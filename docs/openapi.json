@@ -1,0 +1,518 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Training Tracker V2.1 authentication",
+    "version": "0.1.0",
+    "description": "Current implemented API only. Training APIs and invitation/reset-link parity remain unported."
+  },
+  "servers": [
+    {
+      "url": "/api"
+    }
+  ],
+  "paths": {
+    "/auth/context": {
+      "get": {
+        "summary": "Return session context; establish an anonymous CSRF session when necessary",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded. Secrets and recovery codes are returned only by their enrollment operation."
+          },
+          "401": {
+            "description": "Invalid session/credentials or MFA required."
+          },
+          "403": {
+            "description": "Origin, CSRF or reauthentication failed."
+          },
+          "409": {
+            "description": "Installation or enrollment state conflict."
+          },
+          "422": {
+            "description": "Invalid input or second-factor code."
+          },
+          "429": {
+            "description": "Rate limit reached."
+          }
+        }
+      }
+    },
+    "/auth/setup": {
+      "post": {
+        "summary": "Install a fresh local workspace once",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires the configured APP_ORIGIN in Origin and the current session CSRF token.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Setup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operation succeeded. Secrets and recovery codes are returned only by their enrollment operation."
+          },
+          "401": {
+            "description": "Invalid session/credentials or MFA required."
+          },
+          "403": {
+            "description": "Origin, CSRF or reauthentication failed."
+          },
+          "409": {
+            "description": "Installation or enrollment state conflict."
+          },
+          "422": {
+            "description": "Invalid input or second-factor code."
+          },
+          "429": {
+            "description": "Rate limit reached."
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Rotate the session after password and optional MFA verification",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires the configured APP_ORIGIN in Origin and the current session CSRF token.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operation succeeded. Secrets and recovery codes are returned only by their enrollment operation."
+          },
+          "401": {
+            "description": "Invalid session/credentials or MFA required."
+          },
+          "403": {
+            "description": "Origin, CSRF or reauthentication failed."
+          },
+          "409": {
+            "description": "Installation or enrollment state conflict."
+          },
+          "422": {
+            "description": "Invalid input or second-factor code."
+          },
+          "429": {
+            "description": "Rate limit reached."
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "Invalidate the current session",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires the configured APP_ORIGIN in Origin and the current session CSRF token.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csrf": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "csrf"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operation succeeded. Secrets and recovery codes are returned only by their enrollment operation."
+          },
+          "401": {
+            "description": "Invalid session/credentials or MFA required."
+          },
+          "403": {
+            "description": "Origin, CSRF or reauthentication failed."
+          },
+          "409": {
+            "description": "Installation or enrollment state conflict."
+          },
+          "422": {
+            "description": "Invalid input or second-factor code."
+          },
+          "429": {
+            "description": "Rate limit reached."
+          }
+        }
+      }
+    },
+    "/auth/mfa": {
+      "get": {
+        "summary": "Return current account MFA status",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded. Secrets and recovery codes are returned only by their enrollment operation."
+          },
+          "401": {
+            "description": "Invalid session/credentials or MFA required."
+          },
+          "403": {
+            "description": "Origin, CSRF or reauthentication failed."
+          },
+          "409": {
+            "description": "Installation or enrollment state conflict."
+          },
+          "422": {
+            "description": "Invalid input or second-factor code."
+          },
+          "429": {
+            "description": "Rate limit reached."
+          }
+        }
+      }
+    },
+    "/auth/mfa/begin": {
+      "post": {
+        "summary": "Create a ten-minute encrypted pending enrollment",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires the configured APP_ORIGIN in Origin and the current session CSRF token.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csrf": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "csrf",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operation succeeded. Secrets and recovery codes are returned only by their enrollment operation."
+          },
+          "401": {
+            "description": "Invalid session/credentials or MFA required."
+          },
+          "403": {
+            "description": "Origin, CSRF or reauthentication failed."
+          },
+          "409": {
+            "description": "Installation or enrollment state conflict."
+          },
+          "422": {
+            "description": "Invalid input or second-factor code."
+          },
+          "429": {
+            "description": "Rate limit reached."
+          }
+        }
+      }
+    },
+    "/auth/mfa/confirm": {
+      "post": {
+        "summary": "Confirm enrollment and return ten recovery codes once",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires the configured APP_ORIGIN in Origin and the current session CSRF token.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csrf": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string",
+                    "pattern": "^[0-9]{6}$"
+                  }
+                },
+                "required": [
+                  "csrf",
+                  "code"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operation succeeded. Secrets and recovery codes are returned only by their enrollment operation."
+          },
+          "401": {
+            "description": "Invalid session/credentials or MFA required."
+          },
+          "403": {
+            "description": "Origin, CSRF or reauthentication failed."
+          },
+          "409": {
+            "description": "Installation or enrollment state conflict."
+          },
+          "422": {
+            "description": "Invalid input or second-factor code."
+          },
+          "429": {
+            "description": "Rate limit reached."
+          }
+        }
+      }
+    },
+    "/auth/mfa/disable": {
+      "post": {
+        "summary": "Disable MFA after password and second-factor verification",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires the configured APP_ORIGIN in Origin and the current session CSRF token.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csrf": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "csrf",
+                  "password",
+                  "code"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operation succeeded. Secrets and recovery codes are returned only by their enrollment operation."
+          },
+          "401": {
+            "description": "Invalid session/credentials or MFA required."
+          },
+          "403": {
+            "description": "Origin, CSRF or reauthentication failed."
+          },
+          "409": {
+            "description": "Installation or enrollment state conflict."
+          },
+          "422": {
+            "description": "Invalid input or second-factor code."
+          },
+          "429": {
+            "description": "Rate limit reached."
+          }
+        }
+      }
+    },
+    "/auth/password": {
+      "post": {
+        "summary": "Change password and revoke other sessions",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires the configured APP_ORIGIN in Origin and the current session CSRF token.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csrf": {
+                    "type": "string"
+                  },
+                  "current": {
+                    "type": "string"
+                  },
+                  "next": {
+                    "type": "string",
+                    "minLength": 15
+                  }
+                },
+                "required": [
+                  "csrf",
+                  "current",
+                  "next"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operation succeeded. Secrets and recovery codes are returned only by their enrollment operation."
+          },
+          "401": {
+            "description": "Invalid session/credentials or MFA required."
+          },
+          "403": {
+            "description": "Origin, CSRF or reauthentication failed."
+          },
+          "409": {
+            "description": "Installation or enrollment state conflict."
+          },
+          "422": {
+            "description": "Invalid input or second-factor code."
+          },
+          "429": {
+            "description": "Rate limit reached."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sessionCookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "tracker_session"
+      }
+    },
+    "schemas": {
+      "Login": {
+        "type": "object",
+        "required": [
+          "csrf",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "csrf": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 200
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "code": {
+            "type": "string",
+            "maxLength": 64
+          }
+        }
+      },
+      "Setup": {
+        "type": "object",
+        "required": [
+          "csrf",
+          "name",
+          "email",
+          "password",
+          "demoPassword"
+        ],
+        "properties": {
+          "csrf": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 15,
+            "description": "At most 72 UTF-8 bytes."
+          },
+          "demoPassword": {
+            "type": "string",
+            "minLength": 15,
+            "description": "Distinct from administrator password; at most 72 UTF-8 bytes."
+          }
+        }
+      },
+      "Problem": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer"
+          },
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    }
+  }
+}
