@@ -43,14 +43,19 @@ export default function Dashboard() {
           <div className="panel">
             <h2>Application migration in progress</h2>
             <p>
-              Account setup and optional authenticator verification are available. Assessment,
-              administration and learning workflows have not yet been ported in this build.
+              Account and client administration are available. Assessment and
+              learning workflows are still being ported in this build.
             </p>
             <Link href="/account/security">Manage account security</Link>
           </div>
           {context.user.global_admin && (
             <p>
               <Link href="/platform/clients">Manage clients</Link>
+            </p>
+          )}
+          {context.canAdmin && (
+            <p>
+              <Link href="/accounts">Manage account access</Link>
             </p>
           )}
           <Feedback error={actionError} />

@@ -3,7 +3,7 @@
   "info": {
     "title": "Training Tracker V2.1 implemented API",
     "version": "0.1.0",
-    "description": "Implemented authentication, client/team authority and platform client administration. Full training and identity parity remain in progress."
+    "description": "Implemented local authentication/account links, client/team authority and platform client administration. Full training parity remains in progress."
   },
   "servers": [
     {
@@ -379,9 +379,14 @@
                   "next": {
                     "type": "string",
                     "minLength": 15
+                  },
+                  "confirmation": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "type": "string"
                   }
                 },
-                "required": ["csrf", "current", "next"]
+                "required": ["csrf", "current", "next", "confirmation"]
               }
             }
           }
@@ -1237,6 +1242,413 @@
           },
           "401": {
             "description": "Invalid session."
+          }
+        }
+      }
+    },
+    "/accounts/create": {
+      "post": {
+        "summary": "Create a pending account or invite an existing account",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and CSRF. Issuance/cancellation require current-password reauthentication. Setup/reset expire after one hour; invitations after seven days. Tokens must not be logged.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "csrf",
+                  "clientId",
+                  "name",
+                  "email",
+                  "password",
+                  "reason",
+                  "mode",
+                  "synthetic"
+                ],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "name": {
+                    "type": "string",
+                    "maxLength": 120
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  },
+                  "mode": {
+                    "enum": ["new", "existing"]
+                  },
+                  "synthetic": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Completed."
+          },
+          "401": {
+            "description": "Sign in required."
+          },
+          "403": {
+            "description": "Authority, recipient or password check failed."
+          },
+          "409": {
+            "description": "Account or membership state changed."
+          },
+          "410": {
+            "description": "Link used, cancelled or expired."
+          },
+          "422": {
+            "description": "Validation failed."
+          },
+          "429": {
+            "description": "Retry after the rate-limit window."
+          }
+        }
+      }
+    },
+    "/accounts/recover": {
+      "post": {
+        "summary": "Issue a scoped setup or password reset link",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and CSRF. Issuance/cancellation require current-password reauthentication. Setup/reset expire after one hour; invitations after seven days. Tokens must not be logged.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "userId", "purpose", "password", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": ["string", "null"],
+                    "format": "uuid"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "purpose": {
+                    "enum": ["setup", "reset"]
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Completed."
+          },
+          "401": {
+            "description": "Sign in required."
+          },
+          "403": {
+            "description": "Authority, recipient or password check failed."
+          },
+          "409": {
+            "description": "Account or membership state changed."
+          },
+          "410": {
+            "description": "Link used, cancelled or expired."
+          },
+          "422": {
+            "description": "Validation failed."
+          },
+          "429": {
+            "description": "Retry after the rate-limit window."
+          }
+        }
+      }
+    },
+    "/accounts/cancel": {
+      "post": {
+        "summary": "Cancel an issued account link",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and CSRF. Issuance/cancellation require current-password reauthentication. Setup/reset expire after one hour; invitations after seven days. Tokens must not be logged.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "id", "password", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": ["string", "null"],
+                    "format": "uuid"
+                  },
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Completed."
+          },
+          "401": {
+            "description": "Sign in required."
+          },
+          "403": {
+            "description": "Authority, recipient or password check failed."
+          },
+          "409": {
+            "description": "Account or membership state changed."
+          },
+          "410": {
+            "description": "Link used, cancelled or expired."
+          },
+          "422": {
+            "description": "Validation failed."
+          },
+          "429": {
+            "description": "Retry after the rate-limit window."
+          }
+        }
+      }
+    },
+    "/accounts/inspect": {
+      "post": {
+        "summary": "Inspect a private link; invitations require the intended recipient",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and CSRF. Issuance/cancellation require current-password reauthentication. Setup/reset expire after one hour; invitations after seven days. Tokens must not be logged.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "raw", "purpose"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "raw": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "purpose": {
+                    "enum": ["setup", "reset", "invite"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Completed."
+          },
+          "401": {
+            "description": "Sign in required."
+          },
+          "403": {
+            "description": "Authority, recipient or password check failed."
+          },
+          "409": {
+            "description": "Account or membership state changed."
+          },
+          "410": {
+            "description": "Link used, cancelled or expired."
+          },
+          "422": {
+            "description": "Validation failed."
+          },
+          "429": {
+            "description": "Retry after the rate-limit window."
+          }
+        }
+      }
+    },
+    "/accounts/redeem": {
+      "post": {
+        "summary": "Consume a private link once",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and CSRF. Issuance/cancellation require current-password reauthentication. Setup/reset expire after one hour; invitations after seven days. Tokens must not be logged.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "raw", "purpose"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "raw": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "purpose": {
+                    "enum": ["setup", "reset", "invite"]
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "confirmation": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "accept": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Completed."
+          },
+          "401": {
+            "description": "Sign in required."
+          },
+          "403": {
+            "description": "Authority, recipient or password check failed."
+          },
+          "409": {
+            "description": "Account or membership state changed."
+          },
+          "410": {
+            "description": "Link used, cancelled or expired."
+          },
+          "422": {
+            "description": "Validation failed."
+          },
+          "429": {
+            "description": "Retry after the rate-limit window."
+          }
+        }
+      }
+    },
+    "/accounts/manage": {
+      "get": {
+        "summary": "List scoped account-link metadata and eligible recovery targets",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 120
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "20 links per page and at most 100 matching targets. No raw tokens, hashes or passwords."
+          },
+          "403": {
+            "description": "Administrator access to the selected client required."
           }
         }
       }

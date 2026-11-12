@@ -108,17 +108,25 @@ describe('fresh setup and optional MFA', () => {
     await auth.disableMfa(session.token, session.csrf, password, recoveryCodes[1]);
     expect((await auth.mfaStatus(session.token)).enabled).toBe(false);
   });
-  it('changes a password, rotates the session and revokes old sessions', async () => {
+  it('changes a password and requires a fresh sign-in for every session', async () => {
     const old = session.token;
     session = await auth.changePassword(
       session.token,
       session.csrf,
       password,
       'A new unique administrator passphrase',
+      'A new unique administrator passphrase',
     );
     expect(session.token).not.toBe(old);
     expect((await auth.context(old)).user).toBeNull();
-    expect((await auth.context(session.token)).user?.email).toBe(email);
+    expect((await auth.context(session.token)).user).toBeNull();
+    session = await auth.login(
+      session.token,
+      session.csrf,
+      email,
+      'A new unique administrator passphrase',
+      'A new unique administrator passphrase',
+    );
   });
   it('persists rate limits independently of failed account transactions', async () => {
     await auth.limit('isolated-rate-limit', 2);

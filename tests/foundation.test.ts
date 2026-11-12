@@ -16,7 +16,7 @@ describe('foundation on a shared PGlite socket', () => {
   it('reapplying unchanged migrations is safe', async () => {
     await migrate(instance.db);
     const r = await instance.db.pool.query('SELECT * FROM schema_migrations');
-    expect(r.rows.map((row) => row.name)).toHaveLength(4);
+    expect(r.rows.map((row) => row.name)).toHaveLength(5);
   });
   it('tenant transactions only return their client', async () => {
     const rows = await instance.db.scoped(

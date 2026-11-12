@@ -23,7 +23,7 @@ Acceptance: fresh administrator plus 30 synthetic accounts; installation cannot 
 - [ ] Human technical/UX review and owner acceptance recorded
 Current evidence: 19 domain/foundation tests passed; real PostgreSQL RLS/concurrent-claim test passed separately; TypeScript and production build passed. The complete browser scenario passed, including setup, password-only login, optional MFA enrollment, recovery-code login, forged-Origin and invalid-CSRF rejection, mobile overflow and axe WCAG A/AA checks. Mobile security screenshot inspected: output/playwright/security-mobile.png.
 Fixes: explicit UUID/text casts for identity parameters; environment checks on authenticated accounts; explicit public user projection; credentials never logged.
-Remaining identity parity: administrator-issued setup/reset links, invitations, scoped role allocation, hosted installer, full demo training scenarios and original platform redirect. These are not claimed by the current local setup.
+Local account links and scoped roles are now recorded in the checkpoints below. Remaining identity parity includes email delivery, hosted installer, full demo training scenarios and original platform redirect.
 
 
 ## Client authority and client directory — In Progress
@@ -37,15 +37,31 @@ Locally verified checkpoint:
 - [x] Platform client directory with search/status/sort/pagination and effective member/admin counts; create, rename, confirmed suspension/reactivation.
 - [x] Global Admin appointment/revocation API with last-active-admin protection.
 - [x] Automated checks and technical self-review for this checkpoint.
-- [ ] Full administration parity: account/invitation/reset links, administration people/team forms, administrator and audit screens, branding and app shell.
+- [ ] Full administration parity: people/team forms, administrator and audit screens, branding and app shell. Local account-link progress is recorded below.
 - [ ] Human acceptance, deferred until full parity by the user's instruction.
 
 Evidence (2026-11-12): 34 domain/foundation tests pass; separate real PostgreSQL test passes RLS, concurrent outbox claims, concurrent administrator revocation and conflicting client updates. TypeScript and production build pass. Browser scenario passes setup, login, MFA recovery, CSRF/Origin rejection, client selection, client creation, suspension confirmation/cancel, filtering, mobile overflow and axe A/AA checks. Screenshots inspected: clients-mobile.png, directory-mobile.png and directory-desktop.png under output/playwright. All 366 captured source hashes remain unchanged.
 
 Technical self-review: tenant IDs validated server-side, cross-tenant foreign keys, effective identity/role checks, session invalidation, historical team entry dates, no implicit admin access to training, explicit sensitive grants, mutation locks, exact versions and safe public projections. Pending work is stopped on suspension and never revived automatically; additional training/file/provider cancellation hooks must be added with their respective modules. Runtime privilege qualification remains deferred with hosting.
 
+
+## Local account invitations and recovery — In Progress
+Acceptance criteria: no membership on link issuance; only Member access after recipient acceptance; hashed one-use tokens; one-hour setup/reset and seven-day invitations; current-password reauthentication; active issuer authority and exact permission version at redemption; scoped metadata lists; cancellation and expiry; password confirmation and all-session sign-out.
+
+- [x] Local new-account setup, existing-account invitations, setup reissue, password recovery and cancellation services/API.
+- [x] Account forms, review step, private one-time link display, scoped link management and recipient screens.
+- [x] Tokens stored hashed; URL fragments avoid sending link credentials in server URLs; listing/audit projections omit credentials.
+- [x] Session and pending-reset invalidation; retained optional MFA configuration; denied-action audits.
+- [x] Local domain, browser, accessibility and PostgreSQL concurrency verification.
+- [ ] Email delivery, production bootstrap/hosted installer and full surrounding administration parity.
+- [ ] Human acceptance, explicitly deferred until full parity.
+
+Evidence (2026-11-12): 42 domain/foundation tests pass. Separate real PostgreSQL qualification includes two simultaneous setup redemptions with exactly one success, plus prior tenant RLS and mutation concurrency checks. Browser verification covers administrator creation, recipient password setup, existing-account invitation acceptance and administrator-issued password recovery, alongside earlier authentication and directory flows. Mobile account page passes overflow and axe A/AA checks; output/playwright/accounts-mobile.png inspected after the private link was hidden. TypeScript and production build pass.
+Fixes and retest: restored source password confirmation and all-session sign-out; corrected the browser combobox selector; opening another private link in the same tab now resets completed state, refreshes the session and ignores stale inspection responses. The full setup/invitation/recovery browser sequence passed after the fix.
+Technical self-review: issuer and recipient rechecks occur in the locked redemption transaction; completed links cannot replay; client admins cannot recover themselves or Global Admins; initial membership never restores old team/reviewer roles; password actions require confirmation, revoke sessions and cancel pending setup/reset links. SMTP remains unconfigured and no messages were sent.
+
 ## Remaining parity features
-1. Finish client/team/member administration UI, identity links, platform administration and branding (core authority and client directory verified above).
+1. Finish client/team/member administration UI, platform administration and branding (core authority and client directory verified above).
 2. Assessment builder, sections, matrices, assignments, publication and response/review.
 3. Private files, scan quarantine, images and confirmed document extraction.
 4. Onboarding, calendars, capacity, versioned plans and generation.

@@ -23,6 +23,7 @@ import { Database } from '../../../packages/database/src/database.js';
 import { databaseMode, port } from '../../../packages/database/src/config.js';
 import { Tenancy } from '../../../packages/domain/src/tenancy.js';
 import { Platform } from '../../../packages/domain/src/platform.js';
+import { Accounts } from '../../../packages/domain/src/accounts.js';
 import { Auth } from '../../../packages/domain/src/auth.js';
 import { encryptionKey } from '../../../packages/domain/src/crypto.js';
 import { DomainError } from '../../../packages/domain/src/errors.js';
@@ -123,6 +124,7 @@ class AuthController {
       user: result.user,
       installed: result.installed,
       client: result.client ?? null,
+      canAdmin: result.canAdmin ?? false,
     };
   }
   @Post('setup') async setup(@Req() req: Request) {
@@ -171,8 +173,17 @@ class AuthController {
     return auth.disableMfa(token(req), data.csrf, data.password, data.code);
   }
   @Post('password') async change(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    const data = parse(z.object({ csrf, current: password, next: password }), req);
-    const result = await auth.changePassword(token(req), data.csrf, data.current, data.next);
+    const data = parse(
+      z.object({ csrf, current: password, next: password, confirmation: password }),
+      req,
+    );
+    const result = await auth.changePassword(
+      token(req),
+      data.csrf,
+      data.current,
+      data.next,
+      data.confirmation,
+    );
     setCookie(res, result.token);
     return { csrf: result.csrf };
   }
@@ -321,7 +332,93 @@ class PlatformController {
   }
 }
 
-@Module({ controllers: [HealthController, AuthController, ClientsController, PlatformController] })
+const accounts = new Accounts(auth);
+@Controller('accounts')
+class AccountsController {
+  @Get('manage') manage(@Req() req: Request) {
+    const q = z
+      .object({
+        clientId: uuid.optional(),
+        page: z.coerce.number().int().min(1).max(100000).default(1),
+        search: z.string().max(120).default(''),
+      })
+      .parse(req.query);
+    return accounts.manage(token(req), q.clientId ?? null, q.page, q.search);
+  }
+  @Post('create') create(@Req() req: Request) {
+    const d = parse(
+      z.object({
+        csrf,
+        clientId: uuid,
+        name: z.string().max(120),
+        email: z.email().max(200),
+        password,
+        reason,
+        mode: z.enum(['new', 'existing']),
+        synthetic: z.boolean(),
+      }),
+      req,
+    );
+    return accounts.create(token(req), d.csrf, d);
+  }
+  @Post('recover') recover(@Req() req: Request) {
+    const d = parse(
+      z.object({
+        csrf,
+        userId: uuid,
+        clientId: uuid.nullable(),
+        purpose: z.enum(['setup', 'reset']),
+        password,
+        reason,
+      }),
+      req,
+    );
+    return accounts.recover(token(req), d.csrf, d);
+  }
+  @Post('cancel') cancel(@Req() req: Request) {
+    const d = parse(z.object({ csrf, id: uuid, clientId: uuid.nullable(), password, reason }), req);
+    return accounts.cancel(token(req), d.csrf, d.id, d.clientId, d.password, d.reason);
+  }
+  @Post('inspect') async inspect(@Req() req: Request) {
+    await auth.limit('account-inspect:' + req.ip, 30);
+    const d = parse(
+      z.object({ csrf, raw: z.string().length(64), purpose: z.enum(['setup', 'reset', 'invite']) }),
+      req,
+    );
+    return accounts.inspect(token(req), d.csrf, d.raw, d.purpose);
+  }
+  @Post('redeem') async redeem(@Req() req: Request) {
+    await auth.limit('account-redeem:' + req.ip, 10);
+    const d = parse(
+      z.object({
+        csrf,
+        raw: z.string().length(64),
+        purpose: z.enum(['setup', 'reset', 'invite']),
+        password: password.optional(),
+        confirmation: password.optional(),
+        accept: z.boolean().optional(),
+      }),
+      req,
+    );
+    if (d.purpose === 'invite' && !d.accept)
+      throw new DomainError(
+        422,
+        'accept_required',
+        'Confirm that you accept this client invitation.',
+      );
+    return accounts.redeem(token(req), d.csrf, d.raw, d.purpose, d.password, d.confirmation);
+  }
+}
+
+@Module({
+  controllers: [
+    HealthController,
+    AuthController,
+    ClientsController,
+    PlatformController,
+    AccountsController,
+  ],
+})
 class ApiModule {}
 const app = await NestFactory.create(ApiModule, { logger: ['error', 'warn'] });
 app.use(helmet());

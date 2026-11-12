@@ -1,6 +1,6 @@
 # Training Assessment Tracker V2.1
 
-Independent TypeScript port of the captured V2 working tree. **The full migration is not complete.** Current implementation: separate Next.js/NestJS/worker runtime, SQL/PGlite/PostgreSQL foundation, fresh local setup, password sessions, optional TOTP and one-use recovery codes. Effective client/team authority, client selection and the platform client directory are now implemented and locally tested. Remaining administration screens, identity links, branding, assessments, learning and integration workflows are not yet fully ported. See [feature checklist](docs/implementation/FEATURE_CHECKLIST.md).
+Independent TypeScript port of the captured V2 working tree. **The full migration is not complete.** Current implementation: separate Next.js/NestJS/worker runtime, SQL/PGlite/PostgreSQL foundation, fresh local setup, password sessions, optional TOTP and one-use recovery codes. Effective client/team authority, client selection and the platform client directory are now implemented and locally tested. Local account setup/invitation/recovery links are implemented with manual private sharing. Remaining administration screens, hosted identity setup, branding, assessments, learning and integration workflows are not yet fully ported. See [feature checklist](docs/implementation/FEATURE_CHECKLIST.md).
 
 ## Local startup
 Requirements: Node 24 (pinned in .node-version), npm and an available local port.
@@ -19,7 +19,7 @@ Copy .env.example to .env only when overriding defaults. DATABASE_URL selects Po
 
 Local operation binds loopback. APP_ORIGIN controls origin checks. WEB_PORT, API_PORT, PGLITE_PORT and PRIVATE_STORAGE_PATH are configurable. Local encryption keys are generated under private storage; preserve them with the database. Production would require APP_ENCRYPTION_KEY, HTTPS, PostgreSQL and qualified private storage, but hosting and deployment are deferred.
 
-Authenticators are optional for every account. Enabling one requires the current password and a valid code. Recovery codes are shown once, stored hashed and consumed once. Disabling requires password plus a code. Password changes revoke other sessions. Administrator-issued password reset/setup links and client invitations are not implemented yet.
+Authenticators are optional for every account. Enabling one requires the current password and a valid code. Recovery codes are shown once, stored hashed and consumed once. Disabling requires password plus a code. Password changes require confirmation and end all sessions. Administrators can issue one-use setup/reset links and invitations after current-password reauthentication; membership starts only after recipient acceptance. Setup/reset links expire after one hour and invitations after seven days. Links are shown once for manual private sharing; email delivery is not yet configured.
 
 ## Verification
 ```powershell

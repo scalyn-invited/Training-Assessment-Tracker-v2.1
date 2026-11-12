@@ -5,7 +5,7 @@ test('fresh setup, password login and optional authenticator recovery', async ({
   page,
   request,
 }) => {
-  test.setTimeout(120000);
+  test.setTimeout(180000);
   const response = await request.get('/api/health/ready');
   expect(response.ok()).toBeTruthy();
   await page.goto('/');
@@ -76,7 +76,9 @@ test('fresh setup, password login and optional authenticator recovery', async ({
   ).toEqual([]);
   await page.getByLabel('Search clients', { exact: true }).focus();
   await page.evaluate(() => window.scrollTo(0, 0));
-  expect(await page.locator('.skip').evaluate(el => el.getBoundingClientRect().bottom <= 0)).toBe(true);
+  expect(await page.locator('.skip').evaluate((el) => el.getBoundingClientRect().bottom <= 0)).toBe(
+    true,
+  );
   await page.screenshot({ path: 'output/playwright/directory-mobile.png', fullPage: true });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: 'output/playwright/directory-desktop.png', fullPage: true });
@@ -126,4 +128,121 @@ test('fresh setup, password login and optional authenticator recovery', async ({
   await expect(
     page.getByRole('heading', { name: 'Welcome, Synthetic Administrator' }),
   ).toBeVisible();
+
+  await page.getByRole('link', { name: 'Manage account access', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Accounts', exact: true })).toBeVisible();
+  const createAccount = page;
+  await expect(page.getByRole('combobox', { name: 'Client', exact: true })).toBeVisible();
+  await createAccount
+    .getByRole('combobox', { name: 'Client', exact: true })
+    .selectOption({ label: 'Demo Client 1' });
+  await createAccount.getByLabel('Name', { exact: true }).fill('Browser invited member');
+  await createAccount.getByLabel('Email', { exact: true }).fill('browser-member@example.invalid');
+  await createAccount.getByLabel('Your current password', { exact: true }).fill(password);
+  await createAccount
+    .getByLabel('Reason', { exact: true })
+    .fill('Synthetic recipient setup verification');
+  await createAccount.getByRole('button', { name: 'Review and continue', exact: true }).click();
+  await createAccount.getByRole('button', { name: 'Create private link', exact: true }).click();
+  await expect(
+    page.getByRole('heading', { name: 'Private account link', exact: true }),
+  ).toBeVisible();
+  const privateLink = await page.getByLabel('Private link', { exact: true }).inputValue();
+  await page.getByRole('button', { name: 'Done with private link', exact: true }).click();
+  await page.setViewportSize({ width: 375, height: 812 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(
+    (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+      .violations,
+  ).toEqual([]);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({ path: 'output/playwright/accounts-mobile.png', fullPage: true });
+  const recipientContext = await page.context().browser()!.newContext();
+  const recipient = await recipientContext.newPage();
+  await recipient.goto(privateLink);
+  await expect(
+    recipient.getByRole('heading', { name: 'Set your password', exact: true }),
+  ).toBeVisible();
+  await recipient
+    .getByLabel('New password', { exact: true })
+    .fill('Browser recipient unique passphrase');
+  await recipient
+    .getByLabel('Confirm new password', { exact: true })
+    .fill('Browser recipient unique passphrase');
+  await recipient.getByRole('button', { name: 'Save password', exact: true }).click();
+  await expect(recipient.getByRole('heading', { name: 'Account action completed' })).toBeVisible();
+  await recipient.getByRole('link', { name: 'Continue to sign in' }).click();
+  await recipient.getByLabel('Email', { exact: true }).fill('browser-member@example.invalid');
+  await recipient
+    .getByLabel('Password', { exact: true })
+    .fill('Browser recipient unique passphrase');
+  await recipient.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await expect(
+    recipient.getByRole('heading', { name: 'Welcome, Browser invited member' }),
+  ).toBeVisible();
+  await recipient.getByRole('link', { name: 'Choose your client', exact: true }).click();
+  await expect(recipient.getByRole('button', { name: 'Demo Client 1', exact: true })).toBeVisible();
+  await expect(recipient.getByRole('button', { name: 'Demo Client 2', exact: true })).toHaveCount(
+    0,
+  );
+
+  await page
+    .getByRole('combobox', { name: 'Account operation', exact: true })
+    .selectOption('existing');
+  await page
+    .getByRole('combobox', { name: 'Client', exact: true })
+    .selectOption({ label: 'Demo Client 2' });
+  await page.getByLabel('Email', { exact: true }).fill('browser-member@example.invalid');
+  await page.getByLabel('Your current password', { exact: true }).fill(password);
+  await page.getByLabel('Reason', { exact: true }).fill('Synthetic second-client invitation');
+  await page.getByRole('button', { name: 'Review and continue', exact: true }).click();
+  await page.getByRole('button', { name: 'Create private link', exact: true }).click();
+  await expect(
+    page.getByRole('heading', { name: 'Private account link', exact: true }),
+  ).toBeVisible();
+  const invitationLink = await page.getByLabel('Private link', { exact: true }).inputValue();
+  await page.getByRole('button', { name: 'Done with private link', exact: true }).click();
+  await recipient.goto(invitationLink);
+  await recipient.getByRole('checkbox', { name: 'I accept this client invitation.' }).check();
+  await recipient.getByRole('button', { name: 'Accept invitation', exact: true }).click();
+  await expect(recipient.getByRole('heading', { name: 'Account action completed' })).toBeVisible();
+
+  await page.getByText('Manage setup and recovery links', { exact: true }).click();
+  await page.getByRole('combobox', { name: 'Action', exact: true }).selectOption('reset');
+  await page
+    .getByRole('combobox', { name: 'Account', exact: true })
+    .selectOption({ label: 'Browser invited member — browser-member@example.invalid' });
+  await page.getByLabel('Your current password for recovery', { exact: true }).fill(password);
+  await page
+    .getByLabel('Recovery reason', { exact: true })
+    .fill('Synthetic account recovery verification');
+  await page
+    .getByRole('checkbox', { name: 'I have checked the recipient and recovery action.' })
+    .check();
+  await page.getByRole('button', { name: 'Issue private link', exact: true }).click();
+  await expect(
+    page.getByRole('heading', { name: 'Private account link', exact: true }),
+  ).toBeVisible();
+  const recoveryLink = await page.getByLabel('Private link', { exact: true }).inputValue();
+  await page.getByRole('button', { name: 'Done with private link', exact: true }).click();
+  await recipient.goto(recoveryLink);
+  await recipient
+    .getByLabel('New password', { exact: true })
+    .fill('Changed recipient browser passphrase');
+  await recipient
+    .getByLabel('Confirm new password', { exact: true })
+    .fill('Changed recipient browser passphrase');
+  await recipient.getByRole('button', { name: 'Save password', exact: true }).click();
+  await expect(recipient.getByRole('heading', { name: 'Account action completed' })).toBeVisible();
+  await recipient.getByRole('link', { name: 'Continue to sign in' }).click();
+  await recipient.getByLabel('Email', { exact: true }).fill('browser-member@example.invalid');
+  await recipient
+    .getByLabel('Password', { exact: true })
+    .fill('Changed recipient browser passphrase');
+  await recipient.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await recipient.getByRole('link', { name: 'Choose your client', exact: true }).click();
+  await expect(recipient.getByRole('button', { name: 'Demo Client 1', exact: true })).toBeVisible();
+  await expect(recipient.getByRole('button', { name: 'Demo Client 2', exact: true })).toBeVisible();
+
+  await recipientContext.close();
 });

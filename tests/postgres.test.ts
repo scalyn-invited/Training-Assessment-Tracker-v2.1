@@ -4,6 +4,8 @@ import { migrate } from '../packages/database/src/migrate.js';
 import { fixture, actor, org, other } from './helpers.js';
 import { enqueue, claim } from '../packages/domain/src/outbox.js';
 import { Auth, type AuthUser } from '../packages/domain/src/auth.js';
+import { Accounts } from '../packages/domain/src/accounts.js';
+import { passwordHash } from '../packages/domain/src/crypto.js';
 import { Platform } from '../packages/domain/src/platform.js';
 import { randomUUID, randomBytes } from 'node:crypto';
 const url = process.env.TEST_POSTGRES_URL;
@@ -114,6 +116,47 @@ describe.skipIf(!url)('real PostgreSQL isolation and concurrency', () => {
       ]);
       expect(edits.filter((r) => r.status === 'fulfilled')).toHaveLength(1);
       expect(edits.find((r) => r.status === 'rejected')).toMatchObject({ reason: { status: 409 } });
+
+      const adminPassword = 'Isolated PostgreSQL administrator passphrase';
+      await db.pool.query('UPDATE users SET password_hash=$2 WHERE id=$1', [
+        surviving[0].user_id,
+        await passwordHash(adminPassword),
+      ]);
+      const accounts = new Accounts(auth);
+      const issued = await accounts.create(survivor.token, survivor.csrf, {
+        clientId: org,
+        name: 'Concurrent recipient',
+        email: 'concurrent@example.invalid',
+        password: adminPassword,
+        reason: 'Concurrent redemption verification',
+        mode: 'new',
+        synthetic: true,
+      });
+      const firstGuest = await auth.context(),
+        secondGuest = await auth.context();
+      const recipientPassword = 'Isolated recipient password for tests';
+      const redemptions = await Promise.allSettled([
+        accounts.redeem(
+          firstGuest.token!,
+          firstGuest.csrf,
+          issued.token,
+          'setup',
+          recipientPassword,
+          recipientPassword,
+        ),
+        accounts.redeem(
+          secondGuest.token!,
+          secondGuest.csrf,
+          issued.token,
+          'setup',
+          recipientPassword,
+          recipientPassword,
+        ),
+      ]);
+      expect(redemptions.filter((r) => r.status === 'fulfilled')).toHaveLength(1);
+      expect(redemptions.find((r) => r.status === 'rejected')).toMatchObject({
+        reason: { status: 410 },
+      });
     } finally {
       await db.close();
     }

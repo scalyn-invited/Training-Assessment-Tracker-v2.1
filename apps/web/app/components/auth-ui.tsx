@@ -6,6 +6,7 @@ type Context = {
   csrf: string;
   user: User | null;
   installed: boolean;
+  canAdmin?: boolean;
   client?: { id: string; name: string } | null;
 };
 type ApiError = Error & { code?: string };

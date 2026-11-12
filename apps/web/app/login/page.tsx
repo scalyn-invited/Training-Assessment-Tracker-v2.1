@@ -14,6 +14,10 @@ import {
 export default function Login() {
   const { context, error: loadError, load } = useContext(),
     router = useRouter();
+  const [passwordChanged, setPasswordChanged] = useState(false);
+  useEffect(() => {
+    setPasswordChanged(new URLSearchParams(window.location.search).get('passwordChanged') === '1');
+  }, []);
   const [busy, setBusy] = useState(false),
     [error, setError] = useState(''),
     [mfa, setMfa] = useState(false);
@@ -39,6 +43,11 @@ export default function Login() {
   }
   return (
     <Guest>
+      {passwordChanged && (
+        <p role="status">
+          Password changed. All sessions have ended. Sign in with your new password.
+        </p>
+      )}
       {!context ? (
         <Pending error={loadError} retry={load} />
       ) : (

@@ -49,8 +49,7 @@ export default function Security() {
       }
       if (result.recoveryCodes) setCodes(result.recoveryCodes);
       if (route === 'password') {
-        load();
-        setSuccess('Password changed. Other sessions have been signed out.');
+        router.replace('/login?passwordChanged=1');
       } else
         setSuccess(
           route === 'mfa/begin'
@@ -178,6 +177,8 @@ export default function Security() {
             <form onSubmit={(e) => action(e, 'password')}>
               <Password name="current" label="Current password" />
               <Password name="next" label="New password" creation />
+              <Password name="confirmation" label="Confirm new password" creation />
+              <p>Saving ends all sessions. You will sign in again.</p>
               <button className="secondary" disabled={busy}>
                 {busy ? 'Saving…' : 'Change password'}
               </button>

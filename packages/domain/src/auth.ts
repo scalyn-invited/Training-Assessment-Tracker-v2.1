@@ -13,10 +13,16 @@ export type AuthUser = {
   permission_version: number;
   environment: 'test' | 'production';
 };
-type StoredUser = AuthUser & { password_hash: string; active: boolean; is_synthetic: boolean };
+type StoredUser = AuthUser & {
+  password_hash: string;
+  active: boolean;
+  is_synthetic: boolean;
+  password_enabled: boolean;
+};
 function eligible(user: StoredUser | undefined | null) {
   return Boolean(
     user?.active &&
+    user.password_enabled &&
     user.environment === (process.env.NODE_ENV === 'production' ? 'production' : 'test') &&
     !(user.environment === 'production' && user.is_synthetic),
   );
@@ -125,7 +131,13 @@ export class Auth {
             session.token_hash,
           ]);
       }
-      return { token, csrf: session.csrf, user, installed, client };
+      const canAdmin = Boolean(
+        user &&
+        (user.global_admin ||
+          (session.organisation_id &&
+            (await new Access().administer(sql, user, session.organisation_id)))),
+      );
+      return { token, csrf: session.csrf, user, installed, client, canAdmin };
     });
   }
   async verified(
@@ -462,7 +474,19 @@ export class Auth {
       return { enabled: false };
     });
   }
-  async changePassword(token: string, csrf: string, current: string, next: string) {
+  async changePassword(
+    token: string,
+    csrf: string,
+    current: string,
+    next: string,
+    confirmation: string,
+  ) {
+    requireCondition(
+      next === confirmation,
+      422,
+      'password_confirmation',
+      'The passwords must match.',
+    );
     await this.limit('password:' + digest(token));
     const hash = await passwordHash(next);
     return this.db.transaction(async (sql) => {
@@ -478,15 +502,12 @@ export class Auth {
         [user!.id, hash],
       );
       await sql.query('DELETE FROM sessions WHERE user_id=$1', [user!.id]);
+      await sql.query(
+        "UPDATE local_account_links SET revoked_at=now() WHERE user_id=$1 AND purpose IN ('setup','reset') AND consumed_at IS NULL",
+        [user!.id],
+      );
       await this.audit(sql, user!.id, 'password.changed');
-      return this.newSession(sql, {
-        id: user!.id,
-        name: user!.name,
-        email: user!.email,
-        global_admin: user!.global_admin,
-        environment: user!.environment,
-        permission_version: user!.permission_version + 1,
-      });
+      return this.newSession(sql, null);
     });
   }
 }
