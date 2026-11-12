@@ -1,3 +1,5 @@
+import { Access, globalAdmin } from './access.js';
+import { seedTenancy } from './seed-tenancy.js';
 import { randomUUID, randomBytes } from 'node:crypto';
 import * as OTPAuth from 'otpauth';
 import type { Database, Sql } from '../../database/src/database.js';
@@ -20,6 +22,7 @@ function eligible(user: StoredUser | undefined | null) {
   );
 }
 type Session = {
+  organisation_id: string | null;
   token_hash: string;
   user_id: string | null;
   csrf: string;
@@ -82,6 +85,7 @@ export class Auth {
         ).rowCount;
         if (
           eligible(found) &&
+          (await new Access().active(sql, found.id, found.environment)) &&
           identity &&
           found.permission_version === session.permission_version
         ) {
@@ -89,7 +93,7 @@ export class Auth {
             id: found.id,
             name: found.name,
             email: found.email,
-            global_admin: found.global_admin,
+            global_admin: await globalAdmin(sql, found.id, found.environment),
             permission_version: found.permission_version,
             environment: found.environment,
           };
@@ -102,7 +106,26 @@ export class Auth {
       await sql.query('UPDATE sessions SET last_seen_at=now() WHERE token_hash=$1', [
         session.token_hash,
       ]);
-      return { token, csrf: session.csrf, user, installed };
+      let client: { id: string; name: string } | null = null;
+      if (user && session.organisation_id) {
+        const access = new Access();
+        if (
+          (await access.available(sql, session.organisation_id, user.environment)) &&
+          (user.global_admin ||
+            (await access.membership(sql, user.id, session.organisation_id, user.environment)))
+        ) {
+          client = (
+            await sql.query<{ id: string; name: string }>(
+              'SELECT id,name FROM organisations WHERE id=$1',
+              [session.organisation_id],
+            )
+          ).rows[0];
+        } else
+          await sql.query('UPDATE sessions SET organisation_id=NULL WHERE token_hash=$1', [
+            session.token_hash,
+          ]);
+      }
+      return { token, csrf: session.csrf, user, installed, client };
     });
   }
   async verified(
@@ -137,13 +160,17 @@ export class Auth {
         )
       ).rowCount;
       requireCondition(
-        eligible(user) && identity && user.permission_version === session.permission_version,
+        eligible(user) &&
+          (await new Access().active(sql, user!.id, user!.environment)) &&
+          identity &&
+          user.permission_version === session.permission_version,
         401,
         'access_revoked',
         'Access has changed. Sign in again.',
       );
     }
     requireCondition(!requireUser || user, 401, 'sign_in_required', 'Sign in to continue.');
+    if (user) user.global_admin = await globalAdmin(sql, user.id, user.environment);
     return { session, user };
   }
   async setup(
@@ -226,6 +253,7 @@ export class Auth {
           );
         }
       }
+      await seedTenancy(sql, adminId);
       await sql.query('INSERT INTO installation(admin_id) VALUES($1)', [adminId]);
       await this.audit(sql, adminId, 'installation.completed');
       return { installed: true };
@@ -252,7 +280,10 @@ export class Auth {
           )
         ).rowCount;
       requireCondition(
-        eligible(user) && identity && valid,
+        eligible(user) &&
+          identity &&
+          valid &&
+          (await new Access().active(sql, user.id, user.environment)),
         401,
         'invalid_credentials',
         'Email or password could not be confirmed.',
@@ -276,7 +307,7 @@ export class Auth {
         id: user.id,
         name: user.name,
         email: user.email,
-        global_admin: user.global_admin,
+        global_admin: await globalAdmin(sql, user.id, user.environment),
         permission_version: user.permission_version,
         environment: user.environment,
       };

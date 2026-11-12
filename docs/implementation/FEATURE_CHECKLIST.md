@@ -25,8 +25,27 @@ Current evidence: 19 domain/foundation tests passed; real PostgreSQL RLS/concurr
 Fixes: explicit UUID/text casts for identity parameters; environment checks on authenticated accounts; explicit public user projection; credentials never logged.
 Remaining identity parity: administrator-issued setup/reset links, invitations, scoped role allocation, hosted installer, full demo training scenarios and original platform redirect. These are not claimed by the current local setup.
 
-## Remaining parity features — Not Started
-1. Client/team/member authorization, role assignments, platform administration and branding.
+
+## Client authority and client directory — In Progress
+Acceptance criteria: effective tenant-scoped roles; active identities and fresh imported permissions; member ownership and historical team boundaries; separate reviewer and sensitive authority; revocation without revival; last-active-admin protection; optimistic client versions; accessible client selection and directory controls.
+
+Locally verified checkpoint:
+- [x] SQL migrations for teams, effective role grants, allocations, sensitive grants and platform states; composite tenant constraints and scoped RLS reads.
+- [x] Authentication derives Global Admin authority from effective grants, not the legacy user flag.
+- [x] Domain/API operations for groups, team periods, role grants/revocations, allocations, membership removal and explicit sensitive access.
+- [x] Client selection and validated selected-client context.
+- [x] Platform client directory with search/status/sort/pagination and effective member/admin counts; create, rename, confirmed suspension/reactivation.
+- [x] Global Admin appointment/revocation API with last-active-admin protection.
+- [x] Automated checks and technical self-review for this checkpoint.
+- [ ] Full administration parity: account/invitation/reset links, administration people/team forms, administrator and audit screens, branding and app shell.
+- [ ] Human acceptance, deferred until full parity by the user's instruction.
+
+Evidence (2026-11-12): 34 domain/foundation tests pass; separate real PostgreSQL test passes RLS, concurrent outbox claims, concurrent administrator revocation and conflicting client updates. TypeScript and production build pass. Browser scenario passes setup, login, MFA recovery, CSRF/Origin rejection, client selection, client creation, suspension confirmation/cancel, filtering, mobile overflow and axe A/AA checks. Screenshots inspected: clients-mobile.png, directory-mobile.png and directory-desktop.png under output/playwright. All 366 captured source hashes remain unchanged.
+
+Technical self-review: tenant IDs validated server-side, cross-tenant foreign keys, effective identity/role checks, session invalidation, historical team entry dates, no implicit admin access to training, explicit sensitive grants, mutation locks, exact versions and safe public projections. Pending work is stopped on suspension and never revived automatically; additional training/file/provider cancellation hooks must be added with their respective modules. Runtime privilege qualification remains deferred with hosting.
+
+## Remaining parity features
+1. Finish client/team/member administration UI, identity links, platform administration and branding (core authority and client directory verified above).
 2. Assessment builder, sections, matrices, assignments, publication and response/review.
 3. Private files, scan quarantine, images and confirmed document extraction.
 4. Onboarding, calendars, capacity, versioned plans and generation.
@@ -35,3 +54,5 @@ Remaining identity parity: administrator-issued setup/reset links, invitations, 
 7. Full functional, PostgreSQL RLS/concurrency, browser/accessibility and visual parity verification.
 
 Current application is NOT a feature-complete V2 copy. No backlog additions, source-data migration, remote publication or deployment. No human review or owner acceptance inferred.
+
+Human technical/UX and owner acceptance is deferred until full V2.1 parity, explicitly authorized by the user on 2026-11-12. Continue implementation autonomously with one-feature automated QA, fixes and evidence. Do not ask again for between-feature human approval, and do not represent deferred reviews as completed.

@@ -4,7 +4,7 @@
 Employee learning, assessment evidence and accountable human review. Preserve V2's calm workspace and existing layouts.
 
 ## Typography
-Use the existing Inter, "Segoe UI", sans-serif stack (Inter only where installed; no external font request), with Georgia for the existing learning hero. Body 14px, mobile inputs 16px, headings 31px, hero 36px desktop and 30px mobile. Preserve source hierarchy rather than introducing a new brand.
+Use the existing Inter, "Segoe UI", sans-serif stack (Inter only where installed; no external font request), with Georgia for the existing learning hero. Current workspace override: body 16px, mobile inputs 16px, headings 32px (27px below 800px), hero 36px desktop and 30px mobile. Preserve source hierarchy rather than introducing a new brand.
 
 ## Color
 Light: --bg #f4f8fb, --surface #ffffff, --ink #203f59, --muted #586e80, --primary #1d4668, --on-primary #ffffff, --error #991b1b, --error-bg #fff1f1.

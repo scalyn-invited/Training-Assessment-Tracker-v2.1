@@ -32,6 +32,14 @@ export default function Dashboard() {
           <p className="eyebrow">Your workspace</p>
           <h1>Welcome, {context.user.name}</h1>
           <p>Signed in as {context.user.email}.</p>
+          <p>
+            {context.client
+              ? 'Current client: ' + context.client.name
+              : 'Choose a client to open your workspace.'}
+          </p>
+          <p>
+            <Link href="/clients">{context.client ? 'Switch client' : 'Choose your client'}</Link>
+          </p>
           <div className="panel">
             <h2>Application migration in progress</h2>
             <p>
@@ -40,6 +48,11 @@ export default function Dashboard() {
             </p>
             <Link href="/account/security">Manage account security</Link>
           </div>
+          {context.user.global_admin && (
+            <p>
+              <Link href="/platform/clients">Manage clients</Link>
+            </p>
+          )}
           <Feedback error={actionError} />
           <button className="secondary" onClick={logout} disabled={busy}>
             {busy ? 'Signing out…' : 'Sign out'}

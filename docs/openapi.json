@@ -1,9 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Training Tracker V2.1 authentication",
+    "title": "Training Tracker V2.1 implemented API",
     "version": "0.1.0",
-    "description": "Current implemented API only. Training APIs and invitation/reset-link parity remain unported."
+    "description": "Implemented authentication, client/team authority and platform client administration. Full training and identity parity remain in progress."
   },
   "servers": [
     {
@@ -143,9 +143,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "csrf"
-                ]
+                "required": ["csrf"]
               }
             }
           }
@@ -225,10 +223,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "csrf",
-                  "password"
-                ]
+                "required": ["csrf", "password"]
               }
             }
           }
@@ -279,10 +274,7 @@
                     "pattern": "^[0-9]{6}$"
                   }
                 },
-                "required": [
-                  "csrf",
-                  "code"
-                ]
+                "required": ["csrf", "code"]
               }
             }
           }
@@ -335,11 +327,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "csrf",
-                  "password",
-                  "code"
-                ]
+                "required": ["csrf", "password", "code"]
               }
             }
           }
@@ -393,11 +381,7 @@
                     "minLength": 15
                   }
                 },
-                "required": [
-                  "csrf",
-                  "current",
-                  "next"
-                ]
+                "required": ["csrf", "current", "next"]
               }
             }
           }
@@ -423,6 +407,839 @@
           }
         }
       }
+    },
+    "/clients/select": {
+      "post": {
+        "summary": "Select an authorized client",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/clients/groups": {
+      "post": {
+        "summary": "Create a scoped team or cohort",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "name", "kind", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 160
+                  },
+                  "kind": {
+                    "enum": ["team", "cohort"]
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/clients/roles/grant": {
+      "post": {
+        "summary": "Grant an effective client or team role",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "memberId", "role", "teamId", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "memberId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "role": {
+                    "enum": ["admin", "coordinator", "member"]
+                  },
+                  "teamId": {
+                    "type": ["string", "null"],
+                    "format": "uuid"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/clients/roles/revoke": {
+      "post": {
+        "summary": "End a role and dependent reviewer authority",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "id", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/clients/teams/membership": {
+      "post": {
+        "summary": "Join or leave a team without restoring prior history",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "memberId", "teamId", "join", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "memberId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "teamId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "join": {
+                    "type": "boolean"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/clients/allocations": {
+      "post": {
+        "summary": "Allocate a primary or backup reviewer",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "memberId", "coordinatorId", "kind", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "memberId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "coordinatorId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "kind": {
+                    "enum": ["primary", "backup"]
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/clients/allocations/end": {
+      "post": {
+        "summary": "End reviewer allocation and dependent sensitive grants",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "id", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/clients/membership/end": {
+      "post": {
+        "summary": "End membership and dependent authority at an exact version",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "memberId", "version", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "memberId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "version": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/clients/sensitive": {
+      "post": {
+        "summary": "Grant or end explicit sensitive access",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "clientId", "allocationId", "grant", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "allocationId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "grant": {
+                    "type": "boolean"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/platform/clients": {
+      "post": {
+        "summary": "Create, rename, suspend or reactivate a client",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "id", "name", "version", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "id": {
+                    "type": ["string", "null"],
+                    "format": "uuid"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 160
+                  },
+                  "version": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  },
+                  "suspended": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      },
+      "get": {
+        "summary": "Search client directory and effective counts",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 120
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "enum": ["", "active", "suspended", "inactive"]
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "enum": ["asc", "desc"]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated directory with filtered and environment totals."
+          },
+          "403": {
+            "description": "Global Admin required."
+          }
+        }
+      }
+    },
+    "/platform/admins/appoint": {
+      "post": {
+        "summary": "Appoint a Global Admin",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "userId", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/platform/admins/revoke": {
+      "post": {
+        "summary": "Revoke a Global Admin with last-active protection",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "description": "Requires configured Origin and session CSRF. Effective authority is rechecked in the mutation transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["csrf", "id", "reason"],
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Saved."
+          },
+          "401": {
+            "description": "Session expired or access revoked."
+          },
+          "403": {
+            "description": "Missing authority, Origin or CSRF rejected."
+          },
+          "404": {
+            "description": "Scoped object unavailable."
+          },
+          "409": {
+            "description": "Version or authority conflict."
+          },
+          "422": {
+            "description": "Validation failed."
+          }
+        }
+      }
+    },
+    "/clients": {
+      "get": {
+        "summary": "List authorized active clients",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Scoped client choices."
+          },
+          "401": {
+            "description": "Invalid session."
+          }
+        }
+      }
     }
   },
   "components": {
@@ -436,11 +1253,7 @@
     "schemas": {
       "Login": {
         "type": "object",
-        "required": [
-          "csrf",
-          "email",
-          "password"
-        ],
+        "required": ["csrf", "email", "password"],
         "properties": {
           "csrf": {
             "type": "string",
@@ -464,13 +1277,7 @@
       },
       "Setup": {
         "type": "object",
-        "required": [
-          "csrf",
-          "name",
-          "email",
-          "password",
-          "demoPassword"
-        ],
+        "required": ["csrf", "name", "email", "password", "demoPassword"],
         "properties": {
           "csrf": {
             "type": "string"

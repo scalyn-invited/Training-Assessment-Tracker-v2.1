@@ -1,6 +1,6 @@
 # Training Assessment Tracker V2.1
 
-Independent TypeScript port of the captured V2 working tree. **The full migration is not complete.** Current implementation: separate Next.js/NestJS/worker runtime, SQL/PGlite/PostgreSQL foundation, fresh local setup, password sessions, optional TOTP and one-use recovery codes. Client administration, assessments, learning and remaining integration workflows are not yet ported. See [feature checklist](docs/implementation/FEATURE_CHECKLIST.md).
+Independent TypeScript port of the captured V2 working tree. **The full migration is not complete.** Current implementation: separate Next.js/NestJS/worker runtime, SQL/PGlite/PostgreSQL foundation, fresh local setup, password sessions, optional TOTP and one-use recovery codes. Effective client/team authority, client selection and the platform client directory are now implemented and locally tested. Remaining administration screens, identity links, branding, assessments, learning and integration workflows are not yet fully ported. See [feature checklist](docs/implementation/FEATURE_CHECKLIST.md).
 
 ## Local startup
 Requirements: Node 24 (pinned in .node-version), npm and an available local port.
@@ -10,7 +10,7 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3100. First use opens setup. Enter your own administrator details and choose a separate password for fictional demo accounts. Three demo clients and 30 accounts are created; their full role/training workflows are still pending. No default password is supplied, logged or committed.
+Open http://localhost:3100. First use opens setup. Enter your own administrator details and choose a separate password for fictional demo accounts. Three demo clients and 30 accounts are created; demo client roles, teams and reviewer allocations are seeded; full training workflows are still pending. No default password is supplied, logged or committed.
 
 With DATABASE_URL absent, startup owns one persistent PGlite socket instance under .runtime/private, applies numbered migrations and launches separate web, API and worker processes. No V2 database, secret or private storage is used. Stop with Ctrl+C. A forced process termination can leave a lock; confirm the recorded process is no longer running before removing that exact .lock file. Never delete the database directory to resolve a lock.
 

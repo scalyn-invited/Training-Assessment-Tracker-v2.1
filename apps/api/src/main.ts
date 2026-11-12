@@ -21,6 +21,8 @@ import { z, ZodError } from 'zod';
 import { randomUUID } from 'node:crypto';
 import { Database } from '../../../packages/database/src/database.js';
 import { databaseMode, port } from '../../../packages/database/src/config.js';
+import { Tenancy } from '../../../packages/domain/src/tenancy.js';
+import { Platform } from '../../../packages/domain/src/platform.js';
 import { Auth } from '../../../packages/domain/src/auth.js';
 import { encryptionKey } from '../../../packages/domain/src/crypto.js';
 import { DomainError } from '../../../packages/domain/src/errors.js';
@@ -116,7 +118,12 @@ class AuthController {
     await auth.limit('context:' + req.ip, 120);
     const result = await auth.context(token(req));
     setCookie(res, result.token!);
-    return { csrf: result.csrf, user: result.user, installed: result.installed };
+    return {
+      csrf: result.csrf,
+      user: result.user,
+      installed: result.installed,
+      client: result.client ?? null,
+    };
   }
   @Post('setup') async setup(@Req() req: Request) {
     await auth.limit('setup:' + req.ip, 10);
@@ -170,7 +177,151 @@ class AuthController {
     return { csrf: result.csrf };
   }
 }
-@Module({ controllers: [HealthController, AuthController] })
+
+const tenancy = new Tenancy(auth),
+  platform = new Platform(auth);
+const uuid = z.uuid(),
+  reason = z.string().trim().min(8).max(2000),
+  version = z.number().int().nonnegative();
+@Controller('clients')
+class ClientsController {
+  @Get() list(@Req() req: Request) {
+    return tenancy.choices(token(req));
+  }
+  @Post('select') select(@Req() req: Request) {
+    const d = parse(z.object({ csrf, clientId: uuid }), req);
+    return tenancy.select(token(req), d.csrf, d.clientId);
+  }
+  @Post('groups') group(@Req() req: Request) {
+    const d = parse(
+      z.object({
+        csrf,
+        clientId: uuid,
+        name: z.string().min(1).max(160),
+        kind: z.enum(['team', 'cohort']),
+        reason,
+      }),
+      req,
+    );
+    return tenancy.createGroup(token(req), d.csrf, d.clientId, d.name, d.kind, d.reason);
+  }
+  @Post('roles/grant') role(@Req() req: Request) {
+    const d = parse(
+      z.object({
+        csrf,
+        clientId: uuid,
+        memberId: uuid,
+        role: z.enum(['admin', 'coordinator', 'member']),
+        teamId: uuid.nullable(),
+        reason,
+      }),
+      req,
+    );
+    return tenancy.grantRole(
+      token(req),
+      d.csrf,
+      d.clientId,
+      d.memberId,
+      d.role,
+      d.teamId,
+      d.reason,
+    );
+  }
+  @Post('roles/revoke') revoke(@Req() req: Request) {
+    const d = parse(z.object({ csrf, clientId: uuid, id: uuid, reason }), req);
+    return tenancy.revokeRole(token(req), d.csrf, d.clientId, d.id, d.reason);
+  }
+  @Post('teams/membership') team(@Req() req: Request) {
+    const d = parse(
+      z.object({ csrf, clientId: uuid, memberId: uuid, teamId: uuid, join: z.boolean(), reason }),
+      req,
+    );
+    return tenancy.teamMembership(
+      token(req),
+      d.csrf,
+      d.clientId,
+      d.memberId,
+      d.teamId,
+      d.join,
+      d.reason,
+    );
+  }
+  @Post('allocations') allocate(@Req() req: Request) {
+    const d = parse(
+      z.object({
+        csrf,
+        clientId: uuid,
+        memberId: uuid,
+        coordinatorId: uuid,
+        kind: z.enum(['primary', 'backup']),
+        reason,
+      }),
+      req,
+    );
+    return tenancy.allocate(
+      token(req),
+      d.csrf,
+      d.clientId,
+      d.memberId,
+      d.coordinatorId,
+      d.kind,
+      d.reason,
+    );
+  }
+  @Post('allocations/end') end(@Req() req: Request) {
+    const d = parse(z.object({ csrf, clientId: uuid, id: uuid, reason }), req);
+    return tenancy.endAllocation(token(req), d.csrf, d.clientId, d.id, d.reason);
+  }
+  @Post('membership/end') leave(@Req() req: Request) {
+    const d = parse(z.object({ csrf, clientId: uuid, memberId: uuid, version, reason }), req);
+    return tenancy.leave(token(req), d.csrf, d.clientId, d.memberId, d.version, d.reason);
+  }
+  @Post('sensitive') sensitive(@Req() req: Request) {
+    const d = parse(
+      z.object({ csrf, clientId: uuid, allocationId: uuid, grant: z.boolean(), reason }),
+      req,
+    );
+    return tenancy.sensitive(token(req), d.csrf, d.clientId, d.allocationId, d.grant, d.reason);
+  }
+}
+@Controller('platform')
+class PlatformController {
+  @Get('clients') clients(@Req() req: Request) {
+    const q = z
+      .object({
+        search: z.string().max(120).default(''),
+        status: z.enum(['', 'active', 'suspended', 'inactive']).default(''),
+        sort: z.enum(['asc', 'desc']).default('asc'),
+        page: z.coerce.number().int().min(1).max(100000).default(1),
+      })
+      .parse(req.query);
+    return platform.directory(token(req), q.search, q.page, q.status, q.sort);
+  }
+  @Post('clients') client(@Req() req: Request) {
+    const d = parse(
+      z.object({
+        csrf,
+        id: uuid.nullable(),
+        name: z.string().min(1).max(160),
+        version,
+        reason,
+        suspended: z.boolean().optional(),
+      }),
+      req,
+    );
+    return platform.client(token(req), d.csrf, d.id, d.name, d.version, d.reason, d.suspended);
+  }
+  @Post('admins/appoint') appoint(@Req() req: Request) {
+    const d = parse(z.object({ csrf, userId: uuid, reason }), req);
+    return platform.appoint(token(req), d.csrf, d.userId, d.reason);
+  }
+  @Post('admins/revoke') revoke(@Req() req: Request) {
+    const d = parse(z.object({ csrf, id: uuid, reason }), req);
+    return platform.revoke(token(req), d.csrf, d.id, d.reason);
+  }
+}
+
+@Module({ controllers: [HealthController, AuthController, ClientsController, PlatformController] })
 class ApiModule {}
 const app = await NestFactory.create(ApiModule, { logger: ['error', 'warn'] });
 app.use(helmet());

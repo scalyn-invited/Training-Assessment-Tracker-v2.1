@@ -2,12 +2,17 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 type User = { id: string; name: string; email: string; global_admin: boolean };
-type Context = { csrf: string; user: User | null; installed: boolean };
+type Context = {
+  csrf: string;
+  user: User | null;
+  installed: boolean;
+  client?: { id: string; name: string } | null;
+};
 type ApiError = Error & { code?: string };
 export async function api<T>(route: string, data?: Record<string, unknown>): Promise<T> {
   let response: Response;
   try {
-    response = await fetch('/api/auth/' + route, {
+    response = await fetch(route.startsWith('/') ? '/api' + route : '/api/auth/' + route, {
       method: data ? 'POST' : 'GET',
       headers: data ? { 'Content-Type': 'application/json' } : undefined,
       body: data ? JSON.stringify(data) : undefined,

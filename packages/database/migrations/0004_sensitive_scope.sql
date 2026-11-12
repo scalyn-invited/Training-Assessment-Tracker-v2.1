@@ -1,0 +1,2 @@
+ALTER TABLE coordinator_allocations ADD CONSTRAINT allocations_tenant_id UNIQUE(organisation_id,environment,id);
+ALTER TABLE client_sensitive_grants ADD CONSTRAINT sensitive_allocation_tenant FOREIGN KEY(organisation_id,environment,allocation_id) REFERENCES coordinator_allocations(organisation_id,environment,id);

@@ -7,3 +7,5 @@ Read DESIGN.md before UI changes. Preserve V2 appearance and workflows; use UX E
 Keep V2 untouched. Never copy credentials, databases or private files from V2. Isolate test databases and storage. No remote push, deployment, live emails or paid AI calls without authorization. Do not infer human reviews or owner acceptance. Current automated tests do not prove unported functionality.
 
 Hosting is undecided. Use configurable separate Node processes, PostgreSQL, private persistent storage and health checks. PGlite is local only; PostgreSQL is required for RLS/concurrency qualification.
+
+Human technical/UX and owner acceptance is deferred until full V2.1 parity, explicitly authorized by the user on 2026-11-12. Continue implementation autonomously with one-feature automated QA, fixes and evidence. Do not ask again for between-feature human approval, and do not represent deferred reviews as completed.
