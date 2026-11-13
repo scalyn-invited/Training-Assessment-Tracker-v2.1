@@ -17,3 +17,11 @@ export function privatePath(): string {
 export function databaseMode(): 'postgresql' | 'pglite' {
   return process.env.DATABASE_URL ? 'postgresql' : 'pglite';
 }
+
+export function tenantRole(value = process.env.DATABASE_TENANT_ROLE ?? 'tracker_tenant'): string {
+  if (!/^tracker_tenant(?:_[a-f0-9]{12})?$/.test(value))
+    throw new Error(
+      'DATABASE_TENANT_ROLE must be tracker_tenant or an installation-specific tracker_tenant_<12 hex characters> role',
+    );
+  return value;
+}

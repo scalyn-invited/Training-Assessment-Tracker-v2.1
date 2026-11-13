@@ -12,7 +12,7 @@ import path from 'node:path';
 import { privatePath } from '../../database/src/config.js';
 import { requireCondition } from './errors.js';
 const scrypt = promisify(scryptCallback);
-export const digest = (text: string) => createHash('sha256').update(text).digest('hex');
+export const digest = (text: string | Buffer) => createHash('sha256').update(text).digest('hex');
 export const secret = () => randomBytes(32).toString('hex');
 export function validatePassword(password: string) {
   requireCondition(

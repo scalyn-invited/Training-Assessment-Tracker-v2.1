@@ -66,7 +66,7 @@ export type Job = {
   lease_token: string;
   attempts: number;
 };
-export async function claim(db: Database): Promise<Job | undefined> {
+export async function claim(db: Database, kinds?: string[]): Promise<Job | undefined> {
   return db.transaction(async (sql) => {
     // Interrupted external effects are ambiguous, never silently sent twice.
     await sql.query(
@@ -74,8 +74,8 @@ export async function claim(db: Database): Promise<Job | undefined> {
     );
     const result = await sql.query<Job>(
       `UPDATE outbox_events SET status='processing',attempts=attempts+1,lease_token=$1,lease_until=now()+interval '2 minutes',updated_at=now()
-   WHERE id=(SELECT id FROM outbox_events WHERE status='pending' AND available_at<=now() ORDER BY created_at,id FOR UPDATE SKIP LOCKED LIMIT 1) RETURNING *`,
-      [randomUUID()],
+   WHERE id=(SELECT id FROM outbox_events WHERE status='pending' AND available_at<=now() AND ($2::text[] IS NULL OR kind=ANY($2)) ORDER BY created_at,id FOR UPDATE SKIP LOCKED LIMIT 1) RETURNING *`,
+      [randomUUID(), kinds ?? null],
     );
     return result.rows[0];
   });

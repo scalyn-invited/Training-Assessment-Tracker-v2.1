@@ -1,0 +1,41 @@
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import { Database } from '../../packages/database/src/database.js';
+test('platform account forms preserve selections and require fresh access confirmation',async({page,request})=>{
+ test.setTimeout(120000);
+ const guest=await(await request.get('/api/auth/context')).json();
+ expect((await request.post('/api/auth/setup',{headers:{Origin:'http://127.0.0.1:3110'},data:{csrf:guest.csrf,name:'Platform owner',email:'owner@example.invalid',password:'Unique administrator passphrase',demoPassword:'Separate demonstration password'}})).ok()).toBe(true);
+ await page.goto('/login');await page.getByLabel('Email',{exact:true}).fill('owner@example.invalid');await page.getByLabel('Password',{exact:true}).fill('Unique administrator passphrase');await page.getByRole('button',{name:'Sign in',exact:true}).click();await expect(page).toHaveURL(/platform/);
+ await page.goto('/platform/clients');
+ const section=page.getByRole('region',{name:'Client account access'});
+ await section.getByLabel('Search accounts',{exact:true}).fill('demo.1.3@example.invalid');await section.getByRole('button',{name:'Search accounts',exact:true}).click();
+ const open=async()=>{await expect(section.getByText('1 matching accounts',{exact:true})).toBeVisible();await expect(section.getByText('Loading accounts...',{exact:true})).toHaveCount(0);await section.getByText('Demo Member 1.3 - demo.1.3@example.invalid',{exact:true}).click();};
+ await open();
+ const form=section.getByRole('form',{name:'Manage client access for demo.1.3@example.invalid'});
+ await expect(form.getByRole('combobox',{name:'Client',exact:true}).locator('option:checked')).toHaveText('Demo Client 1');
+ await expect(form.getByRole('combobox',{name:'Action',exact:true})).toHaveValue('');
+ await expect(form.getByRole('combobox',{name:'Action',exact:true}).locator('option[value="join"]')).toHaveCount(0);
+ await form.getByRole('combobox',{name:'Client',exact:true}).selectOption({label:'Demo Client 2'});
+ await form.getByRole('combobox',{name:'Action',exact:true}).selectOption('grant');await form.getByLabel('Reason',{exact:true}).fill('Reviewed account administration access');await form.getByRole('checkbox').check();await form.getByRole('button',{name:'Apply access change'}).click();
+ await expect(form.getByRole('alert')).toContainText('not an active member');
+ await expect(form.getByRole('combobox',{name:'Client',exact:true}).locator('option:checked')).toHaveText('Demo Client 2');
+ await expect(form.getByRole('combobox',{name:'Action',exact:true})).toHaveValue('grant');
+ await form.getByRole('combobox',{name:'Client',exact:true}).selectOption({label:'Demo Client 1'});await expect(form.getByRole('checkbox')).not.toBeChecked();
+ const db=new Database('postgresql://postgres:postgres@127.0.0.1:55432/postgres');
+ try{
+  await db.pool.query("UPDATE users SET permission_version=permission_version+1 WHERE email='demo.1.3@example.invalid'");
+  await form.getByRole('checkbox').check();await form.getByRole('button',{name:'Apply access change'}).click();
+  await expect(form.getByRole('alert')).toContainText('This account changed');await expect(form.getByRole('button',{name:'Apply access change'})).toBeDisabled();
+  await page.setViewportSize({width:375,height:812});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
+  await form.screenshot({path:'output/playwright/platform-account-mobile.png'});
+  await form.getByRole('button',{name:'Reload accounts'}).click();await open();
+  await expect(form.getByRole('combobox',{name:'Action',exact:true})).toHaveValue('');
+  await form.getByRole('combobox',{name:'Action',exact:true}).selectOption('grant');await form.getByLabel('Reason',{exact:true}).fill('Confirmed refreshed account version');await form.getByRole('checkbox').check();await form.getByRole('button',{name:'Apply access change'}).click();
+  await expect(section.getByText('Access updated for Demo Member 1.3. Affected sessions have ended.',{exact:true})).toBeVisible();
+  expect((await db.pool.query("SELECT r.id FROM role_assignments r JOIN users u ON u.id=r.user_id WHERE u.email='demo.1.3@example.invalid' AND r.role='admin' AND r.scope_type='client' AND r.ends_at IS NULL")).rowCount).toBe(1);
+  await open();await form.getByRole('combobox',{name:'Action',exact:true}).selectOption('revoke');
+  await form.getByLabel('Reason',{exact:true}).fill('Remove the verified temporary client admin');await form.getByRole('checkbox').check();await form.getByRole('button',{name:'Apply access change'}).click();
+  await expect.poll(async()=> (await db.pool.query("SELECT r.id FROM role_assignments r JOIN users u ON u.id=r.user_id WHERE u.email='demo.1.3@example.invalid' AND r.role='admin' AND r.scope_type='client' AND r.ends_at IS NULL")).rowCount).toBe(0);
+ }finally{await db.close();}
+});

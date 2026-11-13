@@ -17,6 +17,7 @@ type Link = {
   environment: string;
   purpose: Purpose;
   expires_at: Date;
+  bootstrap: boolean;
 };
 export class Accounts {
   readonly access = new Access();
@@ -88,6 +89,7 @@ export class Accounts {
     reason: string,
     operation: (sql: Sql, actor: Account) => Promise<T>,
   ) {
+    this.auth.assertLocalPassword();
     this.platform.reason(reason);
     await this.auth.limit('account-action:' + digest(token));
     return this.auth.db
@@ -128,6 +130,7 @@ export class Accounts {
     purpose: Purpose,
     client: string | null,
     reason: string,
+    bootstrap = false,
   ) {
     await sql.query(
       "UPDATE local_account_links SET revoked_at=now() WHERE user_id=$1 AND purpose=$2 AND consumed_at IS NULL AND revoked_at IS NULL AND ($2<>'invite' OR organisation_id=$3)",
@@ -136,7 +139,7 @@ export class Accounts {
     const raw = secret(),
       id = randomUUID();
     const result = await sql.query<{ expires_at: Date }>(
-      "INSERT INTO local_account_links(id,token_hash,purpose,user_id,issuer_id,issuer_version,organisation_id,environment,expires_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,now()+CASE WHEN $3='invite' THEN interval '7 days' ELSE interval '1 hour' END) RETURNING expires_at",
+      "INSERT INTO local_account_links(id,token_hash,purpose,user_id,issuer_id,issuer_version,organisation_id,environment,bootstrap,expires_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,now()+CASE WHEN $3='invite' THEN interval '7 days' ELSE interval '1 hour' END) RETURNING expires_at",
       [
         id,
         digest(raw),
@@ -146,6 +149,7 @@ export class Accounts {
         actor.permission_version,
         client,
         actor.environment,
+        bootstrap,
       ],
     );
     await this.platform.audit(sql, actor, 'local.' + purpose + '.issued', id, reason, {});
@@ -328,6 +332,7 @@ export class Accounts {
     );
   }
   async link(sql: Sql, raw: string, purpose: Purpose) {
+    this.auth.assertLocalPassword();
     requireCondition(
       /^[a-f0-9]{64}$/.test(raw) && ['setup', 'reset', 'invite'].includes(purpose),
       410,
@@ -349,6 +354,7 @@ export class Accounts {
     return link;
   }
   async inspect(token: string, csrf: string, raw: string, purpose: Purpose) {
+    this.auth.assertLocalPassword();
     return this.auth.db.transaction(async (sql) => {
       const { user } = await this.auth.verified(sql, token, csrf, purpose === 'invite');
       const link = await this.link(sql, raw, purpose);
@@ -468,12 +474,24 @@ export class Accounts {
           );
           await this.join(sql, issuer, target, link.organisation_id!);
         } else {
-          await this.mayRecover(sql, issuer, target, link.organisation_id, purpose);
+          if (link.bootstrap) {
+            requireCondition(
+              purpose === 'setup' &&
+                !link.organisation_id &&
+                issuer.id === target.id &&
+                !target.password_enabled &&
+                (await globalAdmin(sql, target.id, target.environment)),
+              403,
+              'bootstrap_setup_unavailable',
+              'Initial administrator setup is no longer available.',
+            );
+          } else await this.mayRecover(sql, issuer, target, link.organisation_id, purpose);
           await sql.query('UPDATE users SET password_hash=$2,password_enabled=true WHERE id=$1', [
             target.id,
             hash,
           ]);
-          if (purpose === 'setup') await this.join(sql, issuer, target, link.organisation_id!);
+          if (purpose === 'setup' && !link.bootstrap)
+            await this.join(sql, issuer, target, link.organisation_id!);
           await invalidate(sql, [target.id]);
           await sql.query(
             "UPDATE local_account_links SET revoked_at=now() WHERE user_id=$1 AND purpose IN ('setup','reset') AND consumed_at IS NULL AND id<>$2",
@@ -499,6 +517,7 @@ export class Accounts {
   }
 
   async manage(token: string, client: string | null, page = 1, search = '') {
+    this.auth.assertLocalPassword();
     requireCondition(
       Number.isInteger(page) && page > 0 && search.length <= 120,
       422,

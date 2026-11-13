@@ -10,7 +10,9 @@ export default function Setup() {
     [error, setError] = useState(''),
     [data, setData] = useState<Record<string, string>>({});
   useEffect(() => {
-    if (context?.installed) router.replace('/login');
+    if (context?.setupMode === 'hosted' || context?.setupMode === 'local')
+      router.replace('/setup/' + context.setupMode);
+    else if (context?.installed) router.replace('/login');
   }, [context, router]);
   async function install() {
     if (!context || busy) return;

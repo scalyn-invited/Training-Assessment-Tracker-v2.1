@@ -1,4 +1,4 @@
-import { beforeAll, afterAll, describe, it, expect } from 'vitest';
+import { beforeAll, afterAll, describe, it, expect, vi } from 'vitest';
 import { randomUUID } from 'node:crypto';
 import { testDatabase, fixture, actor, org, other } from './helpers.js';
 import { migrate } from '../packages/database/src/migrate.js';
@@ -13,10 +13,30 @@ describe('foundation on a shared PGlite socket', () => {
   afterAll(async () => {
     await instance?.close();
   });
+  it('idle connection failure reports only a safe message and permits later queries', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    try {
+      instance.db.pool.emit('error', new Error('private connection details'));
+      expect(warn).toHaveBeenCalledExactlyOnceWith(
+        'An idle database connection closed. New requests will reconnect.',
+      );
+      expect((await instance.db.pool.query('SELECT 1 AS value')).rows[0].value).toBe(1);
+    } finally {
+      warn.mockRestore();
+    }
+  });
   it('reapplying unchanged migrations is safe', async () => {
+    expect((await instance.db.pool.query('SHOW search_path')).rows[0].search_path).toBe('public');
+    const before = await instance.db.pool.query(
+      'SELECT name,sha256 FROM schema_migrations ORDER BY name',
+    );
     await migrate(instance.db);
     const r = await instance.db.pool.query('SELECT * FROM schema_migrations');
-    expect(r.rows.map((row) => row.name)).toHaveLength(5);
+    expect(
+      r.rows
+        .map(({ name, sha256 }) => ({ name, sha256 }))
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    ).toEqual(before.rows);
   });
   it('tenant transactions only return their client', async () => {
     const rows = await instance.db.scoped(

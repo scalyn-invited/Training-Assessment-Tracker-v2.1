@@ -1,3 +1,4 @@
+import { MockIdentity } from './mock-identity.js';
 import { Access, globalAdmin } from './access.js';
 import { seedTenancy } from './seed-tenancy.js';
 import { randomUUID, randomBytes } from 'node:crypto';
@@ -18,6 +19,8 @@ type StoredUser = AuthUser & {
   active: boolean;
   is_synthetic: boolean;
   password_enabled: boolean;
+  origin: string;
+  permissions_synced_at: Date | null;
 };
 function eligible(user: StoredUser | undefined | null) {
   return Boolean(
@@ -33,6 +36,8 @@ type Session = {
   user_id: string | null;
   csrf: string;
   permission_version: number | null;
+  authentication_mode: 'local_password' | 'mock';
+  identity_id: string | null;
 };
 export class Auth {
   constructor(
@@ -58,14 +63,142 @@ export class Auth {
     });
     requireCondition(count <= max, 429, 'rate_limited', 'Wait one minute before trying again.');
   }
-  async newSession(sql: Sql, user: AuthUser | null) {
+  async newSession(sql: Sql, user: AuthUser | null, identityId: string | null = null) {
     const token = secret(),
       csrf = secret();
     await sql.query(
-      'INSERT INTO sessions(token_hash,user_id,csrf,permission_version) VALUES($1,$2,$3,$4)',
-      [digest(token), user?.id ?? null, csrf, user?.permission_version ?? null],
+      'INSERT INTO sessions(token_hash,user_id,csrf,permission_version,authentication_mode,identity_id) VALUES($1,$2,$3,$4,$5,$6)',
+      [
+        digest(token),
+        user?.id ?? null,
+        csrf,
+        user?.permission_version ?? null,
+        identityId ? 'mock' : 'local_password',
+        identityId,
+      ],
     );
     return { token, csrf, user };
+  }
+  private async sessionEligible(sql: Sql, session: Session, user: StoredUser) {
+    if (user.permission_version !== session.permission_version) return false;
+    if (session.authentication_mode === 'mock') {
+      const valid =
+        new MockIdentity(this.key).enabled() &&
+        user.active &&
+        user.is_synthetic &&
+        user.environment === 'test' &&
+        Boolean(
+          (
+            await sql.query('SELECT id FROM identities WHERE id=$1 AND user_id=$2 AND active', [
+              session.identity_id,
+              user.id,
+            ])
+          ).rowCount,
+        );
+      if (!valid) return false;
+      requireCondition(
+        user.origin !== 'primary_import' ||
+          (user.permissions_synced_at &&
+            new Date(user.permissions_synced_at).getTime() >= Date.now() - 300000),
+        503,
+        'permissions_stale',
+        'Permissions are stale. Refresh directory access.',
+      );
+      return true;
+    }
+    return (
+      (process.env.TRAINING_AUTH_MODE ?? 'local_password') === 'local_password' &&
+      eligible(user) &&
+      (await new Access().active(sql, user.id, user.environment)) &&
+      Boolean(
+        (
+          await sql.query(
+            "SELECT id FROM identities WHERE user_id=$1::uuid AND issuer='urn:training:local' AND subject=$1::text AND active",
+            [user.id],
+          )
+        ).rowCount,
+      )
+    );
+  }
+  async signInOptions(): Promise<{
+    mode: 'local_password' | 'mock' | 'unavailable';
+    identities: { id: string; name: string }[];
+  }> {
+    if ((process.env.TRAINING_AUTH_MODE ?? 'local_password') === 'local_password')
+      return { mode: 'local_password', identities: [] };
+    const mock = new MockIdentity(this.key);
+    if (!mock.enabled()) return { mode: 'unavailable', identities: [] };
+    return this.db.transaction(async (sql) => {
+      const candidates = (
+        await sql.query<{ id: string; user_id: string; name: string }>(
+          "SELECT i.id,i.user_id,u.name FROM identities i JOIN users u ON u.id=i.user_id WHERE i.active AND u.active AND u.is_synthetic AND u.environment='test' ORDER BY u.name,i.id",
+        )
+      ).rows;
+      const identities: { id: string; name: string }[] = [];
+      for (const candidate of candidates)
+        if (await new Access().active(sql, candidate.user_id, 'test'))
+          identities.push({ id: candidate.id, name: candidate.name });
+      return { mode: 'mock', identities };
+    });
+  }
+  async mockLogin(token: string, csrf: string, identityId: string) {
+    const mock = new MockIdentity(this.key);
+    mock.assertEnabled();
+    requireCondition(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(identityId),
+      422,
+      'identity_required',
+      'Choose an available test identity.',
+    );
+    await this.limit('mock-login:' + identityId);
+    return this.db.transaction(async (sql) => {
+      await this.verified(sql, token, csrf, false);
+      const identity = (
+        await sql.query<{ id: string; issuer: string; subject: string; user_id: string }>(
+          'SELECT * FROM identities WHERE id=$1 AND active',
+          [identityId],
+        )
+      ).rows[0];
+      requireCondition(
+        identity,
+        401,
+        'invalid_identity',
+        'This test identity is no longer available.',
+      );
+      await sql.query('SELECT id FROM users WHERE id=$1 FOR UPDATE', [identity.user_id]);
+      const user = await mock.resolve(sql, identity.issuer, identity.subject);
+      requireCondition(
+        await new Access().active(sql, user.id, 'test'),
+        503,
+        'permissions_stale',
+        'Permissions are stale. Refresh directory access.',
+      );
+      const safe: AuthUser = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        environment: user.environment,
+        permission_version: user.permission_version,
+        global_admin: await globalAdmin(sql, user.id, user.environment),
+      };
+      await sql.query('DELETE FROM sessions WHERE token_hash=$1', [digest(token)]);
+      await this.audit(sql, user.id, 'mock.login');
+      const session = await this.newSession(sql, safe, identity.id);
+      if (!safe.global_admin) {
+        const clients = (
+          await sql.query(
+            "SELECT cm.organisation_id FROM client_memberships cm JOIN organisations o ON o.id=cm.organisation_id JOIN platform_client_states s ON s.organisation_id=o.id AND s.environment=cm.environment WHERE cm.user_id=$1 AND cm.environment='test' AND cm.status='active' AND cm.joined_at<=now() AND cm.ended_at IS NULL AND o.active AND NOT s.suspended",
+            [safe.id],
+          )
+        ).rows;
+        if (clients.length === 1)
+          await sql.query('UPDATE sessions SET organisation_id=$1 WHERE token_hash=$2', [
+            clients[0].organisation_id,
+            digest(session.token),
+          ]);
+      }
+      return session;
+    });
   }
   async context(token?: string) {
     return this.db.transaction(async (sql) => {
@@ -83,18 +216,7 @@ export class Auth {
         const found = (
           await sql.query<StoredUser>('SELECT * FROM users WHERE id=$1', [session.user_id])
         ).rows[0];
-        const identity = (
-          await sql.query(
-            "SELECT id FROM identities WHERE user_id=$1::uuid AND issuer='urn:training:local' AND subject=$1::text AND active=true",
-            [session.user_id],
-          )
-        ).rowCount;
-        if (
-          eligible(found) &&
-          (await new Access().active(sql, found.id, found.environment)) &&
-          identity &&
-          found.permission_version === session.permission_version
-        ) {
+        if (found && (await this.sessionEligible(sql, session, found))) {
           user = {
             id: found.id,
             name: found.name,
@@ -137,7 +259,27 @@ export class Auth {
           (session.organisation_id &&
             (await new Access().administer(sql, user, session.organisation_id)))),
       );
-      return { token, csrf: session.csrf, user, installed, client, canAdmin };
+      const canCoordinate = Boolean(
+        user &&
+        client &&
+        (await new Access().membership(sql, user.id, client.id, user.environment)) &&
+        (
+          await sql.query(
+            "SELECT r.id FROM role_assignments r WHERE r.user_id=$1 AND r.organisation_id=$2 AND r.environment=$3 AND r.role='coordinator' AND r.starts_at<=now() AND (r.ends_at IS NULL OR r.ends_at>now()) AND (r.scope_type='client' OR EXISTS(SELECT 1 FROM groups g WHERE g.id=r.group_id AND g.active AND g.kind='team' AND g.organisation_id=r.organisation_id AND g.environment=r.environment))",
+            [user.id, client.id, user.environment],
+          )
+        ).rowCount,
+      );
+      return {
+        token,
+        csrf: session.csrf,
+        user,
+        installed,
+        client,
+        canAdmin,
+        canCoordinate,
+        authMode: session.authentication_mode,
+      };
     });
   }
   async verified(
@@ -165,17 +307,8 @@ export class Auth {
       user = (
         await sql.query<StoredUser>('SELECT * FROM users WHERE id=$1 FOR UPDATE', [session.user_id])
       ).rows[0];
-      const identity = (
-        await sql.query(
-          "SELECT id FROM identities WHERE user_id=$1::uuid AND issuer='urn:training:local' AND subject=$1::text AND active=true",
-          [session.user_id],
-        )
-      ).rowCount;
       requireCondition(
-        eligible(user) &&
-          (await new Access().active(sql, user!.id, user!.environment)) &&
-          identity &&
-          user.permission_version === session.permission_version,
+        user && (await this.sessionEligible(sql, session, user)),
         401,
         'access_revoked',
         'Access has changed. Sign in again.',
@@ -194,7 +327,7 @@ export class Auth {
       process.env.NODE_ENV !== 'production',
       503,
       'hosted_setup_pending',
-      'Hosted installation is not yet qualified.',
+      'Prepare hosted installation from the server console and use the private setup wizard.',
     );
     requireCondition(
       data.name.trim().length > 0 &&
@@ -272,6 +405,12 @@ export class Auth {
     });
   }
   async login(token: string, csrf: string, email: string, password: string, code?: string) {
+    requireCondition(
+      (process.env.TRAINING_AUTH_MODE ?? 'local_password') === 'local_password',
+      503,
+      'password_signin_unavailable',
+      'Password sign-in is unavailable in this authentication mode.',
+    );
     await this.limit('login:' + email.trim().toLowerCase());
     return this.db.transaction(async (sql) => {
       await this.verified(sql, token, csrf, false);
@@ -335,7 +474,16 @@ export class Auth {
       return this.newSession(sql, null);
     });
   }
+  assertLocalPassword() {
+    requireCondition(
+      (process.env.TRAINING_AUTH_MODE ?? 'local_password') === 'local_password',
+      503,
+      'local_password_unavailable',
+      'Password and authenticator settings are unavailable in this sign-in mode.',
+    );
+  }
   async mfaStatus(token: string) {
+    this.assertLocalPassword();
     return this.db.transaction(async (sql) => {
       const { user } = await this.verified(sql, token);
       return {
@@ -350,6 +498,7 @@ export class Auth {
     });
   }
   async beginMfa(token: string, csrf: string, password: string) {
+    this.assertLocalPassword();
     await this.limit('mfa:' + digest(token));
     return this.db.transaction(async (sql) => {
       const { user } = await this.verified(sql, token, csrf);
@@ -387,6 +536,7 @@ export class Auth {
     });
   }
   async confirmMfa(token: string, csrf: string, code: string) {
+    this.assertLocalPassword();
     await this.limit('mfa:' + digest(token));
     return this.db.transaction(async (sql) => {
       const { user } = await this.verified(sql, token, csrf);
@@ -454,6 +604,7 @@ export class Auth {
     await sql.query('UPDATE user_mfa SET last_counter=$2 WHERE user_id=$1', [userId, counter]);
   }
   async disableMfa(token: string, csrf: string, password: string, code: string) {
+    this.assertLocalPassword();
     await this.limit('mfa:' + digest(token));
     return this.db.transaction(async (sql) => {
       const { user } = await this.verified(sql, token, csrf);
@@ -481,6 +632,7 @@ export class Auth {
     next: string,
     confirmation: string,
   ) {
+    this.assertLocalPassword();
     requireCondition(
       next === confirmation,
       422,

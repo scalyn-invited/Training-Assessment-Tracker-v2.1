@@ -3,6 +3,7 @@ export class DomainError extends Error {
     public readonly status: number,
     public readonly code: string,
     message: string,
+    public readonly errors?: Record<string, string>,
   ) {
     super(message);
   }

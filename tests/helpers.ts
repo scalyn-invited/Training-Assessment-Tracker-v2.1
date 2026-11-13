@@ -2,17 +2,22 @@ import { PGlite } from '@electric-sql/pglite';
 import { PGLiteSocketServer } from '@electric-sql/pglite-socket';
 import { Database } from '../packages/database/src/database.js';
 import { migrate } from '../packages/database/src/migrate.js';
-export async function testDatabase() {
+export async function testDatabase(
+  options: { migrate?: boolean; tenantRole?: string; port?: number } = {},
+) {
   const pglite = await PGlite.create();
   const server = new PGLiteSocketServer({
     db: pglite,
     host: '127.0.0.1',
     maxConnections: 16,
-    port: 55439,
+    port: options.port ?? 55439,
   });
   await server.start();
-  const db = new Database('postgresql://postgres:postgres@127.0.0.1:55439/postgres');
-  await migrate(db);
+  const db = new Database(
+    'postgresql://postgres:postgres@127.0.0.1:' + (options.port ?? 55439) + '/postgres',
+    options.tenantRole,
+  );
+  if (options.migrate !== false) await migrate(db);
   return {
     db,
     close: async () => {

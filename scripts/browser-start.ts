@@ -1,3 +1,5 @@
+delete process.env.CLAMSCAN_PATH;
+delete process.env.CLAMSCAN_DATABASE;
 process.env.TRACKER_EPHEMERAL_TEST_DB = '1';
 import path from 'node:path';
 process.env.PRIVATE_STORAGE_PATH = path.resolve(

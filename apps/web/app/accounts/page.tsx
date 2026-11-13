@@ -15,6 +15,7 @@ type Issued = {
   revoked_at: string | null;
 };
 type Data = {
+  accountMailAvailable: boolean;
   clients: Client[];
   targets: { id: string; name: string; email: string; passwordEnabled: boolean }[];
   links: Issued[];
@@ -23,7 +24,7 @@ type Data = {
   clientId: string | null;
   global: boolean;
 };
-type Result = { path: string; purpose: string; expiresAt: string };
+type Result = { path: string; purpose: string; expiresAt: string; delivery?: string | null };
 export default function AccountsPage() {
   const { context, error: contextError, load: loadContext } = useContext(),
     router = useRouter();
@@ -75,6 +76,7 @@ export default function AccountsPage() {
         reason: fields.reason,
         mode,
         synthetic: fields.synthetic === 'on',
+        sendEmail: fields.sendEmail === 'on',
       });
       setResult(response);
       setReview(null);
@@ -97,6 +99,7 @@ export default function AccountsPage() {
           userId: fields.userId,
           clientId: fields.clientId || data?.clientId || null,
           purpose: fields.purpose,
+          sendEmail: fields.sendEmail === 'on',
           password: fields.recoveryPassword,
           reason: fields.reason,
         }),
@@ -220,7 +223,11 @@ export default function AccountsPage() {
                         </p>
                       </>
                     )}
-                    <p>Email is not configured. A private link will be shown for manual sharing.</p>
+                    {!data.accountMailAvailable && (
+                      <p>
+                        Email is not configured. A private link will be shown for manual sharing.
+                      </p>
+                    )}
                     <Password name="createPassword" label="Your current password" />
                     <label>
                       Reason
@@ -245,6 +252,15 @@ export default function AccountsPage() {
                         Back to details
                       </button>
                     </div>
+                  )}
+                  {data.accountMailAvailable && (
+                    <details>
+                      <summary>Optional email delivery</summary>
+                      <label>
+                        <input type="checkbox" name="sendEmail" disabled={busy} /> Email this link
+                        to the approved recipient (optional)
+                      </label>
+                    </details>
                   )}
                   <button className="primary" disabled={busy}>
                     {busy
@@ -318,6 +334,15 @@ export default function AccountsPage() {
                   <input type="checkbox" required /> I have checked the recipient and recovery
                   action.
                 </label>
+                {data.accountMailAvailable && (
+                  <details>
+                    <summary>Optional email delivery</summary>
+                    <label>
+                      <input type="checkbox" name="sendEmail" disabled={busy} /> Email this link to
+                      the approved recipient (optional)
+                    </label>
+                  </details>
+                )}
                 <button className="secondary" disabled={busy}>
                   {busy ? 'Issuing…' : 'Issue private link'}
                 </button>
@@ -421,6 +446,7 @@ export default function AccountsPage() {
         ) : (
           <section className="panel">
             <h2>Private account link</h2>
+            {result.delivery && <p role="status">{result.delivery}</p>}
             <p>
               This {result.purpose} link is shown once. Share it privately with the intended person.
             </p>

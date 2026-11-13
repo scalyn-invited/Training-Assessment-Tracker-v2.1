@@ -1,0 +1,41 @@
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import { Database } from '../../packages/database/src/database.js';
+test('stale administration selections require explicit refresh before an account change',async({page,request})=>{
+ test.setTimeout(120000);
+ const origin='http://127.0.0.1:3110',password='Private administration version passphrase';
+ const guest=await(await request.get('/api/auth/context')).json();
+ expect((await request.post('/api/auth/setup',{headers:{Origin:origin},data:{csrf:guest.csrf,name:'Version owner',email:'owner@example.invalid',password,demoPassword:'Separate fictional demo password'}})).ok()).toBeTruthy();
+ await page.goto('/login');await page.getByLabel('Email',{exact:true}).fill('owner@example.invalid');await page.getByLabel('Password',{exact:true}).fill(password);await page.getByRole('button',{name:'Sign in',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'Platform overview',exact:true})).toBeVisible();
+ const db=new Database('postgresql://postgres:postgres@127.0.0.1:55432/postgres');
+ try {
+  const target=(await db.pool.query("SELECT u.id,cm.id membership,cm.organisation_id FROM users u JOIN client_memberships cm ON cm.user_id=u.id WHERE u.email='demo.1.3@example.invalid'")).rows[0];
+  const ctx=await(await page.request.get('/api/auth/context')).json();
+  expect((await page.request.post('/api/clients/select',{headers:{Origin:origin},data:{csrf:ctx.csrf,clientId:target.organisation_id}})).ok()).toBeTruthy();
+  ctx.csrf=(await(await page.request.get('/api/auth/context')).json()).csrf;
+  const team=await(await page.request.post('/api/clients/groups',{headers:{Origin:origin},data:{csrf:ctx.csrf,clientId:target.organisation_id,name:'Version recovery team',kind:'team',reason:'Verify current account permissions'}})).json();
+  const missing=await page.request.post('/api/clients/teams/membership',{headers:{Origin:origin},data:{csrf:ctx.csrf,clientId:target.organisation_id,memberId:target.membership,teamId:team.id,join:true,reason:'Missing displayed account version'}});
+  expect(missing.status()).toBe(422);
+  await page.goto('/administration');
+  await page.getByRole('searchbox',{name:'Search name or email'}).fill('demo.1.3@example.invalid');await page.getByRole('button',{name:'Search people',exact:true}).click();
+  await page.getByRole('button',{name:'Manage assignments',exact:true}).click();
+  const dialog=page.getByRole('dialog'),form=dialog.locator('form').filter({has:page.getByRole('button',{name:'Update team membership',exact:true})});
+  await form.getByRole('combobox',{name:'Team',exact:true}).selectOption({label:'Version recovery team'});await form.getByLabel('Reason',{exact:true}).fill('Review member team assignment');
+  await db.pool.query('UPDATE users SET permission_version=permission_version+1 WHERE id=$1',[target.id]);
+  await form.getByRole('button',{name:'Update team membership',exact:true}).click();
+  await expect(dialog.getByText('This account changed. Close this dialog, refresh the directory and review the account again.',{exact:true})).toBeVisible();
+  await expect(form.getByRole('button',{name:'Update team membership',exact:true})).toBeDisabled();
+  await expect(form.getByLabel('Reason',{exact:true})).toHaveValue('Review member team assignment');
+  expect((await db.pool.query('SELECT id FROM client_team_memberships WHERE group_id=$1',[team.id])).rowCount).toBe(0);
+  await page.setViewportSize({width:375,height:812});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect((await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze()).violations).toEqual([]);
+  await page.screenshot({path:'output/playwright/administration-version-mobile.png',fullPage:true});
+  await dialog.getByRole('button',{name:'Refresh directory and review again',exact:true}).click();await expect(dialog).not.toBeVisible();
+  await page.getByRole('button',{name:'Manage assignments',exact:true}).click();
+  await form.getByRole('combobox',{name:'Team',exact:true}).selectOption({label:'Version recovery team'});await form.getByLabel('Reason',{exact:true}).fill('Reviewed refreshed member assignment');
+  await form.getByRole('button',{name:'Update team membership',exact:true}).click();await expect(dialog).not.toBeVisible();
+  expect((await db.pool.query('SELECT id FROM client_team_memberships WHERE group_id=$1 AND ends_at IS NULL',[team.id])).rowCount).toBe(1);
+ } finally {await db.close();}
+});

@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { PlatformAccounts } from '../../components/platform-accounts';
 import { api, useContext, Guest, Pending, Feedback } from '../../components/auth-ui';
 type Client = {
   id: string;
@@ -16,11 +17,36 @@ type Directory = { clients: Client[]; total: number; all: number; page: number }
 export default function ClientDirectory() {
   const { context, error, load } = useContext(),
     router = useRouter();
-  const [data, setData] = useState<Directory | null>(null),
-    [search, setSearch] = useState(''),
-    [status, setStatus] = useState(''),
-    [sort, setSort] = useState('asc'),
-    [page, setPage] = useState(1);
+  const [data, setData] = useState<Directory | null>(null);
+  const [filters, setFilters] = useState({ search: '', status: '', sort: 'asc', page: 1 });
+  const { search, status, sort, page } = filters;
+  const [urlReady, setUrlReady] = useState(false);
+  const historyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    const restore = () => {
+      if (historyTimer.current) clearTimeout(historyTimer.current);
+      const params = new URLSearchParams(window.location.search), rawPage = Number(params.get('page') ?? 1);
+      setFilters({search: (params.get('client_search') ?? '').slice(0,120),
+        status: ['active','suspended','inactive'].includes(params.get('status') ?? '') ? params.get('status')! : '',
+        sort: params.get('sort') === 'desc' ? 'desc' : 'asc',
+        page: Number.isInteger(rawPage) && rawPage >= 1 && rawPage <= 100000 ? rawPage : 1});
+      setUrlReady(true);
+    };
+    restore(); window.addEventListener('popstate', restore);
+    return () => { window.removeEventListener('popstate',restore); if(historyTimer.current)clearTimeout(historyTimer.current); };
+  }, []);
+  function updateFilters(change: Partial<typeof filters>, debounce = false) {
+    const next = {...filters,...change}; setFilters(next);
+    if(historyTimer.current)clearTimeout(historyTimer.current);
+    const write = () => {
+      const url = new URL(window.location.href);
+      for(const [key,value] of Object.entries({client_search:next.search,status:next.status,sort:next.sort === 'asc' ? '' : next.sort,page:next.page === 1 ? '' : String(next.page)})) {
+        if(value)url.searchParams.set(key,value);else url.searchParams.delete(key);
+      }
+      if(url.href !== window.location.href)window.history.pushState(null,'',url.pathname+url.search+url.hash);
+    };
+    if(debounce)historyTimer.current=setTimeout(write,300);else write();
+  }
   const [loading, setLoading] = useState(false),
     [failure, setFailure] = useState(''),
     [success, setSuccess] = useState('');
@@ -51,10 +77,12 @@ export default function ClientDirectory() {
     if (context && !context.user) router.replace('/login');
   }, [context, router]);
   useEffect(() => {
-    if (!context?.user?.global_admin) return;
+    if (!context?.user?.global_admin || !urlReady) return;
+    ++requestId.current;
+    setLoading(true);
     const timer = setTimeout(() => void refresh(), 300);
     return () => clearTimeout(timer);
-  }, [context, refresh]);
+  }, [context, refresh, urlReady]);
   useEffect(() => {
     if (selected) {
       dialog.current?.showModal();
@@ -73,9 +101,7 @@ export default function ClientDirectory() {
     if (!saving) setSelected(null);
   }
   function clear() {
-    setSearch('');
-    setStatus('');
-    setPage(1);
+    updateFilters({search:'',status:'',page:1});
   }
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -163,8 +189,7 @@ export default function ClientDirectory() {
               maxLength={120}
               value={search}
               onChange={(e) => {
-                setSearch(e.target.value);
-                setPage(1);
+                updateFilters({search:e.target.value,page:1},true);
               }}
               enterKeyHint="search"
             />
@@ -174,8 +199,7 @@ export default function ClientDirectory() {
             <select
               value={status}
               onChange={(e) => {
-                setStatus(e.target.value);
-                setPage(1);
+                updateFilters({status:e.target.value,page:1});
               }}
             >
               <option value="">All statuses</option>
@@ -195,8 +219,7 @@ export default function ClientDirectory() {
         <button
           className="directory-mobile-sort secondary"
           onClick={() => {
-            setSort(sort === 'asc' ? 'desc' : 'asc');
-            setPage(1);
+            updateFilters({sort:sort === 'asc' ? 'desc' : 'asc',page:1});
           }}
         >
           Client name: {sort === 'asc' ? 'A to Z' : 'Z to A'}
@@ -210,8 +233,7 @@ export default function ClientDirectory() {
                   <button
                     className="directory-sort"
                     onClick={() => {
-                      setSort(sort === 'asc' ? 'desc' : 'asc');
-                      setPage(1);
+                      updateFilters({sort:sort === 'asc' ? 'desc' : 'asc',page:1});
                     }}
                   >
                     Client name {sort === 'asc' ? '↑' : '↓'}
@@ -289,7 +311,7 @@ export default function ClientDirectory() {
             <button
               className="secondary"
               disabled={page === 1 || loading}
-              onClick={() => setPage(page - 1)}
+              onClick={() => updateFilters({page:page-1})}
             >
               Previous
             </button>
@@ -297,7 +319,7 @@ export default function ClientDirectory() {
             <button
               className="secondary"
               disabled={page * 20 >= data.total || loading}
-              onClick={() => setPage(page + 1)}
+              onClick={() => updateFilters({page:page+1})}
             >
               Next
             </button>
@@ -308,6 +330,7 @@ export default function ClientDirectory() {
           retained assignments are blocked.
         </p>
       </section>
+      <PlatformAccounts csrf={context.csrf} onChanged={() => void refresh()} />
       <dialog
         ref={dialog}
         className="workspace-dialog"

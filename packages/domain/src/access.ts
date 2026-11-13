@@ -161,7 +161,17 @@ export class Access {
         )
       );
     }
-    if (!recordTeam) return this.allocated(sql, actor, row);
+
+    // Source Access.enrolments applies this historical restriction to both
+    // application records and the approved external feed.
+    if (!recordTeam) {
+      if (!(await this.allocated(sql, actor, row))) return false;
+      return Boolean((await sql.query(
+        'SELECT a.id FROM coordinator_allocations a JOIN client_memberships cm ON cm.id=a.coordinator_membership_id AND cm.organisation_id=a.organisation_id AND cm.environment=a.environment WHERE a.organisation_id=$1 AND a.environment=$2 AND a.member_membership_id=$3 AND cm.user_id=$4 AND a.starts_at<=$5 AND a.starts_at<=now() AND (a.ends_at IS NULL OR a.ends_at>now())',
+        [row.organisation_id, actor.environment, row.id, actor.id, recordedAt],
+      )).rowCount);
+    }
+
     if (!(await this.team(sql, row.organisation_id, actor.environment, recordTeam))) return false;
     const memberHistory = await sql.query(
       'SELECT id FROM client_team_memberships WHERE organisation_id=$1 AND environment=$2 AND client_membership_id=$3 AND group_id=$4 AND starts_at<=$5 AND ' +

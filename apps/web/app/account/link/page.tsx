@@ -113,12 +113,21 @@ export default function AccountLink() {
             <Feedback error={error} />
             {error && (
               <>
-                <p>Invitation acceptance requires the intended recipient to be signed in.</p>
-                <p>
-                  <Link href="/login" target="_blank" rel="noopener">
-                    Open sign in in another tab
-                  </Link>
-                </p>
+                {credential?.purpose === 'invite' ? (
+                  <>
+                    <p>Invitation acceptance requires the intended recipient to be signed in.</p>
+                    <p>
+                      <Link href="/login" target="_blank" rel="noopener">
+                        Open sign in in another tab
+                      </Link>
+                    </p>
+                  </>
+                ) : (
+                  <p>
+                    If this link has expired or been replaced, ask the person who issued it for a
+                    new private link.
+                  </p>
+                )}
                 <button className="secondary" onClick={load}>
                   Check this link again
                 </button>

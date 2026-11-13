@@ -1,4 +1,6 @@
 import { randomUUID } from 'node:crypto';
+import { passwordHash, secret } from './crypto.js';
+import { mockIdentityEnabled } from './mock-identity.js';
 import type { Sql } from '../../database/src/database.js';
 import { Auth, type AuthUser } from './auth.js';
 import { Access, globalAdmin, effective, type Membership } from './access.js';
@@ -38,7 +40,92 @@ export class Tenancy {
       ).rows;
     });
   }
-  async select(token: string, csrf: string, client: string) {
+  async administration(token: string, client: string, search = '', page = 1) {
+    requireCondition(
+      search.length <= 120 && Number.isInteger(page) && page >= 1 && page <= 100000,
+      422,
+      'invalid_filter',
+      'Enter a valid search or page.',
+    );
+    return this.auth.db.transaction(async (sql) => {
+      const { user, session } = await this.auth.verified(sql, token);
+      requireCondition(
+        session.organisation_id === client && (await this.access.administer(sql, user!, client)),
+        403,
+        'client_admin_required',
+        'Select this client with administration permission first.',
+      );
+      const params = [client, user!.environment, search];
+      const where =
+        "cm.organisation_id=$1 AND cm.environment=$2 AND cm.status='active' AND cm.ended_at IS NULL AND cm.joined_at<=now() AND u.active AND (u.name ILIKE '%'||$3||'%' OR u.email ILIKE '%'||$3||'%')";
+      const people = (
+        await sql.query(
+          `SELECT cm.id,cm.version,u.permission_version,u.id user_id,u.name,u.email,u.active,u.origin,u.sync_policy,u.is_synthetic,u.external_person_id,u.export_training_history FROM client_memberships cm JOIN users u ON u.id=cm.user_id AND u.environment=cm.environment WHERE ${where} ORDER BY u.name,cm.id LIMIT 20 OFFSET $4`,
+          [...params, (page - 1) * 20],
+        )
+      ).rows;
+      const total = (
+        await sql.query(
+          `SELECT count(*)::int total FROM client_memberships cm JOIN users u ON u.id=cm.user_id AND u.environment=cm.environment WHERE ${where}`,
+          params,
+        )
+      ).rows[0].total;
+      const groups = (
+        await sql.query(
+          'SELECT id,name,kind,origin FROM groups WHERE organisation_id=$1 AND environment=$2 AND active ORDER BY name,id',
+          params.slice(0, 2),
+        )
+      ).rows;
+      const ids = people.map((person) => person.id);
+      const roles = (
+        await sql.query(
+          'SELECT id,client_membership_id,role,group_id,scope_type FROM role_assignments WHERE organisation_id=$1 AND environment=$2 AND client_membership_id=ANY($3::uuid[]) AND ' +
+            effective,
+          [client, user!.environment, ids],
+        )
+      ).rows;
+      const teams = (
+        await sql.query(
+          'SELECT id,client_membership_id,group_id FROM client_team_memberships WHERE organisation_id=$1 AND environment=$2 AND client_membership_id=ANY($3::uuid[]) AND ' +
+            effective,
+          [client, user!.environment, ids],
+        )
+      ).rows;
+
+      const candidates = (
+        await sql.query(
+          "SELECT cm.id,u.name,u.email,EXISTS(SELECT 1 FROM role_assignments r WHERE r.client_membership_id=cm.id AND r.role='coordinator' AND r.starts_at<=now() AND (r.ends_at IS NULL OR r.ends_at>now())) coordinator,EXISTS(SELECT 1 FROM role_assignments r WHERE r.client_membership_id=cm.id AND r.role='member' AND r.starts_at<=now() AND (r.ends_at IS NULL OR r.ends_at>now())) member FROM client_memberships cm JOIN users u ON u.id=cm.user_id WHERE cm.organisation_id=$1 AND cm.environment=$2 AND cm.status='active' AND cm.ended_at IS NULL AND cm.joined_at<=now() AND u.active ORDER BY u.name,cm.id",
+          [client, user!.environment],
+        )
+      ).rows;
+      const allocations = (
+        await sql.query(
+          'SELECT a.id,a.kind,a.member_membership_id,a.coordinator_membership_id,m.name member_name,c.name coordinator_name,EXISTS(SELECT 1 FROM client_sensitive_grants g WHERE g.allocation_id=a.id AND g.starts_at<=now() AND (g.ends_at IS NULL OR g.ends_at>now())) sensitive FROM coordinator_allocations a JOIN client_memberships mm ON mm.id=a.member_membership_id JOIN users m ON m.id=mm.user_id JOIN client_memberships cm ON cm.id=a.coordinator_membership_id JOIN users c ON c.id=cm.user_id WHERE a.organisation_id=$1 AND a.environment=$2 AND a.starts_at<=now() AND (a.ends_at IS NULL OR a.ends_at>now()) ORDER BY m.name,c.name,a.id',
+          [client, user!.environment],
+        )
+      ).rows;
+      const canGrantSensitive = await this.access.role(
+        sql,
+        user!.id,
+        client,
+        user!.environment,
+        'admin',
+      );
+
+      return {
+        people,
+        total,
+        page,
+        groups,
+        roles,
+        teams,
+        candidates,
+        allocations,
+        canGrantSensitive,
+      };
+    });
+  }
+  async select(token: string, csrf: string, client: string, rotateCsrf = false) {
     return this.auth.db.transaction(async (sql) => {
       const { user, session } = await this.auth.verified(sql, token, csrf);
       requireCondition(
@@ -49,11 +136,17 @@ export class Tenancy {
         'client_unavailable',
         'This client is unavailable.',
       );
-      await sql.query('UPDATE sessions SET organisation_id=$1 WHERE token_hash=$2', [
+      const nextCsrf = rotateCsrf ? secret() : session.csrf;
+      await sql.query('UPDATE sessions SET organisation_id=$1,csrf=$3 WHERE token_hash=$2', [
         client,
         session.token_hash,
+        nextCsrf,
       ]);
-      return { clientId: client };
+      if (rotateCsrf) await sql.query(
+        "INSERT INTO audit_events(id,organisation_id,environment,actor_id,action,target_id,metadata) VALUES($1,$2::uuid,$3,$4,'client.selected',$2::text,'{}')",
+        [randomUUID(), client, user!.environment, user!.id],
+      );
+      return { clientId: client, csrf: nextCsrf };
     });
   }
   async mutate<T>(
@@ -121,6 +214,45 @@ export class Tenancy {
     );
     return row;
   }
+  async createPerson(
+    token: string, csrf: string, client: string,
+    data: { name: string; email: string; role: 'member' | 'coordinator'; synthetic: boolean; reason: string },
+  ) {
+    requireCondition((process.env.TRAINING_AUTH_MODE ?? 'local_password') !== 'local_password',
+      409, 'account_invitation_required', 'Use local account setup and invitations.');
+    const email = data.email.trim().toLowerCase();
+    requireCondition(data.name.trim().length > 0 && data.name.length <= 120 && email.length <= 200 &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && ['member', 'coordinator'].includes(data.role) &&
+      typeof data.synthetic === 'boolean', 422, 'invalid_person', 'Enter a name, valid email and client role.');
+    return this.mutate(token, csrf, client, data.reason, async (sql, actor) => {
+      const { session } = await this.auth.verified(sql, token, csrf);
+      requireCondition(session.organisation_id === client, 403, 'client_selection_required', 'Select this client first.');
+      requireCondition(!data.synthetic || (actor.environment === 'test' &&
+        mockIdentityEnabled() && email.endsWith('@example.invalid')),
+        422, 'invalid_classification', 'Synthetic people require the test mock environment and an example.invalid email.');
+      const id = randomUUID(), membership = randomUUID(), grant = randomUUID();
+      const inserted = await sql.query(
+        `INSERT INTO users(id,name,email,password_hash,password_enabled,environment,is_synthetic,origin,sync_policy)
+         VALUES($1,$2,$3,$4,false,$5,$6,'manual','local_only') ON CONFLICT(email) DO NOTHING RETURNING id`,
+        [id, data.name.trim(), email, await passwordHash(secret()), actor.environment, data.synthetic]);
+      requireCondition(inserted.rowCount, 409, 'person_exists', 'Review the existing identity before adding a client membership.');
+      if (data.synthetic) await sql.query(
+        'INSERT INTO identities(id,user_id,issuer,subject) VALUES($1,$2,$3,$4)',
+        [randomUUID(), id, process.env.MOCK_IDENTITY_ISSUER ?? 'https://identity.example.invalid/mock', randomUUID()]);
+      await sql.query('INSERT INTO client_memberships(id,organisation_id,environment,user_id) VALUES($1,$2,$3,$4)',
+        [membership, client, actor.environment, id]);
+      await invalidate(sql, [id]);
+      await this.audit(sql, actor, client, 'membership.joined', membership, data.reason);
+      await sql.query(`INSERT INTO role_assignments(id,user_id,role,organisation_id,environment,client_membership_id,scope_type,scope_key,granted_by,reason)
+        VALUES($1,$2,$3,$4,$5,$6,'client',$7,$8,$9)`,
+        [grant, id, data.role, client, actor.environment, membership, 'client:' + client, actor.id, data.reason]);
+      await invalidate(sql, [id]);
+      await this.audit(sql, actor, client, 'client.role.granted', grant, data.reason);
+      await sql.query('INSERT INTO audit_events(id,organisation_id,environment,actor_id,action,target_id,metadata) VALUES($1,$2,$3,$4,$5,$6,$7)',
+        [randomUUID(), client, actor.environment, actor.id, 'person.created', id, { reason: data.reason, synthetic: data.synthetic }]);
+      return { id, membershipId: membership };
+    });
+  }
   async createGroup(
     token: string,
     csrf: string,
@@ -145,6 +277,12 @@ export class Tenancy {
       return { id };
     });
   }
+  private async accountVersion(sql: Sql, userId: string, expected?: number) {
+    if (expected === undefined) return;
+    requireCondition(Number.isInteger(expected) && expected > 0, 422, 'invalid_account_version', 'Reload the account before saving.');
+    const user = (await sql.query('SELECT permission_version FROM users WHERE id=$1 FOR UPDATE', [userId])).rows[0];
+    requireCondition(user && user.permission_version === expected, 409, 'account_version_conflict', 'This account changed. Close this dialog, refresh the directory and review the account again.');
+  }
   async grantRole(
     token: string,
     csrf: string,
@@ -153,6 +291,7 @@ export class Tenancy {
     role: 'admin' | 'coordinator' | 'member',
     team: string | null,
     reason: string,
+    expectedAccountVersion?: number,
   ) {
     requireCondition(
       ['admin', 'coordinator', 'member'].includes(role) && (!team || role === 'coordinator'),
@@ -168,6 +307,7 @@ export class Tenancy {
         'Only a Global Admin can grant client administration.',
       );
       const member = await this.member(sql, client, actor.environment, memberId);
+      await this.accountVersion(sql, member.user_id, expectedAccountVersion);
       requireCondition(
         !team || (await this.access.team(sql, client, actor.environment, team)),
         404,
@@ -208,7 +348,7 @@ export class Tenancy {
       return { id };
     });
   }
-  async revokeRole(token: string, csrf: string, client: string, id: string, reason: string) {
+  async revokeRole(token: string, csrf: string, client: string, id: string, reason: string, expectedAccountVersion?: number) {
     return this.mutate(token, csrf, client, reason, async (sql, actor) => {
       const row = (
         await sql.query(
@@ -217,6 +357,7 @@ export class Tenancy {
         )
       ).rows[0];
       requireCondition(row, 404, 'role_unavailable', 'This role is unavailable.');
+      await this.accountVersion(sql, row.user_id, expectedAccountVersion);
       requireCondition(
         row.role !== 'admin' || (await globalAdmin(sql, actor.id, actor.environment)),
         403,
@@ -242,15 +383,19 @@ export class Tenancy {
     team: string,
     join: boolean,
     reason: string,
+    expectedAccountVersion?: number,
   ) {
     return this.mutate(token, csrf, client, reason, async (sql, actor) => {
       const member = await this.member(sql, client, actor.environment, memberId);
+      await this.accountVersion(sql, member.user_id, expectedAccountVersion);
+      const group = await this.access.team(sql, client, actor.environment, team);
       requireCondition(
-        await this.access.team(sql, client, actor.environment, team),
+        group,
         404,
         'team_unavailable',
         'This team is unavailable.',
       );
+      requireCondition(group.origin === 'manual', 422, 'imported_membership', 'Imported membership requires its explicit directory mapping.');
       const current = (
         await sql.query(
           'SELECT id FROM client_team_memberships WHERE client_membership_id=$1 AND group_id=$2 AND ends_at IS NULL',
@@ -376,9 +521,12 @@ export class Tenancy {
     memberId: string,
     expected: number,
     reason: string,
+    expectedAccountVersion?: number,
   ) {
     return this.mutate(token, csrf, client, reason, async (sql, actor) => {
       const member = await this.member(sql, client, actor.environment, memberId);
+      requireCondition(member.user_id !== actor.id, 409, 'self_deactivation', 'Another administrator must end your client membership.');
+      await this.accountVersion(sql, member.user_id, expectedAccountVersion);
       requireCondition(
         member.version === expected,
         409,

@@ -61,8 +61,56 @@ describe('effective client and historical team authority', () => {
     await expect(tenancy.select(session.token, session.csrf, other)).rejects.toMatchObject({
       status: 404,
     });
-    expect(await tenancy.select(session.token, session.csrf, client)).toEqual({ clientId: client });
+    expect(await tenancy.select(session.token, session.csrf, client)).toEqual({ clientId: client, csrf: session.csrf });
     expect(await tenancy.choices(admin.token)).toHaveLength(3);
+  });
+  it('scopes administration lists to the selected authorized client', async () => {
+    const local = await login(clientAdmin.email);
+    await tenancy.select(local.token, local.csrf, client);
+    const result = await tenancy.administration(local.token, client, 'demo.1.3');
+    expect(result.total).toBe(1);
+    expect(result.people[0].id).toBe(member.membership_id);
+    expect(result.groups.every((group) => group.id !== other)).toBe(true);
+    expect(Object.keys(result.people[0]).sort()).toEqual([
+      'active',
+      'email',
+      'export_training_history',
+      'external_person_id',
+      'id',
+      'is_synthetic',
+      'name',
+      'origin',
+      'permission_version',
+      'sync_policy',
+      'user_id',
+      'version',
+    ]);
+    expect((await tenancy.administration(local.token, client, 'demo.1.3', 99)).people).toEqual([]);
+    await expect(tenancy.administration(local.token, other)).rejects.toMatchObject({ status: 403 });
+    const ordinary = await login(member.email);
+    await tenancy.select(ordinary.token, ordinary.csrf, client);
+    await expect(tenancy.administration(ordinary.token, client)).rejects.toMatchObject({
+      status: 403,
+    });
+  });
+
+  it('excludes inactive people from directory rows, counts and training candidates without changing membership history', async () => {
+    await tenancy.select(admin.token, admin.csrf, client);
+    const before = await tenancy.administration(admin.token, client);
+    const membership = (await instance.db.pool.query('SELECT * FROM client_memberships WHERE id=$1', [member.membership_id])).rows[0];
+    await instance.db.pool.query('UPDATE users SET active=false WHERE id=$1', [member.id]);
+    try {
+      const directory = await tenancy.administration(admin.token, client);
+      expect(directory.total).toBe(before.total - 1);
+      expect(directory.people.some(p => p.user_id === member.id)).toBe(false);
+      expect(directory.candidates.some(p => p.id === member.membership_id)).toBe(false);
+      const search = await tenancy.administration(admin.token, client, member.email);
+      expect(search.total).toBe(0); expect(search.people).toEqual([]);
+      expect((await instance.db.pool.query('SELECT * FROM client_memberships WHERE id=$1', [member.membership_id])).rows[0]).toEqual(membership);
+    } finally {
+      await instance.db.pool.query('UPDATE users SET active=true WHERE id=$1', [member.id]);
+    }
+    expect((await tenancy.administration(admin.token, client)).total).toBe(before.total);
   });
   it('does not infer platform authority from the legacy user flag', async () => {
     await instance.db.pool.query('UPDATE users SET global_admin=true WHERE id=$1', [member.id]);

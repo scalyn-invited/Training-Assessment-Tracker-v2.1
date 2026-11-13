@@ -53,11 +53,75 @@ describe('platform administration authority and version guards', () => {
   afterAll(async () => {
     await instance?.close();
   });
+  it('lists effective administrators and searches eligible accounts without exposing credentials', async () => {
+    const result = await platform.administrators(session.token, 'admin@example.invalid');
+    expect(result.activeAdmins).toBe(1);
+    expect(result.accounts).toHaveLength(1);
+    expect(Object.keys(result.accounts[0]).sort()).toEqual([
+      'email',
+      'global_admin',
+      'id',
+      'name',
+      'permission_version',
+    ]);
+    expect(result.accounts[0].global_admin).toBe(true);
+    expect((await platform.administrators(session.token, 'admin@example.invalid', 99)).total).toBe(
+      1,
+    );
+    expect(
+      (await platform.administrators(session.token, 'admin@example.invalid', 99)).accounts,
+    ).toEqual([]);
+    await instance.db.pool.query('UPDATE identities SET active=false WHERE user_id=$1', [otherId]);
+    expect((await platform.administrators(session.token, 'demo.1.0@example.invalid')).total).toBe(
+      0,
+    );
+    await instance.db.pool.query('UPDATE identities SET active=true WHERE user_id=$1', [otherId]);
+  });
+
+  it('rejects stale appointment confirmation without granting, auditing or invalidating again', async () => {
+    const selected = (await platform.administrators(session.token, 'demo.1.0@example.invalid'))
+      .accounts[0];
+    const before = (
+      await instance.db.pool.query('SELECT count(*)::int n FROM platform_audit_events')
+    ).rows[0].n;
+    await instance.db.pool.query(
+      'UPDATE users SET permission_version=permission_version+1 WHERE id=$1',
+      [otherId],
+    );
+    await expect(
+      platform.appoint(session.token, session.csrf, otherId, reason, selected.permission_version),
+    ).rejects.toMatchObject({ code: 'account_version_conflict', status: 409 });
+    await expect(
+      platform.appoint(session.token, session.csrf, otherId, reason, 0),
+    ).rejects.toMatchObject({ code: 'account_version_required', status: 422 });
+    expect(
+      (
+        await instance.db.pool.query(
+          "SELECT id FROM role_assignments WHERE user_id=$1 AND scope_type='platform'",
+          [otherId],
+        )
+      ).rowCount,
+    ).toBe(0);
+    expect(
+      (await instance.db.pool.query('SELECT permission_version FROM users WHERE id=$1', [otherId]))
+        .rows[0].permission_version,
+    ).toBe(selected.permission_version + 1);
+    expect(
+      (await instance.db.pool.query('SELECT count(*)::int n FROM platform_audit_events')).rows[0].n,
+    ).toBe(before);
+  });
   it('protects the last active administrator', async () => {
     await expect(
       platform.revoke(session.token, session.csrf, grantId, reason),
     ).rejects.toMatchObject({ code: 'last_administrator' });
-    const appointed = await platform.appoint(session.token, session.csrf, otherId, reason);
+    const appointed = await platform.appoint(
+      session.token,
+      session.csrf,
+      otherId,
+      reason,
+      (await instance.db.pool.query('SELECT permission_version FROM users WHERE id=$1', [otherId]))
+        .rows[0].permission_version,
+    );
     await instance.db.pool.query('UPDATE identities SET active=false WHERE user_id=$1', [otherId]);
     await expect(
       platform.revoke(session.token, session.csrf, grantId, reason),
@@ -181,5 +245,64 @@ describe('platform administration authority and version guards', () => {
         )
       ).rows,
     ).toHaveLength(0);
+  });
+  it('filters audit events and totals by environment before pagination', async () => {
+    await instance.db.pool.query(
+      "INSERT INTO platform_audit_events(id,environment,actor_id,action,target_id,reason,created_at) VALUES($1,'test',$2,'fixture.audit','target-a','Searchable reason','2026-01-02T23:59:59Z'),($3,'production',NULL,'private.production','target-a','Searchable reason','2026-01-02T12:00:00Z')",
+      [randomUUID(), adminId, randomUUID()],
+    );
+    const result = await platform.history(session.token, {
+      query: 'Searchable',
+      target: 'target-a',
+      actor: 'Admin',
+      from: '2026-01-02',
+      to: '2026-01-02',
+    });
+    expect(result.total).toBe(1);
+    expect(result.events[0].action).toBe('fixture.audit');
+    expect(result.actions).not.toContain('private.production');
+    expect((await platform.history(session.token, { query: 'Searchable', page: 2 })).total).toBe(1);
+    expect(
+      (await platform.history(session.token, { query: 'Searchable', page: 2 })).events,
+    ).toEqual([]);
+    await expect(platform.history(session.token, { from: '2026-02-30' })).rejects.toMatchObject({
+      status: 422,
+    });
+    await expect(
+      platform.history(session.token, { from: '2026-02-01', to: '2026-01-01' }),
+    ).rejects.toMatchObject({ status: 422 });
+  });
+  it('exposes only source-approved audit change fields', async () => {
+    await instance.db.pool.query(
+      "INSERT INTO platform_audit_events(id,environment,actor_id,action,target_id,reason,changes) VALUES($1,'test',$2,'fixture.secret','safe-target','Projection verification',$3)",
+      [
+        randomUUID(),
+        adminId,
+        {
+          before: { name: 'Old', password: 'private' },
+          after: { name: 'New' },
+          token: 'private',
+          accent: { before: '#ffffff', after: '#000000', secret: 'private' },
+          grant_id: 'internal',
+        },
+      ],
+    );
+    const result = await platform.history(session.token, { action: 'fixture.secret' });
+    expect(result.events[0].changes).toEqual({
+      name: { before: 'Old', after: 'New' },
+      accent: { before: '#ffffff', after: '#000000' },
+    });
+  });
+
+  it('denies audit history to a standard client account', async () => {
+    const guest = await auth.context();
+    const member = await auth.login(
+      guest.token!,
+      guest.csrf,
+      'demo.1.3@example.invalid',
+      'Separate demonstration password',
+    );
+    await expect(platform.administrators(member.token)).rejects.toMatchObject({ status: 403 });
+    await expect(platform.history(member.token)).rejects.toMatchObject({ status: 403 });
   });
 });

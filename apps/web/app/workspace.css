@@ -8,3 +8,7 @@ html{scroll-padding-top:90px}body{font-size:16px;line-height:1.55}.container{max
 .required-field::before{content:"* ";color:var(--error)}
 
 .filter-bar label{display:flex;flex-direction:column;gap:6px}.filter-bar label input,.filter-bar label select{margin:0}.filter-bar button{align-self:end}.panel>p{max-width:85ch}
+
+/* Shell controls retain readable labels and keyboard targets at every width. */
+.sidebar-nav a{min-height:44px}.app-sidebar .theme-options button{font-size:14px}.workspace-header .profile-copy strong,.workspace-header .profile-copy small{font-size:14px}
+@media(max-width:800px){.sidebar-nav a,.brand-copy span,.workspace-nav-label,.sandbox span,.section-heading>span,.plan-card .subtle,.card-bottom,.signed-in{font-size:14px}.workspace-header .client-switcher{max-width:100%}.client-controls{flex-wrap:wrap}.client-controls select{min-width:0;max-width:100%}.sandbox{flex-wrap:wrap}.mobile-bar>span{min-width:0;overflow-wrap:anywhere}}

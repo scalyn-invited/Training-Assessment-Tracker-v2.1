@@ -1,12 +1,22 @@
 'use client';
 import { useEffect, useState, type FormEvent } from 'react';
 import Link from 'next/link';
-type User = { id: string; name: string; email: string; global_admin: boolean };
+import { AppShell } from './app-shell';
+type User = {
+  id: string;
+  name: string;
+  email: string;
+  global_admin: boolean;
+  environment?: string;
+};
 type Context = {
   csrf: string;
   user: User | null;
   installed: boolean;
+  setupMode?: 'hosted' | 'local';
   canAdmin?: boolean;
+  canCoordinate?: boolean;
+  authMode?: 'local_password' | 'mock' | null;
   client?: { id: string; name: string } | null;
 };
 type ApiError = Error & { code?: string };
@@ -30,17 +40,36 @@ export async function api<T>(route: string, data?: Record<string, unknown>): Pro
     );
   return result;
 }
+let contextRequest: Promise<Context> | null = null;
+function loadContext() {
+  if (!contextRequest)
+    contextRequest = api<Context>('context')
+      .then((result) => {
+        window.dispatchEvent(new CustomEvent('trackercontext', { detail: result }));
+        return result;
+      })
+      .finally(() => {
+        contextRequest = null;
+      });
+  return contextRequest;
+}
 export function useContext() {
   const [context, setContext] = useState<Context | null>(null),
     [error, setError] = useState('');
   const load = () => {
     setError('');
-    api<Context>('context')
+    loadContext()
       .then(setContext)
       .catch((e) => setError(e.message));
   };
   useEffect(() => {
+    const update = (event: Event) => {
+      setContext((event as CustomEvent<Context>).detail);
+      setError('');
+    };
+    window.addEventListener('trackercontext', update);
     load();
+    return () => window.removeEventListener('trackercontext', update);
   }, []);
   return { context, setContext, error, load };
 }
@@ -96,19 +125,7 @@ export function Feedback({ error, success }: { error?: string; success?: string 
   );
 }
 export function Guest({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <header className="guest-header">
-        <Link className="brand" href="/">
-          Training Tracker
-        </Link>
-        <span>V2.1</span>
-      </header>
-      <main id="main" className="container">
-        {children}
-      </main>
-    </>
-  );
+  return <AppShell>{children}</AppShell>;
 }
 export function Pending({ error, retry }: { error: string; retry: () => void }) {
   return error ? (

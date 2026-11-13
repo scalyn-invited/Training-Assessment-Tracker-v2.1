@@ -22,6 +22,9 @@ const postgres = new EmbeddedPostgres({
   onLog: () => {},
   onError: () => {},
 });
+const suites = ['tests/postgres.test.ts','tests/demo-postgres.test.ts','tests/foundation-checks-postgres.test.ts','tests/operator-bootstrap-postgres.test.ts','tests/client-services-postgres.test.ts'];
+const requested = process.argv.slice(2);
+if(requested.some(file=>!suites.includes(file)))throw new Error('Choose a configured PostgreSQL qualification suite.');
 let started = false;
 try {
   await postgres.initialise();
@@ -31,7 +34,14 @@ try {
   console.log('Isolated PostgreSQL ready; credentials are not logged.');
   const child = spawn(
     process.execPath,
-    [path.resolve('node_modules/vitest/vitest.mjs'), 'run', 'tests/postgres.test.ts'],
+    [
+      path.resolve('node_modules/vitest/vitest.mjs'),
+      'run',
+      ...(requested.length ? requested : suites),
+      '--reporter=default',
+      '--reporter=json',
+      '--outputFile=.runtime/postgres-qualification.json',
+    ],
     {
       stdio: 'inherit',
       env: {
@@ -50,8 +60,8 @@ try {
     if (process.platform === 'win32')
       await promisify(execFile)(
         path.resolve('node_modules/@embedded-postgres/windows-x64/native/bin/pg_ctl.exe'),
-        ['-D', folder, '-m', 'fast', '-w', '-t', '20', 'stop'],
-        { windowsHide: true, timeout: 30000 },
+        ['-D', folder, '-m', 'fast', '-w', '-t', '60', 'stop'],
+        { windowsHide: true, timeout: 70000 },
       );
     else await postgres.stop();
   }

@@ -122,3 +122,6 @@ h1{font-size:31px;letter-spacing:-1px;font-weight:600}.eyebrow{font-size:9px;let
 :root[data-theme=platform-dark]{--platform-decorative:var(--platform-dark-decorative)}
 :root:is([data-theme=platform-light],[data-theme=platform-dark]){--line:var(--platform-decorative)}
 :root:is([data-theme=platform-light],[data-theme=platform-dark]) :is(input,select,textarea,button,.secondary,.theme-tile){border-color:var(--platform-line)}
+
+/* Keep record evidence and receipt metadata readable on narrow screens. */
+@media(max-width:640px){.file-list small,.receipts .subtle,.receipts .section-heading>span{font-size:14px}.receipts .section-heading{flex-wrap:wrap}.receipts .section-heading h2{font-size:18px}}
