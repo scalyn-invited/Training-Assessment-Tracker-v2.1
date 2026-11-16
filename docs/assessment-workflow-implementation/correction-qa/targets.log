@@ -1,0 +1,39 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [32m✓[39m tests/programme-generation.test.ts[2m > [22mreserves all four blocks, publishes only the complete draft and preserves approved history[33m 16871[2mms[22m[39m
+ [32m✓[39m tests/programme-generation.test.ts[2m > [22mbounds schema repair per block and never publishes a partial failed run[33m 7231[2mms[22m[39m
+ [32m✓[39m tests/programme-generation.test.ts[2m > [22mrechecks changed baseline after provider I/O and retains all human content[33m 6070[2mms[22m[39m
+ [32m✓[39m tests/programme-generation.test.ts[2m > [22mretains ambiguous reservation, cancels sibling blocks and requires reconciliation[33m 9054[2mms[22m[39m
+ [32m✓[39m tests/programme-generation.test.ts[2m > [22mrejects members, another client, stale inputs and exhausted budget before dispatch[33m 5972[2mms[22m[39m
+ [32m✓[39m tests/programme-generation.test.ts[2m > [22mrolls back a capacity-conflicted final draft but retains known usage charges[33m 15407[2mms[22m[39m
+ [32m✓[39m tests/programme-generation.test.ts[2m > [22mrecovers sibling jobs deferred while another block is performing external work[33m 6669[2mms[22m[39m
+ [32m✓[39m tests/programme-generation.test.ts[2m > [22mkeeps archived generation metadata readable after temporary input retention[33m 7240[2mms[22m[39m
+ [32m✓[39m tests/programme-generation.test.ts[2m > [22mstops queued generation when authority is revoked[33m 4604[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mrequires complete current confirmed inputs and preserves dates against request tampering[33m 8550[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mrequires bounded content, criterion weights, source KPIs and the full daily budget[33m 12147[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mapproves exact content, preserves approved history and atomically replaces reservations[33m 13680[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22minvalidates pending review on edit and blocks a second overlapping approval[33m 17943[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mrequires an explicit refreshed draft when inputs change and retains earlier lessons by position[33m 9375[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mrechecks calendar revisions and current authority before approving[33m 9987[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mselects N+2, keeps mock output provisional and requires exact current human approval[33m 4714[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22matomically invalidates pending proposals and flags approved support after a source regrade[33m 4203[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mresumption invalidates a pending proposal and preserves approved history[33m 3276[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mkeeps KPI support provisional, pinned to immutable snapshots and private to coordinators[33m 1950[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mretains ambiguous reservations without a usable suggestion[33m 1963[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mchecks the exact freeze boundary and refuses a target started during provider work[33m 2197[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mreturns final support without a provider call when no future block is eligible[33m 1101[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mrechecks revoked authority after provider work and keeps the known charge without applying output[33m 1296[2mms[22m[39m
+ [32m✓[39m tests/learning-kpis.test.ts[2m > [22mrestricts current authority and preserves comparability and future effective versions[33m 5682[2mms[22m[39m
+ [32m✓[39m tests/learning-kpis.test.ts[2m > [22mkeeps insufficient samples nonnumeric and records encrypted verified evidence with immutable lineage[33m 2532[2mms[22m[39m
+ [32m✓[39m tests/learning-kpis.test.ts[2m > [22mbounds evidence and numeric input and evaluates lower and band targets without rewriting history[33m 6127[2mms[22m[39m
+ [32m✓[39m tests/learning-kpis.test.ts[2m > [22mserializes competing revisions and rechecks revoked coordinator authority[33m 2111[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[32m27 passed[39m[22m[90m (27)[39m
+[2m   Start at [22m 22:16:34
+[2m   Duration [22m 240.39s[2m (tests 98%, import 1%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/correction-qa/targets.json
+
+EXIT 0
