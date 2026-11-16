@@ -85,7 +85,7 @@ async function boot(page: Page, handler?: (route: any) => Promise<boolean>) {
   await page.route('**/*', async (route) => {
     if (handler && (await handler(route))) return;
     const u = route.request().url();
-    if (u === origin + '/')
+    if (u === origin + '/' || u === origin + '/assessments/definitions/synthetic-copy')
       return route.fulfill({
         contentType: 'text/html',
         body: '<!doctype html><html lang="en" data-theme="light"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><h1>Synthetic isolated component QA</h1><div id="shell"></div><div id="builder" class="assessment-workspace assessment-builder"></div><div id="review"></div><h2>Learner section B</h2><div id="learner"></div><h2>History all questions</h2><div id="history"></div></body></html>',
@@ -227,13 +227,19 @@ test('D03 unknown save replays exact operation before newer typing', async ({ pa
   expect(posts[2].save_token).not.toBe(posts[0].save_token);
 });
 
-test('D06 existing published handoff targets exact ID; D08 saved copy lacks provenance', async ({
-  page,
-}) => {
+test('D06 exact published handoff and D08 durable copy provenance', async ({ page }) => {
   const errors = await boot(page, async (route) => {
     if (!route.request().url().endsWith('/api/assessments/builder')) return false;
     await route.fulfill({
-      json: { id: 'synthetic-copy', version: 1, status: 'draft', readiness: {} },
+      json: {
+        id: 'synthetic-copy',
+        version: 1,
+        revision: 2,
+        source_definition_id: initial.id,
+        source_revision: 1,
+        status: 'draft',
+        readiness: {},
+      },
     });
     return true;
   });
@@ -253,7 +259,34 @@ test('D06 existing published handoff targets exact ID; D08 saved copy lacks prov
   await page.locator('#save-definition').click();
   await expect(page.locator('#save-status')).toHaveText('Draft saved. Not published.');
   await expect(page).toHaveURL(origin + '/assessments/definitions/synthetic-copy');
-  await expect(page.locator('#builder')).not.toContainText('synthetic-definition');
+  await expect(page.locator('#definition-provenance')).toContainText(
+    'Source definition synthetic-definition · revision 1',
+  );
+  await expect(page.locator('#definition-provenance')).toContainText(
+    'Draft synthetic-copy · revision 2 · edit version 1',
+  );
+  await expect(page.locator('#definition-provenance')).toContainText(
+    'Existing assignments and team rules remain pinned',
+  );
+  await page.reload();
+  await page.addStyleTag({ content: css });
+  await page.evaluate((v) => {
+    (window as any).fixture = {
+      ...v,
+      id: 'synthetic-copy',
+      status: 'draft',
+      revision: 2,
+      version: 1,
+      source_definition_id: v.id,
+      source_revision: 1,
+    };
+  }, initial);
+  await page.addScriptTag({ content: builder });
+  await expect(page.locator('#definition-provenance')).toContainText(
+    'Source definition synthetic-definition · revision 1',
+  );
+  await page.locator('[data-section=review]').click();
+  await expect(page.locator('#learner-preview')).toContainText('Saved revision 2');
   await screenshot(page, 'D08-copy-provenance');
   expect(errors).toEqual([]);
 });

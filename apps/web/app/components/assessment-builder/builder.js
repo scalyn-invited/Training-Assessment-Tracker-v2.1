@@ -451,6 +451,13 @@ function renderReview() {
     updatePublish();
 }
 function updatePublish() {
+    const provenance = $('definition-provenance');
+    if (provenance) {
+        provenance.replaceChildren(el('p', `${state.status === 'published' ? 'Published definition' : 'Draft'} ${state.id ?? 'not saved'} · revision ${state.revision ?? 'not yet known'} · edit version ${state.version}`));
+        if (state.source_definition_id) provenance.append(el('p', `Source definition ${state.source_definition_id} · revision ${state.source_revision}`));
+        else if (state.id) provenance.append(el('p', 'No direct copy source is recorded for this revision.'));
+        provenance.append(el('p','Existing assignments and team rules remain pinned to their original published revision. Saving a published definition creates a separate draft; it does not migrate assignments.'));
+    }
     $('save-definition').disabled = saving || !!publication || conflict;
     const assign = $('assign-definition');
     assign.hidden = state.status !== 'published' || dirty || !state.id;
@@ -482,7 +489,10 @@ async function save() {
     saving = true; $('save-definition').disabled = true; status('Saving draft…'); updatePublish();
     try {
         const result = await request(root.dataset.endpoint, payload);
+        if (state.id !== result.id) { state.revision = undefined; state.source_definition_id = null; state.source_revision = null; }
         state.id = result.id; state.version = result.version; state.status = result.status;
+        if (result.revision !== undefined) state.revision = result.revision;
+        if (result.source_definition_id !== undefined) { state.source_definition_id = result.source_definition_id; state.source_revision = result.source_revision; }
         dirty = replay || generation !== sentGeneration;
         serverErrors = dirty ? {} : result.readiness; retryPayload = null;
         if (!dirty) { if (matrixRemoved.length) { matrixRemoved = []; renderQuestion(); } sectionUndo = null; renderSections(); removed = []; $('removed-question').hidden = true; }
@@ -559,6 +569,7 @@ $('publish-definition').addEventListener('click', async () => {
 });
 function escapeText(value) { const div = el('div', value); return div.innerHTML.replaceAll('"', '&quot;'); }
 const releaseGuard = registerWorkGuard(() => ({ dirty, pending: saving || uploadPending, uncertain: !!retryPayload || !!publication }));
+const provenance = el('div',null,{id:'definition-provenance',class:'notice'}); provenance.style.overflowWrap = 'anywhere'; $('save-status').before(provenance);
 renderSections(); renderList(); renderQuestion(); renderRubric(); updatePublish();
 status(dirty ? 'Unsaved changes' : state.status === 'published' ? 'Published revision. Saving creates a new draft.' : 'Draft saved. Not published.');
 

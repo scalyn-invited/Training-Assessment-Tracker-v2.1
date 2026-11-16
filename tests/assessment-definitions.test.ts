@@ -146,6 +146,21 @@ describe('assessment definitions and publication', () => {
     expect(b.family_id).toBe(a.family_id);
     expect(b.revision).toBe(a.revision + 1);
     expect(b.status).toBe('draft');
+    expect(b).toMatchObject({ source_definition_id: a.id, source_revision: a.revision });
+    expect(second).toMatchObject({
+      revision: b.revision,
+      source_definition_id: a.id,
+      source_revision: a.revision,
+    });
+    await expect(definitions.get(member.token, client, second.id)).rejects.toMatchObject({
+      status: 403,
+    });
+    await expect(
+      instance.db.pool.query(
+        'UPDATE assessment_definitions SET source_definition_id=NULL,source_revision=NULL WHERE id=$1',
+        [second.id],
+      ),
+    ).rejects.toThrow();
   });
   it('QA D03 exact publication retry conflicts but exact readback confirms the same published record', async () => {
     const saved = await definitions.save(
