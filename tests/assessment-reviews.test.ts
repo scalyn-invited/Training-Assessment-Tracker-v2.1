@@ -249,7 +249,79 @@ it('QA D02 characterizes no-team appeal freeze and unavailable alternate routing
   });
   expect((await reviews.read(member.token, client, a.id)).appeal).toMatchObject({ status: 'open' });
 });
-it('QA D07 characterizes absent member-safe return feedback without leaking private rationale', async () => {
+it('D07 separately authored return feedback is safe, encrypted and bound to the immutable attempt', async () => {
+  const a = await submitted();
+  const feedback = 'PUBLIC: Add a concrete worked example before resubmitting.';
+  const rejected = await reviews.decide(
+    coordinator.token,
+    coordinator.csrf,
+    client,
+    a.id,
+    a.attempt,
+    3,
+    'rejected',
+    'PRIVATE: Internal rationale only',
+    score(a.attempt),
+    null,
+    feedback,
+  );
+  const view = await reviews.read(member.token, client, a.id);
+  expect(view).toMatchObject({
+    approved: null,
+    reviews: [],
+    rubric: null,
+    evidence: [],
+    returned: { attemptId: a.attempt, feedback },
+  });
+  expect(JSON.stringify(view)).not.toContain('PRIVATE:');
+  expect(JSON.stringify(view)).not.toContain('Evidence supports the result.');
+  const stored = (
+    await instance.db.pool.query('SELECT return_feedback FROM assessment_reviews WHERE id=$1', [
+      rejected.review,
+    ])
+  ).rows[0];
+  expect(stored.return_feedback).not.toContain('PUBLIC:');
+  await expect(
+    instance.db.pool.query('UPDATE assessment_reviews SET return_feedback=$1 WHERE id=$2', [
+      'tamper',
+      rejected.review,
+    ]),
+  ).rejects.toThrow();
+  await responses.save(member.token, member.csrf, client, a.id, rejected.version, {
+    responses: { written: 'Revised public evidence' },
+    save_token: randomUUID(),
+  });
+  expect((await reviews.read(member.token, client, a.id)).returned?.feedback).toBe(feedback);
+  await responses.submit(
+    member.token,
+    member.csrf,
+    client,
+    a.id,
+    rejected.version + 1,
+    randomUUID(),
+  );
+  expect((await reviews.read(member.token, client, a.id)).returned).toBeNull();
+});
+it('D07 rejects empty explicitly supplied public feedback without a decision', async () => {
+  const a = await submitted();
+  await expect(
+    reviews.decide(
+      coordinator.token,
+      coordinator.csrf,
+      client,
+      a.id,
+      a.attempt,
+      3,
+      'rejected',
+      'Private test rationale',
+      null,
+      null,
+      '   ',
+    ),
+  ).rejects.toThrow();
+  expect((await reviews.read(member.token, client, a.id)).status).toBe('submitted');
+});
+it('QA D07 legacy rejection omits public feedback without leaking private rationale', async () => {
   const a = await submitted();
   const rejected = await decide(a, coordinator, 'rejected');
   const view = await reviews.read(member.token, client, a.id);

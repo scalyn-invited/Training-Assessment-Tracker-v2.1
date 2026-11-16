@@ -30,6 +30,12 @@ type Extraction = {
   pages: number | null;
 };
 type ReviewData = {
+  returned?: {
+    attemptId: string;
+    feedback: string;
+    decisionId?: string;
+    returnedAt?: string;
+  } | null;
   status: string;
   canAnalyze: boolean;
   files: { id: string; name: string; status: string; extraction: Extraction | null }[];
@@ -210,6 +216,18 @@ export function AssessmentReview({
         </div>
       )}
       {data.approved && <ApprovedResult approved={data.approved} />}
+      {data.returned && (
+        <section className="panel">
+          <h2>Changes requested</h2>
+          <p style={{ whiteSpace: 'pre-wrap' }}>{data.returned.feedback}</p>
+          <p>
+            {data.appeal
+              ? 'Editing is paused while the appeal is open.'
+              : 'Revise your draft and submit a new attempt when ready. Previous attempts remain unchanged.'}{' '}
+            This guidance is not an approved grade.
+          </p>
+        </section>
+      )}
       {data.canReview && data.attemptId && (
         <>
           {data.objective && (
@@ -601,8 +619,13 @@ function DecisionForm({
       ),
     ),
     [reason, setReason] = useState('');
+  const [returnFeedback, setReturnFeedback] = useState('');
+  const [returnError, setReturnError] = useState('');
   const baseline = useRef(JSON.stringify({ rows, reason }));
-  useWorkGuard({ dirty: JSON.stringify({ rows, reason }) !== baseline.current, pending: busy });
+  useWorkGuard({
+    dirty: Boolean(returnFeedback) || JSON.stringify({ rows, reason }) !== baseline.current,
+    pending: busy,
+  });
   function patch(id: string, value: object) {
     setRows((current) => ({ ...current, [id]: { ...current[id], ...value } }));
   }
@@ -610,7 +633,16 @@ function DecisionForm({
     event.preventDefault();
     const action =
       ((event.nativeEvent as SubmitEvent).submitter as HTMLButtonElement)?.value ?? 'approve';
+    if (
+      action === 'reject' &&
+      (returnFeedback.trim().length < 8 || returnFeedback.trim().length > 4000)
+    ) {
+      setReturnError('Enter member-safe return feedback between 8 and 4,000 characters.');
+      return;
+    }
+    setReturnError('');
     void perform(action, reason, {
+      ...(action === 'reject' ? { return_feedback: returnFeedback.trim() } : {}),
       source: provisional?.id ?? null,
       result: {
         rubric_id: data.definitionId,
@@ -626,6 +658,21 @@ function DecisionForm({
   return (
     <form className="panel" onSubmit={submit}>
       <h2>Human review</h2>
+      <Feedback error={returnError} />
+      <label>
+        Member-safe return feedback
+        <textarea
+          aria-label="Member-safe return feedback"
+          value={returnFeedback}
+          onChange={(e) => setReturnFeedback(e.target.value)}
+          maxLength={4000}
+          disabled={busy}
+        />
+      </label>
+      <p>
+        Required only when returning an attempt. This text is visible to the member; keep private
+        reasoning in the separate rationale field. It does not release scores.
+      </p>
       {provisional && (
         <p className="notice">
           Provisional analysis is prefilled. Independently verify every score and evidence reference

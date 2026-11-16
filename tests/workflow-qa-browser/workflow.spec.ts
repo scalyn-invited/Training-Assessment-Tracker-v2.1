@@ -314,6 +314,60 @@ test('D01 same-document Back and Forward cancellation retains author work', asyn
   await expect(page.locator('#assessment-title')).toHaveValue('Retain on history cancel');
 });
 
+test('D07 rejection requires separate member-safe feedback and transmits it separately', async ({
+  page,
+}) => {
+  const posts: any[] = [];
+  await boot(page, async (route) => {
+    if (!route.request().url().includes('/api/assessments/reviews/')) return false;
+    if (route.request().method() === 'POST') {
+      posts.push(route.request().postDataJSON());
+      await route.fulfill({ json: { ok: true } });
+    } else await route.fulfill({ json: reviewData });
+    return true;
+  });
+  await page.addScriptTag({ content: review });
+  await page.getByLabel('Private decision rationale').fill('PRIVATE rationale');
+  page.on('dialog', (d) => d.accept());
+  await page.getByRole('button', { name: 'Reject and allow resubmission' }).click();
+  await expect(
+    page.getByText('Enter member-safe return feedback between 8 and 4,000 characters.', {
+      exact: true,
+    }),
+  ).toBeVisible();
+  expect(posts).toHaveLength(0);
+  await page
+    .getByLabel('Member-safe return feedback', { exact: true })
+    .fill('PUBLIC: Add a worked example.');
+  await page.getByRole('button', { name: 'Reject and allow resubmission' }).click();
+  await expect.poll(() => posts.length).toBe(1);
+  expect(posts[0].return_feedback).toBe('PUBLIC: Add a worked example.');
+  expect(posts[0].reason).toBe('PRIVATE rationale');
+});
+test('D07 learner sees returned guidance without a released grade or private reason', async ({
+  page,
+}) => {
+  await boot(page, async (route) => {
+    if (!route.request().url().includes('/api/assessments/reviews/')) return false;
+    await route.fulfill({
+      json: {
+        ...reviewData,
+        member: true,
+        canReview: false,
+        files: [],
+        evidence: [],
+        rubric: null,
+        returned: { attemptId: 'attempt-current', feedback: 'PUBLIC: Add a worked example.' },
+      },
+    });
+    return true;
+  });
+  await page.addScriptTag({ content: review });
+  await expect(page.getByRole('heading', { name: 'Changes requested' })).toBeVisible();
+  await expect(page.getByText('PUBLIC: Add a worked example.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Approved result' })).toHaveCount(0);
+  await screenshot(page, 'D07-member-return-guidance');
+});
 const reviewData = {
   status: 'submitted',
   canAnalyze: false,
@@ -390,6 +444,9 @@ test('D01 uncertain reviewer decision stops newer writes and retains fields', as
   });
   await page.addScriptTag({ content: review });
   await page.getByLabel('Private decision rationale').fill('Synthetic private rationale');
+  await page
+    .getByLabel('Member-safe return feedback', { exact: true })
+    .fill('Synthetic public return guidance');
   page.on('dialog', (d) => d.accept());
   await page.getByRole('button', { name: 'Reject and allow resubmission' }).click();
   await expect(page.getByRole('button', { name: 'Reject and allow resubmission' })).toBeDisabled();
