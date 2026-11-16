@@ -541,17 +541,19 @@ async function reconcilePublication() {
     try {
         const row = await request('/api/assessments/definitions?' + new URLSearchParams({clientId: root.dataset.client, id: publication.id}));
         if (row.id !== publication.id) throw Error('The returned definition does not match.');
-        if (row.status === 'published' && row.version > publication.version) {
+        // Publication increments the attempted saved version exactly once. A later
+        // published version belongs to changed content, not this operation.
+        if (row.status === 'published' && row.version === publication.version + 1) {
             state.status = row.status; state.version = row.version; publication = null;
             status('Publication confirmed for this exact definition. Existing assignments remain unchanged.');
         } else if (row.status === 'draft' && row.version === publication.version) {
             publication = null;
             status('This exact saved version is still a draft. You may explicitly retry publication.');
-        } else if (row.status === 'draft' && row.version > publication.version) {
-            // Exact-ID readback confirms a stale draft, not an uncertain publication.
+        } else if ((row.status === 'draft' || row.status === 'published') && row.version > publication.version) {
+            // Exact-ID readback confirms changed saved content, not our publication.
             // Keep the local version/content intact and stop writes until explicit recovery.
             publication = null; conflict = true; compareButton.hidden = false;
-            status('Publication conflict: the saved version changed and is still a draft. Writes are stopped. Your complete local draft remains here; compare before deciding to discard and reload.');
+            status(`Publication conflict: the saved version changed and ${row.status === 'published' ? 'a newer version was published' : 'is still a draft'}. Writes are stopped. Your complete local draft remains here; compare before deciding to discard and reload.`);
         } else {
             status('Publication outcome unknown: the saved version changed. Local edits are retained; reload only after comparing the current definition.');
         }
