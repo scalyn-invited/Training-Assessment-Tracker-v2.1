@@ -1,0 +1,36 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mkeeps client choices scoped and rejects cross-client selection[32m 75[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mscopes administration lists to the selected authorized client[32m 258[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mexcludes inactive people from directory rows, counts and training candidates without changing membership history[33m 513[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mdoes not infer platform authority from the legacy user flag[33m 521[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mpermits own records and allocated review but not administrative raw access[33m 417[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mdenies cross-client roles and protects client-admin grants[33m 346[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mteam removal revokes sessions and rejoining does not restore historical review[33m 564[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mending a coordinator role ends allocations without reviving them on regrant[32m 170[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mrequires explicit allocation replacement and rejects self-review[32m 177[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mdenies stale imported permissions even with a valid session[33m 459[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts[2m > [22meffective client and historical team authority[2m > [22mfilters tenant role and team rows before returning results[32m 18[2mms[22m[39m
+ [32m✓[39m tests/approved-feed.test.ts[2m > [22mfilters history before pagination and retains exact approved facts and provenance[33m 877[2mms[22m[39m
+ [32m✓[39m tests/approved-feed.test.ts[2m > [22mexcludes local-only records and rechecks current client, membership, version and freshness[32m 269[2mms[22m[39m
+ [32m✓[39m tests/approved-feed.test.ts[2m > [22mresolves immutable synthetic identities and excludes their training from external summaries[32m 202[2mms[22m[39m
+ [32m✓[39m tests/enrolments.test.ts[2m > [22mrequires selected-client administration and valid member/team authority[33m 991[2mms[22m[39m
+ [32m✓[39m tests/enrolments.test.ts[2m > [22mcreates onboarding records without granting sensitive access or training access to administrators[33m 642[2mms[22m[39m
+ [32m✓[39m tests/enrolments.test.ts[2m > [22mrequires explicit replacement of a different primary allocation[32m 140[2mms[22m[39m
+ [32m✓[39m tests/enrolments.test.ts[2m > [22mcombines sensitive grants with primary and historical team authority for management[33m 405[2mms[22m[39m
+ [32m✓[39m tests/enrolments.test.ts[2m > [22mdoes not restore historical teamless records through a replacement allocation[33m 602[2mms[22m[39m
+ [32m✓[39m tests/administration-version.test.ts[2m > [22mbinds team, role and departure changes to the displayed account version without partial writes[33m 1122[2mms[22m[39m
+ [32m✓[39m tests/administration-version.test.ts[2m > [22mrejects imported membership edits and self-deactivation at the domain boundary[33m 572[2mms[22m[39m
+ [32m✓[39m tests/historical-authority.test.ts[2m > [22mmatches historical team and allocation boundaries used by source application records[33m 8606[2mms[22m[39m
+ [32m✓[39m tests/access-membership.test.ts[2m > [22mbounds each fresh membership decision to one database round trip[32m 72[2mms[22m[39m
+ [32m✓[39m tests/access-membership.test.ts[2m > [22mpreserves every current identity, client, environment and membership gate without caching[32m 272[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m6 passed[39m[22m[90m (6)[39m
+[2m      Tests [22m [1m[32m24 passed[39m[22m[90m (24)[39m
+[2m   Start at [22m 21:53:45
+[2m   Duration [22m 49.90s[2m (tests 94%, import 5%, transform 1%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/correction-backend/authority-green.json
+
+EXIT 0

@@ -1,0 +1,21 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mrequires complete current confirmed inputs and preserves dates against request tampering[33m 12597[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mrequires bounded content, criterion weights, source KPIs and the full daily budget[33m 15511[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mapproves exact content, preserves approved history and atomically replaces reservations[33m 13230[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22minvalidates pending review on edit and blocks a second overlapping approval[33m 22912[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mrequires an explicit refreshed draft when inputs change and retains earlier lessons by position[33m 18084[2mms[22m[39m
+ [32m✓[39m tests/learning-plans.test.ts[2m > [22mrechecks calendar revisions and current authority before approving[33m 15762[2mms[22m[39m
+[90mstdout[2m | tests/learning-plans.test.ts
+[22m[39mQUERY_TIMINGS {"BEGIN":{"n":180,"ms":211.43390000003228,"max":4.050600000002305},"SELECT":{"n":23286,"ms":93581.24589999978,"max":103.06939999999304},"CREATE":{"n":19,"ms":228.59880000000067,"max":38.66200000000026},"ALTER":{"n":14,"ms":142.91939999999977,"max":75.86630000000014},"INSERT":{"n":475,"ms":1670.3606999999997,"max":14.908100000000104},"--":{"n":2,"ms":2.9187000000001717,"max":2.2168000000001484},"COMMIT":{"n":159,"ms":236.92719999995688,"max":20.09140000000116},"DELETE":{"n":4,"ms":18.200099999999566,"max":6.6578999999996995},"UPDATE":{"n":66,"ms":365.57559999996465,"max":30.07209999999759},"ROLLBACK":{"n":21,"ms":32.35650000002079,"max":6.605099999999766}}
+
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m6 passed[39m[22m[90m (6)[39m
+[2m   Start at [22m 21:39:08
+[2m   Duration [22m 102.98s[2m (tests 99%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/correction-backend/diagnostic-plans.json
+
+EXIT 0
