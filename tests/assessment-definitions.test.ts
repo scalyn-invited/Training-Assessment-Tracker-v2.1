@@ -147,6 +147,27 @@ describe('assessment definitions and publication', () => {
     expect(b.revision).toBe(a.revision + 1);
     expect(b.status).toBe('draft');
   });
+  it('QA D03 exact publication retry conflicts but exact readback confirms the same published record', async () => {
+    const saved = await definitions.save(
+      coordinator.token,
+      coordinator.csrf,
+      client,
+      input(),
+      null,
+      0,
+      randomUUID(),
+    );
+    await definitions.publish(coordinator.token, coordinator.csrf, client, saved.id, saved.version);
+    await expect(
+      definitions.publish(coordinator.token, coordinator.csrf, client, saved.id, saved.version),
+    ).rejects.toMatchObject({ status: 409 });
+    expect(await definitions.get(coordinator.token, client, saved.id)).toMatchObject({
+      id: saved.id,
+      status: 'published',
+      revision: 1,
+      version: 2,
+    });
+  });
   it('blocks incomplete publication and foreign or quarantined image references', async () => {
     const incomplete = await definitions.save(
       coordinator.token,
