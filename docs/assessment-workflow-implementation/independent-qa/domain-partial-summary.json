@@ -1,0 +1,165 @@
+{
+  "completed_file_summaries_only": [
+    {
+      "file": "tests/postgres.test.ts",
+      "tests": 1,
+      "failed": 0,
+      "skipped": 1
+    },
+    {
+      "file": "tests/document-extractions.test.ts",
+      "tests": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/client-services-postgres.test.ts",
+      "tests": 1,
+      "failed": 0,
+      "skipped": 1
+    },
+    {
+      "file": "tests/assessment-analysis.test.ts",
+      "tests": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/assessment-reviews.test.ts",
+      "tests": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/learning-support.test.ts",
+      "tests": 8,
+      "failed": 6,
+      "skipped": 0
+    },
+    {
+      "file": "tests/learning-grading.test.ts",
+      "tests": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/delivery.test.ts",
+      "tests": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/learning-lifecycle.test.ts",
+      "tests": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/learning-grading-ai.test.ts",
+      "tests": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/learning-plans.test.ts",
+      "tests": 6,
+      "failed": 3,
+      "skipped": 0
+    },
+    {
+      "file": "tests/programme-generation.test.ts",
+      "tests": 9,
+      "failed": 4,
+      "skipped": 0
+    },
+    {
+      "file": "tests/learning-kpis.test.ts",
+      "tests": 4,
+      "failed": 3,
+      "skipped": 0
+    },
+    {
+      "file": "tests/learning-notices.test.ts",
+      "tests": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/assessment-responses.test.ts",
+      "tests": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/onboarding.test.ts",
+      "tests": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/operations.test.ts",
+      "tests": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/platform.test.ts",
+      "tests": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/assessment-assignments.test.ts",
+      "tests": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/tenancy.test.ts",
+      "tests": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/accounts.test.ts",
+      "tests": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/evidence-files.test.ts",
+      "tests": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/foundation-checks.test.ts",
+      "tests": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/promotions.test.ts",
+      "tests": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/document-parser.test.ts",
+      "tests": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "tests/installer.test.ts",
+      "tests": 4,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "passed": 158,
+  "failed": 16,
+  "skipped": 2,
+  "full_run_complete": false,
+  "exit": 15
+}

@@ -1,0 +1,980 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\node_modules\\playwright\\cli.js",
+      "test",
+      "-c",
+      "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser.config.ts"
+    ],
+    "configFile": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser.config.ts",
+    "rootDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/independent-qa/browser-tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/.runtime/independent-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/independent-qa/browser-tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\independent-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests",
+        "snapshotDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 90000,
+        "use": {
+          "headless": true,
+          "trace": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "d05.spec.ts",
+      "file": "d05.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "current approved attempt keeps accurate copy and review controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 903,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:46:49.459Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "111eed22252feb6ac480-8bcae22bd33797c29dd9",
+          "file": "d05.spec.ts",
+          "line": 85,
+          "column": 3
+        },
+        {
+          "title": "pending attempt keeps accurate copy and review controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 581,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:46:51.032Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "111eed22252feb6ac480-f51689217ad6a8268de4",
+          "file": "d05.spec.ts",
+          "line": 85,
+          "column": 3
+        },
+        {
+          "title": "newer attempt with earlier approval keeps accurate copy and review controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6476,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:46:51.634Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "111eed22252feb6ac480-fb9d334f59d33acdb9b7",
+          "file": "d05.spec.ts",
+          "line": 85,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "learner-guard.spec.ts",
+      "file": "learner-guard.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "D01 learner shares pre-context guard and blocks unknown autosave outcome",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8220,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"confirm\",\u001b[39m\n\u001b[31m+   \"alert\",\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"confirm\",\u001b[39m\n\u001b[31m+   \"alert\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\learner-guard.spec.ts:121:19",
+                    "location": {
+                      "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\learner-guard.spec.ts",
+                      "column": 19,
+                      "line": 121
+                    },
+                    "snippet": " \u001b[90m 119 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Switch client'\u001b[39m\u001b[33m,\u001b[39m exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 120 |\u001b[39m   expect(contextPosts)\u001b[33m.\u001b[39mtoBe(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 121 |\u001b[39m   expect(dialogs)\u001b[33m.\u001b[39mtoEqual([\u001b[32m'confirm'\u001b[39m])\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 122 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByLabel(\u001b[32m'Additional context (optional)'\u001b[39m))\u001b[33m.\u001b[39mtoHaveValue(\n \u001b[90m 123 |\u001b[39m     \u001b[32m'Retain learner draft'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 124 |\u001b[39m   )\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\learner-guard.spec.ts",
+                        "column": 19,
+                        "line": 121
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"confirm\",\u001b[39m\n\u001b[31m+   \"alert\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n  119 |   await page.getByRole('button', { name: 'Switch client', exact: true }).click();\n  120 |   expect(contextPosts).toBe(0);\n> 121 |   expect(dialogs).toEqual(['confirm']);\n      |                   ^\n  122 |   await expect(page.getByLabel('Additional context (optional)')).toHaveValue(\n  123 |     'Retain learner draft',\n  124 |   );\n    at C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\learner-guard.spec.ts:121:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:46:58.380Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\independent-browser-results\\learner-guard-D01-learner--12f66-ks-unknown-autosave-outcome\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\independent-browser-results\\learner-guard-D01-learner--12f66-ks-unknown-autosave-outcome\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\learner-guard.spec.ts",
+                    "column": 19,
+                    "line": 121
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0e15b856cc42d6546d2b-5ff84b83086c24d76bc9",
+          "file": "learner-guard.spec.ts",
+          "line": 34,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "workflow.spec.ts",
+      "file": "workflow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "D04 preview discloses scope and uses pinned section references across views",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1309,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:14.429Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-11a4ce7ff36bd8ce2e32",
+          "file": "workflow.spec.ts",
+          "line": 105,
+          "column": 1
+        },
+        {
+          "title": "D03 lost publication reconciles exact definition: published",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5135,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:16.458Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-3ab89ade3020789a9ba1",
+          "file": "workflow.spec.ts",
+          "line": 131,
+          "column": 3
+        },
+        {
+          "title": "D03 lost publication reconciles exact definition: draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4342,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:21.675Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-ade24e730e6b011cce1e",
+          "file": "workflow.spec.ts",
+          "line": 131,
+          "column": 3
+        },
+        {
+          "title": "D03 lost publication reconciles exact definition: unavailable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5437,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:26.310Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-d495d9587296ad9dc35a",
+          "file": "workflow.spec.ts",
+          "line": 131,
+          "column": 3
+        },
+        {
+          "title": "D03 lost publication reconciles exact definition: denied",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4869,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:32.437Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-f3a8b1f32643f86bad17",
+          "file": "workflow.spec.ts",
+          "line": 131,
+          "column": 3
+        },
+        {
+          "title": "D03 stale save stops writes and offers authorized structured comparison",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4496,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:37.636Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-e0b5d82f1aa377d638f1",
+          "file": "workflow.spec.ts",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "D03 unknown save replays exact operation before newer typing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2543,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:42.557Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-eebd0ed912cf3a271957",
+          "file": "workflow.spec.ts",
+          "line": 202,
+          "column": 1
+        },
+        {
+          "title": "D06 exact published handoff and D08 durable copy provenance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5013,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:45.236Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-8bd8a144ea8c4a2da4fd",
+          "file": "workflow.spec.ts",
+          "line": 230,
+          "column": 1
+        },
+        {
+          "title": "D01 literal link cancellation preserves author edits; clean navigation proceeds",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2626,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:50.377Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-9a183f5b337c56e72837",
+          "file": "workflow.spec.ts",
+          "line": 296,
+          "column": 1
+        },
+        {
+          "title": "D01 same-document Back and Forward cancellation retains author work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1520,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:53.284Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-4e834745e09ce48d47bc",
+          "file": "workflow.spec.ts",
+          "line": 328,
+          "column": 1
+        },
+        {
+          "title": "D07 rejection requires separate member-safe feedback and transmits it separately",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2152,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:55.015Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-d79ba038e168ca0e1328",
+          "file": "workflow.spec.ts",
+          "line": 353,
+          "column": 1
+        },
+        {
+          "title": "D07 learner sees returned guidance without a released grade or private reason",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1508,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:57.317Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-f30d33c37d8e84de93bc",
+          "file": "workflow.spec.ts",
+          "line": 391,
+          "column": 1
+        },
+        {
+          "title": "D04 reordered current references do not renumber historical pinned content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2337,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:47:58.944Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-4436d2f331561d4496cb",
+          "file": "workflow.spec.ts",
+          "line": 438,
+          "column": 1
+        },
+        {
+          "title": "D01 reviewer canceled reload preserves score feedback rationale and verified file text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6605,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:48:01.385Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-0815a8aa02fa4c2e3fe3",
+          "file": "workflow.spec.ts",
+          "line": 460,
+          "column": 1
+        },
+        {
+          "title": "D01 confirmed file evidence becomes clean without losing an unrelated review draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4851,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:48:08.083Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-735bd47feca7d3e80bc4",
+          "file": "workflow.spec.ts",
+          "line": 494,
+          "column": 1
+        },
+        {
+          "title": "D01 uncertain reviewer decision stops newer writes and retains fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2334,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:48:13.076Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-b837e2e91b2294a27bbb",
+          "file": "workflow.spec.ts",
+          "line": 526,
+          "column": 1
+        },
+        {
+          "title": "D01 switch canceled guard sends zero context mutations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3313,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:48:15.538Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-f6edea81ccde55f36fa2",
+          "file": "workflow.spec.ts",
+          "line": 562,
+          "column": 3
+        },
+        {
+          "title": "D01 logout canceled guard sends zero context mutations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3405,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:48:19.060Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-3910922e6221623007cb",
+          "file": "workflow.spec.ts",
+          "line": 562,
+          "column": 3
+        },
+        {
+          "title": "QA-D03 changed server draft after publication conflict offers recovery comparison",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8316,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Compare with saved definition' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: 'Compare with saved definition' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Compare with saved definition' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Compare with saved definition' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: 'Compare with saved definition' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Compare with saved definition' })\u001b[22m\n\n    at C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\workflow.spec.ts:669:81",
+                    "location": {
+                      "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\workflow.spec.ts",
+                      "column": 81,
+                      "line": 669
+                    },
+                    "snippet": " \u001b[90m 667 |\u001b[39m   expect(posts)\u001b[33m.\u001b[39mtoBe(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 668 |\u001b[39m   \u001b[36mawait\u001b[39m screenshot(page\u001b[33m,\u001b[39m\u001b[32m'QA-D03-changed-draft-recovery'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 669 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m{name\u001b[33m:\u001b[39m\u001b[32m'Compare with saved definition'\u001b[39m}))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 670 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 671 |\u001b[39m\n \u001b[90m 672 |\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\workflow.spec.ts",
+                        "column": 81,
+                        "line": 669
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Compare with saved definition' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: 'Compare with saved definition' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Compare with saved definition' })\u001b[22m\n\n\n  667 |   expect(posts).toBe(1);\n  668 |   await screenshot(page,'QA-D03-changed-draft-recovery');\n> 669 |   await expect(page.getByRole('button',{name:'Compare with saved definition'})).toBeVisible();\n      |                                                                                 ^\n  670 | });\n  671 |\n  672 |\n    at C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\workflow.spec.ts:669:81"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T11:48:22.573Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\independent-browser-results\\workflow-QA-D03-changed-se-e5f00--offers-recovery-comparison\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\independent-browser-results\\workflow-QA-D03-changed-se-e5f00--offers-recovery-comparison\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\browser-tests\\workflow.spec.ts",
+                    "column": 81,
+                    "line": 669
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-3ae107f41719ce862b60",
+          "file": "workflow.spec.ts",
+          "line": 654,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T11:46:48.179Z",
+    "duration": 111237.83700000001,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

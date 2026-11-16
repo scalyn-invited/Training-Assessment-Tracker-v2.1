@@ -1,0 +1,1 @@
+const net=require('node:net');for(const port of [3275,55439]){const s=net.createServer();s.on('error',e=>{console.log(port,e.code);process.exitCode=1});s.listen(port,'127.0.0.1',()=>{console.log(port,'free after QA');s.close()});}

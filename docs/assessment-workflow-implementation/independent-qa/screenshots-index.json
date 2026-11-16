@@ -1,0 +1,22 @@
+[
+  "D01-logout-canceled-before-post.png",
+  "D01-reviewer-dirty.png",
+  "D01-switch-canceled-before-post.png",
+  "D03-conflict-retry.png",
+  "D03-reconciled-denied.png",
+  "D03-reconciled-draft.png",
+  "D03-reconciled-published.png",
+  "D03-reconciled-unavailable.png",
+  "D04-section-preview-history.png",
+  "D05-current-approved-attempt-desktop.png",
+  "D05-current-approved-attempt-mobile.png",
+  "D05-newer-attempt-with-earlier-approval-desktop.png",
+  "D05-newer-attempt-with-earlier-approval-mobile.png",
+  "D05-pending-attempt-desktop.png",
+  "D05-pending-attempt-mobile.png",
+  "D06-existing-assignment-handoff.png",
+  "D07-member-return-guidance.png",
+  "D08-copy-provenance-narrow.png",
+  "D08-copy-provenance.png",
+  "QA-D03-changed-draft-recovery.png"
+]
