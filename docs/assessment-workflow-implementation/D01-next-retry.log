@@ -1,0 +1,33 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-next-browser\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (14.8s)
+
+
+  1) tests\workflow-next-browser\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: locator('#assessment-title')
+    Expected: "Synthetic saved draft"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" locator('#assessment-title') with timeout 5000ms
+      - waiting for locator('#assessment-title')
+
+
+      22 |  await page.goto('/assessments');
+      23 |  await page.getByRole('link',{name:'Edit draft',exact:true}).click();
+    > 24 |  await expect(page.locator('#assessment-title')).toHaveValue(row.title);
+         |                                                  ^
+      25 |  await page.evaluate(()=>{(window as any).__sameDocument='retained';});
+      26 |  await page.locator('nav a[href="/assessments"]').first().click();
+      27 |  await expect(page).toHaveURL(/\/assessments$/);
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-next-browser\navigation.spec.ts:24:50
+
+    Error Context: .runtime\workflow-next-results\navigation-D01-real-Next-s-98965-ean-SPA-navigation-proceeds\error-context.md
+
+  1 failed
+    tests\workflow-next-browser\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds 

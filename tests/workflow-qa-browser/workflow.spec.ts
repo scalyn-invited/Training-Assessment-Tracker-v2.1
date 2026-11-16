@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 import { build } from 'esbuild';
 import { readFile, mkdir } from 'node:fs/promises';
 const origin = 'https://workflow-qa.invalid';
-const shots = 'docs/assessment-workflow-implementation/qa-screenshots';
+const shots = 'docs/assessment-workflow-implementation/implementation-screenshots';
 const questions = ['A1', 'A2', 'B1', 'B2'].map((id) => ({
   id,
   type: 'multiple_choice',
@@ -203,6 +203,63 @@ test('D06 existing published handoff targets exact ID; D08 saved copy lacks prov
   await screenshot(page, 'D08-copy-provenance');
   expect(errors).toEqual([]);
 });
+test('D01 literal link cancellation preserves author edits; clean navigation proceeds', async ({
+  page,
+}) => {
+  await boot(page, async (route) => {
+    if (!route.request().url().endsWith('/destination')) return false;
+    await route.fulfill({ contentType: 'text/html', body: '<h1>Destination</h1>' });
+    return true;
+  });
+  await page.addScriptTag({ content: builder });
+  await page.evaluate(() => {
+    const a = document.createElement('a');
+    a.href = '/destination';
+    a.textContent = 'Leave fixture';
+    document.body.append(a);
+  });
+  await page.locator('#assessment-title').fill('Retain on link cancel');
+  const dialogs: string[] = [];
+  page.on('dialog', async (d) => {
+    dialogs.push(d.type());
+    await d.dismiss();
+  });
+  await page.getByRole('link', { name: 'Leave fixture' }).click();
+  expect(dialogs).toEqual(['confirm']);
+  await expect(page.locator('#assessment-title')).toHaveValue('Retain on link cancel');
+  await page.evaluate(() => {
+    (window as any).cleanupBuilder();
+  });
+  await page.getByRole('link', { name: 'Leave fixture' }).click();
+  await expect(page.getByRole('heading', { name: 'Destination' })).toBeVisible();
+  expect(dialogs).toHaveLength(1);
+});
+
+test('D01 same-document Back and Forward cancellation retains author work', async ({ page }) => {
+  await boot(page);
+  await page.evaluate(() => {
+    history.replaceState({}, '', '/prior');
+    history.pushState({}, '', '/current');
+    history.pushState({}, '', '/next');
+    history.back();
+  });
+  await expect(page).toHaveURL(origin + '/current');
+  await page.addScriptTag({ content: builder });
+  await page.locator('#assessment-title').fill('Retain on history cancel');
+  const dialogs: string[] = [];
+  page.on('dialog', async (d) => {
+    dialogs.push(d.type());
+    await d.dismiss();
+  });
+  await page.evaluate(() => history.back());
+  await expect.poll(() => dialogs.length).toBe(1);
+  await expect(page).toHaveURL(origin + '/current');
+  await page.evaluate(() => history.forward());
+  await expect.poll(() => dialogs.length).toBe(2);
+  await expect(page).toHaveURL(origin + '/current');
+  await expect(page.locator('#assessment-title')).toHaveValue('Retain on history cancel');
+});
+
 const reviewData = {
   status: 'submitted',
   canAnalyze: false,
@@ -226,7 +283,7 @@ const reviewData = {
   },
   evidence: [{ id: 'attempt-current:q', text: 'Synthetic evidence' }],
 };
-test('D01 reviewer reload loses score feedback rationale and verified file text without warning', async ({
+test('D01 reviewer canceled reload preserves score feedback rationale and verified file text', async ({
   page,
 }) => {
   const errors = await boot(page, async (route) => {
@@ -247,21 +304,60 @@ test('D01 reviewer reload loses score feedback rationale and verified file text 
     dialogs.push(d.type());
     await d.dismiss();
   });
-  await page.reload();
-  await page.addScriptTag({ content: review });
-  await expect(page.getByLabel('Private decision rationale')).toHaveValue('');
-  await expect(page.getByLabel('Score for Evidence', { exact: true })).toHaveValue('');
-  await expect(page.getByLabel('Feedback for Evidence', { exact: true })).toHaveValue('');
-  await page.getByText('Verify synthetic.txt', { exact: true }).click();
-  await expect(page.getByLabel('Verified evidence text 1')).toHaveValue('');
-  expect(dialogs).toEqual([]);
+  await page.reload({ timeout: 2000 }).catch(() => {});
+  expect(dialogs).toEqual(['beforeunload']);
+  await expect(page.getByLabel('Private decision rationale')).toHaveValue(
+    'Synthetic private rationale',
+  );
+  await expect(page.getByLabel('Score for Evidence', { exact: true })).toHaveValue('83');
+  await expect(page.getByLabel('Feedback for Evidence', { exact: true })).toHaveValue(
+    'Synthetic member feedback',
+  );
+  await expect(page.getByLabel('Verified evidence text 1')).toHaveValue('Synthetic verified text');
+  await expect(page.getByLabel('Confirmation reason 1')).toHaveValue('Synthetic comparison');
   expect(errors).toEqual([]);
 });
+test('D01 uncertain reviewer decision stops newer writes and retains fields', async ({ page }) => {
+  let posts = 0;
+  await boot(page, async (route) => {
+    if (!route.request().url().includes('/api/assessments/reviews/')) return false;
+    if (route.request().method() === 'POST') {
+      posts++;
+      await route.abort('failed');
+    } else
+      await route.fulfill({
+        json: {
+          ...reviewData,
+          attemptId: posts ? 'new-attempt' : reviewData.attemptId,
+          version: posts ? 4 : 3,
+        },
+      });
+    return true;
+  });
+  await page.addScriptTag({ content: review });
+  await page.getByLabel('Private decision rationale').fill('Synthetic private rationale');
+  page.on('dialog', (d) => d.accept());
+  await page.getByRole('button', { name: 'Reject and allow resubmission' }).click();
+  await expect(page.getByRole('button', { name: 'Reject and allow resubmission' })).toBeDisabled();
+  await expect(page.getByLabel('Private decision rationale')).toHaveValue(
+    'Synthetic private rationale',
+  );
+  await page.getByRole('button', { name: 'Refresh review status' }).click();
+  await expect(page.getByLabel('Private decision rationale')).toHaveValue(
+    'Synthetic private rationale',
+  );
+  await expect(page.getByRole('button', { name: 'Reject and allow resubmission' })).toBeDisabled();
+  expect(posts).toBe(1);
+});
 for (const action of ['switch', 'logout'])
-  test('D01 ' + action + ' POST occurs before canceled builder unload', async ({ page }) => {
+  test('D01 ' + action + ' canceled guard sends zero context mutations', async ({ page }) => {
     const events: string[] = [];
     const errors = await boot(page, async (route) => {
       const u = new URL(route.request().url());
+      if (['/dashboard', '/login'].includes(u.pathname)) {
+        await route.fulfill({ contentType: 'text/html', body: '<h1>Synthetic destination</h1>' });
+        return true;
+      }
       if (u.pathname === '/api/auth/context') {
         await route.fulfill({
           json: {
@@ -322,12 +418,25 @@ for (const action of ['switch', 'logout'])
       await page.locator('#active-client').selectOption('synthetic-b');
       await page.getByRole('button', { name: 'Switch client', exact: true }).click();
     } else await page.getByRole('button', { name: /sign out/i }).click();
-    await expect.poll(() => events.length).toBe(2);
-    expect(events).toEqual([
-      'POST ' + (action === 'switch' ? '/api/clients/select' : '/api/auth/logout'),
-      'beforeunload',
-    ]);
+    await expect.poll(() => events.length).toBe(1);
+    expect(events).toEqual(['confirm']);
+    await expect(page.getByRole('button', { name: 'Switch client', exact: true })).toBeEnabled();
+    await expect(page.getByRole('button', { name: /sign out/i })).toBeEnabled();
     await expect(page.locator('#assessment-title')).toHaveValue('Dirty synthetic context draft');
-    await screenshot(page, 'D01-' + action + '-canceled-after-post');
+    await screenshot(page, 'D01-' + action + '-canceled-before-post');
+    page.removeAllListeners('dialog');
+    events.length = 0;
+    page.on('dialog', async (d) => {
+      events.push(d.type());
+      await d.accept();
+    });
+    if (action === 'switch')
+      await page.getByRole('button', { name: 'Switch client', exact: true }).click();
+    else await page.getByRole('button', { name: /sign out/i }).click();
+    await expect(page.getByRole('heading', { name: 'Synthetic destination' })).toBeVisible();
+    expect(events).toEqual([
+      'confirm',
+      'POST ' + (action === 'switch' ? '/api/clients/select' : '/api/auth/logout'),
+    ]);
     expect(errors).toEqual([]);
   });

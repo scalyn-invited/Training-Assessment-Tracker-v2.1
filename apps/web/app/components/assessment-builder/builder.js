@@ -1,4 +1,5 @@
 import { Editor } from '@tiptap/core';
+import { registerWorkGuard } from '../work-guard';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import { defaultMatrix, matrixReadiness, matrixPreview } from './assessment-matrix.js';
@@ -501,9 +502,9 @@ $('publish-definition').addEventListener('click', async () => {
     finally { saving = false; updatePublish(); }
 });
 function escapeText(value) { const div = el('div', value); return div.innerHTML.replaceAll('"', '&quot;'); }
-const beforeUnload = e => { if (dirty || saving || uploadPending) { e.preventDefault(); e.returnValue = ''; } }; window.addEventListener('beforeunload',beforeUnload);
+const releaseGuard = registerWorkGuard(() => ({ dirty, pending: saving || uploadPending, uncertain: !!retryPayload }));
 renderSections(); renderList(); renderQuestion(); renderRubric(); updatePublish();
 status(dirty ? 'Unsaved changes' : state.status === 'published' ? 'Published revision. Saving creates a new draft.' : 'Draft saved. Not published.');
 
-return () => { lifetime.abort(); observer?.disconnect(); editor?.destroy(); window.removeEventListener('beforeunload',beforeUnload); };
+return () => { lifetime.abort(); observer?.disconnect(); editor?.destroy(); releaseGuard(); };
 }

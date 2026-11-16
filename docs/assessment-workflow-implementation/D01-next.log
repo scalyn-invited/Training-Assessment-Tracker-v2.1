@@ -1,0 +1,17 @@
+[WebServer] C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\next-server.cjs:7
+[WebServer]   if (fs.readdirSync(dir).some(name => name === '.env' || name.startsWith('.env.'))) throw Error('Refusing Next fixture with environment files');
+[WebServer]                                                                                      ^
+[WebServer] 
+[WebServer] Error: Refusing Next fixture with environment files
+[WebServer]     at Object.<anonymous> (C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\next-server.cjs:7:92)
+[WebServer]     at Module._compile (node:internal/modules/cjs/loader:1872:14)
+[WebServer]     at Object..js (node:internal/modules/cjs/loader:2003:10)
+[WebServer]     at Module.load (node:internal/modules/cjs/loader:1594:32)
+[WebServer]     at Module._load (node:internal/modules/cjs/loader:1396:12)
+[WebServer]     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+[WebServer]     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+[WebServer]     at node:internal/main/run_main_module:33:47
+[WebServer] 
+[WebServer] Node.js v24.19.0
+Error: Process from config.webServer was not able to start. Exit code: 1
+

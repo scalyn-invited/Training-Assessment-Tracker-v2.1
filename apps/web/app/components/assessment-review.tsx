@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState, useRef, type FormEvent } from 'react';
 import { api, Feedback, Pending } from './auth-ui';
+import { useWorkGuard } from './use-work-guard';
+import { workState } from './work-guard';
 type ScoreRow = {
   id: string;
   score: number | null;
@@ -79,13 +81,22 @@ export function AssessmentReview({
   const [data, setData] = useState<ReviewData | null>(null),
     [error, setError] = useState(''),
     [busy, setBusy] = useState(false),
+    [writeStopped, setWriteStopped] = useState(false),
     [loading, setLoading] = useState(false),
     [message, setMessage] = useState('');
+  useWorkGuard({ dirty: false, pending: busy, uncertain: writeStopped });
   async function load(silent = false) {
     setError('');
     if (!silent) setLoading(true);
     try {
       const next = await api<ReviewData>('/assessments/reviews/' + id + '?clientId=' + client);
+      if (writeStopped || (data && next.attemptId !== data.attemptId && workState().dirty)) {
+        setWriteStopped(true);
+        setMessage(
+          `Server status: ${next.status}; version ${next.version}. Local review is retained separately and cannot be submitted. Reload to start a fresh review.`,
+        );
+        return;
+      }
       setData(next);
       if (next.canReview) onStatus(next.status);
     } catch (e) {
@@ -109,7 +120,7 @@ export function AssessmentReview({
     return () => window.clearInterval(timer);
   }, [queued, extracting, error, id, client]);
   const perform: Action = async (action, reason, extra = {}) => {
-    if (!data || busy) return;
+    if (!data || busy || writeStopped) return;
     const confirmations: Record<string, string> = {
       approve: 'Approve this reviewed result and make the feedback visible to the member?',
       reject: 'Reject this attempt and allow the member to submit a new response?',
@@ -150,6 +161,9 @@ export function AssessmentReview({
         await load();
       } else complete();
     } catch (e) {
+      const code = (e as Error & { code?: string }).code;
+      if (!code || ['stale_review', 'decision_state', 'review_forbidden'].includes(code))
+        setWriteStopped(true);
       setError(
         (e as Error).message +
           ' Your entered review is still here. If the outcome is uncertain, reload the assessment before trying again.',
@@ -167,6 +181,13 @@ export function AssessmentReview({
     );
   return (
     <section aria-label="Assessment review and results">
+      {writeStopped && (
+        <p role="status">
+          Review writes are stopped. Refresh status to inspect the recorded outcome. Your entered
+          values remain here; reload only after reviewing the outcome and accepting that local edits
+          will be discarded.
+        </p>
+      )}
       <Feedback error={error} success={message} />
       {loading && <p role="status">Refreshing review...</p>}
       {error && (
@@ -227,7 +248,7 @@ export function AssessmentReview({
                   refresh={() => void load()}
                   index={index}
                   perform={perform}
-                  busy={busy || loading}
+                  busy={busy || loading || writeStopped}
                 />
               ) : (
                 <p key={file.id}>
@@ -266,7 +287,7 @@ export function AssessmentReview({
                 button="Request synthetic provisional analysis"
                 action="analysis"
                 perform={perform}
-                busy={busy || loading}
+                busy={busy || loading || writeStopped}
               />
             )}
           {data.status === 'technical_failure' && (
@@ -294,7 +315,7 @@ export function AssessmentReview({
               }
               data={data}
               perform={perform}
-              busy={busy || loading}
+              busy={busy || loading || writeStopped}
               status={data.status}
             />
           )}
@@ -307,7 +328,7 @@ export function AssessmentReview({
           button="Request alternate review"
           action="appeal"
           perform={perform}
-          busy={busy || loading}
+          busy={busy || loading || writeStopped}
         />
       )}
     </section>
@@ -421,6 +442,7 @@ function ConfirmFile({
   const [text, setText] = useState(''),
     [reason, setReason] = useState('');
   const edited = useRef(false);
+  useWorkGuard({ dirty: Boolean(text || reason), pending: busy });
   const pending = Boolean(
     extraction && ['queued', 'waiting_scan', 'running'].includes(extraction.status),
   );
@@ -579,6 +601,8 @@ function DecisionForm({
       ),
     ),
     [reason, setReason] = useState('');
+  const baseline = useRef(JSON.stringify({ rows, reason }));
+  useWorkGuard({ dirty: JSON.stringify({ rows, reason }) !== baseline.current, pending: busy });
   function patch(id: string, value: object) {
     setRows((current) => ({ ...current, [id]: { ...current[id], ...value } }));
   }
