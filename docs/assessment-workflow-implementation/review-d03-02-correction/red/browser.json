@@ -1,0 +1,254 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\node_modules\\playwright\\cli.js",
+      "test",
+      "-c",
+      "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser.config.ts",
+      "--grep",
+      "REVIEW-D03",
+      "--trace",
+      "on"
+    ],
+    "configFile": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser.config.ts",
+    "rootDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/review-d03-02-correction/browser-tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/.runtime/review-d03-02-correction-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/review-d03-02-correction/browser-tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\review-d03-02-correction-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests",
+        "snapshotDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 90000,
+        "use": {
+          "headless": true,
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "workflow.spec.ts",
+      "file": "workflow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REVIEW-D03 newer published content must not confirm the local saved version 409",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10230,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#save-definition')\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" locator('#save-definition') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#save-definition')\u001b[22m\n\u001b[2m    13 × locator resolved to <button type=\"button\" class=\"primary\" id=\"save-definition\">Save draft</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#save-definition')\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" locator('#save-definition') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#save-definition')\u001b[22m\n\u001b[2m    13 × locator resolved to <button type=\"button\" class=\"primary\" id=\"save-definition\">Save draft</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts:757:50",
+                    "location": {
+                      "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts",
+                      "column": 50,
+                      "line": 757
+                    },
+                    "snippet": " \u001b[90m 755 |\u001b[39m   \u001b[36mawait\u001b[39m screenshot(page\u001b[33m,\u001b[39m\u001b[32m`REVIEW-D03-newer-published-${outcome}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 756 |\u001b[39m   expect(posts)\u001b[33m.\u001b[39mtoBe(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 757 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'#save-definition'\u001b[39m))\u001b[33m.\u001b[39mtoBeDisabled()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 758 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m{name\u001b[33m:\u001b[39m\u001b[32m'Compare with saved definition'\u001b[39m}))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 759 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'#definition-provenance'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'edit version 1'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 760 |\u001b[39m })\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts",
+                        "column": 50,
+                        "line": 757
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#save-definition')\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" locator('#save-definition') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#save-definition')\u001b[22m\n\u001b[2m    13 × locator resolved to <button type=\"button\" class=\"primary\" id=\"save-definition\">Save draft</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  755 |   await screenshot(page,`REVIEW-D03-newer-published-${outcome}`);\n  756 |   expect(posts).toBe(1);\n> 757 |   await expect(page.locator('#save-definition')).toBeDisabled();\n      |                                                  ^\n  758 |   await expect(page.getByRole('button',{name:'Compare with saved definition'})).toBeVisible();\n  759 |   await expect(page.locator('#definition-provenance')).toContainText('edit version 1');\n  760 | });\n    at C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts:757:50"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T14:54:38.856Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\review-d03-02-correction-browser-results\\workflow-REVIEW-D03-newer--5f662-the-local-saved-version-409\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\review-d03-02-correction-browser-results\\workflow-REVIEW-D03-newer--5f662-the-local-saved-version-409\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts",
+                    "column": 50,
+                    "line": 757
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-e919473cdbf69169c024",
+          "file": "workflow.spec.ts",
+          "line": 733,
+          "column": 49
+        },
+        {
+          "title": "REVIEW-D03 newer published content must not confirm the local saved version lost-response",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9750,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#save-definition')\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" locator('#save-definition') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#save-definition')\u001b[22m\n\u001b[2m    13 × locator resolved to <button type=\"button\" class=\"primary\" id=\"save-definition\">Save draft</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#save-definition')\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" locator('#save-definition') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#save-definition')\u001b[22m\n\u001b[2m    13 × locator resolved to <button type=\"button\" class=\"primary\" id=\"save-definition\">Save draft</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts:757:50",
+                    "location": {
+                      "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts",
+                      "column": 50,
+                      "line": 757
+                    },
+                    "snippet": " \u001b[90m 755 |\u001b[39m   \u001b[36mawait\u001b[39m screenshot(page\u001b[33m,\u001b[39m\u001b[32m`REVIEW-D03-newer-published-${outcome}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 756 |\u001b[39m   expect(posts)\u001b[33m.\u001b[39mtoBe(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 757 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'#save-definition'\u001b[39m))\u001b[33m.\u001b[39mtoBeDisabled()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 758 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m{name\u001b[33m:\u001b[39m\u001b[32m'Compare with saved definition'\u001b[39m}))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 759 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'#definition-provenance'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'edit version 1'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 760 |\u001b[39m })\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts",
+                        "column": 50,
+                        "line": 757
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#save-definition')\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" locator('#save-definition') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#save-definition')\u001b[22m\n\u001b[2m    13 × locator resolved to <button type=\"button\" class=\"primary\" id=\"save-definition\">Save draft</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  755 |   await screenshot(page,`REVIEW-D03-newer-published-${outcome}`);\n  756 |   expect(posts).toBe(1);\n> 757 |   await expect(page.locator('#save-definition')).toBeDisabled();\n      |                                                  ^\n  758 |   await expect(page.getByRole('button',{name:'Compare with saved definition'})).toBeVisible();\n  759 |   await expect(page.locator('#definition-provenance')).toContainText('edit version 1');\n  760 | });\n    at C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts:757:50"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T14:54:58.049Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\review-d03-02-correction-browser-results\\workflow-REVIEW-D03-newer--e8459-saved-version-lost-response\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\review-d03-02-correction-browser-results\\workflow-REVIEW-D03-newer--e8459-saved-version-lost-response\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-correction\\browser-tests\\workflow.spec.ts",
+                    "column": 50,
+                    "line": 757
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-2351b148cb0e5ace0b30",
+          "file": "workflow.spec.ts",
+          "line": 733,
+          "column": 49
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T14:54:37.577Z",
+    "duration": 42628.143000000004,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
