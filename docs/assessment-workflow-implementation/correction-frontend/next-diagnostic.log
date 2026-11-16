@@ -1,0 +1,26 @@
+[WebServer] ▲ Next.js 16.4.6 (webpack)
+[WebServer] - Local:         http://127.0.0.1:3275
+[WebServer] - Network:       http://127.0.0.1:3275
+[WebServer] ✓ Ready in 2.2s
+[WebServer] ✓ Running next.config.ts took 83ms
+[WebServer] 
+[WebServer] ○ Compiling /assessments/page ...
+
+Running 2 tests using 1 worker
+
+[WebServer]  GET /assessments 200 in 19.5s (next.js: 16.8s, proxy.ts: 1269ms, application-code: 1519ms)
+[WebServer]  GET /assessments 200 in 1123ms (next.js: 70ms, proxy.ts: 88ms, application-code: 965ms)
+[WebServer] ○ Compiling /assessments/definitions/[id]/page ...
+[WebServer]  GET /assessments/definitions/synthetic-definition 200 in 30.0s (next.js: 27.9s, proxy.ts: 437ms, application-code: 1688ms)
+[WebServer]  GET /assessments 200 in 1054ms (next.js: 329ms, proxy.ts: 189ms, application-code: 537ms)
+[WebServer]  GET /assessments/definitions/synthetic-definition 200 in 843ms (next.js: 185ms, proxy.ts: 91ms, application-code: 567ms)
+  ok 1 docs\assessment-workflow-implementation\correction-frontend\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (58.9s)
+[WebServer]  GET /assessments 200 in 2.1s (next.js: 68ms, proxy.ts: 55ms, application-code: 1930ms)
+[WebServer]  GET /assessments/definitions/synthetic-definition 200 in 1704ms (next.js: 308ms, proxy.ts: 59ms, application-code: 1337ms)
+[WebServer]  GET /assessments 200 in 1130ms (next.js: 100ms, proxy.ts: 237ms, application-code: 793ms)
+[WebServer]  GET /assessments/definitions/synthetic-definition 200 in 2.2s (next.js: 337ms, proxy.ts: 391ms, application-code: 1507ms)
+  ok 2 docs\assessment-workflow-implementation\correction-frontend\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (27.7s)
+
+  2 passed (2.3m)
+
+EXIT 0

@@ -547,6 +547,11 @@ async function reconcilePublication() {
         } else if (row.status === 'draft' && row.version === publication.version) {
             publication = null;
             status('This exact saved version is still a draft. You may explicitly retry publication.');
+        } else if (row.status === 'draft' && row.version > publication.version) {
+            // Exact-ID readback confirms a stale draft, not an uncertain publication.
+            // Keep the local version/content intact and stop writes until explicit recovery.
+            publication = null; conflict = true; compareButton.hidden = false;
+            status('Publication conflict: the saved version changed and is still a draft. Writes are stopped. Your complete local draft remains here; compare before deciding to discard and reload.');
         } else {
             status('Publication outcome unknown: the saved version changed. Local edits are retained; reload only after comparing the current definition.');
         }
@@ -568,7 +573,7 @@ $('publish-definition').addEventListener('click', async () => {
     finally { saving = false; updatePublish(); }
 });
 function escapeText(value) { const div = el('div', value); return div.innerHTML.replaceAll('"', '&quot;'); }
-const releaseGuard = registerWorkGuard(() => ({ dirty, pending: saving || uploadPending, uncertain: !!retryPayload || !!publication }));
+const releaseGuard = registerWorkGuard(() => ({ dirty: dirty || conflict, pending: saving || uploadPending, uncertain: !!retryPayload || !!publication }));
 const provenance = el('div',null,{id:'definition-provenance',class:'notice'}); provenance.style.overflowWrap = 'anywhere'; $('save-status').before(provenance);
 renderSections(); renderList(); renderQuestion(); renderRubric(); updatePublish();
 status(dirty ? 'Unsaved changes' : state.status === 'published' ? 'Published revision. Saving creates a new draft.' : 'Draft saved. Not published.');
