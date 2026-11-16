@@ -68,7 +68,7 @@ type ReviewData = {
   } | null;
   evidence: { id: string; text: string }[];
 };
-type Action = (action: string, reason: string, extra?: Record<string, unknown>) => Promise<void>;
+type Action = (action: string, reason: string, extra?: Record<string, unknown>) => Promise<boolean>;
 export function AssessmentReview({
   id,
   client,
@@ -126,7 +126,7 @@ export function AssessmentReview({
     return () => window.clearInterval(timer);
   }, [queued, extracting, error, id, client]);
   const perform: Action = async (action, reason, extra = {}) => {
-    if (!data || busy || writeStopped) return;
+    if (!data || busy || writeStopped) return false;
     const confirmations: Record<string, string> = {
       approve: 'Approve this reviewed result and make the feedback visible to the member?',
       reject: 'Reject this attempt and allow the member to submit a new response?',
@@ -136,7 +136,7 @@ export function AssessmentReview({
         'Request synthetic provisional analysis? Verify the result independently before approving.',
       confirm: 'Confirm that this text has been checked against the original file?',
     };
-    if (action !== 'extract' && !window.confirm(confirmations[action])) return;
+    if (action !== 'extract' && !window.confirm(confirmations[action])) return false;
     setBusy(true);
     setError('');
     setMessage('');
@@ -152,7 +152,7 @@ export function AssessmentReview({
       });
       if (data.appeal && data.canReview && ['approve', 'reject', 'uphold'].includes(action)) {
         window.location.assign('/assessments?review=recorded');
-        return;
+        return true;
       }
       if (action === 'extract') {
         setMessage(
@@ -166,6 +166,7 @@ export function AssessmentReview({
         setMessage('File evidence confirmed. Review scores against the updated evidence.');
         await load();
       } else complete();
+      return true;
     } catch (e) {
       const code = (e as Error & { code?: string }).code;
       if (!code || ['stale_review', 'decision_state', 'review_forbidden'].includes(code))
@@ -174,6 +175,7 @@ export function AssessmentReview({
         (e as Error).message +
           ' Your entered review is still here. If the outcome is uncertain, reload the assessment before trying again.',
       );
+      return false;
     } finally {
       setBusy(false);
     }
@@ -460,7 +462,11 @@ function ConfirmFile({
   const [text, setText] = useState(''),
     [reason, setReason] = useState('');
   const edited = useRef(false);
-  useWorkGuard({ dirty: Boolean(text || reason), pending: busy });
+  const [confirmed, setConfirmed] = useState({ text: '', reason: '' });
+  useWorkGuard({
+    dirty: (edited.current && text !== confirmed.text) || reason !== confirmed.reason,
+    pending: busy,
+  });
   const pending = Boolean(
     extraction && ['queued', 'waiting_scan', 'running'].includes(extraction.status),
   );
@@ -549,7 +555,9 @@ function ConfirmFile({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          void perform('confirm', reason, { file, text });
+          void perform('confirm', reason, { file, text }).then((saved) => {
+            if (saved) setConfirmed({ text, reason });
+          });
         }}
       >
         <label>
@@ -621,9 +629,9 @@ function DecisionForm({
     [reason, setReason] = useState('');
   const [returnFeedback, setReturnFeedback] = useState('');
   const [returnError, setReturnError] = useState('');
-  const baseline = useRef(JSON.stringify({ rows, reason }));
+  const [baseline, setBaseline] = useState(JSON.stringify({ rows, reason, returnFeedback }));
   useWorkGuard({
-    dirty: Boolean(returnFeedback) || JSON.stringify({ rows, reason }) !== baseline.current,
+    dirty: JSON.stringify({ rows, reason, returnFeedback }) !== baseline,
     pending: busy,
   });
   function patch(id: string, value: object) {
@@ -653,6 +661,15 @@ function DecisionForm({
           score: rows[c.id].score === '' ? null : Number(rows[c.id].score),
         })),
       },
+    }).then((saved) => {
+      if (saved)
+        setBaseline(
+          JSON.stringify({
+            rows,
+            reason,
+            returnFeedback: action === 'reject' ? returnFeedback : '',
+          }),
+        );
     });
   }
   return (

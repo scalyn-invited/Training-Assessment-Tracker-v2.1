@@ -130,6 +130,7 @@ describe('assessment definitions and publication', () => {
         first.id,
       ]),
     ).rejects.toThrow('immutable');
+    const copyToken = randomUUID();
     const second = await definitions.save(
       coordinator.token,
       coordinator.csrf,
@@ -137,8 +138,19 @@ describe('assessment definitions and publication', () => {
       { ...input(), title: 'Revised' },
       first.id,
       2,
-      randomUUID(),
+      copyToken,
     );
+    expect(
+      await definitions.save(
+        coordinator.token,
+        coordinator.csrf,
+        client,
+        { ...input(), title: 'Revised' },
+        first.id,
+        2,
+        copyToken,
+      ),
+    ).toEqual(second);
     expect(second.id).not.toBe(first.id);
     const a = await definitions.get(coordinator.token, client, first.id),
       b = await definitions.get(coordinator.token, client, second.id);

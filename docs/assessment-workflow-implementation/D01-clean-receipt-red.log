@@ -1,0 +1,31 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:461:1 › D01 confirmed file evidence becomes clean without losing an unrelated review draft (4.6s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:461:1 › D01 confirmed file evidence becomes clean without losing an unrelated review draft 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "beforeunload",
+    + ]
+
+      480 |  dialogs.length=0;
+      481 |  await page.reload({timeout:2000}).catch(()=>{});
+    > 482 |  expect(dialogs).toEqual([]);
+          |                  ^
+      483 | });
+      484 | test('D01 uncertain reviewer decision stops newer writes and retains fields', async ({ page }) => {
+      485 |   let posts = 0;
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:482:18
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D01-confirmed-fil-533a0-g-an-unrelated-review-draft\error-context.md
+
+  1 failed
+    tests\workflow-qa-browser\workflow.spec.ts:461:1 › D01 confirmed file evidence becomes clean without losing an unrelated review draft 

@@ -4,6 +4,7 @@ import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
 import { ResponseQuestions, type Question, type Section, type Answers } from './response-questions';
 import { ResponseEvidence } from './response-evidence';
 import { AssessmentReview } from './assessment-review';
+import { registerWorkGuard } from './work-guard';
 type Draft = {
   responses: Answers;
   context: string | null;
@@ -215,50 +216,15 @@ function Editor({
     setMessage('Unsaved changes');
     setTick((n) => n + 1);
   }
-  useEffect(() => {
-    let approvedLeave = false;
-    let reset: ReturnType<typeof setTimeout> | undefined;
-    const unsaved = () => {
-      const s = state.current;
-      return s.busy || Boolean(s.pending) || s.generation !== s.saved;
-    };
-    const handler = (e: BeforeUnloadEvent) => {
-      if (unsaved() && !approvedLeave) e.preventDefault();
-    };
-    const link = (event: MouseEvent) => {
-      const anchor = (event.target as Element).closest?.('a');
-      if (
-        !anchor ||
-        event.defaultPrevented ||
-        event.button !== 0 ||
-        event.ctrlKey ||
-        event.metaKey ||
-        event.shiftKey ||
-        anchor.target === '_blank' ||
-        anchor.hasAttribute('download') ||
-        anchor.pathname.startsWith('/api/') ||
-        anchor.getAttribute('href')?.startsWith('#') ||
-        !unsaved()
-      )
-        return;
-      if (!window.confirm('You have unsaved or unconfirmed changes. Leave this assessment?')) {
-        event.preventDefault();
-        event.stopPropagation();
-      } else {
-        approvedLeave = true;
-        reset = setTimeout(() => {
-          approvedLeave = false;
-        }, 1000);
-      }
-    };
-    window.addEventListener('beforeunload', handler);
-    document.addEventListener('click', link, true);
-    return () => {
-      window.removeEventListener('beforeunload', handler);
-      document.removeEventListener('click', link, true);
-      clearTimeout(reset);
-    };
-  }, []);
+  useEffect(
+    () =>
+      registerWorkGuard(() => ({
+        dirty: state.current.generation !== state.current.saved,
+        pending: state.current.busy,
+        uncertain: Boolean(state.current.pending),
+      })),
+    [],
+  );
   useEffect(() => {
     const s = state.current;
     if (s.generation === s.saved || s.busy || s.pending || s.conflict || s.validation) return;

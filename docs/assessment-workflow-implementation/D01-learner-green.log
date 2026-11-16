@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ok 1 tests\workflow-qa-browser\learner-guard.spec.ts:5:1 › D01 learner shares pre-context guard and blocks unknown autosave outcome (1.3s)
+
+  1 passed (2.1s)

@@ -288,6 +288,9 @@ test('D06 exact published handoff and D08 durable copy provenance', async ({ pag
   await page.locator('[data-section=review]').click();
   await expect(page.locator('#learner-preview')).toContainText('Saved revision 2');
   await screenshot(page, 'D08-copy-provenance');
+  await page.setViewportSize({ width: 375, height: 900 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await screenshot(page, 'D08-copy-provenance-narrow');
   expect(errors).toEqual([]);
 });
 test('D01 literal link cancellation preserves author edits; clean navigation proceeds', async ({
@@ -376,6 +379,14 @@ test('D07 rejection requires separate member-safe feedback and transmits it sepa
   await expect.poll(() => posts.length).toBe(1);
   expect(posts[0].return_feedback).toBe('PUBLIC: Add a worked example.');
   expect(posts[0].reason).toBe('PRIVATE rationale');
+  page.removeAllListeners('dialog');
+  const dialogs: string[] = [];
+  page.on('dialog', async (d) => {
+    dialogs.push(d.type());
+    await d.dismiss();
+  });
+  await page.reload({ timeout: 2000 }).catch(() => {});
+  expect(dialogs).toEqual([]);
 });
 test('D07 learner sees returned guidance without a released grade or private reason', async ({
   page,
@@ -424,6 +435,28 @@ const reviewData = {
   },
   evidence: [{ id: 'attempt-current:q', text: 'Synthetic evidence' }],
 };
+test('D04 reordered current references do not renumber historical pinned content', async ({
+  page,
+}) => {
+  const errors = await boot(page);
+  await page.evaluate(() => {
+    const w = window as any;
+    w.pinned = structuredClone(w.fixture);
+    w.fixture.questions.reverse();
+    w.fixture.sections.reverse();
+  });
+  await page.addScriptTag({ content: builder });
+  await page.locator('[data-section=review]').click();
+  await expect(page.locator('#learner-preview')).toContainText('Section B — Question 1');
+  const pinned = await bundle(
+    `import {createRoot} from 'react-dom/client';import {ResponseQuestions} from './apps/web/app/components/response-questions';createRoot(document.getElementById('learner')).render(<ResponseQuestions questions={window.fixture.questions.slice(0,2)} allQuestions={window.fixture.questions} sections={window.fixture.sections} answers={{}}/>);createRoot(document.getElementById('history')).render(<ResponseQuestions questions={window.pinned.questions} sections={window.pinned.sections} answers={{}}/>);`,
+  );
+  await page.addScriptTag({ content: pinned });
+  await expect(page.locator('#learner')).toContainText('Section B — Question 1');
+  await expect(page.locator('#history')).toContainText('Section B — Question 3');
+  await expect(page.locator('#history')).toContainText('Section A — Question 1');
+  expect(errors).toEqual([]);
+});
 test('D01 reviewer canceled reload preserves score feedback rationale and verified file text', async ({
   page,
 }) => {
@@ -457,6 +490,38 @@ test('D01 reviewer canceled reload preserves score feedback rationale and verifi
   await expect(page.getByLabel('Verified evidence text 1')).toHaveValue('Synthetic verified text');
   await expect(page.getByLabel('Confirmation reason 1')).toHaveValue('Synthetic comparison');
   expect(errors).toEqual([]);
+});
+test('D01 confirmed file evidence becomes clean without losing an unrelated review draft', async ({
+  page,
+}) => {
+  await boot(page, async (route) => {
+    if (!route.request().url().includes('/api/assessments/reviews/')) return false;
+    await route.fulfill({ json: route.request().method() === 'POST' ? { ok: true } : reviewData });
+    return true;
+  });
+  await page.addScriptTag({ content: review });
+  await page.getByText('Verify synthetic.txt', { exact: true }).click();
+  await page.getByLabel('Verified evidence text 1').fill('Checked synthetic text');
+  await page.getByLabel('Confirmation reason 1').fill('Checked against original');
+  page.on('dialog', (d) => d.accept());
+  await page.getByLabel('Score for Evidence', { exact: true }).fill('74');
+  await page.getByRole('button', { name: 'Confirm file evidence' }).click();
+  await expect(
+    page.getByText('File evidence confirmed. Review scores against the updated evidence.'),
+  ).toBeVisible();
+  page.removeAllListeners('dialog');
+  const dialogs: string[] = [];
+  page.on('dialog', async (d) => {
+    dialogs.push(d.type());
+    await d.dismiss();
+  });
+  await page.reload({ timeout: 2000 }).catch(() => {});
+  expect(dialogs).toEqual(['beforeunload']);
+  await expect(page.getByLabel('Score for Evidence', { exact: true })).toHaveValue('74');
+  await page.getByLabel('Score for Evidence', { exact: true }).fill('');
+  dialogs.length = 0;
+  await page.reload({ timeout: 2000 }).catch(() => {});
+  expect(dialogs).toEqual([]);
 });
 test('D01 uncertain reviewer decision stops newer writes and retains fields', async ({ page }) => {
   let posts = 0;

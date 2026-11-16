@@ -70,7 +70,7 @@ test.beforeAll(async () => {
       ),
     )
   ).join('\n');
-  await mkdir('docs/assessment-workflow-implementation/qa-screenshots', { recursive: true });
+  await mkdir('docs/assessment-workflow-implementation/implementation-screenshots', { recursive: true });
 });
 
 for (const scenario of [
@@ -133,7 +133,7 @@ for (const scenario of [
     } else await expect(approved).toHaveCount(0);
     const slug = scenario.name.replaceAll(' ', '-');
     await page.screenshot({
-      path: `docs/assessment-workflow-implementation/qa-screenshots/D05-${slug}-desktop.png`,
+      path: `docs/assessment-workflow-implementation/implementation-screenshots/D05-${slug}-desktop.png`,
       fullPage: true,
     });
     await page.setViewportSize({ width: 375, height: 667 });
@@ -141,7 +141,7 @@ for (const scenario of [
       true,
     );
     await page.screenshot({
-      path: `docs/assessment-workflow-implementation/qa-screenshots/D05-${slug}-mobile.png`,
+      path: `docs/assessment-workflow-implementation/implementation-screenshots/D05-${slug}-mobile.png`,
       fullPage: true,
     });
     expect(errors).toEqual([]);
