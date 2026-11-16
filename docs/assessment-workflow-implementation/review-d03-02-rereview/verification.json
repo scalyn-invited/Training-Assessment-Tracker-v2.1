@@ -1,0 +1,76 @@
+{
+  "testedHead": "e920b19152f355ba37cd375d247f25cd5642b379",
+  "branch": "feature/assessment-workflow-improvements",
+  "productionCommit": "a1e4c16d2096076b4111cd3669396dfd4661d939",
+  "exactReviewerNegativesUnchanged": true,
+  "stats": {
+    "original": {
+      "startTime": "2026-11-16T14:35:56.826Z",
+      "duration": 83500.337,
+      "expected": 25,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "frontendRed": {
+      "startTime": "2026-11-16T14:54:37.577Z",
+      "duration": 42628.143000000004,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "frontendGreen": {
+      "startTime": "2026-11-16T15:12:40.838Z",
+      "duration": 82915.22,
+      "expected": 29,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qa": {
+      "startTime": "2026-11-16T15:25:36.501Z",
+      "duration": 122748.871,
+      "expected": 29,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reviewer": {
+      "startTime": "2026-11-16T15:41:26.145Z",
+      "duration": 109438.954,
+      "expected": 29,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "next": {
+      "startTime": "2026-11-16T15:45:37.195Z",
+      "duration": 47761.806,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reviewer-focused.json": {
+      "passed": 24,
+      "failed": 0,
+      "pending": 0,
+      "total": 24
+    },
+    "domain.json": {
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "total": 1
+    }
+  },
+  "productionDiff": "",
+  "upstreamEvidenceDiff": "",
+  "trackedDiff": "",
+  "portsBefore": "3275 free after QA\n55439 free after QA\n",
+  "portsAfter": "3275 free after QA\n55439 free after QA\n",
+  "processes": {
+    "qa_owned_processes": []
+  }
+}
