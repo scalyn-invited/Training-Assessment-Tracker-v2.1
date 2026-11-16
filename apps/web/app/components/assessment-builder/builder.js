@@ -1,5 +1,6 @@
 import { Editor } from '@tiptap/core';
 import { registerWorkGuard } from '../work-guard';
+import { questionReference } from '../question-reference';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import { defaultMatrix, matrixReadiness, matrixPreview } from './assessment-matrix.js';
@@ -427,10 +428,11 @@ function mapSaveErrors(errors, payload) {
 function renderReview() {
     const errors = readiness(); $('readiness-list').replaceChildren(Object.keys(errors).length ? errorList(errors) : el('p', 'Ready for publication checks. The server verifies the saved revision before publishing.'));
     const preview = $('learner-preview'); preview.replaceChildren(el('h4', state.title || 'Untitled assessment'));
+    preview.append(el('p', 'Content preview — responses are not saved'), el('p', dirty ? 'Current unsaved local edits' : `Saved revision ${state.revision ?? '—'} · ${state.status} · version ${state.version}`), el('p', 'Content only: save, submission, permissions and file scanning are not simulated. Author rubric is separate; answer keys are not shown.'));
     state.questions.forEach((q, i) => {
         const group = state.sections?.find(s => s.question_ids[0] === q.id);
         if (group) preview.append(el('h4', group.title || 'Untitled section'), el('p', group.instructions || '', { class: 'section-instructions' }));
-        const article = el('article', null, { class: 'builder-preview-question' }); article.append(el('h4', `Question ${i + 1}`));
+        const article = el('article', null, { class: 'builder-preview-question' }); article.append(el('h4', questionReference(q.id, state.questions, state.sections)));
         const prompt = el('div', null, { class: 'assessment-prompt' });
         // Editor schema restricts this HTML; the server independently sanitises persisted markup.
         const previewEditor = new Editor({ element: prompt, editable: false, extensions: [StarterKit, PrivateImage.configure({ inline: true })], content: q.prompt_html ?? `<p>${escapeText(q.prompt)}</p>` });

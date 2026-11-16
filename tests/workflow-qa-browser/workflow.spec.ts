@@ -76,7 +76,7 @@ test.beforeAll(async () => {
     true,
   );
   responses = await bundle(
-    `import {createRoot} from 'react-dom/client';import {ResponseQuestions} from './apps/web/app/components/response-questions';createRoot(document.getElementById('learner')).render(<ResponseQuestions questions={window.fixture.questions.slice(2)} answers={{}} onChange={()=>{}}/>);createRoot(document.getElementById('history')).render(<ResponseQuestions questions={window.fixture.questions} answers={{}}/>);`,
+    `import {createRoot} from 'react-dom/client';import {ResponseQuestions} from './apps/web/app/components/response-questions';createRoot(document.getElementById('learner')).render(<ResponseQuestions questions={window.fixture.questions.slice(2)} allQuestions={window.fixture.questions} sections={window.fixture.sections} answers={{}} onChange={()=>{}}/>);createRoot(document.getElementById('history')).render(<ResponseQuestions questions={window.fixture.questions} sections={window.fixture.sections} answers={{}}/>);`,
   );
 });
 async function boot(page: Page, handler?: (route: any) => Promise<boolean>) {
@@ -102,21 +102,28 @@ async function boot(page: Page, handler?: (route: any) => Promise<boolean>) {
 async function screenshot(page: Page, name: string) {
   await page.screenshot({ path: `${shots}/${name}.png`, fullPage: true });
 }
-test('D04 observes reset and inconsistent second-section references', async ({ page }) => {
+test('D04 preview discloses scope and uses pinned section references across views', async ({
+  page,
+}) => {
   const errors = await boot(page);
   await page.addScriptTag({ content: builder });
   await page.locator('[data-section=review]').click();
   await expect(page.locator('#learner-preview')).toContainText('Question 3');
+  await expect(page.locator('#learner-preview')).toContainText('Saved revision 1');
   await page.locator('[name=preview-B1][value=yes]').check();
   await page.locator('[data-section=details]').click();
   await page.locator('#assessment-title').fill('Unsaved local title');
   await page.locator('[data-section=review]').click();
   await expect(page.locator('[name=preview-B1][value=yes]')).not.toBeChecked();
   await expect(page.locator('#learner-preview')).toContainText('Unsaved local title');
-  await expect(page.locator('#learner-preview')).not.toContainText('responses are not saved');
+  await expect(page.locator('#learner-preview')).toContainText(
+    'Content preview — responses are not saved',
+  );
+  await expect(page.locator('#learner-preview')).toContainText('Current unsaved local edits');
   await page.addScriptTag({ content: responses });
-  await expect(page.locator('#learner h3').first()).toHaveText('Question 1');
-  await expect(page.locator('#history h3').nth(2)).toHaveText('Question 3');
+  await expect(page.locator('#learner h3').first()).toHaveText('Section B — Question 3');
+  await expect(page.locator('#history h3').nth(2)).toHaveText('Section B — Question 3');
+  await expect(page.locator('#learner-preview')).toContainText('Section B — Question 3');
   await screenshot(page, 'D04-section-preview-history');
   expect(errors).toEqual([]);
 });

@@ -128,6 +128,7 @@ export function AssessmentResponse({ id }: { id: string }) {
                       <p>Submission receipt: {attempt.id}</p>
                       <ResponseQuestions
                         questions={attempt.questions}
+                        sections={attempt.sections}
                         answers={attempt.responses}
                         prefix={attempt.id}
                       />
@@ -443,6 +444,8 @@ function Editor({
             (q) => !currentSection || currentSection.question_ids.includes(q.id),
           )}
           answers={draft.responses}
+          allQuestions={data.definition.questions}
+          sections={data.definition.sections}
           errors={errors}
           onChange={(id, value) =>
             change({ responses: { ...state.current.draft.responses, [id]: value } })
