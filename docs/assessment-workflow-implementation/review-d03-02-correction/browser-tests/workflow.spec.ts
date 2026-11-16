@@ -704,6 +704,8 @@ for (const savedStatus of ['draft', 'published']) for (const outcome of ['409', 
     await expect(page.locator('#assessment-title')).toHaveValue(initial.title);
     await expect(page.locator('#save-definition')).toBeDisabled();
     expect(posts).toBe(1);
+    // Close the long comparison disclosure before navigating beneath the sticky header.
+    await page.getByText('Private structured comparison',{exact:true}).click();
     await page.locator('[data-section=details]').click();
     await page.locator('[data-section=review]').click();
     await expect(page.locator('#learner-preview')).toContainText('draft · version 1');
