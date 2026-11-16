@@ -1,0 +1,8 @@
+
+> training-assessment-tracker-v2-1@0.1.0 typecheck
+> tsc --noEmit -p tsconfig.server.json && npm run typecheck --workspace=@tracker/web
+
+
+> typecheck
+> tsc --noEmit
+

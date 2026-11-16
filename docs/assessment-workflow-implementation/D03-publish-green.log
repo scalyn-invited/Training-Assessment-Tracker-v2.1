@@ -1,0 +1,9 @@
+
+Running 4 tests using 1 worker
+
+  ok 1 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: published (925ms)
+  ok 2 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: draft (918ms)
+  ok 3 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: unavailable (1.4s)
+  ok 4 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: denied (1.3s)
+
+  4 passed (6.2s)

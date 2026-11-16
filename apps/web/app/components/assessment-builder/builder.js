@@ -30,6 +30,7 @@ state.questions.forEach(q => { q.type ||= 'open_response'; q.choices ||= []; });
 let selected = state.questions[0]?.id, editor, dirty = !state.id, saving = false, generation = 0, retryPayload = null;
 let serverErrors = {}, removed = [], uploadPending = false;
 let matrixRemoved = [];
+let publication = null, conflict = false;
 const csrf = $('builder-csrf').value;
 const status = message => $('save-status').textContent = message;
 const el = (tag, text, attrs = {}) => {
@@ -448,10 +449,11 @@ function renderReview() {
     updatePublish();
 }
 function updatePublish() {
+    $('save-definition').disabled = saving || !!publication || conflict;
     const assign = $('assign-definition');
     assign.hidden = state.status !== 'published' || dirty || !state.id;
     assign.href = `/assessments/definitions/${state.id}/assign`;
-    $('publish-definition').disabled = saving || uploadPending || dirty || !state.id || state.status !== 'draft' || Object.keys(readiness()).length > 0;
+    $('publish-definition').disabled = saving || !!publication || conflict || uploadPending || dirty || !state.id || state.status !== 'draft' || Object.keys(readiness()).length > 0;
     $('publish-help').textContent = state.status === 'published' ? 'Published. Save edits to create a new draft revision.' : dirty ? 'Save the latest changes before publishing.' : Object.keys(readiness()).length ? 'Resolve the checklist items before publishing.' : 'Publishing freezes this revision for assignment. Existing assignments remain unchanged.';
 }
 async function request(url, body) {
@@ -470,7 +472,7 @@ function upload(data, onProgress) {
     });
 }
 async function save() {
-    if (saving) return;
+    if (saving || publication || conflict) return;
     const sentGeneration = generation;
     // Reuse the exact failed mutation first: an uncertain response may already have committed.
     const payload = retryPayload || { action: 'save', id: state.id, expected_version: state.version, save_token: uuid(), title: state.title, threshold: state.threshold, sections: clone(state.sections), questions: clone(state.questions), criteria: clone(state.criteria), answer_key: clone(state.answer_key) };
@@ -488,21 +490,73 @@ async function save() {
     } catch (error) {
         if (![422, 403, 404, 409, 419].includes(error.status)) retryPayload = payload;
         else retryPayload = null;
+        if (error.status === 409) { conflict = true; compareButton.hidden = false; }
         serverErrors = mapSaveErrors(error.errors || {}, payload);
-        $('builder-errors').replaceChildren(el('p', error.status === 409 ? 'This draft changed in another window. Your edits remain here; copy them before reloading.' : 'Draft could not be saved. Your entered content remains here. Retry after correcting the problem.'), errorList(serverErrors)); $('builder-errors').hidden = false;
+        $('builder-errors').replaceChildren(el('p', error.status === 409 ? 'This draft changed in another window. Writes are stopped. Your complete local draft remains here. Compare with the saved definition before deciding to discard and reload.' : 'Draft could not be saved. Your entered content remains here. Retry after correcting the problem.'), errorList(serverErrors)); $('builder-errors').hidden = false;
         status('Save failed. Your content is preserved.'); $('save-definition').textContent = 'Retry save';
     } finally { saving = false; $('save-definition').disabled = false; updatePublish(); }
 }
 $('save-definition').addEventListener('click', save);
+const comparison = el('div', null, {id:'definition-comparison'});
+const compareButton = button('Compare with saved definition', async () => {
+    compareButton.disabled = true;
+    comparison.replaceChildren();
+    try {
+        const row = await request('/api/assessments/definitions?' + new URLSearchParams({clientId:root.dataset.client,id:state.id}));
+        if (row.id !== state.id) throw Error('The returned definition does not match.');
+        const details = el('details');
+        details.append(el('summary','Private structured comparison'), el('p','Author-only snapshot at comparison time. Includes answer keys. Nothing is exported or merged; neither version is overwritten.'));
+        for (const [label, data] of [['Local draft',state], ['Saved definition',row]]) {
+            const pre = el('pre',JSON.stringify(data,null,2)); pre.style.whiteSpace = 'pre-wrap'; pre.style.overflowWrap = 'anywhere';
+            details.append(el('h3',label),pre);
+        }
+        comparison.append(details, button('Discard local edits and reload', () => {
+            if (confirm('Discard all local edits and load the saved definition? This cannot be undone.')) {
+                window.dispatchEvent(new Event('tat:leave-committed')); window.location.reload();
+            }
+        }));
+    } catch (error) { comparison.append(el('p','Comparison unavailable. Local edits are unchanged. ' + error.message)); }
+    finally { compareButton.disabled = false; }
+});
+compareButton.hidden = true;
+$('save-status').after(compareButton,comparison);
+const reconcileButton = button('Check publication status', () => void reconcilePublication());
+reconcileButton.hidden = true;
+$('save-status').after(reconcileButton);
+async function reconcilePublication() {
+    if (!publication) return;
+    reconcileButton.disabled = true;
+    try {
+        const row = await request('/api/assessments/definitions?' + new URLSearchParams({clientId: root.dataset.client, id: publication.id}));
+        if (row.id !== publication.id) throw Error('The returned definition does not match.');
+        if (row.status === 'published' && row.version > publication.version) {
+            state.status = row.status; state.version = row.version; publication = null;
+            status('Publication confirmed for this exact definition. Existing assignments remain unchanged.');
+        } else if (row.status === 'draft' && row.version === publication.version) {
+            publication = null;
+            status('This exact saved version is still a draft. You may explicitly retry publication.');
+        } else {
+            status('Publication outcome unknown: the saved version changed. Local edits are retained; reload only after comparing the current definition.');
+        }
+    } catch (error) {
+        status('Publication outcome unknown. Writes are stopped; check status again when access and connection are restored. ' + error.message);
+    } finally { reconcileButton.hidden = !publication; reconcileButton.disabled = false; updatePublish(); }
+}
 $('publish-definition').addEventListener('click', async () => {
+    if (saving || publication || conflict || dirty) return;
     if (!confirm('Publish this saved revision? Its questions and scoring rules will be frozen for new assignments.')) return;
+    publication = {id: state.id, version: state.version};
     saving = true; updatePublish(); status('Publishing assessment…');
-    try { const result = await request(root.dataset.endpoint, { action: 'publish', id: state.id, expected_version: state.version }); state.version = result.version; state.status = result.status; status('Assessment published. Save further edits as a new draft revision.'); }
-    catch (error) { serverErrors = error.errors || {}; status('Publication failed. Your saved draft is preserved. ' + error.message); renderReview(); }
+    try { const result = await request(root.dataset.endpoint, { action: 'publish', id: publication.id, expected_version: publication.version }); state.version = result.version; state.status = result.status; publication = null; status('Assessment published. Save further edits as a new draft revision.'); }
+    catch (error) {
+        serverErrors = error.errors || {};
+        if ([400, 401, 403, 404, 419, 422].includes(error.status)) { publication = null; status('Publication was not accepted. Your local content remains here. ' + error.message); renderReview(); }
+        else await reconcilePublication();
+    }
     finally { saving = false; updatePublish(); }
 });
 function escapeText(value) { const div = el('div', value); return div.innerHTML.replaceAll('"', '&quot;'); }
-const releaseGuard = registerWorkGuard(() => ({ dirty, pending: saving || uploadPending, uncertain: !!retryPayload }));
+const releaseGuard = registerWorkGuard(() => ({ dirty, pending: saving || uploadPending, uncertain: !!retryPayload || !!publication }));
 renderSections(); renderList(); renderQuestion(); renderRubric(); updatePublish();
 status(dirty ? 'Unsaved changes' : state.status === 'published' ? 'Published revision. Saving creates a new draft.' : 'Draft saved. Not published.');
 

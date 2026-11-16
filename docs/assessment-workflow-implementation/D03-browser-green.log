@@ -1,0 +1,21 @@
+
+Running 16 tests using 1 worker
+
+  ok  1 tests\workflow-qa-browser\d05.spec.ts:85:3 › current approved attempt keeps accurate copy and review controls (510ms)
+  ok  2 tests\workflow-qa-browser\d05.spec.ts:85:3 › pending attempt keeps accurate copy and review controls (450ms)
+  ok  3 tests\workflow-qa-browser\d05.spec.ts:85:3 › newer attempt with earlier approval keeps accurate copy and review controls (485ms)
+  ok  4 tests\workflow-qa-browser\workflow.spec.ts:105:1 › D04 observes reset and inconsistent second-section references (638ms)
+  ok  5 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: published (1.3s)
+  ok  6 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: draft (1.1s)
+  ok  7 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: unavailable (1.2s)
+  ok  8 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: denied (1.1s)
+  ok  9 tests\workflow-qa-browser\workflow.spec.ts:156:1 › D03 stale save stops writes and offers authorized structured comparison (1.4s)
+  ok 10 tests\workflow-qa-browser\workflow.spec.ts:182:1 › D06 existing published handoff targets exact ID; D08 saved copy lacks provenance (820ms)
+  ok 11 tests\workflow-qa-browser\workflow.spec.ts:212:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (781ms)
+  ok 12 tests\workflow-qa-browser\workflow.spec.ts:244:1 › D01 same-document Back and Forward cancellation retains author work (828ms)
+  ok 13 tests\workflow-qa-browser\workflow.spec.ts:292:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (3.2s)
+  ok 14 tests\workflow-qa-browser\workflow.spec.ts:326:1 › D01 uncertain reviewer decision stops newer writes and retains fields (540ms)
+  ok 15 tests\workflow-qa-browser\workflow.spec.ts:359:3 › D01 switch canceled guard sends zero context mutations (1.1s)
+  ok 16 tests\workflow-qa-browser\workflow.spec.ts:359:3 › D01 logout canceled guard sends zero context mutations (1.3s)
+
+  16 passed (18.8s)

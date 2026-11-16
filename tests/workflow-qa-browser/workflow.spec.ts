@@ -120,42 +120,58 @@ test('D04 observes reset and inconsistent second-section references', async ({ p
   await screenshot(page, 'D04-section-preview-history');
   expect(errors).toEqual([]);
 });
-test('D03 observes false definitive publication failure then blind version retry', async ({
+for (const outcome of ['published', 'draft', 'unavailable', 'denied'])
+  test('D03 lost publication reconciles exact definition: ' + outcome, async ({ page }) => {
+    const posts: any[] = [];
+    const reads: string[] = [];
+    const errors = await boot(page, async (route) => {
+      const u = new URL(route.request().url());
+      if (u.pathname === '/api/assessments/definitions') {
+        reads.push(u.searchParams.get('id')!);
+        if (outcome === 'unavailable') await route.abort('failed');
+        else if (outcome === 'denied')
+          await route.fulfill({ status: 403, json: { message: 'Access denied' } });
+        else
+          await route.fulfill({
+            json: { ...initial, status: outcome, version: outcome === 'published' ? 2 : 1 },
+          });
+        return true;
+      }
+      if (u.pathname !== '/api/assessments/builder') return false;
+      posts.push(route.request().postDataJSON());
+      await route.abort('failed');
+      return true;
+    });
+    await page.addScriptTag({ content: builder });
+    await page.locator('[data-section=review]').click();
+    page.on('dialog', (d) => d.accept());
+    await page.locator('#publish-definition').click();
+    await expect.poll(() => reads.length).toBe(1);
+    expect(reads).toEqual(['synthetic-definition']);
+    expect(posts).toHaveLength(1);
+    if (outcome === 'published') {
+      await expect(page.locator('#save-status')).toContainText('Publication confirmed');
+      await expect(page.locator('#publish-definition')).toBeDisabled();
+    } else if (outcome === 'draft') {
+      await expect(page.locator('#save-status')).toContainText('still a draft');
+      await expect(page.locator('#publish-definition')).toBeEnabled();
+    } else {
+      await expect(page.locator('#save-status')).toContainText('unknown');
+      await expect(page.locator('#publish-definition')).toBeDisabled();
+      await expect(page.locator('#save-definition')).toBeDisabled();
+    }
+    await screenshot(page, 'D03-reconciled-' + outcome);
+    expect(errors).toEqual([]);
+  });
+test('D03 stale save stops writes and offers authorized structured comparison', async ({
   page,
 }) => {
   const posts: any[] = [];
-  let committed = false;
   const errors = await boot(page, async (route) => {
-    if (!route.request().url().endsWith('/api/assessments/builder')) return false;
-    posts.push(route.request().postDataJSON());
-    if (!committed) {
-      committed = true;
-      await route.abort('failed');
-    } else
-      await route.fulfill({
-        status: 409,
-        json: { message: 'This revision is no longer a draft.' },
-      });
-    return true;
-  });
-  await page.addScriptTag({ content: builder });
-  await page.locator('[data-section=review]').click();
-  page.on('dialog', (d) => d.accept());
-  await page.locator('#publish-definition').click();
-  await expect(page.locator('#save-status')).toContainText(
-    'Publication failed. Your saved draft is preserved.',
-  );
-  await expect(page.locator('#publish-definition')).toBeEnabled();
-  await page.locator('#publish-definition').click();
-  await expect(page.locator('#save-status')).toContainText('no longer a draft');
-  expect(posts).toHaveLength(2);
-  expect(posts[1]).toEqual(posts[0]);
-  await screenshot(page, 'D03-unknown-publication');
-  expect(errors).toEqual([]);
-});
-test('D03 stale save preserves fields but does not stop another write', async ({ page }) => {
-  const posts: any[] = [];
-  const errors = await boot(page, async (route) => {
+    if (route.request().url().includes('/api/assessments/definitions?')) {
+      await route.fulfill({ json: { ...initial, title: 'Concurrent server title', version: 2 } });
+      return true;
+    }
     if (!route.request().url().endsWith('/api/assessments/builder')) return false;
     posts.push(route.request().postDataJSON());
     await route.fulfill({ status: 409, json: { message: 'Stale version' } });
@@ -164,15 +180,46 @@ test('D03 stale save preserves fields but does not stop another write', async ({
   await page.addScriptTag({ content: builder });
   await page.locator('#assessment-title').fill('Local conflict title');
   await page.locator('#save-definition').click();
-  await expect(page.locator('#builder-errors')).toContainText('copy them before reloading');
+  await expect(page.locator('#builder-errors')).toContainText('Writes are stopped');
   await expect(page.locator('#assessment-title')).toHaveValue('Local conflict title');
-  await page.locator('#save-definition').click();
-  await expect.poll(() => posts.length).toBe(2);
-  expect(posts[1].expected_version).toBe(posts[0].expected_version);
-  expect(posts[1].save_token).not.toBe(posts[0].save_token);
+  await expect(page.locator('#save-definition')).toBeDisabled();
+  await page.getByRole('button', { name: 'Compare with saved definition' }).click();
+  await page.getByText('Private structured comparison', { exact: true }).click();
+  await expect(page.locator('#definition-comparison')).toContainText('Concurrent server title');
+  await expect(page.locator('#definition-comparison')).toContainText('Local conflict title');
+  await expect(page.locator('#definition-comparison')).toContainText('B2');
+  expect(posts).toHaveLength(1);
   await screenshot(page, 'D03-conflict-retry');
   expect(errors).toEqual([]);
 });
+test('D03 unknown save replays exact operation before newer typing', async ({ page }) => {
+  const posts: any[] = [];
+  await boot(page, async (route) => {
+    if (!route.request().url().endsWith('/api/assessments/builder')) return false;
+    posts.push(route.request().postDataJSON());
+    if (posts.length === 1) await route.abort('failed');
+    else
+      await route.fulfill({
+        json: { id: initial.id, version: posts.length, status: 'draft', readiness: {} },
+      });
+    return true;
+  });
+  await page.addScriptTag({ content: builder });
+  await page.locator('#assessment-title').fill('First mutation');
+  await page.locator('#save-definition').click();
+  await expect(page.locator('#save-status')).toContainText('Save failed');
+  await page.locator('#assessment-title').fill('Newer typing');
+  await page.locator('#save-definition').click();
+  await expect(page.locator('#save-status')).toContainText('Previous changes saved');
+  expect(posts[1]).toEqual(posts[0]);
+  await expect(page.locator('#assessment-title')).toHaveValue('Newer typing');
+  await page.locator('#save-definition').click();
+  await expect(page.locator('#save-status')).toHaveText('Draft saved. Not published.');
+  expect(posts[2].expected_version).toBe(2);
+  expect(posts[2].title).toBe('Newer typing');
+  expect(posts[2].save_token).not.toBe(posts[0].save_token);
+});
+
 test('D06 existing published handoff targets exact ID; D08 saved copy lacks provenance', async ({
   page,
 }) => {
