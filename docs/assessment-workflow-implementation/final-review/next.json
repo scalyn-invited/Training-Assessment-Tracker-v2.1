@@ -1,0 +1,251 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\node_modules\\playwright\\cli.js",
+      "test",
+      "-c",
+      "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\final-review\\next.config.ts",
+      "--trace",
+      "on"
+    ],
+    "configFile": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\final-review\\next.config.ts",
+    "rootDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/final-review/next-tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/.runtime/final-review-next-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/final-review/next-tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\final-review-next-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\final-review\\next-tests",
+        "snapshotDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\final-review\\next-tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 90000,
+        "use": {
+          "headless": true,
+          "baseURL": "http://127.0.0.1:3275",
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\final-review\\next.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": {
+      "stdout": "pipe",
+      "stderr": "pipe",
+      "command": "node docs/assessment-workflow-implementation/final-review/next-server.cjs",
+      "cwd": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow",
+      "url": "http://127.0.0.1:3275/assessments",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "navigation.spec.ts",
+      "file": "navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3117,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T14:39:49.079Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\final-review-next-results\\navigation-D01-real-Next-s-98965-ean-SPA-navigation-proceeds\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5d2868f7d23420c27cca-afe37b048a80ae313ed5",
+          "file": "navigation.spec.ts",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "recovery.spec.ts",
+      "file": "recovery.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "D03 real Next 409 authorized recovery reloads newer draft only after discard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7023,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T14:39:52.861Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\final-review-next-results\\recovery-D03-real-Next-409-536d7-er-draft-only-after-discard\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef78f3da5c9c24fceacf-e983fbf01fb6210f6176",
+          "file": "recovery.spec.ts",
+          "line": 3,
+          "column": 48
+        },
+        {
+          "title": "D03 real Next lost-response authorized recovery reloads newer draft only after discard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4766,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T14:40:00.819Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\.runtime\\final-review-next-results\\recovery-D03-real-Next-los-c00a7-er-draft-only-after-discard\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef78f3da5c9c24fceacf-0764c124bf398fa41e92",
+          "file": "recovery.spec.ts",
+          "line": 3,
+          "column": 48
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T14:39:45.049Z",
+    "duration": 22342.904,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
