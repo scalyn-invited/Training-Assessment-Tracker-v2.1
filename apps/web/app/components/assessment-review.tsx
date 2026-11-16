@@ -40,7 +40,12 @@ type ReviewData = {
   rubricApplicable: boolean;
   objective: Result['objective'];
   appeal: { id: string; assigned: boolean; reason: string } | null;
-  approved: { approved_at: string; result: Result; criterionLabels: Record<string, string> } | null;
+  approved: {
+    attempt_id: string;
+    approved_at: string;
+    result: Result;
+    criterionLabels: Record<string, string>;
+  } | null;
   reviews: {
     id: string;
     kind: string;
@@ -191,7 +196,10 @@ export function AssessmentReview({
               <h2>Automatic multiple-choice score</h2>
               <p>
                 {data.objective.percentage}% - {data.objective.correct} of {data.objective.total}{' '}
-                correct. This uses the assigned revision. Human approval is still required.
+                correct.{' '}
+                {data.approved?.attempt_id === data.attemptId
+                  ? 'This automatic score uses the assigned revision. The result above was approved.'
+                  : 'This uses the assigned revision. Human approval is still required.'}
               </p>
             </section>
           )}
