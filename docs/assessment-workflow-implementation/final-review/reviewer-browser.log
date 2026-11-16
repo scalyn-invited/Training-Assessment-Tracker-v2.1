@@ -1,0 +1,108 @@
+
+Running 27 tests using 1 worker
+
+  ok  1 docs\assessment-workflow-implementation\final-review\browser-tests\d05.spec.ts:85:3 › current approved attempt keeps accurate copy and review controls (655ms)
+  ok  2 docs\assessment-workflow-implementation\final-review\browser-tests\d05.spec.ts:85:3 › pending attempt keeps accurate copy and review controls (536ms)
+  ok  3 docs\assessment-workflow-implementation\final-review\browser-tests\d05.spec.ts:85:3 › newer attempt with earlier approval keeps accurate copy and review controls (579ms)
+  ok  4 docs\assessment-workflow-implementation\final-review\browser-tests\learner-guard.spec.ts:34:1 › D01 learner shares pre-context guard and blocks unknown autosave outcome (1.8s)
+  ok  5 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:105:1 › D04 preview discloses scope and uses pinned section references across views (2.6s)
+  ok  6 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: published (2.1s)
+  ok  7 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: draft (2.0s)
+  ok  8 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: unavailable (1.7s)
+  ok  9 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: denied (1.9s)
+  ok 10 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:173:1 › D03 stale save stops writes and offers authorized structured comparison (2.5s)
+  ok 11 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:202:1 › D03 unknown save replays exact operation before newer typing (1.8s)
+  ok 12 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:230:1 › D06 exact published handoff and D08 durable copy provenance (3.1s)
+  ok 13 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:296:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (1.6s)
+  ok 14 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:328:1 › D01 same-document Back and Forward cancellation retains author work (1.7s)
+  ok 15 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:353:1 › D07 rejection requires separate member-safe feedback and transmits it separately (2.2s)
+  ok 16 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:391:1 › D07 learner sees returned guidance without a released grade or private reason (1.4s)
+  ok 17 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:438:1 › D04 reordered current references do not renumber historical pinned content (2.1s)
+  ok 18 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:460:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (4.2s)
+  ok 19 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:494:1 › D01 confirmed file evidence becomes clean without losing an unrelated review draft (4.0s)
+  ok 20 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:526:1 › D01 uncertain reviewer decision stops newer writes and retains fields (1.5s)
+  ok 21 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:562:3 › D01 switch canceled guard sends zero context mutations (2.4s)
+  ok 22 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:562:3 › D01 logout canceled guard sends zero context mutations (2.8s)
+  ok 23 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:654:3 › D03 recovery 409 retains complete local draft through denied/unavailable comparison and cancel (3.5s)
+  ok 24 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:654:3 › D03 recovery lost-response retains complete local draft through denied/unavailable comparison and cancel (3.5s)
+  ok 25 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:715:1 › QA-D03 changed server draft after publication conflict offers recovery comparison (1.7s)
+  x  26 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version 409 (6.9s)
+  x  27 docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version lost-response (6.4s)
+
+
+  1) docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version 409 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('#save-definition')
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" locator('#save-definition') with timeout 5000ms
+      - waiting for locator('#save-definition')
+        13 × locator resolved to <button type="button" class="primary" id="save-definition">Save draft</button>
+           - unexpected value "enabled"
+
+
+      755 |   await screenshot(page,`REVIEW-D03-newer-published-${outcome}`);
+      756 |   expect(posts).toBe(1);
+    > 757 |   await expect(page.locator('#save-definition')).toBeDisabled();
+          |                                                  ^
+      758 |   await expect(page.getByRole('button',{name:'Compare with saved definition'})).toBeVisible();
+      759 |   await expect(page.locator('#definition-provenance')).toContainText('edit version 1');
+      760 | });
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:757:50
+
+    Error Context: .runtime\final-review-browser-results\workflow-REVIEW-D03-newer--5f662-the-local-saved-version-409\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\final-review-browser-results\workflow-REVIEW-D03-newer--5f662-the-local-saved-version-409\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\final-review-browser-results\workflow-REVIEW-D03-newer--5f662-the-local-saved-version-409\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version lost-response 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('#save-definition')
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" locator('#save-definition') with timeout 5000ms
+      - waiting for locator('#save-definition')
+        14 × locator resolved to <button type="button" class="primary" id="save-definition">Save draft</button>
+           - unexpected value "enabled"
+
+
+      755 |   await screenshot(page,`REVIEW-D03-newer-published-${outcome}`);
+      756 |   expect(posts).toBe(1);
+    > 757 |   await expect(page.locator('#save-definition')).toBeDisabled();
+          |                                                  ^
+      758 |   await expect(page.getByRole('button',{name:'Compare with saved definition'})).toBeVisible();
+      759 |   await expect(page.locator('#definition-provenance')).toContainText('edit version 1');
+      760 | });
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:757:50
+
+    Error Context: .runtime\final-review-browser-results\workflow-REVIEW-D03-newer--e8459-saved-version-lost-response\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\final-review-browser-results\workflow-REVIEW-D03-newer--e8459-saved-version-lost-response\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\final-review-browser-results\workflow-REVIEW-D03-newer--e8459-saved-version-lost-response\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version 409 
+    docs\assessment-workflow-implementation\final-review\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version lost-response 
+  25 passed (1.4m)
+
+EXIT 1
