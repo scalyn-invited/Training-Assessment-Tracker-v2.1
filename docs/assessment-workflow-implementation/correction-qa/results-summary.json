@@ -1,0 +1,791 @@
+{
+  "candidate": "2652126fe7d69e280c4e3410efd3741d91f68bcd",
+  "domain": [
+    {
+      "tag": "targets",
+      "passed": 27,
+      "failed": 0,
+      "pending": 0,
+      "files": [
+        {
+          "file": "learning-kpis.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "restricts current authority and preserves comparability and future effective versions",
+              "status": "passed",
+              "duration": 5682.188399999999
+            },
+            {
+              "title": "keeps insufficient samples nonnumeric and records encrypted verified evidence with immutable lineage",
+              "status": "passed",
+              "duration": 2532.309699999998
+            },
+            {
+              "title": "bounds evidence and numeric input and evaluates lower and band targets without rewriting history",
+              "status": "passed",
+              "duration": 6127.233900000003
+            },
+            {
+              "title": "serializes competing revisions and rechecks revoked coordinator authority",
+              "status": "passed",
+              "duration": 2111.4179000000004
+            }
+          ]
+        },
+        {
+          "file": "learning-plans.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "requires complete current confirmed inputs and preserves dates against request tampering",
+              "status": "passed",
+              "duration": 8549.891099999999
+            },
+            {
+              "title": "requires bounded content, criterion weights, source KPIs and the full daily budget",
+              "status": "passed",
+              "duration": 12146.622800000001
+            },
+            {
+              "title": "approves exact content, preserves approved history and atomically replaces reservations",
+              "status": "passed",
+              "duration": 13680.156899999998
+            },
+            {
+              "title": "invalidates pending review on edit and blocks a second overlapping approval",
+              "status": "passed",
+              "duration": 17943.225099999996
+            },
+            {
+              "title": "requires an explicit refreshed draft when inputs change and retains earlier lessons by position",
+              "status": "passed",
+              "duration": 9375.241799999996
+            },
+            {
+              "title": "rechecks calendar revisions and current authority before approving",
+              "status": "passed",
+              "duration": 9987.243599999994
+            }
+          ]
+        },
+        {
+          "file": "learning-support.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "selects N+2, keeps mock output provisional and requires exact current human approval",
+              "status": "passed",
+              "duration": 4714.179
+            },
+            {
+              "title": "atomically invalidates pending proposals and flags approved support after a source regrade",
+              "status": "passed",
+              "duration": 4202.623
+            },
+            {
+              "title": "resumption invalidates a pending proposal and preserves approved history",
+              "status": "passed",
+              "duration": 3276.2798999999977
+            },
+            {
+              "title": "keeps KPI support provisional, pinned to immutable snapshots and private to coordinators",
+              "status": "passed",
+              "duration": 1949.9410999999964
+            },
+            {
+              "title": "retains ambiguous reservations without a usable suggestion",
+              "status": "passed",
+              "duration": 1962.6164999999964
+            },
+            {
+              "title": "checks the exact freeze boundary and refuses a target started during provider work",
+              "status": "passed",
+              "duration": 2196.536899999999
+            },
+            {
+              "title": "returns final support without a provider call when no future block is eligible",
+              "status": "passed",
+              "duration": 1101.0161000000007
+            },
+            {
+              "title": "rechecks revoked authority after provider work and keeps the known charge without applying output",
+              "status": "passed",
+              "duration": 1296.123599999999
+            }
+          ]
+        },
+        {
+          "file": "programme-generation.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "reserves all four blocks, publishes only the complete draft and preserves approved history",
+              "status": "passed",
+              "duration": 16870.843699999998
+            },
+            {
+              "title": "bounds schema repair per block and never publishes a partial failed run",
+              "status": "passed",
+              "duration": 7230.5249
+            },
+            {
+              "title": "rechecks changed baseline after provider I/O and retains all human content",
+              "status": "passed",
+              "duration": 6070.4637
+            },
+            {
+              "title": "retains ambiguous reservation, cancels sibling blocks and requires reconciliation",
+              "status": "passed",
+              "duration": 9054.428700000004
+            },
+            {
+              "title": "rejects members, another client, stale inputs and exhausted budget before dispatch",
+              "status": "passed",
+              "duration": 5971.941599999998
+            },
+            {
+              "title": "rolls back a capacity-conflicted final draft but retains known usage charges",
+              "status": "passed",
+              "duration": 15406.853600000002
+            },
+            {
+              "title": "recovers sibling jobs deferred while another block is performing external work",
+              "status": "passed",
+              "duration": 6669.496400000004
+            },
+            {
+              "title": "keeps archived generation metadata readable after temporary input retention",
+              "status": "passed",
+              "duration": 7240.294099999999
+            },
+            {
+              "title": "stops queued generation when authority is revoked",
+              "status": "passed",
+              "duration": 4604.073499999999
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "assessment",
+      "passed": 40,
+      "failed": 0,
+      "pending": 0,
+      "files": [
+        {
+          "file": "assessment-assignments.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "rejects unpublished revisions and missing independent sensitive authority",
+              "status": "passed",
+              "duration": 666.7574000000004
+            },
+            {
+              "title": "assigns one pinned revision idempotently and exposes only scoped assignment metadata",
+              "status": "passed",
+              "duration": 1371.0714000000007
+            },
+            {
+              "title": "pins team rules, includes future eligible records and does not replace individual assignments",
+              "status": "passed",
+              "duration": 2153.5118
+            },
+            {
+              "title": "QA D08 published-copy creation preserves old individual and team pins",
+              "status": "passed",
+              "duration": 257.3235000000004
+            },
+            {
+              "title": "stops future assignments without deleting work and resumes only explicitly",
+              "status": "passed",
+              "duration": 1330.848899999999
+            },
+            {
+              "title": "blocks future processing when the rule creator loses current authority",
+              "status": "passed",
+              "duration": 602.2178000000004
+            }
+          ]
+        },
+        {
+          "file": "assessment-content.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "source assessment content rules permits incomplete drafts but blocks publication until ready",
+              "status": "passed",
+              "duration": 6.211000000000013
+            },
+            {
+              "title": "source assessment content rules removes executable rich text and remote or data images while retaining private media",
+              "status": "passed",
+              "duration": 4.016600000000153
+            },
+            {
+              "title": "source assessment content rules preserves stable references while reordering sections and rejects orphaned questions",
+              "status": "passed",
+              "duration": 1.8830000000000382
+            },
+            {
+              "title": "source assessment content rules pins choice keys and validates scoring weights",
+              "status": "passed",
+              "duration": 1.3829000000000633
+            },
+            {
+              "title": "source assessment content rules validates matrices against the assigned revision and does not treat notes as ratings",
+              "status": "passed",
+              "duration": 1.5237999999999374
+            },
+            {
+              "title": "source assessment content rules rejects duplicate and blank rating headings at publication",
+              "status": "passed",
+              "duration": 0.33609999999998763
+            }
+          ]
+        },
+        {
+          "file": "assessment-definitions.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "assessment definitions and publication requires coordinator membership rather than platform authority",
+              "status": "passed",
+              "duration": 138.40790000000015
+            },
+            {
+              "title": "assessment definitions and publication encrypts keys, replays identical saves and rejects changed tokens or stale versions",
+              "status": "passed",
+              "duration": 326.4260999999997
+            },
+            {
+              "title": "assessment definitions and publication publishes immutable revisions and edits by creating a new family revision",
+              "status": "passed",
+              "duration": 434.2581999999993
+            },
+            {
+              "title": "assessment definitions and publication QA D03 exact publication retry conflicts but exact readback confirms the same published record",
+              "status": "passed",
+              "duration": 247.10249999999996
+            },
+            {
+              "title": "assessment definitions and publication blocks incomplete publication and foreign or quarantined image references",
+              "status": "passed",
+              "duration": 404.4508999999998
+            }
+          ]
+        },
+        {
+          "file": "assessment-responses.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "limits editing to the member and never projects keys or rubric to the member",
+              "status": "passed",
+              "duration": 1603.9876999999997
+            },
+            {
+              "title": "enforces section order and required matrix gates while retaining encrypted draft progress",
+              "status": "passed",
+              "duration": 2391.4194000000007
+            },
+            {
+              "title": "accepts only accessible clean evidence from the same enrolment",
+              "status": "passed",
+              "duration": 1191.8030999999992
+            },
+            {
+              "title": "does not permit other members to replay a submission reference",
+              "status": "passed",
+              "duration": 623.9814999999999
+            },
+            {
+              "title": "preserves unsectioned multiple-choice responses and allows an unanswered choice",
+              "status": "passed",
+              "duration": 761.9567999999999
+            }
+          ]
+        },
+        {
+          "file": "assessment-reviews.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "QA D02 characterizes no-team appeal freeze and unavailable alternate routing",
+              "status": "passed",
+              "duration": 2131.8334999999997
+            },
+            {
+              "title": "D07 separately authored return feedback is safe, encrypted and bound to the immutable attempt",
+              "status": "passed",
+              "duration": 1609.7327999999998
+            },
+            {
+              "title": "D07 rejects empty explicitly supplied public feedback without a decision",
+              "status": "passed",
+              "duration": 881.4282000000003
+            },
+            {
+              "title": "QA D07 legacy rejection omits public feedback without leaking private rationale",
+              "status": "passed",
+              "duration": 1305.4951
+            },
+            {
+              "title": "requires reviewer authority, pins the latest version and projects approved results only",
+              "status": "passed",
+              "duration": 1720.5488999999998
+            },
+            {
+              "title": "requires explicit current file confirmation and rechecks bytes at decision time",
+              "status": "passed",
+              "duration": 2809.2916000000005
+            },
+            {
+              "title": "allows rejection and resubmission but never reviews a superseded attempt",
+              "status": "passed",
+              "duration": 1920.977700000003
+            },
+            {
+              "title": "routes case-only appeals and closes alternate record/file access immediately on resolution",
+              "status": "passed",
+              "duration": 3045.935099999999
+            },
+            {
+              "title": "binds appeal access to the exact role grant without revival",
+              "status": "passed",
+              "duration": 1484.9038
+            },
+            {
+              "title": "keeps routing metadata separate from sensitive assessment details",
+              "status": "passed",
+              "duration": 1025.1494999999995
+            },
+            {
+              "title": "blocks decisions during queued analysis and rejects a provisional source from another attempt",
+              "status": "passed",
+              "duration": 1041.601200000001
+            }
+          ]
+        },
+        {
+          "file": "assessment-scoring.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "uses pinned weights and category denominators while keeping objective scoring separate",
+              "status": "passed",
+              "duration": 8.397100000000023
+            },
+            {
+              "title": "propagates insufficient evidence without inventing zero scores",
+              "status": "passed",
+              "duration": 0.6025000000000773
+            },
+            {
+              "title": "rejects wrong revisions, missing or duplicated criteria and unconfirmed evidence",
+              "status": "passed",
+              "duration": 1.997700000000009
+            },
+            {
+              "title": "bounds feedback and scores and accepts numeric form values without accepting arbitrary coercion",
+              "status": "passed",
+              "duration": 3.900099999999952
+            },
+            {
+              "title": "compares the unrounded total to threshold and preserves a missing threshold",
+              "status": "passed",
+              "duration": 0.4149999999999636
+            },
+            {
+              "title": "does not invent rubric grades for objective-only or reflective assessments",
+              "status": "passed",
+              "duration": 0.400600000000054
+            },
+            {
+              "title": "counts feedback limits in Unicode characters like the source",
+              "status": "passed",
+              "duration": 1.7518999999999778
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "authority",
+      "passed": 24,
+      "failed": 0,
+      "pending": 0,
+      "files": [
+        {
+          "file": "access-membership.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "bounds each fresh membership decision to one database round trip",
+              "status": "passed",
+              "duration": 41.128099999999904
+            },
+            {
+              "title": "preserves every current identity, client, environment and membership gate without caching",
+              "status": "passed",
+              "duration": 275.4506000000001
+            }
+          ]
+        },
+        {
+          "file": "administration-version.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "binds team, role and departure changes to the displayed account version without partial writes",
+              "status": "passed",
+              "duration": 839.3354999999992
+            },
+            {
+              "title": "rejects imported membership edits and self-deactivation at the domain boundary",
+              "status": "passed",
+              "duration": 424.41939999999977
+            }
+          ]
+        },
+        {
+          "file": "approved-feed.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "filters history before pagination and retains exact approved facts and provenance",
+              "status": "passed",
+              "duration": 813.5848999999998
+            },
+            {
+              "title": "excludes local-only records and rechecks current client, membership, version and freshness",
+              "status": "passed",
+              "duration": 363.0688
+            },
+            {
+              "title": "resolves immutable synthetic identities and excludes their training from external summaries",
+              "status": "passed",
+              "duration": 261.2953000000007
+            }
+          ]
+        },
+        {
+          "file": "enrolments.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "requires selected-client administration and valid member/team authority",
+              "status": "passed",
+              "duration": 859.1005000000005
+            },
+            {
+              "title": "creates onboarding records without granting sensitive access or training access to administrators",
+              "status": "passed",
+              "duration": 666.2709999999997
+            },
+            {
+              "title": "requires explicit replacement of a different primary allocation",
+              "status": "passed",
+              "duration": 137.0581999999995
+            },
+            {
+              "title": "combines sensitive grants with primary and historical team authority for management",
+              "status": "passed",
+              "duration": 376.58489999999983
+            },
+            {
+              "title": "does not restore historical teamless records through a replacement allocation",
+              "status": "passed",
+              "duration": 533.1778999999997
+            }
+          ]
+        },
+        {
+          "file": "historical-authority.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "matches historical team and allocation boundaries used by source application records",
+              "status": "passed",
+              "duration": 2450.4717
+            }
+          ]
+        },
+        {
+          "file": "tenancy.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "effective client and historical team authority keeps client choices scoped and rejects cross-client selection",
+              "status": "passed",
+              "duration": 307.8894
+            },
+            {
+              "title": "effective client and historical team authority scopes administration lists to the selected authorized client",
+              "status": "passed",
+              "duration": 892.8902999999996
+            },
+            {
+              "title": "effective client and historical team authority excludes inactive people from directory rows, counts and training candidates without changing membership history",
+              "status": "passed",
+              "duration": 345.46129999999994
+            },
+            {
+              "title": "effective client and historical team authority does not infer platform authority from the legacy user flag",
+              "status": "passed",
+              "duration": 260.4345000000003
+            },
+            {
+              "title": "effective client and historical team authority permits own records and allocated review but not administrative raw access",
+              "status": "passed",
+              "duration": 129.09699999999975
+            },
+            {
+              "title": "effective client and historical team authority denies cross-client roles and protects client-admin grants",
+              "status": "passed",
+              "duration": 258.8644999999997
+            },
+            {
+              "title": "effective client and historical team authority team removal revokes sessions and rejoining does not restore historical review",
+              "status": "passed",
+              "duration": 472.1100000000006
+            },
+            {
+              "title": "effective client and historical team authority ending a coordinator role ends allocations without reviving them on regrant",
+              "status": "passed",
+              "duration": 196.82639999999992
+            },
+            {
+              "title": "effective client and historical team authority requires explicit allocation replacement and rejects self-review",
+              "status": "passed",
+              "duration": 255.76380000000063
+            },
+            {
+              "title": "effective client and historical team authority denies stale imported permissions even with a valid session",
+              "status": "passed",
+              "duration": 374.59699999999975
+            },
+            {
+              "title": "effective client and historical team authority filters tenant role and team rows before returning results",
+              "status": "passed",
+              "duration": 18.373499999999694
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "affected",
+      "passed": 27,
+      "failed": 0,
+      "pending": 0,
+      "files": [
+        {
+          "file": "delivery.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "activates only an exact approved enrolment and atomically pins blocks, measures and notice",
+              "status": "passed",
+              "duration": 11192.987799999999
+            },
+            {
+              "title": "previews future lessons and publishes immutable quizzes without exposing answer keys",
+              "status": "passed",
+              "duration": 1812.5437000000002
+            },
+            {
+              "title": "requires reasoned early start and protects member drafts from stale writes and coordinator access",
+              "status": "passed",
+              "duration": 2536.5045999999984
+            },
+            {
+              "title": "pins zero-index answers and rubrics into idempotent immutable attempts",
+              "status": "passed",
+              "duration": 1827.940200000001
+            },
+            {
+              "title": "rechecks evidence scan state at submission and rejects evidence from another enrolment",
+              "status": "passed",
+              "duration": 743.2151999999987
+            },
+            {
+              "title": "rejects empty work, wrong lesson and access after sensitive grant revocation",
+              "status": "passed",
+              "duration": 1093.046400000003
+            }
+          ]
+        },
+        {
+          "file": "learning-grading.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "requires current reviewer authority, exact version and sufficient evidence for approval",
+              "status": "passed",
+              "duration": 4838.9928
+            },
+            {
+              "title": "preserves approved feedback while a later human review requests changes, then replaces evidence on regrade",
+              "status": "passed",
+              "duration": 4800.2163
+            },
+            {
+              "title": "records only comparable approved grades with immutable snapshot lineage and approved feed events",
+              "status": "passed",
+              "duration": 3648.182700000005
+            },
+            {
+              "title": "requires an independent role-bound alternate during an appeal and closes case access when upheld",
+              "status": "passed",
+              "duration": 3562.775800000003
+            },
+            {
+              "title": "does not revive alternate authority when a qualifying role is revoked and replaced",
+              "status": "passed",
+              "duration": 1959.908399999993
+            }
+          ]
+        },
+        {
+          "file": "learning-lifecycle.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "requires current coordinator and version; pausing retains work and blocks new drafts",
+              "status": "passed",
+              "duration": 1778.1569000000018
+            },
+            {
+              "title": "previews explicit rescheduling without mutation; preserves started history on resumption",
+              "status": "passed",
+              "duration": 2440.9694000000018
+            },
+            {
+              "title": "rejects changed calendars and capacity without partially applying a preview",
+              "status": "passed",
+              "duration": 3100.578999999998
+            },
+            {
+              "title": "completion rejects missing required approved evidence and rolls back all effects",
+              "status": "passed",
+              "duration": 931.6551
+            },
+            {
+              "title": "requires sufficient on-target KPIs and completes atomically only after all evidence is approved",
+              "status": "passed",
+              "duration": 8354.760300000002
+            }
+          ]
+        },
+        {
+          "file": "mock-identity.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "synthetic delegated identity contract accepts exact delegated claims and denies disabled or production harnesses",
+              "status": "passed",
+              "duration": 9.97890000000001
+            },
+            {
+              "title": "synthetic delegated identity contract rejects tampering, malformed signatures, oversize credentials and unsafe claim combinations",
+              "status": "passed",
+              "duration": 2.863800000000026
+            },
+            {
+              "title": "synthetic delegated identity contract keeps missing scopes, revoked identity and stale permissions distinct",
+              "status": "passed",
+              "duration": 1.7691999999999553
+            }
+          ]
+        },
+        {
+          "file": "onboarding.test.ts",
+          "status": "passed",
+          "tests": [
+            {
+              "title": "keeps partial drafts encrypted, immutable and exact-versioned",
+              "status": "passed",
+              "duration": 1001.6493999999998
+            },
+            {
+              "title": "requires independent coordinator confirmation and clears it on ordinary edits",
+              "status": "passed",
+              "duration": 2877.6791000000003
+            },
+            {
+              "title": "validates source durations, limits, nested metadata and complete inputs",
+              "status": "passed",
+              "duration": 182.39050000000043
+            },
+            {
+              "title": "confirms exact schedule and calendar versions without changing enrolment readiness",
+              "status": "passed",
+              "duration": 2938.6326
+            },
+            {
+              "title": "shares member capacity between programmes and rejects conflicting calendar changes",
+              "status": "passed",
+              "duration": 2367.571900000001
+            },
+            {
+              "title": "requires every complete step and a trusted assessment confirmation before plan creation",
+              "status": "passed",
+              "duration": 268.59410000000025
+            },
+            {
+              "title": "uses the same calendar for a second enrolment without leaking calendar audit metadata",
+              "status": "passed",
+              "duration": 777.8464999999997
+            },
+            {
+              "title": "revocation and active training block later mutations without losing history",
+              "status": "passed",
+              "duration": 537.6539000000012
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "browser": [
+    {
+      "mode": "browser",
+      "stats": {
+        "startTime": "2026-11-16T14:12:28.165Z",
+        "duration": 137471.68800000002,
+        "expected": 25,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "mode": "next",
+      "stats": {
+        "startTime": "2026-11-16T14:15:52.684Z",
+        "duration": 21461.573,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "preservation": {
+    "headUnchanged": true,
+    "productionDiff": "",
+    "originalEvidenceDiff": "",
+    "upstreamEvidenceDiff": "",
+    "status": "?? docs/assessment-workflow-implementation/D05-tooling-blocker.md\n?? docs/assessment-workflow-implementation/D05-tooling-recovery.md\n?? docs/assessment-workflow-implementation/QA-prerequisites-evidence.zip\n?? docs/assessment-workflow-implementation/correction-qa/\n?? docs/assessment-workflow-implementation/implementation-evidence.zip\n?? docs/assessment-workflow-implementation/independent-qa-evidence.zip\n?? docs/assessment-workflow-implementation/qa-screenshots/D01-logout-canceled-before-post.png\n?? docs/assessment-workflow-implementation/qa-screenshots/D01-switch-canceled-before-post.png\n?? docs/assessment-workflow-implementation/screenshots/D05-approved-desktop.png\n?? docs/assessment-workflow-implementation/screenshots/D05-approved-mobile.png\n?? docs/assessment-workflow-implementation/tooling-fixture/\n?? docs/assessment-workflow-implementation/tooling-lifecycle-probe.cjs\n?? docs/assessment-workflow-implementation/tooling-native-probe.cjs\n?? docs/assessment-workflow-implementation/tooling-ownership-latest.json\n?? docs/assessment-workflow-implementation/tooling-ownership.py\n?? docs/assessment-workflow-implementation/tooling-process-before.json\n?? docs/assessment-workflow-implementation/tooling-process-probe.py\n?? docs/assessment-workflow-implementation/tooling-scope-evidence.py\n?? docs/assessment-workflow-implementation/tooling-smoke.cjs\n?? docs/assessment-workflow-implementation/tooling-smoke.ts\n?? docs/assessment-workflow-implementation/tooling-timeout-probe.cjs\n",
+    "upstreamUntrackedStillPresent": true
+  },
+  "domainTotals": {
+    "passed": 118,
+    "failed": 0,
+    "pending": 0,
+    "files": 21
+  }
+}
