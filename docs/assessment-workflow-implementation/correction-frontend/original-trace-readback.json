@@ -1,0 +1,22 @@
+[
+  {
+    "trace": "docs\\assessment-workflow-implementation\\independent-qa\\traces\\next-first\\navigation-D01-real-Next-s-98965-ean-SPA-navigation-proceeds\\trace.zip",
+    "rsc": [
+      {
+        "url": "http://127.0.0.1:3275/assessments/definitions/synthetic-definition?_rsc=hwGi8VF06EQnBrsE",
+        "status": -1,
+        "time": -1
+      }
+    ]
+  },
+  {
+    "trace": "docs\\assessment-workflow-implementation\\independent-qa\\traces\\next-serialized\\navigation-D01-real-Next-s-98965-ean-SPA-navigation-proceeds\\trace.zip",
+    "rsc": [
+      {
+        "url": "http://127.0.0.1:3275/assessments/definitions/synthetic-definition?_rsc=hwGi8VF06EQnBrsE",
+        "status": -1,
+        "time": -1
+      }
+    ]
+  }
+]
