@@ -33,6 +33,7 @@ test('fresh setup, password login and optional authenticator recovery', async ({
   await page.getByLabel('Password', { exact: true }).fill(password);
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Platform overview', exact: true })).toBeVisible();
+  await page.locator('summary').filter({ hasText: 'Workspace' }).click();
   await page.getByRole('link', { name: 'Choose your client', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Choose your client' })).toBeVisible();
   await page.setViewportSize({ width: 375, height: 812 });
@@ -141,6 +142,7 @@ test('fresh setup, password login and optional authenticator recovery', async ({
     const data = await response.json();
     await route.fulfill({ response, json: { ...data, accountMailAvailable: true } });
   });
+  await page.locator('summary').filter({ hasText: 'Workspace' }).click();
   await page.getByRole('link', { name: 'Manage account access', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Accounts', exact: true })).toBeVisible();
   const createAccount = page;
