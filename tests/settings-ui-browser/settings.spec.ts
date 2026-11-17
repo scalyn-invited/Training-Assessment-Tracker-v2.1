@@ -133,7 +133,9 @@ test('Settings preserves versioned branding, previews, status and permissions on
   await name.fill('Stale draft');
   await reason.fill('Attempt stale browser update');
   await save.click();
-  await expect(page.getByRole('alert')).toBeVisible();
+  await expect(page.getByRole('main').getByRole('alert')).toContainText(
+    'Branding changed while you were editing',
+  );
   await expect(name).toHaveValue('Stale draft');
   expect((await (await request.get('/api/branding')).json()).displayName).toBe('Concurrent edit');
   await page.getByRole('button', { name: 'Reload appearance', exact: true }).click();
@@ -157,7 +159,7 @@ test('Settings preserves versioned branding, previews, status and permissions on
   });
   await reason.fill('Reject invalid logo contents');
   await save.click();
-  await expect(page.getByRole('alert')).toBeVisible();
+  await expect(page.getByRole('main').getByRole('alert')).toBeVisible();
   expect((await (await request.get('/api/branding')).json()).customLogo).toBe(false);
   await form.getByRole('button', { name: 'Discard changes' }).click();
   await expect(reason).toHaveValue('');

@@ -37,3 +37,7 @@ Fresh ephemeral PGlite/storage on ports 3110/3111/55432, isolated from the saved
 Initial browser checks exposed exact field-label matching and inherited global input spacing; corrected with explicit accessible labels and scoped selectors. Status values are separate from decorative dots for reliable text access. Final desktop/mobile screenshots were inspected and copied to `screenshots/settings/`.
 
 The legacy baseline source folder previously recorded as missing remains unavailable locally; no baseline qualification or full-port acceptance is claimed. PR remains for Bernie to review and merge.
+
+## CI assertion correction
+
+The first push UI run exposed an ambiguous alert locator: Next.js's transient route announcer could match alongside the expected branding error. The application correctly rejected the stale save. Settings assertions now target alerts inside the main content and verify the conflict message explicitly; the corruption check uses the same scope. No application behavior changed.
