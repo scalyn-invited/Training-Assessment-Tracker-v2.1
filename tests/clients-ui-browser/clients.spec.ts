@@ -97,11 +97,8 @@ test('Clients presentation preserves real management, workspace selection and re
   await page.setViewportSize({ width: 390, height: 1458 });
   await accessibility();
   await page.screenshot({ path: `${screenshotDir}/clients-dark-mobile.png`, fullPage: true });
-  await page
-    .getByRole('navigation', { name: 'Mobile platform navigation' })
-    .getByRole('button', { name: 'Settings' })
-    .click();
-  const settings = page.getByRole('dialog', { name: 'Settings', exact: true });
+  await page.getByRole('button', { name: 'Personal settings' }).click();
+  const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
   await settings.locator('summary').filter({ hasText: 'Theme' }).click();
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await settings.getByRole('button', { name: 'Close', exact: true }).click();
