@@ -91,7 +91,8 @@ test('fresh setup, password login and optional authenticator recovery', async ({
   await page.screenshot({ path: 'output/playwright/directory-mobile.png', fullPage: true });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: 'output/playwright/directory-desktop.png', fullPage: true });
-  await page.getByRole('link', { name: 'Back to workspace', exact: true }).click();
+  await page.locator('summary').filter({ hasText: 'Workspace' }).click();
+  await page.getByRole('link', { name: 'Learning workspace', exact: true }).click();
 
   const current = await (await page.request.get('/api/auth/context')).json();
   const wrongOrigin = await page.request.post('/api/auth/logout', {
