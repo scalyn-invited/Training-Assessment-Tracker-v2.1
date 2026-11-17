@@ -1,0 +1,40 @@
+{
+  "schema_version": 2, "diagram_type": "workflow",
+  "meta": {
+    "title": "Active training · submissions, recovery and completion",
+    "locale": "en", "quality_profile": "showcase",
+    "output": "docs/archify/training.html",
+    "repository": {"url": "https://github.com/scalyn-invited/Training-Assessment-Tracker-v2.1.git", "revision": "40df79d3e3d71c6d357feb176053b7d225770000", "link_mode": "local-only"}
+  },
+  "lanes": [
+    {"id": "member", "label": "Member · active work"},
+    {"id": "review", "label": "Coordinator"},
+    {"id": "completion", "label": "Coordinator · outcome"}
+  ],
+  "nodes": [
+    {"id": "work", "lane": "member", "col": 0, "type": "frontend", "label": "Work on lesson", "sublabel": "Save current draft", "width": 182, "sources": [{"path": "packages/domain/src/delivery.ts", "line": 327, "end_line": 390}]},
+    {"id": "submit", "lane": "member", "col": 1, "type": "security", "label": "Submit attempt", "sublabel": "Saved; clean evidence", "width": 182, "sources": [{"path": "packages/domain/src/delivery.ts", "line": 467, "end_line": 579}]},
+    {"id": "review", "lane": "review", "col": 1, "type": "security", "label": "Review evidence", "sublabel": "Manual or provisional", "width": 182, "sources": [{"path": "packages/domain/src/learning-grading.ts", "line": 319, "end_line": 413}, {"path": "packages/domain/src/learning-grading.ts", "line": 440, "end_line": 490}]},
+    {"id": "revise", "lane": "review", "col": 0, "type": "frontend", "label": "Changes requested", "sublabel": "No prior approved grade", "width": 182, "sources": [{"path": "packages/domain/src/learning-grading.ts", "line": 377, "end_line": 389}, {"path": "packages/domain/src/delivery.ts", "line": 513, "end_line": 525}]},
+    {"id": "approved", "lane": "review", "col": 2, "type": "frontend", "label": "Approved grade", "sublabel": "Updates KPI evidence", "width": 182, "sources": [{"path": "packages/domain/src/learning-grading.ts", "line": 377, "end_line": 412}]},
+    {"id": "check", "lane": "completion", "col": 2, "type": "security", "label": "Completion gates", "sublabel": "All lessons + KPI targets", "width": 182, "sources": [{"path": "packages/domain/src/learning-lifecycle.ts", "line": 288, "end_line": 338}]},
+    {"id": "ongoing", "lane": "completion", "col": 1, "type": "frontend", "label": "Continue training", "sublabel": "Remaining work / support", "width": 182, "sources": [{"path": "packages/domain/src/learning-lifecycle.ts", "line": 301, "end_line": 338}]},
+    {"id": "done", "lane": "completion", "col": 3, "type": "security", "label": "Mark completed", "sublabel": "Explicit action + reason", "width": 182, "sources": [{"path": "packages/domain/src/learning-lifecycle.ts", "line": 288, "end_line": 355}]}
+  ],
+  "edges": [
+    {"from": "work", "to": "submit", "label": "valid + saved"},
+    {"from": "submit", "to": "review", "label": "receipt", "fromSide": "bottom", "toSide": "top"},
+    {"from": "review", "to": "revise", "label": "request edits", "role": "branch"},
+    {"from": "revise", "to": "work", "label": "new attempt", "role": "return", "variant": "dashed", "fromSide": "top", "toSide": "bottom"},
+    {"from": "review", "to": "approved", "label": "approve"},
+    {"from": "approved", "to": "check", "label": "check readiness", "fromSide": "bottom", "toSide": "top"},
+    {"from": "check", "to": "ongoing", "label": "not met", "role": "branch"},
+    {"from": "ongoing", "to": "work", "label": "eligible lesson", "role": "return", "variant": "dashed"},
+    {"from": "check", "to": "done", "label": "all met"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "Learning is not automatic approval", "items": ["The workflow starts only after explicit activation. Future lessons remain preview-only unless a coordinator explicitly starts the block early.", "Manual review is supported; provider analysis is optional and provisional. Insufficient evidence cannot become an official numeric grade.", "A changes-requested decision does not erase an earlier approved grade. New attempts require an eligible prior status."]},
+    {"dot": "rose", "title": "Appeals and support are separate branches", "items": ["Learning appeals concern an approved grade: Member requests, Client Admin routes, alternate reviewer resolves. Do not reuse initial-assessment appeal eligibility.", "Support/adaptation requires approved source evidence. N+2 proposals can affect only eligible future blocks, before freeze and without started/submitted work.", "A human must explicitly approve a fresh adaptation. See HANDOFF.md for evidence and constraints."]},
+    {"dot": "amber", "title": "Lifecycle recovery · see lifecycle.html", "items": ["The optional active → pause → preview → resume → active branch is drawn separately in lifecycle.html for readability.", "If the preview is stale or capacity fails, stay paused and create a new preview; preserve the user's reason.", "Completion is not a timer: every required lesson needs approved evidence and every current KPI must be on target, with at least three targets."]}
+  ]
+}
