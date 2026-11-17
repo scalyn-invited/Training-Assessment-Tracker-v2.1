@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { ThemePicker, type Brand } from './brand-header';
 import { OverviewIcon } from './overview-icon';
 import { ClientsIcon } from './clients-icon';
+import { PeopleIcon } from './people-icon';
 import { OverviewDialog } from './overview-dialog';
 import styles from '../platform/overview.module.css';
 
 type Props = {
-  activePage?: 'overview' | 'clients';
+  activePage?: 'overview' | 'clients' | 'people';
   children: ReactNode;
   name: string;
   environment?: string;
@@ -66,15 +67,15 @@ export function OverviewShell({
           <span>Clients</span>
         </Link>
         <Link
-          href="/platform/clients#client-account-access"
+          href="/platform/people"
           aria-label="People & access"
-          onClick={() => {
-            const section = document.getElementById('client-account-access');
-            const disclosure = section?.closest('details');
-            if (disclosure) disclosure.open = true;
-          }}
+          aria-current={activePage === 'people' ? 'page' : undefined}
         >
-          <OverviewIcon name="people" />
+          {activePage === 'people' ? (
+            <PeopleIcon name="people-active" />
+          ) : (
+            <OverviewIcon name="people" />
+          )}
           <span>{mobile ? 'People' : 'People & access'}</span>
         </Link>
         <Link href="/platform/audit" aria-label="Audit log">

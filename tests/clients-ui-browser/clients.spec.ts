@@ -196,8 +196,10 @@ test('Clients presentation preserves real management, workspace selection and re
     .getByRole('navigation', { name: 'Mobile platform navigation' })
     .getByRole('link', { name: 'People & access' })
     .click();
-  await expect(page.getByRole('region', { name: 'Client account access' })).toBeVisible();
-  await expect(page).toHaveURL(/#client-account-access$/);
+  await expect(page).toHaveURL(/\/platform\/people$/);
+  await expect(page.getByRole('heading', { name: 'People & access' })).toBeVisible();
+  // Existing saved links into client access remain supported.
+  await page.goto('/platform/clients#client-account-access');
   await page.reload();
   await expect(page.getByRole('region', { name: 'Client account access' })).toBeVisible();
 

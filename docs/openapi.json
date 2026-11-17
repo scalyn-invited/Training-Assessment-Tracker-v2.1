@@ -8245,8 +8245,17 @@
     "/platform/client-accounts": {
       "get": {
         "summary": "Search eligible accounts and their current client memberships",
-        "description": "Client choices are independent of the client directory page. defaultClientId is populated only for exactly one active available membership. Returns permission_version for explicit account actions.",
+        "description": "Client choices are independent of the client directory page. defaultClientId is populated only for exactly one active available membership. Returns permission_version for explicit account actions, global_admin_id for the current platform grant, and account_active for current account eligibility. view=admins filters current Global Admin grant holders, including inactive holders; view=all retains existing account eligibility. Both views use 20 rows per page and return search-independent accountTotal, adminTotal and activeAdmins counts. Existing mutation guards remain authoritative.",
         "parameters": [
+          {
+            "name": "view",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["all", "admins"],
+              "default": "all"
+            }
+          },
           {
             "name": "search",
             "in": "query",
