@@ -1,4 +1,4 @@
-/* Overview-only tokens and layout: other routes retain the existing workspace shell. */
+/* Shared Overview/Clients tokens and layout; other routes retain the existing shell. */
 .shell {
   --ov-sidebar: var(--surface);
   --ov-active: var(--hover);

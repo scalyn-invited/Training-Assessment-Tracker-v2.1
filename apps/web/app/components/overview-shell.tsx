@@ -3,10 +3,12 @@ import { useRef, type ReactNode } from 'react';
 import Link from 'next/link';
 import { ThemePicker, type Brand } from './brand-header';
 import { OverviewIcon } from './overview-icon';
+import { ClientsIcon } from './clients-icon';
 import { OverviewDialog } from './overview-dialog';
 import styles from '../platform/overview.module.css';
 
 type Props = {
+  activePage?: 'overview' | 'clients';
   children: ReactNode;
   name: string;
   environment?: string;
@@ -19,6 +21,7 @@ type Props = {
 };
 
 export function OverviewShell({
+  activePage = 'overview',
   children,
   name,
   environment,
@@ -46,17 +49,30 @@ export function OverviewShell({
         className={mobile ? styles.bottomNav : styles.navigation}
         aria-label={mobile ? 'Mobile platform navigation' : 'Main navigation'}
       >
-        <Link href="/platform" aria-current="page">
-          <OverviewIcon name="overview" />
+        <Link href="/platform" aria-current={activePage === 'overview' ? 'page' : undefined}>
+          {activePage === 'overview' ? (
+            <OverviewIcon name="overview" />
+          ) : (
+            <ClientsIcon name="overview-inactive" />
+          )}
           <span>Overview</span>
         </Link>
-        <Link href="/platform/clients">
-          <OverviewIcon name="clients" />
+        <Link href="/platform/clients" aria-current={activePage === 'clients' ? 'page' : undefined}>
+          {activePage === 'clients' ? (
+            <ClientsIcon name="clients-active" />
+          ) : (
+            <OverviewIcon name="clients" />
+          )}
           <span>Clients</span>
         </Link>
         <Link
           href="/platform/clients#client-account-access"
           aria-label="People & access"
+          onClick={() => {
+            const section = document.getElementById('client-account-access');
+            const disclosure = section?.closest('details');
+            if (disclosure) disclosure.open = true;
+          }}
         >
           <OverviewIcon name="people" />
           <span>{mobile ? 'People' : 'People & access'}</span>

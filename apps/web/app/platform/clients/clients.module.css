@@ -1,0 +1,448 @@
+.page {
+  --client-control-size: 40px;
+  --client-search-size: 14px;
+  --client-border: var(--line);
+  --client-success: #146c45;
+  --client-success-bg: #e5f7ed;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+:global([data-theme='dark']) .page {
+  --client-border: #2a3658;
+  --client-success: #4ade9a;
+  --client-success-bg: #0f2a22;
+}
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.header h1 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+}
+.header p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 22px;
+}
+.create,
+.manage,
+.open,
+.sort,
+.mobileSort {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  min-height: 0;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.create {
+  background: var(--ov-accent);
+  color: white;
+  border: 0;
+  padding: 9px 14px;
+  flex-shrink: 0;
+}
+.create:hover {
+  filter: brightness(1.1);
+}
+.filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.search {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+.search > img {
+  position: absolute;
+  left: 12px;
+  top: 11px;
+  pointer-events: none;
+}
+/* Match the legacy input selector's specificity inside this scoped field. */
+.search
+  input:not([type='hidden']):not([type='checkbox']):not([type='radio']):not([type='file']):not(
+    [type='color']
+  ) {
+  margin: 0;
+  height: var(--client-control-size);
+  min-height: var(--client-control-size);
+  width: 100%;
+  padding: 9px 12px 9px 38px;
+  border: 1px solid var(--client-border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--client-search-size);
+  font-weight: 400;
+  line-height: 20px;
+}
+.search input::placeholder {
+  color: var(--ov-tertiary);
+  opacity: 1;
+}
+.statusFilter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  height: 40px;
+  padding: 0 14px;
+  background: var(--raised);
+  border: 1px solid var(--client-border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  white-space: nowrap;
+}
+.statusFilter select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.statusFilter:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+/* Keep the exported light glyphs legible on the existing light-theme surfaces. */
+:global([data-theme='light']) .statusFilter > img,
+:global([data-theme$='-light']) .statusFilter > img,
+:global([data-theme='light']) .sort img,
+:global([data-theme$='-light']) .sort img,
+:global([data-theme='light']) .mobileSort img,
+:global([data-theme$='-light']) .mobileSort img {
+  filter: brightness(0.4);
+}
+.directory {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: clip;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0;
+  font-size: 14px;
+}
+.table th {
+  text-transform: none;
+  letter-spacing: normal;
+  background: var(--raised);
+  color: var(--muted);
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  height: 40px;
+}
+.table :is(th, td) {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 8px;
+  vertical-align: middle;
+}
+.table th {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.table :is(th, td):first-child {
+  padding-left: 20px;
+}
+.table :is(th, td):last-child {
+  padding-right: 20px;
+}
+.table tbody tr {
+  height: 68px;
+}
+.table th:nth-child(2) {
+  width: 126px;
+}
+.table th:nth-child(3) {
+  width: 106px;
+}
+.table th:nth-child(4) {
+  width: 126px;
+}
+.table th:nth-child(5) {
+  width: 276px;
+}
+.sort {
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  padding: 0;
+  font-size: 12px;
+  gap: 6px;
+}
+.descending {
+  transform: rotate(180deg);
+}
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.identity strong {
+  font-weight: 500;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+.initials {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  background: var(--soft);
+  color: var(--ov-link);
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  background: var(--hover);
+}
+.badge[data-state='active'] {
+  background: var(--client-success-bg);
+  color: var(--client-success);
+}
+.badge[data-state='suspended'] {
+  background: var(--ov-warning-bg);
+  color: var(--ov-warning);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.manage {
+  background: var(--raised);
+  color: var(--ink);
+  border: 1px solid var(--client-border);
+  padding: 6px 14px;
+}
+.open {
+  background: transparent;
+  color: var(--muted);
+  border: 0;
+  padding: 7px 10px;
+}
+.manage:hover,
+.open:hover {
+  background: var(--hover);
+}
+.open:disabled:hover {
+  background: transparent;
+}
+.directoryFooter {
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 17px;
+}
+.directoryFooter p:last-child {
+  color: var(--ov-tertiary);
+  font-size: 11px;
+  line-height: 16px;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+.table .empty {
+  padding: 24px;
+  text-align: center;
+}
+.empty p {
+  margin: 8px 0 16px;
+  color: var(--muted);
+}
+.mobileSort {
+  display: none;
+}
+.accountAccess {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  min-width: 0;
+}
+.accountAccess > summary {
+  margin: 0;
+  padding: 16px 20px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.accountAccess > :global(section) {
+  margin: 0;
+  border: 0;
+  background: transparent;
+}
+.accountAccess :is(h2, h3) {
+  margin-bottom: 12px;
+}
+.accountAccess :global(.directory-filters) {
+  margin-top: 16px;
+}
+.dialog p {
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.dialog :global(.directory-dialog-header) {
+  gap: 16px;
+}
+.dialog h2 {
+  overflow-wrap: anywhere;
+}
+.dialog label {
+  margin-bottom: 16px;
+}
+.dialog :global(.directory-danger) {
+  margin-top: 24px;
+}
+@media (max-width: 1270px) {
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+  .table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .table thead button {
+    visibility: hidden;
+  }
+  .table tbody tr {
+    height: auto;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .table :is(td, td:first-child, td:last-child) {
+    padding: 0;
+    border: 0;
+  }
+  .table td + td {
+    margin-top: 8px;
+  }
+  .table td[data-label] {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 20px;
+  }
+  .table td[data-label]::before {
+    content: attr(data-label);
+    width: 104px;
+    flex-shrink: 0;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+  .actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .mobileSort {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    padding: 10px 16px;
+    background: var(--raised);
+    color: var(--ink);
+    font-size: 12px;
+  }
+  .table .empty {
+    padding: 10px 0;
+  }
+}
+@media (max-width: 800px) {
+  .page {
+    --client-search-size: 16px;
+  }
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .header h1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .search input,
+  .statusFilter select {
+    font-size: 16px;
+  }
+  .directoryFooter {
+    padding: 14px 16px;
+  }
+}
+@media (pointer: coarse) {
+  .page {
+    --client-control-size: 44px;
+  }
+  .create,
+  .manage,
+  .open,
+  .mobileSort,
+  .sort {
+    min-height: 44px;
+  }
+  .search input,
+  .statusFilter {
+    min-height: 44px;
+  }
+  .search > img {
+    top: 13px;
+  }
+}

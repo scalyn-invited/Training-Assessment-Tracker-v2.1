@@ -7,6 +7,7 @@ test('platform account forms preserve selections and require fresh access confir
  expect((await request.post('/api/auth/setup',{headers:{Origin:'http://127.0.0.1:3110'},data:{csrf:guest.csrf,name:'Platform owner',email:'owner@example.invalid',password:'Unique administrator passphrase',demoPassword:'Separate demonstration password'}})).ok()).toBe(true);
  await page.goto('/login');await page.getByLabel('Email',{exact:true}).fill('owner@example.invalid');await page.getByLabel('Password',{exact:true}).fill('Unique administrator passphrase');await page.getByRole('button',{name:'Sign in',exact:true}).click();await expect(page).toHaveURL(/platform/);
  await page.goto('/platform/clients');
+ await page.locator('summary').filter({hasText:'Client account access'}).click();
  const section=page.getByRole('region',{name:'Client account access'});
  await section.getByLabel('Search accounts',{exact:true}).fill('demo.1.3@example.invalid');await section.getByRole('button',{name:'Search accounts',exact:true}).click();
  const open=async()=>{await expect(section.getByText('1 matching accounts',{exact:true})).toBeVisible();await expect(section.getByText('Loading accounts...',{exact:true})).toHaveCount(0);await section.getByText('Demo Member 1.3 - demo.1.3@example.invalid',{exact:true}).click();};
