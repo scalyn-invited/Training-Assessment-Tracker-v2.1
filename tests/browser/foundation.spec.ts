@@ -505,7 +505,9 @@ test('fresh setup, password login and optional authenticator recovery', async ({
   ).toEqual([]);
 
   await page.goto('/platform/appearance');
-  await expect(page.getByRole('heading', { name: 'Settings', exact: true })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Platform appearance', exact: true }),
+  ).toBeVisible();
   await page.getByLabel('Platform display name', { exact: true }).fill('Browser shared platform');
   await page.getByLabel('Application name', { exact: true }).fill('Browser learning');
   await page.getByLabel('Brand colour hex value', { exact: true }).fill('#224466');
@@ -513,9 +515,9 @@ test('fresh setup, password login and optional authenticator recovery', async ({
     .getByRole('combobox', { name: 'Default theme', exact: true })
     .selectOption('platform-light');
   await page
-    .getByLabel('Reason for change', { exact: true })
+    .getByLabel('Appearance change reason', { exact: true })
     .fill('Synthetic platform appearance verification');
-  await page.getByRole('button', { name: 'Save appearance', exact: true }).click();
+  await page.getByRole('button', { name: 'Save platform appearance', exact: true }).click();
   await expect(page.getByText('Platform appearance saved.', { exact: true })).toBeVisible();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'platform-light');
   await page.goto('/settings/appearance');

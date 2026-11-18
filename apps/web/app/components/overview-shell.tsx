@@ -10,7 +10,7 @@ import { OverviewDialog } from './overview-dialog';
 import styles from '../platform/overview.module.css';
 
 type Props = {
-  activePage?: 'overview' | 'clients' | 'people' | 'audit' | 'settings';
+  activePage?: 'overview' | 'clients' | 'people' | 'audit';
   children: ReactNode;
   name: string;
   environment?: string;
@@ -91,17 +91,10 @@ export function OverviewShell({
           )}
           <span>{mobile ? 'Audit' : 'Audit log'}</span>
         </Link>
-        <Link
-          href="/platform/settings"
-          aria-current={activePage === 'settings' ? 'page' : undefined}
-        >
-          {activePage === 'settings' ? (
-            <img src="/images/settings/settings-active.svg" alt="" aria-hidden="true" />
-          ) : (
-            <OverviewIcon name="settings" />
-          )}
+        <button type="button" onClick={() => settings.current?.showModal()} aria-haspopup="dialog">
+          <OverviewIcon name="settings" />
           <span>Settings</span>
-        </Link>
+        </button>
       </nav>
     );
   }
@@ -177,15 +170,9 @@ export function OverviewShell({
             <span className={styles.platformLabel}>Platform administration</span>
           )}
           <div className={styles.profile}>
-            <button
-              type="button"
-              className={styles.avatar}
-              aria-label="Personal settings"
-              aria-haspopup="dialog"
-              onClick={() => settings.current?.showModal()}
-            >
+            <span className={styles.avatar} aria-hidden="true">
               {name.slice(0, 1).toUpperCase()}
-            </button>
+            </span>
             <span className={styles.profileCopy}>
               <strong title={name}>{name}</strong>
               <small>Global administration</small>
@@ -213,13 +200,13 @@ export function OverviewShell({
       {navigation(true)}
       <OverviewDialog dialogRef={settings} titleId="overview-settings-title">
         <div className={styles.dialogHeader}>
-          <h2 id="overview-settings-title">Personal settings</h2>
+          <h2 id="overview-settings-title">Settings</h2>
           <button type="button" className="secondary" onClick={() => settings.current?.close()}>
             Close
           </button>
         </div>
         <nav className={styles.settingsLinks} aria-label="Platform settings">
-          <Link href="/platform/settings">Platform appearance</Link>
+          <Link href="/platform/appearance">Platform appearance</Link>
           <Link href="/platform/admins">Global admins</Link>
           <Link href="/accounts">Manage account access</Link>
           {authMode === 'local_password' && <Link href="/account/security">Account security</Link>}

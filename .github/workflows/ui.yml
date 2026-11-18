@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [overview, shell, clients, history, accounts, accounts-mock, people, audit, settings]
+        suite: [overview, shell, clients, history, accounts, accounts-mock, people, audit]
     env:
       NEXT_TELEMETRY_DISABLED: '1'
       PLAYWRIGHT_BROWSERS_PATH: .runtime/browsers

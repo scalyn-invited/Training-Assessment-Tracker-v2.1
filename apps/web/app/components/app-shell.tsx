@@ -166,29 +166,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </>
     );
   if (
-    [
-      '/platform',
-      '/platform/clients',
-      '/platform/people',
-      '/platform/audit',
-      '/platform/settings',
-      '/platform/settings/status',
-      '/platform/appearance',
-    ].includes(pathname) &&
+    ['/platform', '/platform/clients', '/platform/people', '/platform/audit'].includes(pathname) &&
     context?.user?.global_admin
   )
     return (
       <OverviewShell
         activePage={
-          pathname === '/platform/appearance' || pathname.startsWith('/platform/settings')
-            ? 'settings'
-            : pathname === '/platform/audit'
-              ? 'audit'
-              : pathname === '/platform/people'
-                ? 'people'
-                : pathname === '/platform/clients'
-                  ? 'clients'
-                  : 'overview'
+          pathname === '/platform/audit'
+            ? 'audit'
+            : pathname === '/platform/people'
+              ? 'people'
+              : pathname === '/platform/clients'
+                ? 'clients'
+                : 'overview'
         }
         name={context.user.name}
         environment={context.user.environment}

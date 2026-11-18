@@ -181,8 +181,11 @@ test('Audit Log preserves read-only evidence and filters across desktop, mobile 
     await page.screenshot({ path: `${screenshots}/audit-details-mobile.png`, fullPage: true });
     await page.keyboard.press('Escape');
     await expect(details).toBeFocused();
-    await page.getByRole('button', { name: 'Personal settings' }).click();
-    const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
+    await page
+      .getByRole('navigation', { name: 'Mobile platform navigation' })
+      .getByRole('button', { name: 'Settings' })
+      .click();
+    const settings = page.getByRole('dialog', { name: 'Settings', exact: true });
     await settings.locator('summary').filter({ hasText: 'Theme' }).click();
     await settings.getByRole('button', { name: 'Light', exact: true }).click();
     await settings.getByRole('button', { name: 'Close', exact: true }).click();
@@ -272,9 +275,7 @@ test('Audit Log preserves read-only evidence and filters across desktop, mobile 
       expect((await control.boundingBox())!.height).toBeGreaterThanOrEqual(44);
     await mobile.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
     const footer = await mobile.locator('footer').last().boundingBox();
-    const bottomNav = await mobile
-      .getByRole('navigation', { name: 'Mobile platform navigation' })
-      .boundingBox();
+    const bottomNav = await mobile.getByRole('navigation', { name: 'Mobile platform navigation' }).boundingBox();
     expect(footer!.y + footer!.height).toBeLessThanOrEqual(bottomNav!.y);
     await mobile.screenshot({ path: `${screenshots}/audit-touch-bottom.png` });
     await touch.close();

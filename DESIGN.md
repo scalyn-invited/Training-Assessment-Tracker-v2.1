@@ -19,10 +19,6 @@ The user authorized building Figma desktop frames `6939:2013`/`6939:2352` and mo
 
 The user authorized Figma desktop `6939:2491` and mobile `6939:5430` in file `eQejFiVgug5zmBTd9aVGHx`. `/platform/audit` shares the platform shell with Audit selected and presents UTC date groups, responsive event rows, filters and a read-only details dialog. Existing audit GET semantics, approved change-field projection, permissions and 25-event pagination remain authoritative. No audit records, API or mutation behavior changed. Details and evidence are in `docs/implementation/AUDIT_LOG_UI_QA.md`.
 
-## Settings UI exception — 17 November 2026
-
-The user authorized Figma desktop frames `6939:2692`/`6939:2861` and mobile frames `6939:5599`/`6939:5741` in file `eQejFiVgug5zmBTd9aVGHx`. `/platform/settings` and `/platform/settings/status` present Appearance and System status in the shared platform shell; `/platform/appearance` remains a working alias. Existing versioned branding saves, logo rules, audit reasons, personal theme precedence and status APIs remain authoritative. The profile button opens personal settings so mobile themes and account security remain reachable. Evidence and interim placements are recorded in `docs/implementation/SETTINGS_UI_QA.md`; this does not imply acceptance of the pending userflow.
-
 ## Typography
 Use the existing Inter, "Segoe UI", sans-serif stack (Inter only where installed; no external font request), with Georgia for the existing learning hero. Current workspace override: body 16px, mobile inputs 16px, headings 32px (27px below 800px), hero 36px desktop and 30px mobile. Preserve source hierarchy rather than introducing a new brand.
 

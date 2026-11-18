@@ -166,8 +166,8 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   await page.setViewportSize({ width: 390, height: 1458 });
   await page.screenshot({ path: `${screenshotDir}/overview-dark-mobile.png`, fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.getByRole('button', { name: 'Personal settings' }).click();
-  const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
+  await mobile.getByRole('button', { name: 'Settings' }).click();
+  const settings = page.getByRole('dialog', { name: 'Settings', exact: true });
   await expect(settings.getByRole('link', { name: 'Account security', exact: true })).toBeVisible();
   await expect(settings.getByRole('link', { name: 'Global admins', exact: true })).toBeVisible();
   await settings.getByRole('button', { name: 'Close', exact: true }).focus();
@@ -179,7 +179,7 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.keyboard.press('Escape');
-  await expect(page.getByRole('button', { name: 'Personal settings' })).toBeFocused();
+  await expect(mobile.getByRole('button', { name: 'Settings' })).toBeFocused();
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await accessibility();
@@ -210,12 +210,13 @@ test('Overview design uses live scoped data, preserves access, and works on desk
       (await new AxeBuilder({ page: touch }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
         .violations,
     ).toEqual([]);
-    await touch.getByRole('button', { name: 'Personal settings' }).tap();
-    await expect(
-      touch.getByRole('dialog', { name: 'Personal settings', exact: true }),
-    ).toBeVisible();
     await touch
-      .getByRole('dialog', { name: 'Personal settings', exact: true })
+      .getByRole('navigation', { name: 'Mobile platform navigation' })
+      .getByRole('button', { name: 'Settings' })
+      .tap();
+    await expect(touch.getByRole('dialog', { name: 'Settings', exact: true })).toBeVisible();
+    await touch
+      .getByRole('dialog', { name: 'Settings', exact: true })
       .getByRole('button', { name: 'Close', exact: true })
       .tap();
     await touch.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
