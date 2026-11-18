@@ -1,7 +1,15 @@
 # Design system — Training Assessment Tracker V2.1
 
+## Global design-system directive — 18 November 2026
+
+The user supplied Bernie's instruction to use the Overview, Clients, People & access, Audit Log and Settings implementation on `ui/settings-figma` as the global visual system across every existing route. This directive supersedes the older restriction to a few platform routes and the requirement to preserve the old visual presentation. Preserve existing information order, actions, workflows, permissions, approval/scan/immutable-record/budget/N+2 rules, URLs, theme precedence and client branding. Ask before changing a workflow or inventing a different layout.
+
+Use the current reference components and semantic tokens to establish reusable controls and a single authenticated shell, plus an appropriate guest layout. Migrate page contents, child dialogs and loading/empty/error states, not just navigation. Keep editor/assessment utilities until their consumers are replaced. Remove old presentation only after route coverage and consumer checks pass. UX Engine is explicitly required by this directive; its unavailable local instructions/tool are recorded as a dependency rather than represented as used.
+
+Implementation status: integration branch and complete route inventory prepared; global UI migration pending. `docs/implementation/GLOBAL_UI_ROUTE_INVENTORY.md` is the route checklist and `GLOBAL_UI_INTEGRATION.md` records reconciliation/evidence. No push or deployment. The earlier design sections below are retained as historical reference; their route-limited scope is superseded, not evidence of global completion.
+
 ## World
-Employee learning, assessment evidence and accountable human review. Preserve V2's calm workspace and existing layouts.
+Employee learning, assessment evidence and accountable human review. Apply the supplied Figma visual character while preserving existing workflows and information architecture.
 
 ## Overview UI exception — 17 November 2026
 
