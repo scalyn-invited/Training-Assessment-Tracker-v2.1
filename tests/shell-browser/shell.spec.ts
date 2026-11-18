@@ -76,11 +76,9 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     await expect(page.getByText('Password sign-in', { exact: true })).toBeVisible();
     await page.keyboard.press('Escape');
     await page.setViewportSize({ width: 375, height: 812 });
-    const settingsButton = page
-      .getByRole('navigation', { name: 'Mobile platform navigation' })
-      .getByRole('button', { name: 'Settings' });
+    const settingsButton = page.getByRole('button', { name: 'Personal settings' });
     await settingsButton.click();
-    const drawer = page.getByRole('dialog', { name: 'Settings', exact: true });
+    const drawer = page.getByRole('dialog', { name: 'Personal settings', exact: true });
     await expect(drawer).toBeVisible();
     const first = drawer.getByRole('button', { name: 'Close', exact: true });
     await expect(first).toBeFocused();

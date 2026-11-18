@@ -222,8 +222,8 @@ test('People directory preserves account and Global Admin safeguards on desktop 
   await a11y();
   await page.keyboard.press('Escape');
   const settingsNav = page.getByRole('navigation', { name: 'Mobile platform navigation' });
-  await settingsNav.getByRole('button', { name: 'Settings' }).click();
-  const settings = page.getByRole('dialog', { name: 'Settings', exact: true });
+  await page.getByRole('button', { name: 'Personal settings' }).click();
+  const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
   await settings.locator('summary').filter({ hasText: 'Theme' }).click();
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await settings.getByRole('button', { name: 'Close', exact: true }).click();

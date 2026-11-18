@@ -1,0 +1,427 @@
+.page {
+  --settings-input-size: 14px;
+  gap: 24px;
+}
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.tabs a {
+  padding: 11px 14px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+}
+.tabs a[aria-current] {
+  color: var(--ink);
+  border-bottom-color: var(--ov-accent);
+}
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 24px;
+  align-items: start;
+}
+.form,
+.preview,
+.connections {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 14px;
+  overflow: hidden;
+  min-width: 0;
+}
+.fields {
+  margin: 0;
+  border: 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+.fields label,
+.field {
+  display: block;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+.fields label > :is(input:not([type='checkbox']), select) {
+  margin-top: 8px;
+}
+.fields :is(input:not([type='checkbox']), select) {
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+/* Match the legacy global input selector so these fields retain the scoped layout. */
+.fields
+  input:not([type='hidden']):not([type='checkbox']):not([type='radio']):not([type='file']):not(
+    [type='color']
+  ) {
+  margin: 8px 0 0;
+  width: var(--settings-input-width, 100%);
+  height: 40px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: var(--settings-input-size);
+  line-height: 20px;
+  font-weight: 400;
+}
+.colour {
+  --settings-input-width: 140px;
+}
+.fields .colour input {
+  margin: 0;
+}
+.fields input::placeholder {
+  color: var(--ov-tertiary);
+  opacity: 1;
+}
+.fields input:focus-visible,
+.fields select:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.fields .help,
+.help {
+  display: block;
+  color: var(--ov-tertiary);
+  font-size: 12px;
+  line-height: 17px;
+  font-weight: 400;
+}
+.fields label > .help,
+.field > .help {
+  margin-top: 8px;
+}
+.required {
+  color: var(--error);
+}
+.colour {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+.colour input[type='color'] {
+  width: 40px;
+  flex: 0 0 40px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+.colour input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.colour input[type='color']::-webkit-color-swatch {
+  border: 0;
+}
+.fields .colour input:not([type='color']) {
+  width: 140px;
+  font-family: monospace;
+}
+.upload {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg);
+  border: 1px dashed var(--muted);
+  border-radius: 10px;
+}
+.iconBox {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 8px;
+  background: var(--raised);
+  display: grid;
+  place-items: center;
+}
+.icon {
+  display: block;
+  flex-shrink: 0;
+}
+.fileCopy {
+  min-width: 0;
+  flex: 1;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+.fileCopy p {
+  margin-top: 2px;
+}
+.fields .fileButton {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--raised);
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.fields .fileButton input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  height: 100%;
+  cursor: pointer;
+}
+.fileButton:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+.currentLogo {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.currentLogo img {
+  max-width: 120px;
+  max-height: 72px;
+  object-fit: contain;
+}
+.currentLogo input {
+  width: auto;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 24px;
+  background: var(--raised);
+  border-top: 1px solid var(--line);
+}
+.actions button {
+  margin: 0;
+  min-height: 36px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+.save {
+  background: var(--ov-accent);
+  color: var(--on-primary);
+  border: 1px solid transparent;
+}
+:global([data-theme='dark']) .save {
+  color: white;
+}
+.discard {
+  background: var(--raised);
+  color: var(--ink);
+  border: 1px solid var(--muted);
+}
+.previews {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.previews h2 {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.preview {
+  padding: 16px;
+}
+.preview h3 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 12px;
+}
+.mock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--preview-card);
+  color: var(--preview-text);
+  border: 1px solid var(--preview-decorative);
+}
+.mock h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+.mock p {
+  color: var(--preview-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+.activePreview,
+.buttonPreview {
+  background: var(--preview-primary);
+  color: var(--preview-on-primary);
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 18px;
+}
+.activePreview {
+  width: 100%;
+}
+.connections header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.connections h2 {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+}
+.connections header p {
+  color: var(--muted);
+  font-size: 13px;
+}
+.connections dl {
+  margin: 0;
+}
+.connection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 20px;
+  min-height: 64px;
+  border-bottom: 1px solid var(--line);
+}
+.connection dt {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+.connection dd {
+  margin: 0;
+  padding: 3px 10px 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  text-align: left;
+  max-width: 100%;
+}
+.status {
+  background: var(--soft);
+  color: var(--ov-link);
+}
+.warning {
+  background: var(--ov-warning-bg);
+  color: var(--ov-warning);
+}
+.ownerNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--raised);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 20px;
+}
+@media (max-width: 1200px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 36%);
+  }
+  .upload {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 1000px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 800px) {
+  .page {
+    --settings-input-size: 16px;
+  }
+  .fields {
+    padding: 24px;
+  }
+  .upload {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    gap: 12px;
+  }
+  .upload .iconBox {
+    width: 28px;
+    flex-basis: 28px;
+  }
+  .fileCopy {
+    flex-basis: calc(100% - 42px);
+  }
+  .fields .fileButton {
+    margin-left: 0;
+    padding: 8px;
+    font-size: 12px;
+  }
+  .fields :is(input:not([type='checkbox']), select) {
+    font-size: 16px;
+  }
+  .connections header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .connection {
+    justify-content: flex-start;
+  }
+}
+@media (pointer: coarse) {
+  .actions button,
+  .tabs a,
+  .fields .fileButton,
+  .fields :is(input:not([type='checkbox']), select) {
+    min-height: 44px;
+  }
+}

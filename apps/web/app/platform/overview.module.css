@@ -277,6 +277,9 @@
   min-width: 0;
 }
 .avatar {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -287,6 +290,12 @@
   color: var(--ov-link);
   font-size: 12px;
   font-weight: 600;
+}
+@media (pointer: coarse) {
+  button.avatar {
+    min-width: 44px;
+    min-height: 44px;
+  }
 }
 .profileCopy {
   display: flex;

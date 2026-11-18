@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
 import { generate, themes } from '../../../../packages/domain/src/theme';
-type Brand = {
+import { SettingsLayout, PlatformAppearanceForm } from './platform-settings';
+export type AppearanceBrand = {
   version: number;
   savedTheme: string;
   customLogo: boolean;
@@ -23,7 +24,7 @@ type Brand = {
 export function Appearance({ platform = false }: { platform?: boolean }) {
   const { context, error, load } = useContext(),
     router = useRouter(),
-    [brand, setBrand] = useState<Brand | null>(null),
+    [brand, setBrand] = useState<AppearanceBrand | null>(null),
     [failure, setFailure] = useState(''),
     [success, setSuccess] = useState(''),
     [busy, setBusy] = useState(false),
@@ -34,10 +35,11 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
     if (context && !context.user) router.replace('/login');
   }, [context, router]);
   useEffect(() => {
-    if (!context?.user || (!platform && !client)) return;
+    if (!context?.user || (platform && !context.user.global_admin) || (!platform && !client))
+      return;
     let cancelled = false;
     setFailure('');
-    api<Brand>('/branding' + (client ? '?clientId=' + client : ''))
+    api<AppearanceBrand>('/branding' + (client ? '?clientId=' + client : ''))
       .then((data) => {
         if (!cancelled) {
           setBrand(data);
@@ -119,6 +121,37 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
     }
   }
   const palettes = /^#[0-9a-f]{6}$/i.test(accent) ? generate(accent) : null;
+  if (platform)
+    return (
+      <SettingsLayout tab="appearance">
+        <Feedback error={failure} success={success} />
+        {failure && (
+          <button className="secondary" onClick={() => setRevision((n) => n + 1)}>
+            Reload appearance
+          </button>
+        )}
+        {!brand && !failure && <p role="status">Loading appearance settings...</p>}
+        {brand?.canEdit && (
+          <PlatformAppearanceForm
+            key={`${brand.version}:${revision}`}
+            brand={brand}
+            accent={accent}
+            setAccent={setAccent}
+            busy={busy}
+            save={save}
+            discard={() => {
+              setBrand(null);
+              setFailure('');
+              setSuccess('');
+              setRevision((n) => n + 1);
+            }}
+          />
+        )}
+        {brand && !brand.canEdit && (
+          <p>Global Admin access is required to change platform appearance.</p>
+        )}
+      </SettingsLayout>
+    );
   return (
     <Guest>
       {!context?.user ? (
