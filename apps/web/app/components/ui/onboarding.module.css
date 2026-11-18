@@ -1,0 +1,84 @@
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2);
+}
+.steps button[aria-current='step'] {
+  border-color: var(--ui-link);
+  background: var(--ui-active);
+}
+.panel h2:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 3px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-space-4);
+}
+.panel fieldset.kpi,
+.review {
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-control);
+  padding: var(--ui-space-4);
+  margin: 0;
+  min-width: 0;
+}
+.review dl > div {
+  align-items: flex-start;
+  gap: var(--ui-space-4);
+  border-color: var(--ui-border);
+}
+.review dd {
+  max-width: 68%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.files {
+  border-top: 1px solid var(--ui-border);
+  padding-top: var(--ui-space-6);
+  min-width: 0;
+}
+.files > :not(:first-child) {
+  margin-top: var(--ui-space-4);
+}
+.files a {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.files a:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 3px;
+}
+.subtle {
+  font-size: var(--ui-text-small);
+  color: var(--ui-muted);
+}
+.divider {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--ui-border);
+}
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .steps button {
+    flex: 1 1 140px;
+  }
+  .review dl > div {
+    display: block;
+  }
+  .review dd {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+@media (pointer: coarse) {
+  .files a,
+  .panel label:has(input[type='checkbox']) {
+    min-height: 44px;
+  }
+}

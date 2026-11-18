@@ -83,6 +83,10 @@ Background receipts uses shared presentation on Overview and training-record det
 
 `/enrolments/[id]` retains the existing action navigation, heading/status, two-column foundation/evidence panels and full-width background receipts. Panels stack at 800px. Use the shared title hierarchy, semantic palettes, 14px panels, 24/16px panel padding and 20px grid gap. File metadata/actions wrap within their panel; file controls use the shared borders, focus and 16px mobile type, with 44px coarse-pointer chooser/link targets. Summary-only access keeps its existing explanatory panel; detail/upload/manage flags remain server-owned. Preserve upload quarantine, error retention, refresh, local checks and receipt polling. No new confirmation, file deletion, offline flow or changed workflow is introduced. Both BackgroundReceipts consumers now use shared presentation; the temporary legacy branch is removed. Generic file-list/receipt styles still serve other routes; obsolete detail-grid selectors are retired.
 
+## Onboarding
+
+`/enrolments/[id]/onboarding` retains six input steps and the seventh review/create step, existing field order, schedule/KPI groups, review disclosures and native assessment/calendar confirmations. Use shared fields, buttons, panels, badges and feedback. Step buttons wrap with an explicit current-step state; schedule/KPI grids stack at 800px. Preserve the existing three KPI groups rather than introducing a new layout. Assessment uploads reuse the record file-control styling. Drafts remain page-memory only, with the same 800ms autosave and version checks. Register pending saves, changed inputs and calendar/curriculum reasons with the existing shared work guard so navigation, client switching and sign-out preserve work; the parent owns the curriculum reason guard. Signed-out visits use the existing login destination. Native field constraints, permissions, assessment confirmation, calendar versions, curriculum budget and approved history remain authoritative.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
