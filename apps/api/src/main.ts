@@ -431,8 +431,8 @@ class PlatformController {
   }
 
   @Get('client-accounts') clientAccounts(@Req() req: Request) {
-    const d = z.object({search:z.string().max(120).default(''),page:z.coerce.number().int().min(1).max(100000).default(1)}).parse(req.query);
-    return platform.clientAccounts(token(req),d.search,d.page);
+    const d = z.object({search:z.string().max(120).default(''),page:z.coerce.number().int().min(1).max(100000).default(1),view:z.enum(['all','admins']).default('all')}).parse(req.query);
+    return platform.clientAccounts(token(req),d.search,d.page,d.view);
   }
   @Post('client-accounts') clientAccount(@Req() req: Request) {
     const d = parse(z.object({csrf,clientId:uuid,userId:uuid,action:z.enum(['join','grant','revoke']),expectedVersion:z.number().int().positive(),reason}),req);

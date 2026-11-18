@@ -11,6 +11,10 @@ The user authorized the supplied Figma desktop frame `6939:1670` and mobile fram
 
 The user authorized continuing with the Clients desktop frame `6939:1831` and mobile frame `6939:4866` in the same Figma file while userflow work continues. `/platform/clients` shares the Overview shell with Clients selected. The directory uses a desktop table and stacked mobile entries, original exported icons, real counts, native search/status controls and existing guarded dialogs. Sorting, pagination and account-access management remain available; the latter is expandable and opens through the People & access link. Interim choices and intentional accessibility differences are recorded in `docs/implementation/CLIENTS_UI_QA.md`. Other routes keep their current layouts. This does not imply acceptance of the pending userflow.
 
+## People & access UI exception — 17 November 2026
+
+The user authorized building Figma desktop frames `6939:2013`/`6939:2352` and mobile frames `6939:5012`/`6939:5326` in file `eQejFiVgug5zmBTd9aVGHx`. `/platform/people` shares the Overview/Clients shell and presents All accounts and Global admins directories. Existing account creation/invitation and guarded client/platform role mutations remain authoritative. The existing directory GET adds an optional admin view, current grant/eligibility fields and unfiltered tab totals; mutation rules are unchanged. Interim userflow choices and automated evidence are recorded in `docs/implementation/PEOPLE_ACCESS_UI_QA.md`. This does not imply team acceptance of pending userflows.
+
 ## Typography
 Use the existing Inter, "Segoe UI", sans-serif stack (Inter only where installed; no external font request), with Georgia for the existing learning hero. Current workspace override: body 16px, mobile inputs 16px, headings 32px (27px below 800px), hero 36px desktop and 30px mobile. Preserve source hierarchy rather than introducing a new brand.
 

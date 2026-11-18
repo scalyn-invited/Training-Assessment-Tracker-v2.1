@@ -32,7 +32,7 @@ export function PlatformAccounts({csrf,onChanged}:{csrf:string;onChanged:()=>voi
   </>}
  </section>;
 }
-function AccountAccess({account,clients,allowJoin,csrf,reload,onSaved}:{account:Account;clients:Choice[];allowJoin:boolean;csrf:string;reload:()=>void;onSaved:()=>void}) {
+export function AccountAccess({account,clients,allowJoin,csrf,reload,onSaved,expanded=false}:{account:Account;clients:Choice[];allowJoin:boolean;csrf:string;reload:()=>void;onSaved:()=>void;expanded?:boolean}) {
  const [client,setClient]=useState(account.defaultClientId),[action,setAction]=useState(''),[confirmed,setConfirmed]=useState(false);
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[stale,setStale]=useState(false);
  async function save(e:FormEvent<HTMLFormElement>){e.preventDefault();if(busy||stale||!confirmed)return;
@@ -41,7 +41,7 @@ function AccountAccess({account,clients,allowJoin,csrf,reload,onSaved}:{account:
   catch(failure){const e=failure as Error & {code?:string};setError(e.message);setStale(e.code==='account_version_conflict');}
   finally{setBusy(false);}
  }
- return <details className="review-section"><summary>{account.name} - {account.email}</summary>
+ return <details className="review-section" open={expanded || undefined}><summary>{account.name} - {account.email}</summary>
   <p>Current clients: {account.memberships.map(m=>m.name).join(', ')||'No active client membership'}</p>
   <p>Client roles: {account.roles.map(r=>`${clients.find(c=>c.id===r.clientId)?.name??'Unavailable client'}: ${r.role}`).join('; ')||'None'}</p>
   <form aria-label={'Manage client access for '+account.email} onSubmit={save} aria-busy={busy}>

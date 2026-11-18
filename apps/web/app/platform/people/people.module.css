@@ -1,0 +1,447 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.header h1 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+}
+.header p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--muted);
+}
+.page .add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: var(--ov-accent);
+  color: white;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+}
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.tabs button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  min-height: 44px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+.tabs button[aria-current] {
+  color: var(--ink);
+  border-bottom-color: var(--ov-accent);
+}
+.tabs span,
+.badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--ov-active);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+.directory {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.search {
+  position: relative;
+  flex: 1;
+  min-width: 160px;
+  margin: 0;
+}
+.search > img {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  pointer-events: none;
+}
+.search
+  input:not([type='hidden']):not([type='checkbox']):not([type='radio']):not([type='file']):not(
+    [type='color']
+  ) {
+  width: 100%;
+  margin: 0;
+  min-height: 40px;
+  height: 40px;
+  padding: 9px 12px 9px 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+.search input::placeholder {
+  color: var(--ov-tertiary);
+  opacity: 1;
+}
+.searchButton {
+  background: var(--ov-accent);
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 20px;
+  min-height: 40px;
+  font-weight: 500;
+}
+.clear {
+  background: transparent;
+  color: var(--muted);
+  border: 0;
+  padding: 10px 8px;
+  font-size: 13px;
+  line-height: 20px;
+  min-height: 40px;
+  font-weight: 400;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0;
+}
+.table th {
+  background: var(--raised);
+  color: var(--muted);
+  text-align: left;
+  text-transform: none;
+  letter-spacing: normal;
+  padding: 12px 10px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--line);
+}
+.table th:first-child {
+  width: 38%;
+  padding-left: 20px;
+}
+.table th:nth-child(2) {
+  width: 26%;
+}
+.table th:nth-child(3) {
+  width: 18%;
+}
+.table th:last-child {
+  width: 18%;
+  padding-right: 20px;
+}
+.table td {
+  padding: 12px 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 18px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+.table td:first-child {
+  padding-left: 20px;
+}
+.table td:last-child {
+  padding-right: 20px;
+}
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 50%;
+  background: var(--soft);
+  color: var(--ov-link);
+  font-weight: 600;
+  font-size: 14px;
+}
+.identityCopy {
+  min-width: 0;
+}
+.name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+.name strong {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+.identity small {
+  display: block;
+  color: var(--ov-tertiary);
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 1px;
+}
+.clientRoles {
+  display: block;
+  font-size: 12px;
+  color: var(--ov-tertiary);
+}
+.adminBadge {
+  display: inline-block;
+  background: var(--soft);
+  color: var(--ov-link);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 16px;
+}
+.action {
+  text-align: right;
+}
+.manage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  padding: 4px 0;
+  min-height: 32px;
+  color: var(--ov-link);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+.mobileLabel {
+  display: none;
+}
+.message {
+  padding: 24px 20px;
+  color: var(--muted);
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+.pagination nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pagination nav > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pagination button {
+  min-height: 32px;
+  min-width: 32px;
+  padding: 6px 9px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+}
+.pagination button[aria-current] {
+  color: white;
+  background: var(--ov-accent);
+  border-color: var(--ov-accent);
+}
+.ellipsis {
+  padding: 0 2px;
+}
+.page .protection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+  background: var(--raised);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 20px;
+}
+.accessDialog > p {
+  margin: 16px 0;
+  overflow-wrap: anywhere;
+}
+.accessDialog section {
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.accessDialog section > p {
+  margin: 10px 0;
+}
+.accessDialog :is(input, select) {
+  max-width: 100%;
+}
+.accessDialog summary {
+  overflow-wrap: anywhere;
+}
+.accessDialog .protection {
+  border-radius: 8px;
+}
+@media (max-width: 1100px) and (min-width: 801px) {
+  .table th:first-child {
+    width: 34%;
+  }
+  .table th:nth-child(2) {
+    width: 24%;
+  }
+  .table th:last-child {
+    width: 24%;
+  }
+}
+@media (max-width: 800px) {
+  .header {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .header h1 {
+    font-size: 27px;
+    line-height: 34px;
+  }
+  .header p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .page .add {
+    width: 100%;
+  }
+  .filters {
+    padding: 16px 20px;
+    gap: 8px;
+  }
+  .search {
+    flex-basis: 100%;
+  }
+  .search
+    input:not([type='hidden']):not([type='checkbox']):not([type='radio']):not([type='file']):not(
+      [type='color']
+    ) {
+    font-size: 16px;
+  }
+  .table,
+  .table tbody {
+    display: block;
+  }
+  .table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .table tr {
+    display: block;
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .table tbody tr:last-child {
+    border-bottom: 0;
+  }
+  .table td,
+  .table td:first-child,
+  .table td:last-child {
+    display: block;
+    border: 0;
+    padding: 0;
+  }
+  .table td[data-label] {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    align-items: start;
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .table td:first-child {
+    margin-bottom: 8px;
+  }
+  .mobileLabel {
+    display: block;
+    color: var(--muted);
+  }
+  .adminBadge {
+    justify-self: start;
+  }
+  .action {
+    text-align: left;
+    margin-top: 8px;
+  }
+  .manage {
+    justify-content: flex-start;
+  }
+  .pagination {
+    padding: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .pagination nav {
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+}
+@media (pointer: coarse) {
+  .page :is(button, .add) {
+    min-height: 44px;
+  }
+  .pagination button {
+    min-width: 44px;
+  }
+}

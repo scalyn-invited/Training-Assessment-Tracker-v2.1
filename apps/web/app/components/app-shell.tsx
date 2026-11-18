@@ -165,10 +165,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </main>
       </>
     );
-  if (['/platform', '/platform/clients'].includes(pathname) && context?.user?.global_admin)
+  if (
+    ['/platform', '/platform/clients', '/platform/people'].includes(pathname) &&
+    context?.user?.global_admin
+  )
     return (
       <OverviewShell
-        activePage={pathname === '/platform/clients' ? 'clients' : 'overview'}
+        activePage={
+          pathname === '/platform/people'
+            ? 'people'
+            : pathname === '/platform/clients'
+              ? 'clients'
+              : 'overview'
+        }
         name={context.user.name}
         environment={context.user.environment}
         authMode={context.authMode}

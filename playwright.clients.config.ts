@@ -1,6 +1,7 @@
 import { defineConfig } from '@playwright/test';
 import base from './playwright.overview.config';
 const suites: Record<string, string> = {
+  people: 'tests/people-ui-browser',
   history: 'tests/directory-history-browser',
   accounts: 'tests/platform-accounts-browser',
   'accounts-mock': 'tests/platform-accounts-mock-browser',
