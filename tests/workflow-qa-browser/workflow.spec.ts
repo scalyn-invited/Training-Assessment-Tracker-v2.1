@@ -383,6 +383,17 @@ test('D07 rejection requires separate member-safe feedback and transmits it sepa
   await expect.poll(() => posts.length).toBe(1);
   expect(posts[0].return_feedback).toBe('PUBLIC: Add a worked example.');
   expect(posts[0].reason).toBe('PRIVATE rationale');
+  // Observing the outbound POST does not mean the response and guard baseline
+  // have been applied. Require confirmed clean work before testing reload.
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const state = { dirty: false, pending: false, uncertain: false };
+        window.dispatchEvent(new CustomEvent('tat:query-work', { detail: state }));
+        return Boolean(state.dirty || state.pending || state.uncertain);
+      }),
+    )
+    .toBe(false);
   page.removeAllListeners('dialog');
   const dialogs: string[] = [];
   page.on('dialog', async (d) => {
