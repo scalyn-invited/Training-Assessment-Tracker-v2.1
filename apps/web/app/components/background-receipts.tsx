@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { api, Feedback } from './auth-ui';
+import { api, Feedback as LegacyFeedback } from './auth-ui';
+import { Button, Panel, Badge, Feedback as SharedFeedback } from './ui/controls';
+import styles from './ui/receipts.module.css';
 type Receipt = {
   id: string;
   state: string;
@@ -11,9 +13,11 @@ type Receipt = {
 export function BackgroundReceipts({
   client,
   revision = 0,
+  shared = false,
 }: {
   client: string;
   revision?: number;
+  shared?: boolean;
 }) {
   const [receipts, setReceipts] = useState<Receipt[] | null>(null),
     [error, setError] = useState(''),
@@ -49,27 +53,37 @@ export function BackgroundReceipts({
       clearInterval(timer);
     };
   }, [client, revision, retry]);
+  const Container = shared ? Panel : 'section';
+  const Action = shared ? Button : 'button';
+  const Status = shared ? Badge : 'span';
+  const Feedback = shared ? SharedFeedback : LegacyFeedback;
   return (
-    <section className="panel receipts" aria-label="Background check receipts">
-      <div className="section-heading">
+    <Container
+      className={shared ? styles.panel : 'panel receipts'}
+      aria-label="Background check receipts"
+    >
+      <div className={shared ? styles.heading : 'section-heading'}>
         <h2>Background receipts</h2>
         <span>Refreshes every 5 seconds</span>
       </div>
-      <p className="subtle">Local notification sink. No outbound email.</p>
+      <p className={shared ? styles.subtle : 'subtle'}>
+        Local notification sink. No outbound email.
+      </p>
       <Feedback error={error} />
       {error && (
-        <button
-          className="secondary"
+        <Action
+          type="button"
+          className={shared ? undefined : 'secondary'}
           disabled={loading}
           aria-busy={loading}
           onClick={() => setRetry((n) => n + 1)}
         >
           {loading ? 'Loading receipts...' : 'Retry background receipts'}
-        </button>
+        </Action>
       )}
       {!receipts && !error && <p role="status">Loading your background receipts...</p>}
       {receipts && (
-        <ul className="file-list" aria-live="polite">
+        <ul className={shared ? styles.list : 'file-list'} aria-live="polite">
           {receipts.length === 0 && (
             <li>No checks requested yet. Open a training record to check background processing.</li>
           )}
@@ -91,13 +105,13 @@ export function BackgroundReceipts({
                   </p>
                 )}
               </div>
-              <span className="badge">
+              <Status className={shared ? undefined : 'badge'}>
                 {row.state.charAt(0).toUpperCase() + row.state.slice(1)}
-              </span>
+              </Status>
             </li>
           ))}
         </ul>
       )}
-    </section>
+    </Container>
   );
 }

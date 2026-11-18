@@ -187,6 +187,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       '/administration',
       '/settings/ai',
       '/settings/appearance',
+      '/dashboard',
     ].includes(pathname) &&
     context?.user
   )

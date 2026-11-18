@@ -150,8 +150,9 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
       page.getByText('Learning plans temporarily unavailable.', { exact: true }),
     ).toBeVisible();
     await page.getByRole('button', { name: 'Retry learning plans' }).click();
-    await expect(page.locator('.plan-card')).toHaveCount(12);
-    await expect(page.locator('.plan-card h3').first()).toHaveText('Plan 00');
+    const plans = page.getByRole('link').filter({ has: page.getByRole('heading', { level: 3 }) });
+    await expect(plans).toHaveCount(12);
+    await expect(plans.getByRole('heading').first()).toHaveText('Plan 00');
     await expect(
       page
         .getByRole('navigation', { name: 'Main navigation' })
@@ -161,9 +162,9 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     expect((await page.request.get('/api/platform/overview')).status()).toBe(403);
     expect((await page.request.get('/api/clients/people?clientId=' + client)).status()).toBe(403);
     await page.getByRole('button', { name: 'Next plans' }).click();
-    await expect(page.locator('.plan-card h3')).toHaveText('Plan 12');
+    await expect(plans.getByRole('heading')).toHaveText('Plan 12');
     await page.getByRole('button', { name: 'Previous plans' }).click();
-    await expect(page.locator('.plan-card')).toHaveCount(12);
+    await expect(plans).toHaveCount(12);
     await page.getByRole('combobox', { name: 'Active client', exact: true }).focus();
     await page.evaluate(() => scrollTo(0, 0));
     await page.screenshot({

@@ -69,6 +69,12 @@ The shared form layout leaves hidden forms hidden, including enrolment review. I
 
 Client Appearance uses the same shared form layout and a scoped theme gallery and generated-preview component stylesheet. Before: legacy 16px workspace typography, generic panel/control radii and global gallery/preview selectors. After: the reference 14px body/32px desktop title, semantic navy/light/generated surfaces, 14px panels, 8px controls and 24/16/8px section/form/control spacing. Preserve the existing gallery's 135px minimum tracks and 72px swatches; at 800px use two gallery columns and one preview column. Preview colours still come from the existing palette generator, never the surrounding theme. Personal themes, inherited platform branding, client modes, native logo selection/removal and versioned saves are unchanged. Shared feedback and reload controls also apply to the existing platform Appearance consumer and require its regression suite. Evidence: `GLOBAL_UI_CLIENT_SETTINGS_QA.md`.
 
+## Learning workspace Overview
+
+`/dashboard` keeps the welcome, baseline message, account/journey pair, scoped plan cards and background receipts in their existing order. Replace the legacy hero/type treatment with shared navy/light/generated panels and the reference sans-serif hierarchy. Retain the two-column account/journey and plan grids on desktop; collapse them at the existing 800px breakpoint. Use shared PageHeader, Panel, Badge, Button and Pagination, 24px panel gaps/padding (16px mobile), 14px panels and 8px controls. Plan cards retain every status, team, member, duration and destination. Counts are still server-scoped; Global Admin does not gain learning access.
+
+Background receipts has a shared-presentation opt-in for Overview until the training-record consumer is migrated. Its five-second polling, local-only receipt copy, error details and recovery remain unchanged. Existing hero illustration is already hidden by the legacy workspace stylesheet and can be removed from this route. Do not remove legacy journey/receipt styles while setup/training-record consumers remain.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
