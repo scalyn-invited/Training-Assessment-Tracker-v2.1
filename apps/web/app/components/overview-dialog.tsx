@@ -6,10 +6,12 @@ export function OverviewDialog({
   dialogRef,
   titleId,
   children,
+  onClose,
 }: {
   dialogRef: RefObject<HTMLDialogElement | null>;
   titleId: string;
   children: ReactNode;
+  onClose?: () => void;
 }) {
   function keepFocus(event: KeyboardEvent<HTMLDialogElement>) {
     if (event.key !== 'Tab') return;
@@ -38,6 +40,7 @@ export function OverviewDialog({
       className={styles.dialog}
       aria-labelledby={titleId}
       onKeyDown={keepFocus}
+      onClose={onClose}
     >
       {children}
     </dialog>

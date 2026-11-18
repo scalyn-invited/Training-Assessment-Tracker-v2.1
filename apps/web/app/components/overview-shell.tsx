@@ -5,11 +5,12 @@ import { ThemePicker, type Brand } from './brand-header';
 import { OverviewIcon } from './overview-icon';
 import { ClientsIcon } from './clients-icon';
 import { PeopleIcon } from './people-icon';
+import { AuditIcon } from './audit-icon';
 import { OverviewDialog } from './overview-dialog';
 import styles from '../platform/overview.module.css';
 
 type Props = {
-  activePage?: 'overview' | 'clients' | 'people';
+  activePage?: 'overview' | 'clients' | 'people' | 'audit';
   children: ReactNode;
   name: string;
   environment?: string;
@@ -78,8 +79,16 @@ export function OverviewShell({
           )}
           <span>{mobile ? 'People' : 'People & access'}</span>
         </Link>
-        <Link href="/platform/audit" aria-label="Audit log">
-          <OverviewIcon name="audit" />
+        <Link
+          href="/platform/audit"
+          aria-label="Audit log"
+          aria-current={activePage === 'audit' ? 'page' : undefined}
+        >
+          {activePage === 'audit' ? (
+            <AuditIcon name="audit-active" />
+          ) : (
+            <OverviewIcon name="audit" />
+          )}
           <span>{mobile ? 'Audit' : 'Audit log'}</span>
         </Link>
         <button type="button" onClick={() => settings.current?.showModal()} aria-haspopup="dialog">
