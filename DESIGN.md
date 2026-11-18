@@ -73,11 +73,15 @@ Client Appearance uses the same shared form layout and a scoped theme gallery an
 
 `/dashboard` keeps the welcome, baseline message, account/journey pair, scoped plan cards and background receipts in their existing order. Replace the legacy hero/type treatment with shared navy/light/generated panels and the reference sans-serif hierarchy. Retain the two-column account/journey and plan grids on desktop; collapse them at the existing 800px breakpoint. Use shared PageHeader, Panel, Badge, Button and Pagination, 24px panel gaps/padding (16px mobile), 14px panels and 8px controls. Plan cards retain every status, team, member, duration and destination. Counts are still server-scoped; Global Admin does not gain learning access.
 
-Background receipts has a shared-presentation opt-in for Overview until the training-record consumer is migrated. Its five-second polling, local-only receipt copy, error details and recovery remain unchanged. Existing hero illustration is already hidden by the legacy workspace stylesheet and can be removed from this route. Do not remove legacy journey/receipt styles while setup/training-record consumers remain.
+Background receipts uses shared presentation on Overview and training-record details. Its five-second polling, local-only receipt copy, error details and recovery remain unchanged. The previously hidden Overview hero illustration is removed. Retain legacy journey and receipt utilities while setup and curriculum consumers remain.
 
 ## Training-record directory
 
 `/enrolments` retains its existing single-column search and record list, twenty-record pagination and permission-dependent destinations. Shared header, native search/buttons, panel, feedback and pagination use the global theme tokens. Record sections keep their title/member, raw status and current record/onboarding/learning links; unavailable private inputs retain the existing explanation. Use 16px record spacing, 8px within each record and 44px link targets for coarse pointers. Do not add a status filter or redesign the list into a new table. Correct repeated search loading with an explicit refresh trigger and use the existing sign-in destination for signed-out visitors; backend search and access decisions remain authoritative.
+
+## Training-record details
+
+`/enrolments/[id]` retains the existing action navigation, heading/status, two-column foundation/evidence panels and full-width background receipts. Panels stack at 800px. Use the shared title hierarchy, semantic palettes, 14px panels, 24/16px panel padding and 20px grid gap. File metadata/actions wrap within their panel; file controls use the shared borders, focus and 16px mobile type, with 44px coarse-pointer chooser/link targets. Summary-only access keeps its existing explanatory panel; detail/upload/manage flags remain server-owned. Preserve upload quarantine, error retention, refresh, local checks and receipt polling. No new confirmation, file deletion, offline flow or changed workflow is introduced. Both BackgroundReceipts consumers now use shared presentation; the temporary legacy branch is removed. Generic file-list/receipt styles still serve other routes; obsolete detail-grid selectors are retired.
 
 ## Historical design record
 

@@ -113,8 +113,11 @@ test('learning Overview retains scoped plans, receipts, navigation and responsiv
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/enrolments\/[a-f0-9-]+$/);
   await expect(page.getByRole('heading', { name: 'Learning plan 00', exact: true })).toBeVisible();
-  // The shared receipt component retains legacy presentation on this unmigrated route.
-  await expect(page.locator('section.panel.receipts')).toHaveCount(1);
+  // Both Overview and the migrated record detail now use shared receipts.
+  await expect(page.locator('[data-application-shell="learning"]')).toBeVisible();
+  await expect(
+    page.getByRole('region', { name: 'Background check receipts', exact: true }),
+  ).toBeVisible();
   await page.goBack();
   await expect(plans).toHaveCount(12);
   await page.getByRole('link', { name: 'View learning plans', exact: true }).click();

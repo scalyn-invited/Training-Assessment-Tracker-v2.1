@@ -171,7 +171,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </>
     );
   if (
-    [
+    ([
       '/platform',
       '/platform/clients',
       '/platform/people',
@@ -189,7 +189,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       '/settings/appearance',
       '/dashboard',
       '/enrolments',
-    ].includes(pathname) &&
+    ].includes(pathname) ||
+      /^\/enrolments\/[^/]+$/.test(pathname)) &&
     context?.user
   )
     return (

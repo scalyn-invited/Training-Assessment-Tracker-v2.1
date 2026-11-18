@@ -200,7 +200,7 @@ export default function Dashboard() {
           <p>
             <Link href="/enrolments">Training records</Link>
           </p>
-          {client && <BackgroundReceipts client={client} shared />}
+          {client && <BackgroundReceipts client={client} />}
         </div>
       )}
     </Guest>
