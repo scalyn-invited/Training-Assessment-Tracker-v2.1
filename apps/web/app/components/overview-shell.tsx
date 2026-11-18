@@ -6,7 +6,7 @@ import { OverviewIcon } from './overview-icon';
 import { ClientsIcon } from './clients-icon';
 import { PeopleIcon } from './people-icon';
 import { AuditIcon } from './audit-icon';
-import { OverviewDialog } from './overview-dialog';
+import { Dialog } from './ui/dialog';
 import styles from '../platform/overview.module.css';
 
 type Props = {
@@ -211,7 +211,7 @@ export function OverviewShell({
         </footer>
       </div>
       {navigation(true)}
-      <OverviewDialog dialogRef={settings} titleId="overview-settings-title">
+      <Dialog dialogRef={settings} titleId="overview-settings-title">
         <div className={styles.dialogHeader}>
           <h2 id="overview-settings-title">Personal settings</h2>
           <button type="button" className="secondary" onClick={() => settings.current?.close()}>
@@ -225,7 +225,7 @@ export function OverviewShell({
           {authMode === 'local_password' && <Link href="/account/security">Account security</Link>}
         </nav>
         {themePicker()}
-      </OverviewDialog>
+      </Dialog>
     </div>
   );
 }

@@ -46,6 +46,9 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
   await expect(page).toHaveURL(/\/platform$/);
   await expect(page.getByRole('heading', { name: 'Platform overview' })).toBeVisible();
+  await expect(
+    page.getByText('What needs attention across the platform.', { exact: true }),
+  ).toHaveCSS('margin-top', '8px');
   const main = page.getByRole('main');
   await expect(
     main.getByRole('link', { name: 'Manage clients', exact: true }).locator('strong'),
@@ -178,6 +181,28 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   await settings.locator('summary').click();
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  // Exercise the shared dialog's field boundary with an isolated DOM fixture. The old
+  // button-only focus list skipped fields at either edge of a form dialog.
+  await settings.evaluate((dialog) => {
+    const field = document.createElement('input');
+    field.setAttribute('aria-label', 'Dialog keyboard fixture');
+    field.dataset.keyboardFixture = 'true';
+    dialog.append(field);
+    const disabled = document.createElement('fieldset');
+    disabled.disabled = true;
+    disabled.dataset.keyboardFixture = 'true';
+    disabled.append(document.createElement('input'));
+    dialog.append(disabled);
+  });
+  const fixture = settings.getByRole('textbox', { name: 'Dialog keyboard fixture' });
+  await settings.getByRole('button', { name: 'Close', exact: true }).focus();
+  await page.keyboard.press('Shift+Tab');
+  await expect(fixture).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(settings.getByRole('button', { name: 'Close', exact: true })).toBeFocused();
+  await settings
+    .locator('[data-keyboard-fixture]')
+    .evaluateAll((nodes) => nodes.forEach((node) => node.remove()));
   await page.keyboard.press('Escape');
   await expect(page.getByRole('button', { name: 'Personal settings' })).toBeFocused();
   await page.reload();

@@ -1,46 +1,54 @@
 'use client';
-import type { KeyboardEvent, ReactNode, RefObject } from 'react';
-import styles from '../platform/overview.module.css';
+import type { ComponentProps, KeyboardEvent, RefObject } from 'react';
+import styles from './controls.module.css';
 
-export function OverviewDialog({
+export function Dialog({
   dialogRef,
   titleId,
+  className,
+  onKeyDown,
   children,
-  onClose,
-}: {
+  ...props
+}: Omit<ComponentProps<'dialog'>, 'ref' | 'aria-labelledby'> & {
   dialogRef: RefObject<HTMLDialogElement | null>;
   titleId: string;
-  children: ReactNode;
-  onClose?: () => void;
 }) {
   function keepFocus(event: KeyboardEvent<HTMLDialogElement>) {
-    if (event.key !== 'Tab') return;
+    onKeyDown?.(event);
+    if (event.defaultPrevented || event.key !== 'Tab') return;
     const items = Array.from(
       event.currentTarget.querySelectorAll<HTMLElement>(
-        'a[href],button:not(:disabled),summary,[tabindex="0"]',
+        'a[href],button,input,select,textarea,summary,[tabindex], [contenteditable="true"]',
       ),
     ).filter(
       (element) =>
+        element.tabIndex >= 0 &&
+        !element.matches(':disabled') &&
+        !element.closest('[inert]') &&
         element.getClientRects().length &&
         (!element.closest('details:not([open])') || element.tagName === 'SUMMARY'),
     );
     const first = items[0];
     const last = items.at(-1);
+    if (!first) {
+      event.preventDefault();
+      return;
+    }
     if (event.shiftKey && document.activeElement === first) {
       event.preventDefault();
       last?.focus();
     } else if (!event.shiftKey && document.activeElement === last) {
       event.preventDefault();
-      first?.focus();
+      first.focus();
     }
   }
   return (
     <dialog
+      {...props}
       ref={dialogRef}
-      className={styles.dialog}
+      className={[styles.dialog, className].filter(Boolean).join(' ')}
       aria-labelledby={titleId}
       onKeyDown={keepFocus}
-      onClose={onClose}
     >
       {children}
     </dialog>

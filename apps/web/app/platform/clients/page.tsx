@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { PlatformAccounts } from '../../components/platform-accounts';
 import { ClientsIcon } from '../../components/clients-icon';
+import { DirectoryTable, Pagination } from '../../components/ui/directory';
+import { Badge } from '../../components/ui/controls';
 import styles from './clients.module.css';
 import { api, useContext, Guest, Pending, Feedback } from '../../components/auth-ui';
 type Client = {
@@ -286,7 +288,7 @@ export default function ClientDirectory() {
               <ClientsIcon name="sort" />
             </span>
           </button>
-          <table className={styles.table}>
+          <DirectoryTable className={styles.table}>
             <caption className="sr-only">Client directory</caption>
             <thead>
               <tr>
@@ -332,7 +334,8 @@ export default function ClientDirectory() {
                     </div>
                   </td>
                   <td data-label="Status">
-                    <span
+                    <Badge
+                      tone={client.suspended ? 'warning' : client.active ? 'success' : undefined}
                       className={styles.badge}
                       data-state={
                         client.suspended ? 'suspended' : client.active ? 'active' : 'inactive'
@@ -344,7 +347,7 @@ export default function ClientDirectory() {
                         : client.active
                           ? 'Active'
                           : 'Directory inactive'}
-                    </span>
+                    </Badge>
                   </td>
                   <td data-label="Members">{client.members}</td>
                   <td data-label="Client admins">{client.admins}</td>
@@ -392,7 +395,7 @@ export default function ClientDirectory() {
                 </tr>
               )}
             </tbody>
-          </table>
+          </DirectoryTable>
           <div className={styles.directoryFooter}>
             <p role="status">
               {data
@@ -403,7 +406,7 @@ export default function ClientDirectory() {
               {loading && data ? ' ? Updating?' : ''}
             </p>
             {data && data.total > 20 && (
-              <nav className={styles.pagination} aria-label="Directory pages">
+              <Pagination aria-label="Directory pages">
                 <button
                   className={styles.manage}
                   disabled={page === 1 || loading}
@@ -419,7 +422,7 @@ export default function ClientDirectory() {
                 >
                   Next
                 </button>
-              </nav>
+              </Pagination>
             )}
             <p>
               Counts show effective access. Suspended clients have zero effective members and

@@ -1,51 +1,29 @@
-/* Shared Overview/Clients tokens and layout; other routes retain the existing shell. */
+/* Reference shell. Shared tokens are opt-in until each route is verified. */
 .shell {
-  --ov-sidebar: var(--surface);
-  --ov-active: var(--hover);
-  --ov-tertiary: var(--muted);
-  --ov-link: var(--primary);
-  --ov-accent: var(--primary);
-  --ov-warning: #855000;
-  --ov-warning-bg: #fff1cd;
-  --ov-glow: transparent;
+  composes: theme from '../components/ui/tokens.module.css';
+  --ov-sidebar: var(--ui-sidebar);
+  --ov-active: var(--ui-active);
+  --ov-tertiary: var(--ui-tertiary);
+  --ov-link: var(--ui-link);
+  --ov-accent: var(--ui-accent);
+  --ov-warning: var(--ui-warning);
+  --ov-warning-bg: var(--ui-warning-bg);
+  --ov-glow: var(--ui-glow);
   min-height: 100dvh;
-  background: var(--bg);
-  color: var(--ink);
-  font:
-    14px/1.5 Inter,
-    'Segoe UI',
-    sans-serif;
+  background: var(--ui-background);
+  color: var(--ui-text);
+  font: var(--ui-text-body)/1.5 var(--ui-font);
 }
-:global([data-theme='dark']) .shell {
-  color-scheme: dark;
-  --bg: #070b16;
-  --surface: #0d1426;
-  --raised: #111a30;
-  --hover: #16213d;
-  --ink: #e9edf7;
-  --muted: #98a2bc;
-  --line: #1a2440;
-  --primary: #7baaff;
-  --focus: #7baaff;
-  --on-primary: #070b16;
-  --soft: #14224a;
-  --ov-sidebar: #0a1020;
-  --ov-tertiary: #8492b0;
-  --ov-accent: #2f6beb;
-  --ov-warning: #fbbf4a;
-  --ov-warning-bg: #2b2010;
-  --ov-glow: rgba(23, 46, 117, 0.55);
-}
-.shell :is(p, h1, h2, h3, ul) {
+.shell :where(p, h1, h2, h3, ul) {
   margin: 0;
 }
-.shell a {
+.shell :where(a) {
   color: var(--ov-link);
 }
-.shell button {
+.shell :where(button) {
   font-family: inherit;
 }
-.shell img {
+.shell :where(img) {
   display: block;
   flex-shrink: 0;
 }
@@ -346,17 +324,8 @@
   flex-direction: column;
   gap: 24px;
 }
-.pageHeader h1 {
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: 600;
-  letter-spacing: -0.6px;
-}
-.pageHeader p {
-  margin-top: 8px;
-  font-size: 14px;
-  line-height: 22px;
-  color: var(--muted);
+.pageHeader {
+  composes: pageHeader from '../components/ui/controls.module.css';
 }
 .metrics {
   display: grid;
@@ -408,11 +377,11 @@
 .accountMetric {
   min-width: 0;
 }
-.panel,
+.panel {
+  composes: panel from '../components/ui/controls.module.css';
+}
 .emptyPanel {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--surface);
+  composes: panel from '../components/ui/controls.module.css';
 }
 .emptyPanel {
   padding: 20px;
@@ -550,19 +519,6 @@
 .bottomNav {
   display: none;
 }
-.dialog {
-  width: min(560px, calc(100% - 32px));
-  max-height: calc(100dvh - 48px);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--surface);
-  color: var(--ink);
-  padding: 24px;
-  overflow: auto;
-}
-.dialog::backdrop {
-  background: #000a;
-}
 .dialogHeader {
   display: flex;
   align-items: center;
@@ -572,19 +528,6 @@
 }
 .dialogHeader h2 {
   font-size: 20px;
-}
-.dialog p {
-  margin: 12px 0;
-}
-.dialog dl > div {
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.dialog dd {
-  overflow-wrap: anywhere;
-}
-.dialog :global(.theme-options) {
-  position: static;
 }
 .settingsLinks {
   display: flex;
@@ -655,10 +598,6 @@
   }
   .content {
     padding: 8px 16px 24px;
-  }
-  .pageHeader h1 {
-    font-size: 24px;
-    line-height: 32px;
   }
   .metrics {
     grid-template-columns: minmax(0, 1fr);

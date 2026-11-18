@@ -54,6 +54,18 @@ test('Settings preserves versioned branding, previews, status and permissions on
     ).toEqual([]);
   }
   await expect(name).toHaveValue('Scalyn');
+  await expect(
+    page.getByText(
+      'Platform defaults inherited by all clients. Client settings and personal themes take precedence.',
+      { exact: true },
+    ),
+  ).toHaveCSS('margin-top', '8px');
+  await name.focus();
+  await page.keyboard.press('Tab');
+  await expect(form.getByLabel('Application name', { exact: true })).toBeFocused();
+  await sections.getByRole('link', { name: 'Appearance', exact: true }).focus();
+  await page.keyboard.press('Tab');
+  await expect(sections.getByRole('link', { name: 'System status' })).toBeFocused();
   await a11y();
   await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
@@ -73,6 +85,8 @@ test('Settings preserves versioned branding, previews, status and permissions on
   await page.screenshot({ path: `${screenshots}/settings-status-mobile.png`, fullPage: true });
   await sections.getByRole('link', { name: 'Appearance', exact: true }).click();
   await expect(name).toHaveValue('Scalyn');
+  await expect(name).toHaveCSS('font-size', '16px');
+  await expect(form.getByLabel('Default theme')).toHaveCSS('font-size', '16px');
   await a11y();
   await page.setViewportSize({ width: 390, height: 1900 });
   await page.screenshot({ path: `${screenshots}/settings-appearance-mobile.png`, fullPage: true });

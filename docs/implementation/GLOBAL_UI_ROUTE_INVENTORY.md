@@ -105,3 +105,17 @@ Paths below are relative to `apps/web/app`. `page.tsx` is the entry component un
 Record implementation paths/commit, applicable roles and denial cases, desktop/mobile screenshots, keyboard/dialog focus checks, axe/contrast results, light/dark/client-brand/personal-theme behavior, navigation and unsaved work, validation/stale/empty/error/retry checks, isolated test commands/results, and any pre-existing issue. Cross out no route until its contents, child dialogs and states have evidence. Human acceptance and production readiness are separate from automated verification.
 
 The integration prep is verified separately in `GLOBAL_UI_INTEGRATION.md`. No row has been marked complete by that prep, and no global visual migration is claimed yet.
+
+## Shared foundation checkpoint — 18 November 2026
+
+The first extraction is implemented and locally verified: semantic tokens and reusable controls, native dialog, directory/stacked rows and pagination now have reference consumers. See `GLOBAL_UI_FOUNDATION_QA.md` for exact files, seven passing browser suites, build/typecheck evidence, screenshots, corrections and preservation checks. UX Engine is available and used; its earlier missing-package finding is resolved.
+
+| Reference routes | Foundation adoption / regression evidence | Remaining migration work |
+| --- | --- | --- |
+| `/platform` | Shared token scope, PageHeader, Panel, Button, Feedback and Dialog; Overview browser checks and desktop/mobile inspection | Generalized shell, final consumer cleanup and route qualification |
+| `/platform/clients` | Shared token scope, DirectoryTable with all stacked cells, Badge and Pagination; Clients and history checks, desktop/mobile inspection | Generalized shell, remaining account-access/dialog presentation and route qualification |
+| `/platform/people` | Extracted token scope and shared Personal settings dialog; People safeguard/browser regression and desktop inspection | Shared page-control adoption, generalized shell and final route qualification |
+| `/platform/audit` | Extracted token scope and shared Details dialog; Audit browser checks and desktop/dialog-mobile inspection | Remaining shared page-control adoption, generalized shell and final route qualification |
+| `/platform/settings`, `/platform/settings/status`, `/platform/appearance` | Shared headers, route tabs, ordinary fields, actions, feedback and token scope; Settings browser checks including alias, desktop/mobile inspection | Generalized shell, remaining specialized controls and final route qualification |
+
+Foundation extraction is distinct from global adoption: the foundation and route checkboxes above stay open until their full consumer coverage passes. The legacy shell and guest/account/client/learning/assessment surfaces remain unconverted. The assessment workflow-fix source is still awaiting confirmation.

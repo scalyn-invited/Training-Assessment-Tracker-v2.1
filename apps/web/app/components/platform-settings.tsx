@@ -2,9 +2,10 @@
 import { useEffect, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { api, Guest, useContext, Pending, Feedback } from './auth-ui';
+import { api, Guest, useContext, Pending } from './auth-ui';
 import type { AppearanceBrand } from './appearance';
 import { generate, themes } from '../../../../packages/domain/src/theme';
+import { Button, Input, Select, PageHeader, RouteTabs, Feedback } from './ui/controls';
 import layout from '../platform/overview.module.css';
 import styles from '../platform/settings/settings.module.css';
 
@@ -41,27 +42,21 @@ export function SettingsLayout({
         </>
       ) : (
         <div className={`${layout.page} ${styles.page}`}>
-          <header className={layout.pageHeader}>
-            <h1>Settings</h1>
-            <p>
-              Platform defaults inherited by all clients. Client settings and personal themes take
-              precedence.
-            </p>
-          </header>
-          <nav className={styles.tabs} aria-label="Settings sections">
-            <Link
-              href="/platform/settings"
-              aria-current={tab === 'appearance' ? 'page' : undefined}
-            >
-              Appearance
-            </Link>
-            <Link
-              href="/platform/settings/status"
-              aria-current={tab === 'status' ? 'page' : undefined}
-            >
-              System status
-            </Link>
-          </nav>
+          <PageHeader title="Settings">
+            Platform defaults inherited by all clients. Client settings and personal themes take
+            precedence.
+          </PageHeader>
+          <RouteTabs
+            label="Settings sections"
+            items={[
+              { href: '/platform/settings', label: 'Appearance', active: tab === 'appearance' },
+              {
+                href: '/platform/settings/status',
+                label: 'System status',
+                active: tab === 'status',
+              },
+            ]}
+          />
           {children}
         </div>
       )}
@@ -96,7 +91,7 @@ export function PlatformAppearanceForm({
             <span className={styles.required} aria-hidden="true">
               *
             </span>
-            <input
+            <Input
               name="displayName"
               aria-label="Platform display name"
               value={name}
@@ -110,7 +105,7 @@ export function PlatformAppearanceForm({
             <span className={styles.required} aria-hidden="true">
               *
             </span>
-            <input
+            <Input
               name="appName"
               aria-label="Application name"
               defaultValue={brand.appName}
@@ -150,13 +145,13 @@ export function PlatformAppearanceForm({
           </div>
           <label>
             Default theme
-            <select name="theme" defaultValue={brand.theme}>
+            <Select name="theme" defaultValue={brand.theme}>
               {Object.entries(themes).map(([key, label]) => (
                 <option key={key} value={key}>
                   {label}
                 </option>
               ))}
-            </select>
+            </Select>
           </label>
           <div className={styles.field}>
             <label htmlFor="platform-logo">Platform logo</label>
@@ -198,7 +193,7 @@ export function PlatformAppearanceForm({
             <span className={styles.required} aria-hidden="true">
               *
             </span>
-            <input
+            <Input
               name="reason"
               aria-label="Reason for change"
               placeholder="Explain the change"
@@ -213,12 +208,12 @@ export function PlatformAppearanceForm({
           </label>
         </fieldset>
         <div className={styles.actions}>
-          <button className={styles.save} disabled={busy} aria-busy={busy}>
+          <Button type="submit" variant="primary" disabled={busy} aria-busy={busy}>
             {busy ? 'Saving appearance...' : 'Save appearance'}
-          </button>
-          <button className={styles.discard} type="button" disabled={busy} onClick={discard}>
+          </Button>
+          <Button disabled={busy} onClick={discard}>
             Discard changes
-          </button>
+          </Button>
         </div>
       </form>
       <aside className={styles.previews} aria-label="Live appearance preview">
@@ -285,11 +280,7 @@ export function PlatformSystemStatus() {
   return (
     <SettingsLayout tab="status">
       <Feedback error={error} />
-      {error && (
-        <button className="secondary" onClick={() => setRevision((n) => n + 1)}>
-          Retry system status
-        </button>
-      )}
+      {error && <Button onClick={() => setRevision((n) => n + 1)}>Retry system status</Button>}
       {!data && !error && <p role="status">Loading system status...</p>}
       {data && (
         <section className={styles.connections} aria-labelledby="connections-title">

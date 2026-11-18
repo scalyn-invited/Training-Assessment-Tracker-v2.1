@@ -2,24 +2,6 @@
   --settings-input-size: 14px;
   gap: 24px;
 }
-.tabs {
-  display: flex;
-  gap: 4px;
-  border-bottom: 1px solid var(--line);
-}
-.tabs a {
-  padding: 11px 14px;
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 500;
-  border-bottom: 2px solid transparent;
-}
-.tabs a[aria-current] {
-  color: var(--ink);
-  border-bottom-color: var(--ov-accent);
-}
 .columns {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 400px;
@@ -221,28 +203,6 @@
   background: var(--raised);
   border-top: 1px solid var(--line);
 }
-.actions button {
-  margin: 0;
-  min-height: 36px;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  line-height: 18px;
-  font-weight: 500;
-}
-.save {
-  background: var(--ov-accent);
-  color: var(--on-primary);
-  border: 1px solid transparent;
-}
-:global([data-theme='dark']) .save {
-  color: white;
-}
-.discard {
-  background: var(--raised);
-  color: var(--ink);
-  border: 1px solid var(--muted);
-}
 .previews {
   display: flex;
   flex-direction: column;
@@ -419,7 +379,6 @@
 }
 @media (pointer: coarse) {
   .actions button,
-  .tabs a,
   .fields .fileButton,
   .fields :is(input:not([type='checkbox']), select) {
     min-height: 44px;
