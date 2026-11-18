@@ -63,6 +63,12 @@ Keep administration's existing section order: team creation, people/assignments,
 
 The shared form layout leaves hidden forms hidden, including enrolment review. Its low-specificity form rules let desktop search rows remain horizontal. Dialog sections use 16px gaps; actions/radio groups wrap with 8px gaps. Before: these surfaces used legacy global panels/tables/dialogs. After: the reference type scale, semantic palettes, 14px panels, 8px controls and compact responsive spacing apply to their contents and states. Evidence: `GLOBAL_UI_CLIENT_ADMIN_QA.md`.
 
+## Client AI settings and Appearance
+
+`/settings/ai` and `/settings/appearance` retain their existing section order and workflows inside the shared learning shell. AI settings use shared panels and native fields for the registry, task routes and uncertain-charge reconciliation. Keep exact routing versions, budget units, reload/charge confirmations, pending and disabled actions. No new provider or billing flow is introduced.
+
+Client Appearance uses the same shared form layout and a scoped theme gallery and generated-preview component stylesheet. Before: legacy 16px workspace typography, generic panel/control radii and global gallery/preview selectors. After: the reference 14px body/32px desktop title, semantic navy/light/generated surfaces, 14px panels, 8px controls and 24/16/8px section/form/control spacing. Preserve the existing gallery's 135px minimum tracks and 72px swatches; at 800px use two gallery columns and one preview column. Preview colours still come from the existing palette generator, never the surrounding theme. Personal themes, inherited platform branding, client modes, native logo selection/removal and versioned saves are unchanged. Shared feedback and reload controls also apply to the existing platform Appearance consumer and require its regression suite. Evidence: `GLOBAL_UI_CLIENT_SETTINGS_QA.md`.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
