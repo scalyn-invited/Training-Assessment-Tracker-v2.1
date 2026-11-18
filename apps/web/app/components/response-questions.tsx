@@ -1,5 +1,6 @@
 'use client';
 import type { CSSProperties } from 'react';
+import { questionReference } from './question-reference';
 export type Question = {
   id: string;
   type: string;
@@ -18,12 +19,16 @@ export type Section = { id: string; title: string; instructions: string; questio
 export type Answers = Record<string, unknown>;
 export function ResponseQuestions({
   questions,
+  allQuestions = questions,
+  sections,
   answers,
   onChange,
   errors = {},
   prefix = 'response',
 }: {
   questions: Question[];
+  allQuestions?: Question[];
+  sections?: Section[] | null;
   answers: Answers;
   onChange?: (id: string, value: unknown) => void;
   errors?: Record<string, string>;
@@ -31,12 +36,12 @@ export function ResponseQuestions({
 }) {
   return (
     <>
-      {questions.map((q, index) => {
+      {questions.map((q) => {
         const value = answers[q.id],
           title = prefix + '-' + q.id;
         return (
           <section key={q.id} className="panel">
-            <h3 id={title}>Question {index + 1}</h3>
+            <h3 id={title}>{questionReference(q.id, allQuestions, sections)}</h3>
             {q.prompt_html ? (
               <div
                 className="assessment-prompt"

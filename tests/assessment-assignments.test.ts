@@ -202,6 +202,50 @@ it('pins team rules, includes future eligible records and does not replace indiv
       .total,
   ).toBe(2);
 });
+it('QA D08 published-copy creation preserves old individual and team pins', async () => {
+  const source = await definitions.get(coordinator.token, client, definition);
+  const before = (
+    await instance.db.pool.query(
+      'SELECT id,definition_id,team_rule_id FROM assessment_assignments ORDER BY id',
+    )
+  ).rows;
+  const rules = (
+    await instance.db.pool.query('SELECT id,definition_id FROM assessment_team_rules ORDER BY id')
+  ).rows;
+  const copy = await definitions.save(
+    coordinator.token,
+    coordinator.csrf,
+    client,
+    {
+      title: 'Synthetic revised assessment',
+      questions: source.questions,
+      sections: source.sections,
+      answer_key: source.answer_key,
+      rubric: source.rubric,
+    },
+    definition,
+    source.version,
+    randomUUID(),
+  );
+  expect(copy.id).not.toBe(definition);
+  expect(await definitions.get(coordinator.token, client, copy.id)).toMatchObject({
+    status: 'draft',
+    revision: source.revision + 1,
+    family_id: source.family_id,
+  });
+  expect(await definitions.get(coordinator.token, client, definition)).toEqual(source);
+  expect(
+    (
+      await instance.db.pool.query(
+        'SELECT id,definition_id,team_rule_id FROM assessment_assignments ORDER BY id',
+      )
+    ).rows,
+  ).toEqual(before);
+  expect(
+    (await instance.db.pool.query('SELECT id,definition_id FROM assessment_team_rules ORDER BY id'))
+      .rows,
+  ).toEqual(rules);
+});
 it('stops future assignments without deleting work and resumes only explicitly', async () => {
   await assignments.change(coordinator.token, coordinator.csrf, client, rule, 1, 'stop');
   const later = await enrol('Stopped-rule programme');

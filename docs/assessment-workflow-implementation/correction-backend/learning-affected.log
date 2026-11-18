@@ -1,0 +1,39 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [32m✓[39m tests/learning-grading.test.ts[2m > [22mrequires current reviewer authority, exact version and sufficient evidence for approval[33m 6310[2mms[22m[39m
+ [32m✓[39m tests/learning-grading.test.ts[2m > [22mpreserves approved feedback while a later human review requests changes, then replaces evidence on regrade[33m 6171[2mms[22m[39m
+ [32m✓[39m tests/learning-grading.test.ts[2m > [22mrecords only comparable approved grades with immutable snapshot lineage and approved feed events[33m 4956[2mms[22m[39m
+ [32m✓[39m tests/learning-grading.test.ts[2m > [22mrequires an independent role-bound alternate during an appeal and closes case access when upheld[33m 4189[2mms[22m[39m
+ [32m✓[39m tests/learning-grading.test.ts[2m > [22mdoes not revive alternate authority when a qualifying role is revoked and replaced[33m 2210[2mms[22m[39m
+ [32m✓[39m tests/delivery.test.ts[2m > [22mactivates only an exact approved enrolment and atomically pins blocks, measures and notice[33m 14206[2mms[22m[39m
+ [32m✓[39m tests/delivery.test.ts[2m > [22mpreviews future lessons and publishes immutable quizzes without exposing answer keys[33m 1803[2mms[22m[39m
+ [32m✓[39m tests/delivery.test.ts[2m > [22mrequires reasoned early start and protects member drafts from stale writes and coordinator access[33m 2774[2mms[22m[39m
+ [32m✓[39m tests/delivery.test.ts[2m > [22mpins zero-index answers and rubrics into idempotent immutable attempts[33m 2004[2mms[22m[39m
+ [32m✓[39m tests/delivery.test.ts[2m > [22mrechecks evidence scan state at submission and rejects evidence from another enrolment[33m 825[2mms[22m[39m
+ [32m✓[39m tests/delivery.test.ts[2m > [22mrejects empty work, wrong lesson and access after sensitive grant revocation[33m 1083[2mms[22m[39m
+ [32m✓[39m tests/learning-lifecycle.test.ts[2m > [22mrequires current coordinator and version; pausing retains work and blocks new drafts[33m 1786[2mms[22m[39m
+ [32m✓[39m tests/learning-lifecycle.test.ts[2m > [22mpreviews explicit rescheduling without mutation; preserves started history on resumption[33m 2586[2mms[22m[39m
+ [32m✓[39m tests/learning-lifecycle.test.ts[2m > [22mrejects changed calendars and capacity without partially applying a preview[33m 3376[2mms[22m[39m
+ [32m✓[39m tests/learning-lifecycle.test.ts[2m > [22mcompletion rejects missing required approved evidence and rolls back all effects[33m 912[2mms[22m[39m
+ [32m✓[39m tests/learning-lifecycle.test.ts[2m > [22mrequires sufficient on-target KPIs and completes atomically only after all evidence is approved[33m 7595[2mms[22m[39m
+ [32m✓[39m tests/onboarding.test.ts[2m > [22mkeeps partial drafts encrypted, immutable and exact-versioned[33m 718[2mms[22m[39m
+ [32m✓[39m tests/onboarding.test.ts[2m > [22mrequires independent coordinator confirmation and clears it on ordinary edits[33m 1853[2mms[22m[39m
+ [32m✓[39m tests/onboarding.test.ts[2m > [22mvalidates source durations, limits, nested metadata and complete inputs[32m 106[2mms[22m[39m
+ [32m✓[39m tests/onboarding.test.ts[2m > [22mconfirms exact schedule and calendar versions without changing enrolment readiness[33m 2118[2mms[22m[39m
+ [32m✓[39m tests/onboarding.test.ts[2m > [22mshares member capacity between programmes and rejects conflicting calendar changes[33m 1557[2mms[22m[39m
+ [32m✓[39m tests/onboarding.test.ts[2m > [22mrequires every complete step and a trusted assessment confirmation before plan creation[32m 105[2mms[22m[39m
+ [32m✓[39m tests/onboarding.test.ts[2m > [22muses the same calendar for a second enrolment without leaking calendar audit metadata[33m 364[2mms[22m[39m
+ [32m✓[39m tests/onboarding.test.ts[2m > [22mrevocation and active training block later mutations without losing history[33m 357[2mms[22m[39m
+ [32m✓[39m tests/mock-identity.test.ts[2m > [22msynthetic delegated identity contract[2m > [22maccepts exact delegated claims and denies disabled or production harnesses[32m 8[2mms[22m[39m
+ [32m✓[39m tests/mock-identity.test.ts[2m > [22msynthetic delegated identity contract[2m > [22mrejects tampering, malformed signatures, oversize credentials and unsafe claim combinations[32m 3[2mms[22m[39m
+ [32m✓[39m tests/mock-identity.test.ts[2m > [22msynthetic delegated identity contract[2m > [22mkeeps missing scopes, revoked identity and stale permissions distinct[32m 1[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m5 passed[39m[22m[90m (5)[39m
+[2m      Tests [22m [1m[32m27 passed[39m[22m[90m (27)[39m
+[2m   Start at [22m 21:57:52
+[2m   Duration [22m 133.50s[2m (tests 97%, import 2%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/correction-backend/learning-affected.json
+
+EXIT 0

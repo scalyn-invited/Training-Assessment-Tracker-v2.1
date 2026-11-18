@@ -1,0 +1,12 @@
+import { PGlite } from '@electric-sql/pglite';
+import {testDatabase} from '../../tests/helpers.js';
+console.log('START PGlite create');
+const p = await PGlite.create();
+console.log('PGlite created');
+console.log(await p.query('select 1 as probe'));
+await p.close();
+console.log('START socket helper and migrations');
+const instance = await testDatabase();
+console.log('Migrations complete');
+await instance.close();
+console.log('CLOSED');

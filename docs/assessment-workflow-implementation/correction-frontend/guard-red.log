@@ -1,0 +1,74 @@
+
+Running 2 tests using 1 worker
+
+  x  1 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery 409 retains complete local draft through denied/unavailable comparison and cancel (4.8s)
+  x  2 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery lost-response retains complete local draft through denied/unavailable comparison and cancel (3.6s)
+
+
+  1) docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery 409 retains complete local draft through denied/unavailable comparison and cancel 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 1
+
+    - Array [
+    -   "confirm",
+    - ]
+    + Array []
+
+      685 |     page.on('dialog',cancelLeave);
+      686 |     await page.getByRole('link',{name:'Recovery navigation probe'}).click();
+    > 687 |     expect(leaveDialogs).toEqual(['confirm']);
+          |                          ^
+      688 |     page.off('dialog',cancelLeave);
+      689 |     for(access of ['denied','unavailable']) {
+      690 |       await compare.click();
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:687:26
+
+    Error Context: .runtime\correction-browser-results\workflow-D03-recovery-409--f4b67-lable-comparison-and-cancel\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\correction-browser-results\workflow-D03-recovery-409--f4b67-lable-comparison-and-cancel\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\correction-browser-results\workflow-D03-recovery-409--f4b67-lable-comparison-and-cancel\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery lost-response retains complete local draft through denied/unavailable comparison and cancel 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 1
+
+    - Array [
+    -   "confirm",
+    - ]
+    + Array []
+
+      685 |     page.on('dialog',cancelLeave);
+      686 |     await page.getByRole('link',{name:'Recovery navigation probe'}).click();
+    > 687 |     expect(leaveDialogs).toEqual(['confirm']);
+          |                          ^
+      688 |     page.off('dialog',cancelLeave);
+      689 |     for(access of ['denied','unavailable']) {
+      690 |       await compare.click();
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:687:26
+
+    Error Context: .runtime\correction-browser-results\workflow-D03-recovery-lost-81a02-lable-comparison-and-cancel\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\correction-browser-results\workflow-D03-recovery-lost-81a02-lable-comparison-and-cancel\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\correction-browser-results\workflow-D03-recovery-lost-81a02-lable-comparison-and-cancel\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery 409 retains complete local draft through denied/unavailable comparison and cancel 
+    docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery lost-response retains complete local draft through denied/unavailable comparison and cancel 
+
+EXIT 1

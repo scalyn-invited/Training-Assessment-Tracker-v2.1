@@ -1,0 +1,8 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{execFileSync}=require('node:child_process');
+const out=__dirname;
+for(const mode of ['browser','next'])fs.cpSync(path.resolve('.runtime/review-d03-02-correction-'+mode+'-results'),path.join(out,'green-traces',mode),{recursive:true,errorOnExist:true,force:false});
+const read=p=>JSON.parse(fs.readFileSync(path.join(out,p),'utf8'));
+const result={testedCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),red:read('red/browser.json').stats,browser:read('browser.json').stats,next:read('next.json').stats,domain:{passed:read('focused-final.json').numPassedTests,failed:read('focused-final.json').numFailedTests},race:{passed:read('domain.json').numPassedTests,failed:read('domain.json').numFailedTests},originalEvidenceDiff:execFileSync('git',['diff','56db8f9','--','docs/assessment-workflow-implementation/final-review','docs/assessment-workflow-implementation/correction-qa','docs/assessment-workflow-implementation/d03-correction'],{encoding:'utf8'}),trackedDiff:execFileSync('git',['diff'],{encoding:'utf8'})};
+fs.writeFileSync(path.join(out,'verification.json'),JSON.stringify(result,null,2));
+const manifest=[];function walk(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,entry.name);if(entry.isDirectory())walk(p);else if(entry.name!=='manifest.json'&&!p.includes('__pycache__'))manifest.push({path:path.relative(out,p),sha256:crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex')});}}walk(out);
+fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify(manifest,null,2));console.log(JSON.stringify(result,null,2));console.log('Retained files',manifest.length);

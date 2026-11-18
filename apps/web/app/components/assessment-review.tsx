@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState, useRef, type FormEvent } from 'react';
 import { api, Feedback, Pending } from './auth-ui';
+import { useWorkGuard } from './use-work-guard';
+import { workState } from './work-guard';
 type ScoreRow = {
   id: string;
   score: number | null;
@@ -28,6 +30,12 @@ type Extraction = {
   pages: number | null;
 };
 type ReviewData = {
+  returned?: {
+    attemptId: string;
+    feedback: string;
+    decisionId?: string;
+    returnedAt?: string;
+  } | null;
   status: string;
   canAnalyze: boolean;
   files: { id: string; name: string; status: string; extraction: Extraction | null }[];
@@ -40,7 +48,12 @@ type ReviewData = {
   rubricApplicable: boolean;
   objective: Result['objective'];
   appeal: { id: string; assigned: boolean; reason: string } | null;
-  approved: { approved_at: string; result: Result; criterionLabels: Record<string, string> } | null;
+  approved: {
+    attempt_id: string;
+    approved_at: string;
+    result: Result;
+    criterionLabels: Record<string, string>;
+  } | null;
   reviews: {
     id: string;
     kind: string;
@@ -55,7 +68,7 @@ type ReviewData = {
   } | null;
   evidence: { id: string; text: string }[];
 };
-type Action = (action: string, reason: string, extra?: Record<string, unknown>) => Promise<void>;
+type Action = (action: string, reason: string, extra?: Record<string, unknown>) => Promise<boolean>;
 export function AssessmentReview({
   id,
   client,
@@ -74,13 +87,22 @@ export function AssessmentReview({
   const [data, setData] = useState<ReviewData | null>(null),
     [error, setError] = useState(''),
     [busy, setBusy] = useState(false),
+    [writeStopped, setWriteStopped] = useState(false),
     [loading, setLoading] = useState(false),
     [message, setMessage] = useState('');
+  useWorkGuard({ dirty: false, pending: busy, uncertain: writeStopped });
   async function load(silent = false) {
     setError('');
     if (!silent) setLoading(true);
     try {
       const next = await api<ReviewData>('/assessments/reviews/' + id + '?clientId=' + client);
+      if (writeStopped || (data && next.attemptId !== data.attemptId && workState().dirty)) {
+        setWriteStopped(true);
+        setMessage(
+          `Server status: ${next.status}; version ${next.version}. Local review is retained separately and cannot be submitted. Reload to start a fresh review.`,
+        );
+        return;
+      }
       setData(next);
       if (next.canReview) onStatus(next.status);
     } catch (e) {
@@ -104,7 +126,7 @@ export function AssessmentReview({
     return () => window.clearInterval(timer);
   }, [queued, extracting, error, id, client]);
   const perform: Action = async (action, reason, extra = {}) => {
-    if (!data || busy) return;
+    if (!data || busy || writeStopped) return false;
     const confirmations: Record<string, string> = {
       approve: 'Approve this reviewed result and make the feedback visible to the member?',
       reject: 'Reject this attempt and allow the member to submit a new response?',
@@ -114,7 +136,7 @@ export function AssessmentReview({
         'Request synthetic provisional analysis? Verify the result independently before approving.',
       confirm: 'Confirm that this text has been checked against the original file?',
     };
-    if (action !== 'extract' && !window.confirm(confirmations[action])) return;
+    if (action !== 'extract' && !window.confirm(confirmations[action])) return false;
     setBusy(true);
     setError('');
     setMessage('');
@@ -130,7 +152,7 @@ export function AssessmentReview({
       });
       if (data.appeal && data.canReview && ['approve', 'reject', 'uphold'].includes(action)) {
         window.location.assign('/assessments?review=recorded');
-        return;
+        return true;
       }
       if (action === 'extract') {
         setMessage(
@@ -144,11 +166,16 @@ export function AssessmentReview({
         setMessage('File evidence confirmed. Review scores against the updated evidence.');
         await load();
       } else complete();
+      return true;
     } catch (e) {
+      const code = (e as Error & { code?: string }).code;
+      if (!code || ['stale_review', 'decision_state', 'review_forbidden'].includes(code))
+        setWriteStopped(true);
       setError(
         (e as Error).message +
           ' Your entered review is still here. If the outcome is uncertain, reload the assessment before trying again.',
       );
+      return false;
     } finally {
       setBusy(false);
     }
@@ -162,6 +189,13 @@ export function AssessmentReview({
     );
   return (
     <section aria-label="Assessment review and results">
+      {writeStopped && (
+        <p role="status">
+          Review writes are stopped. Refresh status to inspect the recorded outcome. Your entered
+          values remain here; reload only after reviewing the outcome and accepting that local edits
+          will be discarded.
+        </p>
+      )}
       <Feedback error={error} success={message} />
       {loading && <p role="status">Refreshing review...</p>}
       {error && (
@@ -184,6 +218,18 @@ export function AssessmentReview({
         </div>
       )}
       {data.approved && <ApprovedResult approved={data.approved} />}
+      {data.returned && (
+        <section className="panel">
+          <h2>Changes requested</h2>
+          <p style={{ whiteSpace: 'pre-wrap' }}>{data.returned.feedback}</p>
+          <p>
+            {data.appeal
+              ? 'Editing is paused while the appeal is open.'
+              : 'Revise your draft and submit a new attempt when ready. Previous attempts remain unchanged.'}{' '}
+            This guidance is not an approved grade.
+          </p>
+        </section>
+      )}
       {data.canReview && data.attemptId && (
         <>
           {data.objective && (
@@ -191,7 +237,10 @@ export function AssessmentReview({
               <h2>Automatic multiple-choice score</h2>
               <p>
                 {data.objective.percentage}% - {data.objective.correct} of {data.objective.total}{' '}
-                correct. This uses the assigned revision. Human approval is still required.
+                correct.{' '}
+                {data.approved?.attempt_id === data.attemptId
+                  ? 'This automatic score uses the assigned revision. The result above was approved.'
+                  : 'This uses the assigned revision. Human approval is still required.'}
               </p>
             </section>
           )}
@@ -219,7 +268,7 @@ export function AssessmentReview({
                   refresh={() => void load()}
                   index={index}
                   perform={perform}
-                  busy={busy || loading}
+                  busy={busy || loading || writeStopped}
                 />
               ) : (
                 <p key={file.id}>
@@ -258,7 +307,7 @@ export function AssessmentReview({
                 button="Request synthetic provisional analysis"
                 action="analysis"
                 perform={perform}
-                busy={busy || loading}
+                busy={busy || loading || writeStopped}
               />
             )}
           {data.status === 'technical_failure' && (
@@ -286,7 +335,7 @@ export function AssessmentReview({
               }
               data={data}
               perform={perform}
-              busy={busy || loading}
+              busy={busy || loading || writeStopped}
               status={data.status}
             />
           )}
@@ -299,7 +348,7 @@ export function AssessmentReview({
           button="Request alternate review"
           action="appeal"
           perform={perform}
-          busy={busy || loading}
+          busy={busy || loading || writeStopped}
         />
       )}
     </section>
@@ -413,6 +462,11 @@ function ConfirmFile({
   const [text, setText] = useState(''),
     [reason, setReason] = useState('');
   const edited = useRef(false);
+  const [confirmed, setConfirmed] = useState({ text: '', reason: '' });
+  useWorkGuard({
+    dirty: (edited.current && text !== confirmed.text) || reason !== confirmed.reason,
+    pending: busy,
+  });
   const pending = Boolean(
     extraction && ['queued', 'waiting_scan', 'running'].includes(extraction.status),
   );
@@ -501,7 +555,9 @@ function ConfirmFile({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          void perform('confirm', reason, { file, text });
+          void perform('confirm', reason, { file, text }).then((saved) => {
+            if (saved) setConfirmed({ text, reason });
+          });
         }}
       >
         <label>
@@ -571,6 +627,13 @@ function DecisionForm({
       ),
     ),
     [reason, setReason] = useState('');
+  const [returnFeedback, setReturnFeedback] = useState('');
+  const [returnError, setReturnError] = useState('');
+  const [baseline, setBaseline] = useState(JSON.stringify({ rows, reason, returnFeedback }));
+  useWorkGuard({
+    dirty: JSON.stringify({ rows, reason, returnFeedback }) !== baseline,
+    pending: busy,
+  });
   function patch(id: string, value: object) {
     setRows((current) => ({ ...current, [id]: { ...current[id], ...value } }));
   }
@@ -578,7 +641,16 @@ function DecisionForm({
     event.preventDefault();
     const action =
       ((event.nativeEvent as SubmitEvent).submitter as HTMLButtonElement)?.value ?? 'approve';
+    if (
+      action === 'reject' &&
+      (returnFeedback.trim().length < 8 || returnFeedback.trim().length > 4000)
+    ) {
+      setReturnError('Enter member-safe return feedback between 8 and 4,000 characters.');
+      return;
+    }
+    setReturnError('');
     void perform(action, reason, {
+      ...(action === 'reject' ? { return_feedback: returnFeedback.trim() } : {}),
       source: provisional?.id ?? null,
       result: {
         rubric_id: data.definitionId,
@@ -589,11 +661,35 @@ function DecisionForm({
           score: rows[c.id].score === '' ? null : Number(rows[c.id].score),
         })),
       },
+    }).then((saved) => {
+      if (saved)
+        setBaseline(
+          JSON.stringify({
+            rows,
+            reason,
+            returnFeedback: action === 'reject' ? returnFeedback : '',
+          }),
+        );
     });
   }
   return (
     <form className="panel" onSubmit={submit}>
       <h2>Human review</h2>
+      <Feedback error={returnError} />
+      <label>
+        Member-safe return feedback
+        <textarea
+          aria-label="Member-safe return feedback"
+          value={returnFeedback}
+          onChange={(e) => setReturnFeedback(e.target.value)}
+          maxLength={4000}
+          disabled={busy}
+        />
+      </label>
+      <p>
+        Required only when returning an attempt. This text is visible to the member; keep private
+        reasoning in the separate rationale field. It does not release scores.
+      </p>
       {provisional && (
         <p className="notice">
           Provisional analysis is prefilled. Independently verify every score and evidence reference

@@ -300,9 +300,18 @@ class ClientsController {
     return tenancy.select(token(req), d.csrf, d.clientId, true);
   }
   @Post('people') person(@Req() req: Request) {
-    const d = parse(z.object({ csrf, clientId: uuid, name: z.string().min(1).max(120),
-      email: z.string().email().max(200), role: z.enum(['member', 'coordinator']),
-      synthetic: z.boolean(), reason }), req);
+    const d = parse(
+      z.object({
+        csrf,
+        clientId: uuid,
+        name: z.string().min(1).max(120),
+        email: z.string().email().max(200),
+        role: z.enum(['member', 'coordinator']),
+        synthetic: z.boolean(),
+        reason,
+      }),
+      req,
+    );
     return tenancy.createPerson(token(req), d.csrf, d.clientId, d);
   }
   @Post('groups') group(@Req() req: Request) {
@@ -343,12 +352,36 @@ class ClientsController {
     );
   }
   @Post('roles/revoke') revoke(@Req() req: Request) {
-    const d = parse(z.object({ csrf, clientId: uuid, id: uuid, expectedAccountVersion: z.number().int().positive(), reason }), req);
-    return tenancy.revokeRole(token(req), d.csrf, d.clientId, d.id, d.reason, d.expectedAccountVersion);
+    const d = parse(
+      z.object({
+        csrf,
+        clientId: uuid,
+        id: uuid,
+        expectedAccountVersion: z.number().int().positive(),
+        reason,
+      }),
+      req,
+    );
+    return tenancy.revokeRole(
+      token(req),
+      d.csrf,
+      d.clientId,
+      d.id,
+      d.reason,
+      d.expectedAccountVersion,
+    );
   }
   @Post('teams/membership') team(@Req() req: Request) {
     const d = parse(
-      z.object({ csrf, clientId: uuid, memberId: uuid, expectedAccountVersion: z.number().int().positive(), teamId: uuid, join: z.boolean(), reason }),
+      z.object({
+        csrf,
+        clientId: uuid,
+        memberId: uuid,
+        expectedAccountVersion: z.number().int().positive(),
+        teamId: uuid,
+        join: z.boolean(),
+        reason,
+      }),
       req,
     );
     return tenancy.teamMembership(
@@ -389,8 +422,26 @@ class ClientsController {
     return tenancy.endAllocation(token(req), d.csrf, d.clientId, d.id, d.reason);
   }
   @Post('membership/end') leave(@Req() req: Request) {
-    const d = parse(z.object({ csrf, clientId: uuid, memberId: uuid, expectedAccountVersion: z.number().int().positive(), version, reason }), req);
-    return tenancy.leave(token(req), d.csrf, d.clientId, d.memberId, d.version, d.reason, d.expectedAccountVersion);
+    const d = parse(
+      z.object({
+        csrf,
+        clientId: uuid,
+        memberId: uuid,
+        expectedAccountVersion: z.number().int().positive(),
+        version,
+        reason,
+      }),
+      req,
+    );
+    return tenancy.leave(
+      token(req),
+      d.csrf,
+      d.clientId,
+      d.memberId,
+      d.version,
+      d.reason,
+      d.expectedAccountVersion,
+    );
   }
   @Post('sensitive') sensitive(@Req() req: Request) {
     const d = parse(
@@ -431,12 +482,36 @@ class PlatformController {
   }
 
   @Get('client-accounts') clientAccounts(@Req() req: Request) {
-    const d = z.object({search:z.string().max(120).default(''),page:z.coerce.number().int().min(1).max(100000).default(1),view:z.enum(['all','admins']).default('all')}).parse(req.query);
-    return platform.clientAccounts(token(req),d.search,d.page,d.view);
+    const d = z
+      .object({
+        search: z.string().max(120).default(''),
+        page: z.coerce.number().int().min(1).max(100000).default(1),
+        view: z.enum(['all', 'admins']).default('all'),
+      })
+      .parse(req.query);
+    return platform.clientAccounts(token(req), d.search, d.page, d.view);
   }
   @Post('client-accounts') clientAccount(@Req() req: Request) {
-    const d = parse(z.object({csrf,clientId:uuid,userId:uuid,action:z.enum(['join','grant','revoke']),expectedVersion:z.number().int().positive(),reason}),req);
-    return platform.clientRole(token(req),d.csrf,d.clientId,d.userId,d.action,d.expectedVersion,d.reason);
+    const d = parse(
+      z.object({
+        csrf,
+        clientId: uuid,
+        userId: uuid,
+        action: z.enum(['join', 'grant', 'revoke']),
+        expectedVersion: z.number().int().positive(),
+        reason,
+      }),
+      req,
+    );
+    return platform.clientRole(
+      token(req),
+      d.csrf,
+      d.clientId,
+      d.userId,
+      d.action,
+      d.expectedVersion,
+      d.reason,
+    );
   }
   @Get('clients') clients(@Req() req: Request) {
     const q = z
@@ -684,6 +759,7 @@ class AssessmentController {
         text: z.string().optional(),
         result: z.unknown().optional(),
         source: uuid.nullable().optional(),
+        return_feedback: z.string().trim().min(8).max(4000).optional(),
       }),
       req,
     );
@@ -748,6 +824,7 @@ class AssessmentController {
       d.reason,
       d.result,
       d.source ?? null,
+      d.return_feedback ?? null,
     );
   }
   @Post('appeals/:id/route') routeAppeal(@Req() req: Request, @Param('id') id: string) {

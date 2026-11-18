@@ -1,0 +1,16 @@
+
+Running 9 tests using 1 worker
+
+  ok 1 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: published (2.9s)
+  ok 2 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: draft (4.5s)
+  ok 3 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: unavailable (4.1s)
+  ok 4 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: denied (2.5s)
+  ok 5 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:173:1 › D03 stale save stops writes and offers authorized structured comparison (7.9s)
+  ok 6 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:202:1 › D03 unknown save replays exact operation before newer typing (4.1s)
+  ok 7 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery 409 retains complete local draft through denied/unavailable comparison and cancel (5.9s)
+  ok 8 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery lost-response retains complete local draft through denied/unavailable comparison and cancel (6.8s)
+  ok 9 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:708:1 › QA-D03 changed server draft after publication conflict offers recovery comparison (2.7s)
+
+  9 passed (47.0s)
+
+EXIT 0

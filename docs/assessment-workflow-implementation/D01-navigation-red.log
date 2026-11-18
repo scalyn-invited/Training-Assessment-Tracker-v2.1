@@ -1,0 +1,54 @@
+
+Running 2 tests using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:206:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (682ms)
+  x  2 tests\workflow-qa-browser\workflow.spec.ts:225:1 › D01 same-document Back and Forward cancellation retains author work (5.7s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:206:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Array [
+    -   "confirm",
+    +   "beforeunload",
+      ]
+
+      215 |   page.on('dialog', async d=>{dialogs.push(d.type());await d.dismiss();});
+      216 |   await page.getByRole('link',{name:'Leave fixture'}).click();
+    > 217 |   expect(dialogs).toEqual(['confirm']);
+          |                   ^
+      218 |   await expect(page.locator('#assessment-title')).toHaveValue('Retain on link cancel');
+      219 |   await page.evaluate(()=>{(window as any).cleanupBuilder();});
+      220 |   await page.getByRole('link',{name:'Leave fixture'}).click();
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:217:19
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D01-literal-link--28487-s-clean-navigation-proceeds\error-context.md
+
+  2) tests\workflow-qa-browser\workflow.spec.ts:225:1 › D01 same-document Back and Forward cancellation retains author work 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 0
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      232 |   page.on('dialog',async d=>{dialogs.push(d.type());await d.dismiss();});
+      233 |   await page.evaluate(()=>history.back());
+    > 234 |   await expect.poll(()=>dialogs.length).toBe(1);
+          |                                         ^
+      235 |   await expect(page).toHaveURL(origin+'/current');
+      236 |   await page.evaluate(()=>history.forward());
+      237 |   await expect.poll(()=>dialogs.length).toBe(2);
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:234:41
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D01-same-document-c036e-llation-retains-author-work\error-context.md
+
+  2 failed
+    tests\workflow-qa-browser\workflow.spec.ts:206:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds 
+    tests\workflow-qa-browser\workflow.spec.ts:225:1 › D01 same-document Back and Forward cancellation retains author work 

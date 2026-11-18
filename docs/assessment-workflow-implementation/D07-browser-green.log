@@ -1,0 +1,24 @@
+
+Running 19 tests using 1 worker
+
+  ok  1 tests\workflow-qa-browser\d05.spec.ts:85:3 › current approved attempt keeps accurate copy and review controls (1.7s)
+  ok  2 tests\workflow-qa-browser\d05.spec.ts:85:3 › pending attempt keeps accurate copy and review controls (1.9s)
+  ok  3 tests\workflow-qa-browser\d05.spec.ts:85:3 › newer attempt with earlier approval keeps accurate copy and review controls (2.1s)
+  ok  4 tests\workflow-qa-browser\workflow.spec.ts:105:1 › D04 preview discloses scope and uses pinned section references across views (2.9s)
+  ok  5 tests\workflow-qa-browser\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: published (1.8s)
+  ok  6 tests\workflow-qa-browser\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: draft (1.7s)
+  ok  7 tests\workflow-qa-browser\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: unavailable (1.6s)
+  ok  8 tests\workflow-qa-browser\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: denied (1.3s)
+  ok  9 tests\workflow-qa-browser\workflow.spec.ts:173:1 › D03 stale save stops writes and offers authorized structured comparison (2.1s)
+  ok 10 tests\workflow-qa-browser\workflow.spec.ts:202:1 › D03 unknown save replays exact operation before newer typing (1.2s)
+  ok 11 tests\workflow-qa-browser\workflow.spec.ts:230:1 › D06 existing published handoff targets exact ID; D08 saved copy lacks provenance (1.1s)
+  ok 12 tests\workflow-qa-browser\workflow.spec.ts:260:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (1.2s)
+  ok 13 tests\workflow-qa-browser\workflow.spec.ts:292:1 › D01 same-document Back and Forward cancellation retains author work (1.2s)
+  ok 14 tests\workflow-qa-browser\workflow.spec.ts:317:1 › D07 rejection requires separate member-safe feedback and transmits it separately (1.0s)
+  ok 15 tests\workflow-qa-browser\workflow.spec.ts:335:1 › D07 learner sees returned guidance without a released grade or private reason (832ms)
+  ok 16 tests\workflow-qa-browser\workflow.spec.ts:369:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (3.2s)
+  ok 17 tests\workflow-qa-browser\workflow.spec.ts:403:1 › D01 uncertain reviewer decision stops newer writes and retains fields (916ms)
+  ok 18 tests\workflow-qa-browser\workflow.spec.ts:437:3 › D01 switch canceled guard sends zero context mutations (1.6s)
+  ok 19 tests\workflow-qa-browser\workflow.spec.ts:437:3 › D01 logout canceled guard sends zero context mutations (1.7s)
+
+  19 passed (45.4s)

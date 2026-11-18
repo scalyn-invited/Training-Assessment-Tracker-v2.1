@@ -8,6 +8,7 @@ import { Icon } from './workspace-icon';
 import { ApplicationShell } from './application-shell';
 import { Button, Select, Feedback as SharedFeedback } from './ui/controls';
 import sharedStyles from './ui/application-shell.module.css';
+import { confirmWorkLeave, leaveAfterConfirmedMutation } from './work-guard';
 type Client = { id: string; name: string };
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { context } = useContext(),
@@ -91,11 +92,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   async function switchClient(e: React.FormEvent) {
     e.preventDefault();
     if (!context || busy || !selected) return;
+    if (!confirmWorkLeave()) return;
     setBusy('client');
     setError('');
     try {
       await api('/clients/select', { csrf: context.csrf, clientId: selected });
-      window.location.assign('/dashboard');
+      leaveAfterConfirmedMutation('/dashboard');
     } catch (e) {
       setError((e as Error).message);
       setBusy(null);
@@ -103,11 +105,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
   async function logout() {
     if (!context || busy) return;
+    if (!confirmWorkLeave()) return;
     setBusy('logout');
     setError('');
     try {
       await api('logout', { csrf: context.csrf });
-      window.location.assign('/login');
+      leaveAfterConfirmedMutation('/login');
     } catch (e) {
       setError((e as Error).message);
       setBusy(null);

@@ -1,0 +1,1181 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [2m[90m↓[39m[22m tests/postgres.test.ts [2m([22m[2m1 test[22m[2m | [22m[33m1 skipped[39m[2m)[22m
+ [32m✓[39m tests/document-extractions.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 243602[2mms[22m[39m
+   [33m[2m✓[22m[39m persists encrypted extraction drafts, deduplicates requests and requires explicit file confirmation[33m 13441[2mms[22m[39m
+   [33m[2m✓[22m[39m denies unrelated actors, stale attempts, quarantined files and unattached evidence[33m 21159[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves failed attempts and allows an explicit retry after tools become available[33m 18315[2mms[22m[39m
+   [33m[2m✓[22m[39m rechecks source hash and scan state after parsing and never publishes stale text[33m 20657[2mms[22m[39m
+   [33m[2m✓[22m[39m rechecks current reviewer authority and job lease before publishing[33m 19515[2mms[22m[39m
+   [33m[2m✓[22m[39m recovers a dispatch gap, fences stale workers and requires a new request after interruption[33m 5587[2mms[22m[39m
+   [33m[2m✓[22m[39m waits for a clean scan after admission and fences another runtime environment[33m 9618[2mms[22m[39m
+   [33m[2m✓[22m[39m cleans a stale failed private work directory without restarting extraction[33m 3848[2mms[22m[39m
+   [33m[2m✓[22m[39m cancels queued and running extraction on client suspension without revival[33m 5820[2mms[22m[39m
+   [33m[2m✓[22m[39m saves encrypted onboarding review drafts and atomically confirms source-bound findings[33m 11091[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the extraction review on stale onboarding and extraction versions[33m 9472[2mms[22m[39m
+   [33m[2m✓[22m[39m blocks source changes, private member reads and active onboarding replacement[33m 6872[2mms[22m[39m
+   [33m[2m✓[22m[39m waits for onboarding scans and rejects mixing initial-assessment confirmation paths[33m 21238[2mms[22m[39m
+   [33m[2m✓[22m[39m replays retention receipts to purge confirmed text while preserving immutable attribution[33m 18960[2mms[22m[39m
+ [2m[90m↓[39m[22m tests/client-services-postgres.test.ts [2m([22m[2m1 test[22m[2m | [22m[33m1 skipped[39m[2m)[22m
+ [32m✓[39m tests/assessment-analysis.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 170886[2mms[22m[39m
+   [33m[2m✓[22m[39m pins safe configuration, encrypts evidence and releases unused reserve only after provisional output[33m 13334[2mms[22m[39m
+   [33m[2m✓[22m[39m reserves budget atomically and rejects real-member or unsupported-provider requests without queued remnants[33m 22213[2mms[22m[39m
+   [33m[2m✓[22m[39m allows one repair, charges known usage, and stops repeated invalid output[33m 10536[2mms[22m[39m
+   [33m[2m✓[22m[39m switches to the pinned fallback only after throttling and respects the attempt bound[33m 21500[2mms[22m[39m
+   [33m[2m✓[22m[39m retains ambiguous reservations, never automatically retries, and requires explicit reconciliation[33m 6241[2mms[22m[39m
+   [33m[2m✓[22m[39m does not publish results after permission revocation, lease expiry, or provider policy withdrawal[33m 14401[2mms[22m[39m
+   [33m[2m✓[22m[39m recovers dispatch gaps but treats interrupted provider attempts as ambiguous[33m 6085[2mms[22m[39m
+   [33m[2m✓[22m[39m serializes provider calls per client without holding a transaction over provider I/O[33m 7249[2mms[22m[39m
+   [33m[2m✓[22m[39m counts known refusal charges and fails safely on a budget overrun[33m 13232[2mms[22m[39m
+   [33m[2m✓[22m[39m fences environment dispatch and cancels suspension without reactivation resurrection[33m 6277[2mms[22m[39m
+   [33m[2m✓[22m[39m limits provider administration to the selected client and returns only safe metadata[33m 1243[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 172564[2mms[22m[39m
+   [33m[2m✓[22m[39m QA D02 characterizes no-team appeal freeze and unavailable alternate routing[33m 21991[2mms[22m[39m
+   [33m[2m✓[22m[39m D07 separately authored return feedback is safe, encrypted and bound to the immutable attempt[33m 17346[2mms[22m[39m
+   [33m[2m✓[22m[39m D07 rejects empty explicitly supplied public feedback without a decision[33m 9926[2mms[22m[39m
+   [33m[2m✓[22m[39m QA D07 legacy rejection omits public feedback without leaking private rationale[33m 8801[2mms[22m[39m
+   [33m[2m✓[22m[39m requires reviewer authority, pins the latest version and projects approved results only[33m 11418[2mms[22m[39m
+   [33m[2m✓[22m[39m requires explicit current file confirmation and rechecks bytes at decision time[33m 5053[2mms[22m[39m
+   [33m[2m✓[22m[39m allows rejection and resubmission but never reviews a superseded attempt[33m 2587[2mms[22m[39m
+   [33m[2m✓[22m[39m routes case-only appeals and closes alternate record/file access immediately on resolution[33m 11488[2mms[22m[39m
+   [33m[2m✓[22m[39m binds appeal access to the exact role grant without revival[33m 6996[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps routing metadata separate from sensitive assessment details[33m 3347[2mms[22m[39m
+   [33m[2m✓[22m[39m blocks decisions during queued analysis and rejects a provisional source from another attempt[33m 5739[2mms[22m[39m
+ [31m❯[39m tests/learning-support.test.ts [2m([22m[2m8 tests[22m[2m | [22m[31m6 failed[39m[2m)[22m[33m 190478[2mms[22m[39m
+[31m   [31m×[31m selects N+2, keeps mock output provisional and requires exact current human approval[39m[33m 30198[2mms[22m[39m
+[31m   [31m×[31m atomically invalidates pending proposals and flags approved support after a source regrade[39m[33m 30139[2mms[22m[39m
+   [33m[2m✓[22m[39m resumption invalidates a pending proposal and preserves approved history[33m 26129[2mms[22m[39m
+[31m   [31m×[31m keeps KPI support provisional, pinned to immutable snapshots and private to coordinators[39m[33m 2525[2mms[22m[39m
+[31m   [31m×[31m retains ambiguous reservations without a usable suggestion[39m[33m 4260[2mms[22m[39m
+[31m   [31m×[31m checks the exact freeze boundary and refuses a target started during provider work[39m[33m 5728[2mms[22m[39m
+   [33m[2m✓[22m[39m returns final support without a provider call when no future block is eligible[33m 3496[2mms[22m[39m
+[31m   [31m×[31m rechecks revoked authority after provider work and keeps the known charge without applying output[39m[33m 5154[2mms[22m[39m
+ [32m✓[39m tests/learning-grading.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 104680[2mms[22m[39m
+   [33m[2m✓[22m[39m requires current reviewer authority, exact version and sufficient evidence for approval[33m 10129[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves approved feedback while a later human review requests changes, then replaces evidence on regrade[33m 12080[2mms[22m[39m
+   [33m[2m✓[22m[39m records only comparable approved grades with immutable snapshot lineage and approved feed events[33m 7357[2mms[22m[39m
+   [33m[2m✓[22m[39m requires an independent role-bound alternate during an appeal and closes case access when upheld[33m 5877[2mms[22m[39m
+   [33m[2m✓[22m[39m does not revive alternate authority when a qualifying role is revoked and replaced[33m 2850[2mms[22m[39m
+ [32m✓[39m tests/delivery.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 61340[2mms[22m[39m
+   [33m[2m✓[22m[39m activates only an exact approved enrolment and atomically pins blocks, measures and notice[33m 24347[2mms[22m[39m
+   [33m[2m✓[22m[39m previews future lessons and publishes immutable quizzes without exposing answer keys[33m 4261[2mms[22m[39m
+   [33m[2m✓[22m[39m requires reasoned early start and protects member drafts from stale writes and coordinator access[33m 5833[2mms[22m[39m
+   [33m[2m✓[22m[39m pins zero-index answers and rubrics into idempotent immutable attempts[33m 2947[2mms[22m[39m
+   [33m[2m✓[22m[39m rechecks evidence scan state at submission and rejects evidence from another enrolment[33m 1282[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects empty work, wrong lesson and access after sensitive grant revocation[33m 1980[2mms[22m[39m
+ [32m✓[39m tests/learning-lifecycle.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 79490[2mms[22m[39m
+   [33m[2m✓[22m[39m requires current coordinator and version; pausing retains work and blocks new drafts[33m 2266[2mms[22m[39m
+   [33m[2m✓[22m[39m previews explicit rescheduling without mutation; preserves started history on resumption[33m 3348[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects changed calendars and capacity without partially applying a preview[33m 5202[2mms[22m[39m
+   [33m[2m✓[22m[39m completion rejects missing required approved evidence and rolls back all effects[33m 1637[2mms[22m[39m
+   [33m[2m✓[22m[39m requires sufficient on-target KPIs and completes atomically only after all evidence is approved[33m 14403[2mms[22m[39m
+ [32m✓[39m tests/learning-grading-ai.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 76449[2mms[22m[39m
+   [33m[2m✓[22m[39m persists provisional mock grading privately and requires separate exact human approval[33m 11525[2mms[22m[39m
+   [33m[2m✓[22m[39m withdrawal during provider work prevents provisional application but retains accounted cost[33m 3362[2mms[22m[39m
+   [33m[2m✓[22m[39m retains ambiguous reservation and allows a supported human decision without retrying the provider[33m 7042[2mms[22m[39m
+   [33m[2m✓[22m[39m uses pinned quiz answers without an AI run and refuses to approve an unanswered criterion[33m 6966[2mms[22m[39m
+ [31m❯[39m tests/learning-plans.test.ts [2m([22m[2m6 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[33m 160043[2mms[22m[39m
+   [33m[2m✓[22m[39m requires complete current confirmed inputs and preserves dates against request tampering[33m 15155[2mms[22m[39m
+   [33m[2m✓[22m[39m requires bounded content, criterion weights, source KPIs and the full daily budget[33m 19850[2mms[22m[39m
+   [33m[2m✓[22m[39m approves exact content, preserves approved history and atomically replaces reservations[33m 17784[2mms[22m[39m
+[31m   [31m×[31m invalidates pending review on edit and blocks a second overlapping approval[39m[33m 30038[2mms[22m[39m
+[31m   [31m×[31m requires an explicit refreshed draft when inputs change and retains earlier lessons by position[39m[33m 30019[2mms[22m[39m
+[31m   [31m×[31m rechecks calendar revisions and current authority before approving[39m[33m 30003[2mms[22m[39m
+ [31m❯[39m tests/programme-generation.test.ts [2m([22m[2m9 tests[22m[2m | [22m[31m4 failed[39m[2m)[22m[33m 247698[2mms[22m[39m
+[31m   [31m×[31m reserves all four blocks, publishes only the complete draft and preserves approved history[39m[33m 30104[2mms[22m[39m
+   [33m[2m✓[22m[39m bounds schema repair per block and never publishes a partial failed run[33m 21040[2mms[22m[39m
+   [33m[2m✓[22m[39m rechecks changed baseline after provider I/O and retains all human content[33m 17435[2mms[22m[39m
+   [33m[2m✓[22m[39m retains ambiguous reservation, cancels sibling blocks and requires reconciliation[33m 26556[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects members, another client, stale inputs and exhausted budget before dispatch[33m 22939[2mms[22m[39m
+[31m   [31m×[31m rolls back a capacity-conflicted final draft but retains known usage charges[39m[33m 30029[2mms[22m[39m
+[31m   [31m×[31m recovers sibling jobs deferred while another block is performing external work[39m[33m 30021[2mms[22m[39m
+[31m   [31m×[31m keeps archived generation metadata readable after temporary input retention[39m[33m 30030[2mms[22m[39m
+   [33m[2m✓[22m[39m stops queued generation when authority is revoked[33m 13990[2mms[22m[39m
+ [31m❯[39m tests/learning-kpis.test.ts [2m([22m[2m4 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[33m 179126[2mms[22m[39m
+[31m   [31m×[31m restricts current authority and preserves comparability and future effective versions[39m[33m 30367[2mms[22m[39m
+[31m   [31m×[31m keeps insufficient samples nonnumeric and records encrypted verified evidence with immutable lineage[39m[33m 29110[2mms[22m[39m
+[31m   [31m×[31m bounds evidence and numeric input and evaluates lower and band targets without rewriting history[39m[33m 11178[2mms[22m[39m
+   [33m[2m✓[22m[39m serializes competing revisions and rechecks revoked coordinator authority[33m 16237[2mms[22m[39m
+ [32m✓[39m tests/learning-notices.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 44653[2mms[22m[39m
+   [33m[2m✓[22m[39m deduplicates dispatch, uses the test sink and preserves in-app updates without email[33m 993[2mms[22m[39m
+   [33m[2m✓[22m[39m rechecks revoked recipient authority before dispatch and before list pagination[33m 583[2mms[22m[39m
+   [33m[2m✓[22m[39m recovers missed dispatch but holds interrupted sending without replay[33m 365[2mms[22m[39m
+   [33m[2m✓[22m[39m sends only a secure workspace link and records relay acceptance with no duplicate[33m 1122[2mms[22m[39m
+   [33m[2m✓[22m[39m bounds explicit transient rejection to four attempts and never retries unknown outcomes[33m 2803[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps unconfigured or insecure live delivery in app without contacting SMTP[33m 654[2mms[22m[39m
+   [33m[2m✓[22m[39m rechecks authority after a committed sending claim before contacting the transport[33m 474[2mms[22m[39m
+ [32m✓[39m tests/assessment-responses.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 41990[2mms[22m[39m
+   [33m[2m✓[22m[39m limits editing to the member and never projects keys or rubric to the member[33m 3195[2mms[22m[39m
+   [33m[2m✓[22m[39m enforces section order and required matrix gates while retaining encrypted draft progress[33m 3261[2mms[22m[39m
+   [33m[2m✓[22m[39m accepts only accessible clean evidence from the same enrolment[33m 2957[2mms[22m[39m
+   [33m[2m✓[22m[39m does not permit other members to replay a submission reference[33m 1244[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves unsectioned multiple-choice responses and allows an unanswered choice[33m 1713[2mms[22m[39m
+ [32m✓[39m tests/onboarding.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 47357[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps partial drafts encrypted, immutable and exact-versioned[33m 2382[2mms[22m[39m
+   [33m[2m✓[22m[39m requires independent coordinator confirmation and clears it on ordinary edits[33m 5736[2mms[22m[39m
+   [33m[2m✓[22m[39m validates source durations, limits, nested metadata and complete inputs[33m 351[2mms[22m[39m
+   [33m[2m✓[22m[39m confirms exact schedule and calendar versions without changing enrolment readiness[33m 6306[2mms[22m[39m
+   [33m[2m✓[22m[39m shares member capacity between programmes and rejects conflicting calendar changes[33m 5354[2mms[22m[39m
+   [33m[2m✓[22m[39m uses the same calendar for a second enrolment without leaking calendar audit metadata[33m 979[2mms[22m[39m
+   [33m[2m✓[22m[39m revocation and active training block later mutations without losing history[33m 823[2mms[22m[39m
+ [32m✓[39m tests/operations.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 48783[2mms[22m[39m
+   [33m[2m✓[22m[39m defaults to dry-run and requires explicit approval before durable deletion[33m 1241[2mms[22m[39m
+   [33m[2m✓[22m[39m replays restored objects, skips changed keys and redacts extraction drafts[33m 911[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the durable receipt when physical removal fails and succeeds on replay[33m 866[2mms[22m[39m
+   [33m[2m✓[22m[39m requires scoped administrator authority and preserves held evidence[33m 1099[2mms[22m[39m
+   [33m[2m✓[22m[39m prunes only old terminal AI traces outside active holds, keeping accounting and metadata[33m 488[2mms[22m[39m
+   [33m[2m✓[22m[39m runs metadata and retention CLI commands against the isolated database[33m 15105[2mms[22m[39m
+ [32m✓[39m tests/platform.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 20294[2mms[22m[39m
+   [32m✓[39m platform administration authority and version guards [2m(11)[22m
+     [33m[2m✓[22m[39m lists effective administrators and searches eligible accounts without exposing credentials[33m 330[2mms[22m[39m
+     [33m[2m✓[22m[39m protects the last active administrator[33m 324[2mms[22m[39m
+     [33m[2m✓[22m[39m requires client role for sensitive access even for Global Admin[33m 841[2mms[22m[39m
+     [33m[2m✓[22m[39m suspension revokes users and stops work without reactivation resurrecting it[33m 523[2mms[22m[39m
+     [33m[2m✓[22m[39m ending membership checks version and ends dependent authority[33m 349[2mms[22m[39m
+     [33m[2m✓[22m[39m filters audit events and totals by environment before pagination[33m 355[2mms[22m[39m
+     [33m[2m✓[22m[39m denies audit history to a standard client account[33m 406[2mms[22m[39m
+ [32m✓[39m tests/assessment-assignments.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 36331[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects unpublished revisions and missing independent sensitive authority[33m 1170[2mms[22m[39m
+   [33m[2m✓[22m[39m assigns one pinned revision idempotently and exposes only scoped assignment metadata[33m 2364[2mms[22m[39m
+   [33m[2m✓[22m[39m pins team rules, includes future eligible records and does not replace individual assignments[33m 3633[2mms[22m[39m
+   [33m[2m✓[22m[39m stops future assignments without deleting work and resumes only explicitly[33m 2162[2mms[22m[39m
+   [33m[2m✓[22m[39m blocks future processing when the rule creator loses current authority[33m 927[2mms[22m[39m
+ [32m✓[39m tests/tenancy.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 15986[2mms[22m[39m
+   [32m✓[39m effective client and historical team authority [2m(11)[22m
+     [33m[2m✓[22m[39m keeps client choices scoped and rejects cross-client selection[33m 595[2mms[22m[39m
+     [33m[2m✓[22m[39m scopes administration lists to the selected authorized client[33m 1051[2mms[22m[39m
+     [33m[2m✓[22m[39m excludes inactive people from directory rows, counts and training candidates without changing membership history[33m 615[2mms[22m[39m
+     [33m[2m✓[22m[39m does not infer platform authority from the legacy user flag[33m 383[2mms[22m[39m
+     [33m[2m✓[22m[39m permits own records and allocated review but not administrative raw access[33m 385[2mms[22m[39m
+     [33m[2m✓[22m[39m denies cross-client roles and protects client-admin grants[33m 424[2mms[22m[39m
+     [33m[2m✓[22m[39m team removal revokes sessions and rejoining does not restore historical review[33m 742[2mms[22m[39m
+     [33m[2m✓[22m[39m ending a coordinator role ends allocations without reviving them on regrant[33m 387[2mms[22m[39m
+     [33m[2m✓[22m[39m requires explicit allocation replacement and rejects self-review[33m 440[2mms[22m[39m
+     [33m[2m✓[22m[39m denies stale imported permissions even with a valid session[33m 471[2mms[22m[39m
+ [32m✓[39m tests/accounts.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 26455[2mms[22m[39m
+   [32m✓[39m administrator issued local account actions [2m(8)[22m
+     [33m[2m✓[22m[39m requires administrator reauthentication and never grants access on issuance[33m 1222[2mms[22m[39m
+     [33m[2m✓[22m[39m sets a password once and grants only the initial Member role[33m 1531[2mms[22m[39m
+     [33m[2m✓[22m[39m requires the exact signed-in invitation recipient[33m 1065[2mms[22m[39m
+     [33m[2m✓[22m[39m reissues and cancels links without retaining usable older tokens[33m 1064[2mms[22m[39m
+     [33m[2m✓[22m[39m password reset revokes sessions but preserves optional MFA configuration[33m 1802[2mms[22m[39m
+     [33m[2m✓[22m[39m rejects expired links and changed issuer authority at redemption[33m 1404[2mms[22m[39m
+     [33m[2m✓[22m[39m a Client Admin cannot reset a Global Admin or issue cross-client access[33m 591[2mms[22m[39m
+     [33m[2m✓[22m[39m lists only scoped metadata and requires the invitation recipient before inspection[33m 1951[2mms[22m[39m
+ [32m✓[39m tests/evidence-files.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 38239[2mms[22m[39m
+   [33m[2m✓[22m[39m requires scoped member or primary sensitive authority for uploading[33m 1087[2mms[22m[39m
+   [33m[2m✓[22m[39m permits own supporting evidence only after scan success, with private projections[33m 1781[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps assessment-purpose and third-party sensitive files hidden from the member[33m 3644[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves quarantine after scanner failures and rejects infected or changed files[33m 4283[2mms[22m[39m
+   [33m[2m✓[22m[39m fences interrupted workers and recovers only when scanner configuration is present[33m 1073[2mms[22m[39m
+   [33m[2m✓[22m[39m rechecks client suspension before publishing a scanner result[33m 1115[2mms[22m[39m
+ [32m✓[39m tests/foundation-checks.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 40495[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves the detailed record and summary-only permission boundary[33m 1240[2mms[22m[39m
+   [33m[2m✓[22m[39m commits one exact-version request and audit, and preserves idempotency before later version changes[33m 1575[2mms[22m[39m
+   [33m[2m✓[22m[39m cancels queued work after version or identity revocation without creating a receipt[33m 788[2mms[22m[39m
+   [33m[2m✓[22m[39m recovers only local check leases, enforces three attempts, and leaves terminal receipts unchanged[33m 1053[2mms[22m[39m
+ [32m✓[39m tests/promotions.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 31360[2mms[22m[39m
+   [33m[2m✓[22m[39m prepares exact idempotent private requests and rejects synthetic, scope and key conflicts[33m 2429[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps unconfigured delivery prepared and reconciles ambiguity using the original key without historical export[33m 2528[2mms[22m[39m
+   [33m[2m✓[22m[39m quarantines wrong acknowledgements and duplicate primary mappings[33m 2295[2mms[22m[39m
+   [33m[2m✓[22m[39m rechecks identity before dispatch and current authority after the adapter returns[33m 1566[2mms[22m[39m
+   [33m[2m✓[22m[39m recovers missing queued dispatch without replaying ambiguous effects[33m 868[2mms[22m[39m
+ [32m✓[39m tests/document-parser.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 7791[2mms[22m[39m
+   [33m[2m✓[22m[39m extracts UTF-8 text in a real isolated child without application environment or bootstrap[33m 903[2mms[22m[39m
+   [33m[2m✓[22m[39m fails empty, non-UTF-8, oversized and unsupported input without returning document contents[33m 5153[2mms[22m[39m
+   [33m[2m✓[22m[39m extracts namespaced DOCX body paragraphs, table cells, tabs and breaks in a real child[33m 711[2mms[22m[39m
+   [33m[2m✓[22m[39m bounds actual native subprocess time and combined output and keeps errors content-free[33m 404[2mms[22m[39m
+ [32m✓[39m tests/installer.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 80893[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects injected connection fields and preserves nonempty or foreign-owned databases[33m 20090[2mms[22m[39m
+   [33m[2m✓[22m[39m advances owned stages once, preserves credentials and writes a safe hosted profile[33m 20705[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects changed administrator fingerprints and unsafe external overrides without resetting stages[33m 20929[2mms[22m[39m
+   [33m[2m✓[22m[39m resumes configuration failure after database completion without replacing the administrator[33m 19160[2mms[22m[39m
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mStarting fixture transaction
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mThree clients prepared
+Preparing scenario 1/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 2/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 3/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 4/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 5/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 6/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 7/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 8/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 9/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 10/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 11/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 12/21
+
+[90mstdout[2m | tests/realistic-demo.test.ts[2m > [22m[2mcreates the mock catalogue through ordinary services and replays only the identical manifest, records and evidence
+[22m[39mPreparing scenario 13/21
+
+(node:35024) TimeoutOverflowWarning: 5691886929 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35024) TimeoutOverflowWarning: 5691886919 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886902 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886898 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886886 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886879 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886861 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886856 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886844 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886838 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886830 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886827 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886813 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886809 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886802 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886798 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886781 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886773 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886758 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886747 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886716 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886704 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886689 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886680 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886656 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886650 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886634 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886631 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886614 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886611 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886592 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886588 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886575 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886570 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886565 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886558 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886545 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886541 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886528 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886521 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886512 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886507 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886492 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886486 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886480 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886475 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886449 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886446 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886430 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886429 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886415 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886406 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886404 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886397 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886393 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886384 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886381 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886372 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886370 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886363 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886360 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886356 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886352 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886342 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886340 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886334 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886324 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886307 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886304 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886299 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886297 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886289 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886279 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886267 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886258 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886256 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886251 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886249 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886242 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886241 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886233 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886232 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886227 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886218 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886207 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886205 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886198 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886195 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886190 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886188 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886184 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886173 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886171 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886167 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886165 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886162 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886161 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886157 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886156 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886150 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886147 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886143 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886130 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886122 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886120 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886115 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886114 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886110 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886109 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886105 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886101 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886094 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886090 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886080 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886079 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886071 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886068 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886056 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886054 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886007 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691886005 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885997 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885995 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885986 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885983 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885975 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885969 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885966 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885965 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885953 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885949 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885939 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885937 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885930 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885924 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885915 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885913 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885903 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885902 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885896 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885893 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885887 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885884 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885879 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885878 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885869 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885867 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885853 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885850 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885843 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885839 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885833 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885832 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885824 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885820 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885803 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885801 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885783 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885779 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885761 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885755 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885732 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885730 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885719 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885718 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885708 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885704 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885692 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885690 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885677 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885672 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885661 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885659 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885641 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885637 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885623 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885611 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885595 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885593 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885585 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885583 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885577 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885573 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885566 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885563 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885552 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885549 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885536 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885534 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885519 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885510 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885481 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885474 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885439 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885438 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885408 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885394 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885368 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885360 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885316 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885294 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885263 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885261 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885223 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885218 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885208 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885201 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885191 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885189 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885181 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885176 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885160 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885154 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885143 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885139 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885130 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885125 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885117 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885115 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885106 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885103 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885095 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885093 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885089 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885085 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885083 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885068 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885052 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885045 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885026 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885021 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885016 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885011 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885004 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691885002 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884992 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884985 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884974 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884973 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884963 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884957 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884940 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884938 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884928 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884925 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884874 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884867 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884849 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884843 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884818 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884812 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884787 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884780 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884765 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884759 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884747 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884743 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884734 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884732 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884720 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884717 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884706 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884700 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884694 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884683 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884667 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884657 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884636 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884625 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884613 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884608 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884593 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884590 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884585 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884583 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884574 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884573 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884564 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884562 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884546 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884534 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884520 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884515 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884494 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884491 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884483 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884480 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884475 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884471 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884457 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884451 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884443 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884439 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884423 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884419 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884401 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884400 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884388 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884384 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884376 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884374 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884365 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884363 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884358 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884354 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884337 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884330 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884320 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884314 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884303 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884299 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884284 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884281 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884276 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884274 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884272 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884269 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884262 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884260 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884246 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884245 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884236 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884234 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884227 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884224 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884218 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884211 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884210 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884201 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884199 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884191 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884186 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884181 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884176 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884168 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884160 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884148 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884143 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884130 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884125 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884118 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884117 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884113 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884111 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884103 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884101 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884096 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884094 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884085 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884079 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884061 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884059 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884052 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884050 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884046 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884044 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884038 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884037 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884032 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884029 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884019 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884017 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884009 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691884006 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883998 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883996 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883993 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883991 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883988 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883982 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883980 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883978 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883976 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883975 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883974 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883970 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883969 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883964 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883960 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883954 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883954 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883943 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883941 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883936 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883934 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883927 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883924 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883907 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883905 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883896 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883894 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883883 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883881 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883872 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883870 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883859 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883857 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883852 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883849 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883844 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883842 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883833 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883830 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883822 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883818 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883811 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883810 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883804 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883803 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883794 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883786 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883772 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883767 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883756 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883755 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883747 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883746 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883739 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883737 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883731 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883730 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883722 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883721 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883715 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883712 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883707 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883705 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883699 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883698 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883691 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883689 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883679 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883678 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883671 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883668 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883663 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883661 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883656 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883654 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883649 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883646 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883642 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883639 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883627 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883624 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883620 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883617 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883605 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883601 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883596 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883590 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883584 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883583 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883578 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883577 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883570 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883568 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883564 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883564 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883562 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883560 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883559 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883555 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883551 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883547 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883544 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883541 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883537 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883523 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883522 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(node:35024) TimeoutOverflowWarning: 5691883517 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+
+EXIT 15

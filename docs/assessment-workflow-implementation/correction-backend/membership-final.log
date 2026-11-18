@@ -1,0 +1,14 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [32m✓[39m tests/access-membership.test.ts[2m > [22mbounds each fresh membership decision to one database round trip[32m 9[2mms[22m[39m
+ [32m✓[39m tests/access-membership.test.ts[2m > [22mpreserves every current identity, client, environment and membership gate without caching[32m 41[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+[2m   Start at [22m 22:05:20
+[2m   Duration [22m 2.74s[2m (tests 89%, import 7%, transform 4%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/correction-backend/membership-final.json
+
+EXIT 0

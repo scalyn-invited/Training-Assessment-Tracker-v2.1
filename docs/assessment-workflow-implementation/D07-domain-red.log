@@ -1,0 +1,68 @@
+
+ RUN  v5.1.0 C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow
+
+ ❯ tests/assessment-reviews.test.ts (11 tests | 2 failed | 8 skipped) 24986ms
+   × D07 separately authored return feedback is safe, encrypted and bound to the immutable attempt 1909ms
+   × D07 rejects empty explicitly supplied public feedback without a decision 1580ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/assessment-reviews.test.ts > D07 separately authored return feedback is safe, encrypted and bound to the immutable attempt
+AssertionError: expected { files: [], version: 4, …(14) } to match object { approved: null, reviews: [], …(3) }
+(12 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "approved": null,
+    "evidence": [],
+-   "returned": {
+-     "attemptId": "1e540df1-f68f-4168-88bd-92847986e726",
+-     "feedback": "PUBLIC: Add a concrete worked example before resubmitting.",
+-   },
+    "reviews": [],
+    "rubric": null,
+  }
+
+ ❯ tests/assessment-reviews.test.ts:257:15
+    255|  const rejected=await reviews.decide(coordinator.token,coordinator.csr…
+    256|  const view=await reviews.read(member.token,client,a.id);
+    257|  expect(view).toMatchObject({approved:null,reviews:[],rubric:null,evid…
+       |               ^
+    258|  expect(JSON.stringify(view)).not.toContain('PRIVATE:');
+    259|  expect(JSON.stringify(view)).not.toContain('Evidence supports the res…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/assessment-reviews.test.ts > D07 rejects empty explicitly supplied public feedback without a decision
+AssertionError: promise resolved "{ …(4) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "id": "45a787dd-3e47-4767-95cf-cdc0c8a1c8dd",
++   "review": "5c7a8f2a-1b0e-48d6-92ff-9185acb3e942",
++   "status": "rejected",
++   "version": 4,
+  }
+
+ ❯ tests/assessment-reviews.test.ts:270:142
+    268| it('D07 rejects empty explicitly supplied public feedback without a de…
+    269|  const a=await submitted();
+    270|  await expect(reviews.decide(coordinator.token,coordinator.csrf,client…
+       |                                                                                                                                              ^
+    271|  expect((await reviews.read(member.token,client,a.id)).status).toBe('s…
+    272| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed | 8 skipped (11)
+   Start at  18:56:17
+   Duration  32.97s (tests 80%, import 17%, transform 3%)
+

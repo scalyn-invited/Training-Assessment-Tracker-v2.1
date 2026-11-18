@@ -1,0 +1,16 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [32m✓[39m tests/learning-kpis.test.ts[2m > [22mrestricts current authority and preserves comparability and future effective versions[33m 10994[2mms[22m[39m
+ [32m✓[39m tests/learning-kpis.test.ts[2m > [22mkeeps insufficient samples nonnumeric and records encrypted verified evidence with immutable lineage[33m 4654[2mms[22m[39m
+ [32m✓[39m tests/learning-kpis.test.ts[2m > [22mbounds evidence and numeric input and evaluates lower and band targets without rewriting history[33m 8084[2mms[22m[39m
+ [32m✓[39m tests/learning-kpis.test.ts[2m > [22mserializes competing revisions and rechecks revoked coordinator authority[33m 2691[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m   Start at [22m 21:36:01
+[2m   Duration [22m 54.47s[2m (tests 98%, import 1%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/correction-backend/kpis-baseline.json
+
+EXIT 0

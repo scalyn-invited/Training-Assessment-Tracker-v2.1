@@ -1,0 +1,10 @@
+
+Running 5 tests using 1 worker
+
+  ok 1 tests\workflow-qa-browser\workflow.spec.ts:206:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (467ms)
+  ok 2 tests\workflow-qa-browser\workflow.spec.ts:225:1 › D01 same-document Back and Forward cancellation retains author work (515ms)
+  ok 3 tests\workflow-qa-browser\workflow.spec.ts:265:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (2.6s)
+  ok 4 tests\workflow-qa-browser\workflow.spec.ts:296:3 › D01 switch canceled guard sends zero context mutations (1.6s)
+  ok 5 tests\workflow-qa-browser\workflow.spec.ts:296:3 › D01 logout canceled guard sends zero context mutations (1.3s)
+
+  5 passed (7.8s)

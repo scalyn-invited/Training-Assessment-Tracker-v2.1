@@ -1,0 +1,39 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [31m×[39m tests/access-membership.test.ts[2m > [22mbounds each fresh membership decision to one database round trip[32m 10[2mms[22m[39m
+[31m   → expected 3 to be 1 // Object.is equality[39m
+ [32m✓[39m tests/access-membership.test.ts[2m > [22mpreserves every current identity, client, environment and membership gate without caching[32m 42[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m tests/access-membership.test.ts[2m > [22mbounds each fresh membership decision to one database round trip
+[31m[1mAssertionError[22m: expected 3 to be 1 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 1[39m
+[31m+ 3[39m
+
+[36m [2m❯[22m tests/access-membership.test.ts:[2m27:21[22m[39m
+    [90m 25|[39m     const counted: Sql = { query: (text, values) => { queries++; retur…
+    [90m 26|[39m     expect((await access.membership(counted, user, client, 'test'))?.i…
+    [90m 27|[39m     [34mexpect[39m(queries)[33m.[39m[34mtoBe[39m([34m1[39m)[33m;[39m
+    [90m   |[39m                     [31m^[39m
+    [90m 28|[39m     await sql.query('UPDATE users SET active=false WHERE id=$1', [user…
+    [90m 29|[39m     expect(await access.membership(counted, user, client, 'test')).toB…
+[90m [2m❯[22m Database.transaction packages/database/src/database.ts:[2m60:22[22m[39m
+[90m [2m❯[22m tests/access-membership.test.ts:[2m23:3[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (2)[39m
+[2m   Start at [22m 21:46:24
+[2m   Duration [22m 2.82s[2m (tests 87%, import 9%, transform 4%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/correction-backend/membership-red.json
+
+EXIT 1

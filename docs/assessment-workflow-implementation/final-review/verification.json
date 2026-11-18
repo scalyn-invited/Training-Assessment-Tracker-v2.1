@@ -1,0 +1,32 @@
+{
+  "candidate": "2652126fe7d69e280c4e3410efd3741d91f68bcd",
+  "head": "156e3830cb43ee65f0538634b970f9081de70f96",
+  "browser": {
+    "startTime": "2026-11-16T14:35:56.826Z",
+    "duration": 83500.337,
+    "expected": 25,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "next": {
+    "startTime": "2026-11-16T14:39:45.049Z",
+    "duration": 22342.904,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "focusedDomain": {
+    "passed": 24,
+    "failed": 0,
+    "total": 24
+  },
+  "raceDomain": {
+    "passed": 1,
+    "failed": 0,
+    "total": 1
+  },
+  "productionDiff": "",
+  "parentEvidenceDiff": ""
+}

@@ -1,0 +1,35 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:105:1 › D04 preview discloses scope and uses pinned section references across views (6.2s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:105:1 › D04 preview discloses scope and uses pinned section references across views 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#learner-preview')
+    Expected substring: "Saved revision 1"
+    Received string:    "Synthetic two-section assessmentSection AFirst sectionQuestion 1Synthetic prompt A1Choose one answerYesNoQuestion 2Synthetic prompt A2Choose one answerYesNoSection BSecond sectionQuestion 3Synthetic prompt B1Choose one answerYesNoQuestion 4Synthetic prompt B2Choose one answerYesNo"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#learner-preview') with timeout 5000ms
+      - waiting for locator('#learner-preview')
+        13 × locator resolved to <div id="learner-preview">…</div>
+           - unexpected value "Synthetic two-section assessmentSection AFirst sectionQuestion 1Synthetic prompt A1Choose one answerYesNoQuestion 2Synthetic prompt A2Choose one answerYesNoSection BSecond sectionQuestion 3Synthetic prompt B1Choose one answerYesNoQuestion 4Synthetic prompt B2Choose one answerYesNo"
+
+
+      108 |   await page.locator('[data-section=review]').click();
+      109 |   await expect(page.locator('#learner-preview')).toContainText('Question 3');
+    > 110 |   await expect(page.locator('#learner-preview')).toContainText('Saved revision 1');
+          |                                                  ^
+      111 |   await page.locator('[name=preview-B1][value=yes]').check();
+      112 |   await page.locator('[data-section=details]').click();
+      113 |   await page.locator('#assessment-title').fill('Unsaved local title');
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:110:50
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D04-preview-discl-1702b-ion-references-across-views\error-context.md
+
+  1 failed
+    tests\workflow-qa-browser\workflow.spec.ts:105:1 › D04 preview discloses scope and uses pinned section references across views 

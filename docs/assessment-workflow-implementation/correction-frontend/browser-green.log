@@ -1,0 +1,32 @@
+
+Running 25 tests using 1 worker
+
+  ok  1 docs\assessment-workflow-implementation\correction-frontend\browser-tests\d05.spec.ts:85:3 › current approved attempt keeps accurate copy and review controls (1.2s)
+  ok  2 docs\assessment-workflow-implementation\correction-frontend\browser-tests\d05.spec.ts:85:3 › pending attempt keeps accurate copy and review controls (2.8s)
+  ok  3 docs\assessment-workflow-implementation\correction-frontend\browser-tests\d05.spec.ts:85:3 › newer attempt with earlier approval keeps accurate copy and review controls (2.3s)
+  ok  4 docs\assessment-workflow-implementation\correction-frontend\browser-tests\learner-guard.spec.ts:34:1 › D01 learner shares pre-context guard and blocks unknown autosave outcome (4.1s)
+  ok  5 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:105:1 › D04 preview discloses scope and uses pinned section references across views (6.1s)
+  ok  6 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: published (3.6s)
+  ok  7 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: draft (3.7s)
+  ok  8 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: unavailable (3.2s)
+  ok  9 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: denied (3.5s)
+  ok 10 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:173:1 › D03 stale save stops writes and offers authorized structured comparison (3.6s)
+  ok 11 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:202:1 › D03 unknown save replays exact operation before newer typing (3.4s)
+  ok 12 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:230:1 › D06 exact published handoff and D08 durable copy provenance (8.2s)
+  ok 13 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:296:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (2.5s)
+  ok 14 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:328:1 › D01 same-document Back and Forward cancellation retains author work (1.7s)
+  ok 15 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:353:1 › D07 rejection requires separate member-safe feedback and transmits it separately (2.3s)
+  ok 16 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:391:1 › D07 learner sees returned guidance without a released grade or private reason (1.5s)
+  ok 17 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:438:1 › D04 reordered current references do not renumber historical pinned content (2.4s)
+  ok 18 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:460:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (6.0s)
+  ok 19 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:494:1 › D01 confirmed file evidence becomes clean without losing an unrelated review draft (6.1s)
+  ok 20 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:526:1 › D01 uncertain reviewer decision stops newer writes and retains fields (2.8s)
+  ok 21 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:562:3 › D01 switch canceled guard sends zero context mutations (4.9s)
+  ok 22 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:562:3 › D01 logout canceled guard sends zero context mutations (4.0s)
+  ok 23 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery 409 retains complete local draft through denied/unavailable comparison and cancel (6.1s)
+  ok 24 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:3 › D03 recovery lost-response retains complete local draft through denied/unavailable comparison and cancel (6.1s)
+  ok 25 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:715:1 › QA-D03 changed server draft after publication conflict offers recovery comparison (2.6s)
+
+  25 passed (1.8m)
+
+EXIT 0

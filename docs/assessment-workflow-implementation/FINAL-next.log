@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ok 1 tests\workflow-next-browser\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (36.2s)
+
+  1 passed (1.5m)

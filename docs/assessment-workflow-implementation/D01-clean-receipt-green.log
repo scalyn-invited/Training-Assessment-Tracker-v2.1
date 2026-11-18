@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ok 1 tests\workflow-qa-browser\workflow.spec.ts:461:1 › D01 confirmed file evidence becomes clean without losing an unrelated review draft (2.7s)
+
+  1 passed (4.1s)

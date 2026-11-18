@@ -1,0 +1,9 @@
+# D08 direct copy provenance
+
+Migration0033 records immutable direct source definition ID/revision for new published-to-draft copies only. Composite tenant/environment/source-revision FK, paired-null/self checks and immutable provenance trigger; no historic backfill or inference from family membership. Existing published-row immutability remains. Save and exact-save replay add revision/source metadata; existing response fields remain. Authorized definition GET returns the persisted relationship under unchanged author authority.
+
+Builder displays exact draft identity, publication revision separately from edit version, source identity/revision and old-pin preservation. Existing/legacy definitions without a recorded direct source say so, rather than inventing one. Changing IDs clears stale revision metadata if an older server omits new fields. No assignment migration, unpublish or in-place historical editing.
+
+RED domain failed on missing direct-source metadata; GREEN definitions+assignments passes (including existing individual/team pin test and immutable source-row/provenance/unauthorized-member checks). Browser RED failed on missing provenance panel; GREEN covers copy/save, full fixture reload and saved revision2 preview. Full component suite and server/web typecheck exit0. Exact commands in D08-domain-red/green, D08-browser-red/green, D08-typecheck logs: Vitest definitions+assignments with --hookTimeout=180000; Playwright workflow-qa config; npm run typecheck.
+
+All domain runs exported TEMP/TMP/TMPDIR in the same invocation and verified worktree-local Node temp/free55439. Fresh synthetic PGlite only; no live database or external service. Browser API responses are controlled fixtures, not an authenticated copy lifecycle. Real PostgreSQL migration/concurrency qualification remains separate. Existing old assignment pins remain covered by real domain tests; no backend role change.

@@ -1,0 +1,8 @@
+{
+  "status": "bounded full regression stopped without completed report",
+  "runner": 15056,
+  "command": "C:\\Program Files\\nodejs\\node.exe node_modules/vitest/vitest.mjs run --hookTimeout=180000 --reporter=default --reporter=json --outputFile=C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\independent-qa\\domain.json",
+  "children": [
+    39764
+  ]
+}

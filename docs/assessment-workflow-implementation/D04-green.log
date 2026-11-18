@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ok 1 tests\workflow-qa-browser\workflow.spec.ts:105:1 › D04 preview discloses scope and uses pinned section references across views (1.4s)
+
+  1 passed (4.2s)
