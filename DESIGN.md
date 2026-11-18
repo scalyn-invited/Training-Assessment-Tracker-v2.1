@@ -55,6 +55,14 @@ The visual change is deliberate: legacy generic panels and the second navigation
 
 Client selection at `/clients` reuses the same shared shell and panel/header/feedback/buttons while retaining the existing single-column list of client actions, loading/empty/retry copy and Back to workspace link. No new chooser layout, automatic selection rule or permission behavior is introduced. Long client names wrap within the existing shared button; coarse-pointer controls retain the shared 44px minimum. Selection remains a shared/platform branding surface.
 
+## Client directory and administration
+
+`/people` and `/administration` use the shared learning shell with the existing client-required loading/selection boundary. Client-scoped branding and personal theme precedence remain owned by the existing resolver. The People API remains restricted to client administration authority; the directory does not grant broader member access.
+
+Keep administration's existing section order: team creation, people/assignments, coordinator allocations, training-record creation and promotion ledger. Replace presentation with shared panels, native fields/buttons, labeled stacked tables, pagination and dialogs while preserving all reason/version inputs, review stages, membership/sensitive-access confirmations and promotion request keys. Existing mock-only local-person choices stay mock-only. No new management workflow is introduced.
+
+The shared form layout leaves hidden forms hidden, including enrolment review. Its low-specificity form rules let desktop search rows remain horizontal. Dialog sections use 16px gaps; actions/radio groups wrap with 8px gaps. Before: these surfaces used legacy global panels/tables/dialogs. After: the reference type scale, semantic palettes, 14px panels, 8px controls and compact responsive spacing apply to their contents and states. Evidence: `GLOBAL_UI_CLIENT_ADMIN_QA.md`.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.

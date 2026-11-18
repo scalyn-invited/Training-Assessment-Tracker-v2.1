@@ -31,8 +31,8 @@
   color: var(--ui-muted);
   margin: 0;
 }
-.panel form,
-.dialog form,
+.panel form:where(:not([hidden])),
+.dialog form:where(:not([hidden])),
 .panel fieldset:not([hidden]) {
   display: flex;
   flex-direction: column;
@@ -111,6 +111,26 @@ details.panel > summary {
 .dialog h2 {
   font-size: var(--ui-text-section);
   line-height: 28px;
+}
+.dialog > :not([hidden]) + :not([hidden]),
+.dialog details[open] > :not(summary) {
+  margin-top: var(--ui-space-4);
+}
+.dialog details > summary {
+  color: var(--ui-text);
+  font-weight: 600;
+}
+.actions,
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ui-space-2);
+}
+.choices label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
 }
 @media (max-width: 800px) {
   .panel {

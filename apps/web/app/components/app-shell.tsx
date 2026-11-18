@@ -183,6 +183,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       '/accounts',
       '/account/security',
       '/clients',
+      '/people',
+      '/administration',
     ].includes(pathname) &&
     context?.user
   )
@@ -248,7 +250,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Button onClick={() => setRetry((n) => n + 1)}>Retry workspace navigation</Button>
         )}
         {brandError && <Button onClick={reload}>Retry appearance</Button>}
-        {children}
+        {clientRequired && !context.client ? (
+          <p role="status">Opening your client workspace...</p>
+        ) : (
+          children
+        )}
       </ApplicationShell>
     );
   return (
