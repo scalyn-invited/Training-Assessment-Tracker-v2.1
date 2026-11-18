@@ -1,0 +1,26 @@
+name: Verify assessment workflows
+on: [push, pull_request]
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      PLAYWRIGHT_BROWSERS_PATH: .runtime/browsers
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --config playwright.workflow-qa.config.ts
+      - run: npx playwright test --config playwright.workflow-next.config.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: assessment-workflow-browser
+          path: |
+            .runtime/workflow-qa-playwright/
+            .runtime/workflow-next-results/
+          retention-days: 14
