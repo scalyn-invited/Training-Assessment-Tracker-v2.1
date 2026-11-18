@@ -182,6 +182,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       '/platform/admins',
       '/accounts',
       '/account/security',
+      '/clients',
     ].includes(pathname) &&
     context?.user
   )
