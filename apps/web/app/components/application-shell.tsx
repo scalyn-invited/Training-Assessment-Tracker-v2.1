@@ -88,7 +88,15 @@ export function ApplicationShell({
           <Link
             key={item.href}
             href={item.href}
-            aria-current={pathname === item.href ? 'page' : undefined}
+            aria-current={
+              (
+                item.href === '/dashboard#learning-plans'
+                  ? pathname === '/enrolments' || pathname.startsWith('/enrolments/')
+                  : pathname === item.href
+              )
+                ? 'page'
+                : undefined
+            }
             onClick={() => menu.current?.close()}
           >
             <Icon name={item.icon} />

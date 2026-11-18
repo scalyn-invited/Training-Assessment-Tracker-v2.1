@@ -1,0 +1,35 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-4);
+  min-width: 0;
+}
+.search > button {
+  align-self: flex-start;
+}
+.record {
+  padding: var(--ui-space-4) 0;
+  border-bottom: 1px solid var(--ui-border);
+  min-width: 0;
+}
+.record h3 {
+  overflow-wrap: anywhere;
+}
+.record > :not(:first-child) {
+  margin-top: var(--ui-space-2);
+}
+.record a {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.record a:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 3px;
+}
+@media (pointer: coarse) {
+  .record a {
+    min-height: 44px;
+  }
+}

@@ -75,6 +75,10 @@ Client Appearance uses the same shared form layout and a scoped theme gallery an
 
 Background receipts has a shared-presentation opt-in for Overview until the training-record consumer is migrated. Its five-second polling, local-only receipt copy, error details and recovery remain unchanged. Existing hero illustration is already hidden by the legacy workspace stylesheet and can be removed from this route. Do not remove legacy journey/receipt styles while setup/training-record consumers remain.
 
+## Training-record directory
+
+`/enrolments` retains its existing single-column search and record list, twenty-record pagination and permission-dependent destinations. Shared header, native search/buttons, panel, feedback and pagination use the global theme tokens. Record sections keep their title/member, raw status and current record/onboarding/learning links; unavailable private inputs retain the existing explanation. Use 16px record spacing, 8px within each record and 44px link targets for coarse pointers. Do not add a status filter or redesign the list into a new table. Correct repeated search loading with an explicit refresh trigger and use the existing sign-in destination for signed-out visitors; backend search and access decisions remain authoritative.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
