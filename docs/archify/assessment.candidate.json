@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Assessment · publication to decision and appeal",
+    "locale": "en", "quality_profile": "showcase",
+    "output": "docs/archify/assessment.html",
+    "repository": {"url": "https://github.com/scalyn-invited/Training-Assessment-Tracker-v2.1.git", "revision": "40df79d3e3d71c6d357feb176053b7d225770000", "link_mode": "local-only"}
+  },
+  "lanes": [
+    {"id": "author", "label": "Coordinator · author and assign"},
+    {"id": "member", "label": "Assigned Member · respond"},
+    {"id": "reviewer", "label": "Authorised Reviewer · decide"},
+    {"id": "appeal", "label": "Member → Client Admin → Alternate Reviewer · optional appeal"}
+  ],
+  "nodes": [
+    {"id": "publish", "lane": "author", "col": 0, "type": "security", "label": "Publish ready draft", "sublabel": "Content + media gates", "width": 180, "sources": [{"path": "packages/domain/src/assessment-definitions.ts", "line": 232, "end_line": 278}]},
+    {"id": "assign", "lane": "author", "col": 1, "type": "frontend", "label": "Assign revision", "sublabel": "Eligible member or team", "width": 180, "sources": [{"path": "packages/domain/src/assessment-assignments.ts", "line": 155, "end_line": 249}]},
+    {"id": "answer", "lane": "member", "col": 1, "type": "frontend", "label": "Answer and save", "sublabel": "Sections; clean evidence", "width": 180, "sources": [{"path": "packages/domain/src/assessment-responses.ts", "line": 221, "end_line": 320}]},
+    {"id": "submit", "lane": "member", "col": 2, "type": "security", "label": "Submit saved work", "sublabel": "Immutable attempt receipt", "width": 180, "sources": [{"path": "packages/domain/src/assessment-responses.ts", "line": 380, "end_line": 505}]},
+    {"id": "decide", "lane": "reviewer", "col": 2, "type": "security", "label": "Human decision", "sublabel": "Latest attempt + version", "width": 180, "sources": [{"path": "packages/domain/src/assessment-reviews.ts", "line": 198, "end_line": 311}]},
+    {"id": "returned", "lane": "reviewer", "col": 1, "type": "frontend", "label": "Rejected attempt", "sublabel": "Return feedback if given", "width": 180, "sources": [{"path": "packages/domain/src/assessment-reviews.ts", "line": 213, "end_line": 290}, {"path": "packages/domain/src/assessment-responses.ts", "line": 236, "end_line": 269}]},
+    {"id": "approved", "lane": "reviewer", "col": 3, "type": "frontend", "label": "Approved result", "sublabel": "Member-visible outcome", "width": 180, "sources": [{"path": "packages/domain/src/assessment-reviews.ts", "line": 254, "end_line": 311}]},
+    {"id": "request", "lane": "appeal", "col": 3, "type": "frontend", "label": "Request appeal", "sublabel": "Approved or rejected", "width": 180, "sources": [{"path": "packages/domain/src/assessment-reviews.ts", "line": 314, "end_line": 365}]},
+    {"id": "route", "lane": "appeal", "col": 2, "type": "security", "label": "Admin routes case", "sublabel": "Different team reviewer", "width": 180, "sources": [{"path": "packages/domain/src/assessment-reviews.ts", "line": 368, "end_line": 447}]},
+    {"id": "resolve", "lane": "appeal", "col": 1, "type": "security", "label": "Alternate resolves", "sublabel": "Uphold or new decision", "width": 180, "sources": [{"path": "packages/domain/src/assessment-reviews.ts", "line": 450, "end_line": 495}, {"path": "packages/domain/src/assessment-reviews.ts", "line": 288, "end_line": 295}, {"path": "packages/domain/src/assessment-access.ts", "line": 27, "end_line": 67}]}
+  ],
+  "edges": [
+    {"from": "publish", "to": "assign", "label": "published"},
+    {"from": "assign", "to": "answer", "label": "assigned"},
+    {"from": "answer", "to": "submit", "label": "valid + saved"},
+    {"from": "submit", "to": "decide", "label": "submitted", "fromSide": "bottom", "toSide": "top"},
+    {"from": "decide", "to": "returned", "label": "reject", "role": "branch"},
+    {"from": "returned", "to": "answer", "label": "no open appeal", "role": "return", "variant": "dashed"},
+    {"from": "decide", "to": "approved", "label": "approve"},
+    {"from": "approved", "to": "request", "label": "optional", "role": "branch"},
+    {"from": "returned", "to": "request", "label": "optional appeal", "role": "branch", "variant": "dashed", "fromSide": "bottom", "toSide": "top"},
+    {"from": "request", "to": "route", "label": "one open case"},
+    {"from": "route", "to": "resolve", "label": "case-scoped"}
+  ],
+  "cards": [
+    {"dot": "rose", "title": "Authority and privacy", "items": ["Assignment requires current primary coordinator and sensitive authority. Review disallows self-review.", "An open appeal blocks editing and resubmission. Alternate access depends on the exact active case and role; it ends on resolution.", "Client Admin routing does not confer assessment-content access. See HANDOFF.md for role boundaries."]},
+    {"dot": "amber", "title": "Waiting and recovery", "items": ["Incomplete content or unready images block publication. Never imply scan success from upload completion.", "Save conflicts preserve input. Retry an uncertain submission with the same request identity rather than creating a second attempt.", "Optional analysis remains private and provisional; pending analysis blocks the human decision. Extraction is not evidence confirmation."]},
+    {"dot": "cyan", "title": "Separate from onboarding", "items": ["Published revisions and submitted attempts retain history. A rejected attempt may be edited into a new saved draft when no appeal is open.", "This workflow does not automatically populate onboarding findings. Onboarding requires explicit coordinator confirmation.", "Sources describe the pinned implementation. Screen layout and usability acceptance remain for designer review."]}
+  ]
+}
