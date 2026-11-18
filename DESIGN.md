@@ -45,6 +45,14 @@ Shared controls live in `components/ui/`: Button (primary, secondary, ghost, dan
 
 At 800px and below, use 16px form controls and the reference 24px headings. On coarse pointers controls have a 44px minimum hit target. Headers, tabs and actions wrap; flex/grid children use min-width: 0; long labels wrap. Existing mobile navigation clearance and safe-area padding remain. Components are opt-in during migration so unverified routes do not receive accidental restyling.
 
+## Shared application shell and account pages
+
+`ApplicationShell` generalizes the reference shell for platform and learning workspaces. Preserve the existing navigation destinations, role predicates, client selection and account controls. Platform navigation keeps its five-item mobile bar; the longer existing learning navigation uses a labeled native menu dialog. The active page comes from the existing URL. The legacy authenticated branch stays only for routes awaiting bounded migration.
+
+For `/platform/admins`, `/accounts` and `/account/security`, retain the current information order, form stages and confirmation actions. Use the shared PageHeader, Panel, native fields, buttons, password show/hide controls, feedback, dialog and stacked directory table. Panels use 24px padding (16px mobile), 24px between sections, 16px within forms and 8px inside password controls. No new account or assessment workflow is introduced. Account routes retain their existing shared/platform branding scope, even when a client is selected; client-scoped theme precedence remains owned by `useBrand`.
+
+The visual change is deliberate: legacy generic panels and the second navigation treatment give way to the reference navy surfaces, blue primary actions, 14px body/32px desktop titles, 14px panels and compact labeled fields. Existing light/neon/generated palettes remain inherited. Private setup links, MFA keys and recovery codes must not enter screenshot evidence. Source: local UX Engine design-system, visual-character, responsive, state-completeness, restyle and form-ux instructions; evidence in `GLOBAL_UI_ACCOUNT_QA.md`.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.

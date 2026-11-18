@@ -80,12 +80,13 @@ details.panel > summary {
 }
 .password {
   min-width: 0;
+  display: grid;
+  gap: var(--ui-space-2);
 }
 .password > button {
-  margin-top: var(--ui-space-2);
+  justify-self: start;
 }
 .password .help {
-  margin-top: var(--ui-space-2);
   font-size: var(--ui-text-small);
 }
 .tableWrap {

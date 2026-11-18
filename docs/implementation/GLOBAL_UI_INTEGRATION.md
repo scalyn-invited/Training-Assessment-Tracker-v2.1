@@ -26,8 +26,21 @@ No remote PR, branch or merge was changed by this preparation. If the assessment
 - Page-file census: 38 existing page routes. Shared `error.tsx` and `not-found.tsx` add two recovery surfaces. The route-by-route checklist records roles, shell, page/child components, dialogs and loading/empty/error/recovery states in `GLOBAL_UI_ROUTE_INVENTORY.md`.
 - This is branch/inventory verification. No new screen migration, new desktop/mobile visual approval, full parity or production readiness is claimed. Historical evidence remains intact.
 
-## UX Engine resolved; workflow-source confirmation remains open
+## UX Engine resolved; historical workflow-source question
 
 The preparation check did not find UX Engine in the exposed tools or installed skill locations. The user subsequently identified `ux-engine-v2.4.0/` in the workspace. Its `agent-skills/` directory contains Codex-compatible instructions; the design-system, visual-character, responsive (including its examples), restyle and state-completeness instructions have now been read for the shared foundation work. No installation or package modification was needed. The previous missing-package finding is resolved; no UX file is requested from Bernie.
 
-`global-ui-team-confirmations.txt` now asks only whether the assessment workflow fixes are already in main or on another branch/commit. The user authorized continuing local preparation and shared foundation work while that answer is pending. This does not establish that unidentified assessment fixes have been integrated. Keep assessment screens unchanged until their source is resolved. Continue in the recorded order: shared foundations with remaining platform/account pages, client administration, learning, assessments, guest/setup/recovery, then verified obsolete-code retirement. Verify and record each bounded feature before continuing.
+At the foundation checkpoint, `global-ui-team-confirmations.txt` asked whether the assessment workflow fixes were already in main or on another branch/commit. The user authorized shared foundation work while that answer was pending. That historical question is now resolved below; the reported foundation evidence remains unchanged.
+
+## Assessment workflow source resolved and merged locally
+
+Bernie supplied `codex/assessment-workflow-fixes` in the response forwarded by the user on 18 November 2026. Fetched tip: **e44b295**. Preserved the in-progress shared shell/account presentation in local checkpoint **9f60b1f** (explicitly QA pending), then merged the complete branch with normal full history in **dffeacd**. `git merge-base --is-ancestor e44b295 HEAD` succeeds. No migration-only copying or selective workflow replacement was used.
+
+The merge includes the author save/publication recovery, question references, review state/member-safe feedback, published handoff/copy provenance, unsaved-work guards and migrations **0032** and **0033**, together with their tests and historical evidence. Two conflict resolutions retain both sides' behavior:
+
+- API `/platform/client-accounts`: retain the UI's `view=all|admins` query and fourth directory argument while retaining incoming workflow changes elsewhere.
+- `app-shell.tsx`: retain `ApplicationShell` and shared controls, plus the incoming `confirmWorkLeave` and `leaveAfterConfirmedMutation` imports. Client switching and logout check work state before sending mutations.
+
+Verification after merge: 42 tests in eight migration/assessment/access/platform/API suites passed (24.61s); 30 authentication/account/branding/client-account tests passed (12.48s); all 22 workflow browser fixtures passed (20.1s); the actual Next navigation fixture passed (15.7s overall). The Next fixture ran in an isolated detached worktree at `dffeacd`, with no environment files, database, API, worker or external adapters. Only `node_modules` was linked for dependencies; the local browser override selected installed Chrome. The existing saved environment was left intact. Shared-shell/account and reference-screen evidence is recorded separately in `GLOBAL_UI_ACCOUNT_QA.md`.
+
+The requested workflow source is integrated. Assessment presentation migration has not started. Continue in the recorded order: remaining platform/account pages, client administration, learning, assessments, guest/setup/recovery, then verified obsolete-code retirement. Nothing pushed or deployed; no human acceptance or production readiness is inferred.
