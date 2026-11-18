@@ -7,6 +7,10 @@ Employee learning, assessment evidence and accountable human review. Preserve V2
 
 The user authorized the supplied Figma desktop frame `6939:1670` and mobile frame `6939:4740` in file `eQejFiVgug5zmBTd9aVGHx` for the `/platform` Overview, following Bernie's approval to proceed with UI work. Its scoped layout uses a 248px desktop sidebar, a workspace menu and mobile bottom navigation. The dark palette follows the frames; existing light, branded and personal theme behavior remains available. Existing workflows and permissions remain authoritative, and other pages retain the V2 layout. Interim destination/count/activity decisions are recorded in `docs/implementation/OVERVIEW_UI_QA.md`; these are implementation assumptions, not completed team acceptance.
 
+## Clients UI exception — 17 November 2026
+
+The user authorized continuing with the Clients desktop frame `6939:1831` and mobile frame `6939:4866` in the same Figma file while userflow work continues. `/platform/clients` shares the Overview shell with Clients selected. The directory uses a desktop table and stacked mobile entries, original exported icons, real counts, native search/status controls and existing guarded dialogs. Sorting, pagination and account-access management remain available; the latter is expandable and opens through the People & access link. Interim choices and intentional accessibility differences are recorded in `docs/implementation/CLIENTS_UI_QA.md`. Other routes keep their current layouts. This does not imply acceptance of the pending userflow.
+
 ## Typography
 Use the existing Inter, "Segoe UI", sans-serif stack (Inter only where installed; no external font request), with Georgia for the existing learning hero. Current workspace override: body 16px, mobile inputs 16px, headings 32px (27px below 800px), hero 36px desktop and 30px mobile. Preserve source hierarchy rather than introducing a new brand.
 

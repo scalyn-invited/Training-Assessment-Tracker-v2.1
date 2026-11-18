@@ -3,6 +3,8 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { PlatformAccounts } from '../../components/platform-accounts';
+import { ClientsIcon } from '../../components/clients-icon';
+import styles from './clients.module.css';
 import { api, useContext, Guest, Pending, Feedback } from '../../components/auth-ui';
 type Client = {
   id: string;
@@ -21,31 +23,85 @@ export default function ClientDirectory() {
   const [filters, setFilters] = useState({ search: '', status: '', sort: 'asc', page: 1 });
   const { search, status, sort, page } = filters;
   const [urlReady, setUrlReady] = useState(false);
+  const accountAccess = useRef<HTMLDetailsElement>(null);
+  const bindAccountAccess = useCallback((node: HTMLDetailsElement | null) => {
+    accountAccess.current = node;
+    // The authenticated shell can mount after the page context resolves.
+    if (node && window.location.hash === '#client-account-access') node.open = true;
+  }, []);
+  const [opening, setOpening] = useState<string | null>(null);
+  const [openError, setOpenError] = useState('');
+  useEffect(() => {
+    const reveal = () => {
+      if (window.location.hash === '#client-account-access' && accountAccess.current) {
+        accountAccess.current.open = true;
+        document.getElementById('client-account-access')?.scrollIntoView();
+      }
+    };
+    reveal();
+    window.addEventListener('hashchange', reveal);
+    window.addEventListener('popstate', reveal);
+    return () => {
+      window.removeEventListener('hashchange', reveal);
+      window.removeEventListener('popstate', reveal);
+    };
+  }, [context]);
+  async function openWorkspace(client: Client) {
+    if (!context || opening || !client.active || client.suspended) return;
+    setOpening(client.id);
+    setOpenError('');
+    try {
+      await api('/clients/select', { csrf: context.csrf, clientId: client.id });
+      // Selection rotates CSRF; reload the shell and context for the chosen client.
+      window.location.assign('/dashboard');
+    } catch (e) {
+      setOpenError((e as Error).message);
+      setOpening(null);
+    }
+  }
   const historyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     const restore = () => {
       if (historyTimer.current) clearTimeout(historyTimer.current);
-      const params = new URLSearchParams(window.location.search), rawPage = Number(params.get('page') ?? 1);
-      setFilters({search: (params.get('client_search') ?? '').slice(0,120),
-        status: ['active','suspended','inactive'].includes(params.get('status') ?? '') ? params.get('status')! : '',
+      const params = new URLSearchParams(window.location.search),
+        rawPage = Number(params.get('page') ?? 1);
+      setFilters({
+        search: (params.get('client_search') ?? '').slice(0, 120),
+        status: ['active', 'suspended', 'inactive'].includes(params.get('status') ?? '')
+          ? params.get('status')!
+          : '',
         sort: params.get('sort') === 'desc' ? 'desc' : 'asc',
-        page: Number.isInteger(rawPage) && rawPage >= 1 && rawPage <= 100000 ? rawPage : 1});
+        page: Number.isInteger(rawPage) && rawPage >= 1 && rawPage <= 100000 ? rawPage : 1,
+      });
       setUrlReady(true);
     };
-    restore(); window.addEventListener('popstate', restore);
-    return () => { window.removeEventListener('popstate',restore); if(historyTimer.current)clearTimeout(historyTimer.current); };
+    restore();
+    window.addEventListener('popstate', restore);
+    return () => {
+      window.removeEventListener('popstate', restore);
+      if (historyTimer.current) clearTimeout(historyTimer.current);
+    };
   }, []);
   function updateFilters(change: Partial<typeof filters>, debounce = false) {
-    const next = {...filters,...change}; setFilters(next);
-    if(historyTimer.current)clearTimeout(historyTimer.current);
+    const next = { ...filters, ...change };
+    setFilters(next);
+    if (historyTimer.current) clearTimeout(historyTimer.current);
     const write = () => {
       const url = new URL(window.location.href);
-      for(const [key,value] of Object.entries({client_search:next.search,status:next.status,sort:next.sort === 'asc' ? '' : next.sort,page:next.page === 1 ? '' : String(next.page)})) {
-        if(value)url.searchParams.set(key,value);else url.searchParams.delete(key);
+      for (const [key, value] of Object.entries({
+        client_search: next.search,
+        status: next.status,
+        sort: next.sort === 'asc' ? '' : next.sort,
+        page: next.page === 1 ? '' : String(next.page),
+      })) {
+        if (value) url.searchParams.set(key, value);
+        else url.searchParams.delete(key);
       }
-      if(url.href !== window.location.href)window.history.pushState(null,'',url.pathname+url.search+url.hash);
+      if (url.href !== window.location.href)
+        window.history.pushState(null, '', url.pathname + url.search + url.hash);
     };
-    if(debounce)historyTimer.current=setTimeout(write,300);else write();
+    if (debounce) historyTimer.current = setTimeout(write, 300);
+    else write();
   }
   const [loading, setLoading] = useState(false),
     [failure, setFailure] = useState(''),
@@ -101,7 +157,7 @@ export default function ClientDirectory() {
     if (!saving) setSelected(null);
   }
   function clear() {
-    updateFilters({search:'',status:'',page:1});
+    updateFilters({ search: '', status: '', page: 1 });
   }
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -153,28 +209,24 @@ export default function ClientDirectory() {
     );
   return (
     <Guest>
-      <p>
-        <Link href="/dashboard">Back to workspace</Link>
-      </p>
-      <header className="page-header">
-        <div>
-          <p className="eyebrow">Platform</p>
-          <h1>Clients</h1>
-          <p>Manage organisations and access. Training content requires its own permissions.</p>
-        </div>
-        <button className="primary" onClick={() => open('new')}>
-          Create client
-        </button>
-      </header>
-      <Feedback error={failure} success={success} />
-      {failure && (
-        <button className="secondary" onClick={() => void refresh()}>
-          Try loading the directory again
-        </button>
-      )}
-      <section className="panel directory-panel" aria-busy={loading}>
+      <div className={styles.page}>
+        <header className={styles.header}>
+          <div>
+            <h1>Clients</h1>
+            <p>Create organisations, manage them, or open a client workspace.</p>
+          </div>
+          <button className={styles.create} onClick={() => open('new')}>
+            <ClientsIcon name="add" /> Create client
+          </button>
+        </header>
+        <Feedback error={failure || openError} success={success} />
+        {failure && (
+          <button className="secondary" onClick={() => void refresh()}>
+            Try loading the directory again
+          </button>
+        )}
         <form
-          className="directory-filters"
+          className={styles.filters}
           role="search"
           aria-label="Find clients"
           onSubmit={(e) => {
@@ -182,25 +234,35 @@ export default function ClientDirectory() {
             void refresh();
           }}
         >
-          <label>
-            Search clients
+          <label className={styles.search}>
+            <span className="sr-only">Search clients</span>
+            <ClientsIcon name="search" />
             <input
               type="search"
+              placeholder="Search clients by name"
               maxLength={120}
               value={search}
-              onChange={(e) => {
-                updateFilters({search:e.target.value,page:1},true);
-              }}
+              onChange={(e) => updateFilters({ search: e.target.value, page: 1 }, true)}
               enterKeyHint="search"
             />
           </label>
-          <label>
-            Status
+          <label className={styles.statusFilter}>
+            <span className="sr-only">Status</span>
+            <ClientsIcon name="filter" />
+            <span aria-hidden="true">
+              Status:{' '}
+              {status === 'active'
+                ? 'Active'
+                : status === 'suspended'
+                  ? 'Suspended'
+                  : status === 'inactive'
+                    ? 'Directory inactive'
+                    : 'All statuses'}
+            </span>
+            <ClientsIcon name="chevron" />
             <select
               value={status}
-              onChange={(e) => {
-                updateFilters({status:e.target.value,page:1});
-              }}
+              onChange={(e) => updateFilters({ status: e.target.value, page: 1 })}
             >
               <option value="">All statuses</option>
               <option value="active">Active</option>
@@ -208,49 +270,57 @@ export default function ClientDirectory() {
               <option value="inactive">Directory inactive</option>
             </select>
           </label>
-          <button type="button" className="secondary" onClick={clear}>
-            Clear filters
-          </button>
+          {(search || status) && (
+            <button type="button" className={styles.manage} onClick={clear}>
+              Clear filters
+            </button>
+          )}
         </form>
-        <p className="directory-count" role="status">
-          {data ? data.total + ' of ' + data.all + ' clients' : 'Loading client directory…'}
-          {loading && data ? ' · Updating…' : ''}
-        </p>
-        <button
-          className="directory-mobile-sort secondary"
-          onClick={() => {
-            updateFilters({sort:sort === 'asc' ? 'desc' : 'asc',page:1});
-          }}
-        >
-          Client name: {sort === 'asc' ? 'A to Z' : 'Z to A'}
-        </button>
-        <div className="directory-table-wrap">
-          <table className="directory-table client-directory-table">
+        <section className={styles.directory} aria-label="Clients" aria-busy={loading}>
+          <button
+            className={styles.mobileSort}
+            onClick={() => updateFilters({ sort: sort === 'asc' ? 'desc' : 'asc', page: 1 })}
+          >
+            Client name: {sort === 'asc' ? 'A to Z' : 'Z to A'}
+            <span className={sort === 'desc' ? styles.descending : undefined}>
+              <ClientsIcon name="sort" />
+            </span>
+          </button>
+          <table className={styles.table}>
             <caption className="sr-only">Client directory</caption>
             <thead>
               <tr>
-                <th scope="col" aria-sort={sort === 'asc' ? 'ascending' : 'descending'}>
+                <th
+                  scope="col"
+                  aria-label="Client name"
+                  aria-sort={sort === 'asc' ? 'ascending' : 'descending'}
+                >
                   <button
-                    className="directory-sort"
-                    onClick={() => {
-                      updateFilters({sort:sort === 'asc' ? 'desc' : 'asc',page:1});
-                    }}
+                    className={styles.sort}
+                    onClick={() =>
+                      updateFilters({ sort: sort === 'asc' ? 'desc' : 'asc', page: 1 })
+                    }
                   >
-                    Client name {sort === 'asc' ? '↑' : '↓'}
+                    Client name{' '}
+                    <span className={sort === 'desc' ? styles.descending : undefined}>
+                      <ClientsIcon name="sort" />
+                    </span>
                   </button>
                 </th>
                 <th scope="col">Status</th>
                 <th scope="col">Members</th>
                 <th scope="col">Client admins</th>
-                <th scope="col">Actions</th>
+                <th scope="col">
+                  <span className="sr-only">Actions</span>
+                </th>
               </tr>
             </thead>
             <tbody>
               {data?.clients.map((client) => (
                 <tr key={client.id}>
                   <td>
-                    <div className="client-identity">
-                      <span className="client-initials" aria-hidden="true">
+                    <div className={styles.identity}>
+                      <span className={styles.initials} aria-hidden="true">
                         {client.name
                           .split(/\s+/)
                           .slice(0, 2)
@@ -258,14 +328,17 @@ export default function ClientDirectory() {
                           .join('')
                           .toUpperCase()}
                       </span>
-                      <div>
-                        <strong>{client.name}</strong>
-                        <small title={client.id}>{client.id}</small>
-                      </div>
+                      <strong>{client.name}</strong>
                     </div>
                   </td>
                   <td data-label="Status">
-                    <span className="directory-badge">
+                    <span
+                      className={styles.badge}
+                      data-state={
+                        client.suspended ? 'suspended' : client.active ? 'active' : 'inactive'
+                      }
+                    >
+                      {client.active && !client.suspended && <ClientsIcon name="active-dot" />}
                       {client.suspended
                         ? 'Suspended'
                         : client.active
@@ -274,172 +347,200 @@ export default function ClientDirectory() {
                     </span>
                   </td>
                   <td data-label="Members">{client.members}</td>
-                  <td data-label="Client admins">
-                    {client.admins || (
-                      <span className="directory-badge">
-                        {client.suspended ? 'Access suspended' : 'None assigned'}
-                      </span>
-                    )}
-                  </td>
+                  <td data-label="Client admins">{client.admins}</td>
                   <td>
-                    <button
-                      className="directory-action"
-                      aria-label={'Manage ' + client.name}
-                      onClick={() => open(client)}
-                    >
-                      Manage client →
-                    </button>
+                    <div className={styles.actions}>
+                      <button
+                        className={styles.manage}
+                        aria-label={'Manage ' + client.name}
+                        onClick={() => open(client)}
+                      >
+                        Manage
+                      </button>
+                      <button
+                        className={styles.open}
+                        aria-label={'Open workspace for ' + client.name}
+                        disabled={Boolean(opening) || !client.active || client.suspended}
+                        aria-busy={opening === client.id}
+                        title={
+                          client.suspended
+                            ? 'Workspace access is suspended'
+                            : !client.active
+                              ? 'This client is inactive'
+                              : undefined
+                        }
+                        onClick={() => void openWorkspace(client)}
+                      >
+                        {opening === client.id ? 'Opening?' : 'Open workspace'}{' '}
+                        <ClientsIcon name="workspace-arrow" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
               {data?.clients.length === 0 && (
                 <tr>
-                  <td className="directory-empty" colSpan={5}>
+                  <td className={styles.empty} colSpan={5}>
                     <strong>No clients found</strong>
                     <p>No clients yet, or none match your filters.</p>
-                    <button className="secondary" onClick={clear}>
-                      Clear search and status
-                    </button>
+                    {(search || status) && (
+                      <button className="secondary" onClick={clear}>
+                        Clear search and status
+                      </button>
+                    )}
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
-        </div>
-        {data && data.total > 20 && (
-          <nav aria-label="Directory pages">
-            <button
-              className="secondary"
-              disabled={page === 1 || loading}
-              onClick={() => updateFilters({page:page-1})}
-            >
-              Previous
-            </button>
-            <span> Page {page} </span>
-            <button
-              className="secondary"
-              disabled={page * 20 >= data.total || loading}
-              onClick={() => updateFilters({page:page+1})}
-            >
-              Next
-            </button>
-          </nav>
-        )}
-        <p className="field-help">
-          Counts show effective access. Suspended clients have zero effective members and admins;
-          retained assignments are blocked.
-        </p>
-      </section>
-      <PlatformAccounts csrf={context.csrf} onChanged={() => void refresh()} />
-      <dialog
-        ref={dialog}
-        className="workspace-dialog"
-        aria-labelledby="client-title"
-        onCancel={(e) => {
-          e.preventDefault();
-          close();
-        }}
-        onClose={() => {
-          if (!saving) setSelected(null);
-        }}
-      >
-        {selected && (
-          <>
-            <div className="directory-dialog-header">
-              <h2 id="client-title">{selected === 'new' ? 'Create client' : selected.name}</h2>
-              <button type="button" onClick={close} disabled={saving} autoFocus>
-                Close
-              </button>
-            </div>
-            {selected !== 'new' && (
-              <>
-                <p>{selected.id}</p>
-                <p>
-                  Effective members: {selected.members} · Effective admins: {selected.admins}
-                </p>
-              </>
-            )}
-            <form ref={form} onSubmit={save} aria-busy={saving}>
-              <Feedback error={formError} />
-              <label>
-                Directory name
-                <input
-                  name="name"
-                  defaultValue={selected === 'new' ? '' : selected.name}
-                  required
-                  maxLength={160}
-                  readOnly={confirm}
-                />
-              </label>
-              <label>
-                {selected === 'new' ? 'Creation reason' : 'Client change reason'}
-                <input name="reason" required minLength={8} maxLength={2000} readOnly={confirm} />
-              </label>
-              {!confirm ? (
-                <>
-                  <button className="primary" disabled={saving}>
-                    {saving
-                      ? 'Saving…'
-                      : selected === 'new'
-                        ? 'Create client'
-                        : 'Save directory name'}
-                  </button>
-                  {selected !== 'new' && (
-                    <div className="directory-danger">
-                      <h3>Client access</h3>
-                      <p>
-                        Suspension blocks access and cancels pending work. Reactivation requires
-                        fresh approval for sensitive grants.
-                      </p>
-                      <button
-                        type="button"
-                        className="danger"
-                        onClick={() => {
-                          if (form.current?.reportValidity()) setConfirm(true);
-                        }}
-                      >
-                        {selected.suspended ? 'Reactivate client' : 'Suspend client'}
-                      </button>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div
-                  className="directory-danger"
-                  role="group"
-                  aria-label="Confirm client access change"
+          <div className={styles.directoryFooter}>
+            <p role="status">
+              {data
+                ? data.total + ' of ' + data.all + ' clients'
+                : failure
+                  ? 'Client directory unavailable.'
+                  : 'Loading client directory?'}
+              {loading && data ? ' ? Updating?' : ''}
+            </p>
+            {data && data.total > 20 && (
+              <nav className={styles.pagination} aria-label="Directory pages">
+                <button
+                  className={styles.manage}
+                  disabled={page === 1 || loading}
+                  onClick={() => updateFilters({ page: page - 1 })}
                 >
-                  <h3>
-                    {selected !== 'new' && selected.suspended ? 'Reactivate' : 'Suspend'}{' '}
-                    {selected !== 'new' && selected.name}?
-                  </h3>
+                  Previous
+                </button>
+                <span>Page {page}</span>
+                <button
+                  className={styles.manage}
+                  disabled={page * 20 >= data.total || loading}
+                  onClick={() => updateFilters({ page: page + 1 })}
+                >
+                  Next
+                </button>
+              </nav>
+            )}
+            <p>
+              Counts show effective access. Suspended clients have zero effective members and
+              admins; retained assignments are blocked.
+            </p>
+          </div>
+        </section>
+        <details ref={bindAccountAccess} className={styles.accountAccess}>
+          <summary>Client account access</summary>
+          <PlatformAccounts csrf={context.csrf} onChanged={() => void refresh()} />
+        </details>
+        <dialog
+          ref={dialog}
+          className={'workspace-dialog ' + styles.dialog}
+          aria-labelledby="client-title"
+          onCancel={(e) => {
+            e.preventDefault();
+            close();
+          }}
+          onClose={() => {
+            if (!saving) setSelected(null);
+          }}
+        >
+          {selected && (
+            <>
+              <div className="directory-dialog-header">
+                <h2 id="client-title">{selected === 'new' ? 'Create client' : selected.name}</h2>
+                <button type="button" onClick={close} disabled={saving} autoFocus>
+                  Close
+                </button>
+              </div>
+              {selected !== 'new' && (
+                <>
+                  <p>{selected.id}</p>
                   <p>
-                    {selected !== 'new' && selected.suspended
-                      ? 'Access can resume. Ended grants and stopped work will remain ended.'
-                      : 'Members will be signed out and pending work stopped.'}
+                    Effective members: {selected.members} · Effective admins: {selected.admins}
                   </p>
-                  <button
-                    type="button"
-                    className="secondary"
-                    onClick={() => setConfirm(false)}
-                    disabled={saving}
-                    autoFocus
-                  >
-                    Cancel
-                  </button>
-                  <button className="danger" disabled={saving}>
-                    {saving
-                      ? 'Saving…'
-                      : selected !== 'new' && selected.suspended
-                        ? 'Confirm reactivation'
-                        : 'Confirm suspension'}
-                  </button>
-                </div>
+                </>
               )}
-            </form>
-          </>
-        )}
-      </dialog>
+              <form ref={form} onSubmit={save} aria-busy={saving}>
+                <Feedback error={formError} />
+                <label>
+                  Directory name
+                  <input
+                    name="name"
+                    defaultValue={selected === 'new' ? '' : selected.name}
+                    required
+                    maxLength={160}
+                    readOnly={confirm}
+                  />
+                </label>
+                <label>
+                  {selected === 'new' ? 'Creation reason' : 'Client change reason'}
+                  <input name="reason" required minLength={8} maxLength={2000} readOnly={confirm} />
+                </label>
+                {!confirm ? (
+                  <>
+                    <button className="primary" disabled={saving}>
+                      {saving
+                        ? 'Saving…'
+                        : selected === 'new'
+                          ? 'Create client'
+                          : 'Save directory name'}
+                    </button>
+                    {selected !== 'new' && (
+                      <div className="directory-danger">
+                        <h3>Client access</h3>
+                        <p>
+                          Suspension blocks access and cancels pending work. Reactivation requires
+                          fresh approval for sensitive grants.
+                        </p>
+                        <button
+                          type="button"
+                          className="danger"
+                          onClick={() => {
+                            if (form.current?.reportValidity()) setConfirm(true);
+                          }}
+                        >
+                          {selected.suspended ? 'Reactivate client' : 'Suspend client'}
+                        </button>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div
+                    className="directory-danger"
+                    role="group"
+                    aria-label="Confirm client access change"
+                  >
+                    <h3>
+                      {selected !== 'new' && selected.suspended ? 'Reactivate' : 'Suspend'}{' '}
+                      {selected !== 'new' && selected.name}?
+                    </h3>
+                    <p>
+                      {selected !== 'new' && selected.suspended
+                        ? 'Access can resume. Ended grants and stopped work will remain ended.'
+                        : 'Members will be signed out and pending work stopped.'}
+                    </p>
+                    <button
+                      type="button"
+                      className="secondary"
+                      onClick={() => setConfirm(false)}
+                      disabled={saving}
+                      autoFocus
+                    >
+                      Cancel
+                    </button>
+                    <button className="danger" disabled={saving}>
+                      {saving
+                        ? 'Saving…'
+                        : selected !== 'new' && selected.suspended
+                          ? 'Confirm reactivation'
+                          : 'Confirm suspension'}
+                    </button>
+                  </div>
+                )}
+              </form>
+            </>
+          )}
+        </dialog>
+      </div>
     </Guest>
   );
 }
