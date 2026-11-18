@@ -3,10 +3,14 @@ import { useRef, type ReactNode } from 'react';
 import Link from 'next/link';
 import { ThemePicker, type Brand } from './brand-header';
 import { OverviewIcon } from './overview-icon';
+import { ClientsIcon } from './clients-icon';
+import { PeopleIcon } from './people-icon';
+import { AuditIcon } from './audit-icon';
 import { OverviewDialog } from './overview-dialog';
 import styles from '../platform/overview.module.css';
 
 type Props = {
+  activePage?: 'overview' | 'clients' | 'people' | 'audit';
   children: ReactNode;
   name: string;
   environment?: string;
@@ -19,6 +23,7 @@ type Props = {
 };
 
 export function OverviewShell({
+  activePage = 'overview',
   children,
   name,
   environment,
@@ -46,23 +51,44 @@ export function OverviewShell({
         className={mobile ? styles.bottomNav : styles.navigation}
         aria-label={mobile ? 'Mobile platform navigation' : 'Main navigation'}
       >
-        <Link href="/platform" aria-current="page">
-          <OverviewIcon name="overview" />
+        <Link href="/platform" aria-current={activePage === 'overview' ? 'page' : undefined}>
+          {activePage === 'overview' ? (
+            <OverviewIcon name="overview" />
+          ) : (
+            <ClientsIcon name="overview-inactive" />
+          )}
           <span>Overview</span>
         </Link>
-        <Link href="/platform/clients">
-          <OverviewIcon name="clients" />
+        <Link href="/platform/clients" aria-current={activePage === 'clients' ? 'page' : undefined}>
+          {activePage === 'clients' ? (
+            <ClientsIcon name="clients-active" />
+          ) : (
+            <OverviewIcon name="clients" />
+          )}
           <span>Clients</span>
         </Link>
         <Link
-          href="/platform/clients#client-account-access"
+          href="/platform/people"
           aria-label="People & access"
+          aria-current={activePage === 'people' ? 'page' : undefined}
         >
-          <OverviewIcon name="people" />
+          {activePage === 'people' ? (
+            <PeopleIcon name="people-active" />
+          ) : (
+            <OverviewIcon name="people" />
+          )}
           <span>{mobile ? 'People' : 'People & access'}</span>
         </Link>
-        <Link href="/platform/audit" aria-label="Audit log">
-          <OverviewIcon name="audit" />
+        <Link
+          href="/platform/audit"
+          aria-label="Audit log"
+          aria-current={activePage === 'audit' ? 'page' : undefined}
+        >
+          {activePage === 'audit' ? (
+            <AuditIcon name="audit-active" />
+          ) : (
+            <OverviewIcon name="audit" />
+          )}
           <span>{mobile ? 'Audit' : 'Audit log'}</span>
         </Link>
         <button type="button" onClick={() => settings.current?.showModal()} aria-haspopup="dialog">

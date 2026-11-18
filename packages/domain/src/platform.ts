@@ -283,15 +283,28 @@ export class Platform {
       };
     });
   }
-  async clientAccounts(token: string, search = '', page = 1) {
-    requireCondition(search.length <= 120 && Number.isInteger(page) && page >= 1 && page <= 100000,
+  async clientAccounts(token: string, search = '', page = 1, view: 'all' | 'admins' = 'all') {
+    requireCondition(['all', 'admins'].includes(view) && search.length <= 120 && Number.isInteger(page) && page >= 1 && page <= 100000,
       422, 'invalid_filter', 'Enter a valid account search or page.');
     return this.transaction(token, undefined, async (sql, actor) => {
-      const where = `u.environment=$1 AND u.active AND NOT(u.environment='production' AND u.is_synthetic)
-        AND EXISTS(SELECT 1 FROM identities i WHERE i.user_id=u.id AND i.active)
+      // Keep the original all-accounts eligibility and expose current platform grants separately.
+      // The admins view also retains inactive grant holders, as the existing administrators page does.
+      const eligible = `u.active AND NOT(u.environment='production' AND u.is_synthetic)
+        AND EXISTS(SELECT 1 FROM identities i WHERE i.user_id=u.id AND i.active)`;
+      const active = `${eligible} AND (u.origin<>'primary_import' OR u.permissions_synced_at>=now()-interval '5 minutes')`;
+      const grant = `r.user_id=u.id AND r.environment=u.environment AND r.role='admin' AND r.scope_type='platform'
+        AND r.starts_at<=now() AND (r.ends_at IS NULL OR r.ends_at>now())`;
+      const hasGrant = `EXISTS(SELECT 1 FROM role_assignments r WHERE ${grant})`;
+      const where = `u.environment=$1 AND ${view === 'admins' ? hasGrant : eligible}
         AND (u.name ILIKE '%'||$2||'%' OR u.email ILIKE '%'||$2||'%')`;
-      const accounts = (await sql.query(`SELECT u.id,u.name,u.email,u.permission_version FROM users u WHERE ${where} ORDER BY u.name,u.id LIMIT 20 OFFSET $3`, [actor.environment,search,(page-1)*20])).rows;
+      const accounts = (await sql.query<{id:string;name:string;email:string;permission_version:number;account_active:boolean;global_admin_id:string|null}>(`SELECT u.id,u.name,u.email,u.permission_version,(${active}) account_active,
+        (SELECT r.id FROM role_assignments r WHERE ${grant} ORDER BY r.id LIMIT 1) global_admin_id
+        FROM users u WHERE ${where} ORDER BY u.name,u.id LIMIT 20 OFFSET $3`, [actor.environment,search,(page-1)*20])).rows;
       const total = (await sql.query(`SELECT count(*)::int total FROM users u WHERE ${where}`, [actor.environment,search])).rows[0].total;
+      const counts = (await sql.query<{accountTotal:number;adminTotal:number;activeAdmins:number}>(`SELECT count(*) FILTER(WHERE ${eligible})::int "accountTotal",
+        count(*) FILTER(WHERE ${hasGrant})::int "adminTotal",
+        count(*) FILTER(WHERE ${hasGrant} AND ${active})::int "activeAdmins"
+        FROM users u WHERE u.environment=$1`, [actor.environment])).rows[0];
       const clients = (await sql.query(`SELECT o.id,o.name FROM organisations o JOIN platform_client_states s ON s.organisation_id=o.id WHERE s.environment=$1 AND o.active AND NOT s.suspended ORDER BY o.name,o.id`,[actor.environment])).rows;
       const memberships = (await sql.query(`SELECT cm.user_id,cm.organisation_id,o.name FROM client_memberships cm JOIN organisations o ON o.id=cm.organisation_id JOIN platform_client_states s ON s.organisation_id=o.id AND s.environment=cm.environment
         WHERE cm.environment=$1 AND cm.user_id=ANY($2::uuid[]) AND cm.status='active' AND cm.ended_at IS NULL AND cm.joined_at<=now() AND o.active AND NOT s.suspended ORDER BY o.name,o.id`,[actor.environment,accounts.map(a=>a.id)])).rows;
@@ -301,7 +314,7 @@ export class Platform {
         return {...account,memberships:current.map(m=>({id:m.organisation_id,name:m.name})),
           roles:roles.filter(r=>r.user_id===account.id).map(r=>({clientId:r.organisation_id,role:r.role})),
           defaultClientId:current.length===1 ? current[0].organisation_id : ''};
-      }), clients, total, page, allowJoin:(process.env.TRAINING_AUTH_MODE ?? 'local_password') !== 'local_password' };
+      }), clients, total, page, ...counts, allowJoin:(process.env.TRAINING_AUTH_MODE ?? 'local_password') !== 'local_password' };
     });
   }
   async clientRole(token: string, csrf: string, client: string, userId: string,

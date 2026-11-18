@@ -91,7 +91,8 @@ test('fresh setup, password login and optional authenticator recovery', async ({
   await page.screenshot({ path: 'output/playwright/directory-mobile.png', fullPage: true });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: 'output/playwright/directory-desktop.png', fullPage: true });
-  await page.getByRole('link', { name: 'Back to workspace', exact: true }).click();
+  await page.locator('summary').filter({ hasText: 'Workspace' }).click();
+  await page.getByRole('link', { name: 'Learning workspace', exact: true }).click();
 
   const current = await (await page.request.get('/api/auth/context')).json();
   const wrongOrigin = await page.request.post('/api/auth/logout', {
@@ -276,25 +277,27 @@ test('fresh setup, password login and optional authenticator recovery', async ({
   await expect(recipient.getByRole('button', { name: 'Demo Client 2', exact: true })).toBeVisible();
 
   await page.goto('/platform/audit');
-  await expect(
-    page.getByRole('heading', { name: 'Administrative audit', exact: true }),
-  ).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Filter audit', exact: true })).toBeEnabled();
+  await expect(page.getByRole('heading', { name: 'Audit log', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Apply filters', exact: true })).toBeEnabled();
   await expect(page.getByRole('table')).toContainText('platform.client.created');
   await page.getByLabel('Search reason or target').fill('no-event-matches-this-filter');
-  await page.getByRole('button', { name: 'Filter audit', exact: true }).click();
+  await page.getByRole('button', { name: 'Apply filters', exact: true }).click();
   await expect(page.getByRole('table')).toContainText('No administrative events match');
   await page.getByRole('button', { name: 'Clear filters', exact: true }).click();
   await expect(page.getByRole('table')).toContainText('platform.client.created');
   await page
     .getByRole('combobox', { name: 'Action', exact: true })
     .selectOption('platform.client.created');
-  await page.getByRole('button', { name: 'Filter audit', exact: true }).click();
-  await expect(page.getByRole('button', { name: 'Filter audit', exact: true })).toBeEnabled();
+  await page.getByRole('button', { name: 'Apply filters', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Apply filters', exact: true })).toBeEnabled();
   await expect(page.getByRole('combobox', { name: 'Action', exact: true })).toHaveValue(
     'platform.client.created',
   );
-  await page.getByText('Change details', { exact: true }).first().click();
+  await page
+    .getByRole('button', { name: /^Details for/ })
+    .first()
+    .click();
+  await expect(page.getByRole('dialog', { name: 'Change details' })).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),

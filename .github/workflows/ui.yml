@@ -6,11 +6,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [overview, shell]
+        suite: [overview, shell, clients, history, accounts, accounts-mock, people, audit]
     env:
       NEXT_TELEMETRY_DISABLED: '1'
       PLAYWRIGHT_BROWSERS_PATH: .runtime/browsers
       OVERVIEW_QA_SUITE: ${{ matrix.suite }}
+      CLIENTS_QA_SUITE: ${{ matrix.suite }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,7 +20,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npx playwright test --config playwright.overview.config.ts
+      - if: matrix.suite == 'overview' || matrix.suite == 'shell'
+        run: npx playwright test --config playwright.overview.config.ts
+      - if: matrix.suite != 'overview' && matrix.suite != 'shell'
+        run: npx playwright test --config playwright.clients.config.ts
       - uses: actions/upload-artifact@v4
         if: always()
         with:

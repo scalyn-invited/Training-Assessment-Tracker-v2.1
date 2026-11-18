@@ -114,8 +114,8 @@ test('Overview design uses live scoped data, preserves access, and works on desk
     .getByRole('navigation', { name: 'Main navigation', exact: true })
     .getByRole('link', { name: 'People & access' })
     .click();
-  await expect(page).toHaveURL(/\/platform\/clients#client-account-access$/);
-  await expect(page.getByRole('region', { name: 'Client account access' })).toBeVisible();
+  await expect(page).toHaveURL(/\/platform\/people$/);
+  await expect(page.getByRole('heading', { name: 'People & access' })).toBeVisible();
   await page.goto('/platform');
 
   // One section failing does not remove working metrics, and retry restores real data.

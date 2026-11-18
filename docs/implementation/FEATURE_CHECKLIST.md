@@ -401,3 +401,22 @@ Final local closure (2026-11-13): full current ordinary browser journey passes (
 User-authorized UI update from Figma desktop 6939:1670 and mobile 6939:4740, scoped to /platform. Existing count/status/account/audit APIs, permissions and other page layouts are retained. Current destinations and active-account semantics are documented for later team review in OVERVIEW_UI_QA.md; no new backend behavior was introduced.
 
 Evidence: focused isolated Overview browser test passed (14.4 seconds / 21.1 seconds overall), including light/dark, 320–1440px overflow, axe A/AA, touch targets, API failure/retry, empty states, live data mapping, role denial and preserved workflows. Existing shell regression passed (11.9 seconds / 18.9 seconds overall). TypeScript and production build passed. Desktop/mobile/touch screenshots inspected. QA used a fresh ephemeral database/storage and separate build output, not the saved demo workspace. Fixes, commands, boundaries and evidence are in OVERVIEW_UI_QA.md. Human acceptance remains unrecorded; no full domain/PostgreSQL rerun or deployment is claimed.
+
+
+## Clients presentation refresh - locally verified, 17 November 2026
+
+User-authorized Figma desktop 6939:1831/mobile 6939:4866 update for /platform/clients, sharing the Overview shell while preserving current directory/account workflows. Adds Open workspace through the existing client-selection API; permissions, reasons, displayed versions and suspension/reactivation confirmation remain authoritative. Team assumptions and later userflow confirmations are in CLIENTS_UI_QA.md.
+
+Focused Clients browser checks pass (15.7 seconds / 22.9 seconds overall), alongside directory-history, password/mock account-access and Overview regressions. TypeScript and production build pass. Dark/light desktop/mobile and touch screenshots inspected; isolated test database/storage and separate build outputs used. Details, corrections and evidence: CLIENTS_UI_QA.md. The legacy baseline verifier could not qualify hashes because its recorded V2 source folder is absent on this machine; no V2 or baseline manifest was changed. No full domain/PostgreSQL requalification or human acceptance is claimed.
+
+## People & access presentation refresh — locally verified, 17 November 2026
+
+User-authorized All accounts and Global admins desktop/mobile implementation at `/platform/people`, using Figma frames 6939:2013/2352/5012/5326 and the existing platform shell. Existing account creation/invitation, guarded Client Admin operations and Global Admin appointment/revocation are retained. The directory GET adds a server-filtered admin view, current platform grant/eligibility fields and independent tab totals; no mutation authority or concurrency rule changed.
+
+Twenty focused domain/API-contract tests passed across the affected suites. The People browser scenario passed (17.7 seconds / 25.6 seconds overall), including real access changes, stale recovery, last-admin protection, denial, pagination/history, mobile/desktop accessibility and SVG geometry. Overview, Clients and password/mock account-access browser regressions passed. TypeScript and production build passed. Screenshots inspected; isolated QA database/storage and separate build outputs used. Implementation assumptions, evidence and limitations are recorded in PEOPLE_ACCESS_UI_QA.md. No remote CI, merge, full-port requalification or human acceptance is claimed.
+
+## Audit Log presentation refresh — locally verified, 17 November 2026
+
+User-authorized Figma desktop 6939:2491/mobile 6939:5430 UI for `/platform/audit`, sharing the platform shell. Retains existing filters, approved payload projection, Global Admin gate, UTC semantics and 25-event pagination. Adds collapsible date groups, URL/history restoration, responsive event rows and a read-only Details dialog. No backend, audit-write or immutable-record rule changed.
+
+Eleven platform domain tests passed. The final focused Audit browser test passed (12.6 seconds / 19.6 seconds overall), covering filters, date boundaries, pagination/history, unchanged record snapshots, secret-field exclusion, denial, light/dark/mobile accessibility, footer clearance and SVG geometry. Overview and People browser regressions, TypeScript and production build passed. Screenshots inspected; test database/storage and build output isolated from the saved demo. Evidence and interim userflow placements are in AUDIT_LOG_UI_QA.md. Remote check results are recorded on the PR separately; human acceptance remains deferred.

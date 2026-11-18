@@ -10,7 +10,7 @@ test('mock platform account join requires explicit choice and changes ambiguous 
  const actor=(await db.pool.query("SELECT id FROM users WHERE email='demo.1.0@example.invalid'")).rows[0].id;
  await db.pool.query("INSERT INTO role_assignments(id,user_id,role,environment,scope_type,scope_key,granted_by,reason) VALUES($1,$2,'admin','test','platform','platform',$2,'Explicit browser fixture authority')",[randomUUID(),actor]);
  await page.goto('/login');await page.getByRole('button',{name:'Sign in as Demo Client Admin 1.0',exact:true}).click();await expect(page).toHaveURL(/platform/);
- await page.goto('/platform/clients');const section=page.getByRole('region',{name:'Client account access'});
+ await page.goto('/platform/clients#client-account-access');const section=page.getByRole('region',{name:'Client account access'});
  await section.getByLabel('Search accounts',{exact:true}).fill('demo.1.3@example.invalid');await section.getByRole('button',{name:'Search accounts',exact:true}).click();
  await expect(section.getByText('1 matching accounts',{exact:true})).toBeVisible();await expect(section.getByText('Loading accounts...',{exact:true})).toHaveCount(0);await section.getByText('Demo Member 1.3 - demo.1.3@example.invalid',{exact:true}).click();
  const form=section.getByRole('form',{name:'Manage client access for demo.1.3@example.invalid'});

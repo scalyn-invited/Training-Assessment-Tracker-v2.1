@@ -7,6 +7,18 @@ Employee learning, assessment evidence and accountable human review. Preserve V2
 
 The user authorized the supplied Figma desktop frame `6939:1670` and mobile frame `6939:4740` in file `eQejFiVgug5zmBTd9aVGHx` for the `/platform` Overview, following Bernie's approval to proceed with UI work. Its scoped layout uses a 248px desktop sidebar, a workspace menu and mobile bottom navigation. The dark palette follows the frames; existing light, branded and personal theme behavior remains available. Existing workflows and permissions remain authoritative, and other pages retain the V2 layout. Interim destination/count/activity decisions are recorded in `docs/implementation/OVERVIEW_UI_QA.md`; these are implementation assumptions, not completed team acceptance.
 
+## Clients UI exception — 17 November 2026
+
+The user authorized continuing with the Clients desktop frame `6939:1831` and mobile frame `6939:4866` in the same Figma file while userflow work continues. `/platform/clients` shares the Overview shell with Clients selected. The directory uses a desktop table and stacked mobile entries, original exported icons, real counts, native search/status controls and existing guarded dialogs. Sorting, pagination and account-access management remain available; the latter is expandable and opens through the People & access link. Interim choices and intentional accessibility differences are recorded in `docs/implementation/CLIENTS_UI_QA.md`. Other routes keep their current layouts. This does not imply acceptance of the pending userflow.
+
+## People & access UI exception — 17 November 2026
+
+The user authorized building Figma desktop frames `6939:2013`/`6939:2352` and mobile frames `6939:5012`/`6939:5326` in file `eQejFiVgug5zmBTd9aVGHx`. `/platform/people` shares the Overview/Clients shell and presents All accounts and Global admins directories. Existing account creation/invitation and guarded client/platform role mutations remain authoritative. The existing directory GET adds an optional admin view, current grant/eligibility fields and unfiltered tab totals; mutation rules are unchanged. Interim userflow choices and automated evidence are recorded in `docs/implementation/PEOPLE_ACCESS_UI_QA.md`. This does not imply team acceptance of pending userflows.
+
+## Audit Log UI exception — 17 November 2026
+
+The user authorized Figma desktop `6939:2491` and mobile `6939:5430` in file `eQejFiVgug5zmBTd9aVGHx`. `/platform/audit` shares the platform shell with Audit selected and presents UTC date groups, responsive event rows, filters and a read-only details dialog. Existing audit GET semantics, approved change-field projection, permissions and 25-event pagination remain authoritative. No audit records, API or mutation behavior changed. Details and evidence are in `docs/implementation/AUDIT_LOG_UI_QA.md`.
+
 ## Typography
 Use the existing Inter, "Segoe UI", sans-serif stack (Inter only where installed; no external font request), with Georgia for the existing learning hero. Current workspace override: body 16px, mobile inputs 16px, headings 32px (27px below 800px), hero 36px desktop and 30px mobile. Preserve source hierarchy rather than introducing a new brand.
 
