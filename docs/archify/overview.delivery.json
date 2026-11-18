@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "ff54b213-8cbb-4853-88c6-9ea45ced08a8",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\archify\\overview.candidate.json",
+  "output": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\archify\\overview.html",
+  "specification": {
+    "sha256": "2ba4f43445d2f63bae0e045e77da8e722ba3e2376dc3ce1e691c22c64f20ddf8",
+    "bytes": 5332
+  },
+  "artifact": {
+    "sha256": "0d144726921e1980968c85231d8949743275eb6163373598ebcb4e6c1fbee204",
+    "bytes": 763547
+  }
+}

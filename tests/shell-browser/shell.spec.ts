@@ -71,25 +71,27 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     await expect(
       page.getByRole('heading', { name: 'Platform overview', exact: true }),
     ).toBeVisible();
-    await expect(
-      page.getByText('Only one active Global Admin remains.', { exact: false }),
-    ).toBeVisible();
+    await expect(page.getByText('Only one active Global Admin', { exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'View system status' }).first().click();
     await expect(page.getByText('Password sign-in', { exact: true })).toBeVisible();
+    await page.keyboard.press('Escape');
     await page.setViewportSize({ width: 375, height: 812 });
-    await page.getByRole('button', { name: 'Open navigation', exact: true }).click();
-    const drawer = page.getByRole('dialog', { name: 'Workspace menu' });
+    const settingsButton = page
+      .getByRole('navigation', { name: 'Mobile platform navigation' })
+      .getByRole('button', { name: 'Settings' });
+    await settingsButton.click();
+    const drawer = page.getByRole('dialog', { name: 'Settings', exact: true });
     await expect(drawer).toBeVisible();
-    await expect(drawer.getByRole('button', { name: 'Close navigation' })).toBeFocused();
-    await expect(page.locator('#app-content')).toHaveAttribute('inert', '');
-    const first = drawer.getByRole('link').first();
+    const first = drawer.getByRole('button', { name: 'Close', exact: true });
+    await expect(first).toBeFocused();
     await first.focus();
     await page.keyboard.press('Shift+Tab');
     await expect(drawer.locator('summary')).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(first).toBeFocused();
     await page.keyboard.press('Escape');
-    await expect(page.getByRole('button', { name: 'Open navigation' })).toBeFocused();
-    await expect(page.locator('#app-sidebar')).toHaveAttribute('inert', '');
+    await expect(settingsButton).toBeFocused();
+    await expect(drawer).not.toBeVisible();
     expect(
       (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
         .violations,
@@ -97,7 +99,7 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
-    await page.getByRole('button', { name: 'Open navigation' }).click();
+    await settingsButton.click();
     await drawer.locator('summary').click();
     await drawer.getByRole('button', { name: 'Dark', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
@@ -105,12 +107,13 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     await page.keyboard.press('Escape');
     await page.reload();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-    await page.getByRole('button', { name: 'Open navigation' }).click();
+    await settingsButton.click();
     await drawer.locator('summary').click();
     await drawer.getByRole('button', { name: 'Use platform default', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
     await page.keyboard.press('Escape');
     await page.keyboard.press('Escape');
+    await page.locator('summary').filter({ hasText: 'Workspace' }).click();
     await page.getByRole('link', { name: 'Choose your client', exact: true }).click();
     await page.getByRole('button', { name: 'Demo Client 1', exact: true }).click();
     await expect(page).toHaveURL(/dashboard/);

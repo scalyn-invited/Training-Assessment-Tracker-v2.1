@@ -6,6 +6,7 @@ import { api, useContext, Feedback } from './auth-ui';
 import { BrandHeader, ThemePicker, useBrand } from './brand-header';
 import { Icon } from './workspace-icon';
 import { confirmWorkLeave, leaveAfterConfirmedMutation } from './work-guard';
+import { OverviewShell } from './overview-shell';
 type Client = { id: string; name: string };
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { context } = useContext(),
@@ -166,6 +167,32 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </>
+    );
+  if (pathname === '/platform' && context?.user?.global_admin)
+    return (
+      <OverviewShell
+        name={context.user.name}
+        environment={context.user.environment}
+        authMode={context.authMode}
+        brand={brand}
+        storageKey={storageKey}
+        reload={reload}
+        logout={() => void logout()}
+        signingOut={busy === 'logout'}
+      >
+        <Feedback error={error || brandError} />
+        {error && (
+          <button className="secondary" onClick={() => setRetry((n) => n + 1)}>
+            Retry workspace navigation
+          </button>
+        )}
+        {brandError && (
+          <button className="secondary" onClick={reload}>
+            Retry appearance
+          </button>
+        )}
+        {children}
+      </OverviewShell>
     );
   return (
     <>

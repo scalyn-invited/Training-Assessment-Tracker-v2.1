@@ -1,0 +1,31 @@
+{
+  "schema_version": 2, "diagram_type": "workflow",
+  "meta": {
+    "title": "Pause and resume · explicit calendar decisions",
+    "locale": "en", "quality_profile": "showcase", "output": "docs/archify/lifecycle.html",
+    "repository": {"url": "https://github.com/scalyn-invited/Training-Assessment-Tracker-v2.1.git", "revision": "40df79d3e3d71c6d357feb176053b7d225770000", "link_mode": "local-only"}
+  },
+  "lanes": [
+    {"id": "active", "label": "Member · active training"},
+    {"id": "change", "label": "Coordinator · pause and plan"},
+    {"id": "decision", "label": "Coordinator · approve resumption"}
+  ],
+  "nodes": [
+    {"id": "work", "lane": "active", "col": 0, "type": "frontend", "label": "Active training", "sublabel": "Continue in training.html", "width": 180, "sources": [{"path": "packages/domain/src/delivery.ts", "line": 279, "end_line": 300}]},
+    {"id": "pause", "lane": "change", "col": 0, "type": "security", "label": "Pause record", "sublabel": "Exact version + reason", "width": 180, "sources": [{"path": "packages/domain/src/learning-lifecycle.ts", "line": 50, "end_line": 81}]},
+    {"id": "preview", "lane": "change", "col": 1, "type": "frontend", "label": "Preview resumption", "sublabel": "Dates + capacity", "width": 180, "sources": [{"path": "packages/domain/src/learning-lifecycle.ts", "line": 84, "end_line": 162}]},
+    {"id": "approve", "lane": "decision", "col": 1, "type": "security", "label": "Approve preview", "sublabel": "Exact fresh inputs", "width": 180, "sources": [{"path": "packages/domain/src/learning-lifecycle.ts", "line": 165, "end_line": 281}]},
+    {"id": "active", "lane": "decision", "col": 2, "type": "frontend", "label": "Active again", "sublabel": "Return to member work", "width": 180, "sources": [{"path": "packages/domain/src/learning-lifecycle.ts", "line": 264, "end_line": 281}]}
+  ],
+  "edges": [
+    {"from": "work", "to": "pause", "label": "coordinator action"},
+    {"from": "pause", "to": "preview", "label": "remain paused"},
+    {"from": "preview", "to": "approve", "label": "review", "fromSide": "bottom", "toSide": "top"},
+    {"from": "approve", "to": "active", "label": "valid + confirmed"},
+    {"from": "approve", "to": "preview", "label": "stale: re-preview", "role": "return", "variant": "dashed"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "A branch of active training", "items": ["Enter this optional workflow from active member work in training.html; only an authorised coordinator can pause or resume.", "After successful resumption, return to the active member-work node in training.html. No new onboarding or activation is implied."]},
+    {"dot": "rose", "title": "No silent date changes", "items": ["Rescheduling replaces only blocks without started work, drafts or submissions. Shared capacity is checked.", "A stale preview cannot be approved: keep the record paused, create a fresh preview, and explicitly review it again.", "Cancelling a preview or leaving the screen is not resumption. Preserve reasons and make the paused state visible."]}
+  ]
+}

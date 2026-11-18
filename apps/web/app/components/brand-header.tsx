@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { themes } from '../../../../packages/domain/src/theme';
@@ -68,12 +68,14 @@ export function ThemePicker({
   csrf,
   storageKey,
   reload,
+  icon,
 }: {
   brand: Brand | null;
   client?: string;
   csrf?: string;
   storageKey: string;
   reload: () => void;
+  icon?: ReactNode;
 }) {
   const menu = useRef<HTMLDetailsElement>(null);
   const [busy, setBusy] = useState(false),
@@ -131,6 +133,7 @@ export function ThemePicker({
         ref={menu}
         onKeyDown={(e) => {
           if (e.key === 'Escape' && e.currentTarget.open) {
+            e.preventDefault();
             e.stopPropagation();
             e.currentTarget.open = false;
             e.currentTarget.querySelector('summary')?.focus();
@@ -138,7 +141,7 @@ export function ThemePicker({
         }}
       >
         <summary>
-          <Icon name="moon" />
+          {icon ?? <Icon name="moon" />}
           <span>Theme</span>
           <span className="theme-current">
             {brand
