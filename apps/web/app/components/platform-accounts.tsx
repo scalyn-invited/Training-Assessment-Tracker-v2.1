@@ -13,7 +13,7 @@ export function PlatformAccounts({csrf,onChanged}:{csrf:string;onChanged:()=>voi
    .finally(()=>{if(!cancelled)setLoading(false);});return()=>{cancelled=true;};
  },[query,page,revision]);
  const reload=()=>setRevision(n=>n+1);
- return <section className="panel directory-panel" aria-label="Client account access" aria-busy={loading}>
+ return <section id="client-account-access" className="panel directory-panel" aria-label="Client account access" aria-busy={loading}>
   <h2>Client account access</h2><p>Choose an account and client before changing access. Client Admin access does not grant training review permissions.</p>
   <form role="search" aria-label="Find client accounts" onSubmit={e=>{e.preventDefault();setQuery(String(new FormData(e.currentTarget).get('search')));setPage(1);reload();}}>
    <label>Search accounts<input type="search" name="search" maxLength={120}/></label>
