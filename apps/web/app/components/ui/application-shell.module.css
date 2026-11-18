@@ -1,0 +1,65 @@
+.clientBar {
+  display: flex;
+  align-items: end;
+  gap: var(--ui-space-4);
+  padding: var(--ui-space-4) var(--ui-space-6);
+  border-bottom: 1px solid var(--ui-border);
+}
+.clientSwitcher {
+  min-width: 0;
+  flex: 1;
+  max-width: 560px;
+  margin: 0;
+}
+.clientSwitcher label {
+  display: block;
+  margin: 0;
+  font-size: var(--ui-text-label);
+  color: var(--ui-muted);
+}
+.clientSwitcher > div {
+  display: flex;
+  align-items: end;
+  gap: var(--ui-space-2);
+}
+.clientSwitcher select {
+  flex: 1;
+  min-width: 0;
+}
+.clientSwitcher button {
+  flex-shrink: 0;
+}
+.menuToggle.menuToggle {
+  display: none;
+}
+.menuLinks.menuLinks {
+  display: flex;
+}
+.coBrand {
+  padding: var(--ui-space-2);
+  font-size: var(--ui-text-small);
+}
+@media (max-width: 800px) {
+  .menuToggle.menuToggle {
+    display: inline-flex;
+  }
+  .clientBar {
+    flex-wrap: wrap;
+    padding: var(--ui-space-4);
+  }
+  .clientSwitcher {
+    flex-basis: 100%;
+  }
+  .clientSwitcher > div {
+    flex-wrap: wrap;
+  }
+  .clientSwitcher select {
+    flex-basis: 100%;
+  }
+  .learningMain.learningMain {
+    padding-bottom: 0;
+  }
+  .coBrand {
+    display: none;
+  }
+}

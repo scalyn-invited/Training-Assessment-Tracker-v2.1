@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { api, useContext, Feedback } from './auth-ui';
 import { BrandHeader, ThemePicker, useBrand } from './brand-header';
 import { Icon } from './workspace-icon';
-import { OverviewShell } from './overview-shell';
+import { ApplicationShell } from './application-shell';
+import { Button, Select, Feedback as SharedFeedback } from './ui/controls';
+import sharedStyles from './ui/application-shell.module.css';
 type Client = { id: string; name: string };
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { context } = useContext(),
@@ -174,21 +176,59 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       '/platform/settings',
       '/platform/settings/status',
       '/platform/appearance',
+      '/platform/admins',
+      '/accounts',
+      '/account/security',
     ].includes(pathname) &&
-    context?.user?.global_admin
+    context?.user
   )
     return (
-      <OverviewShell
+      <ApplicationShell
+        context={context}
+        pathname={pathname}
+        platform={platform && context.user.global_admin}
+        themeClientId={!shared ? context.client?.id : undefined}
+        navigationBusy={Boolean(busy)}
+        clientSwitcher={
+          <form
+            className={sharedStyles.clientSwitcher}
+            aria-label="Active client"
+            onSubmit={switchClient}
+          >
+            <label htmlFor="active-client">Active client</label>
+            <div>
+              <Select
+                id="active-client"
+                value={selected}
+                onChange={(e) => setSelected(e.target.value)}
+                required
+                disabled={Boolean(busy) || !clients}
+              >
+                <option value="">{clients ? 'Choose client' : 'Loading clients...'}</option>
+                {clients?.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </Select>
+              <Button type="submit" disabled={Boolean(busy) || !selected}>
+                {busy === 'client' ? 'Opening client...' : 'Switch client'}
+              </Button>
+            </div>
+          </form>
+        }
         activePage={
           pathname === '/platform/appearance' || pathname.startsWith('/platform/settings')
             ? 'settings'
             : pathname === '/platform/audit'
               ? 'audit'
-              : pathname === '/platform/people'
+              : pathname === '/platform/people' || pathname === '/platform/admins'
                 ? 'people'
                 : pathname === '/platform/clients'
                   ? 'clients'
-                  : 'overview'
+                  : pathname === '/platform'
+                    ? 'overview'
+                    : undefined
         }
         name={context.user.name}
         environment={context.user.environment}
@@ -199,19 +239,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         logout={() => void logout()}
         signingOut={busy === 'logout'}
       >
-        <Feedback error={error || brandError} />
+        <SharedFeedback error={error || brandError} />
         {error && (
-          <button className="secondary" onClick={() => setRetry((n) => n + 1)}>
-            Retry workspace navigation
-          </button>
+          <Button onClick={() => setRetry((n) => n + 1)}>Retry workspace navigation</Button>
         )}
-        {brandError && (
-          <button className="secondary" onClick={reload}>
-            Retry appearance
-          </button>
-        )}
+        {brandError && <Button onClick={reload}>Retry appearance</Button>}
         {children}
-      </OverviewShell>
+      </ApplicationShell>
     );
   return (
     <>

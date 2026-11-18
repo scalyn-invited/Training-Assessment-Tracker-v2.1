@@ -7,9 +7,19 @@ import { ClientsIcon } from './clients-icon';
 import { PeopleIcon } from './people-icon';
 import { AuditIcon } from './audit-icon';
 import { Dialog } from './ui/dialog';
+import type { Context } from './auth-ui';
+import { Icon } from './workspace-icon';
+import { Button } from './ui/controls';
 import styles from '../platform/overview.module.css';
+import shared from './ui/application-shell.module.css';
 
 type Props = {
+  context: Context;
+  pathname: string;
+  platform: boolean;
+  clientSwitcher?: ReactNode;
+  themeClientId?: string;
+  navigationBusy: boolean;
   activePage?: 'overview' | 'clients' | 'people' | 'audit' | 'settings';
   children: ReactNode;
   name: string;
@@ -22,8 +32,14 @@ type Props = {
   signingOut: boolean;
 };
 
-export function OverviewShell({
-  activePage = 'overview',
+export function ApplicationShell({
+  context,
+  pathname,
+  platform,
+  clientSwitcher,
+  themeClientId,
+  navigationBusy,
+  activePage,
   children,
   name,
   environment,
@@ -34,6 +50,54 @@ export function OverviewShell({
   logout,
   signingOut,
 }: Props) {
+  const menu = useRef<HTMLDialogElement>(null);
+  const workspaceName = platform ? 'Platform administration' : 'Learning workspace';
+  const home = platform ? '/platform' : '/dashboard';
+  const canManageAccounts = Boolean(context.user?.global_admin || context.canAdmin);
+  const learningLinks = [
+    ...(context.user?.global_admin
+      ? [{ href: '/platform', label: 'Platform administration', icon: 'grid' }]
+      : []),
+    { href: '/dashboard', label: 'Overview', icon: 'home' },
+    { href: '/dashboard#learning-plans', label: 'Learning plans', icon: 'book' },
+    ...(context.canCoordinate
+      ? [{ href: '/learning-reviews', label: 'Review queue', icon: 'check' }]
+      : []),
+    { href: '/assessments', label: 'Assessments', icon: 'check' },
+    { href: '/notifications', label: 'Updates', icon: 'bell' },
+    ...(context.canAdmin
+      ? [
+          { href: '/people', label: 'People', icon: 'users' },
+          { href: '/administration', label: 'Administration', icon: 'grid' },
+          { href: '/accounts', label: 'Account access', icon: 'shield' },
+          { href: '/settings/ai', label: 'AI settings', icon: 'spark' },
+        ]
+      : []),
+    { href: '/settings/appearance', label: 'Appearance', icon: 'settings' },
+    ...(authMode === 'local_password'
+      ? [{ href: '/account/security', label: 'Account security', icon: 'shield' }]
+      : []),
+  ];
+  function learningNavigation(mobile = false) {
+    return (
+      <nav
+        className={styles.navigation + (mobile ? ' ' + shared.menuLinks : '')}
+        aria-label={mobile ? 'Mobile learning navigation' : 'Main navigation'}
+      >
+        {learningLinks.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={pathname === item.href ? 'page' : undefined}
+            onClick={() => menu.current?.close()}
+          >
+            <Icon name={item.icon} />
+            <span>{item.label}</span>
+          </Link>
+        ))}
+      </nav>
+    );
+  }
   const workspace = useRef<HTMLDetailsElement>(null);
   const settings = useRef<HTMLDialogElement>(null);
   const brandName = brand?.mode === 'cerebru' ? 'Cerebru' : (brand?.displayName ?? 'Scalyn');
@@ -109,6 +173,8 @@ export function OverviewShell({
     return (
       <ThemePicker
         brand={brand}
+        client={themeClientId}
+        csrf={context.csrf}
         storageKey={storageKey}
         reload={reload}
         icon={<OverviewIcon name="moon" />}
@@ -116,9 +182,12 @@ export function OverviewShell({
     );
   }
   return (
-    <div className={styles.shell}>
-      <aside className={styles.sidebar} aria-label="Platform workspace">
-        <Link href="/platform" className={styles.brand} aria-label={`${brandName} — Overview`}>
+    <div className={styles.shell} data-application-shell={platform ? 'platform' : 'learning'}>
+      <aside
+        className={styles.sidebar}
+        aria-label={platform ? 'Platform workspace' : 'Learning workspace'}
+      >
+        <Link href={home} className={styles.brand} aria-label={`${brandName} — Overview`}>
           <span className={styles.brandMark}>
             {customLogo ? <img src={brand!.logo!} alt="" /> : brandName.slice(0, 1).toUpperCase()}
           </span>
@@ -127,6 +196,7 @@ export function OverviewShell({
             <small>{brand?.appName ?? 'Assessment Training Tracker'}</small>
           </span>
         </Link>
+        {brand?.mode === 'co-branded' && <p className={shared.coBrand}>Part of Cerebru</p>}
         <details ref={workspace} className={styles.workspace} onKeyDown={closeWorkspace}>
           <summary>
             <span className={styles.workspaceIcon}>
@@ -134,33 +204,35 @@ export function OverviewShell({
             </span>
             <span className={styles.workspaceCopy}>
               <small>Workspace</small>
-              <strong>Platform administration</strong>
+              <strong>{workspaceName}</strong>
             </span>
             <OverviewIcon name="switch" />
           </summary>
           <nav className={styles.workspaceMenu} aria-label="Choose workspace">
-            <Link
-              href="/platform"
-              aria-current="page"
-              onClick={() => {
-                if (workspace.current) workspace.current.open = false;
-              }}
-            >
-              Platform administration
-            </Link>
+            {context.user?.global_admin && (
+              <Link
+                href="/platform"
+                aria-current={platform ? 'page' : undefined}
+                onClick={() => {
+                  if (workspace.current) workspace.current.open = false;
+                }}
+              >
+                Platform administration
+              </Link>
+            )}
             <Link href="/dashboard">Learning workspace</Link>
             <Link href="/clients">Choose your client</Link>
-            <Link href="/accounts">Manage account access</Link>
+            {canManageAccounts && <Link href="/accounts">Manage account access</Link>}
             {brand && brand.mode !== 'white-label' && (
               <a href="https://opsbrain-eosin.vercel.app/home">Back to Cerebru</a>
             )}
           </nav>
         </details>
-        <p className={styles.navLabel}>Platform administration</p>
-        {navigation()}
+        <p className={styles.navLabel}>{workspaceName}</p>
+        {platform ? navigation() : learningNavigation()}
         <div className={styles.desktopTheme}>{themePicker()}</div>
       </aside>
-      <div className={styles.main}>
+      <div className={styles.main + (!platform ? ' ' + shared.learningMain : '')}>
         <header className={styles.topbar}>
           {environment === 'test' ? (
             <div className={styles.sandbox}>
@@ -174,7 +246,7 @@ export function OverviewShell({
               </span>
             </div>
           ) : (
-            <span className={styles.platformLabel}>Platform administration</span>
+            <span className={styles.platformLabel}>{workspaceName}</span>
           )}
           <div className={styles.profile}>
             <button
@@ -188,13 +260,13 @@ export function OverviewShell({
             </button>
             <span className={styles.profileCopy}>
               <strong title={name}>{name}</strong>
-              <small>Global administration</small>
+              <small>{platform ? 'Global administration' : 'Current client access'}</small>
             </span>
             <button
               type="button"
               className={styles.logout}
               onClick={logout}
-              disabled={signingOut}
+              disabled={navigationBusy}
               aria-busy={signingOut}
               aria-label={signingOut ? 'Signing out...' : 'Sign out'}
             >
@@ -202,6 +274,20 @@ export function OverviewShell({
             </button>
           </div>
         </header>
+        {!platform && (
+          <div className={shared.clientBar}>
+            <Button
+              className={shared.menuToggle}
+              aria-label="Open navigation"
+              aria-haspopup="dialog"
+              onClick={() => menu.current?.showModal()}
+            >
+              <Icon name="menu" />
+              Menu
+            </Button>
+            {clientSwitcher}
+          </div>
+        )}
         <main id="main" className={styles.content} tabIndex={-1}>
           {children}
         </main>
@@ -210,7 +296,16 @@ export function OverviewShell({
           <span>Learning with purpose. Progress with evidence.</span>
         </footer>
       </div>
-      {navigation(true)}
+      {platform && navigation(true)}
+      {!platform && (
+        <Dialog dialogRef={menu} titleId="workspace-menu-title">
+          <div className={styles.dialogHeader}>
+            <h2 id="workspace-menu-title">Workspace menu</h2>
+            <Button onClick={() => menu.current?.close()}>Close navigation</Button>
+          </div>
+          {learningNavigation(true)}
+        </Dialog>
+      )}
       <Dialog dialogRef={settings} titleId="overview-settings-title">
         <div className={styles.dialogHeader}>
           <h2 id="overview-settings-title">Personal settings</h2>
@@ -218,10 +313,14 @@ export function OverviewShell({
             Close
           </button>
         </div>
-        <nav className={styles.settingsLinks} aria-label="Platform settings">
-          <Link href="/platform/settings">Platform appearance</Link>
-          <Link href="/platform/admins">Global admins</Link>
-          <Link href="/accounts">Manage account access</Link>
+        <nav className={styles.settingsLinks} aria-label="Account settings">
+          {context.user?.global_admin && (
+            <>
+              <Link href="/platform/settings">Platform appearance</Link>
+              <Link href="/platform/admins">Global admins</Link>
+            </>
+          )}
+          {canManageAccounts && <Link href="/accounts">Manage account access</Link>}
           {authMode === 'local_password' && <Link href="/account/security">Account security</Link>}
         </nav>
         {themePicker()}

@@ -1,0 +1,127 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-6);
+  min-width: 0;
+}
+.panel {
+  composes: panel from './controls.module.css';
+  padding: var(--ui-space-6);
+}
+.panel > :not([hidden]) + :not([hidden]) {
+  margin-top: var(--ui-space-4);
+}
+.panel h2 {
+  font-size: var(--ui-text-section);
+  line-height: 28px;
+}
+.panel h3 {
+  font-size: var(--ui-text-control-mobile);
+  line-height: 22px;
+}
+.page p,
+.dialog p {
+  overflow-wrap: anywhere;
+}
+.page label,
+.dialog label {
+  display: block;
+  font-size: var(--ui-text-label);
+  font-weight: 500;
+  color: var(--ui-muted);
+  margin: 0;
+}
+.panel form,
+.dialog form,
+.panel fieldset:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--ui-space-4);
+  min-width: 0;
+}
+.panel form > button,
+.dialog form > button {
+  align-self: flex-start;
+}
+.panel fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.panel .filters {
+  flex-direction: row;
+  align-items: end;
+  flex-wrap: wrap;
+}
+.filters label {
+  flex: 1;
+  min-width: 180px;
+}
+.panel .filters > button {
+  align-self: auto;
+}
+.panel legend {
+  font-size: var(--ui-text-control-mobile);
+  color: var(--ui-text);
+  font-weight: 600;
+  margin-bottom: var(--ui-space-4);
+}
+.panel details > summary,
+details.panel > summary {
+  margin: 0;
+  font-size: var(--ui-text-body);
+  font-weight: 600;
+  color: var(--ui-text);
+}
+.panel details[open] > :not(summary) {
+  margin-top: var(--ui-space-4);
+}
+.password {
+  min-width: 0;
+}
+.password > button {
+  margin-top: var(--ui-space-2);
+}
+.password .help {
+  margin-top: var(--ui-space-2);
+  font-size: var(--ui-text-small);
+}
+.tableWrap {
+  min-width: 0;
+}
+.table small {
+  display: block;
+  color: var(--ui-muted);
+}
+.table td {
+  overflow-wrap: anywhere;
+}
+.table td > p {
+  margin-top: var(--ui-space-2);
+}
+.table :is(th, td):first-child {
+  padding-left: var(--ui-space-3);
+}
+.table :is(th, td):last-child {
+  padding-right: var(--ui-space-3);
+}
+.dialog h2 {
+  font-size: var(--ui-text-section);
+  line-height: 28px;
+}
+@media (max-width: 800px) {
+  .panel {
+    padding: var(--ui-space-4);
+  }
+}
+@media (max-width: 1270px) {
+  .table :is(td, td:first-child, td:last-child) {
+    padding: 0;
+  }
+  .table td[data-label] {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
