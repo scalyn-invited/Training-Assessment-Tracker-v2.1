@@ -3,6 +3,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { api, Feedback, Guest, Pending, useContext } from './auth-ui';
+import { Button, Textarea, Feedback as SharedFeedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/curriculum.module.css';
+import recordStyles from './ui/training-record.module.css';
 type Run = {
   id: string;
   status: string;
@@ -77,6 +81,7 @@ export function GenerationRequest({
   csrf,
   version,
   onDirty,
+  onPending,
   canQueue,
 }: {
   id: string;
@@ -84,6 +89,7 @@ export function GenerationRequest({
   csrf: string;
   version: number;
   onDirty: (value: boolean) => void;
+  onPending: (value: boolean) => void;
   canQueue: () => boolean;
 }) {
   const { view, error: loadError, loading, load } = useRuns(id, client),
@@ -114,6 +120,7 @@ export function GenerationRequest({
     )
       attempt.current = { version, feedback, key: crypto.randomUUID() };
     pending.current = true;
+    onPending(true);
     setBusy(true);
     setError('');
     onDirty(true);
@@ -134,11 +141,12 @@ export function GenerationRequest({
       onDirty(Boolean(feedback));
     } finally {
       pending.current = false;
+      onPending(false);
       setBusy(false);
     }
   }
   return (
-    <details className="panel">
+    <details className={layout.panel + ' ' + styles.generation}>
       <summary>Generate or revise with AI</summary>
       <p>
         Generate all blocks as a new draft using the administrator-approved route. Every result
@@ -149,7 +157,7 @@ export function GenerationRequest({
         resource, scheduled dates, existing draft and your revision notes. Names, identity records
         and uploaded files are excluded.
       </p>
-      <Feedback error={error || loadError} />
+      <SharedFeedback error={error || loadError} />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -157,7 +165,7 @@ export function GenerationRequest({
         }}
       >
         <label htmlFor="generation-feedback">Revision notes (optional)</label>
-        <textarea
+        <Textarea
           id="generation-feedback"
           rows={3}
           maxLength={4000}
@@ -169,14 +177,19 @@ export function GenerationRequest({
           }}
         />
         {active && (
-          <p className="notice">
+          <p className={recordStyles.notice}>
             An existing generation is queued, running or awaiting charge reconciliation. Open its
             progress before requesting another.
           </p>
         )}
-        <button className="primary" disabled={busy || Boolean(active) || !view} aria-busy={busy}>
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={busy || Boolean(active) || !view}
+          aria-busy={busy}
+        >
           {busy ? 'Queuing curriculum generation…' : 'Queue curriculum generation'}
-        </button>
+        </Button>
       </form>
       <h3>Recent generation requests</h3>
       {!view && !loadError && <p role="status">Loading generation requests…</p>}
@@ -198,9 +211,9 @@ export function GenerationRequest({
           </li>
         ))}
       </ul>
-      <button className="secondary" type="button" disabled={loading} onClick={() => void load()}>
+      <Button type="button" disabled={loading} onClick={() => void load()}>
         {loading ? 'Refreshing generation requests…' : 'Refresh generation requests'}
-      </button>
+      </Button>
     </details>
   );
 }
