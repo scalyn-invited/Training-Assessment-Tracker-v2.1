@@ -23,4 +23,5 @@ jobs:
           path: |
             .runtime/workflow-qa-playwright/
             .runtime/workflow-next-results/
+            .runtime/workflow-qa-screenshots/
           retention-days: 14

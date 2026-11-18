@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 import { build } from 'esbuild';
 import { readFile, mkdir } from 'node:fs/promises';
 const origin = 'https://workflow-qa.invalid';
-const shots = 'docs/assessment-workflow-implementation/implementation-screenshots';
+const shots = '.runtime/workflow-qa-screenshots';
 const questions = ['A1', 'A2', 'B1', 'B2'].map((id) => ({
   id,
   type: 'multiple_choice',
@@ -29,32 +29,36 @@ const initial = {
 };
 let css: string, builder: string, review: string, shell: string, responses: string;
 async function bundle(contents: string, shim = false) {
-  return (
-    await build({
-      stdin: { contents, resolveDir: process.cwd(), loader: 'tsx' },
-      bundle: true,
-      write: false,
-      platform: 'browser',
-      jsx: 'automatic',
-      define: { 'process.env.NODE_ENV': '"production"', 'process.env': '{}' },
-      plugins: shim
-        ? [
-            {
-              name: 'router-test-seam',
-              setup(b) {
-                b.onResolve({ filter: /^next\/navigation$/ }, () => ({
-                  path: 'navigation',
-                  namespace: 'qa',
-                }));
-                b.onLoad({ filter: /.*/, namespace: 'qa' }, () => ({
-                  contents: `const router={replace:()=>{}};export const useRouter=()=>router;export const usePathname=()=>'/assessments/definitions/synthetic-definition';`,
-                }));
-              },
+  const result = await build({
+    stdin: { contents, resolveDir: process.cwd(), loader: 'tsx' },
+    bundle: true,
+    write: false,
+    outdir: '.runtime/workflow-qa-bundle',
+    platform: 'browser',
+    jsx: 'automatic',
+    define: { 'process.env.NODE_ENV': '"production"', 'process.env': '{}' },
+    plugins: shim
+      ? [
+          {
+            name: 'router-test-seam',
+            setup(b) {
+              b.onResolve({ filter: /^next\/navigation$/ }, () => ({
+                path: 'navigation',
+                namespace: 'qa',
+              }));
+              b.onLoad({ filter: /.*/, namespace: 'qa' }, () => ({
+                contents: `const router={replace:()=>{}};export const useRouter=()=>router;export const usePathname=()=>'/assessments/definitions/synthetic-definition';`,
+              }));
             },
-          ]
-        : [],
-    })
-  ).outputFiles[0].text;
+          },
+        ]
+      : [],
+  });
+  css += result.outputFiles
+    .filter((file) => file.path.endsWith('.css'))
+    .map((file) => file.text)
+    .join('\n');
+  return result.outputFiles.find((file) => file.path.endsWith('.js'))!.text;
 }
 test.beforeAll(async () => {
   css = (

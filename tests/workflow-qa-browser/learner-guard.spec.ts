@@ -11,6 +11,7 @@ test.beforeAll(async () => {
       },
       bundle: true,
       write: false,
+      outdir: '.runtime/workflow-qa-bundle',
       platform: 'browser',
       jsx: 'automatic',
       define: { 'process.env.NODE_ENV': '"production"', 'process.env': '{}' },
@@ -29,7 +30,7 @@ test.beforeAll(async () => {
         },
       ],
     })
-  ).outputFiles[0].text;
+  ).outputFiles.find((file) => file.path.endsWith('.js'))!.text;
 });
 test('D01 learner shares pre-context guard and blocks unknown autosave outcome', async ({
   page,
