@@ -234,7 +234,6 @@ function LearningRoute({
             </Select>
           </label>
           <ReasonAction
-            shared
             label="Assign learning reviewer"
             help="Choose a reviewer and explain the assignment. Access is limited to this case and ends on resolution or role revocation."
             confirm="Assign this independent coordinator to this learning appeal?"

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { api, Feedback } from './auth-ui';
-import { Button, Input, Panel, Feedback as SharedFeedback } from './ui/controls';
+import { api } from './auth-ui';
+import { Button, Input, Panel, Feedback } from './ui/controls';
 import { registerWorkGuard } from './work-guard';
 import layout from './ui/form-layout.module.css';
 import styles from './ui/learning-lesson.module.css';
@@ -14,7 +14,6 @@ export function ResponseEvidence({
   selected,
   onChange,
   disabled,
-  shared = false,
 }: {
   enrolment: string;
   client: string;
@@ -22,7 +21,6 @@ export function ResponseEvidence({
   selected: string[];
   onChange: (ids: string[]) => void;
   disabled: boolean;
-  shared?: boolean;
 }) {
   const [files, setFiles] = useState<FileRow[] | null>(null),
     [error, setError] = useState(''),
@@ -31,12 +29,8 @@ export function ResponseEvidence({
   const [chosen, setChosen] = useState(false);
   const pending = useRef(false);
   useEffect(() => {
-    if (shared) return registerWorkGuard(() => ({ dirty: chosen, pending: pending.current }));
-  }, [shared, chosen]);
-  const Surface = shared ? Panel : 'section';
-  const Action = shared ? Button : 'button';
-  const Field = shared ? Input : 'input';
-  const Message = shared ? SharedFeedback : Feedback;
+    return registerWorkGuard(() => ({ dirty: chosen, pending: pending.current }));
+  }, [chosen]);
   async function refresh() {
     setError('');
     try {
@@ -83,19 +77,19 @@ export function ResponseEvidence({
     }
   }
   return (
-    <Surface className={shared ? `${layout.panel} ${styles.panel}` : 'panel'}>
+    <Panel className={`${layout.panel} ${styles.panel}`}>
       <h2>Supporting evidence</h2>
       <p>
         Attach up to five clean files. PDF, DOCX, TXT, PNG or JPEG; up to 20 MiB each. Files
         awaiting scanning cannot be attached.
       </p>
-      <Message error={error} success={message} />
+      <Feedback error={error} success={message} />
       {!files && !error && <p role="status">Loading evidence...</p>}
       {files?.length === 0 && <p>No supporting files uploaded yet.</p>}
       {files?.map((file) => (
-        <div key={file.id} className={shared ? styles.file : undefined}>
-          <label className={shared ? styles.choice : undefined}>
-            <Field
+        <div key={file.id} className={styles.file}>
+          <label className={styles.choice}>
+            <Input
               type="checkbox"
               checked={selected.includes(file.id)}
               disabled={
@@ -116,13 +110,9 @@ export function ResponseEvidence({
           {file.status === 'clean' && <a href={'/api/files/' + file.id}>Download {file.name}</a>}
         </div>
       ))}
-      <Action
-        type="button"
-        className={shared ? undefined : 'secondary'}
-        onClick={() => void refresh()}
-      >
+      <Button type="button" onClick={() => void refresh()}>
         Refresh evidence
-      </Action>
+      </Button>
       <form onSubmit={upload}>
         <label>
           Upload supporting evidence
@@ -132,19 +122,14 @@ export function ResponseEvidence({
             accept=".pdf,.docx,.txt,.png,.jpg,.jpeg"
             required
             disabled={busy || disabled}
-            className={shared ? recordStyles.upload : undefined}
+            className={recordStyles.upload}
             onChange={(e) => setChosen(!!e.target.files?.length)}
           />
         </label>
-        <Action
-          type="submit"
-          className={shared ? undefined : 'secondary'}
-          disabled={busy || disabled}
-          aria-busy={busy}
-        >
+        <Button type="submit" disabled={busy || disabled} aria-busy={busy}>
           {busy ? 'Uploading evidence...' : 'Upload evidence'}
-        </Action>
+        </Button>
       </form>
-    </Surface>
+    </Panel>
   );
 }

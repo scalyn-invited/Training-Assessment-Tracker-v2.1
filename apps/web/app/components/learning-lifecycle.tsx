@@ -106,7 +106,6 @@ export function LearningLifecycle({
           <details>
             <summary>Pause programme</summary>
             <ReasonAction
-              shared
               label="Pause programme"
               help="Pausing stops new lesson work. Existing drafts, submissions and approved evidence remain available."
               confirm="Pause this programme? The member cannot save or submit new lesson work until it is resumed."
@@ -121,7 +120,6 @@ export function LearningLifecycle({
           <details>
             <summary>Confirm programme completion</summary>
             <ReasonAction
-              shared
               label="Complete programme"
               help="Every required lesson must have approved evidence, and at least three current KPI targets must have sufficient on-target evidence. Time elapsed alone does not complete training."
               confirm="Confirm the member has achieved the required capability and complete this programme? This decision will be recorded in its history."

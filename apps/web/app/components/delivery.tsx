@@ -112,7 +112,6 @@ export function LearningDelivery({ id }: { id: string }) {
               <Panel className={layout.panel + ' ' + styles.panel}>
                 <h2>Activate the approved programme</h2>
                 <ReasonAction
-                  shared
                   primary
                   label="Activate programme"
                   help="Activation pins the approved lessons and rubric. A newer unapproved draft does not replace approved content."
@@ -166,7 +165,6 @@ export function LearningDelivery({ id }: { id: string }) {
                   <details>
                     <summary>Authorise early start</summary>
                     <ReasonAction
-                      shared
                       label="Authorise and lock block"
                       help="This opens future lessons in this block and locks its version immediately."
                       confirm="Authorise early start and lock this block version?"
@@ -450,7 +448,6 @@ export function LearningLesson({
             )}
             {v.editable && (
               <ResponseEvidence
-                shared
                 enrolment={id}
                 client={s.client!}
                 csrf={s.context!.csrf}
@@ -748,7 +745,6 @@ export function SubmissionReceipt({ id, submissionId }: { id: string; submission
                 <details>
                   <summary>Withdraw this attempt</summary>
                   <ReasonAction
-                    shared
                     label="Withdraw attempt"
                     help="Withdrawal stops review of this attempt. Its submitted content remains in history; you can submit a new attempt."
                     confirm="Withdraw this submission from review? Its immutable receipt will remain in history."

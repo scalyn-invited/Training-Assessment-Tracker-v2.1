@@ -444,7 +444,6 @@ function Editor({
         </label>
       </fieldset>
       <ResponseEvidence
-        shared
         enrolment={data.enrolmentId}
         client={client}
         csrf={csrf}

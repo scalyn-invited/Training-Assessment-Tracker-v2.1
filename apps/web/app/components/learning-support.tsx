@@ -119,7 +119,6 @@ export function LearningSupport({
                   />
                 </label>
                 <ReasonAction
-                  shared
                   label="Request adaptation"
                   help="Only teaching explanations, examples, activities and tools may change. Review the result before approving it."
                   confirm={`Request a provisional adaptation using approved evidence from block ${block}?`}
@@ -219,7 +218,6 @@ export function LearningSupport({
               </details>
               {view.coordinator && p.status === 'provisional' && (
                 <ReasonAction
-                  shared
                   label="Approve adaptation"
                   help="Approve this exact proposal and base version. Current evidence, dates, freeze and permission are checked again."
                   confirm={`Approve these teaching changes for block ${p.replacement?.number}? This creates a new lesson version visible to the learner.`}

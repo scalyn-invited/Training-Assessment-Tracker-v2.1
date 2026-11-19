@@ -189,7 +189,6 @@ export function LearningReview({
                   {g.status === 'provisional' && (
                     <>
                       <ReasonAction
-                        shared
                         label="Approve grade"
                         help="Approve only if every criterion is supported by the submitted evidence."
                         confirm="Approve this exact provisional grading attempt as official feedback?"
@@ -201,7 +200,6 @@ export function LearningReview({
                       <details>
                         <summary>Request changes to this work</summary>
                         <ReasonAction
-                          shared
                           label="Request changes"
                           help="Explain the evidence or changes the member needs to provide."
                           confirm="Record requested changes for this exact attempt?"
@@ -229,7 +227,6 @@ export function LearningReview({
               <details>
                 <summary>Request provisional grading</summary>
                 <ReasonAction
-                  shared
                   label="Request provisional grading"
                   help={
                     v.submission.quiz
@@ -401,7 +398,6 @@ export function LearningReview({
         <Panel className={`${layout.panel} ${styles.panel}`}>
           <h2>Request another review</h2>
           <ReasonAction
-            shared
             label="Request an appeal"
             help="An administrator must assign an independent reviewer. The approved decision remains in place while the appeal is open."
             confirm="Request an independent appeal for this approved decision?"
@@ -421,7 +417,6 @@ export function LearningReview({
           </p>
           {p.canUphold && (
             <ReasonAction
-              shared
               label="Uphold existing decision"
               help="Record an independent rationale. This resolves the appeal and closes case access."
               confirm="Uphold the existing approved decision and close this appeal?"

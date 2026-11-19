@@ -279,9 +279,6 @@
 .accountAccess :is(h2, h3) {
   margin-bottom: 12px;
 }
-.accountAccess :global(.directory-filters) {
-  margin-top: 16px;
-}
 .dialog p {
   margin: 12px 0;
   overflow-wrap: anywhere;

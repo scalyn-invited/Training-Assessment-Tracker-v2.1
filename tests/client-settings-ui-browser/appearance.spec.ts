@@ -287,9 +287,10 @@ test('client Appearance preserves branding, personal precedence, logo safeguards
             exact: true,
           }),
         ).toBeVisible();
-        expect((await p.locator('input[type=color]').boundingBox())!.height).toBeGreaterThanOrEqual(
-          44,
-        );
+        // The saved-version refresh remounts the form after the success notice appears.
+        await expect
+          .poll(async () => (await p.locator('input[type=color]').boundingBox())?.height ?? 0)
+          .toBeGreaterThanOrEqual(44);
       } else {
         await expect(p.getByRole('heading', { name: 'Client branding', exact: true })).toHaveCount(
           0,
