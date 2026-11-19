@@ -164,10 +164,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </Link>
     );
   }
-  if (guest && (pathname === '/login' || pathname === '/account/link'))
+  if (
+    guest &&
+    ['/login', '/account/link', '/setup', '/setup/local', '/setup/hosted'].includes(pathname)
+  )
     return (
       <GuestShell
         signIn={pathname === '/login'}
+        setup={pathname === '/setup' || pathname.startsWith('/setup/')}
         brand={brand}
         error={brandError}
         storageKey={storageKey}

@@ -154,6 +154,14 @@ Source frames: `6984:3988`, `7007:8148`, `7001:7171`, `7007:8206`, `7001:7574`, 
 
 The account-link form registers dirty/pending work in page memory and retains inputs when rechecking the same credential. Fragment changes still clear the previous recipient and form; successful redemption removes the fragment. No passwords, tokens or MFA secrets are persisted in browser storage or screenshot evidence. Setup and shared error pages retain their separate migrations; login-specific legacy CSS still has setup consumers. Evidence: `GLOBAL_UI_GUEST_AUTH_QA.md`.
 
+## Setup and installers
+
+`/setup`, `/setup/local` and `/setup/hosted` use the shared GuestShell with SetupFrame, semantic panels, fields, passwords, buttons, badges and feedback. Christian's setup frames `7001:6540`, `7001:6636`, `7001:6749`, `7001:6860`, `7001:6962` and `6984:3323` supply the 810px stepper region, 640px card/32px padding, 24px title, 14px radius and 560px completion card/36px padding. Keep actual dynamic branding and guest theme precedence. Below 800px the stepper wraps into three columns, paired fields stack, card padding is 20px and fields/buttons retain 48px height and 16px input text. This is a responsive adaptation of desktop setup frames, not a claim of supplied mobile setup frames.
+
+Preserve the legacy initializer's existing stages and the installers' token, requirements, database, administrator, review, progress and completion behavior. Requirements and progress are actual API values: four saved installation stages and, locally, 25 fixture steps. Do not invent the prototype's optional checks, percentage, separate connection-testing flow or edit shortcuts. Local PGlite remains local-only; hosted setup uses PostgreSQL. Preserve private review summaries, empty-database protection, retry, pause/resume, automatic local runtime handoff and hosted restart guidance. Dirty/pending forms use the existing work guard; same-step reload preserves mounted entries and the selected database engine. Retire obsolete login-grid, login-panel, intro-heading, steps and journey-steps rules only after their last consumers move; shared mobile-grid rules remain.
+
+Bernie's response forwarded by the user confirms preserving the current authentication flow; Christian's additional authentication workflows are future work. This resolves the earlier guest-auth clarification, without implying human acceptance of the implemented UI. Setup evidence: `docs/implementation/GLOBAL_UI_SETUP_QA.md`.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.

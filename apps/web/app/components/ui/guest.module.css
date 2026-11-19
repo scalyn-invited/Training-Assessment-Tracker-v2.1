@@ -227,6 +227,10 @@
 .card {
   padding: var(--guest-card-padding);
 }
+.setup .main {
+  max-width: 810px;
+  margin-top: 16px;
+}
 .card .heading {
   text-align: center;
   gap: var(--ui-space-3);

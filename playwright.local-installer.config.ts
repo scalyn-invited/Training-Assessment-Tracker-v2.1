@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { defineConfig } from '@playwright/test';
+process.env.NEXT_DIST_DIR = '.next-setup-ui';
 process.env.PLAYWRIGHT_BROWSERS_PATH = path.resolve('.runtime/browsers');
 process.env.TRACKER_LOCAL_INSTALLER_ROOT ??= path.resolve(
   '.runtime/local-installer-browser',
@@ -13,9 +14,10 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:3130',
     headless: true,
+    channel: process.env.CI ? undefined : 'chrome',
     actionTimeout: 15000,
-    screenshot: 'only-on-failure',
-    trace: 'retain-on-failure',
+    screenshot: 'off',
+    trace: 'off',
   },
   reporter: [['list']],
   webServer: {

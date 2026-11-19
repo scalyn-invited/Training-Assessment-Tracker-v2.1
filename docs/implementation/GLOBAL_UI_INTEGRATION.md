@@ -48,3 +48,7 @@ The requested workflow source is integrated. Assessment presentation migration h
 ## Future PR target - 19 November 2026
 
 Bernie's message forwarded by the user specifies `dev` as the target for future pull requests. Continue local work on `ui/global-design-system`; when submission is authorized, reconcile against the then-current `dev` before preparing the PR. This message does not authorize a push or deployment, and no new merge or remote branch verification is claimed here.
+
+## Authentication workflow direction confirmed - 19 November 2026
+
+Bernie's response forwarded by the user explicitly confirms preserving the current authentication flow. Additional authentication stages and recovery behavior in Christian's designs are future work. This resolves the earlier question about administrator-issued recovery, combined authenticator/recovery-code input and password plus confirmation on one screen. Preserve the original clarification draft and historical QA. This direction is not human UI acceptance or authorization to push/deploy. Setup/installer presentation follows the same workflow-preserving boundary; evidence is in `GLOBAL_UI_SETUP_QA.md`.

@@ -9,6 +9,7 @@ import styles from './ui/guest.module.css';
 export function GuestShell({
   children,
   signIn,
+  setup = false,
   brand,
   error,
   storageKey,
@@ -16,6 +17,7 @@ export function GuestShell({
 }: {
   children: ReactNode;
   signIn: boolean;
+  setup?: boolean;
   brand: Brand | null;
   error: string;
   storageKey: string;
@@ -24,8 +26,8 @@ export function GuestShell({
   const name = brand?.mode === 'cerebru' ? 'Cerebru' : (brand?.displayName ?? 'Training Tracker');
   return (
     <div
-      className={`${tokens.theme} ${styles.shell} ${signIn ? styles.signIn : styles.linkShell}`}
-      data-guest-shell={signIn ? 'sign-in' : 'account-link'}
+      className={`${tokens.theme} ${styles.shell} ${signIn ? styles.signIn : styles.linkShell} ${setup ? styles.setup : ''}`}
+      data-guest-shell={setup ? 'setup' : signIn ? 'sign-in' : 'account-link'}
     >
       <header className={styles.brandPanel}>
         <Link href="/login" className={styles.brand}>
