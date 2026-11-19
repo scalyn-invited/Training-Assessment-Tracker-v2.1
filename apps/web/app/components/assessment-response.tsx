@@ -1,9 +1,14 @@
 'use client';
+import { Button, Textarea, PageHeader, Feedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/assessment-response.module.css';
+
 import { useEffect, useRef, useState } from 'react';
-import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
+import { api, useContext, Guest } from './auth-ui';
 import { ResponseQuestions, type Question, type Section, type Answers } from './response-questions';
 import { ResponseEvidence } from './response-evidence';
 import { AssessmentReview } from './assessment-review';
+import { useRouter } from 'next/navigation';
 import { registerWorkGuard } from './work-guard';
 type Draft = {
   responses: Answers;
@@ -61,8 +66,12 @@ export function AssessmentResponse({ id }: { id: string }) {
     [failure, setFailure] = useState(''),
     [reload, setReload] = useState(0);
   const client = context?.client?.id;
+  const router = useRouter();
   useEffect(() => {
-    if (!client) return;
+    if (context && !context.user) router.replace('/login');
+  }, [context, router]);
+  useEffect(() => {
+    if (!context?.user || !client) return;
     let active = true;
     setData(null);
     setFailure('');
@@ -76,96 +85,99 @@ export function AssessmentResponse({ id }: { id: string }) {
     return () => {
       active = false;
     };
-  }, [id, client, reload]);
+  }, [id, client, context?.user?.id, reload]);
   return (
     <Guest>
-      {!context?.user ? (
-        <Pending error={error} retry={load} />
-      ) : !client ? (
-        <a href="/clients">Choose a client</a>
-      ) : (
-        <>
-          <p>
-            <a href="/assessments">Back to assessments</a>
-          </p>
-          {failure ? (
-            <Pending error={failure} retry={() => setReload((n) => n + 1)} />
-          ) : !data ? (
-            <p role="status">Loading assessment...</p>
-          ) : (
-            <>
-              <p className="eyebrow">
-                {context.client?.name} / Revision {data.revision}
-              </p>
-              <h1>{data.title}</h1>
-              <p>
-                {data.memberName} - {data.status.replaceAll('_', ' ')}
-              </p>
-              {data.member &&
-              !data.appealOpen &&
-              ['assigned', 'draft', 'rejected'].includes(data.status) ? (
-                <Editor
-                  key={data.id + ':' + data.version}
-                  data={data}
+      <div className={`${layout.page} ${styles.root}`}>
+        {!context?.user ? (
+          <Pending error={error} retry={load} />
+        ) : !client ? (
+          <a href="/clients">Choose a client</a>
+        ) : (
+          <>
+            {!data && <PageHeader title="Assessment response" />}
+            <p>
+              <a href="/assessments">Back to assessments</a>
+            </p>
+            {failure ? (
+              <Pending error={failure} retry={() => setReload((n) => n + 1)} />
+            ) : !data ? (
+              <p role="status">Loading assessment...</p>
+            ) : (
+              <>
+                <p className="eyebrow">
+                  {context.client?.name} / Revision {data.revision}
+                </p>
+                <PageHeader title={data.title} />
+                <p>
+                  {data.memberName} - {data.status.replaceAll('_', ' ')}
+                </p>
+                {data.member &&
+                !data.appealOpen &&
+                ['assigned', 'draft', 'rejected'].includes(data.status) ? (
+                  <Editor
+                    key={data.id + ':' + data.version}
+                    data={data}
+                    client={client}
+                    csrf={context.csrf}
+                    complete={() => setReload((n) => n + 1)}
+                  />
+                ) : (
+                  <p className={styles.notice}>
+                    {data.attempts.length
+                      ? 'Submitted attempts are preserved below.'
+                      : 'No response has been submitted yet.'}
+                  </p>
+                )}
+                {data.attempts.length > 0 && (
+                  <section className={layout.page}>
+                    <h2>Submission history</h2>
+                    {data.attempts.map((attempt) => (
+                      <details key={attempt.id} className={`${layout.panel} ${styles.panel}`} open>
+                        <summary>
+                          Attempt {attempt.number} - {new Date(attempt.createdAt).toLocaleString()}
+                        </summary>
+                        <p>Submission receipt: {attempt.id}</p>
+                        <ResponseQuestions
+                          questions={attempt.questions}
+                          sections={attempt.sections}
+                          answers={attempt.responses}
+                          prefix={attempt.id}
+                        />
+                        <h3>Additional context</h3>
+                        <p style={{ whiteSpace: 'pre-wrap' }}>
+                          {attempt.context || 'No additional context.'}
+                        </p>
+                        {attempt.files.length > 0 && (
+                          <ul>
+                            {attempt.files.map((file, index) => (
+                              <li key={file}>
+                                <a href={'/api/files/' + file}>Supporting evidence {index + 1}</a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </details>
+                    ))}
+                  </section>
+                )}
+                <AssessmentReview
+                  id={id}
                   client={client}
                   csrf={context.csrf}
+                  status={data.status}
+                  onStatus={(status) =>
+                    setData((current) =>
+                      current && current.status !== status ? { ...current, status } : current,
+                    )
+                  }
                   complete={() => setReload((n) => n + 1)}
                 />
-              ) : (
-                <p className="notice">
-                  {data.attempts.length
-                    ? 'Submitted attempts are preserved below.'
-                    : 'No response has been submitted yet.'}
-                </p>
-              )}
-              {data.attempts.length > 0 && (
-                <section>
-                  <h2>Submission history</h2>
-                  {data.attempts.map((attempt) => (
-                    <details key={attempt.id} className="panel" open>
-                      <summary>
-                        Attempt {attempt.number} - {new Date(attempt.createdAt).toLocaleString()}
-                      </summary>
-                      <p>Submission receipt: {attempt.id}</p>
-                      <ResponseQuestions
-                        questions={attempt.questions}
-                        sections={attempt.sections}
-                        answers={attempt.responses}
-                        prefix={attempt.id}
-                      />
-                      <h3>Additional context</h3>
-                      <p style={{ whiteSpace: 'pre-wrap' }}>
-                        {attempt.context || 'No additional context.'}
-                      </p>
-                      {attempt.files.length > 0 && (
-                        <ul>
-                          {attempt.files.map((file, index) => (
-                            <li key={file}>
-                              <a href={'/api/files/' + file}>Supporting evidence {index + 1}</a>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </details>
-                  ))}
-                </section>
-              )}
-              <AssessmentReview
-                id={id}
-                client={client}
-                csrf={context.csrf}
-                status={data.status}
-                onStatus={(status) =>
-                  setData((current) =>
-                    current && current.status !== status ? { ...current, status } : current,
-                  )
-                }
-                complete={() => setReload((n) => n + 1)}
-              />
-            </>
-          )}
-        </>
-      )}
+              </>
+            )}
+          </>
+        )}
+      </div>
     </Guest>
   );
 }
@@ -346,7 +358,7 @@ function Editor({
   const blocked = busy || pending || conflict;
   return (
     <>
-      <section className="panel">
+      <section className={`${layout.panel} ${styles.panel}`}>
         <h2>Your response</h2>
         <p id="response-save-status" role="status" aria-live="polite">
           {message}
@@ -360,15 +372,15 @@ function Editor({
           </ul>
         )}
         {pending && (
-          <button
-            className="secondary"
+          <Button
+            variant="secondary"
             disabled={busy}
             onClick={() => {
               if (state.current.pending) void run(state.current.pending);
             }}
           >
             Retry save
-          </button>
+          </Button>
         )}
         {conflict && (
           <p>
@@ -377,11 +389,11 @@ function Editor({
         )}
       </section>
       {sections.length > 0 && (
-        <nav id="learner-section-nav" aria-label="Assessment sections">
+        <nav className={layout.actions} id="learner-section-nav" aria-label="Assessment sections">
           {sections.map((section, i) => (
-            <button
+            <Button
               key={section.id}
-              className="secondary"
+              variant="secondary"
               aria-current={section.id === current ? 'step' : undefined}
               disabled={
                 blocked ||
@@ -391,11 +403,16 @@ function Editor({
               onClick={() => void save(section.id)}
             >
               {i + 1}. {section.title}
-            </button>
+            </Button>
           ))}
         </nav>
       )}
-      <fieldset id="section-response" disabled={locked} style={{ minWidth: 0 }}>
+      <fieldset
+        className={styles.answers}
+        id="section-response"
+        disabled={locked}
+        style={{ minWidth: 0 }}
+      >
         <legend className="sr-only">Assessment answers</legend>
         {currentSection && (
           <>
@@ -419,7 +436,7 @@ function Editor({
         />
         <label>
           Additional context (optional)
-          <textarea
+          <Textarea
             maxLength={6000}
             value={draft.context ?? ''}
             onChange={(e) => change({ context: e.target.value })}
@@ -427,6 +444,7 @@ function Editor({
         </label>
       </fieldset>
       <ResponseEvidence
+        shared
         enrolment={data.enrolmentId}
         client={client}
         csrf={csrf}
@@ -434,33 +452,42 @@ function Editor({
         disabled={locked || conflict}
         onChange={(files) => change({ files })}
       />
-      <div className="actions">
-        <button className="secondary" disabled={blocked} onClick={() => void save()}>
+      <div className={layout.actions}>
+        <Button variant="secondary" disabled={blocked} onClick={() => void save()}>
           Save draft
-        </button>
+        </Button>
         {index > 0 && (
-          <button
-            className="secondary"
+          <Button
+            variant="secondary"
             disabled={blocked}
             onClick={() => void save(sections[index - 1].id)}
           >
             Previous section
-          </button>
+          </Button>
         )}
         {index >= 0 && index < sections.length - 1 ? (
-          <button
-            className="primary"
+          <Button
+            variant="primary"
             disabled={blocked}
             onClick={() => void save(sections[index + 1].id)}
           >
             Continue to next section
-          </button>
+          </Button>
         ) : (
-          <button className="primary" disabled={blocked} onClick={submit}>
+          <Button variant="primary" disabled={blocked} onClick={submit}>
             Submit response
-          </button>
+          </Button>
         )}
       </div>
+    </>
+  );
+}
+
+function Pending({ error, retry }: { error?: string; retry: () => void }) {
+  return (
+    <>
+      <Feedback error={error} />
+      {error ? <Button onClick={retry}>Try again</Button> : <p role="status">Loading...</p>}
     </>
   );
 }

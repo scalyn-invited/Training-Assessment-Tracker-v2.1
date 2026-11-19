@@ -1,8 +1,12 @@
 'use client';
+import { Button, Input, Textarea, Feedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/assessment-response.module.css';
+
 import { useEffect, useState, useRef, type FormEvent } from 'react';
-import { api, Feedback, Pending } from './auth-ui';
+import { api } from './auth-ui';
 import { useWorkGuard } from './use-work-guard';
-import { workState } from './work-guard';
+import { workState, leaveAfterConfirmedMutation } from './work-guard';
 type ScoreRow = {
   id: string;
   score: number | null;
@@ -151,7 +155,7 @@ export function AssessmentReview({
         ...extra,
       });
       if (data.appeal && data.canReview && ['approve', 'reject', 'uphold'].includes(action)) {
-        window.location.assign('/assessments?review=recorded');
+        leaveAfterConfirmedMutation('/assessments?review=recorded');
         return true;
       }
       if (action === 'extract') {
@@ -182,13 +186,13 @@ export function AssessmentReview({
   };
   if (!data)
     return (
-      <section className="panel">
+      <section className={`${layout.panel} ${styles.panel}`}>
         <h2>Review and results</h2>
         <Pending error={error} retry={() => void load()} />
       </section>
     );
   return (
-    <section aria-label="Assessment review and results">
+    <section className={`${layout.page} ${styles.root}`} aria-label="Assessment review and results">
       {writeStopped && (
         <p role="status">
           Review writes are stopped. Refresh status to inspect the recorded outcome. Your entered
@@ -199,12 +203,12 @@ export function AssessmentReview({
       <Feedback error={error} success={message} />
       {loading && <p role="status">Refreshing review...</p>}
       {error && (
-        <button className="secondary" onClick={() => void load()} disabled={busy}>
+        <Button variant="secondary" onClick={() => void load()} disabled={busy}>
           Refresh review status
-        </button>
+        </Button>
       )}
       {data.appeal && (
-        <div className="notice">
+        <div className={styles.notice}>
           <h2>Alternate review requested</h2>
           <p>
             An appeal is open. Previous approved results remain visible while alternate review is
@@ -219,7 +223,7 @@ export function AssessmentReview({
       )}
       {data.approved && <ApprovedResult approved={data.approved} />}
       {data.returned && (
-        <section className="panel">
+        <section className={`${layout.panel} ${styles.panel}`}>
           <h2>Changes requested</h2>
           <p style={{ whiteSpace: 'pre-wrap' }}>{data.returned.feedback}</p>
           <p>
@@ -233,7 +237,7 @@ export function AssessmentReview({
       {data.canReview && data.attemptId && (
         <>
           {data.objective && (
-            <section className="panel">
+            <section className={`${layout.panel} ${styles.panel}`}>
               <h2>Automatic multiple-choice score</h2>
               <p>
                 {data.objective.percentage}% - {data.objective.correct} of {data.objective.total}{' '}
@@ -244,7 +248,7 @@ export function AssessmentReview({
               </p>
             </section>
           )}
-          <section className="panel">
+          <section className={`${layout.panel} ${styles.panel}`}>
             <h2>Evidence for review</h2>
             {!data.evidence.length && (
               <p>
@@ -279,7 +283,7 @@ export function AssessmentReview({
             )}
           </section>
           {data.reviews.length > 0 && (
-            <section className="panel">
+            <section className={`${layout.panel} ${styles.panel}`}>
               <h2>Review history - private</h2>
               {data.reviews.map((review) => (
                 <details key={review.id}>
@@ -311,20 +315,20 @@ export function AssessmentReview({
               />
             )}
           {data.status === 'technical_failure' && (
-            <p className="notice">
+            <p className={styles.notice}>
               Analysis did not finish. You can review manually or request a new analysis. Uncertain
               provider charges require administrator reconciliation.
             </p>
           )}
           {queued ? (
-            <div className="notice" role="status">
+            <div className={styles.notice} role="status">
               <p>
                 Analysis is pending. Wait for it to finish before deciding. You can leave this page
                 and return later.
               </p>
-              <button className="secondary" onClick={() => void load()} disabled={busy || loading}>
+              <Button variant="secondary" onClick={() => void load()} disabled={busy || loading}>
                 Refresh analysis status
-              </button>
+              </Button>
             </div>
           ) : (
             <DecisionForm
@@ -357,7 +361,7 @@ export function AssessmentReview({
 function ApprovedResult({ approved }: { approved: NonNullable<ReviewData['approved']> }) {
   const result = approved.result;
   return (
-    <section className="panel">
+    <section className={`${layout.panel} ${styles.panel}`}>
       <h2>Approved result</h2>
       <p>
         Rubric score:{' '}
@@ -415,18 +419,22 @@ function ReasonForm({
   busy: boolean;
 }) {
   const [reason, setReason] = useState('');
+  const [savedReason, setSavedReason] = useState('');
+  useWorkGuard({ dirty: reason !== savedReason, pending: busy });
   return (
     <form
-      className="panel"
+      className={`${layout.panel} ${styles.panel}`}
       onSubmit={(e) => {
         e.preventDefault();
-        void perform(action, reason);
+        void perform(action, reason).then((saved) => {
+          if (saved) setSavedReason(reason);
+        });
       }}
     >
       <h2>{title}</h2>
       <label>
         {label}
-        <textarea
+        <Textarea
           aria-label={label}
           value={reason}
           onChange={(e) => setReason(e.target.value)}
@@ -436,9 +444,9 @@ function ReasonForm({
           disabled={busy}
         />
       </label>
-      <button className="primary" disabled={busy} aria-busy={busy}>
+      <Button type="submit" variant="primary" disabled={busy} aria-busy={busy}>
         {busy ? 'Saving...' : button}
-      </button>
+      </Button>
     </form>
   );
 }
@@ -482,18 +490,18 @@ function ConfirmFile({
         <a href={'/api/files/' + file}>Download {name}</a>
       </p>
       {!pending && extraction?.status !== 'ready' && (
-        <button
+        <Button
           type="button"
-          className="secondary"
+          variant="secondary"
           onClick={() => void perform('extract', '', { file })}
           disabled={busy}
           aria-busy={busy}
         >
           {extraction?.status === 'failed' ? 'Retry text extraction' : 'Request text extraction'}
-        </button>
+        </Button>
       )}
       {extraction && (
-        <div className="notice">
+        <div className={styles.notice}>
           <p role="status">Extraction: {extraction.status.replaceAll('_', ' ')}</p>
           {pending && (
             <>
@@ -501,9 +509,9 @@ function ConfirmFile({
                 Text extraction is pending. You can leave and return later, or enter verified text
                 manually.
               </p>
-              <button type="button" className="secondary" disabled={busy} onClick={refresh}>
+              <Button type="button" variant="secondary" disabled={busy} onClick={refresh}>
                 Refresh extraction status
-              </button>
+              </Button>
             </>
           )}
           {extraction.error && <p>{extraction.error}</p>}
@@ -523,9 +531,9 @@ function ConfirmFile({
                 </p>
               </details>
               {fits ? (
-                <button
+                <Button
                   type="button"
-                  className="secondary"
+                  variant="secondary"
                   disabled={busy}
                   onClick={() => {
                     if (
@@ -541,7 +549,7 @@ function ConfirmFile({
                   }}
                 >
                   Use extracted text
-                </button>
+                </Button>
               ) : (
                 <p>
                   The extraction exceeds the 30,000-character evidence limit. Enter the relevant
@@ -562,7 +570,7 @@ function ConfirmFile({
       >
         <label>
           Verified evidence text
-          <textarea
+          <Textarea
             aria-label={'Verified evidence text ' + (index + 1)}
             value={text}
             onChange={(e) => {
@@ -576,7 +584,7 @@ function ConfirmFile({
         </label>
         <label>
           Confirmation reason
-          <textarea
+          <Textarea
             aria-label={'Confirmation reason ' + (index + 1)}
             value={reason}
             onChange={(e) => setReason(e.target.value)}
@@ -590,9 +598,9 @@ function ConfirmFile({
           Confirm only text you have checked against this file. Extraction alone does not confirm
           evidence.
         </p>
-        <button className="secondary" disabled={busy} aria-busy={busy}>
+        <Button type="submit" variant="secondary" disabled={busy} aria-busy={busy}>
           Confirm file evidence
-        </button>
+        </Button>
       </form>
     </details>
   );
@@ -673,12 +681,12 @@ function DecisionForm({
     });
   }
   return (
-    <form className="panel" onSubmit={submit}>
+    <form className={`${layout.panel} ${styles.panel}`} onSubmit={submit}>
       <h2>Human review</h2>
       <Feedback error={returnError} />
       <label>
         Member-safe return feedback
-        <textarea
+        <Textarea
           aria-label="Member-safe return feedback"
           value={returnFeedback}
           onChange={(e) => setReturnFeedback(e.target.value)}
@@ -691,7 +699,7 @@ function DecisionForm({
         reasoning in the separate rationale field. It does not release scores.
       </p>
       {provisional && (
-        <p className="notice">
+        <p className={styles.notice}>
           Provisional analysis is prefilled. Independently verify every score and evidence reference
           before approving.
         </p>
@@ -708,7 +716,7 @@ function DecisionForm({
             </p>
             <label>
               Score (0-100)
-              <input
+              <Input
                 aria-label={'Score for ' + c.label}
                 type="number"
                 min={0}
@@ -718,8 +726,8 @@ function DecisionForm({
                 onChange={(e) => patch(c.id, { score: e.target.value })}
               />
             </label>
-            <label>
-              <input
+            <label className={styles.choice}>
+              <Input
                 type="checkbox"
                 checked={row.insufficient_evidence}
                 onChange={(e) => patch(c.id, { insufficient_evidence: e.target.checked })}
@@ -728,7 +736,7 @@ function DecisionForm({
             </label>
             <label>
               Member-visible explanation, strengths and next focus
-              <textarea
+              <Textarea
                 aria-label={'Feedback for ' + c.label}
                 maxLength={4000}
                 value={row.feedback}
@@ -737,8 +745,8 @@ function DecisionForm({
             </label>
             <p>Supporting evidence</p>
             {data.evidence.map((item) => (
-              <label key={item.id} style={{ overflowWrap: 'anywhere' }}>
-                <input
+              <label className={styles.choice} key={item.id}>
+                <Input
                   type="checkbox"
                   checked={row.evidence_ids.includes(item.id)}
                   onChange={(e) =>
@@ -757,7 +765,7 @@ function DecisionForm({
       })}
       <label>
         Private decision rationale
-        <textarea
+        <Textarea
           aria-label="Private decision rationale"
           value={reason}
           onChange={(e) => setReason(e.target.value)}
@@ -767,9 +775,10 @@ function DecisionForm({
           disabled={busy}
         />
       </label>
-      <div className="actions">
-        <button
-          className="primary"
+      <div className={layout.actions}>
+        <Button
+          variant="primary"
+          type="submit"
           value="approve"
           disabled={
             busy ||
@@ -778,9 +787,10 @@ function DecisionForm({
           aria-busy={busy}
         >
           Approve reviewed result
-        </button>
-        <button
-          className="secondary"
+        </Button>
+        <Button
+          variant="secondary"
+          type="submit"
           value="reject"
           disabled={
             busy ||
@@ -788,13 +798,22 @@ function DecisionForm({
           }
         >
           Reject and allow resubmission
-        </button>
+        </Button>
         {data.appeal && (
-          <button className="secondary" value="uphold" disabled={busy}>
+          <Button variant="secondary" type="submit" value="uphold" disabled={busy}>
             Uphold previous decision
-          </button>
+          </Button>
         )}
       </div>
     </form>
+  );
+}
+
+function Pending({ error, retry }: { error?: string; retry: () => void }) {
+  return (
+    <>
+      <Feedback error={error} />
+      {error ? <Button onClick={retry}>Try again</Button> : <p role="status">Loading...</p>}
+    </>
   );
 }
