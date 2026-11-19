@@ -2,13 +2,24 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Button, Panel, PageHeader, Badge, Feedback as SharedFeedback } from './ui/controls';
+import {
+  Button,
+  Input,
+  Select,
+  Textarea,
+  Panel,
+  PageHeader,
+  Badge,
+  Feedback as SharedFeedback,
+} from './ui/controls';
 import layout from './ui/form-layout.module.css';
 import styles from './ui/learning-delivery.module.css';
 import recordStyles from './ui/training-record.module.css';
-import { ReasonAction, useLeaveGuard } from './learning-controls';
+import { ReasonAction } from './learning-controls';
 import { LearningLifecycle } from './learning-lifecycle';
 import { LearningReview, type LearningReceiptView } from './learning-review';
+import { registerWorkGuard, leaveAfterConfirmedMutation } from './work-guard';
+import lessonStyles from './ui/learning-lesson.module.css';
 import { ResponseEvidence } from './response-evidence';
 import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
 import type { Delivery } from '../../../../packages/domain/src/delivery';
@@ -199,6 +210,10 @@ export function LearningLesson({
   const base = `/enrolments/${id}/delivery/${blockId}/lessons/${index}`,
     s = useDeliveryView<LessonView>(base),
     v = s.view;
+  const router = useRouter();
+  useEffect(() => {
+    if (s.context && !s.context.user) router.replace('/login');
+  }, [s.context, router]);
   const [work, setWork] = useState<Work | null>(null),
     [dirty, setDirty] = useState(false),
     [busy, setBusy] = useState(false),
@@ -216,7 +231,7 @@ export function LearningLesson({
       setDirty(false);
     }
   }, [v]);
-  const navigationGuard = useLeaveGuard(dirty || busy);
+  useEffect(() => registerWorkGuard(() => ({ dirty, pending: pending.current })), [dirty]);
   function change(update: Partial<Work>) {
     if (!current.current) return;
     current.current = { ...current.current, ...update };
@@ -285,8 +300,7 @@ export function LearningLesson({
         key: retryKey.current.key,
       });
       setMessage('Work submitted. Opening your receipt.');
-      navigationGuard.current = false;
-      window.location.assign(`/enrolments/${id}/submissions/${a.id}`);
+      leaveAfterConfirmedMutation(`/enrolments/${id}/submissions/${a.id}`);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -297,165 +311,181 @@ export function LearningLesson({
   }
   return (
     <Guest>
-      <Link href={`/enrolments/${id}/delivery`}>Back to learning plan</Link>
-      {!v || !work ? (
-        <Pending error={s.error} retry={s.load} />
-      ) : (
-        <>
-          <p className="eyebrow">
-            Block {v.block.number} / Version {v.block.version} / {v.lesson.date}
-          </p>
-          <h1>{v.lesson.title}</h1>
-          <p>
-            {v.enrolment.title} / {v.enrolment.timezone}
-          </p>
-          <section className="panel">
-            <h2>Learning objective</h2>
-            <p>{v.objective}</p>
-            <p>Prerequisites: {v.prerequisites}</p>
-            {(['explanation', 'example', 'activity', 'tools', 'completion'] as const).map(
-              (key, i) => (
-                <div key={key}>
-                  <h2>
-                    {
-                      [
-                        'Learn',
-                        'Worked example',
-                        'Your activity',
-                        'Permitted tools',
-                        'Completion evidence',
-                      ][i]
-                    }
-                  </h2>
-                  <p className="preserve-lines">{v.lesson[key]}</p>
-                </div>
-              ),
+      <div className={layout.page}>
+        <Link href={`/enrolments/${id}/delivery`}>Back to learning plan</Link>
+        {!s.context?.user || !v || !work ? (
+          <>
+            <PageHeader title="Learning lesson" />
+            <SharedFeedback error={s.error} />
+            {s.error ? (
+              <Button onClick={() => void (s.context?.user ? s.load() : s.loadContext())}>
+                Try loading again
+              </Button>
+            ) : (
+              <p role="status">
+                {s.context?.user ? 'Loading lesson...' : 'Loading your session...'}
+              </p>
             )}
-            <p>
-              Time: reading {v.lesson.reading}, practice {v.lesson.practice}, assessment{' '}
-              {v.lesson.assessment}, revision {v.lesson.revision} minutes.
-            </p>
-            <h2>Assessment criteria</h2>
-            <ul>
-              {v.rubric.criteria.map((c) => (
-                <li key={c.id}>
-                  {c.label} / {c.weight * 100}%
-                </li>
-              ))}
-            </ul>
-            {v.resources && (
-              <>
-                <h2>Approved resource</h2>
-                <p>
-                  {String(v.resources.title)} / {String(v.resources.reference)}
-                </p>
-                <p>{String(v.resources.access)}</p>
-              </>
-            )}
-          </section>
-          <Feedback error={s.error} />
-          {!v.editable ? (
-            <p className="notice">
-              Preview only. Work opens on the scheduled date while your programme is active, or
-              after coordinator-authorised early start.
-            </p>
-          ) : (
-            <section className="panel">
-              <h2>Your work</h2>
-              <label htmlFor="work-body">Your response</label>
-              <textarea
-                id="work-body"
-                disabled={submitting}
-                rows={10}
-                maxLength={30000}
-                value={work.body}
-                onChange={(e) => change({ body: e.target.value })}
-              />
-              {v.quiz && (
-                <fieldset>
-                  <legend>Objective questions</legend>
-                  {v.quiz.questions.map((q, i) => (
-                    <fieldset key={q.id}>
-                      <legend>{q.prompt}</legend>
-                      {q.options.map((option, n) => (
-                        <label key={n}>
-                          <input
-                            type="radio"
-                            name={'answer-' + i}
-                            disabled={submitting}
-                            checked={work.answers[i] === n}
-                            onChange={() => {
-                              const answers = [...work.answers];
-                              while (answers.length <= i) answers.push(null);
-                              answers[i] = n;
-                              change({ answers });
-                            }}
-                          />
-                          {option}
-                        </label>
-                      ))}
-                    </fieldset>
-                  ))}
-                </fieldset>
+          </>
+        ) : (
+          <>
+            <div>
+              <p className="eyebrow">
+                Block {v.block.number} / Version {v.block.version} / {v.lesson.date}
+              </p>
+              <PageHeader title={v.lesson.title || 'Learning lesson'}>
+                {v.enrolment.title} / {v.enrolment.timezone}
+              </PageHeader>
+            </div>
+            <Panel className={`${layout.panel} ${lessonStyles.panel}`}>
+              <h2>Learning objective</h2>
+              <p>{v.objective}</p>
+              <p>Prerequisites: {v.prerequisites}</p>
+              {(['explanation', 'example', 'activity', 'tools', 'completion'] as const).map(
+                (key, i) => (
+                  <div key={key}>
+                    <h2>
+                      {
+                        [
+                          'Learn',
+                          'Worked example',
+                          'Your activity',
+                          'Permitted tools',
+                          'Completion evidence',
+                        ][i]
+                      }
+                    </h2>
+                    <p className={lessonStyles.prose}>{v.lesson[key]}</p>
+                  </div>
+                ),
               )}
-              <Feedback error={error} success={message} />
-              <div className="form-actions">
-                <button
-                  className="secondary"
-                  disabled={busy || !dirty}
-                  onClick={() => void save()}
-                  aria-busy={busy}
-                >
-                  {busy ? 'Saving or submitting...' : 'Save work'}
-                </button>
-                <button
-                  className="primary"
-                  disabled={busy || dirty || !work.version}
-                  onClick={() => void submit()}
-                >
-                  Submit saved work for review
-                </button>
-              </div>
-              <p>Wait for "Draft saved" before submitting. Saving a draft does not submit it.</p>
-            </section>
-          )}
-          {v.editable && (
-            <ResponseEvidence
-              enrolment={id}
-              client={s.client!}
-              csrf={s.context!.csrf}
-              selected={work.files}
-              onChange={(files) => change({ files })}
-              disabled={submitting}
-            />
-          )}
-          <section className="panel">
-            <h2>Attempt history</h2>
-            {v.attempts.length ? (
+              <p>
+                Time: reading {v.lesson.reading}, practice {v.lesson.practice}, assessment{' '}
+                {v.lesson.assessment}, revision {v.lesson.revision} minutes.
+              </p>
+              <h2>Assessment criteria</h2>
               <ul>
-                {v.attempts.map((a) => (
-                  <li key={a.id}>
-                    <Link href={`/enrolments/${id}/submissions/${a.id}`}>
-                      Attempt {a.attempt} / {a.status.replaceAll('_', ' ')}
-                    </Link>
+                {v.rubric.criteria.map((c) => (
+                  <li key={c.id}>
+                    {c.label} / {c.weight * 100}%
                   </li>
                 ))}
               </ul>
+              {v.resources && (
+                <>
+                  <h2>Approved resource</h2>
+                  <p>
+                    {String(v.resources.title)} / {String(v.resources.reference)}
+                  </p>
+                  <p>{String(v.resources.access)}</p>
+                </>
+              )}
+            </Panel>
+            <SharedFeedback error={s.error} />
+            {!v.editable ? (
+              <p className={recordStyles.notice}>
+                Preview only. Work opens on the scheduled date while your programme is active, or
+                after coordinator-authorised early start.
+              </p>
             ) : (
-              <p>No submitted attempts. Your draft is private work in progress.</p>
+              <Panel className={`${layout.panel} ${lessonStyles.panel}`}>
+                <h2>Your work</h2>
+                <label htmlFor="work-body">Your response</label>
+                <Textarea
+                  id="work-body"
+                  disabled={submitting}
+                  rows={10}
+                  maxLength={30000}
+                  value={work.body}
+                  onChange={(e) => change({ body: e.target.value })}
+                />
+                {v.quiz && (
+                  <fieldset>
+                    <legend>Objective questions</legend>
+                    {v.quiz.questions.map((q, i) => (
+                      <fieldset key={q.id}>
+                        <legend>{q.prompt}</legend>
+                        {q.options.map((option, n) => (
+                          <label key={n} className={lessonStyles.choice}>
+                            <Input
+                              type="radio"
+                              name={'answer-' + i}
+                              disabled={submitting}
+                              checked={work.answers[i] === n}
+                              onChange={() => {
+                                const answers = [...work.answers];
+                                while (answers.length <= i) answers.push(null);
+                                answers[i] = n;
+                                change({ answers });
+                              }}
+                            />
+                            {option}
+                          </label>
+                        ))}
+                      </fieldset>
+                    ))}
+                  </fieldset>
+                )}
+                <SharedFeedback error={error} success={message} />
+                <div className={layout.actions}>
+                  <Button
+                    variant="secondary"
+                    disabled={busy || !dirty}
+                    onClick={() => void save()}
+                    aria-busy={busy}
+                  >
+                    {busy ? 'Saving or submitting...' : 'Save work'}
+                  </Button>
+                  <Button
+                    variant="primary"
+                    disabled={busy || dirty || !work.version}
+                    onClick={() => void submit()}
+                  >
+                    Submit saved work for review
+                  </Button>
+                </div>
+                <p>Wait for "Draft saved" before submitting. Saving a draft does not submit it.</p>
+              </Panel>
             )}
-          </section>
-          {v.canConfigureQuiz && (
-            <QuizPublisher
-              view={v}
-              path={base}
-              csrf={s.context!.csrf}
-              client={s.client!}
-              done={s.load}
-            />
-          )}
-        </>
-      )}
+            {v.editable && (
+              <ResponseEvidence
+                shared
+                enrolment={id}
+                client={s.client!}
+                csrf={s.context!.csrf}
+                selected={work.files}
+                onChange={(files) => change({ files })}
+                disabled={submitting}
+              />
+            )}
+            <Panel className={`${layout.panel} ${lessonStyles.panel}`}>
+              <h2>Attempt history</h2>
+              {v.attempts.length ? (
+                <ul>
+                  {v.attempts.map((a) => (
+                    <li key={a.id}>
+                      <Link href={`/enrolments/${id}/submissions/${a.id}`}>
+                        Attempt {a.attempt} / {a.status.replaceAll('_', ' ')}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No submitted attempts. Your draft is private work in progress.</p>
+              )}
+            </Panel>
+            {v.canConfigureQuiz && (
+              <QuizPublisher
+                view={v}
+                path={base}
+                csrf={s.context!.csrf}
+                client={s.client!}
+                done={s.load}
+              />
+            )}
+          </>
+        )}
+      </div>
     </Guest>
   );
 }
@@ -480,9 +510,11 @@ function QuizPublisher({
     [error, setError] = useState(''),
     [saved, setSaved] = useState(false);
   const pending = useRef(false);
-  useLeaveGuard(!saved && (!!reason || questions.some((q) => !!q.prompt || !!q.options) || busy));
+  const dirty =
+    !saved && (!!reason || questions.some((q) => !!q.prompt || !!q.options || q.correct !== 0));
+  useEffect(() => registerWorkGuard(() => ({ dirty, pending: pending.current })), [dirty]);
   return (
-    <section className="panel">
+    <Panel className={`${layout.panel} ${lessonStyles.panel}`}>
       <details>
         <summary>Publish an objective quiz for this lesson</summary>
         <p>
@@ -530,7 +562,7 @@ function QuizPublisher({
               <legend>{view.rubric.criteria[i].label}</legend>
               <label>
                 Question {i + 1}
-                <textarea
+                <Textarea
                   aria-label={'Question ' + (i + 1)}
                   required
                   minLength={10}
@@ -545,7 +577,7 @@ function QuizPublisher({
               </label>
               <label>
                 Answer options for question {i + 1} (2-4 lines)
-                <textarea
+                <Textarea
                   aria-label={'Answer options ' + (i + 1)}
                   required
                   value={q.options}
@@ -558,7 +590,7 @@ function QuizPublisher({
               </label>
               <label>
                 Correct option for question {i + 1}
-                <select
+                <Select
                   value={q.correct}
                   onChange={(e) =>
                     setQuestions(
@@ -573,13 +605,13 @@ function QuizPublisher({
                       {name}
                     </option>
                   ))}
-                </select>
+                </Select>
               </label>
             </fieldset>
           ))}
           <label>
             Review and publication reason
-            <input
+            <Input
               minLength={8}
               maxLength={2000}
               required
@@ -588,13 +620,13 @@ function QuizPublisher({
               onChange={(e) => setReason(e.target.value)}
             />
           </label>
-          <Feedback error={error} />
-          <button className="primary" disabled={busy} aria-busy={busy}>
+          <SharedFeedback error={error} />
+          <Button type="submit" variant="primary" disabled={busy} aria-busy={busy}>
             {busy ? 'Publishing quiz...' : 'Publish reviewed quiz'}
-          </button>
+          </Button>
         </form>
       </details>
-    </section>
+    </Panel>
   );
 }
 export function SubmissionReceipt({ id, submissionId }: { id: string; submissionId: string }) {

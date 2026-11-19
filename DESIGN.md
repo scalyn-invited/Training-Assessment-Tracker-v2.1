@@ -103,6 +103,12 @@ Background receipts uses shared presentation on Overview and training-record det
 
 `/enrolments/[id]/delivery` retains the member/title/status header, curriculum/progress links, activation/lifecycle controls, ordered block/lesson lists and submissions. Use shared headers, badges, panels, reason fields, buttons and feedback with 24px section gaps and 16px internal spacing. Lesson metadata stays below its link and wraps on mobile. Resume previews retain their existing nested articles and exact dates. ReasonAction opts into shared styling here while other consumers retain legacy presentation. Register reasons, changed preview weeks and pending decisions with the shared work guard; retain native activation, early-start, pause, completion and resume confirmations. Existing version, approval, capacity and completion rules remain server-owned. Signed-out visits reach login; session/data loading has scoped recovery.
 
+## Learning lesson
+
+`/enrolments/[id]/delivery/[blockId]/[index]` retains the lesson context, objective/content/rubric/resource panel, member response and quiz, supporting evidence, attempt history and coordinator quiz disclosure in their existing order. Use the shared shell, header, panels, fields, buttons and feedback with 24px sections, 16px internal spacing, 14px panels and wrapping prose/file names. Labels and controls retain native keyboard semantics and 44px coarse-pointer targets. Evidence presentation opts in here; the assessment response consumer remains unchanged until its own migration.
+
+Preserve the 800ms autosave, newer edits during a save, exact draft versions, idempotent immutable submission, scan gates, five-file limit, answer indexes, final quiz publication and all API permissions. Register changed response/quiz inputs, a chosen upload and pending mutations with the shared work guard. Successful submission uses the existing confirmed-mutation receipt handoff. Signed-out visitors reach login. Do not introduce a new lesson layout or alter scheduling, attempt, approval or assessment rules.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.

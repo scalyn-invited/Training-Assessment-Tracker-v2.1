@@ -1,0 +1,39 @@
+.panel {
+  overflow-wrap: anywhere;
+}
+.panel li + li {
+  margin-top: var(--ui-space-2);
+}
+.prose {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.panel .choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-space-2);
+  color: var(--ui-text);
+}
+.choice input {
+  flex: 0 0 auto;
+}
+.file {
+  padding: var(--ui-space-3) 0;
+  border-bottom: 1px solid var(--ui-border);
+}
+.file a {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+}
+@media (pointer: coarse) {
+  .choice,
+  .panel summary,
+  .panel a {
+    min-height: 44px;
+  }
+  .panel a {
+    display: inline-flex;
+    align-items: center;
+  }
+}
