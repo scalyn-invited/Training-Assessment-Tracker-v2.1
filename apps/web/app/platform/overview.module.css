@@ -1,4 +1,4 @@
-/* Reference shell. Shared tokens are opt-in until each route is verified. */
+/* Shared authenticated shell and retained reference-page styles. */
 .shell {
   composes: theme from '../components/ui/tokens.module.css';
   --ov-sidebar: var(--ui-sidebar);
@@ -324,9 +324,6 @@
   flex-direction: column;
   gap: 24px;
 }
-.pageHeader {
-  composes: pageHeader from '../components/ui/controls.module.css';
-}
 .metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -376,9 +373,6 @@
 }
 .accountMetric {
   min-width: 0;
-}
-.panel {
-  composes: panel from '../components/ui/controls.module.css';
 }
 .emptyPanel {
   composes: panel from '../components/ui/controls.module.css';
@@ -707,8 +701,5 @@
   .main {
     margin: 0;
     padding: 0;
-  }
-  .panel {
-    break-inside: avoid;
   }
 }

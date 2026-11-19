@@ -279,21 +279,31 @@
 .accountAccess :is(h2, h3) {
   margin-bottom: 12px;
 }
+.dialog {
+  composes: dialog from '../../components/ui/form-layout.module.css';
+}
 .dialog p {
-  margin: 12px 0;
+  margin: var(--ui-space-3) 0;
   overflow-wrap: anywhere;
 }
-.dialog :global(.directory-dialog-header) {
-  gap: 16px;
+.dialogHeader {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--ui-space-4);
+}
+.dialogHeader button {
+  flex-shrink: 0;
 }
 .dialog h2 {
   overflow-wrap: anywhere;
 }
-.dialog label {
-  margin-bottom: 16px;
+.accessChange {
+  padding-top: var(--ui-space-6);
+  border-top: 1px solid var(--ui-border);
 }
-.dialog :global(.directory-danger) {
-  margin-top: 24px;
+.dialog .accessChange button + button {
+  margin-left: var(--ui-space-2);
 }
 @media (max-width: 1270px) {
   .table tbody tr {
