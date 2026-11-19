@@ -1,6 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { api, Feedback, Pending } from './auth-ui';
+import { api } from './auth-ui';
+import { Button, Input, Panel, Feedback } from './ui/controls';
+import { registerWorkGuard } from './work-guard';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/learning-progress.module.css';
+import recordStyles from './ui/training-record.module.css';
 import { ReasonAction } from './learning-controls';
 import type { LearningSupport as SupportService } from '../../../../packages/domain/src/learning-support';
 type View = Awaited<ReturnType<SupportService['read']>>;
@@ -22,6 +27,15 @@ export function LearningSupport({
     [busy, setBusy] = useState(false);
   const sequence = useRef(0),
     pending = useRef(false);
+  const savedBlock = useRef('1');
+  useEffect(
+    () =>
+      registerWorkGuard(() => ({
+        dirty: !!view?.coordinator && block !== savedBlock.current,
+        pending: pending.current,
+      })),
+    [block, view?.coordinator],
+  );
   async function load() {
     const request = ++sequence.current;
     try {
@@ -55,7 +69,7 @@ export function LearningSupport({
     await load();
   }
   return (
-    <section className="panel" aria-label="Learning support">
+    <Panel className={`${layout.panel} ${styles.panel}`} aria-label="Learning support">
       <h2>Learning support</h2>
       <p>
         Future teaching changes require human approval. Targets, planned minutes and completed work
@@ -63,12 +77,18 @@ export function LearningSupport({
       </p>
       <Feedback error={error} success={message} />
       {!view ? (
-        <Pending error={error} retry={load} />
+        <>
+          {error ? (
+            <Button onClick={() => void load()}>Try loading support again</Button>
+          ) : (
+            <p role="status">Loading support...</p>
+          )}
+        </>
       ) : (
         <>
-          <button className="secondary" onClick={() => void load()}>
+          <Button variant="secondary" onClick={() => void load()}>
             Refresh support status
-          </button>
+          </Button>
           {queued && (
             <p role="status">
               Support is being prepared. You can leave this page and return later.
@@ -77,7 +97,7 @@ export function LearningSupport({
           {view.coordinator && (
             <>
               {!active && (
-                <p className="notice">
+                <p className={recordStyles.notice}>
                   Adaptation requests and approvals require an active programme.
                 </p>
               )}
@@ -89,7 +109,7 @@ export function LearningSupport({
                 </p>
                 <label>
                   Evidence block number
-                  <input
+                  <Input
                     type="number"
                     required
                     min={1}
@@ -99,6 +119,7 @@ export function LearningSupport({
                   />
                 </label>
                 <ReasonAction
+                  shared
                   label="Request adaptation"
                   help="Only teaching explanations, examples, activities and tools may change. Review the result before approving it."
                   confirm={`Request a provisional adaptation using approved evidence from block ${block}?`}
@@ -108,12 +129,13 @@ export function LearningSupport({
                     Number(block) < 1 ||
                     Number(block) > 12
                   }
-                  run={(reason) =>
-                    mutate(
+                  run={async (reason) => {
+                    await mutate(
                       { action: 'propose', evidenceBlock: Number(block), reason },
                       'Adaptation request recorded. Review its status below.',
-                    )
-                  }
+                    );
+                    savedBlock.current = block;
+                  }}
                 />
               </details>
             </>
@@ -125,7 +147,7 @@ export function LearningSupport({
             </p>
           )}
           {view.proposals.map((p) => (
-            <article key={p.id}>
+            <article key={p.id} className={styles.article}>
               <h3>
                 {p.replacement
                   ? `Block ${p.replacement.number} adaptation`
@@ -136,12 +158,12 @@ export function LearningSupport({
               </p>
               <p>{p.reason}</p>
               {p.status === 'provisional' && (
-                <p className="notice">
+                <p className={recordStyles.notice}>
                   Provisional only. The current lesson content has not changed.
                 </p>
               )}
               {p.status === 'source_review_required' && (
-                <p className="notice">
+                <p className={recordStyles.notice}>
                   Source evidence was regraded. Review this approved adaptation with the learner;
                   taught history has been retained.
                 </p>
@@ -191,14 +213,13 @@ export function LearningSupport({
                 </p>
                 <ul>
                   {p.sourceIds.map((source) => (
-                    <li key={source} style={{ overflowWrap: 'anywhere' }}>
-                      {source}
-                    </li>
+                    <li key={source}>{source}</li>
                   ))}
                 </ul>
               </details>
               {view.coordinator && p.status === 'provisional' && (
                 <ReasonAction
+                  shared
                   label="Approve adaptation"
                   help="Approve this exact proposal and base version. Current evidence, dates, freeze and permission are checked again."
                   confirm={`Approve these teaching changes for block ${p.replacement?.number}? This creates a new lesson version visible to the learner.`}
@@ -220,8 +241,8 @@ export function LearningSupport({
               <p>
                 Suggestions are provisional guidance. They cannot change targets or daily capacity.
               </p>
-              <button
-                className="secondary"
+              <Button
+                variant="secondary"
                 disabled={busy}
                 aria-busy={busy}
                 onClick={async () => {
@@ -249,7 +270,7 @@ export function LearningSupport({
                 }}
               >
                 {busy ? 'Requesting suggestions...' : 'Request support suggestions'}
-              </button>
+              </Button>
               {!view.suggestions.length && (
                 <p>
                   No support suggestions requested yet. Request guidance when reviewing the
@@ -257,7 +278,7 @@ export function LearningSupport({
                 </p>
               )}
               {view.suggestions.map((s) => (
-                <article key={s.id}>
+                <article key={s.id} className={styles.article}>
                   <h4>Support suggestions: {s.status.replaceAll('_', ' ')}</h4>
                   {s.actions.length > 0 && (
                     <ul>
@@ -283,9 +304,7 @@ export function LearningSupport({
                     <p>{new Date(s.createdAt).toISOString()}</p>
                     <ul>
                       {s.sourceIds.map((source) => (
-                        <li key={source} style={{ overflowWrap: 'anywhere' }}>
-                          {source}
-                        </li>
+                        <li key={source}>{source}</li>
                       ))}
                     </ul>
                   </details>
@@ -295,6 +314,6 @@ export function LearningSupport({
           )}
         </>
       )}
-    </section>
+    </Panel>
   );
 }

@@ -115,6 +115,12 @@ Preserve the 800ms autosave, newer edits during a save, exact draft versions, id
 
 Keep every exact-version decision, pinned rubric, insufficient-evidence gate, provisional versus official result, native confirmation, immutable history, appeal authority and case-closure handoff. Shared work protection covers human assessment inputs and every reason/pending action. Polling continues only while a grade is queued and retains the current receipt on refresh failure. Signed-out visits reach login. Guest and other learning pages remain separate migrations.
 
+## Progress and evidence
+
+`/enrolments/[id]/progress` retains KPI cards followed by learning support, with evidence lineage, workplace observations, future definitions, adaptation review and support suggestions in their existing order. Use shared headers, panels, feedback, fields and buttons, 24px sections and 16px internal/form spacing. Preserve the existing three definition fieldsets and disclosures, including their full field set; do not invent a wizard or dashboard. Wrap lineage identifiers and long teaching content. Mobile fields use 16px type; coarse-pointer disclosures/controls retain 44px targets.
+
+Missing samples remain nonnumeric; snapshots and observations retain their original definition and history. Future effective dates, comparability, human approval, exact proposal/base versions, N+2/freeze/started-block rules and member projections stay server-owned. Shared work protection covers observation/definition inputs, changed adaptation block selection, reasons and pending mutations. Queued background work remains safe to leave after the request completes. Preserve polling/retry and retained content on refresh failure; use separate support loading feedback. Signed-out visits reach login.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
