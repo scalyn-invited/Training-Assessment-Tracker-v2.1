@@ -1,3 +1,4 @@
+import { styleBuilderElement, styleBuilderRoot } from './presentation';
 import { Editor } from '@tiptap/core';
 import { registerWorkGuard } from '../work-guard';
 import { questionReference } from '../question-reference';
@@ -11,9 +12,10 @@ const PrivateImage = Image.extend({
 
 export function mountAssessmentBuilder(root, initial) {
 const lifetime = new AbortController();
+styleBuilderRoot(root);
 
-const mobileBar = document.querySelector('.mobile-bar');
-const observer = mobileBar ? new ResizeObserver(() => root.style.setProperty('--builder-nav-offset', mobileBar.getBoundingClientRect().height+'px')) : null; if(mobileBar)observer.observe(mobileBar);
+const header = root.querySelector('.builder-header');
+const observer = header ? new ResizeObserver(() => root.style.setProperty('--builder-header-height', header.getBoundingClientRect().height + 'px')) : null; if (header) observer.observe(header);
 
 const $ = id => root.querySelector('#'+CSS.escape(id));
 const uuid = () => crypto.randomUUID();
@@ -38,6 +40,7 @@ const el = (tag, text, attrs = {}) => {
     const node = document.createElement(tag);
     if (text !== null) node.textContent = text;
     Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
+    styleBuilderElement(node);
     return node;
 };
 function button(text, action, attrs = {}) {
