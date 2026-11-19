@@ -1,0 +1,64 @@
+.directory {
+  composes: panel from './ui/form-layout.module.css';
+}
+.account {
+  composes: panel from './ui/form-layout.module.css';
+}
+.account > summary {
+  min-height: 44px;
+  margin: 0;
+  color: var(--ui-text);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.account p {
+  overflow-wrap: anywhere;
+}
+.form,
+.form fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--ui-space-4);
+  min-width: 0;
+}
+.form fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.form label {
+  display: block;
+  margin: 0;
+  font-size: var(--ui-text-label);
+  font-weight: 500;
+  color: var(--ui-muted);
+}
+.form legend {
+  margin-bottom: var(--ui-space-4);
+  font-size: var(--ui-text-control-mobile);
+  color: var(--ui-text);
+}
+.form p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.form > button,
+.form fieldset > button {
+  align-self: flex-start;
+}
+.form .confirmation {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-3);
+  min-height: 44px;
+  color: var(--ui-text);
+  overflow-wrap: anywhere;
+}
+.confirmation input {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--ui-accent);
+}
