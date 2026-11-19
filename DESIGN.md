@@ -121,6 +121,11 @@ Keep every exact-version decision, pinned rubric, insufficient-evidence gate, pr
 
 Missing samples remain nonnumeric; snapshots and observations retain their original definition and history. Future effective dates, comparability, human approval, exact proposal/base versions, N+2/freeze/started-block rules and member projections stay server-owned. Shared work protection covers observation/definition inputs, changed adaptation block selection, reasons and pending mutations. Queued background work remains safe to leave after the request completes. Preserve polling/retry and retained content on refresh failure; use separate support loading feedback. Signed-out visits reach login.
 
+
+## Learning review queue
+
+`/learning-reviews` retains oldest-first review links, attempts/statuses, twenty-item pagination and the separate case-routing panel. Use shared headers, panels, controls, feedback and pagination with 24px sections, 16px record spacing and 8px status spacing. Keep the list and native case disclosures; no new table or review workflow. Case identifiers wrap, controls use 16px mobile type and coarse-pointer targets are 44px. Preserve independent reviewer eligibility, case-only authority, reasons and confirmations. Shared work protection covers changed reviewer selections and pending/reason actions; routing reload failures retain forms. The displayed page remains tied to the fetched records during refresh or failure.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.

@@ -1,0 +1,34 @@
+.panel {
+  overflow-wrap: anywhere;
+}
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.list li + li {
+  margin-top: var(--ui-space-4);
+  padding-top: var(--ui-space-4);
+  border-top: 1px solid var(--ui-border);
+}
+.list a {
+  display: inline-block;
+}
+.list small {
+  display: block;
+  color: var(--ui-muted);
+  margin-top: var(--ui-space-2);
+}
+.panel summary {
+  overflow-wrap: anywhere;
+}
+@media (pointer: coarse) {
+  .list a,
+  .panel summary {
+    min-height: 44px;
+  }
+}
+
+.refresh {
+  align-self: flex-start;
+}
