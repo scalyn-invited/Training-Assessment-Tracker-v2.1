@@ -95,6 +95,10 @@ Background receipts uses shared presentation on Overview and training-record det
 
 `/enrolments/[id]/generation/[runId]` retains its progress/budget panel followed by configuration/provenance, provider attempts and manual refresh. Use the shared header, panels, feedback and button with 24px section spacing and 16px panel spacing; keep ordered block entries and all provenance details. Wrap long provider/request identifiers without hiding data. Keep currency amounts together with tabular figures. The existing three-second queued/running polling, terminal-state notices, retained details on refresh failure and exact generated-version link remain. Signed-out visitors use the existing login destination. No new generation, retry, reconciliation or approval action is introduced.
 
+## Document review
+
+`/enrolments/[id]/documents/[fileId]` retains file/scan information, the untrusted-text notice, download/request actions, extraction status and read-only text, five review fields, save/confirm actions and attempt history in their existing order. Apply shared headers, panels, feedback and native controls with 24px section spacing, 16px field spacing, wrapping actions and 16px mobile inputs. Extracted text preserves whitespace and wraps long lines within the panel. Keep the original confirmation and reload prompts, scan/editability gates, polling, exact run/onboarding versions and source-bound receipt. Register dirty and pending work with the shared navigation guard; downloads in a new tab remain available. Signed-out direct visits reach login. Do not add automatic confirmation or AI actions.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
