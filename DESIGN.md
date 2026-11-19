@@ -126,6 +126,10 @@ Missing samples remain nonnumeric; snapshots and observations retain their origi
 
 `/learning-reviews` retains oldest-first review links, attempts/statuses, twenty-item pagination and the separate case-routing panel. Use shared headers, panels, controls, feedback and pagination with 24px sections, 16px record spacing and 8px status spacing. Keep the list and native case disclosures; no new table or review workflow. Case identifiers wrap, controls use 16px mobile type and coarse-pointer targets are 44px. Preserve independent reviewer eligibility, case-only authority, reasons and confirmations. Shared work protection covers changed reviewer selections and pending/reason actions; routing reload failures retain forms. The displayed page remains tied to the fetched records during refresh or failure.
 
+## Notifications and preferences
+
+`/notifications` retains the client heading, Workspace link, account-wide email preference and scoped event list with twenty-item pagination. Use shared panels, header, radio fields, buttons, feedback and pagination. Preserve the existing notice link/date/status information, 24px sections, 16px records and 8px metadata spacing. Timestamp values remain together with tabular figures; long event text wraps. Coarse-pointer radio labels and notice links have 44px targets. Keep the synthetic sink and relay-acceptance explanation, exact preference payload and no new read/acknowledgment action. Shared work protection covers changed preferences and pending saves. Refresh errors retain current events and unsaved preference state; page controls operate on the displayed page.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
