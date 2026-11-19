@@ -1,0 +1,391 @@
+/* Christian's authentication frames extend the shared tokens with guest geometry. */
+.shell {
+  --guest-title: 28px;
+  --guest-display: 40px;
+  --guest-card-padding: 36px;
+  min-height: 100dvh;
+  color: var(--ui-text);
+  background: var(--ui-background);
+  font: 400 var(--ui-text-body)/22px var(--ui-font);
+  overflow-wrap: anywhere;
+}
+.shell * {
+  min-width: 0;
+}
+.shell p {
+  margin: 0;
+  color: var(--ui-muted);
+}
+.shell a {
+  color: var(--ui-link);
+}
+.shell :is(a, summary):focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 3px;
+}
+.signIn {
+  display: grid;
+  grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+}
+.brandPanel {
+  padding: 48px;
+  position: relative;
+}
+.signIn .brandPanel {
+  background: linear-gradient(var(--ui-glow), transparent 520px), var(--ui-sidebar);
+  border-right: 1px solid var(--ui-border);
+  display: flex;
+  flex-direction: column;
+}
+.brand.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-3);
+  text-decoration: none;
+  color: var(--ui-text);
+}
+.brand img {
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+.brand strong {
+  display: block;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+}
+.brand small {
+  display: block;
+  color: var(--ui-tertiary);
+  font-size: var(--ui-text-small);
+  line-height: 16px;
+  margin-top: 2px;
+}
+.monogram {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  background: var(--ui-accent);
+  color: var(--ui-on-accent);
+  border-radius: var(--ui-radius-icon);
+  font-size: 19px;
+  font-weight: 700;
+}
+.intro {
+  margin-block: auto;
+  padding-block: var(--ui-space-8);
+}
+.intro p {
+  font-size: clamp(28px, 2.78vw, var(--guest-display));
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  color: var(--ui-text);
+}
+.intro p + p {
+  margin-top: 14px;
+  color: var(--ui-link);
+}
+.intro span {
+  display: block;
+  margin-top: 14px;
+  color: var(--ui-muted);
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 28px var(--ui-space-8) var(--ui-space-5);
+}
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+.toolbar :global(.theme-picker) {
+  font-family: var(--ui-font);
+}
+.toolbar :global(.theme-options) {
+  z-index: 50;
+  top: calc(100% + 8px);
+  bottom: auto;
+  left: auto;
+  right: 0;
+  width: 210px;
+}
+.brandError {
+  display: grid;
+  gap: var(--ui-space-2);
+  margin-block: var(--ui-space-4);
+}
+.main {
+  width: 100%;
+  max-width: 380px;
+  margin: 140px auto auto;
+}
+.main h1 {
+  font-size: var(--guest-title);
+  line-height: 36px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+.heading {
+  display: grid;
+  gap: var(--ui-space-2);
+}
+.stack,
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-5);
+}
+.stack label {
+  color: var(--ui-muted);
+  font-size: var(--ui-text-label);
+}
+.stack :is(input, button) {
+  font-family: var(--ui-font);
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-3);
+}
+.actions > button {
+  width: 100%;
+}
+.help {
+  font-size: var(--ui-text-label);
+  line-height: 20px;
+  text-align: center;
+}
+.forgot {
+  align-self: flex-end;
+}
+.forgot summary {
+  color: var(--ui-link);
+  cursor: pointer;
+  text-align: right;
+}
+.forgot[open] {
+  align-self: stretch;
+}
+.forgot p {
+  margin-top: var(--ui-space-2);
+}
+.fieldIcon {
+  position: relative;
+  display: flow-root;
+}
+.fieldIcon > img {
+  position: absolute;
+  left: 12px;
+  top: 19px;
+  pointer-events: none;
+}
+.shell.shell.shell
+  .fieldIcon
+  input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='color']):not(
+    [type='hidden']
+  ) {
+  padding-left: 38px;
+}
+.password.password {
+  gap: 0;
+}
+.password.password > button,
+.password.password > p {
+  margin-top: var(--ui-space-2);
+}
+.footer.footer {
+  border: 0;
+  padding: var(--ui-space-6) 0 0;
+  display: block;
+  text-align: center;
+  color: var(--ui-tertiary);
+  font-size: var(--ui-text-small);
+}
+.linkShell {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(var(--ui-glow), transparent 420px), var(--ui-background);
+}
+.linkShell .brandPanel {
+  padding: 28px var(--ui-space-8) 0;
+  text-align: center;
+}
+.linkShell .content {
+  flex: 1;
+  padding-top: var(--ui-space-3);
+}
+.linkShell .main {
+  max-width: 440px;
+  margin: auto;
+  padding-block: var(--ui-space-6);
+}
+.card {
+  padding: var(--guest-card-padding);
+}
+.card .heading {
+  text-align: center;
+  gap: var(--ui-space-3);
+}
+.card h1 {
+  font-size: var(--ui-text-title-mobile);
+  line-height: 32px;
+}
+.headerIcon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--ui-space-4);
+  background: var(--soft);
+  justify-self: center;
+}
+.details {
+  margin: 0;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-control);
+  padding: 0 var(--ui-space-3);
+}
+.details > div {
+  gap: var(--ui-space-3);
+  padding: var(--ui-space-3) 0;
+}
+.details > div:last-child {
+  border-bottom: 0;
+}
+.details dt {
+  flex: 0 0 60px;
+}
+.details dd {
+  font-weight: 400;
+}
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-space-3);
+  padding: var(--ui-space-3) var(--ui-space-4);
+  border-radius: var(--ui-radius-icon);
+  background: var(--soft);
+}
+.callout > img {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+.callout p {
+  color: var(--ui-text);
+  font-size: var(--ui-text-label);
+  line-height: 20px;
+}
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+}
+.checkbox input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+@media (max-width: 1100px) {
+  .signIn {
+    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+  }
+  .brandPanel {
+    padding: var(--ui-space-7);
+  }
+}
+@media (max-width: 800px) {
+  .shell {
+    display: flex;
+    flex-direction: column;
+    padding: var(--ui-space-5) var(--ui-space-5) max(var(--ui-space-6), env(safe-area-inset-bottom));
+    background: linear-gradient(var(--ui-glow), transparent 260px), var(--ui-background);
+  }
+  .shell .brandPanel {
+    padding: 0;
+    background: none;
+    border: 0;
+    text-align: left;
+  }
+  .brand small,
+  .intro,
+  .footer.footer,
+  .headerIcon {
+    display: none;
+  }
+  .monogram,
+  .brand img {
+    width: 32px;
+    height: 32px;
+  }
+  .shell .content {
+    padding: 0;
+    flex: 1;
+  }
+  .toolbar {
+    margin-top: var(--ui-space-3);
+  }
+  .toolbar :global(.theme-current) {
+    display: none;
+  }
+  .shell .main {
+    max-width: 480px;
+    margin: var(--ui-space-5) auto 0;
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .main > .stack,
+  .card.card {
+    flex: 1;
+  }
+  .card.card {
+    background: none;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+  }
+  .card .heading {
+    text-align: left;
+  }
+  .main h1 {
+    font-size: var(--guest-title);
+    line-height: 36px;
+  }
+  .form {
+    flex: 1;
+  }
+  .actions {
+    margin-top: auto;
+    padding-top: var(--ui-space-5);
+  }
+  .shell.shell.shell
+    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='color']):not(
+      [type='hidden']
+    ),
+  .shell.shell button {
+    min-height: 48px;
+    font-size: var(--ui-text-control-mobile);
+  }
+  .shell .fieldIcon > img {
+    top: 23px;
+  }
+  .shell input:not([type='checkbox']) {
+    font-size: var(--ui-text-control-mobile);
+  }
+}
+@media (pointer: coarse) {
+  .shell :is(a, summary),
+  .checkbox {
+    min-height: 44px;
+  }
+  .shell :is(a, summary) {
+    display: inline-flex;
+    align-items: center;
+  }
+}

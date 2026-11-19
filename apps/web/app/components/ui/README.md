@@ -13,3 +13,5 @@ Use `tokens.module.css`'s `theme` class once at a migrated layout boundary. It i
 Lower-specificity shell resets allow shared component styles to survive stylesheet ordering. Do not add broad global overrides to work around legacy styles. Retire each old selector only after its consumers have moved and the relevant browser checks pass.
 
 Available primitives and variants are not a blanket verification claim. Each new consumer still needs the applicable role, validation, recovery, keyboard, theme, branding and desktop/mobile checks before its route can be marked complete.
+
+`../guest-shell.tsx` and `guest.module.css` opt `/login` and `/account/link` into the shared system. The shell receives resolved branding/theme controls from AppShell; it does not infer authentication modes or environment. PasswordField's optional icon wrapper and guest class preserve its native constraints and default rendering for existing account consumers. Keep private-link values out of navigation and screenshot evidence.

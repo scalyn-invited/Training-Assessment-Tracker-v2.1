@@ -6,6 +6,7 @@ import { api, useContext, Feedback } from './auth-ui';
 import { BrandHeader, ThemePicker, useBrand } from './brand-header';
 import { Icon } from './workspace-icon';
 import { ApplicationShell } from './application-shell';
+import { GuestShell } from './guest-shell';
 import { Button, Select, Feedback as SharedFeedback } from './ui/controls';
 import sharedStyles from './ui/application-shell.module.css';
 import { confirmWorkLeave, leaveAfterConfirmedMutation } from './work-guard';
@@ -22,7 +23,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     shared,
     storageKey,
     reload,
-  } = useBrand(context?.user ? context.user.environment + '.' + context.user.id : 'guest');
+  } = useBrand(
+    !guest && context?.user ? context.user.environment + '.' + context.user.id : 'guest',
+  );
   const [clients, setClients] = useState<Client[] | null>(null),
     [selected, setSelected] = useState(''),
     [error, setError] = useState(''),
@@ -161,6 +164,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </Link>
     );
   }
+  if (guest && (pathname === '/login' || pathname === '/account/link'))
+    return (
+      <GuestShell
+        signIn={pathname === '/login'}
+        brand={brand}
+        error={brandError}
+        storageKey={storageKey}
+        reload={reload}
+      >
+        {children}
+      </GuestShell>
+    );
   if (guest)
     return (
       <>
