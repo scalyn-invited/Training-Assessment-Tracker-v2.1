@@ -162,6 +162,12 @@ Preserve the legacy initializer's existing stages and the installers' token, req
 
 Bernie's response forwarded by the user confirms preserving the current authentication flow; Christian's additional authentication workflows are future work. This resolves the earlier guest-auth clarification, without implying human acceptance of the implemented UI. Setup evidence: `docs/implementation/GLOBAL_UI_SETUP_QA.md`.
 
+## Shared recovery and root redirect
+
+`error.tsx` and `not-found.tsx` use the standalone RecoveryFrame with shared semantic tokens, PageHeader and button/link styles. Retain the existing single-column title, explanation and one recovery action; do not add navigation, account information or inferred permissions. The frame has no session or branding fetch dependency. It inherits the document's resolved theme and palette without overwriting preferences; a fresh document before appearance resolves retains the existing root default. Keep 32px/24px headings, 14px text, 24px section gaps, existing 1260px content maximum and 20px mobile inset. Mobile/coarse-pointer actions have 48px targets. Focus the main landmark when the fallback mounts; keep the root skip link functional.
+
+The error action uses the installed Next.js `retry` callback to refresh and reset the boundary; `reset` is still supported but does not itself refresh. Preserve the existing error copy and never render exception details. Not-found keeps its `/` return link, framework 404 and noindex behavior. `/` remains the unchanged redirect to `/dashboard`; session/client/role destinations are not redesigned. Evidence: `docs/implementation/GLOBAL_UI_RECOVERY_QA.md`.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
