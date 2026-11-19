@@ -190,7 +190,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       '/dashboard',
       '/enrolments',
     ].includes(pathname) ||
-      /^\/enrolments\/[^/]+(?:\/(?:onboarding|plan|(?:generation|documents)\/[^/]+))?$/.test(pathname)) &&
+      /^\/enrolments\/[^/]+(?:\/(?:onboarding|plan|delivery|(?:generation|documents)\/[^/]+))?$/.test(pathname)) &&
     context?.user
   )
     return (

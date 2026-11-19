@@ -99,6 +99,10 @@ Background receipts uses shared presentation on Overview and training-record det
 
 `/enrolments/[id]/documents/[fileId]` retains file/scan information, the untrusted-text notice, download/request actions, extraction status and read-only text, five review fields, save/confirm actions and attempt history in their existing order. Apply shared headers, panels, feedback and native controls with 24px section spacing, 16px field spacing, wrapping actions and 16px mobile inputs. Extracted text preserves whitespace and wraps long lines within the panel. Keep the original confirmation and reload prompts, scan/editability gates, polling, exact run/onboarding versions and source-bound receipt. Register dirty and pending work with the shared navigation guard; downloads in a new tab remain available. Signed-out direct visits reach login. Do not add automatic confirmation or AI actions.
 
+## Learning delivery
+
+`/enrolments/[id]/delivery` retains the member/title/status header, curriculum/progress links, activation/lifecycle controls, ordered block/lesson lists and submissions. Use shared headers, badges, panels, reason fields, buttons and feedback with 24px section gaps and 16px internal spacing. Lesson metadata stays below its link and wraps on mobile. Resume previews retain their existing nested articles and exact dates. ReasonAction opts into shared styling here while other consumers retain legacy presentation. Register reasons, changed preview weeks and pending decisions with the shared work guard; retain native activation, early-start, pause, completion and resume confirmations. Existing version, approval, capacity and completion rules remain server-owned. Signed-out visits reach login; session/data loading has scoped recovery.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.

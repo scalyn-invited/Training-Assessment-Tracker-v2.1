@@ -17,7 +17,7 @@ export async function deliveryFlow(page: Page) {
   page.once('dialog', (d) => d.accept());
   await page.getByRole('button', { name: 'Activate programme', exact: true }).click();
   await expect(page.getByText('active', { exact: true })).toBeVisible();
-  await page.locator('.file-list a').first().click();
+  await page.locator(`a[href^="/enrolments/${id}/delivery/"]`).first().click();
   await expect(page).toHaveURL(/delivery\/[a-f0-9-]+\/0$/);
   const lesson = page.url();
   await expect(page.getByText('Apply safe practice for block 1', { exact: true })).toBeVisible();
@@ -67,7 +67,9 @@ export async function deliveryFlow(page: Page) {
 
     await member.getByRole('button', { name: 'Demo Client 1', exact: true }).click();
     await expect(
-      member.getByRole('combobox', { name: 'Active client', exact: true }).locator('option:checked'),
+      member
+        .getByRole('combobox', { name: 'Active client', exact: true })
+        .locator('option:checked'),
     ).toHaveText('Demo Client 1');
     await member.goto(lesson);
     await expect(member.getByText(/Preview only/)).toBeVisible();

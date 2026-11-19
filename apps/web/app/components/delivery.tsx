@@ -1,6 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Button, Panel, PageHeader, Badge, Feedback as SharedFeedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/learning-delivery.module.css';
+import recordStyles from './ui/training-record.module.css';
 import { ReasonAction, useLeaveGuard } from './learning-controls';
 import { LearningLifecycle } from './learning-lifecycle';
 import { LearningReview, type LearningReceiptView } from './learning-review';
@@ -37,11 +42,15 @@ function useDeliveryView<T>(path: string) {
       sequence.current++;
     };
   }, [path, client]);
-  return { ...ctx, client, view, setView, error: error || ctx.error, load };
+  return { ...ctx, loadContext: ctx.load, client, view, setView, error: error || ctx.error, load };
 }
 export function LearningDelivery({ id }: { id: string }) {
   const s = useDeliveryView<Overview>(`/enrolments/${id}/delivery`),
     v = s.view;
+  const router = useRouter();
+  useEffect(() => {
+    if (s.context && !s.context.user) router.replace('/login');
+  }, [s.context, router]);
   async function action(path: string, data: Record<string, unknown>) {
     await api(`/enrolments/${id}/delivery${path}`, {
       csrf: s.context!.csrf,
@@ -52,112 +61,129 @@ export function LearningDelivery({ id }: { id: string }) {
   }
   return (
     <Guest>
-      <Link href="/enrolments">Back to training records</Link>
-      {!s.context?.user || !v ? (
-        <Pending error={s.error} retry={s.load} />
-      ) : (
-        <>
-          <div className="page-heading">
-            <div>
-              <p className="eyebrow">{v.memberName}</p>
-              <h1>Today and learning plan</h1>
-              <p>
-                {v.enrolment.title} / {v.enrolment.timezone}
-              </p>
-            </div>
-            <span className="badge">{v.enrolment.status}</span>
-          </div>
-          <p>
-            <Link href={`/enrolments/${id}/plan`}>Curriculum and approval history</Link>
-          </p>
-          <p>
-            <Link href={`/enrolments/${id}/progress`}>Progress and evidence</Link>
-          </p>
-          <Feedback error={s.error} />
-          {v.coordinator && v.enrolment.status === 'ready' && (
-            <section className="panel">
-              <h2>Activate the approved programme</h2>
-              <ReasonAction
-                primary
-                label="Activate programme"
-                help="Activation pins the approved lessons and rubric. A newer unapproved draft does not replace approved content."
-                confirm="Activate the approved programme and open scheduled lessons for this member?"
-                run={(reason) => action('/activate', { version: v.enrolment.version, reason })}
-              />
-            </section>
-          )}
-          {v.coordinator && ['active', 'paused', 'completed'].includes(v.enrolment.status) && (
-            <LearningLifecycle
-              id={id}
-              client={s.client!}
-              csrf={s.context!.csrf}
-              version={v.enrolment.version}
-              refresh={s.load}
-            />
-          )}
-          {!v.blocks.length && (
-            <p className="notice">
-              Lessons become available after your coordinator activates an approved programme.
-            </p>
-          )}
-          {v.blocks.map((b) => (
-            <section className="panel" key={b.id}>
-              <h2>
-                Block {b.number} / {b.content.start}
-              </h2>
-              <p>{b.content.objective}</p>
-              <p>
-                Version {b.version} /{' '}
-                {b.startedAt ? 'Started; version locked' : 'Upcoming or available'}
-              </p>
-              <ul className="file-list">
-                {b.content.lessons.map((l, i) => (
-                  <li key={i}>
-                    <div>
-                      <Link href={`/enrolments/${id}/delivery/${b.id}/${i}`}>{l.title}</Link>
-                      <small>
-                        {l.date} /{' '}
-                        {(l.reading ?? 0) +
-                          (l.practice ?? 0) +
-                          (l.assessment ?? 0) +
-                          (l.revision ?? 0)}{' '}
-                        minutes{l.date === v.today ? ' / Today' : ''}
-                      </small>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              {v.coordinator && v.enrolment.status === 'active' && !b.startedAt && (
-                <details>
-                  <summary>Authorise early start</summary>
-                  <ReasonAction
-                    label="Authorise and lock block"
-                    help="This opens future lessons in this block and locks its version immediately."
-                    confirm="Authorise early start and lock this block version?"
-                    run={(reason) => action(`/${b.id}/early-start`, { reason })}
-                  />
-                </details>
-              )}
-            </section>
-          ))}
-          <section className="panel">
-            <h2>Submissions and review</h2>
-            {v.submissions.length ? (
-              <ul>
-                {v.submissions.map((a) => (
-                  <li key={a.id}>
-                    <Link href={`/enrolments/${id}/submissions/${a.id}`}>
-                      Attempt {a.attempt} / {a.status.replaceAll('_', ' ')} / {String(a.created_at)}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+      <div className={layout.page}>
+        <Link href="/enrolments">Back to training records</Link>
+        {!s.context?.user || !v ? (
+          <>
+            <PageHeader title="Today and learning plan" />
+            <SharedFeedback error={s.error} />
+            {s.error ? (
+              <Button onClick={() => void (s.context?.user ? s.load() : s.loadContext())}>
+                Try loading again
+              </Button>
             ) : (
-              <p>No submissions yet. Submitted lesson work appears here.</p>
+              <p role="status">
+                {s.context?.user ? 'Loading learning plan...' : 'Loading your session...'}
+              </p>
             )}
-          </section>
-        </>
-      )}
+          </>
+        ) : (
+          <>
+            <div className={recordStyles.heading}>
+              <div>
+                <p className="eyebrow">{v.memberName}</p>
+                <PageHeader title="Today and learning plan" />
+                <p>
+                  {v.enrolment.title} / {v.enrolment.timezone}
+                </p>
+              </div>
+              <Badge>{v.enrolment.status}</Badge>
+            </div>
+            <p>
+              <Link href={`/enrolments/${id}/plan`}>Curriculum and approval history</Link>
+            </p>
+            <p>
+              <Link href={`/enrolments/${id}/progress`}>Progress and evidence</Link>
+            </p>
+            <SharedFeedback error={s.error} />
+            {v.coordinator && v.enrolment.status === 'ready' && (
+              <Panel className={layout.panel + ' ' + styles.panel}>
+                <h2>Activate the approved programme</h2>
+                <ReasonAction
+                  shared
+                  primary
+                  label="Activate programme"
+                  help="Activation pins the approved lessons and rubric. A newer unapproved draft does not replace approved content."
+                  confirm="Activate the approved programme and open scheduled lessons for this member?"
+                  run={(reason) => action('/activate', { version: v.enrolment.version, reason })}
+                />
+              </Panel>
+            )}
+            {v.coordinator && ['active', 'paused', 'completed'].includes(v.enrolment.status) && (
+              <LearningLifecycle
+                id={id}
+                client={s.client!}
+                csrf={s.context!.csrf}
+                version={v.enrolment.version}
+                refresh={s.load}
+              />
+            )}
+            {!v.blocks.length && (
+              <p className={recordStyles.notice}>
+                Lessons become available after your coordinator activates an approved programme.
+              </p>
+            )}
+            {v.blocks.map((b) => (
+              <Panel className={layout.panel + ' ' + styles.panel} key={b.id}>
+                <h2>
+                  Block {b.number} / {b.content.start}
+                </h2>
+                <p>{b.content.objective}</p>
+                <p>
+                  Version {b.version} /{' '}
+                  {b.startedAt ? 'Started; version locked' : 'Upcoming or available'}
+                </p>
+                <ul className={styles.lessons}>
+                  {b.content.lessons.map((l, i) => (
+                    <li key={i}>
+                      <div>
+                        <Link href={`/enrolments/${id}/delivery/${b.id}/${i}`}>{l.title}</Link>
+                        <small>
+                          {l.date} /{' '}
+                          {(l.reading ?? 0) +
+                            (l.practice ?? 0) +
+                            (l.assessment ?? 0) +
+                            (l.revision ?? 0)}{' '}
+                          minutes{l.date === v.today ? ' / Today' : ''}
+                        </small>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                {v.coordinator && v.enrolment.status === 'active' && !b.startedAt && (
+                  <details>
+                    <summary>Authorise early start</summary>
+                    <ReasonAction
+                      shared
+                      label="Authorise and lock block"
+                      help="This opens future lessons in this block and locks its version immediately."
+                      confirm="Authorise early start and lock this block version?"
+                      run={(reason) => action(`/${b.id}/early-start`, { reason })}
+                    />
+                  </details>
+                )}
+              </Panel>
+            ))}
+            <Panel className={layout.panel + ' ' + styles.panel}>
+              <h2>Submissions and review</h2>
+              {v.submissions.length ? (
+                <ul>
+                  {v.submissions.map((a) => (
+                    <li key={a.id}>
+                      <Link href={`/enrolments/${id}/submissions/${a.id}`}>
+                        Attempt {a.attempt} / {a.status.replaceAll('_', ' ')} /{' '}
+                        {String(a.created_at)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No submissions yet. Submitted lesson work appears here.</p>
+              )}
+            </Panel>
+          </>
+        )}
+      </div>
     </Guest>
   );
 }

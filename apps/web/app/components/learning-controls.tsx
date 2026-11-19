@@ -1,10 +1,13 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { Feedback } from './auth-ui';
-export function useLeaveGuard(changed: boolean) {
+import { Button, Input, Feedback as SharedFeedback } from './ui/controls';
+import { registerWorkGuard } from './work-guard';
+export function useLeaveGuard(changed: boolean, enabled = true) {
   const dirty = useRef(changed);
   dirty.current = changed;
   useEffect(() => {
+    if (!enabled) return;
     let leaving = false;
     const unload = (e: BeforeUnloadEvent) => {
       if (dirty.current && !leaving) e.preventDefault();
@@ -24,7 +27,7 @@ export function useLeaveGuard(changed: boolean) {
       window.removeEventListener('beforeunload', unload);
       document.removeEventListener('click', click, true);
     };
-  }, []);
+  }, [enabled]);
   return dirty;
 }
 export function ReasonAction({
@@ -34,6 +37,7 @@ export function ReasonAction({
   run,
   primary = false,
   disabled = false,
+  shared = false,
 }: {
   label: string;
   help: string;
@@ -41,12 +45,25 @@ export function ReasonAction({
   run: (reason: string) => Promise<void>;
   primary?: boolean;
   disabled?: boolean;
+  shared?: boolean;
 }) {
   const [reason, setReason] = useState(''),
     [busy, setBusy] = useState(false),
     [error, setError] = useState('');
   const pending = useRef(false);
-  useLeaveGuard(!!reason || busy);
+  useLeaveGuard(!!reason || busy, !shared);
+  const dirty = useRef(false);
+  dirty.current = !!reason;
+  useEffect(
+    () =>
+      shared
+        ? registerWorkGuard(() => ({ dirty: dirty.current, pending: pending.current }))
+        : undefined,
+    [shared],
+  );
+  const Field = shared ? Input : 'input';
+  const Action = shared ? Button : 'button';
+  const Message = shared ? SharedFeedback : Feedback;
   return (
     <form
       onSubmit={async (e) => {
@@ -69,7 +86,7 @@ export function ReasonAction({
       <p>{help}</p>
       <label>
         {label} reason
-        <input
+        <Field
           required
           minLength={8}
           maxLength={2000}
@@ -78,14 +95,17 @@ export function ReasonAction({
           onChange={(e) => setReason(e.target.value)}
         />
       </label>
-      <Feedback error={error} />
-      <button
-        className={primary ? 'primary' : 'secondary'}
+      <Message error={error} />
+      <Action
+        type="submit"
+        {...(shared
+          ? { variant: primary ? ('primary' as const) : ('secondary' as const) }
+          : { className: primary ? 'primary' : 'secondary' })}
         disabled={busy || disabled}
         aria-busy={busy}
       >
         {busy ? 'Saving decision...' : label}
-      </button>
+      </Action>
     </form>
   );
 }
