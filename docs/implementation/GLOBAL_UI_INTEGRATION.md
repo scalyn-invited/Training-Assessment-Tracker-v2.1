@@ -44,3 +44,7 @@ The merge includes the author save/publication recovery, question references, re
 Verification after merge: 42 tests in eight migration/assessment/access/platform/API suites passed (24.61s); 30 authentication/account/branding/client-account tests passed (12.48s); all 22 workflow browser fixtures passed (20.1s); the actual Next navigation fixture passed (15.7s overall). The Next fixture ran in an isolated detached worktree at `dffeacd`, with no environment files, database, API, worker or external adapters. Only `node_modules` was linked for dependencies; the local browser override selected installed Chrome. The existing saved environment was left intact. Shared-shell/account and reference-screen evidence is recorded separately in `GLOBAL_UI_ACCOUNT_QA.md`.
 
 The requested workflow source is integrated. Assessment presentation migration has not started. Continue in the recorded order: remaining platform/account pages, client administration, learning, assessments, guest/setup/recovery, then verified obsolete-code retirement. Nothing pushed or deployed; no human acceptance or production readiness is inferred.
+
+## Future PR target - 19 November 2026
+
+Bernie's message forwarded by the user specifies `dev` as the target for future pull requests. Continue local work on `ui/global-design-system`; when submission is authorized, reconcile against the then-current `dev` before preparing the PR. This message does not authorize a push or deployment, and no new merge or remote branch verification is claimed here.

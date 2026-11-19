@@ -91,6 +91,10 @@ Background receipts uses shared presentation on Overview and training-record det
 
 `/enrolments/[id]/plan` retains block navigation, reference disclosures, lesson/rubric fields, version history, comparisons, full-baseline review and approval receipt in their existing order. Its generation request disclosure shares the same controls; generation progress remains a separate migration. Use shared headers, badges, panels, fields and buttons, wrapping block controls, 16px group spacing and two-column rubric/time/comparison groups that stack at 800px. Preserve all field constraints, version requests, permissions, confirmation text and immutable approved history. Register block edits, rationale, revision notes and pending saves/queues with the shared work guard. Signed-out visits reach login. Retire unused global step-nav, lesson, receipts and comparison selectors after checking consumers; retain review-section, file-list, preserve-lines and unrelated assessment/editor utilities.
 
+## Generation progress
+
+`/enrolments/[id]/generation/[runId]` retains its progress/budget panel followed by configuration/provenance, provider attempts and manual refresh. Use the shared header, panels, feedback and button with 24px section spacing and 16px panel spacing; keep ordered block entries and all provenance details. Wrap long provider/request identifiers without hiding data. Keep currency amounts together with tabular figures. The existing three-second queued/running polling, terminal-state notices, retained details on refresh failure and exact generated-version link remain. Signed-out visitors use the existing login destination. No new generation, retry, reconciliation or approval action is introduced.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.

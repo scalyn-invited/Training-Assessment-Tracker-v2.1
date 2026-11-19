@@ -1,0 +1,13 @@
+.panel li {
+  overflow-wrap: anywhere;
+}
+.panel li + li {
+  margin-top: var(--ui-space-2);
+}
+.amount {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.refresh {
+  align-self: flex-start;
+}

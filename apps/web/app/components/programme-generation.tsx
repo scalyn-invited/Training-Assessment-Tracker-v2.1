@@ -2,11 +2,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { api, Feedback, Guest, Pending, useContext } from './auth-ui';
-import { Button, Textarea, Feedback as SharedFeedback } from './ui/controls';
+import { api, Guest, Pending, useContext } from './auth-ui';
+import { Button, Textarea, Panel, PageHeader, Feedback as SharedFeedback } from './ui/controls';
 import layout from './ui/form-layout.module.css';
 import styles from './ui/curriculum.module.css';
 import recordStyles from './ui/training-record.module.css';
+import progressStyles from './ui/generation-progress.module.css';
 type Run = {
   id: string;
   status: string;
@@ -220,126 +221,137 @@ export function GenerationRequest({
 export function GenerationRun({ id, runId }: { id: string; runId: string }) {
   const { context, error: contextError, load: loadContext } = useContext(),
     client = context?.client?.id;
+  const router = useRouter();
+  useEffect(() => {
+    if (context && !context.user) router.replace('/login');
+  }, [context, router]);
   const { view, error, loading, load } = useRuns(id, client, runId),
     run = view?.runs[0];
   return (
     <Guest>
-      {!context?.user ? (
-        <Pending error={contextError} retry={loadContext} />
-      ) : !client ? (
-        <>
-          <h1>Choose a client</h1>
-          <Link href="/clients">Choose your client</Link>
-        </>
-      ) : (
-        <>
-          <Link className="back" href={`/enrolments/${id}/plan`}>
-            Back to curriculum
-          </Link>
-          <p className="eyebrow">Draft generation</p>
-          <h1>{view?.enrolment.title || 'Curriculum generation'}</h1>
-          <Feedback error={error} />
-          {!view && !error && <p role="status">Loading generation details…</p>}
-          {view && !run && (
-            <p>
-              This request is unavailable in the selected training record. Return to the curriculum
-              to see your available requests.
-            </p>
-          )}
-          {run && (
-            <>
-              <section className="panel">
-                <h2>Generation progress</h2>
-                <p role="status">{run.message}</p>
-                <p>
-                  {run.blocks.filter((b) => b.status === 'complete').length} of {run.blocks.length}{' '}
-                  blocks complete · {run.status}
-                </p>
-                <p>
-                  Reserved:{' '}
-                  <span style={{ whiteSpace: 'nowrap' }}>
-                    {run.reserved.toLocaleString()} micro-USD
-                  </span>{' '}
-                  · Accounted usage:{' '}
-                  <span style={{ whiteSpace: 'nowrap' }}>
-                    {run.spent.toLocaleString()} micro-USD
-                  </span>
-                </p>
-                <p className="subtle">
-                  1,000,000 micro-USD = USD 1. Mock amounts are simulated ledger entries, not actual
-                  charges. Uncertain charges remain reserved until reconciled.
-                </p>
-                {run.status === 'ambiguous' && (
-                  <p className="notice">
-                    Ask a client administrator to reconcile the uncertain charge in AI settings.
-                    Automatic retry is stopped; your existing curriculum remains available.
-                  </p>
-                )}
-                {run.status === 'failed' && (
-                  <p className="notice">
-                    The generated content was not applied. Review the current curriculum and inputs
-                    before requesting a new draft.
-                  </p>
-                )}
-                {run.resultVersion && (
+      <div className={layout.page}>
+        {!context?.user ? (
+          <Pending error={contextError} retry={loadContext} />
+        ) : !client ? (
+          <>
+            <PageHeader title="Choose a client" />
+            <Link href="/clients">Choose your client</Link>
+          </>
+        ) : (
+          <>
+            <Link href={`/enrolments/${id}/plan`}>Back to curriculum</Link>
+            <div>
+              <p className="eyebrow">Draft generation</p>
+              <PageHeader title={view?.enrolment.title || 'Curriculum generation'} />
+            </div>
+            <SharedFeedback error={error} />
+            {!view && !error && <p role="status">Loading generation details…</p>}
+            {view && !run && (
+              <p>
+                This request is unavailable in the selected training record. Return to the
+                curriculum to see your available requests.
+              </p>
+            )}
+            {run && (
+              <>
+                <Panel className={layout.panel + ' ' + progressStyles.panel}>
+                  <h2>Generation progress</h2>
+                  <p role="status">{run.message}</p>
                   <p>
-                    <Link href={`/enrolments/${id}/plan?version=${run.resultVersion}`}>
-                      Review generated draft · version {run.resultVersion}
-                    </Link>
+                    {run.blocks.filter((b) => b.status === 'complete').length} of{' '}
+                    {run.blocks.length} blocks complete · {run.status}
                   </p>
-                )}
-                <ol>
-                  {run.blocks.map((b) => (
-                    <li key={b.block_index}>
-                      Block {b.block_index + 1} · {b.status} · {b.calls} provider calls ·{' '}
-                      {b.repairs} repairs
-                    </li>
-                  ))}
-                </ol>
-              </section>
-              <section className="panel">
-                <h2>Configuration and provenance</h2>
-                <p>
-                  Policy version {run.configuration.policyVersion} · Prompt{' '}
-                  {run.configuration.promptVersion} · Schema {run.configuration.schemaVersion}
-                </p>
-                <ul>
-                  {run.configuration.providers.map((p, i) => (
-                    <li key={p.id}>
-                      {p.id} · {p.model} · Configuration {p.version} · Rate {p.rateVersion}
-                      {i > 0 ? ' (permitted fallback)' : ''}
-                      {p.synthetic ? ' · synthetic demonstration' : ''}
-                    </li>
-                  ))}
-                </ul>
-                <p className="preserve-lines">
-                  Revision notes:{' '}
-                  {run.baseVersion === null
-                    ? 'Removed under retention policy'
-                    : run.feedback || 'None'}
-                </p>
-                <h3>Provider attempts</h3>
-                <ul>
-                  {run.attempts.length ? (
-                    run.attempts.map((a, i) => (
-                      <li key={i}>
-                        Block {a.block_index + 1} · {a.provider} · {a.model} · {a.status} ·{' '}
-                        {a.input_tokens ?? 'unknown'} input / {a.output_tokens ?? 'unknown'} output
-                        tokens · Request {a.external_id ?? 'not supplied'}
-                      </li>
-                    ))
-                  ) : (
-                    <li>No provider attempts yet.</li>
+                  <p>
+                    Reserved:{' '}
+                    <span className={progressStyles.amount}>
+                      {run.reserved.toLocaleString()} micro-USD
+                    </span>{' '}
+                    · Accounted usage:{' '}
+                    <span className={progressStyles.amount}>
+                      {run.spent.toLocaleString()} micro-USD
+                    </span>
+                  </p>
+                  <p className={styles.subtle}>
+                    1,000,000 micro-USD = USD 1. Mock amounts are simulated ledger entries, not
+                    actual charges. Uncertain charges remain reserved until reconciled.
+                  </p>
+                  {run.status === 'ambiguous' && (
+                    <p className={recordStyles.notice}>
+                      Ask a client administrator to reconcile the uncertain charge in AI settings.
+                      Automatic retry is stopped; your existing curriculum remains available.
+                    </p>
                   )}
-                </ul>
-              </section>
-            </>
-          )}
-          <button className="secondary" disabled={loading} onClick={() => void load()}>
-            {loading ? 'Refreshing generation details…' : 'Refresh full details'}
-          </button>
-        </>
-      )}
+                  {run.status === 'failed' && (
+                    <p className={recordStyles.notice}>
+                      The generated content was not applied. Review the current curriculum and
+                      inputs before requesting a new draft.
+                    </p>
+                  )}
+                  {run.resultVersion && (
+                    <p>
+                      <Link href={`/enrolments/${id}/plan?version=${run.resultVersion}`}>
+                        Review generated draft · version {run.resultVersion}
+                      </Link>
+                    </p>
+                  )}
+                  <ol>
+                    {run.blocks.map((b) => (
+                      <li key={b.block_index}>
+                        Block {b.block_index + 1} · {b.status} · {b.calls} provider calls ·{' '}
+                        {b.repairs} repairs
+                      </li>
+                    ))}
+                  </ol>
+                </Panel>
+                <Panel className={layout.panel + ' ' + progressStyles.panel}>
+                  <h2>Configuration and provenance</h2>
+                  <p>
+                    Policy version {run.configuration.policyVersion} · Prompt{' '}
+                    {run.configuration.promptVersion} · Schema {run.configuration.schemaVersion}
+                  </p>
+                  <ul>
+                    {run.configuration.providers.map((p, i) => (
+                      <li key={p.id}>
+                        {p.id} · {p.model} · Configuration {p.version} · Rate {p.rateVersion}
+                        {i > 0 ? ' (permitted fallback)' : ''}
+                        {p.synthetic ? ' · synthetic demonstration' : ''}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className={styles.preserve}>
+                    Revision notes:{' '}
+                    {run.baseVersion === null
+                      ? 'Removed under retention policy'
+                      : run.feedback || 'None'}
+                  </p>
+                  <h3>Provider attempts</h3>
+                  <ul>
+                    {run.attempts.length ? (
+                      run.attempts.map((a, i) => (
+                        <li key={i}>
+                          Block {a.block_index + 1} · {a.provider} · {a.model} · {a.status} ·{' '}
+                          {a.input_tokens ?? 'unknown'} input / {a.output_tokens ?? 'unknown'}{' '}
+                          output tokens · Request {a.external_id ?? 'not supplied'}
+                        </li>
+                      ))
+                    ) : (
+                      <li>No provider attempts yet.</li>
+                    )}
+                  </ul>
+                </Panel>
+              </>
+            )}
+            <Button
+              className={progressStyles.refresh}
+              disabled={loading}
+              aria-busy={loading}
+              onClick={() => void load()}
+            >
+              {loading ? 'Refreshing generation details…' : 'Refresh full details'}
+            </Button>
+          </>
+        )}
+      </div>
     </Guest>
   );
 }
