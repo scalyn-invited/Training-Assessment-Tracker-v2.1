@@ -21,7 +21,8 @@ import { LearningReview, type LearningReceiptView } from './learning-review';
 import { registerWorkGuard, leaveAfterConfirmedMutation } from './work-guard';
 import lessonStyles from './ui/learning-lesson.module.css';
 import { ResponseEvidence } from './response-evidence';
-import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
+import receiptStyles from './ui/submission-receipt.module.css';
+import { api, useContext, Guest } from './auth-ui';
 import type { Delivery } from '../../../../packages/domain/src/delivery';
 type Overview = Awaited<ReturnType<Delivery['read']>>;
 type LessonView = Awaited<ReturnType<Delivery['lesson']>>;
@@ -632,6 +633,10 @@ function QuizPublisher({
 export function SubmissionReceipt({ id, submissionId }: { id: string; submissionId: string }) {
   const s = useDeliveryView<ReceiptView>(`/enrolments/${id}/submissions/${submissionId}`),
     v = s.view;
+  const router = useRouter();
+  useEffect(() => {
+    if (s.context && !s.context.user) router.replace('/login');
+  }, [s.context, router]);
   const [caseClosed, setCaseClosed] = useState(false);
   const queued = v?.grades.some((g) => g.status === 'queued');
   useEffect(() => {
@@ -642,113 +647,127 @@ export function SubmissionReceipt({ id, submissionId }: { id: string; submission
   if (caseClosed)
     return (
       <Guest>
-        <h1>Independent review recorded</h1>
-        <p>Case access has closed. The previous decision and this review remain in history.</p>
-        <Link href="/learning-reviews">Return to review queue</Link>
+        <div className={layout.page}>
+          <PageHeader title="Independent review recorded" />
+          <p>Case access has closed. The previous decision and this review remain in history.</p>
+          <Link href="/learning-reviews">Return to review queue</Link>
+        </div>
       </Guest>
     );
   return (
     <Guest>
-      <Link href={v?.caseOnly ? '/learning-reviews' : `/enrolments/${id}/delivery`}>
-        {v?.caseOnly ? 'Back to review queue' : 'Back to learning plan'}
-      </Link>
-      {!v ? (
-        <Pending error={s.error} retry={s.load} />
-      ) : (
-        <>
-          <h1>Submission receipt</h1>
-          <p>{v.enrolment.title}</p>
-          <section className="panel">
-            <h2>Attempt {v.submission.attempt}</h2>
-            <p>Status: {v.submission.status.replaceAll('_', ' ')}</p>
-            <p>Submitted work is preserved. A revised submission creates a new attempt.</p>
-            <p className="preserve-lines">
-              {v.submission.body || 'No written response; see attached evidence or quiz answers.'}
-            </p>
-            {v.submission.files.length > 0 && (
-              <>
-                <h3>Submitted evidence</h3>
-                <ul>
-                  {v.submission.files.map((file) => (
-                    <li key={file}>
-                      <a href={`/api/files/${file}`}>Download evidence {file}</a>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-            {v.submission.quiz && (
-              <>
-                <h3>Your quiz answers</h3>
-                <ul>
-                  {v.submission.quiz.questions.map((q, i) => (
-                    <li key={q.id}>
-                      {q.prompt}:{' '}
-                      {v.submission.answers[i] === null || v.submission.answers[i] === undefined
-                        ? 'Not answered'
-                        : (q.options[v.submission.answers[i]!] ?? 'Answer unavailable')}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-            <details>
-              <summary>Receipt integrity and rubric</summary>
-              <p className="preserve-lines" style={{ overflowWrap: 'anywhere' }}>
-                Content hash: {v.submission.contentHash}
+      <div className={layout.page}>
+        <Link href={v?.caseOnly ? '/learning-reviews' : `/enrolments/${id}/delivery`}>
+          {v?.caseOnly ? 'Back to review queue' : 'Back to learning plan'}
+        </Link>
+        {!s.context?.user || !v ? (
+          <>
+            <PageHeader title="Submission receipt" />
+            <SharedFeedback error={s.error} />
+            {s.error ? (
+              <Button onClick={() => void (s.context?.user ? s.load() : s.loadContext())}>
+                Try loading again
+              </Button>
+            ) : (
+              <p role="status">
+                {s.context?.user ? 'Loading submission receipt...' : 'Loading your session...'}
               </p>
-              <ul>
-                {v.submission.rubric.criteria.map((c) => (
-                  <li key={c.id}>
-                    {c.label} / {c.weight * 100}%
-                  </li>
-                ))}
-              </ul>
-            </details>
-          </section>
-          <Feedback error={s.error} />
-          <LearningReview
-            view={v}
-            client={s.client!}
-            csrf={s.context!.csrf}
-            refresh={s.load}
-            close={() => {
-              s.setView(null);
-              setCaseClosed(true);
-            }}
-          />
-          {!v.caseOnly && (
-            <p>
-              <Link
-                href={`/enrolments/${id}/delivery/${v.submission.blockId}/${v.submission.lessonIndex}`}
-              >
-                Return to lesson
-              </Link>
-            </p>
-          )}
-          {v.canWithdraw && (
-            <section className="panel">
+            )}
+          </>
+        ) : (
+          <>
+            <PageHeader title="Submission receipt">{v.enrolment.title}</PageHeader>
+            <Panel className={`${layout.panel} ${receiptStyles.panel}`}>
+              <h2>Attempt {v.submission.attempt}</h2>
+              <p>Status: {v.submission.status.replaceAll('_', ' ')}</p>
+              <p>Submitted work is preserved. A revised submission creates a new attempt.</p>
+              <p className={receiptStyles.prose}>
+                {v.submission.body || 'No written response; see attached evidence or quiz answers.'}
+              </p>
+              {v.submission.files.length > 0 && (
+                <>
+                  <h3>Submitted evidence</h3>
+                  <ul>
+                    {v.submission.files.map((file) => (
+                      <li key={file}>
+                        <a href={`/api/files/${file}`}>Download evidence {file}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              {v.submission.quiz && (
+                <>
+                  <h3>Your quiz answers</h3>
+                  <ul>
+                    {v.submission.quiz.questions.map((q, i) => (
+                      <li key={q.id}>
+                        {q.prompt}:{' '}
+                        {v.submission.answers[i] === null || v.submission.answers[i] === undefined
+                          ? 'Not answered'
+                          : (q.options[v.submission.answers[i]!] ?? 'Answer unavailable')}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
               <details>
-                <summary>Withdraw this attempt</summary>
-                <ReasonAction
-                  label="Withdraw attempt"
-                  help="Withdrawal stops review of this attempt. Its submitted content remains in history; you can submit a new attempt."
-                  confirm="Withdraw this submission from review? Its immutable receipt will remain in history."
-                  run={async (reason) => {
-                    await api(`/enrolments/${id}/submissions/${submissionId}/withdraw`, {
-                      csrf: s.context!.csrf,
-                      clientId: s.client,
-                      version: v.submission.version,
-                      reason,
-                    });
-                    await s.load();
-                  }}
-                />
+                <summary>Receipt integrity and rubric</summary>
+                <p className={receiptStyles.prose}>Content hash: {v.submission.contentHash}</p>
+                <ul>
+                  {v.submission.rubric.criteria.map((c) => (
+                    <li key={c.id}>
+                      {c.label} / {c.weight * 100}%
+                    </li>
+                  ))}
+                </ul>
               </details>
-            </section>
-          )}
-        </>
-      )}
+            </Panel>
+            <SharedFeedback error={s.error} />
+            <LearningReview
+              view={v}
+              client={s.client!}
+              csrf={s.context!.csrf}
+              refresh={s.load}
+              close={() => {
+                s.setView(null);
+                setCaseClosed(true);
+              }}
+            />
+            {!v.caseOnly && (
+              <p>
+                <Link
+                  href={`/enrolments/${id}/delivery/${v.submission.blockId}/${v.submission.lessonIndex}`}
+                >
+                  Return to lesson
+                </Link>
+              </p>
+            )}
+            {v.canWithdraw && (
+              <Panel className={`${layout.panel} ${receiptStyles.panel}`}>
+                <details>
+                  <summary>Withdraw this attempt</summary>
+                  <ReasonAction
+                    shared
+                    label="Withdraw attempt"
+                    help="Withdrawal stops review of this attempt. Its submitted content remains in history; you can submit a new attempt."
+                    confirm="Withdraw this submission from review? Its immutable receipt will remain in history."
+                    run={async (reason) => {
+                      await api(`/enrolments/${id}/submissions/${submissionId}/withdraw`, {
+                        csrf: s.context!.csrf,
+                        clientId: s.client,
+                        version: v.submission.version,
+                        reason,
+                      });
+                      await s.load();
+                    }}
+                  />
+                </details>
+              </Panel>
+            )}
+          </>
+        )}
+      </div>
     </Guest>
   );
 }

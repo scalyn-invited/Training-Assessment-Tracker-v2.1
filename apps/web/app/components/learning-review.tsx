@@ -1,7 +1,12 @@
 'use client';
-import { useRef, useState } from 'react';
-import { api, Feedback } from './auth-ui';
-import { ReasonAction, useLeaveGuard } from './learning-controls';
+import { useEffect, useRef, useState } from 'react';
+import { api } from './auth-ui';
+import { Button, Input, Textarea, Panel, Feedback } from './ui/controls';
+import { registerWorkGuard } from './work-guard';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/submission-receipt.module.css';
+import recordStyles from './ui/training-record.module.css';
+import { ReasonAction } from './learning-controls';
 import type { LearningGrading } from '../../../../packages/domain/src/learning-grading';
 export type LearningReceiptView = Awaited<ReturnType<LearningGrading['read']>>;
 export function LearningReview({
@@ -33,7 +38,7 @@ export function LearningReview({
     [dirty, setDirty] = useState(false);
   const pending = useRef(false),
     queued = v.grades.some((g) => g.status === 'queued');
-  useLeaveGuard(dirty || busy);
+  useEffect(() => registerWorkGuard(() => ({ dirty, pending: pending.current })), [dirty]);
   const path = `/enrolments/${v.enrolment.id}/submissions/${v.submission.id}`;
   async function action(kind: string, data: Record<string, unknown>) {
     await api(path + '/' + kind, {
@@ -99,7 +104,7 @@ export function LearningReview({
   return (
     <>
       {v.changes && (
-        <section className="panel">
+        <Panel className={`${layout.panel} ${styles.panel}`}>
           <h2>Requested changes</h2>
           <p>{v.changes.reason}</p>
           <ul>
@@ -110,10 +115,10 @@ export function LearningReview({
           <p>
             Return to the lesson, update saved work and submit a new attempt when it is available.
           </p>
-        </section>
+        </Panel>
       )}
       {v.approved ? (
-        <section className="panel">
+        <Panel className={`${layout.panel} ${styles.panel}`}>
           <h2>Approved feedback</h2>
           <p>Score: {v.approved.total} / 100</p>
           <p>{v.approved.reason}</p>
@@ -124,24 +129,26 @@ export function LearningReview({
               </li>
             ))}
           </ul>
-        </section>
+        </Panel>
       ) : (
         !v.canReview &&
         v.submission.status !== 'withdrawn' && (
-          <p className="notice">Awaiting review. Provisional scores are not official results.</p>
+          <p className={recordStyles.notice}>
+            Awaiting review. Provisional scores are not official results.
+          </p>
         )
       )}
       <Feedback error={error} success={message} />
       {v.canReview && v.submission.status !== 'withdrawn' && (
         <>
-          <section className="panel">
+          <Panel className={`${layout.panel} ${styles.panel}`}>
             <h2>Grading attempts</h2>
             <p>
               Provisional results require your independent review against the submitted work. AI
               never approves a grade.
             </p>
             {dirty && (
-              <p className="notice">
+              <p className={recordStyles.notice}>
                 Your human assessment has unsaved inputs. Record it or discard those inputs before
                 another grading action.
               </p>
@@ -182,6 +189,7 @@ export function LearningReview({
                   {g.status === 'provisional' && (
                     <>
                       <ReasonAction
+                        shared
                         label="Approve grade"
                         help="Approve only if every criterion is supported by the submitted evidence."
                         confirm="Approve this exact provisional grading attempt as official feedback?"
@@ -193,6 +201,7 @@ export function LearningReview({
                       <details>
                         <summary>Request changes to this work</summary>
                         <ReasonAction
+                          shared
                           label="Request changes"
                           help="Explain the evidence or changes the member needs to provide."
                           confirm="Record requested changes for this exact attempt?"
@@ -220,6 +229,7 @@ export function LearningReview({
               <details>
                 <summary>Request provisional grading</summary>
                 <ReasonAction
+                  shared
                   label="Request provisional grading"
                   help={
                     v.submission.quiz
@@ -232,20 +242,20 @@ export function LearningReview({
                 />
               </details>
             )}
-            <button className="secondary" disabled={dirty || busy} onClick={() => void refresh()}>
+            <Button variant="secondary" disabled={dirty || busy} onClick={() => void refresh()}>
               Refresh grading status
-            </button>
-          </section>
-          <section className="panel">
+            </Button>
+          </Panel>
+          <Panel className={`${layout.panel} ${styles.panel}`}>
             <h2>Human assessment or override</h2>
             {queued && (
-              <p className="notice">
+              <p className={recordStyles.notice}>
                 Wait for the queued grading attempt or its failure before recording a human
                 decision.
               </p>
             )}
             <form onSubmit={manual}>
-              <fieldset disabled={queued || busy} style={{ border: 0, padding: 0 }}>
+              <fieldset disabled={queued || busy}>
                 <legend>Assess the pinned criteria</legend>
                 {scores.map((c, i) => (
                   <fieldset key={c.id}>
@@ -255,7 +265,7 @@ export function LearningReview({
                     </legend>
                     <label>
                       Score for criterion {i + 1}
-                      <input
+                      <Input
                         required
                         type="number"
                         min={0}
@@ -272,7 +282,7 @@ export function LearningReview({
                     </label>
                     <label>
                       Evidence and feedback for criterion {i + 1}
-                      <textarea
+                      <Textarea
                         aria-label={'Evidence and feedback for criterion ' + (i + 1)}
                         required
                         maxLength={4000}
@@ -287,8 +297,8 @@ export function LearningReview({
                         }}
                       />
                     </label>
-                    <label>
-                      <input
+                    <label className={styles.choice}>
+                      <Input
                         type="checkbox"
                         checked={c.insufficient}
                         onChange={(e) => {
@@ -310,8 +320,8 @@ export function LearningReview({
                 </p>
                 <fieldset>
                   <legend>Decision</legend>
-                  <label>
-                    <input
+                  <label className={styles.choice}>
+                    <Input
                       type="radio"
                       name="human-outcome"
                       required
@@ -324,8 +334,8 @@ export function LearningReview({
                     />
                     Approve
                   </label>
-                  <label>
-                    <input
+                  <label className={styles.choice}>
+                    <Input
                       type="radio"
                       name="human-outcome"
                       required
@@ -341,7 +351,7 @@ export function LearningReview({
                 </fieldset>
                 <label>
                   Decision rationale
-                  <input
+                  <Input
                     required
                     minLength={8}
                     maxLength={2000}
@@ -352,16 +362,16 @@ export function LearningReview({
                     }}
                   />
                 </label>
-                <button className="primary" disabled={queued || busy} aria-busy={busy}>
+                <Button type="submit" variant="primary" disabled={queued || busy} aria-busy={busy}>
                   {busy ? 'Recording decision...' : 'Record human decision'}
-                </button>
+                </Button>
               </fieldset>
             </form>
             {dirty && (
               <details>
                 <summary>Discard unrecorded assessment inputs</summary>
-                <button
-                  className="secondary"
+                <Button
+                  variant="secondary"
                   disabled={busy}
                   onClick={() => {
                     if (
@@ -376,28 +386,31 @@ export function LearningReview({
                     setOutcome('');
                     setReason('');
                     setDirty(false);
+                    setError('');
+                    setMessage('');
                   }}
                 >
                   Discard unrecorded inputs
-                </button>
+                </Button>
               </details>
             )}
-          </section>
+          </Panel>
         </>
       )}
       {v.canAppeal && (
-        <section className="panel">
+        <Panel className={`${layout.panel} ${styles.panel}`}>
           <h2>Request another review</h2>
           <ReasonAction
+            shared
             label="Request an appeal"
             help="An administrator must assign an independent reviewer. The approved decision remains in place while the appeal is open."
             confirm="Request an independent appeal for this approved decision?"
             run={(reason) => action('appeal', { reason })}
           />
-        </section>
+        </Panel>
       )}
       {v.appeals.map((p) => (
-        <section className="panel" key={p.id}>
+        <Panel className={`${layout.panel} ${styles.panel}`} key={p.id}>
           <h2>Appeal / {p.status}</h2>
           <p>{p.reason}</p>
           <p>
@@ -408,6 +421,7 @@ export function LearningReview({
           </p>
           {p.canUphold && (
             <ReasonAction
+              shared
               label="Uphold existing decision"
               help="Record an independent rationale. This resolves the appeal and closes case access."
               confirm="Uphold the existing approved decision and close this appeal?"
@@ -415,7 +429,7 @@ export function LearningReview({
               run={(reason) => action('uphold', { reason })}
             />
           )}
-        </section>
+        </Panel>
       ))}
     </>
   );

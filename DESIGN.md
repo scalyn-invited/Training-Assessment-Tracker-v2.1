@@ -109,6 +109,12 @@ Background receipts uses shared presentation on Overview and training-record det
 
 Preserve the 800ms autosave, newer edits during a save, exact draft versions, idempotent immutable submission, scan gates, five-file limit, answer indexes, final quiz publication and all API permissions. Register changed response/quiz inputs, a chosen upload and pending mutations with the shared work guard. Successful submission uses the existing confirmed-mutation receipt handoff. Signed-out visitors reach login. Do not introduce a new lesson layout or alter scheduling, attempt, approval or assessment rules.
 
+## Submission receipt and review
+
+`/enrolments/[id]/submissions/[submissionId]` preserves the submitted snapshot, evidence and quiz answers, integrity/rubric disclosure, feedback, grading history, human assessment, appeals and withdrawal in their current order. Use shared headers, panels, fields, buttons and feedback; 24px sections, 16px form spacing, wrapping integrity hashes and filenames, preserved response whitespace and native grouped radio/checkbox controls. Retain the existing rubric fieldsets and review disclosure rather than introducing a new layout. Mobile uses 16px controls and 44px coarse-pointer targets.
+
+Keep every exact-version decision, pinned rubric, insufficient-evidence gate, provisional versus official result, native confirmation, immutable history, appeal authority and case-closure handoff. Shared work protection covers human assessment inputs and every reason/pending action. Polling continues only while a grade is queued and retains the current receipt on refresh failure. Signed-out visits reach login. Guest and other learning pages remain separate migrations.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
