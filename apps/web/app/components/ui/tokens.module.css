@@ -1,4 +1,4 @@
-/* Opt in per migrated layout. Theme selection and branded palettes remain owned by useBrand. */
+/* Shared by application, guest and recovery layouts. Theme selection and branded palettes remain owned by useBrand. */
 .theme {
   --ui-font: Inter, 'Segoe UI', sans-serif;
   --ui-text-small: 12px;

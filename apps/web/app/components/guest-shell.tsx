@@ -10,6 +10,7 @@ export function GuestShell({
   children,
   signIn,
   setup = false,
+  session = false,
   brand,
   error,
   storageKey,
@@ -18,6 +19,7 @@ export function GuestShell({
   children: ReactNode;
   signIn: boolean;
   setup?: boolean;
+  session?: boolean;
   brand: Brand | null;
   error: string;
   storageKey: string;
@@ -27,7 +29,7 @@ export function GuestShell({
   return (
     <div
       className={`${tokens.theme} ${styles.shell} ${signIn ? styles.signIn : styles.linkShell} ${setup ? styles.setup : ''}`}
-      data-guest-shell={setup ? 'setup' : signIn ? 'sign-in' : 'account-link'}
+      data-guest-shell={setup ? 'setup' : signIn ? 'sign-in' : session ? 'session' : 'account-link'}
     >
       <header className={styles.brandPanel}>
         <Link href="/login" className={styles.brand}>

@@ -39,6 +39,34 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   const expected = await (await request.get('/api/platform/overview')).json();
   const accounts = await (await request.get('/api/platform/client-accounts')).json();
   const audit = await (await request.get('/api/platform/audit')).json();
+  // Protected-page context failures use the shared guest system before a session resolves.
+  await page.route('**/api/auth/context', (route) =>
+    route.fulfill({ status: 503, json: { message: 'Session temporarily unavailable.' } }),
+  );
+  await page.goto('/platform');
+  await expect(page.locator('[data-guest-shell="session"]')).toBeVisible();
+  await expect(page.getByText('Session temporarily unavailable.', { exact: true })).toBeVisible();
+  await expect(page.locator('[data-application-shell], .app-sidebar, .guest-header')).toHaveCount(
+    0,
+  );
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    expect(
+      (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+        .violations,
+    ).toEqual([]);
+    const retry = page.getByRole('button', { name: 'Try loading again', exact: true });
+    await retry.focus();
+    await expect(retry).toBeFocused();
+    if (width <= 800) expect((await retry.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    await page.screenshot({ path: `${screenshotDir}/session-error-${width}.png`, fullPage: true });
+  }
+  await page.unroute('**/api/auth/context');
+  await page.getByRole('button', { name: 'Try loading again', exact: true }).press('Enter');
+  await expect(page).toHaveURL(/\/login$/);
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/login');
   await page.getByLabel('Email', { exact: true }).fill('overview@example.invalid');

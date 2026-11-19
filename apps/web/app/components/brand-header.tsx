@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState, useRef, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
 import { themes } from '../../../../packages/domain/src/theme';
 import { Icon } from './workspace-icon';
 export type Brand = {
@@ -186,34 +185,5 @@ export function ThemePicker({
         {message}
       </p>
     </div>
-  );
-}
-export function BrandHeader() {
-  const { brand, error, storageKey, reload } = useBrand();
-  return (
-    <>
-      <header className="guest-header">
-        <Link className="brand" href="/login">
-          {brand?.logo && (
-            <img src={brand.logo} alt="" width={44} height={44} style={{ objectFit: 'contain' }} />
-          )}
-          <span className="brand-copy">
-            <strong>
-              {brand?.mode === 'cerebru' ? 'Cerebru' : (brand?.displayName ?? 'Training Tracker')}
-            </strong>
-            <span>{brand?.appName ?? 'Assessment Training Tracker'}</span>
-          </span>
-        </Link>
-        <ThemePicker brand={brand} storageKey={storageKey} reload={reload} />
-      </header>
-      {error && (
-        <div className="notice" role="alert">
-          {error}{' '}
-          <button className="secondary" onClick={reload}>
-            Retry appearance
-          </button>
-        </div>
-      )}
-    </>
   );
 }
