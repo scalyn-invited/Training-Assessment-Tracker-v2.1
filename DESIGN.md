@@ -130,6 +130,10 @@ Missing samples remain nonnumeric; snapshots and observations retain their origi
 
 `/notifications` retains the client heading, Workspace link, account-wide email preference and scoped event list with twenty-item pagination. Use shared panels, header, radio fields, buttons, feedback and pagination. Preserve the existing notice link/date/status information, 24px sections, 16px records and 8px metadata spacing. Timestamp values remain together with tabular figures; long event text wraps. Coarse-pointer radio labels and notice links have 44px targets. Keep the synthetic sink and relay-acceptance explanation, exact preference payload and no new read/acknowledgment action. Shared work protection covers changed preferences and pending saves. Refresh errors retain current events and unsaved preference state; page controls operate on the displayed page.
 
+## Assessment directory and appeal routing
+
+`/assessments` retains the definition library, assigned-assessment list and independent appeal routing in that order. Shared directory tables retain every column and row action in labeled stacked rows below 1270px, matching the global directory rules. Keep separate twenty-item pagination and permission-dependent build/edit/revise/assign/open destinations. Use shared panels, header, buttons, select/textarea, feedback and pagination with 24px sections, 16px form gaps and wrapping titles/identifiers. Coarse-pointer links/disclosures have 44px targets; mobile fields use 16px type. Keep the native reviewer confirmation, required reason and case-only authority. Shared dirty/pending guards cover selections and reasons; paging and routing-refresh errors retain mounted forms. Keep entered reasons after successful assignment while marking that submitted value saved. Definition/assignment editors and response/review pages remain separate bounded migrations.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.
