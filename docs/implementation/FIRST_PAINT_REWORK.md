@@ -1,6 +1,35 @@
 # First-paint same-feature rework — t_9ea2df68
 
-Status: **PARTIAL IMPLEMENTATION; BLOCKED on generated-appearance outage policy.** No self-approval, overall acceptance, push, deployment or operator-runtime change.
+Status: **IMPLEMENTATION READY FOR INDEPENDENT RETEST under the explicitly approved bounded 503 policy.** No self-approval, overall acceptance, push, deployment or operator-runtime change.
+
+## Approved outage correction — resumed attempt
+
+User approval is recorded by the root coordinator on t_9ea2df68 and t_d56e101f: a fresh branding 503 document without generated tokens may use built-in navy Dark only when its safely resolved scope has a saved `platform-dark` preference. Successful retry may change palette/branding to authoritative values. This supersedes the historical blocked status below, not the original evidence.
+
+Implementation: the request-local snapshot records branding-specific HTTP 503 (not auth failure, timeout, or other HTTP errors). The pre-body script reads only the resolved scoped key, sets honest `data-theme="dark"` and a temporary fallback marker, and never writes storage or caches identities/palettes. The existing unavailable notice and Retry button render from the server snapshot; recovery clears the marker and restores the generated palette through the existing resolver. Notice copy stays identical before/after hydration to avoid a wrapping-induced shift. No System mode, new palette, dependency, or normal-path precedence change.
+
+Self-verification on final application source:
+- Policy browser regression RED: expected dark, received light before hydration. GREEN: navy canvas before hydration, visible unavailable/retry notice, usable form, repeat 503, unchanged platform-dark storage, authoritative recovery and marker removal.
+- Full production-renderer suite: **22 passed / 1 original strict-contract failure**. The unchanged independent assertion still requires `platform-dark` during outage and receives `dark`; it is intentionally preserved, NOT represented as an unchanged-contract pass. Separate policy-specific test qualifies the approved exception.
+- Exact four reload conditions pass again, including 1280×720 hard/cold 800ms; existing introduction/footer/theme-control geometry and deterministic pre-hydration comparison pass. All seven theme tests, scope/default/reset/navigation, responsive temporal, keyboard/reduced-motion/input and bounded axe checks pass.
+- Web resolver unit checks: **14 passed**, including other/unknown identities, client-local exclusion, missing/malformed intent, built-in preservation, non-503 and authentication-503 exclusions. Existing branding tests: **6 passed**.
+- Isolated real API guest/account-link journey: **1 passed** on this attempt; startup readiness ECONNREFUSED messages retained. No live services or emails used.
+- Production build, server/web TypeScript, and diff whitespace checks pass. Next-generated config changes restored. A trial NodeNext import extension caused a build failure; reverted and web unit tests placed in the web TypeScript project with a dedicated Vitest config. Intermediate failure logs retained.
+- Inspected final pre-hydration and repeat-outage screenshots: navy canvas, visible notice/Retry, readable introduction and available form. Recovery palette/branding change is permitted, not a no-change claim.
+
+Reproduce:
+```sh
+API_INTERNAL_ORIGIN=http://127.0.0.1:3281 NEXT_DIST_DIR=.next-first-paint npm run build
+FIRST_PAINT_BUILT=1 npx playwright test --config=playwright.first-paint.config.ts
+npx vitest run --config=vitest.appearance.config.ts
+npx vitest run tests/branding.test.ts
+npx playwright test --config=playwright.guest-ui.config.ts
+npm run typecheck
+```
+The full browser command exits 1 for the preserved obsolete strict-contract assertion described above. Final evidence: `evidence/outage-policy/handoff`, `evidence/rework/outage-*.log`, and `evidence/first-paint-outage-policy.tar.gz`. Prior baseline/RED evidence remains untouched. Root QA t_d56e101f must independently retest the exact handoff commit; completion here releases that existing lane only. Broader authenticated distinct-user/client-switch journeys, every route/dialog, other engines in this attempt, physical devices, full manual WCAG and load/deadline edges remain unqualified.
+
+## Historical first-attempt record (preserved)
+
 
 ## Baseline and scope
 

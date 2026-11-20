@@ -6,9 +6,9 @@ Source: V2 working tree at commit 3f3e4a86e8c4a4ce829a983b0406abac4b43a5b1, incl
 
 Task `t_eeccfb23`: saved-theme-before-hydration RED→GREEN, request-scoped authoritative palettes, current navy document canvas, session/guest separation and one-document snapshot invalidation implemented. Final built-renderer matrix: 17 passed; existing isolated API guest/account-link/axe journey: 1 passed; branding domain: 6 passed; build, server/web TypeScript and diff checks pass. See `FIRST_PAINT_FIX.md` for changed files, reproducible commands and evidence. Unavailable authoritative generated/default appearance may still change on retry; no universal zero-CLS or cross-browser claim. Independent QA `t_8db94a12` and overall acceptance remain open.
 
-## First-paint same-feature rework — partial, outage disposition required
+## First-paint same-feature rework — approved bounded policy implemented; independent retest pending
 
-Task `t_9ea2df68`: desktop login existing-element geometry RED→GREEN in exact four reload conditions plus withheld-hydration check. Final built suite 21 passes / 1 unchanged generated-outage failure; real API guest journey passes on rerun; branding 6 passes, build/typechecks pass. FOUC-QA-03 awaits independent retest; FOUC-QA-02 still fails and requires root-approved bounded policy before correction. See `FIRST_PAINT_REWORK.md`; no acceptance or outage exception inferred.
+Task `t_9ea2df68`: geometry correction passes exact four reload conditions plus withheld-hydration check. Owner-approved fresh branding-503/scoped platform-dark exception now uses honest built-in navy Dark with unavailable/Retry UI and preserved preference; recovery restores authoritative palette. Full built suite 22 passes / 1 preserved original strict-contract failure (expects generated theme, receives approved built-in fallback); separate policy regression passes RED→GREEN. Web policy isolation 14, branding 6, real API guest 1 pass; build/typechecks pass. Root QA must independently retest; see `FIRST_PAINT_REWORK.md`. No overall acceptance claimed.
 
 ## Foundation — Completed (local implementation and QA)
 Acceptance: independent workspaces, separate web/API/worker, persistent shared PGlite fallback, PostgreSQL adapter, checksummed SQL migrations, transaction-scoped tenant access, durable outbox, startup and browser checks.

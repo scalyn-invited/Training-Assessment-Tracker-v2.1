@@ -15,13 +15,17 @@ export async function loadInitialAppearance(
   let account: string | null =
     guestAppearance(pathname) || !/(?:^|;\s*)tracker_session=/.test(cookie) ? 'guest' : null;
   const signal = AbortSignal.timeout(2500);
+  let brandingUnavailable = false;
   const get = async (route: string) => {
     const response = await fetch(origin + route, {
       headers: { cookie },
       cache: 'no-store',
       signal,
     });
-    if (!response.ok) throw new Error('Appearance unavailable');
+    if (!response.ok) {
+      brandingUnavailable = route.startsWith('/branding/current?') && response.status === 503;
+      throw new Error('Appearance unavailable');
+    }
     return response.json();
   };
   try {
@@ -36,6 +40,6 @@ export async function loadInitialAppearance(
   } catch {
     // Bounded recovery, not an indefinite blank document. No guessed identity/cache.
     // The existing appearance retry fetch owns recovery after hydration.
-    return { pathname, account, brand: null };
+    return { pathname, account, brand: null, brandingUnavailable };
   }
 }

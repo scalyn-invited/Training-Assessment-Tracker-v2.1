@@ -11,7 +11,12 @@ export type Brand = {
   preferenceVersion?: number;
   theme?: string;
 };
-export type InitialAppearance = { pathname: string; account: string | null; brand: Brand | null };
+export type InitialAppearance = {
+  pathname: string;
+  account: string | null;
+  brand: Brand | null;
+  brandingUnavailable?: boolean;
+};
 export const sharedAppearance = (pathname: string) =>
   /^\/(platform|login|setup|clients|account|accounts)(\/|$)/.test(pathname);
 export const guestAppearance = (pathname: string) =>
@@ -49,5 +54,6 @@ export function appearanceScript(initial: InitialAppearance) {
   const available = initial.brand
     ? Object.keys(themes)
     : Object.keys(themes).filter((t) => !t.startsWith('platform-'));
-  return `try{var k=${JSON.stringify(key).replace(/</g, '\\u003c')};var t=k&&localStorage.getItem(k);if(${JSON.stringify(available)}.includes(t))document.documentElement.dataset.theme=t}catch(e){}`;
+  const fallback = !initial.brand && initial.brandingUnavailable === true;
+  return `try{var k=${JSON.stringify(key).replace(/</g, '\\u003c')};var t=k&&localStorage.getItem(k);if(${JSON.stringify(available)}.includes(t))document.documentElement.dataset.theme=t;else if(${fallback}&&t==='platform-dark'){document.documentElement.dataset.theme='dark';document.documentElement.dataset.appearanceFallback='platform-dark'}}catch(e){}`;
 }

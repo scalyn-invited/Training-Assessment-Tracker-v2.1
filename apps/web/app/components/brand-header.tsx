@@ -19,7 +19,11 @@ export function useBrand(account: string | null = 'guest') {
   const initialMatches =
     initial?.pathname === pathname && (account === null || initial.account === account);
   const [brand, setBrand] = useState<Brand | null>(initialMatches ? initial.brand : null),
-    [error, setError] = useState(''),
+    [error, setError] = useState(
+      initialMatches && initial?.brandingUnavailable
+        ? 'Appearance is unavailable. Retry appearance.'
+        : '',
+    ),
     [retry, setRetry] = useState(0);
   const storageKey = appearanceKey(account ?? initial?.account ?? 'guest');
   useEffect(() => {
@@ -33,6 +37,7 @@ export function useBrand(account: string | null = 'guest') {
       for (const [key, value] of Object.entries(paletteProperties(resolved)))
         root.style.setProperty(key, value);
       root.dataset.theme = resolved.selectedTheme;
+      delete root.dataset.appearanceFallback;
       setBrand(resolved);
       setError('');
     }
@@ -46,7 +51,12 @@ export function useBrand(account: string | null = 'guest') {
         const data = (await response.json()) as Brand;
         if (current && request === sequence) apply(data);
       } catch (e) {
-        if (current && request === sequence) setError((e as Error).message);
+        if (current && request === sequence)
+          setError(
+            document.documentElement.dataset.appearanceFallback === 'platform-dark'
+              ? 'Appearance is unavailable. Retry appearance.'
+              : (e as Error).message,
+          );
       }
     }
     if (initialMatches && initial?.brand && retry === 0) apply(initial.brand);
