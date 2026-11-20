@@ -5,18 +5,20 @@ import { api, useContext } from './auth-ui';
 import { useBrand } from './brand-header';
 import { ApplicationShell } from './application-shell';
 import { GuestShell } from './guest-shell';
+import { RecoveryFrame } from './recovery-frame';
 import { Button, Select, Feedback as SharedFeedback } from './ui/controls';
 import sharedStyles from './ui/application-shell.module.css';
 import { confirmWorkLeave, leaveAfterConfirmedMutation } from './work-guard';
 type Client = { id: string; name: string };
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const { context } = useContext(),
+  const { context, error: contextError, load: reloadContext } = useContext(),
     pathname = usePathname(),
     router = useRouter();
   const guest = !context?.user || /^\/(login|setup|account\/link)(\/|$)/.test(pathname);
   const platform = pathname === '/platform' || pathname.startsWith('/platform/');
   const {
     brand,
+    documentRecovery,
     error: brandError,
     shared,
     storageKey,
@@ -27,6 +29,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       : !guest && context?.user
         ? context.user.environment + '.' + context.user.id
         : 'guest',
+    context?.client?.id ?? null,
   );
   const [clients, setClients] = useState<Client[] | null>(null),
     [selected, setSelected] = useState(''),
@@ -86,6 +89,23 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       setBusy(null);
     }
   }
+  if (!brand && !documentRecovery)
+    return (
+      <div data-appearance-pending>
+        <RecoveryFrame
+          title="Opening workspace"
+          message="Waiting for this destination’s appearance."
+        >
+          <p role="status">
+            {brandError ? 'The destination is not ready.' : 'Loading appearance...'}
+          </p>
+          <SharedFeedback error={brandError} />
+          <SharedFeedback error={contextError} />
+          {brandError && <Button onClick={reload}>Retry appearance</Button>}
+          {contextError && <Button onClick={reloadContext}>Try loading again</Button>}
+        </RecoveryFrame>
+      </div>
+    );
   if (guest || !context?.user)
     return (
       <GuestShell

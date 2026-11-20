@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useRef, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useState, useRef, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import { themes } from '../../../../packages/domain/src/theme';
 import { Icon } from './workspace-icon';
@@ -12,62 +12,89 @@ import {
 } from './appearance-state';
 import { useInitialAppearance } from './appearance-provider';
 export type { Brand } from './appearance-state';
-export function useBrand(account: string | null = 'guest') {
+export function useBrand(account: string | null = 'guest', clientId: string | null = null) {
   const pathname = usePathname(),
     shared = sharedAppearance(pathname);
   const initial = useInitialAppearance();
   const initialMatches =
     initial?.pathname === pathname && (account === null || initial.account === account);
-  const [brand, setBrand] = useState<Brand | null>(initialMatches ? initial.brand : null),
-    [error, setError] = useState(
+  const identity = account ?? (initialMatches ? initial.account : null);
+  const key = JSON.stringify([pathname, identity, shared ? null : clientId]);
+  const [state, setState] = useState(() => ({
+    key,
+    brand: initialMatches ? initial.brand : null,
+    error:
       initialMatches && initial?.brandingUnavailable
         ? 'Appearance is unavailable. Retry appearance.'
         : '',
-    ),
-    [retry, setRetry] = useState(0);
-  const storageKey = appearanceKey(account ?? initial?.account ?? 'guest');
-  useEffect(() => {
-    // Session loading is not an anonymous identity. Keep the resolved document theme.
-    if (account === null) return;
+  }));
+  const [retry, setRetry] = useState(0);
+  const bootstrap = useRef(true);
+  const storageKey = appearanceKey(identity ?? 'guest');
+  // Forget authority on the render that changes scope, including A -> B -> A
+  // before B resolves. Matching an older key is not a new authority generation.
+  if (state.key !== key) setState({ key, brand: null, error: '' });
+  // Never render authority belonging to a previous route, account or client.
+  const brand = state.key === key ? state.brand : null;
+  const error = state.key === key ? state.error : '';
+  useLayoutEffect(() => {
     let current = true,
       sequence = 0;
     function apply(data: Brand) {
-      const resolved = savedTheme(data, account!, shared);
-      const root = document.documentElement;
-      for (const [key, value] of Object.entries(paletteProperties(resolved)))
-        root.style.setProperty(key, value);
-      root.dataset.theme = resolved.selectedTheme;
-      delete root.dataset.appearanceFallback;
-      setBrand(resolved);
-      setError('');
+      setState({ key, brand: savedTheme(data, identity!, shared), error: '' });
     }
     async function refresh() {
       const request = ++sequence;
       try {
         const response = await fetch('/api/branding/current?shared=' + (shared ? '1' : '0'), {
           cache: 'no-store',
+          signal: AbortSignal.timeout(10000),
         });
         if (!response.ok) throw new Error('Appearance could not be loaded. Retry appearance.');
         const data = (await response.json()) as Brand;
         if (current && request === sequence) apply(data);
       } catch (e) {
         if (current && request === sequence)
-          setError(
-            document.documentElement.dataset.appearanceFallback === 'platform-dark'
-              ? 'Appearance is unavailable. Retry appearance.'
-              : (e as Error).message,
-          );
+          setState((previous) => ({
+            key,
+            brand: previous.key === key ? previous.brand : null,
+            error:
+              document.documentElement.dataset.appearanceFallback === 'platform-dark'
+                ? 'Appearance is unavailable. Retry appearance.'
+                : 'Appearance could not be loaded. Retry appearance.',
+          }));
       }
     }
-    if (initialMatches && initial?.brand && retry === 0) apply(initial.brand);
-    else void refresh();
+    if (bootstrap.current && initialMatches && initial?.brand && retry === 0) {
+      bootstrap.current = false;
+      apply(initial.brand);
+    } else if (account !== null) {
+      bootstrap.current = false;
+      void refresh();
+    }
     window.addEventListener('brandingchanged', refresh);
     return () => {
       current = false;
       window.removeEventListener('brandingchanged', refresh);
     };
-  }, [pathname, shared, account, initial, initialMatches, retry]);
-  return { brand, error, shared, storageKey, reload: () => setRetry((n) => n + 1) };
+  }, [key, account, retry]);
+  // Async responses only publish tagged state. Palette and content commit before paint.
+  useLayoutEffect(() => {
+    if (!brand) return;
+    const root = document.documentElement;
+    for (const [property, value] of Object.entries(paletteProperties(brand)))
+      root.style.setProperty(property, value);
+    root.dataset.theme = brand.selectedTheme;
+    delete root.dataset.appearanceFallback;
+  }, [brand]);
+  return {
+    brand,
+    error,
+    shared,
+    storageKey,
+    documentRecovery: Boolean(initialMatches && !initial?.brand),
+    reload: () => setRetry((n) => n + 1),
+  };
 }
 export function ThemePicker({
   brand,
