@@ -1,0 +1,7 @@
+{
+  "distinctUsers": true,
+  "ownerPreference": "light",
+  "memberPreference": "dark",
+  "guestTheme": "light",
+  "ownerReturnTheme": "light"
+}

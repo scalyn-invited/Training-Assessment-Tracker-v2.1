@@ -1,0 +1,366 @@
+[
+  {
+    "t": 251.10000002384186,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 257.10000002384186,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 274.39999997615814,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 302.89999997615814,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 324.10000002384186,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 338.2000000476837,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 345.3000000715256,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 357.7000000476837,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 374.89999997615814,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 392.2000000476837,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 407.10000002384186,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 423.8000000715256,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 441.8000000715256,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 420,
+      "y": 241.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 498.89999997615814,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 511.89999997615814,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 517.7000000476837,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 527.2000000476837,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 540.3000000715256,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 557.3000000715256,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 579.1000000238419,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 590.6000000238419,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 607,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 623.8999999761581,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 640.8999999761581,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 656.8000000715256,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 674.7000000476837,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 690.3999999761581,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 707.1000000238419,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 723.3999999761581,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 740.1000000238419,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  }
+]
