@@ -37,6 +37,8 @@ Local retest: all 22 component-harness tests passed in Chrome (20.0s), including
 
 GitHub Actions, rather than these local results, determines the updated commit's remote status. No human acceptance or full parity is inferred.
 
+The next CI pass confirmed both assessment workflows and all platform suites, but identified NodeNext extension requirements for the new test helper imports. The earlier full verification run also reached learning progress and found its last retired `section.panel` selector. Both are corrected: explicit `.js` imports and KPI scope selected by its existing exact "Refresh evidence snapshot" action. No assertions or application behavior were removed or changed. TypeScript and formatting pass; all 22 assessment harness scenarios pass again (28.3s). The complete setup/authentication/administration/learning/assessment/browser journey passes locally (8.0m), using the separate export, isolated in-memory PGlite and private storage, Chrome and a local-only webpack override. CI keeps its original browser/build configuration. This local run does not replace remote CI or human review.
+
 ## Review boundary
 
 The published PR and GitHub Actions are the source for remote CI status; local tests do not establish remote success. Do not merge or deploy. Human technical/UX and owner acceptance remain deferred, and full V2.1 parity/production readiness is not claimed. Review the Settings reintroduction and assessment workflow migrations explicitly.

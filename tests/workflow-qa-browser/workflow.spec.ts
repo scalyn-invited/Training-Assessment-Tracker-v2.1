@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 import { build } from 'esbuild';
 import { readFile, mkdir } from 'node:fs/promises';
-import { serveShellAsset } from './shell-assets';
+import { serveShellAsset } from './shell-assets.js';
 const origin = 'https://workflow-qa.invalid';
 const shots = '.runtime/workflow-qa-screenshots';
 const questions = ['A1', 'A2', 'B1', 'B2'].map((id) => ({

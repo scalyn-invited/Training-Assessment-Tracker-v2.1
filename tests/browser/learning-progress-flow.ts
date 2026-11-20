@@ -5,7 +5,12 @@ export async function learningProgressFlow(coordinator: Page, member: Page) {
   await coordinator.getByRole('link', { name: 'Progress and evidence', exact: true }).click();
   await expect(coordinator).toHaveURL(/\/progress$/);
   const url = coordinator.url();
-  const card = coordinator.locator('section.panel').first();
+  const card = coordinator
+    .locator('section')
+    .filter({
+      has: coordinator.getByRole('button', { name: 'Refresh evidence snapshot', exact: true }),
+    })
+    .first();
   await expect(card.getByText('No sufficient result', { exact: false })).toBeVisible();
   await card
     .locator('summary')

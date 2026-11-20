@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { build } from 'esbuild';
-import { serveShellAsset } from './shell-assets';
+import { serveShellAsset } from './shell-assets.js';
 let script: string;
 test.beforeAll(async () => {
   script = (
