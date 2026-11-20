@@ -1,0 +1,417 @@
+{
+  "account-ui-browser.log": {
+    "summary": [
+      "  1 passed (1.1m)"
+    ],
+    "assertions": []
+  },
+  "assessment-directory-ui-browser.log": {
+    "summary": [
+      "  1 passed (48.9s)"
+    ],
+    "assertions": []
+  },
+  "assignment-ui-browser.log": {
+    "summary": [
+      "  1 passed (45.2s)"
+    ],
+    "assertions": []
+  },
+  "audit-ui-browser.log": {
+    "summary": [
+      "  1 passed (33.4s)"
+    ],
+    "assertions": []
+  },
+  "branding.log": {
+    "summary": [
+      " Test Files  1 passed (1)",
+      "      Tests  6 passed (6)"
+    ],
+    "assertions": []
+  },
+  "build.log": {
+    "summary": [],
+    "assertions": []
+  },
+  "builder-gate.log": {
+    "summary": [
+      "  1 passed (38.1s)"
+    ],
+    "assertions": []
+  },
+  "builder-loading.log": {
+    "summary": [
+      "  1 passed (21.5s)"
+    ],
+    "assertions": []
+  },
+  "builder.log": {
+    "summary": [
+      "  1 passed (1.0m)"
+    ],
+    "assertions": []
+  },
+  "calibration.log": {
+    "summary": [
+      "  1 passed (22.1s)"
+    ],
+    "assertions": []
+  },
+  "client-administration.log": {
+    "summary": [
+      "  1 passed (46.8s)"
+    ],
+    "assertions": []
+  },
+  "client-ai.log": {
+    "summary": [
+      "  1 passed (38.4s)"
+    ],
+    "assertions": []
+  },
+  "client-appearance.log": {
+    "summary": [
+      "  1 passed (41.6s)"
+    ],
+    "assertions": []
+  },
+  "client-choice-ui-browser.log": {
+    "summary": [
+      "  1 passed (35.4s)"
+    ],
+    "assertions": []
+  },
+  "client-people.log": {
+    "summary": [
+      "  1 passed (36.4s)"
+    ],
+    "assertions": []
+  },
+  "client-selection-browser.log": {
+    "summary": [
+      "  1 passed (17.0s)"
+    ],
+    "assertions": []
+  },
+  "clients-ui-browser.log": {
+    "summary": [
+      "  1 passed (37.4s)"
+    ],
+    "assertions": []
+  },
+  "css.log": {
+    "summary": [
+      "  1 failed"
+    ],
+    "assertions": [
+      "    Error: actually delayed destination stylesheets"
+    ]
+  },
+  "curriculum-ui-browser.log": {
+    "summary": [
+      "  1 passed (55.1s)"
+    ],
+    "assertions": []
+  },
+  "delivery-ui-browser.log": {
+    "summary": [
+      "  1 passed (49.0s)"
+    ],
+    "assertions": []
+  },
+  "directory-history-browser.log": {
+    "summary": [
+      "  1 passed (22.0s)"
+    ],
+    "assertions": []
+  },
+  "document-review-ui-browser.log": {
+    "summary": [
+      "  1 passed (1.7m)"
+    ],
+    "assertions": []
+  },
+  "full-workflow.log": {
+    "summary": [
+      "  22 passed (41.6s)"
+    ],
+    "assertions": []
+  },
+  "generation-ui-browser-triaged.log": {
+    "summary": [
+      "  1 passed (57.3s)"
+    ],
+    "assertions": []
+  },
+  "generation-ui-browser.log": {
+    "summary": [
+      "  1 failed"
+    ],
+    "assertions": [
+      "    Error: page.goto: net::ERR_ABORTED at http://127.0.0.1:3110/enrolments/d06dd0f7-f873-4053-9f5e-84b18f471e21/generation/fa375451-0126-4226-9d97-aa148622aa84"
+    ]
+  },
+  "guest-ui-browser.log": {
+    "summary": [
+      "  1 passed (1.2m)"
+    ],
+    "assertions": []
+  },
+  "integrated.log": {
+    "summary": [
+      "  1 passed (4.9m)"
+    ],
+    "assertions": []
+  },
+  "layouts-calibrated.log": {
+    "summary": [
+      "  1 passed (1.2m)"
+    ],
+    "assertions": []
+  },
+  "layouts-retest.log": {
+    "summary": [
+      "  1 failed"
+    ],
+    "assertions": [
+      "    Error: /platform/clients 820 existing heading geometry",
+      "    Error: /platform/people 820 existing heading geometry"
+    ]
+  },
+  "layouts.log": {
+    "summary": [
+      "  1 failed"
+    ],
+    "assertions": []
+  },
+  "learning-overview-ui-browser.log": {
+    "summary": [
+      "  1 passed (45.0s)"
+    ],
+    "assertions": []
+  },
+  "lesson-ui-browser-triaged.log": {
+    "summary": [
+      "  1 passed (59.0s)"
+    ],
+    "assertions": []
+  },
+  "lesson-ui-browser.log": {
+    "summary": [
+      "  1 failed"
+    ],
+    "assertions": [
+      "    Error: expect(locator).toBeFocused() failed"
+    ]
+  },
+  "mock.log": {
+    "summary": [
+      "  1 passed (22.5s)"
+    ],
+    "assertions": []
+  },
+  "next-chrome.log": {
+    "summary": [
+      "  1 passed (37.4s)"
+    ],
+    "assertions": []
+  },
+  "next.log": {
+    "summary": [
+      "  1 failed"
+    ],
+    "assertions": [
+      "    Error: browserType.launch: Executable doesn't exist at C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\.worktrees\\t_d56e101f\\.runtime\\browsers\\chromium_headless_shell-1254\\chrome-headless-shell-win64\\chrome-headless-shell.exe"
+    ]
+  },
+  "notifications-ui-browser.log": {
+    "summary": [
+      "  1 passed (47.7s)"
+    ],
+    "assertions": []
+  },
+  "onboarding-ui-browser.log": {
+    "summary": [
+      "  1 passed (1.1m)"
+    ],
+    "assertions": []
+  },
+  "overview-browser.log": {
+    "summary": [
+      "  1 passed (42.4s)"
+    ],
+    "assertions": []
+  },
+  "paint-build.log": {
+    "summary": [],
+    "assertions": []
+  },
+  "paint-repeat.log": {
+    "summary": [
+      "  1 failed",
+      "  22 passed (59.3s)"
+    ],
+    "assertions": [
+      "    Error: Saved generated Dark must not show Light on failure"
+    ]
+  },
+  "paint.log": {
+    "summary": [
+      "  2 failed",
+      "  21 passed (1.2m)"
+    ],
+    "assertions": [
+      "    Error: expect(locator).toBeVisible() failed",
+      "    Error: element(s) not found",
+      "    Error: Saved generated Dark must not show Light on failure"
+    ]
+  },
+  "people-ui-browser.log": {
+    "summary": [
+      "  1 passed (38.8s)"
+    ],
+    "assertions": []
+  },
+  "policy.log": {
+    "summary": [
+      " Test Files  1 passed (1)",
+      "      Tests  14 passed (14)"
+    ],
+    "assertions": []
+  },
+  "progress-ui-browser.log": {
+    "summary": [
+      "  1 passed (56.9s)"
+    ],
+    "assertions": []
+  },
+  "receipt-ui-browser.log": {
+    "summary": [
+      "  1 passed (1.9m)"
+    ],
+    "assertions": []
+  },
+  "recovery-ui-browser.log": {
+    "summary": [
+      "  1 passed (50.2s)"
+    ],
+    "assertions": []
+  },
+  "response-ui-browser.log": {
+    "summary": [
+      "  1 passed (1.1m)"
+    ],
+    "assertions": []
+  },
+  "review-queue-ui-browser.log": {
+    "summary": [
+      "  1 passed (1.3m)"
+    ],
+    "assertions": []
+  },
+  "scope-3.log": {
+    "summary": [
+      "  1 passed (28.4s)"
+    ],
+    "assertions": []
+  },
+  "scope-4.log": {
+    "summary": [
+      "  1 passed (28.2s)"
+    ],
+    "assertions": []
+  },
+  "scope-5.log": {
+    "summary": [
+      "  1 passed (27.5s)"
+    ],
+    "assertions": []
+  },
+  "scope-repeat.log": {
+    "summary": [
+      "  1 passed (27.5s)"
+    ],
+    "assertions": []
+  },
+  "scope.log": {
+    "summary": [
+      "  1 failed"
+    ],
+    "assertions": [
+      "    Error: expect(received).toEqual(expected) // deep equality"
+    ]
+  },
+  "scrollbar-calibrated.log": {
+    "summary": [
+      "  1 passed (21.1s)"
+    ],
+    "assertions": []
+  },
+  "scrollbar-first.log": {
+    "summary": [
+      "  1 failed"
+    ],
+    "assertions": [
+      "    Error: existing visible controls must not jump when data arrives"
+    ]
+  },
+  "scrollbar-repeat.log": {
+    "summary": [
+      "  1 failed"
+    ],
+    "assertions": [
+      "    Error: existing visible controls must not jump when data arrives"
+    ]
+  },
+  "settings-ui-browser.log": {
+    "summary": [
+      "  1 passed (48.6s)"
+    ],
+    "assertions": []
+  },
+  "setup-ui-browser-triaged.log": {
+    "summary": [
+      "  3 passed (33.0s)"
+    ],
+    "assertions": []
+  },
+  "setup-ui-browser.log": {
+    "summary": [
+      "  1 failed",
+      "  2 passed (54.4s)"
+    ],
+    "assertions": [
+      "    Error: expect(locator).toBeVisible() failed",
+      "    Error: element(s) not found"
+    ]
+  },
+  "shell-browser.log": {
+    "summary": [
+      "  1 passed (30.7s)"
+    ],
+    "assertions": []
+  },
+  "training-directory-ui-browser.log": {
+    "summary": [
+      "  1 passed (45.2s)"
+    ],
+    "assertions": []
+  },
+  "training-record-ui-browser.log": {
+    "summary": [
+      "  1 passed (40.5s)"
+    ],
+    "assertions": []
+  },
+  "types.log": {
+    "summary": [],
+    "assertions": []
+  },
+  "workflow.log": {
+    "summary": [
+      "  10 passed (18.5s)"
+    ],
+    "assertions": []
+  }
+}

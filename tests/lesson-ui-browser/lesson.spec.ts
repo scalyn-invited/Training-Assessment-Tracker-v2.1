@@ -234,7 +234,15 @@ test('shared lesson preserves quiz publication, drafts, scans, immutable submiss
   await page.getByText('Publish an objective quiz for this lesson', { exact: true }).click();
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  const themeSaved = page.waitForResponse(
+    (r) => r.url().includes('/api/branding/preference') && r.request().method() === 'POST',
+  );
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
+  expect((await themeSaved).ok()).toBe(true);
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect(
+    page.locator('summary').filter({ hasText: 'Theme' }).first().locator('..'),
+  ).not.toHaveAttribute('open', '');
   const submitQuiz = page.getByRole('button', { name: 'Publish reviewed quiz', exact: true });
   await submitQuiz.click();
   await expect(page.getByLabel('Question 1', { exact: true })).toBeFocused();

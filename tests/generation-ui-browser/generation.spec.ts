@@ -369,7 +369,14 @@ test('shared generation progress preserves polling, provenance, recovery and rol
   await page.goto(progressUrl);
   await expect(page.locator('p[role=alert]')).toBeVisible();
   expect((await page.request.get(detailPath)).status()).toBe(404);
+  const logout = page.waitForResponse(
+    (r) => r.url().endsWith('/api/auth/logout') && r.request().method() === 'POST',
+  );
   await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+  expect((await logout).ok()).toBe(true);
+  await expect(page).toHaveURL(/\/login$/);
+  await expect(page.getByRole('heading', { name: 'Sign in', exact: true })).toBeVisible();
+  expect((await (await page.request.get('/api/auth/context')).json()).user).toBeNull();
   await page.goto(progressUrl);
   await expect(page).toHaveURL(/\/login$/);
   expect(errors).toEqual([]);
