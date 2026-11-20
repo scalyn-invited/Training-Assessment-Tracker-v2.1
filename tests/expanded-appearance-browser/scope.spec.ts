@@ -57,6 +57,7 @@ test('real API scoped navigation never renders target content in the previous sc
           r = main?.getBoundingClientRect();
         w.__frames.push({
           t: performance.now(),
+          viewport: { width: innerWidth, height: innerHeight },
           path: location.pathname,
           theme: document.documentElement.dataset.theme,
           bg: getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(),
@@ -103,14 +104,22 @@ test('real API scoped navigation never renders target content in the previous sc
     heading: document.querySelector('main h1')?.textContent,
     frames: (window as any).__frames,
   }));
-  await page.screenshot({ path: dir + '/scope-client-pending.png', fullPage: true });
+  // Full-page capture transiently changes Chromium's viewport to 1x1 in the
+  // instrumented reproduction; viewport capture preserves the measured render.
+  await page.screenshot({ path: dir + '/scope-client-pending.png', fullPage: false });
   release();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'client-dark');
   await expect(
     page.getByRole('heading', { name: 'Welcome back, Scope QA owner.', exact: true }),
   ).toBeVisible();
-  await page.screenshot({ path: dir + '/scope-client-settled.png', fullPage: true });
+  await page.screenshot({ path: dir + '/scope-client-settled.png', fullPage: false });
   const frames = await page.evaluate(() => (window as any).__frames);
+  expect
+    .soft(
+      frames.filter((f: any) => f.viewport.width !== 1280 || f.viewport.height !== 720),
+      'scope measurements retain configured viewport',
+    )
+    .toEqual([]);
   await writeFile(dir + '/scope-transition.json', JSON.stringify({ pending, frames }, null, 2));
   expect
     .soft(

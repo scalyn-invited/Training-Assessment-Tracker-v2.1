@@ -1,0 +1,24 @@
+{
+  "editor": {
+    "cases": 12,
+    "frames": 179,
+    "byWidth": {
+      "390": 59,
+      "820": 61,
+      "1440": 59
+    },
+    "badThemes": 0,
+    "overflow": 0
+  },
+  "learning": {
+    "cases": 12,
+    "frames": 336,
+    "byWidth": {
+      "390": 105,
+      "820": 111,
+      "1440": 120
+    },
+    "badThemes": 0,
+    "overflow": 0
+  }
+}

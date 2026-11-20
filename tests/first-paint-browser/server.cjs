@@ -64,6 +64,10 @@ const api = http.createServer((req, res) => {
     return res.end(JSON.stringify({ mode: 'local_password' }));
   if (req.url.startsWith('/clients'))
     return res.end(JSON.stringify([{ id: 'fixture-client', name: 'Fixture client' }]));
+  // Dashboard contracts: successful empty results are not an empty object.
+  if (req.url.startsWith('/enrolments?'))
+    return res.end(JSON.stringify({ total: 0, page: 1, records: [] }));
+  if (req.url.startsWith('/jobs?')) return res.end('[]');
   res.end('{}');
 });
 api.listen(3281, '127.0.0.1', () => {

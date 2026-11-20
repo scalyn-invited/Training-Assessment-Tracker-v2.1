@@ -65,6 +65,11 @@ for (const mode of ['missing', 'malformed', 'blocked'])
 
 for (const scope of ['shared', 'client'])
   test(`${scope} identity never temporarily uses guest override`, async ({ page, context }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    page.on('console', (m) => {
+      if (m.type() === 'error') errors.push(m.text());
+    });
     await context.addCookies([
       { name: 'tracker_session', value: scope, url: 'http://127.0.0.1:3280' },
     ]);
@@ -99,6 +104,28 @@ for (const scope of ['shared', 'client'])
     ).toBeDisabled();
     release();
     await expect(page.getByRole('button', { name: 'Sign out', exact: true })).toBeVisible();
+    if (scope === 'client') {
+      await expect(
+        page.getByRole('heading', { name: 'No enrolments available', exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.getByText(
+          'No checks requested yet. Open a training record to check background processing.',
+          { exact: true },
+        ),
+      ).toBeVisible();
+      // Cover the next actual jobs poll as well as initial React commit.
+      await page.waitForResponse((r) => r.url().includes('/api/jobs?') && r.ok());
+      await expect(
+        page.getByRole('heading', { name: 'Welcome back, Synthetic viewer.', exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.getByRole('heading', { name: 'No enrolments available', exact: true }),
+      ).toBeVisible();
+    }
+    await expect(page.getByText('This page could not load', { exact: true })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Sign out', exact: true })).toBeVisible();
+    expect(errors).toEqual([]);
     await expect(page.locator('html')).toHaveAttribute(
       'data-theme',
       scope === 'shared' ? 'dark' : 'client-dark',
