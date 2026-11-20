@@ -1,13 +1,23 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from '../components/auth-ui';
-import { useLeaveGuard } from '../components/learning-controls';
+import { api, useContext, Guest } from '../components/auth-ui';
+import { useRouter } from 'next/navigation';
+import { Button, Input, Panel, PageHeader, Feedback } from '../components/ui/controls';
+import { Pagination } from '../components/ui/directory';
+import layout from '../components/ui/form-layout.module.css';
+import styles from '../components/ui/notifications.module.css';
+import { registerWorkGuard } from '../components/work-guard';
 import type { LearningNotices } from '../../../../packages/domain/src/learning-notices';
 type View = Awaited<ReturnType<LearningNotices['read']>>;
 export default function Updates() {
   const ctx = useContext(),
     client = ctx.context?.client?.id;
+  const router = useRouter();
+  useEffect(() => {
+    if (ctx.context && !ctx.context.user) router.replace('/login');
+  }, [ctx.context, router]);
+  const [retry, setRetry] = useState(0);
   const [view, setView] = useState<View | null>(null),
     [page, setPage] = useState(1),
     [error, setError] = useState(''),
@@ -38,87 +48,106 @@ export default function Updates() {
     return () => {
       sequence.current++;
     };
-  }, [client, page]);
+  }, [client, page, retry]);
   return (
     <Guest>
-      {!ctx.context?.user ? (
-        <Pending error={ctx.error} retry={ctx.load} />
-      ) : !client ? (
-        <>
-          <h1>Choose a client</h1>
-          <Link href="/clients">Choose your client</Link>
-        </>
-      ) : (
-        <>
-          <p className="eyebrow">{ctx.context.client?.name}</p>
-          <h1>Training updates</h1>
-          <Link href="/dashboard">Workspace</Link>
-          {!view ? (
-            <Pending error={error} retry={load} />
-          ) : (
-            <>
-              <Preference key={client} initial={view.trainingEmail} csrf={ctx.context.csrf} />
-              <section className="panel" aria-label="Your updates">
-                <h2>Your updates</h2>
+      <div className={layout.page}>
+        {!ctx.context?.user ? (
+          <>
+            <PageHeader title="Training updates" />
+            <Feedback error={ctx.error} />
+            {ctx.error ? (
+              <Button onClick={() => void ctx.load()}>Try loading your session again</Button>
+            ) : (
+              <p role="status">Loading your session...</p>
+            )}
+          </>
+        ) : !client ? (
+          <>
+            <PageHeader title="Choose a client" />
+            <Link href="/clients">Choose your client</Link>
+          </>
+        ) : (
+          <>
+            <div>
+              <p className="eyebrow">{ctx.context.client?.name}</p>
+              <PageHeader title="Training updates" />
+            </div>
+            <Link href="/dashboard">Workspace</Link>
+            {!view ? (
+              <>
                 <Feedback error={error} />
-                <button
-                  className="secondary"
-                  disabled={loading}
-                  aria-busy={loading}
-                  onClick={() => void load()}
-                >
-                  {loading ? 'Refreshing updates...' : 'Refresh updates'}
-                </button>
+                {error ? (
+                  <Button disabled={loading} onClick={() => void load()}>
+                    Try loading updates again
+                  </Button>
+                ) : null}
                 {loading && <p role="status">Loading your updates...</p>}
-                {!view.notices.length ? (
-                  <p>
-                    No updates are available for your current permissions. Your training events will
-                    appear here when recorded.
-                  </p>
-                ) : (
-                  <ul>
-                    {view.notices.map((n) => (
-                      <li key={n.id}>
-                        <p>
-                          <Link href={n.href}>{n.kind.replaceAll('_', ' ')}</Link>
-                        </p>
-                        <p>
-                          <time
-                            dateTime={new Date(n.createdAt).toISOString()}
-                            style={{ whiteSpace: 'nowrap' }}
-                          >
-                            {new Date(n.createdAt).toLocaleString()}
-                          </time>{' '}
-                          / {n.status.replaceAll('_', ' ')}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <div className="form-actions">
-                  <button
-                    className="secondary"
-                    disabled={loading || page === 1}
-                    onClick={() => setPage((p) => p - 1)}
-                  >
-                    Previous page
-                  </button>
-                  <span>
-                    Page {view.page} / {view.total} updates
-                  </span>
-                  <button
-                    className="secondary"
-                    disabled={loading || page * 20 >= view.total}
-                    onClick={() => setPage((p) => p + 1)}
-                  >
-                    Next page
-                  </button>
-                </div>
-              </section>
-            </>
-          )}
-        </>
-      )}
+              </>
+            ) : (
+              <>
+                <Preference key={client} initial={view.trainingEmail} csrf={ctx.context.csrf} />
+                <Panel className={`${layout.panel} ${styles.panel}`} aria-label="Your updates">
+                  <h2>Your updates</h2>
+                  <Feedback error={error} />
+                  <Button disabled={loading} aria-busy={loading} onClick={() => void load()}>
+                    {loading ? 'Refreshing updates...' : 'Refresh updates'}
+                  </Button>
+                  {loading && <p role="status">Loading your updates...</p>}
+                  {!view.notices.length ? (
+                    <p>
+                      No updates are available for your current permissions. Your training events
+                      will appear here when recorded.
+                    </p>
+                  ) : (
+                    <ul className={styles.list}>
+                      {view.notices.map((n) => (
+                        <li key={n.id}>
+                          <p>
+                            <Link href={n.href}>{n.kind.replaceAll('_', ' ')}</Link>
+                          </p>
+                          <p>
+                            <time
+                              dateTime={new Date(n.createdAt).toISOString()}
+                              className={styles.time}
+                            >
+                              {new Date(n.createdAt).toLocaleString()}
+                            </time>{' '}
+                            / {n.status.replaceAll('_', ' ')}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Pagination aria-label="Updates pages">
+                    <Button
+                      disabled={loading || view.page === 1}
+                      onClick={() => {
+                        setPage(view.page - 1);
+                        setRetry((n) => n + 1);
+                      }}
+                    >
+                      Previous page
+                    </Button>
+                    <span>
+                      Page {view.page} / {view.total} updates
+                    </span>
+                    <Button
+                      disabled={loading || view.page * 20 >= view.total}
+                      onClick={() => {
+                        setPage(view.page + 1);
+                        setRetry((n) => n + 1);
+                      }}
+                    >
+                      Next page
+                    </Button>
+                  </Pagination>
+                </Panel>
+              </>
+            )}
+          </>
+        )}
+      </div>
     </Guest>
   );
 }
@@ -129,9 +158,14 @@ function Preference({ initial, csrf }: { initial: boolean; csrf: string }) {
     [error, setError] = useState(''),
     [message, setMessage] = useState('');
   const pending = useRef(false);
-  useLeaveGuard(value !== saved || busy);
+  const dirty = useRef(false);
+  dirty.current = value !== saved;
+  useEffect(
+    () => registerWorkGuard(() => ({ dirty: dirty.current, pending: pending.current })),
+    [],
+  );
   return (
-    <section className="panel">
+    <Panel className={`${layout.panel} ${styles.panel}`}>
       <h2>Email preference</h2>
       <form
         onSubmit={async (e) => {
@@ -155,34 +189,40 @@ function Preference({ initial, csrf }: { initial: boolean; csrf: string }) {
       >
         <fieldset disabled={busy}>
           <legend>Training emails</legend>
-          <label>
-            <input
+          <label className={styles.choice}>
+            <Input
               type="radio"
               name="trainingEmail"
               checked={value}
-              onChange={() => setValue(true)}
+              onChange={() => {
+                setValue(true);
+                setMessage('');
+              }}
             />
             Enabled when a live sender is configured
           </label>
-          <label>
-            <input
+          <label className={styles.choice}>
+            <Input
               type="radio"
               name="trainingEmail"
               checked={!value}
-              onChange={() => setValue(false)}
+              onChange={() => {
+                setValue(false);
+                setMessage('');
+              }}
             />
             In-app updates only
           </label>
         </fieldset>
         <Feedback error={error} success={message} />
-        <button className="secondary" disabled={busy} aria-busy={busy}>
+        <Button type="submit" disabled={busy} aria-busy={busy}>
           {busy ? 'Saving preference...' : 'Save preference'}
-        </button>
+        </Button>
       </form>
       <p>
         Synthetic accounts use a non-delivering sink. Relay acceptance does not prove email
         delivery.
       </p>
-    </section>
+    </Panel>
   );
 }

@@ -1,14 +1,30 @@
 'use client';
 import { useState, useEffect, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { api, useContext, Guest, Pending, Password, Feedback, values } from '../components/auth-ui';
+import { api, useContext, Guest, values } from '../components/auth-ui';
+import { GuestPending } from '../components/guest-shell';
+import { Button, Input, Feedback } from '../components/ui/controls';
+import { PasswordField } from '../components/ui/password';
+import { SetupFrame, SetupNotice, SetupSignIn } from '../components/setup-frame';
+import { useWorkGuard } from '../components/use-work-guard';
+import { confirmWorkLeave } from '../components/work-guard';
+import styles from '../components/ui/setup.module.css';
+const steps = ['Requirements', 'Administrator', 'Review and install', 'Done'];
+const titles = [
+  'Before we begin',
+  'Your Global Admin account',
+  'Review and install',
+  'Workspace installed',
+];
 export default function Setup() {
   const { context, error: loadError, load } = useContext(),
     router = useRouter();
   const [step, setStep] = useState(1),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(''),
-    [data, setData] = useState<Record<string, string>>({});
+    [data, setData] = useState<Record<string, string>>({}),
+    [dirty, setDirty] = useState(false);
+  useWorkGuard({ dirty: dirty && step !== 4, pending: busy });
   useEffect(() => {
     if (context?.setupMode === 'hosted' || context?.setupMode === 'local')
       router.replace('/setup/' + context.setupMode);
@@ -21,6 +37,7 @@ export default function Setup() {
     try {
       await api('setup', { ...data, csrf: context.csrf });
       setData({});
+      setDirty(false);
       setStep(4);
     } catch (e) {
       setError((e as Error).message);
@@ -35,109 +52,115 @@ export default function Setup() {
   }
   return (
     <Guest>
-      <div className="login-grid">
-        <section className="intro">
-          <p className="eyebrow">Training Tracker</p>
-          <h1>
-            A workspace
-            <br />
-            ready for progress.
-          </h1>
-          <p className="lead">Create the first Global Admin and a fresh fictional workspace.</p>
-          <ol className="journey-steps" aria-label="Installation steps">
-            {['Check requirements', 'Create administrator', 'Review and install'].map(
-              (label, i) => (
-                <li key={label} aria-current={step === i + 1 ? 'step' : undefined}>
-                  <span>{i + 1}</span>
-                  <h2>{label}</h2>
-                </li>
-              ),
-            )}
-          </ol>
-          <p>Setup closes after installation. Existing V2 records are never imported.</p>
-        </section>
-        <section className="panel login-panel">
-          {!context ? (
-            <Pending error={loadError} retry={load} />
-          ) : step === 1 ? (
-            <>
-              <h2>Before we begin</h2>
-              <p>
-                The API and database connection are ready. Your local workspace uses a separate
-                database and private storage.
-              </p>
-              <p>
-                Setup creates your administrator and 30 fictional demo accounts across three
-                clients. Training scenarios and role workflows are still being ported.
-              </p>
-              <button className="primary" onClick={() => setStep(2)}>
-                Continue to administrator
-              </button>
-            </>
-          ) : step === 2 ? (
-            <>
-              <h2>Your Global Admin account</h2>
-              <form onSubmit={review}>
-                <label htmlFor="name">Your name</label>
-                <input
-                  id="name"
-                  name="name"
-                  autoComplete="name"
-                  maxLength={120}
-                  defaultValue={data.name}
-                  required
-                />
-                <label htmlFor="email">Email address</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="username"
-                  maxLength={200}
-                  defaultValue={data.email}
-                  required
-                />
-                <Password name="password" label="Administrator password" creation />
-                <Password name="demoPassword" label="Demo account password" creation />
-                <p>Use a different password for the fictional accounts.</p>
-                <button type="button" className="secondary" onClick={() => setStep(1)}>
-                  Back
-                </button>
-                <button className="primary">Review installation</button>
-              </form>
-            </>
-          ) : step === 3 ? (
-            <>
-              <h2>Review and install</h2>
-              <dl>
+      <SetupFrame
+        label="Workspace installation"
+        steps={steps}
+        step={step - 1}
+        title={!context ? 'Loading setup' : titles[step - 1]}
+        complete={step === 4}
+        busy={busy}
+      >
+        {!context ? (
+          <GuestPending error={loadError} retry={load} />
+        ) : step === 1 ? (
+          <>
+            <p>
+              The API and database connection are ready. Your local workspace uses a separate
+              database and private storage.
+            </p>
+            <p>
+              Setup creates your administrator and 30 fictional demo accounts across three clients.
+              Training scenarios and role workflows are still being ported.
+            </p>
+            <SetupNotice>
+              Setup closes after installation. Existing V2 records are never imported.
+            </SetupNotice>
+            <Button variant="primary" onClick={() => setStep(2)}>
+              Continue to administrator
+            </Button>
+          </>
+        ) : step === 2 ? (
+          <form onSubmit={review} onInput={() => setDirty(true)}>
+            <div className={styles.field}>
+              <label htmlFor="name">Your name</label>
+              <Input
+                id="name"
+                name="name"
+                autoComplete="name"
+                maxLength={120}
+                defaultValue={data.name}
+                required
+              />
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="email">Email address</label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="username"
+                maxLength={200}
+                defaultValue={data.email}
+                required
+              />
+            </div>
+            <PasswordField name="password" label="Administrator password" creation />
+            <PasswordField name="demoPassword" label="Demo account password" creation />
+            <p>Use a different password for the fictional accounts.</p>
+            <SetupNotice shield>
+              Global Admin does not automatically give access to private training records.
+            </SetupNotice>
+            <div className={styles.actions}>
+              <Button
+                onClick={() => {
+                  if (confirmWorkLeave()) {
+                    setDirty(false);
+                    setStep(1);
+                  }
+                }}
+              >
+                Back
+              </Button>
+              <Button type="submit" variant="primary">
+                Review installation
+              </Button>
+            </div>
+          </form>
+        ) : step === 3 ? (
+          <>
+            <dl className={styles.summary}>
+              <div>
                 <dt>Administrator</dt>
                 <dd>{data.name}</dd>
+              </div>
+              <div>
                 <dt>Email</dt>
                 <dd>{data.email}</dd>
+              </div>
+              <div>
                 <dt>Workspace</dt>
                 <dd>Fresh local database, three fictional clients and 30 demo accounts.</dd>
-              </dl>
-              <Feedback error={error} />
-              <button className="secondary" disabled={busy} onClick={() => setStep(2)}>
+              </div>
+            </dl>
+            <Feedback error={error} />
+            <div className={styles.actions}>
+              <Button disabled={busy} onClick={() => setStep(2)}>
                 Back
-              </button>
-              <button className="primary" disabled={busy} aria-busy={busy} onClick={install}>
+              </Button>
+              <Button variant="primary" disabled={busy} aria-busy={busy} onClick={install}>
                 {busy ? 'Installing…' : 'Install workspace'}
-              </button>
-            </>
-          ) : (
-            <>
-              <h2>Workspace installed</h2>
-              <p role="status">
-                Your administrator and demo accounts are ready. Sign in with the password you chose.
-              </p>
-              <a className="primary" href="/login">
-                Continue to sign in
-              </a>
-            </>
-          )}
-        </section>
-      </div>
+              </Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p role="status">
+              Your administrator and demo accounts are ready. Sign in with the password you chose.
+            </p>
+            <SetupSignIn />
+          </>
+        )}
+      </SetupFrame>
     </Guest>
   );
 }

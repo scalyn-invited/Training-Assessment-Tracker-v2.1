@@ -1,0 +1,38 @@
+.page {
+  min-height: 100dvh;
+  width: 100%;
+  color: var(--ui-text);
+  background: linear-gradient(var(--ui-glow), transparent 420px), var(--ui-background);
+  font: 400 var(--ui-text-body)/22px var(--ui-font);
+  overflow-wrap: anywhere;
+}
+.content {
+  width: 100%;
+  max-width: 1260px;
+  margin-inline: auto;
+  padding: 54px 64px 60px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ui-space-6);
+}
+.content p {
+  max-width: 65ch;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+}
+@media (max-width: 800px) {
+  .content {
+    padding: 32px 20px max(32px, env(safe-area-inset-bottom));
+  }
+  .page .actions > :is(a, button) {
+    min-height: 48px;
+  }
+}
+@media (pointer: coarse) {
+  .page .actions > :is(a, button) {
+    min-height: 48px;
+  }
+}

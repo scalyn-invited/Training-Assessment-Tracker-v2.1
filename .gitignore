@@ -3,6 +3,7 @@ dist/
 .next/
 .next-overview/
 .next-clients-build/
+.next-setup-ui/
 .env
 .env.*
 !.env.example

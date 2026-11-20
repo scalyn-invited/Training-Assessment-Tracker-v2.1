@@ -1,0 +1,98 @@
+
+Running 4 tests using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: published (5.5s)
+  x  2 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: draft (5.6s)
+  x  3 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: unavailable (5.5s)
+  x  4 tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: denied (5.5s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: published 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 0
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      139 |  await page.locator('[data-section=review]').click();page.on('dialog',d=>d.accept());
+      140 |  await page.locator('#publish-definition').click();
+    > 141 |  await expect.poll(()=>reads.length).toBe(1);
+          |                                      ^
+      142 |  expect(reads).toEqual(['synthetic-definition']);expect(posts).toHaveLength(1);
+      143 |  if(outcome==='published'){
+      144 |   await expect(page.locator('#save-status')).toContainText('Publication confirmed');
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:141:38
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D03-lost-publicat-02f54--exact-definition-published\error-context.md
+
+  2) tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: draft 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 0
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      139 |  await page.locator('[data-section=review]').click();page.on('dialog',d=>d.accept());
+      140 |  await page.locator('#publish-definition').click();
+    > 141 |  await expect.poll(()=>reads.length).toBe(1);
+          |                                      ^
+      142 |  expect(reads).toEqual(['synthetic-definition']);expect(posts).toHaveLength(1);
+      143 |  if(outcome==='published'){
+      144 |   await expect(page.locator('#save-status')).toContainText('Publication confirmed');
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:141:38
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D03-lost-publicat-fe7b3-iles-exact-definition-draft\error-context.md
+
+  3) tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: unavailable 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 0
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      139 |  await page.locator('[data-section=review]').click();page.on('dialog',d=>d.accept());
+      140 |  await page.locator('#publish-definition').click();
+    > 141 |  await expect.poll(()=>reads.length).toBe(1);
+          |                                      ^
+      142 |  expect(reads).toEqual(['synthetic-definition']);expect(posts).toHaveLength(1);
+      143 |  if(outcome==='published'){
+      144 |   await expect(page.locator('#save-status')).toContainText('Publication confirmed');
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:141:38
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D03-lost-publicat-91d01-xact-definition-unavailable\error-context.md
+
+  4) tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: denied 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 0
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      139 |  await page.locator('[data-section=review]').click();page.on('dialog',d=>d.accept());
+      140 |  await page.locator('#publish-definition').click();
+    > 141 |  await expect.poll(()=>reads.length).toBe(1);
+          |                                      ^
+      142 |  expect(reads).toEqual(['synthetic-definition']);expect(posts).toHaveLength(1);
+      143 |  if(outcome==='published'){
+      144 |   await expect(page.locator('#save-status')).toContainText('Publication confirmed');
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:141:38
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D03-lost-publicat-25e2d-les-exact-definition-denied\error-context.md
+
+  4 failed
+    tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: published 
+    tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: draft 
+    tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: unavailable 
+    tests\workflow-qa-browser\workflow.spec.ts:124:1 › D03 lost publication reconciles exact definition: denied 

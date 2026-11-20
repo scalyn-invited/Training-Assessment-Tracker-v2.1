@@ -1,0 +1,8 @@
+
+Running 3 tests using 1 worker
+
+  ok 1 tests\d05-browser\approval.spec.ts:79:3 › current approved attempt keeps accurate copy and review controls (440ms)
+  ok 2 tests\d05-browser\approval.spec.ts:79:3 › pending attempt keeps accurate copy and review controls (284ms)
+  ok 3 tests\d05-browser\approval.spec.ts:79:3 › newer attempt with earlier approval keeps accurate copy and review controls (338ms)
+
+  3 passed (1.9s)

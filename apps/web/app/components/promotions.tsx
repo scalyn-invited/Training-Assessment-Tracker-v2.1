@@ -1,6 +1,11 @@
 ﻿'use client';
+import { Textarea, Button, Panel, Feedback } from './ui/controls';
+import styles from './ui/form-layout.module.css';
+import { DirectoryTable } from './ui/directory';
+import { Dialog } from './ui/dialog';
+
 import { useCallback, useEffect, useRef, useState, useId, type FormEvent } from 'react';
-import { api, Feedback } from './auth-ui';
+import { api } from './auth-ui';
 export type PromotionPersonData = {
   user_id: string;
   name: string;
@@ -83,7 +88,7 @@ export function PromotionPerson({
       <form onSubmit={submit} aria-busy={busy}>
         <Feedback error={error} />
         <label htmlFor={reasonId}>Promotion reason</label>
-        <textarea
+        <Textarea
           id={reasonId}
           value={reason}
           onChange={(e) => {
@@ -107,17 +112,17 @@ export function PromotionPerson({
                 ? 'Current permissions still apply. This authorization includes approved training from before the member was linked.'
                 : 'This pins the member and verified identity. Sending the request is a separate action; historical export remains disabled.'}
             </p>
-            <button
+            <Button
               type="button"
-              className="secondary"
+              variant="secondary"
               disabled={busy}
               onClick={() => setReview(false)}
             >
               Cancel promotion review
-            </button>
+            </Button>
           </div>
         )}
-        <button className={review ? 'danger' : 'secondary'} disabled={busy}>
+        <Button type="submit" variant={review ? 'danger' : 'secondary'} disabled={busy}>
           {busy
             ? 'Saving promotion…'
             : review
@@ -125,7 +130,7 @@ export function PromotionPerson({
                 ? 'Confirm historical export'
                 : 'Confirm preparation'
               : 'Review promotion action'}
-        </button>
+        </Button>
       </form>
     </details>
   );
@@ -241,16 +246,16 @@ export function PromotionLedger({ client, csrf }: { client: string; csrf: string
     }
   }
   return (
-    <section className="panel directory-panel" aria-label="Promotion ledger">
+    <Panel className={styles.panel} aria-label="Promotion ledger">
       <h2>Promotion ledger</h2>
       <p>
         No primary-platform service is configured. Prepared requests remain local and excluded from
         external retrieval.
       </p>
       <Feedback error={error} success={success} />
-      <button className="secondary" disabled={loading} onClick={() => void load()}>
+      <Button type="submit" variant="secondary" disabled={loading} onClick={() => void load()}>
         {loading ? 'Refreshing promotions…' : 'Refresh promotions'}
-      </button>
+      </Button>
       {!data && loading && <p role="status">Loading promotion requests…</p>}
       {data && (
         <>
@@ -258,12 +263,12 @@ export function PromotionLedger({ client, csrf }: { client: string; csrf: string
             {data.total} promotion requests
           </p>
           <div
-            className="directory-table-wrap"
+            className={styles.tableWrap}
             role="region"
             aria-label="Promotion requests"
             tabIndex={0}
           >
-            <table className="directory-table">
+            <DirectoryTable stacked className={styles.table}>
               <caption className="sr-only">Promotion requests</caption>
               <thead>
                 <tr>
@@ -294,8 +299,9 @@ export function PromotionLedger({ client, csrf }: { client: string; csrf: string
                       </td>
                       <td data-label="Action">
                         {['prepared', 'ambiguous'].includes(row.status) ? (
-                          <button
-                            className="secondary"
+                          <Button
+                            type="submit"
+                            variant="secondary"
                             onClick={() => {
                               setItem(row);
                               setReason('');
@@ -303,7 +309,7 @@ export function PromotionLedger({ client, csrf }: { client: string; csrf: string
                             }}
                           >
                             Review request
-                          </button>
+                          </Button>
                         ) : row.status === 'linked' ? (
                           row.export_training_history ? (
                             'History export authorized'
@@ -325,32 +331,35 @@ export function PromotionLedger({ client, csrf }: { client: string; csrf: string
                   </tr>
                 )}
               </tbody>
-            </table>
+            </DirectoryTable>
           </div>
-          <div className="actions">
-            <button
-              className="secondary"
+          <div className={styles.actions}>
+            <Button
+              type="submit"
+              variant="secondary"
               disabled={loading || data.page <= 1}
               onClick={() => setPage(data.page - 1)}
             >
               Previous promotions
-            </button>
+            </Button>
             <span>
               Page {data.page} of {Math.max(1, Math.ceil(data.total / 20))}
             </span>
-            <button
-              className="secondary"
+            <Button
+              type="submit"
+              variant="secondary"
               disabled={loading || data.page * 20 >= data.total}
               onClick={() => setPage(data.page + 1)}
             >
               Next promotions
-            </button>
+            </Button>
           </div>
         </>
       )}
-      <dialog
-        ref={dialog}
-        className="workspace-dialog"
+      <Dialog
+        titleId="promotion-review-heading"
+        dialogRef={dialog}
+        className={styles.dialog}
         aria-label="Review promotion"
         onCancel={(event) => {
           if (busy) event.preventDefault();
@@ -359,7 +368,7 @@ export function PromotionLedger({ client, csrf }: { client: string; csrf: string
       >
         {item && (
           <>
-            <h3>
+            <h3 id="promotion-review-heading">
               {item.status === 'ambiguous'
                 ? 'Reconcile original request?'
                 : 'Send prepared request?'}
@@ -374,7 +383,7 @@ export function PromotionLedger({ client, csrf }: { client: string; csrf: string
             <Feedback error={actionError} />
             <form onSubmit={submit} aria-busy={busy}>
               <label htmlFor={reviewReasonId}>Review reason</label>
-              <textarea
+              <Textarea
                 id={reviewReasonId}
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
@@ -382,28 +391,22 @@ export function PromotionLedger({ client, csrf }: { client: string; csrf: string
                 minLength={8}
                 maxLength={2000}
               />
-              <div className="actions">
-                <button
-                  type="button"
-                  className="secondary"
-                  disabled={busy}
-                  onClick={close}
-                  autoFocus
-                >
+              <div className={styles.actions}>
+                <Button type="button" variant="secondary" disabled={busy} onClick={close} autoFocus>
                   Cancel request review
-                </button>
-                <button className="danger" disabled={busy}>
+                </Button>
+                <Button type="submit" variant="danger" disabled={busy}>
                   {busy
                     ? 'Queueing request…'
                     : item.status === 'ambiguous'
                       ? 'Reconcile original key'
                       : 'Send prepared request'}
-                </button>
+                </Button>
               </div>
             </form>
           </>
         )}
-      </dialog>
-    </section>
+      </Dialog>
+    </Panel>
   );
 }

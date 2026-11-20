@@ -1,0 +1,34 @@
+.panel li {
+  overflow-wrap: anywhere;
+}
+.panel li + li {
+  margin-top: var(--ui-space-2);
+}
+.lessons {
+  list-style: none;
+  padding: 0;
+}
+.lessons li {
+  padding: var(--ui-space-3) 0;
+  border-bottom: 1px solid var(--ui-border);
+}
+.lessons small {
+  display: block;
+  color: var(--ui-muted);
+  font-size: var(--ui-text-small);
+}
+.preview {
+  padding: var(--ui-space-4);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-panel);
+}
+.preview > :not(:first-child) {
+  margin-top: var(--ui-space-4);
+}
+@media (pointer: coarse) {
+  .lessons a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}

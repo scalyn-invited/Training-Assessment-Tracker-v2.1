@@ -4,7 +4,10 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { PlatformAccounts } from '../../components/platform-accounts';
 import { ClientsIcon } from '../../components/clients-icon';
+import { DirectoryTable, Pagination } from '../../components/ui/directory';
+import { Badge, Button, Input } from '../../components/ui/controls';
 import styles from './clients.module.css';
+import { Dialog } from '../../components/ui/dialog';
 import { api, useContext, Guest, Pending, Feedback } from '../../components/auth-ui';
 type Client = {
   id: string;
@@ -286,7 +289,7 @@ export default function ClientDirectory() {
               <ClientsIcon name="sort" />
             </span>
           </button>
-          <table className={styles.table}>
+          <DirectoryTable className={styles.table}>
             <caption className="sr-only">Client directory</caption>
             <thead>
               <tr>
@@ -332,7 +335,8 @@ export default function ClientDirectory() {
                     </div>
                   </td>
                   <td data-label="Status">
-                    <span
+                    <Badge
+                      tone={client.suspended ? 'warning' : client.active ? 'success' : undefined}
                       className={styles.badge}
                       data-state={
                         client.suspended ? 'suspended' : client.active ? 'active' : 'inactive'
@@ -344,7 +348,7 @@ export default function ClientDirectory() {
                         : client.active
                           ? 'Active'
                           : 'Directory inactive'}
-                    </span>
+                    </Badge>
                   </td>
                   <td data-label="Members">{client.members}</td>
                   <td data-label="Client admins">{client.admins}</td>
@@ -392,7 +396,7 @@ export default function ClientDirectory() {
                 </tr>
               )}
             </tbody>
-          </table>
+          </DirectoryTable>
           <div className={styles.directoryFooter}>
             <p role="status">
               {data
@@ -403,7 +407,7 @@ export default function ClientDirectory() {
               {loading && data ? ' ? Updating?' : ''}
             </p>
             {data && data.total > 20 && (
-              <nav className={styles.pagination} aria-label="Directory pages">
+              <Pagination aria-label="Directory pages">
                 <button
                   className={styles.manage}
                   disabled={page === 1 || loading}
@@ -419,7 +423,7 @@ export default function ClientDirectory() {
                 >
                   Next
                 </button>
-              </nav>
+              </Pagination>
             )}
             <p>
               Counts show effective access. Suspended clients have zero effective members and
@@ -431,10 +435,10 @@ export default function ClientDirectory() {
           <summary>Client account access</summary>
           <PlatformAccounts csrf={context.csrf} onChanged={() => void refresh()} />
         </details>
-        <dialog
-          ref={dialog}
-          className={'workspace-dialog ' + styles.dialog}
-          aria-labelledby="client-title"
+        <Dialog
+          dialogRef={dialog}
+          className={styles.dialog}
+          titleId="client-title"
           onCancel={(e) => {
             e.preventDefault();
             close();
@@ -445,11 +449,11 @@ export default function ClientDirectory() {
         >
           {selected && (
             <>
-              <div className="directory-dialog-header">
+              <div className={styles.dialogHeader}>
                 <h2 id="client-title">{selected === 'new' ? 'Create client' : selected.name}</h2>
-                <button type="button" onClick={close} disabled={saving} autoFocus>
+                <Button type="button" onClick={close} disabled={saving} autoFocus>
                   Close
-                </button>
+                </Button>
               </div>
               {selected !== 'new' && (
                 <>
@@ -463,7 +467,7 @@ export default function ClientDirectory() {
                 <Feedback error={formError} />
                 <label>
                   Directory name
-                  <input
+                  <Input
                     name="name"
                     defaultValue={selected === 'new' ? '' : selected.name}
                     required
@@ -473,39 +477,39 @@ export default function ClientDirectory() {
                 </label>
                 <label>
                   {selected === 'new' ? 'Creation reason' : 'Client change reason'}
-                  <input name="reason" required minLength={8} maxLength={2000} readOnly={confirm} />
+                  <Input name="reason" required minLength={8} maxLength={2000} readOnly={confirm} />
                 </label>
                 {!confirm ? (
                   <>
-                    <button className="primary" disabled={saving}>
+                    <Button type="submit" variant="primary" disabled={saving}>
                       {saving
                         ? 'Saving…'
                         : selected === 'new'
                           ? 'Create client'
                           : 'Save directory name'}
-                    </button>
+                    </Button>
                     {selected !== 'new' && (
-                      <div className="directory-danger">
+                      <div className={styles.accessChange}>
                         <h3>Client access</h3>
                         <p>
                           Suspension blocks access and cancels pending work. Reactivation requires
                           fresh approval for sensitive grants.
                         </p>
-                        <button
+                        <Button
                           type="button"
-                          className="danger"
+                          variant="danger"
                           onClick={() => {
                             if (form.current?.reportValidity()) setConfirm(true);
                           }}
                         >
                           {selected.suspended ? 'Reactivate client' : 'Suspend client'}
-                        </button>
+                        </Button>
                       </div>
                     )}
                   </>
                 ) : (
                   <div
-                    className="directory-danger"
+                    className={styles.accessChange}
                     role="group"
                     aria-label="Confirm client access change"
                   >
@@ -518,28 +522,28 @@ export default function ClientDirectory() {
                         ? 'Access can resume. Ended grants and stopped work will remain ended.'
                         : 'Members will be signed out and pending work stopped.'}
                     </p>
-                    <button
+                    <Button
                       type="button"
-                      className="secondary"
+                      variant="secondary"
                       onClick={() => setConfirm(false)}
                       disabled={saving}
                       autoFocus
                     >
                       Cancel
-                    </button>
-                    <button className="danger" disabled={saving}>
+                    </Button>
+                    <Button type="submit" variant="danger" disabled={saving}>
                       {saving
                         ? 'Saving…'
                         : selected !== 'new' && selected.suspended
                           ? 'Confirm reactivation'
                           : 'Confirm suspension'}
-                    </button>
+                    </Button>
                   </div>
                 )}
               </form>
             </>
           )}
-        </dialog>
+        </Dialog>
       </div>
     </Guest>
   );

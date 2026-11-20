@@ -1,16 +1,11 @@
 'use client';
 import { useState, useEffect, type FormEvent } from 'react';
 import Link from 'next/link';
+import { Button, Input, Panel, PageHeader, Feedback } from '../../components/ui/controls';
+import { PasswordField } from '../../components/ui/password';
+import styles from '../../components/ui/form-layout.module.css';
 import { useRouter } from 'next/navigation';
-import {
-  api,
-  useContext,
-  Guest,
-  Pending,
-  Password,
-  Feedback,
-  values,
-} from '../../components/auth-ui';
+import { api, useContext, Guest, Pending, values } from '../../components/auth-ui';
 export default function Security() {
   const { context, error: loadError, load } = useContext(),
     router = useRouter();
@@ -73,10 +68,9 @@ export default function Security() {
       {!context?.user ? (
         <Pending error={loadError} retry={load} />
       ) : (
-        <>
+        <div className={styles.page}>
           <Link href="/dashboard">Back to workspace</Link>
-          <h1>Account security</h1>
-          <p>{context.user.email}</p>
+          <PageHeader title="Account security">{context.user.email}</PageHeader>
           <Feedback error={error} success={success} />
           {unavailable ? (
             <p>
@@ -86,11 +80,11 @@ export default function Security() {
           ) : (
             <>
               {enabled === null ? (
-                <button className="secondary" onClick={() => location.reload()}>
+                <Button variant="secondary" onClick={() => location.reload()}>
                   Reload security settings
-                </button>
+                </Button>
               ) : (
-                <section className="panel">
+                <Panel className={styles.panel}>
                   <h2>Authenticator verification</h2>
                   <p>
                     {enabled
@@ -111,8 +105,8 @@ export default function Security() {
                           </li>
                         ))}
                       </ul>
-                      <button
-                        className="primary"
+                      <Button
+                        variant="primary"
                         onClick={() => {
                           setCodes([]);
                           setSuccess(
@@ -121,17 +115,17 @@ export default function Security() {
                         }}
                       >
                         I have saved my recovery codes
-                      </button>
+                      </Button>
                     </div>
                   ) : secret ? (
                     <form onSubmit={(e) => action(e, 'mfa/confirm')}>
                       <label htmlFor="setup-key">Authenticator setup key</label>
-                      <input id="setup-key" readOnly value={secret} autoComplete="off" />
+                      <Input id="setup-key" readOnly value={secret} autoComplete="off" />
                       <p>
                         Add this key manually in your authenticator with time-based six-digit codes.
                       </p>
                       <label htmlFor="code">Authenticator code</label>
-                      <input
+                      <Input
                         id="code"
                         name="code"
                         inputMode="numeric"
@@ -140,21 +134,21 @@ export default function Security() {
                         maxLength={6}
                         required
                       />
-                      <button className="primary" disabled={busy}>
+                      <Button type="submit" variant="primary" disabled={busy}>
                         {busy ? 'Confirming…' : 'Confirm authenticator'}
-                      </button>
+                      </Button>
                     </form>
                   ) : !enabled ? (
                     <form onSubmit={(e) => action(e, 'mfa/begin')}>
-                      <Password name="password" label="Your current password" />
-                      <button className="primary" disabled={busy}>
+                      <PasswordField name="password" label="Your current password" />
+                      <Button type="submit" variant="primary" disabled={busy}>
                         {busy ? 'Preparing…' : 'Set up authenticator'}
-                      </button>
+                      </Button>
                     </form>
                   ) : !confirmDisable ? (
-                    <button className="secondary" onClick={() => setConfirmDisable(true)}>
+                    <Button variant="secondary" onClick={() => setConfirmDisable(true)}>
                       Disable authenticator verification
-                    </button>
+                    </Button>
                   ) : (
                     <form onSubmit={(e) => action(e, 'mfa/disable')}>
                       <h3>Disable authenticator verification?</h3>
@@ -162,44 +156,44 @@ export default function Security() {
                         Future sign-ins will require only your password. Other sessions will be
                         signed out.
                       </p>
-                      <Password name="password" label="Your current password" />
+                      <PasswordField name="password" label="Your current password" />
                       <label htmlFor="code">New authenticator or unused recovery code</label>
-                      <input
+                      <Input
                         id="code"
                         name="code"
                         autoComplete="one-time-code"
                         maxLength={64}
                         required
                       />
-                      <button
+                      <Button
                         type="button"
-                        className="secondary"
+                        variant="secondary"
                         onClick={() => setConfirmDisable(false)}
                       >
                         Cancel
-                      </button>
-                      <button className="danger" disabled={busy}>
+                      </Button>
+                      <Button type="submit" variant="danger" disabled={busy}>
                         {busy ? 'Disabling…' : 'Confirm disable'}
-                      </button>
+                      </Button>
                     </form>
                   )}
-                </section>
+                </Panel>
               )}
-              <section className="panel">
+              <Panel className={styles.panel}>
                 <h2>Change password</h2>
                 <form onSubmit={(e) => action(e, 'password')}>
-                  <Password name="current" label="Current password" />
-                  <Password name="next" label="New password" creation />
-                  <Password name="confirmation" label="Confirm new password" creation />
+                  <PasswordField name="current" label="Current password" />
+                  <PasswordField name="next" label="New password" creation />
+                  <PasswordField name="confirmation" label="Confirm new password" creation />
                   <p>Saving ends all sessions. You will sign in again.</p>
-                  <button className="secondary" disabled={busy}>
+                  <Button type="submit" variant="secondary" disabled={busy}>
                     {busy ? 'Saving…' : 'Change password'}
-                  </button>
+                  </Button>
                 </form>
-              </section>
+              </Panel>
             </>
           )}
-        </>
+        </div>
       )}
     </Guest>
   );

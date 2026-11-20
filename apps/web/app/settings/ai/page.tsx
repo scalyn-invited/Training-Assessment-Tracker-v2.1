@@ -2,7 +2,17 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { api, useContext, Guest, Pending, Feedback } from '../../components/auth-ui';
+import { api, useContext, Guest, Pending } from '../../components/auth-ui';
+import {
+  Button,
+  Input,
+  Select,
+  Textarea,
+  Panel,
+  PageHeader,
+  Feedback,
+} from '../../components/ui/controls';
+import styles from '../../components/ui/form-layout.module.css';
 type Policy = { task: string; version: number; routing: string[] };
 type Provider = {
   enabled: boolean;
@@ -71,7 +81,7 @@ export default function AiSettings() {
   if (!client)
     return (
       <Guest>
-        <h1>AI provider settings</h1>
+        <PageHeader title="AI provider settings" />
         <p>Select a client to manage provider routing.</p>
         <Link href="/clients">Choose a client</Link>
       </Guest>
@@ -79,82 +89,94 @@ export default function AiSettings() {
   const refresh = () => setRevision((v) => v + 1);
   return (
     <Guest>
-      <Link href="/administration">Client administration</Link>
-      <h1>AI provider settings</h1>
-      <p>{context.client?.name}</p>
-      <p>
-        Routing changes apply to new requests. Existing requests retain their exact configuration.
-      </p>
-      {!data ? (
-        <Pending error={failure} retry={refresh} />
-      ) : (
-        <>
-          <section className="panel">
-            <h2>Provider registry</h2>
-            <p>
-              Lifetime client cap: {data.organisationLimit} micro-USD. Per-programme cap:{' '}
-              {data.programmeLimit} micro-USD. Reservations and accounted usage both count.
-            </p>
-            <p>
-              Models, data policies, limits and pricing are configured by deployment. Credentials
-              are never displayed. Mock charges are simulated.
-            </p>
-            {data.providers.length ? (
-              <ul>
-                {data.providers.map((p) => (
-                  <li key={p.id}>
-                    <strong>{p.id}</strong> - {p.enabled ? 'Enabled' : 'Not configured'} - {p.model}{' '}
-                    - {p.currency}, pricing {p.rateVersion}. {p.contextBytes} input bytes /{' '}
-                    {p.maxOutputTokens} output tokens
-                  </li>
-                ))}
-              </ul>
-            ) : (
+      <div className={styles.page}>
+        <Link href="/administration">Client administration</Link>
+        <PageHeader title="AI provider settings" />
+        <p>{context.client?.name}</p>
+        <p>
+          Routing changes apply to new requests. Existing requests retain their exact configuration.
+        </p>
+        {!data ? (
+          failure ? (
+            <>
+              <Feedback error={failure} />
+              <Button onClick={refresh}>Try loading again</Button>
+            </>
+          ) : (
+            <p role="status">Loading provider settings...</p>
+          )
+        ) : (
+          <>
+            <Panel className={styles.panel}>
+              <h2>Provider registry</h2>
               <p>
-                No qualified provider is configured. Contact the deployment administrator before
-                requesting analysis.
+                Lifetime client cap: {data.organisationLimit} micro-USD. Per-programme cap:{' '}
+                {data.programmeLimit} micro-USD. Reservations and accounted usage both count.
               </p>
-            )}
-          </section>
-          {data.policies.map((p) => (
-            <RouteForm
-              key={client + ':' + p.task + ':' + p.version}
-              policy={p}
-              providers={data.providers}
-              client={client}
-              csrf={context.csrf}
-            />
-          ))}
-          <section className="panel">
-            <h2>Uncertain charges</h2>
-            <p>
-              Reconcile against provider billing evidence. Enter the total for the entire run,
-              including already accounted calls. This releases the hold; a new request must be made
-              separately.
-            </p>
-            {!data.ambiguous.length && <p>No charges awaiting reconciliation.</p>}
-            {data.ambiguous.map((run) => (
-              <ChargeForm
-                key={client + ':' + run.id}
-                run={run}
+              <p>
+                Models, data policies, limits and pricing are configured by deployment. Credentials
+                are never displayed. Mock charges are simulated.
+              </p>
+              {data.providers.length ? (
+                <ul>
+                  {data.providers.map((p) => (
+                    <li key={p.id}>
+                      <strong>{p.id}</strong> - {p.enabled ? 'Enabled' : 'Not configured'} -{' '}
+                      {p.model} - {p.currency}, pricing {p.rateVersion}. {p.contextBytes} input
+                      bytes / {p.maxOutputTokens} output tokens
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>
+                  No qualified provider is configured. Contact the deployment administrator before
+                  requesting analysis.
+                </p>
+              )}
+            </Panel>
+            {data.policies.map((p) => (
+              <RouteForm
+                key={client + ':' + p.task + ':' + p.version}
+                policy={p}
+                providers={data.providers}
                 client={client}
                 csrf={context.csrf}
               />
             ))}
-          </section>
-          <button
-            className="secondary"
-            onClick={() => {
-              if (
-                window.confirm('Reload provider settings? Unsaved form changes will be discarded.')
-              )
-                refresh();
-            }}
-          >
-            Reload provider settings
-          </button>
-        </>
-      )}
+            <Panel className={styles.panel}>
+              <h2>Uncertain charges</h2>
+              <p>
+                Reconcile against provider billing evidence. Enter the total for the entire run,
+                including already accounted calls. This releases the hold; a new request must be
+                made separately.
+              </p>
+              {!data.ambiguous.length && <p>No charges awaiting reconciliation.</p>}
+              {data.ambiguous.map((run) => (
+                <ChargeForm
+                  key={client + ':' + run.id}
+                  run={run}
+                  client={client}
+                  csrf={context.csrf}
+                />
+              ))}
+            </Panel>
+            <Button
+              type="submit"
+              variant="secondary"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    'Reload provider settings? Unsaved form changes will be discarded.',
+                  )
+                )
+                  refresh();
+              }}
+            >
+              Reload provider settings
+            </Button>
+          </>
+        )}
+      </div>
     </Guest>
   );
 }
@@ -204,7 +226,7 @@ function RouteForm({
     }
   }
   return (
-    <section className="panel">
+    <Panel className={styles.panel}>
       <h2>{label(policy.task)}</h2>
       <p>Routing version {version}</p>
       <Feedback error={error} success={success} />
@@ -213,7 +235,7 @@ function RouteForm({
           <legend>Provider route</legend>
           <label>
             Primary provider
-            <select
+            <Select
               aria-label={'Primary provider for ' + label(policy.task)}
               value={primary}
               required
@@ -227,11 +249,11 @@ function RouteForm({
                   {p.id}
                 </option>
               ))}
-            </select>
+            </Select>
           </label>
           <label>
             Explicitly permitted fallback (optional)
-            <select
+            <Select
               aria-label={'Fallback provider for ' + label(policy.task)}
               value={fallback}
               onChange={(e) => setFallback(e.target.value)}
@@ -242,19 +264,20 @@ function RouteForm({
                   {p.id}
                 </option>
               ))}
-            </select>
+            </Select>
           </label>
-          <button
-            className="secondary"
+          <Button
+            type="submit"
+            variant="secondary"
             disabled={busy || !choices.some((p) => p.id === primary)}
             aria-busy={busy}
           >
             {busy ? 'Saving route...' : 'Save ' + label(policy.task).toLowerCase() + ' route'}
-          </button>
+          </Button>
         </fieldset>
         {!choices.length && <p>No qualified provider supports this task.</p>}
       </form>
-    </section>
+    </Panel>
   );
 }
 function ChargeForm({ run, client, csrf }: { run: Charge; client: string; csrf: string }) {
@@ -307,7 +330,7 @@ function ChargeForm({ run, client, csrf }: { run: Charge; client: string; csrf: 
           <legend>Billing evidence</legend>
           <label>
             Verified total (micro-USD)
-            <input
+            <Input
               aria-label={'Verified total for ' + run.id}
               type="number"
               min={run.spent}
@@ -320,7 +343,7 @@ function ChargeForm({ run, client, csrf }: { run: Charge; client: string; csrf: 
           </label>
           <label>
             Billing reference and reason
-            <textarea
+            <Textarea
               aria-label={'Billing reason for ' + run.id}
               required
               minLength={8}
@@ -329,9 +352,9 @@ function ChargeForm({ run, client, csrf }: { run: Charge; client: string; csrf: 
               onChange={(e) => setReason(e.target.value)}
             />
           </label>
-          <button className="secondary" disabled={busy} aria-busy={busy}>
+          <Button type="submit" variant="secondary" disabled={busy} aria-busy={busy}>
             {busy ? 'Recording reconciliation...' : 'Record reconciliation'}
-          </button>
+          </Button>
         </fieldset>
       )}
     </form>

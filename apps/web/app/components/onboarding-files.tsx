@@ -1,7 +1,10 @@
 'use client';
 import { useEffect, useState, type FormEvent } from 'react';
 import Link from 'next/link';
-import { api, Feedback } from './auth-ui';
+import { api } from './auth-ui';
+import { Button, Input, Feedback } from './ui/controls';
+import styles from './ui/onboarding.module.css';
+import recordStyles from './ui/training-record.module.css';
 type Row = { id: string; name: string; status: string; purpose: string };
 export function OnboardingFiles({
   id,
@@ -59,7 +62,7 @@ export function OnboardingFiles({
     }
   }
   return (
-    <section>
+    <section className={styles.files} aria-label="Private assessment documents">
       <h2>Private assessment documents</h2>
       <p>
         Upload a PDF, DOCX, TXT, PNG or JPEG up to 20 MiB. Extraction produces an unconfirmed draft;
@@ -76,14 +79,15 @@ export function OnboardingFiles({
           {file.status}
         </p>
       ))}
-      <button type="button" className="secondary" disabled={busy} onClick={() => void refresh()}>
+      <Button type="button" disabled={busy} onClick={() => void refresh()}>
         Refresh assessment files
-      </button>
+      </Button>
       {editable && (
         <form onSubmit={upload}>
           <label>
             Upload private assessment
-            <input
+            <Input
+              className={recordStyles.upload}
               name="evidence"
               type="file"
               required
@@ -91,9 +95,9 @@ export function OnboardingFiles({
               disabled={busy}
             />
           </label>
-          <button className="secondary" disabled={busy} aria-busy={busy}>
+          <Button type="submit" disabled={busy} aria-busy={busy}>
             {busy ? 'Uploading assessment…' : 'Upload assessment'}
-          </button>
+          </Button>
         </form>
       )}
     </section>

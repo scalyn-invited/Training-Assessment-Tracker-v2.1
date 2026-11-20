@@ -1,0 +1,33 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:230:1 › D06 exact published handoff and D08 durable copy provenance (6.3s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:230:1 › D06 exact published handoff and D08 durable copy provenance 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#definition-provenance')
+    Expected substring: "Source definition synthetic-definition · revision 1"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" locator('#definition-provenance') with timeout 5000ms
+      - waiting for locator('#definition-provenance')
+
+
+      254 |   await expect(page.locator('#save-status')).toHaveText('Draft saved. Not published.');
+      255 |   await expect(page).toHaveURL(origin + '/assessments/definitions/synthetic-copy');
+    > 256 |   await expect(page.locator('#definition-provenance')).toContainText('Source definition synthetic-definition · revision 1');
+          |                                                        ^
+      257 |   await expect(page.locator('#definition-provenance')).toContainText('Draft synthetic-copy · revision 2 · edit version 1');
+      258 |   await expect(page.locator('#definition-provenance')).toContainText('Existing assignments and team rules remain pinned');
+      259 |   await page.reload();
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:256:56
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D06-exact-publish-c05a9-D08-durable-copy-provenance\error-context.md
+
+  1 failed
+    tests\workflow-qa-browser\workflow.spec.ts:230:1 › D06 exact published handoff and D08 durable copy provenance 

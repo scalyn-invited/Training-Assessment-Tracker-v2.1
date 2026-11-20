@@ -1,0 +1,18 @@
+
+Running 13 tests using 1 worker
+
+  ok  1 tests\workflow-qa-browser\d05.spec.ts:85:3 › current approved attempt keeps accurate copy and review controls (524ms)
+  ok  2 tests\workflow-qa-browser\d05.spec.ts:85:3 › pending attempt keeps accurate copy and review controls (396ms)
+  ok  3 tests\workflow-qa-browser\d05.spec.ts:85:3 › newer attempt with earlier approval keeps accurate copy and review controls (382ms)
+  ok  4 tests\workflow-qa-browser\workflow.spec.ts:105:1 › D04 observes reset and inconsistent second-section references (638ms)
+  ok  5 tests\workflow-qa-browser\workflow.spec.ts:123:1 › D03 observes false definitive publication failure then blind version retry (653ms)
+  ok  6 tests\workflow-qa-browser\workflow.spec.ts:156:1 › D03 stale save preserves fields but does not stop another write (739ms)
+  ok  7 tests\workflow-qa-browser\workflow.spec.ts:176:1 › D06 existing published handoff targets exact ID; D08 saved copy lacks provenance (1.4s)
+  ok  8 tests\workflow-qa-browser\workflow.spec.ts:206:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (1.0s)
+  ok  9 tests\workflow-qa-browser\workflow.spec.ts:225:1 › D01 same-document Back and Forward cancellation retains author work (857ms)
+  ok 10 tests\workflow-qa-browser\workflow.spec.ts:265:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (3.0s)
+  ok 11 tests\workflow-qa-browser\workflow.spec.ts:295:1 › D01 uncertain reviewer decision stops newer writes and retains fields (751ms)
+  ok 12 tests\workflow-qa-browser\workflow.spec.ts:315:3 › D01 switch canceled guard sends zero context mutations (1.2s)
+  ok 13 tests\workflow-qa-browser\workflow.spec.ts:315:3 › D01 logout canceled guard sends zero context mutations (1.4s)
+
+  13 passed (14.6s)

@@ -1,8 +1,11 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { api, Feedback } from './auth-ui';
+import { api } from './auth-ui';
+import { Button, Input, Feedback } from './ui/controls';
+import styles from './ui/onboarding.module.css';
+import recordStyles from './ui/training-record.module.css';
 export function PlanCreate({
   id,
   client,
@@ -27,13 +30,7 @@ export function PlanCreate({
     [busy, setBusy] = useState(false),
     [error, setError] = useState('');
   const dirty = useRef(false);
-  useEffect(() => {
-    const handler = (e: BeforeUnloadEvent) => {
-      if (dirty.current) e.preventDefault();
-    };
-    window.addEventListener('beforeunload', handler);
-    return () => window.removeEventListener('beforeunload', handler);
-  }, []);
+  // Onboarding owns the shared leave guard through onDirty.
   async function create() {
     if (busy) return;
     setBusy(true);
@@ -57,10 +54,10 @@ export function PlanCreate({
   }
   return (
     <>
-      <hr />
+      <hr className={styles.divider} />
       <h3>Create a curriculum draft</h3>
       {preview && (
-        <p className="notice">
+        <p className={recordStyles.notice}>
           Budget estimate using the confirmed shared calendar: {preview.days} scheduled days ·{' '}
           {preview.minutes} minutes ({(preview.minutes / 60).toFixed(1)} hours). All reading,
           practice, assessment and revision must fit this budget.
@@ -80,7 +77,7 @@ export function PlanCreate({
         >
           <label>
             Draft creation or rescheduling reason
-            <input
+            <Input
               required
               minLength={8}
               maxLength={2000}
@@ -93,13 +90,13 @@ export function PlanCreate({
               }}
             />
           </label>
-          <button className="primary" disabled={busy} aria-busy={busy}>
+          <Button type="submit" variant="primary" disabled={busy} aria-busy={busy}>
             {busy
               ? 'Creating curriculum draft…'
               : plan
                 ? 'Create refreshed draft'
                 : 'Create curriculum draft'}
-          </button>
+          </Button>
         </form>
       )}
       {plan && (

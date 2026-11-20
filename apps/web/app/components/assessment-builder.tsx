@@ -2,7 +2,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
+import { api, useContext, Guest } from './auth-ui';
+import { Button, PageHeader, Feedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
 import { builderMarkup } from './assessment-builder/markup';
 import type { BuilderState } from './assessment-builder/builder';
 type Definition = Omit<BuilderState, 'criteria' | 'threshold'> & {
@@ -23,6 +25,7 @@ export function AssessmentBuilder({ definitionId }: { definitionId: string }) {
     if (!context?.user || !client) return;
     let cancelled = false;
     setFailure('');
+    setState(null);
     const query = new URLSearchParams({ clientId: client });
     if (definitionId !== 'new') query.set('id', definitionId);
     api<Definition>('/assessments/definitions?' + query)
@@ -77,32 +80,37 @@ export function AssessmentBuilder({ definitionId }: { definitionId: string }) {
   }, [state, client, context?.csrf]);
   return (
     <Guest>
-      {!context?.user ? (
-        <Pending error={error} retry={load} />
-      ) : !client ? (
-        <>
-          <h1>Choose a client</h1>
-          <Link href="/clients">Choose your client</Link>
-        </>
-      ) : (
-        <>
-          <Feedback error={failure} />
-          {failure && (
-            <>
-              <button className="secondary" onClick={() => setRetry((n) => n + 1)}>
-                Retry builder
-              </button>{' '}
-              <Link href="/dashboard">Return to workspace</Link>
-            </>
-          )}
-          {!state && !failure && <p role="status">Loading assessment builder…</p>}
-          <div
-            id="assessment-builder"
-            className="assessment-workspace assessment-builder"
-            ref={host}
-          />
-        </>
-      )}
+      <div className={layout.page}>
+        {!context?.user ? (
+          <>
+            <PageHeader title="Assessment builder" />
+            <Feedback error={error} />
+            {error ? (
+              <Button onClick={() => void load()}>Try loading your session again</Button>
+            ) : (
+              <p role="status">Loading your session...</p>
+            )}
+          </>
+        ) : !client ? (
+          <>
+            <PageHeader title="Choose a client" />
+            <Link href="/clients">Choose your client</Link>
+          </>
+        ) : (
+          <>
+            <Feedback error={failure} />
+            {failure && (
+              <>
+                <Button onClick={() => setRetry((n) => n + 1)}>Retry builder</Button>{' '}
+                <Link href="/dashboard">Return to workspace</Link>
+              </>
+            )}
+            {!state && <PageHeader title="Assessment builder" />}
+            {!state && !failure && <p role="status">Loading assessment builder...</p>}
+            <div id="assessment-builder" hidden={!state} ref={host} />
+          </>
+        )}
+      </div>
     </Guest>
   );
 }

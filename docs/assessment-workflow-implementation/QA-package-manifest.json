@@ -1,0 +1,140 @@
+{
+  "files": [
+    {
+      "path": "QA-prerequisites-handoff.md",
+      "bytes": 23496,
+      "sha256": "8064865f5890b7f30441b986e1f38d4a699d49af60f5d5fb7c63731844766a62"
+    },
+    {
+      "path": "QA-browser-final.log",
+      "bytes": 1396,
+      "sha256": "540df8ec925dcc8e02d6c3fe91fb4a14c90a2fce7a833a3127136d6f0c0c0d43"
+    },
+    {
+      "path": "QA-browser-initial.log",
+      "bytes": 11990,
+      "sha256": "c340c73a34d53d984377d58030e31498c2ce03c92276ea9daa8a8c6b4e23bf80"
+    },
+    {
+      "path": "QA-browser-retry.log",
+      "bytes": 1389,
+      "sha256": "2b1cba32570792f06915df6438c7fab396b61842a1a4d8e777bef70f83234d3f"
+    },
+    {
+      "path": "QA-browser-styled.log",
+      "bytes": 1397,
+      "sha256": "d468ad8c3f3c0777b8204c0d69ee2ed280b321a5888ea39c84fbc9c58827b0e7"
+    },
+    {
+      "path": "QA-db-probe-foreground.log",
+      "bytes": 230,
+      "sha256": "bc9c865448a013465930cbe64c2454092e227a29c33a96dba756f881ba3e2e2b"
+    },
+    {
+      "path": "QA-db-probe.log",
+      "bytes": 19,
+      "sha256": "a34ef841a6c2d17f0ec1d8306c978281568e873545bdd6603d33b7bfb3aa377d"
+    },
+    {
+      "path": "QA-domain-contained.log",
+      "bytes": 206,
+      "sha256": "60f2bc451e06a51c07283efb52113563437f9ec667b6ac6b32808b4be537647d"
+    },
+    {
+      "path": "QA-domain-final.log",
+      "bytes": 220,
+      "sha256": "c86334c97a62680b30cd6c628f8b7b9d0b36b71a953180b62c3fc29e6772a16b"
+    },
+    {
+      "path": "QA-domain-retry.log",
+      "bytes": 206,
+      "sha256": "d2ac6d7e94fa33cabdb2a2f80804dff8e634e496f3eb0b2a82605d796c44d08a"
+    },
+    {
+      "path": "QA-domain.log",
+      "bytes": 1551,
+      "sha256": "9ec4f173b1daf1af3f09ccf16a258d34e58a66a4996018bcab1c9675e2e1c2d9"
+    },
+    {
+      "path": "QA-isolation-final.log",
+      "bytes": 222,
+      "sha256": "947c3eb728bbf192e1f0e8ed13e076d4ea6049ed5b271dcf76c69cfca141c2c4"
+    },
+    {
+      "path": "QA-typecheck.log",
+      "bytes": 167,
+      "sha256": "c76b353d03ebe42cb5b9253f72fb5a0ea87f7724cf36a58dc0b6214f38beb78f"
+    },
+    {
+      "path": "qa-screenshots/D01-logout-canceled-after-post.png",
+      "bytes": 79874,
+      "sha256": "66f30e1ca7cbcc678e6c492ba32383f47e5392a5c845b51f710434ef936f74f5"
+    },
+    {
+      "path": "qa-screenshots/D01-reviewer-dirty.png",
+      "bytes": 80990,
+      "sha256": "0d131babc14bab6d1150ae8c69063f95c78581092477396986d25e440441f60f"
+    },
+    {
+      "path": "qa-screenshots/D01-switch-canceled-after-post.png",
+      "bytes": 79564,
+      "sha256": "a4694e2ba1fe8b0c89663561c4c6c171287b8b7e3d92a00bb6afb0fe4fbf9304"
+    },
+    {
+      "path": "qa-screenshots/D03-conflict-retry.png",
+      "bytes": 60390,
+      "sha256": "513a51cdedb7a50f9b8781c00e11eaa851e86b3bd57ec2284555f7cf8eca3106"
+    },
+    {
+      "path": "qa-screenshots/D03-unknown-publication.png",
+      "bytes": 108516,
+      "sha256": "5667db2741f21d296ef1f105b19795b8a06f903773b387c7c182ae31eb68a157"
+    },
+    {
+      "path": "qa-screenshots/D04-section-preview-history.png",
+      "bytes": 155232,
+      "sha256": "93bddc69a0907a00f6ffbc69a86827319ce3bc175c095d6bdb284c6ab6e3ddd5"
+    },
+    {
+      "path": "qa-screenshots/D05-current-approved-attempt-desktop.png",
+      "bytes": 50349,
+      "sha256": "eee69b3ca22d8db25e9da0b317b32730f2c7192026e7f0b15986e4a16a7a5664"
+    },
+    {
+      "path": "qa-screenshots/D05-current-approved-attempt-mobile.png",
+      "bytes": 46081,
+      "sha256": "f2aa915fe4322cb5352d495d6eb6be2a26d923d28774ca39f9f44b2a584d1a89"
+    },
+    {
+      "path": "qa-screenshots/D05-newer-attempt-with-earlier-approval-desktop.png",
+      "bytes": 49763,
+      "sha256": "22c8694c2e8f88d5185dc2acf65e5a987452bd74ecbf6fe185fd071354a0d3e6"
+    },
+    {
+      "path": "qa-screenshots/D05-newer-attempt-with-earlier-approval-mobile.png",
+      "bytes": 45353,
+      "sha256": "b391dc5f4f427b506bf094884229239f8a7a3075d4fcbc3162a6c99552846235"
+    },
+    {
+      "path": "qa-screenshots/D05-pending-attempt-desktop.png",
+      "bytes": 35301,
+      "sha256": "8f429bab81ac71140103bfe01d0db3aeabe31c650b3751eed8df0010c56a9673"
+    },
+    {
+      "path": "qa-screenshots/D05-pending-attempt-mobile.png",
+      "bytes": 31541,
+      "sha256": "008d462874d9bbb30aed5425dcc670a1059c4f6fa9239d2529150c627da472c2"
+    },
+    {
+      "path": "qa-screenshots/D06-existing-assignment-handoff.png",
+      "bytes": 59643,
+      "sha256": "8f87b86d934f834d5dbb7a9db26eb613c479b1fd4c6f607cc381b4ff2f844239"
+    },
+    {
+      "path": "qa-screenshots/D08-copy-provenance.png",
+      "bytes": 56063,
+      "sha256": "3e980232692ea881e09d435680a76148ebd1ce8146803d4dda3bad1ae418771d"
+    }
+  ],
+  "screenshots": 14
+}

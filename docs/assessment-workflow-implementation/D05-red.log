@@ -1,0 +1,35 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\d05-browser\approval.spec.ts:46:1 › current approved attempt explains approval without removing review controls (5.4s)
+
+
+  1) tests\d05-browser\approval.spec.ts:46:1 › current approved attempt explains approval without removing review controls 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('section.panel').filter({ has: getByRole('heading', { name: 'Automatic multiple-choice score', exact: true }) })
+    Expected substring: "This automatic score uses the assigned revision. The result above was approved."
+    Received string:    "Automatic multiple-choice score100% - 1 of 1 correct. This uses the assigned revision. Human approval is still required."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('section.panel').filter({ has: getByRole('heading', { name: 'Automatic multiple-choice score', exact: true }) }) with timeout 5000ms
+      - waiting for locator('section.panel').filter({ has: getByRole('heading', { name: 'Automatic multiple-choice score', exact: true }) })
+        13 × locator resolved to <section class="panel">…</section>
+           - unexpected value "Automatic multiple-choice score100% - 1 of 1 correct. This uses the assigned revision. Human approval is still required."
+
+
+      60 |   await page.addScriptTag({ content: bundle });
+      61 |   const automatic = page.locator('section.panel').filter({ has: page.getByRole('heading', { name: 'Automatic multiple-choice score', exact: true }) });
+    > 62 |   await expect(automatic).toContainText('This automatic score uses the assigned revision. The result above was approved.');
+         |                           ^
+      63 |   await expect(automatic).not.toContainText('Human approval is still required.');
+      64 |   await expect(page.getByRole('button', { name: 'Approve reviewed result', exact: true })).toBeEnabled();
+      65 |   await expect(page.getByRole('button', { name: 'Reject and allow resubmission' })).toBeEnabled();
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\d05-browser\approval.spec.ts:62:27
+
+    Error Context: .runtime\d05-playwright\approval-current-approved--9bf52-ut-removing-review-controls\error-context.md
+
+  1 failed
+    tests\d05-browser\approval.spec.ts:46:1 › current approved attempt explains approval without removing review controls 

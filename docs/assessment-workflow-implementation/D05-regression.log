@@ -1,0 +1,12 @@
+
+ RUN  v5.1.0 C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow
+
+
+ Test Files  2 passed (2)
+      Tests  13 passed (13)
+   Start at  17:29:15
+   Duration  3.97s (import 71%, transform 24%, tests 4%, worker 1%)
+
+    Isolate  2 workers spawned · ~596ms startup each (spawn + environment, per file)
+             at least ~596ms faster with isolate: false — reuses workers across files instead of one per file
+

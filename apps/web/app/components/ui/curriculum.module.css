@@ -1,0 +1,71 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-space-4);
+}
+.grid > div > label + label {
+  margin-top: var(--ui-space-4);
+}
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2);
+}
+.steps button[aria-current='page'] {
+  border-color: var(--ui-link);
+  background: var(--ui-active);
+}
+.panel h2:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 3px;
+}
+.panel fieldset.lesson,
+.lesson {
+  padding: var(--ui-space-4);
+  margin: 0;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-control);
+  min-width: 0;
+}
+.lesson > :not(:first-child),
+.generation > :not(:first-child) {
+  margin-top: var(--ui-space-4);
+}
+.lesson summary,
+.generation summary {
+  overflow-wrap: anywhere;
+}
+.generation form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-4);
+  min-width: 0;
+}
+.generation form > button {
+  align-self: flex-start;
+}
+.generation li + li {
+  margin-top: var(--ui-space-3);
+}
+.subtle {
+  color: var(--ui-muted);
+  font-size: var(--ui-text-small);
+}
+.preserve {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.comparison > :not(:first-child) {
+  margin-top: var(--ui-space-4);
+}
+.comparison h3 {
+  margin-bottom: var(--ui-space-2);
+}
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .steps button {
+    flex: 1 1 140px;
+  }
+}

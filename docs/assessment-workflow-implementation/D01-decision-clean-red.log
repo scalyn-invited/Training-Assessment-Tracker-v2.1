@@ -1,0 +1,31 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:350:1 › D07 rejection requires separate member-safe feedback and transmits it separately (2.6s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:350:1 › D07 rejection requires separate member-safe feedback and transmits it separately 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "beforeunload",
+    + ]
+
+      380 |   const dialogs:string[]=[];page.on('dialog',async d=>{dialogs.push(d.type());await d.dismiss();});
+      381 |   await page.reload({timeout:2000}).catch(()=>{});
+    > 382 |   expect(dialogs).toEqual([]);
+          |                   ^
+      383 | });
+      384 | test('D07 learner sees returned guidance without a released grade or private reason', async ({
+      385 |   page,
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:382:19
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D07-rejection-req-b369b-and-transmits-it-separately\error-context.md
+
+  1 failed
+    tests\workflow-qa-browser\workflow.spec.ts:350:1 › D07 rejection requires separate member-safe feedback and transmits it separately 

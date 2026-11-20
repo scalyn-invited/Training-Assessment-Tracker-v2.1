@@ -1,0 +1,12 @@
+START PGlite create
+PGlite created
+{
+  rows: [ { probe: 1 } ],
+  fields: [ { name: 'probe', dataTypeID: 23 } ],
+  command: 'SELECT',
+  affectedRows: 0,
+  rowCount: 1
+}
+START socket helper and migrations
+Migrations complete
+CLOSED

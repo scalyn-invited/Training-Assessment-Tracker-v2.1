@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { Database } from '../../packages/database/src/database.js';
 const screenshots = process.env.UI_QA_SCREENSHOTS ?? 'output/playwright';
+test.use({ hasTouch: true });
 
 test('People directory preserves account and Global Admin safeguards on desktop and mobile', async ({
   page,
@@ -100,6 +101,8 @@ test('People directory preserves account and Global Admin safeguards on desktop 
   });
   await manageOwner.click();
   const dialog = page.getByRole('dialog', { name: 'Manage access', exact: true });
+  await expect(dialog).toHaveCSS('border-top-width', '1px');
+  await expect(dialog).toHaveCSS('border-top-style', 'solid');
   await expect(
     dialog.getByText('Protected: the last active Global Admin cannot be removed.'),
   ).toBeVisible();
@@ -134,6 +137,24 @@ test('People directory preserves account and Global Admin safeguards on desktop 
   const clientForm = dialog.getByRole('form', {
     name: 'Manage client access for demo.1.3@example.invalid',
   });
+  await a11y();
+  await dialog.getByRole('button', { name: 'Confirm appointment' }).focus();
+  await page.keyboard.press('Tab');
+  await expect(dialog.getByRole('button', { name: 'Close', exact: true })).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  await expect(dialog.getByRole('button', { name: 'Confirm appointment' })).toBeFocused();
+  await dialog.getByRole('button', { name: 'Close', exact: true }).focus();
+  await page.screenshot({ path: `${screenshots}/people-access-dialog-desktop.png` });
+  await page.setViewportSize({ width: 375, height: 900 });
+  await a11y();
+  expect(await dialog.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
+  for (const control of await dialog.locator('select, input:not([type=checkbox]), button').all()) {
+    expect((await control.boundingBox())?.height).toBeGreaterThanOrEqual(44);
+  }
+  await page.screenshot({ path: `${screenshots}/people-access-dialog-mobile.png` });
+  await dialog.getByRole('button', { name: 'Confirm appointment' }).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${screenshots}/people-global-access-mobile.png` });
+  await page.setViewportSize({ width: 1440, height: 900 });
   await expect(
     clientForm
       .getByRole('combobox', { name: 'Action', exact: true })
@@ -222,8 +243,8 @@ test('People directory preserves account and Global Admin safeguards on desktop 
   await a11y();
   await page.keyboard.press('Escape');
   const settingsNav = page.getByRole('navigation', { name: 'Mobile platform navigation' });
-  await settingsNav.getByRole('button', { name: 'Settings' }).click();
-  const settings = page.getByRole('dialog', { name: 'Settings', exact: true });
+  await page.getByRole('button', { name: 'Personal settings' }).click();
+  const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
   await settings.locator('summary').filter({ hasText: 'Theme' }).click();
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await settings.getByRole('button', { name: 'Close', exact: true }).click();

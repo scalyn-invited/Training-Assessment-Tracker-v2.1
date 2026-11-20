@@ -1,0 +1,18 @@
+.panel {
+  overflow-wrap: anywhere;
+}
+.table td {
+  overflow-wrap: anywhere;
+}
+.table td a {
+  display: inline-block;
+}
+.panel summary {
+  overflow-wrap: anywhere;
+}
+@media (pointer: coarse) {
+  .table td a,
+  .panel summary {
+    min-height: 44px;
+  }
+}

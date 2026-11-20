@@ -1,0 +1,5 @@
+const fs=require('node:fs'),path=require('node:path');
+const src='docs/assessment-workflow-implementation/independent-qa',out='docs/assessment-workflow-implementation/correction-frontend';
+for(const dir of ['browser-tests','next-tests']) {fs.mkdirSync(`${out}/${dir}`,{recursive:true});for(const name of fs.readdirSync(`${src}/${dir}`)) {const dest=`${out}/${dir}/${name}`;if(fs.existsSync(dest))throw Error('Refusing overwrite '+dest);fs.writeFileSync(dest,fs.readFileSync(`${src}/${dir}/${name}`,'utf8').replaceAll(src,out));}}
+for(const name of ['run.cjs','browser.config.ts','next.config.ts']){const dest=`${out}/${name}`;if(fs.existsSync(dest))throw Error('Refusing overwrite '+dest);fs.writeFileSync(dest,fs.readFileSync(`${src}/${name}`,'utf8').replaceAll(src,out).replaceAll('independent-qa-temp','correction-frontend-temp').replaceAll('independent-browser-results','correction-browser-results').replaceAll('independent-next-results','correction-next-results'));}
+console.log('Copied harness without altering independent negative or evidence');

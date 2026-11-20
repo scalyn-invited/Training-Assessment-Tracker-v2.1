@@ -1,0 +1,40 @@
+
+ RUN  v5.1.0 C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow
+
+ ❯ tests/assessment-reviews.test.ts (9 tests | 9 skipped) 60868ms
+ ❯ tests/assessment-definitions.test.ts (5 tests | 5 skipped) 60216ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/assessment-definitions.test.ts > assessment definitions and publication
+Error: Hook timed out in 60000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".
+ ❯ tests/assessment-definitions.test.ts:37:3
+     35|     return auth.login(g.token!, g.csrf, email, password);
+     36|   }
+     37|   beforeAll(async () => {
+       |   ^
+     38|     instance = await testDatabase();
+     39|     const key = randomBytes(32);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/assessment-reviews.test.ts [ tests/assessment-reviews.test.ts ]
+Error: Hook timed out in 60000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".
+ ❯ tests/assessment-reviews.test.ts:42:1
+     40|   return s;
+     41| }
+     42| beforeAll(async () => {
+       | ^
+     43|   instance = await testDatabase();
+     44|   auth = new Auth(instance.db, key);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 2 passed (4)
+      Tests  13 passed | 14 skipped (27)
+   Start at  17:39:35
+   Duration  156.64s (tests 81%, import 17%, transform 2%)
+

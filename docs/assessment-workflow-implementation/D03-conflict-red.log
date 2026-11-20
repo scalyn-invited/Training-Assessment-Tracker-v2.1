@@ -1,0 +1,35 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:156:1 › D03 stale save stops writes and offers authorized structured comparison (5.6s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:156:1 › D03 stale save stops writes and offers authorized structured comparison 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#builder-errors')
+    Expected substring: "Writes are stopped"
+    Received string:    "This draft changed in another window. Your edits remain here; copy them before reloading."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#builder-errors') with timeout 5000ms
+      - waiting for locator('#builder-errors')
+        14 × locator resolved to <div role="alert" id="builder-errors">…</div>
+           - unexpected value "This draft changed in another window. Your edits remain here; copy them before reloading."
+
+
+      168 |   await page.locator('#assessment-title').fill('Local conflict title');
+      169 |   await page.locator('#save-definition').click();
+    > 170 |   await expect(page.locator('#builder-errors')).toContainText('Writes are stopped');
+          |                                                 ^
+      171 |   await expect(page.locator('#assessment-title')).toHaveValue('Local conflict title');
+      172 |   await expect(page.locator('#save-definition')).toBeDisabled();
+      173 |   await page.getByRole('button',{name:'Compare with saved definition'}).click();
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:170:49
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D03-stale-save-st-e42bb-rized-structured-comparison\error-context.md
+
+  1 failed
+    tests\workflow-qa-browser\workflow.spec.ts:156:1 › D03 stale save stops writes and offers authorized structured comparison 

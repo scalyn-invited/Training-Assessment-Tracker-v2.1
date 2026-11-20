@@ -1,0 +1,9 @@
+
+ RUN  v5.1.0 C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow
+
+
+ Test Files  6 passed (6)
+      Tests  40 passed (40)
+   Start at  19:28:16
+   Duration  97.02s (tests 93%, import 6%, transform 1%)
+

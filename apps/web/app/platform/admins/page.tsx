@@ -1,8 +1,12 @@
 'use client';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
+import { Button, Input, Panel, PageHeader, Feedback } from '../../components/ui/controls';
+import { DirectoryTable, Pagination } from '../../components/ui/directory';
+import { Dialog } from '../../components/ui/dialog';
+import styles from '../../components/ui/form-layout.module.css';
 import { useRouter } from 'next/navigation';
-import { api, useContext, Guest, Pending, Feedback } from '../../components/auth-ui';
+import { api, useContext, Guest, Pending } from '../../components/auth-ui';
 type Account = {
   id: string;
   name: string;
@@ -111,10 +115,10 @@ export default function AdminsPage() {
           <Link href="/dashboard">Return to workspace</Link>
         </>
       ) : (
-        <>
-          <p className="eyebrow">Platform administration</p>
-          <h1>Global admins</h1>
-          <p>Manage organisations and access. Training content requires its own permissions.</p>
+        <div className={styles.page}>
+          <PageHeader title="Global admins">
+            Manage organisations and access. Training content requires its own permissions.
+          </PageHeader>
           <p>
             <Link href="/dashboard">Workspace</Link> ·{' '}
             <Link href="/platform/clients">Manage clients</Link> ·{' '}
@@ -122,19 +126,19 @@ export default function AdminsPage() {
           </p>
           <Feedback error={failure} success={success} />
           {failure && (
-            <button onClick={() => setRevision((n) => n + 1)}>Retry administrators</button>
+            <Button onClick={() => setRevision((n) => n + 1)}>Retry administrators</Button>
           )}
           {!data && !failure && <p role="status">Loading administrators and accounts…</p>}
           {data && (
             <>
-              <section className="panel directory-panel">
+              <Panel className={styles.panel}>
                 <h2>Current administrators</h2>
                 <p>
                   {data.activeAdmins} active Global Admins. The last active Global Admin cannot be
                   removed.
                 </p>
-                <div className="directory-table-wrap">
-                  <table className="directory-table">
+                <div className={styles.tableWrap}>
+                  <DirectoryTable stacked className={styles.table}>
                     <caption className="sr-only">Current global administrators</caption>
                     <thead>
                       <tr>
@@ -152,13 +156,13 @@ export default function AdminsPage() {
                           </td>
                           <td data-label="Status">{admin.active ? 'Active' : 'Inactive'}</td>
                           <td data-label="Actions">
-                            <button
-                              className="secondary"
+                            <Button
+                              variant="secondary"
                               disabled={admin.active && data.activeAdmins <= 1}
                               onClick={() => open({ ...admin, action: 'revoke' })}
                             >
                               Manage access
-                            </button>
+                            </Button>
                             {admin.active && data.activeAdmins <= 1 && (
                               <p>Protected: last active Global Admin.</p>
                             )}
@@ -171,32 +175,33 @@ export default function AdminsPage() {
                         </tr>
                       )}
                     </tbody>
-                  </table>
+                  </DirectoryTable>
                 </div>
-                <nav aria-label="Administrator pages">
-                  <button
-                    className="secondary"
+                <Pagination aria-label="Administrator pages">
+                  <Button
+                    variant="secondary"
                     disabled={adminsPage <= 1}
                     onClick={() => setAdminsPage((n) => n - 1)}
                   >
                     Previous administrators
-                  </button>
+                  </Button>
                   <span> Page {adminsPage} </span>
-                  <button
-                    className="secondary"
+                  <Button
+                    type="submit"
+                    variant="secondary"
                     disabled={adminsPage * 20 >= data.adminTotal}
                     onClick={() => setAdminsPage((n) => n + 1)}
                   >
                     Next administrators
-                  </button>
-                </nav>
-              </section>
+                  </Button>
+                </Pagination>
+              </Panel>
             </>
           )}
-          <section className="panel directory-panel">
+          <Panel className={styles.panel}>
             <h2>Account access</h2>
             <form
-              className="directory-filters directory-search-filters"
+              className={styles.filters}
               onSubmit={(event) => {
                 event.preventDefault();
                 setQuery(String(new FormData(event.currentTarget).get('search')));
@@ -211,20 +216,20 @@ export default function AdminsPage() {
             >
               <label>
                 Search name or email
-                <input type="search" name="search" maxLength={120} />
+                <Input type="search" name="search" maxLength={120} />
               </label>
-              <button className="primary" disabled={!data}>
+              <Button type="submit" variant="primary" disabled={!data}>
                 Search accounts
-              </button>
-              <button type="reset" className="secondary" disabled={!data}>
+              </Button>
+              <Button type="reset" variant="secondary" disabled={!data}>
                 Clear search
-              </button>
+              </Button>
             </form>
             {data && (
               <>
                 <p role="status">{data.total} matching accounts</p>
-                <div className="directory-table-wrap">
-                  <table className="directory-table">
+                <div className={styles.tableWrap}>
+                  <DirectoryTable stacked className={styles.table}>
                     <caption className="sr-only">Account access</caption>
                     <thead>
                       <tr>
@@ -247,12 +252,12 @@ export default function AdminsPage() {
                             {account.global_admin ? (
                               <span>Already appointed</span>
                             ) : (
-                              <button
-                                className="secondary"
+                              <Button
+                                variant="secondary"
                                 onClick={() => open({ ...account, action: 'appoint' })}
                               >
                                 Appoint Global Admin
-                              </button>
+                              </Button>
                             )}
                           </td>
                         </tr>
@@ -263,32 +268,33 @@ export default function AdminsPage() {
                         </tr>
                       )}
                     </tbody>
-                  </table>
+                  </DirectoryTable>
                 </div>
-                <nav aria-label="Account pages">
-                  <button
-                    className="secondary"
+                <Pagination aria-label="Account pages">
+                  <Button
+                    variant="secondary"
                     disabled={page <= 1}
                     onClick={() => setPage((n) => n - 1)}
                   >
                     Previous accounts
-                  </button>
+                  </Button>
                   <span> Page {page} </span>
-                  <button
-                    className="secondary"
+                  <Button
+                    type="submit"
+                    variant="secondary"
                     disabled={page * 20 >= data.total}
                     onClick={() => setPage((n) => n + 1)}
                   >
                     Next accounts
-                  </button>
-                </nav>
+                  </Button>
+                </Pagination>
               </>
             )}
-          </section>
-          <dialog
-            className="workspace-dialog"
-            ref={dialog}
-            aria-labelledby="admin-action-title"
+          </Panel>
+          <Dialog
+            className={styles.dialog}
+            dialogRef={dialog}
+            titleId="admin-action-title"
             onCancel={(event) => {
               if (busy) event.preventDefault();
               else setSelection(null);
@@ -313,23 +319,24 @@ export default function AdminsPage() {
                 <form onSubmit={save}>
                   <label>
                     Reason
-                    <input name="reason" required minLength={8} maxLength={2000} />
+                    <Input name="reason" required minLength={8} maxLength={2000} />
                   </label>
                   <Feedback error={actionError} />
                   {staleAccount && (
-                    <button
+                    <Button
                       type="button"
-                      className="secondary"
+                      variant="secondary"
                       onClick={() => {
                         close();
                         setRevision((value) => value + 1);
                       }}
                     >
                       Reload accounts
-                    </button>
+                    </Button>
                   )}
-                  <button
-                    className={selection.action === 'revoke' ? 'danger' : 'primary'}
+                  <Button
+                    type="submit"
+                    variant={selection.action === 'revoke' ? 'danger' : 'primary'}
                     disabled={busy || staleAccount}
                     aria-busy={busy}
                   >
@@ -338,15 +345,15 @@ export default function AdminsPage() {
                       : selection.action === 'appoint'
                         ? 'Confirm appointment'
                         : 'Confirm revocation'}
-                  </button>{' '}
-                  <button type="button" className="secondary" onClick={close} disabled={busy}>
+                  </Button>{' '}
+                  <Button type="button" variant="secondary" onClick={close} disabled={busy}>
                     Cancel
-                  </button>
+                  </Button>
                 </form>
               </>
             )}
-          </dialog>
-        </>
+          </Dialog>
+        </div>
       )}
     </Guest>
   );

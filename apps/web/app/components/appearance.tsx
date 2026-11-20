@@ -2,9 +2,13 @@
 import { useEffect, useState, type FormEvent, type CSSProperties } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
+import { api, useContext, Guest, Pending } from './auth-ui';
+import { Button, Input, Select, Panel, PageHeader, Feedback } from './ui/controls';
+import styles from './ui/form-layout.module.css';
+import appearanceStyles from './ui/appearance.module.css';
 import { generate, themes } from '../../../../packages/domain/src/theme';
-type Brand = {
+import { SettingsLayout, PlatformAppearanceForm } from './platform-settings';
+export type AppearanceBrand = {
   version: number;
   savedTheme: string;
   customLogo: boolean;
@@ -23,7 +27,7 @@ type Brand = {
 export function Appearance({ platform = false }: { platform?: boolean }) {
   const { context, error, load } = useContext(),
     router = useRouter(),
-    [brand, setBrand] = useState<Brand | null>(null),
+    [brand, setBrand] = useState<AppearanceBrand | null>(null),
     [failure, setFailure] = useState(''),
     [success, setSuccess] = useState(''),
     [busy, setBusy] = useState(false),
@@ -34,10 +38,11 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
     if (context && !context.user) router.replace('/login');
   }, [context, router]);
   useEffect(() => {
-    if (!context?.user || (!platform && !client)) return;
+    if (!context?.user || (platform && !context.user.global_admin) || (!platform && !client))
+      return;
     let cancelled = false;
     setFailure('');
-    api<Brand>('/branding' + (client ? '?clientId=' + client : ''))
+    api<AppearanceBrand>('/branding' + (client ? '?clientId=' + client : ''))
       .then((data) => {
         if (!cancelled) {
           setBrand(data);
@@ -119,54 +124,88 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
     }
   }
   const palettes = /^#[0-9a-f]{6}$/i.test(accent) ? generate(accent) : null;
+  if (platform)
+    return (
+      <SettingsLayout tab="appearance">
+        <Feedback error={failure} success={success} />
+        {failure && (
+          <Button variant="secondary" onClick={() => setRevision((n) => n + 1)}>
+            Reload appearance
+          </Button>
+        )}
+        {!brand && !failure && <p role="status">Loading appearance settings...</p>}
+        {brand?.canEdit && (
+          <PlatformAppearanceForm
+            key={`${brand.version}:${revision}`}
+            brand={brand}
+            accent={accent}
+            setAccent={setAccent}
+            busy={busy}
+            save={save}
+            discard={() => {
+              setBrand(null);
+              setFailure('');
+              setSuccess('');
+              setRevision((n) => n + 1);
+            }}
+          />
+        )}
+        {brand && !brand.canEdit && (
+          <p>Global Admin access is required to change platform appearance.</p>
+        )}
+      </SettingsLayout>
+    );
   return (
     <Guest>
       {!context?.user ? (
         <Pending error={error} retry={load} />
       ) : !platform && !client ? (
         <>
-          <h1>Choose a client</h1>
+          <PageHeader title="Choose a client" />
           <Link href="/clients">Choose your client</Link>
         </>
       ) : (
-        <>
+        <div className={styles.page}>
           <p className="eyebrow">{platform ? 'Platform' : context.client?.name}</p>
-          <h1>{platform ? 'Platform appearance' : 'Appearance'}</h1>
+          <PageHeader title={platform ? 'Platform appearance' : 'Appearance'} />
           <p>
             <Link href="/dashboard">Return to workspace</Link>
           </p>
           <Feedback error={failure} success={success} />
           {failure && (
-            <button className="secondary" onClick={() => setRevision((n) => n + 1)}>
+            <Button variant="secondary" onClick={() => setRevision((n) => n + 1)}>
               Reload appearance
-            </button>
+            </Button>
           )}
           {!brand && !failure && <p role="status">Loading appearance settings…</p>}
           {brand && !platform && (
-            <section className="panel">
+            <Panel className={styles.panel}>
               <h2>Choose your theme</h2>
               <p>Choose a look for your account in this client, across devices.</p>
-              <div className="theme-gallery" role="group" aria-label="Workspace theme">
+              <div className={appearanceStyles.gallery} role="group" aria-label="Workspace theme">
                 {Object.entries(brand.themes).map(([key, label]) => (
-                  <button
-                    className="theme-tile"
+                  <Button
+                    className={appearanceStyles.tile}
                     key={key}
                     aria-pressed={brand.selectedTheme === key}
                     disabled={busy}
                     onClick={() => choose(key)}
                   >
-                    <span className={'theme-preview sample-' + key} aria-hidden="true" />
+                    <span
+                      className={appearanceStyles.swatch + ' sample-' + key}
+                      aria-hidden="true"
+                    />
                     <span>{label}</span>
-                  </button>
+                  </Button>
                 ))}
               </div>
-              <button className="secondary" disabled={busy} onClick={() => choose(null)}>
+              <Button variant="secondary" disabled={busy} onClick={() => choose(null)}>
                 Use client default
-              </button>
-            </section>
+              </Button>
+            </Panel>
           )}
           {brand?.canEdit && (
-            <section className="panel">
+            <Panel className={styles.panel}>
               <h2>{platform ? 'Platform branding' : 'Client branding'}</h2>
               <p>
                 {platform
@@ -177,16 +216,16 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
                 {!platform && (
                   <label>
                     Branding mode
-                    <select name="mode" defaultValue={brand.mode}>
+                    <Select name="mode" defaultValue={brand.mode}>
                       <option value="cerebru">Cerebru</option>
                       <option value="co-branded">Client + Cerebru</option>
                       <option value="white-label">Client only (white-label)</option>
-                    </select>
+                    </Select>
                   </label>
                 )}
                 <label>
                   {platform ? 'Platform display name' : 'Client name'}
-                  <input
+                  <Input
                     name="displayName"
                     defaultValue={brand.displayName}
                     required
@@ -195,11 +234,12 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
                 </label>
                 <label>
                   Application name
-                  <input name="appName" defaultValue={brand.appName} required maxLength={120} />
+                  <Input name="appName" defaultValue={brand.appName} required maxLength={120} />
                 </label>
                 <label>
                   Brand colour
-                  <input
+                  <Input
+                    className={appearanceStyles.colour}
                     type="color"
                     value={/^#[0-9a-f]{6}$/i.test(accent) ? accent : '#1d4668'}
                     onChange={(e) => setAccent(e.target.value)}
@@ -207,7 +247,7 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
                 </label>
                 <label>
                   Brand colour hex value
-                  <input
+                  <Input
                     value={accent}
                     onChange={(e) => setAccent(e.target.value)}
                     required
@@ -216,12 +256,12 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
                   />
                 </label>
                 <p>Choose one colour. We generate readable light and dark themes.</p>
-                <div className="auto-theme-previews">
+                <div className={appearanceStyles.previews}>
                   {palettes &&
                     Object.entries(palettes).map(([variant, tokens]) => (
                       <section
                         key={variant}
-                        className="auto-theme-preview"
+                        className={appearanceStyles.preview}
                         aria-label={variant + ' theme preview'}
                         style={
                           Object.fromEntries(
@@ -234,18 +274,18 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
                       >
                         <h3>{variant === 'light' ? 'Light' : 'Dark'}</h3>
                         <p>Preview only until you save.</p>
-                        <div className="auto-preview-card">
-                          <span className="auto-preview-active">Active navigation</span>
+                        <div className={appearanceStyles.card}>
+                          <span className={appearanceStyles.active}>Active navigation</span>
                           <h4>Your learning workspace</h4>
                           <p>Readable text and comfortable cards.</p>
-                          <span className="auto-preview-button">Button preview</span>
+                          <span className={appearanceStyles.buttonPreview}>Button preview</span>
                         </div>
                       </section>
                     ))}
                 </div>
                 <label>
                   Default theme
-                  <select name="theme" defaultValue={platform ? brand.theme : brand.savedTheme}>
+                  <Select name="theme" defaultValue={platform ? brand.theme : brand.savedTheme}>
                     {!platform && <option value="">Use configured default</option>}
                     {Object.entries(
                       platform
@@ -264,7 +304,7 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
                         {label}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </label>
                 <details>
                   <summary>Logo</summary>
@@ -276,32 +316,37 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
                         style={{ maxWidth: 180, maxHeight: 100 }}
                       />
                       <label>
-                        <input type="checkbox" name="removeLogo" /> Remove custom logo
+                        <Input type="checkbox" name="removeLogo" /> Remove custom logo
                       </label>
                     </>
                   )}
                   <label>
                     {platform ? 'Platform logo' : 'Client logo'}
-                    <input name="logo" type="file" accept="image/png,image/jpeg,image/webp" />
+                    <Input
+                      className={appearanceStyles.file}
+                      name="logo"
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp"
+                    />
                   </label>
                   <p>PNG, JPEG or WebP. Maximum 2 MB and 4096 × 4096 pixels.</p>
                 </details>
                 {platform && (
                   <label>
                     Appearance change reason
-                    <input name="reason" required minLength={8} maxLength={2000} />
+                    <Input name="reason" required minLength={8} maxLength={2000} />
                   </label>
                 )}
-                <button className="primary" disabled={busy} aria-busy={busy}>
+                <Button type="submit" variant="primary" disabled={busy} aria-busy={busy}>
                   {busy
                     ? 'Saving appearance…'
                     : platform
                       ? 'Save platform appearance'
                       : 'Save client branding'}
-                </button>{' '}
-                <button
+                </Button>{' '}
+                <Button
                   type="button"
-                  className="secondary"
+                  variant="secondary"
                   disabled={busy}
                   onClick={() => {
                     setBrand(null);
@@ -309,14 +354,14 @@ export function Appearance({ platform = false }: { platform?: boolean }) {
                   }}
                 >
                   Discard changes
-                </button>
+                </Button>
               </form>
-            </section>
+            </Panel>
           )}
           {brand && !brand.canEdit && platform && (
             <p>Global Admin access is required to change platform appearance.</p>
           )}
-        </>
+        </div>
       )}
     </Guest>
   );

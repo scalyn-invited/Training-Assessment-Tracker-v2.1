@@ -1,4 +1,9 @@
 'use client';
+import { Input, Button, Panel, Select, Feedback, PageHeader } from '../components/ui/controls';
+import styles from '../components/ui/form-layout.module.css';
+import { DirectoryTable, Pagination } from '../components/ui/directory';
+import { Dialog } from '../components/ui/dialog';
+
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import {
@@ -7,7 +12,7 @@ import {
   type PromotionPersonData,
 } from '../components/promotions';
 import { useRouter } from 'next/navigation';
-import { api, useContext, Guest, Pending, Feedback } from '../components/auth-ui';
+import { api, useContext, Guest, Pending } from '../components/auth-ui';
 type Person = PromotionPersonData & {
   id: string;
   version: number;
@@ -127,7 +132,8 @@ export default function Administration() {
       setRevision((n) => n + 1);
       load();
     } catch (e) {
-      if (inside && (e as Error & {code?: string}).code === 'account_version_conflict') setStale(true);
+      if (inside && (e as Error & { code?: string }).code === 'account_version_conflict')
+        setStale(true);
       if (inside) setActionError((e as Error).message);
       else setFailure((e as Error).message);
     } finally {
@@ -137,7 +143,7 @@ export default function Administration() {
   const reason = (
     <label>
       Reason
-      <input name="reason" required minLength={8} maxLength={2000} />
+      <Input name="reason" required minLength={8} maxLength={2000} />
     </label>
   );
   return (
@@ -146,22 +152,21 @@ export default function Administration() {
         <Pending error={error} retry={load} />
       ) : !client ? (
         <>
-          <h1>Choose a client</h1>
+          <PageHeader title="Choose a client" />
           <Link href="/clients">Choose your client</Link>
         </>
       ) : !context.canAdmin ? (
         <>
-          <h1>Client administration permission required</h1>
+          <PageHeader title="Client administration permission required" />
           <Link href="/dashboard">Return to workspace</Link>
         </>
       ) : (
-        <>
+        <div className={styles.page}>
           <p className="eyebrow">{context.client?.name}</p>
-          <h1>People and programme administration</h1>
-          <p>
+          <PageHeader title="People and programme administration">
             Create internal teams and assign responsibility. Administrative access does not reveal
             submission bodies.
-          </p>
+          </PageHeader>
           <p>
             <Link href="/dashboard">Workspace</Link> ·{' '}
             <Link href="/accounts">Add account or invite an existing member</Link> |{' '}
@@ -169,29 +174,39 @@ export default function Administration() {
           </p>
           <Feedback error={failure} success={success} />
           {failure && (
-            <button className="secondary" onClick={() => setRevision((n) => n + 1)}>
+            <Button type="submit" variant="secondary" onClick={() => setRevision((n) => n + 1)}>
               Retry directory
-            </button>
+            </Button>
           )}
-          {context.authMode === 'mock' && <LocalPersonForm key={'local-person:' + client} client={client} csrf={context.csrf}
-            onCreated={() => { setPage(1); setSearch(''); setRevision(n => n + 1); }} />}
-          <section className="panel">
+          {context.authMode === 'mock' && (
+            <LocalPersonForm
+              key={'local-person:' + client}
+              client={client}
+              csrf={context.csrf}
+              onCreated={() => {
+                setPage(1);
+                setSearch('');
+                setRevision((n) => n + 1);
+              }}
+            />
+          )}
+          <Panel className={styles.panel}>
             <h2>Create internal team</h2>
             <form onSubmit={(e) => act(e, 'groups', {}, false)}>
               <label>
                 Team name
-                <input name="name" required maxLength={160} />
+                <Input name="name" required maxLength={160} />
               </label>
               {reason}
-              <button className="secondary" disabled={busy}>
+              <Button type="submit" variant="secondary" disabled={busy}>
                 {busy ? 'Saving…' : 'Create internal team'}
-              </button>
+              </Button>
             </form>
-          </section>
-          <section className="panel directory-panel">
+          </Panel>
+          <Panel className={styles.panel}>
             <h2>People and assignments</h2>
             <form
-              className="directory-filters directory-search-filters"
+              className={styles.filters}
               onSubmit={(e) => {
                 e.preventDefault();
                 setSearch(String(new FormData(e.currentTarget).get('search')));
@@ -201,18 +216,18 @@ export default function Administration() {
             >
               <label>
                 Search name or email
-                <input name="search" type="search" maxLength={120} />
+                <Input name="search" type="search" maxLength={120} />
               </label>
-              <button className="primary" disabled={!data}>
+              <Button type="submit" variant="primary" disabled={!data}>
                 Search people
-              </button>
+              </Button>
             </form>
             {!data && !failure && <p role="status">Loading client people and assignments…</p>}
             {data && (
               <>
                 <p role="status">{data.total} matching people</p>
-                <div className="directory-table-wrap">
-                  <table className="directory-table">
+                <div className={styles.tableWrap}>
+                  <DirectoryTable stacked className={styles.table}>
                     <caption className="sr-only">People and assignments</caption>
                     <thead>
                       <tr>
@@ -233,8 +248,9 @@ export default function Administration() {
                           <td data-label="Status">{p.active ? 'Active' : 'Inactive'}</td>
                           <td data-label="Profile">{p.sync_policy.replaceAll('_', ' ')}</td>
                           <td data-label="Actions">
-                            <button
-                              className="secondary"
+                            <Button
+                              type="submit"
+                              variant="secondary"
                               onClick={() => {
                                 setActionError('');
                                 setEnding(false);
@@ -242,7 +258,7 @@ export default function Administration() {
                               }}
                             >
                               Manage assignments
-                            </button>
+                            </Button>
                           </td>
                         </tr>
                       ))}
@@ -252,28 +268,30 @@ export default function Administration() {
                         </tr>
                       )}
                     </tbody>
-                  </table>
+                  </DirectoryTable>
                 </div>
-                <nav aria-label="People pages">
-                  <button
-                    className="secondary"
+                <Pagination aria-label="People pages">
+                  <Button
+                    type="submit"
+                    variant="secondary"
                     disabled={page <= 1}
                     onClick={() => setPage((n) => n - 1)}
                   >
                     Previous people
-                  </button>
+                  </Button>
                   <span> Page {page} </span>
-                  <button
-                    className="secondary"
+                  <Button
+                    type="submit"
+                    variant="secondary"
                     disabled={page * 20 >= data.total}
                     onClick={() => setPage((n) => n + 1)}
                   >
                     Next people
-                  </button>
-                </nav>
+                  </Button>
+                </Pagination>
               </>
             )}
-          </section>
+          </Panel>
           {data && (
             <Allocations
               data={data}
@@ -287,10 +305,10 @@ export default function Administration() {
           )}
           <EnrolmentForm key={client} client={client!} csrf={context.csrf} />
           <PromotionLedger key={client + String(revision)} client={client!} csrf={context.csrf} />
-          <dialog
-            ref={dialog}
-            className="workspace-dialog"
-            aria-labelledby="person-title"
+          <Dialog
+            dialogRef={dialog}
+            className={styles.dialog}
+            titleId="person-title"
             onCancel={(event) => {
               if (busy) event.preventDefault();
               else close();
@@ -302,11 +320,22 @@ export default function Administration() {
                 <p>
                   {person.email} · {context.client?.name}
                 </p>
-                <button type="button" className="secondary" onClick={close} disabled={busy}>
+                <Button type="button" variant="secondary" onClick={close} disabled={busy}>
                   Close
-                </button>
+                </Button>
                 <Feedback error={actionError} />
-                {stale && <button type="button" className="secondary" onClick={() => { close(); setRevision(n => n + 1); }}>Refresh directory and review again</button>}
+                {stale && (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() => {
+                      close();
+                      setRevision((n) => n + 1);
+                    }}
+                  >
+                    Refresh directory and review again
+                  </Button>
+                )}
                 <h3>Team membership</h3>
                 <p>
                   Current teams:{' '}
@@ -318,11 +347,11 @@ export default function Administration() {
                     )
                     .join(', ') || 'None'}
                 </p>
-                {data.groups.some(g => g.kind === 'team' && g.origin === 'manual') ? (
+                {data.groups.some((g) => g.kind === 'team' && g.origin === 'manual') ? (
                   <form onSubmit={(e) => act(e, 'teams/membership', { memberId: person.id })}>
                     <label>
                       Team
-                      <select name="team" required>
+                      <Select name="team" required>
                         {data.groups
                           .filter((g) => g.kind === 'team' && g.origin === 'manual')
                           .map((g) => (
@@ -330,19 +359,19 @@ export default function Administration() {
                               {g.name}
                             </option>
                           ))}
-                      </select>
+                      </Select>
                     </label>
                     <label>
                       Change
-                      <select name="change">
+                      <Select name="change">
                         <option value="join">Assign</option>
                         <option value="leave">Remove</option>
-                      </select>
+                      </Select>
                     </label>
                     {reason}
-                    <button className="secondary" disabled={busy || stale}>
+                    <Button type="submit" variant="secondary" disabled={busy || stale}>
                       Update team membership
-                    </button>
+                    </Button>
                   </form>
                 ) : (
                   <p>Create an internal team first.</p>
@@ -352,15 +381,15 @@ export default function Administration() {
                   <form onSubmit={(e) => act(e, 'roles/grant', { memberId: person.id })}>
                     <label>
                       Role
-                      <select name="role">
+                      <Select name="role">
                         <option value="member">Member</option>
                         <option value="coordinator">Coordinator</option>
                         {context.user?.global_admin && <option value="admin">Client Admin</option>}
-                      </select>
+                      </Select>
                     </label>
                     <label>
                       Role scope
-                      <select name="team">
+                      <Select name="team">
                         <option value="">Client</option>
                         {data.groups
                           .filter((g) => g.kind === 'team')
@@ -369,12 +398,12 @@ export default function Administration() {
                               {g.name} — coordinator only
                             </option>
                           ))}
-                      </select>
+                      </Select>
                     </label>
                     {reason}
-                    <button className="secondary" disabled={busy || stale}>
+                    <Button type="submit" variant="secondary" disabled={busy || stale}>
                       Grant role
-                    </button>
+                    </Button>
                   </form>
                   {data.roles
                     .filter((r) => r.client_membership_id === person.id)
@@ -389,14 +418,17 @@ export default function Administration() {
                         <p>Revocation ends this role and dependent coordinator authority.</p>
                         <form onSubmit={(e) => act(e, 'roles/revoke', { id: role.id })}>
                           {reason}
-                          <button
-                            className="danger"
+                          <Button
+                            type="submit"
+                            variant="danger"
                             disabled={
-                              busy || stale || (role.role === 'admin' && !context.user?.global_admin)
+                              busy ||
+                              stale ||
+                              (role.role === 'admin' && !context.user?.global_admin)
                             }
                           >
                             Revoke role
-                          </button>
+                          </Button>
                         </form>
                       </details>
                     ))}
@@ -414,9 +446,14 @@ export default function Administration() {
                 />
                 {person.origin === 'manual' && person.user_id !== context.user?.id && (
                   <>
-                    <button className="danger" disabled={busy || stale} onClick={() => setEnding(true)}>
+                    <Button
+                      type="submit"
+                      variant="danger"
+                      disabled={busy || stale}
+                      onClick={() => setEnding(true)}
+                    >
                       End client membership
-                    </button>
+                    </Button>
                     {ending && (
                       <form
                         onSubmit={(e) =>
@@ -429,65 +466,120 @@ export default function Administration() {
                           will not restore historical permissions.
                         </p>
                         {reason}
-                        <button className="danger" disabled={busy || stale}>
+                        <Button type="submit" variant="danger" disabled={busy || stale}>
                           Confirm membership end
-                        </button>{' '}
-                        <button
+                        </Button>{' '}
+                        <Button
                           type="button"
-                          className="secondary"
+                          variant="secondary"
                           disabled={busy || stale}
                           onClick={() => setEnding(false)}
                         >
                           Keep membership
-                        </button>
+                        </Button>
                       </form>
                     )}
                   </>
                 )}
               </>
             )}
-          </dialog>
-        </>
+          </Dialog>
+        </div>
       )}
     </Guest>
   );
 }
 
-function LocalPersonForm({ client, csrf, onCreated }: { client: string; csrf: string; onCreated: () => void }) {
-  const [busy, setBusy] = useState(false), [error, setError] = useState(''), [success, setSuccess] = useState('');
+function LocalPersonForm({
+  client,
+  csrf,
+  onCreated,
+}: {
+  client: string;
+  csrf: string;
+  onCreated: () => void;
+}) {
+  const [busy, setBusy] = useState(false),
+    [error, setError] = useState(''),
+    [success, setSuccess] = useState('');
   async function create(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault(); if (busy) return;
-    const form = event.currentTarget, values = new FormData(form);
-    setBusy(true); setError(''); setSuccess('');
+    event.preventDefault();
+    if (busy) return;
+    const form = event.currentTarget,
+      values = new FormData(form);
+    setBusy(true);
+    setError('');
+    setSuccess('');
     try {
-      await api('/clients/people', { csrf, clientId: client, name: String(values.get('name')),
-        email: String(values.get('email')), role: String(values.get('role')),
-        synthetic: values.get('synthetic') === 'yes', reason: String(values.get('reason')) });
+      await api('/clients/people', {
+        csrf,
+        clientId: client,
+        name: String(values.get('name')),
+        email: String(values.get('email')),
+        role: String(values.get('role')),
+        synthetic: values.get('synthetic') === 'yes',
+        reason: String(values.get('reason')),
+      });
       setSuccess(`${String(values.get('name'))} was added to this client.`);
-      form.reset(); onCreated();
-    } catch (failure) { setError((failure as Error).message); }
-    finally { setBusy(false); }
+      form.reset();
+      onCreated();
+    } catch (failure) {
+      setError((failure as Error).message);
+    } finally {
+      setBusy(false);
+    }
   }
-  return <details className="panel">
-    <summary>Add a local person</summary>
-    <p>Create a Member or Coordinator in this client. Real local-only people receive no sign-in identity.
-      Synthetic test people can use simulated sign-in and must use an example.invalid email.</p>
-    <form aria-label="Add a local person" onSubmit={create} aria-busy={busy}>
-      <fieldset disabled={busy}>
-        <label>Name<input name="name" autoComplete="name" required maxLength={120} /></label>
-        <label>Email address<input name="email" type="email" autoComplete="email" required maxLength={200} /></label>
-        <fieldset><legend>Client role</legend><div className="choices">
-          <label><input type="radio" name="role" value="member" defaultChecked /> Member</label>
-          <label><input type="radio" name="role" value="coordinator" /> Coordinator</label>
-        </div></fieldset>
-        <fieldset><legend>Person type</legend><div className="choices">
-          <label><input type="radio" name="synthetic" value="no" defaultChecked /> Real local-only person</label>
-          <label><input type="radio" name="synthetic" value="yes" /> Synthetic test person</label>
-        </div></fieldset>
-        <label>Reason<input name="reason" required minLength={8} maxLength={2000} /></label>
-        <Feedback error={error} success={success} />
-        <button className="primary" disabled={busy}>{busy ? 'Adding person...' : 'Add person'}</button>
-      </fieldset>
-    </form>
-  </details>;
+  return (
+    <details className={styles.panel}>
+      <summary>Add a local person</summary>
+      <p>
+        Create a Member or Coordinator in this client. Real local-only people receive no sign-in
+        identity. Synthetic test people can use simulated sign-in and must use an example.invalid
+        email.
+      </p>
+      <form aria-label="Add a local person" onSubmit={create} aria-busy={busy}>
+        <fieldset disabled={busy}>
+          <label>
+            Name
+            <Input name="name" autoComplete="name" required maxLength={120} />
+          </label>
+          <label>
+            Email address
+            <Input name="email" type="email" autoComplete="email" required maxLength={200} />
+          </label>
+          <fieldset>
+            <legend>Client role</legend>
+            <div className={styles.choices}>
+              <label>
+                <Input type="radio" name="role" value="member" defaultChecked /> Member
+              </label>
+              <label>
+                <Input type="radio" name="role" value="coordinator" /> Coordinator
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Person type</legend>
+            <div className={styles.choices}>
+              <label>
+                <Input type="radio" name="synthetic" value="no" defaultChecked /> Real local-only
+                person
+              </label>
+              <label>
+                <Input type="radio" name="synthetic" value="yes" /> Synthetic test person
+              </label>
+            </div>
+          </fieldset>
+          <label>
+            Reason
+            <Input name="reason" required minLength={8} maxLength={2000} />
+          </label>
+          <Feedback error={error} success={success} />
+          <Button type="submit" variant="primary" disabled={busy}>
+            {busy ? 'Adding person...' : 'Add person'}
+          </Button>
+        </fieldset>
+      </form>
+    </details>
+  );
 }

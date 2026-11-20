@@ -8,6 +8,8 @@ import type { Sql } from '../../database/src/database.js';
 type DefinitionRow = Omit<AssessmentDraft, 'answer_key'> & {
   id: string;
   family_id: string;
+  source_definition_id: string | null;
+  source_revision: number | null;
   revision: number;
   version: number;
   status: 'draft' | 'published';
@@ -118,7 +120,13 @@ export class AssessmentDefinitions {
           'save_token_used',
           'This save reference was already used for different content.',
         );
-        return { id: saved.definition_id, version: saved.version };
+        const metadata = (
+          await sql.query(
+            'SELECT revision,source_definition_id,source_revision FROM assessment_definitions WHERE id=$1',
+            [saved.definition_id],
+          )
+        ).rows[0];
+        return { id: saved.definition_id, version: saved.version, ...metadata };
       }
       const ids = mediaIds(data.questions);
       if (ids.length) {
@@ -183,7 +191,7 @@ export class AssessmentDefinitions {
           )
         ).rows[0].revision;
         await sql.query(
-          "INSERT INTO assessment_definitions(id,organisation_id,environment,family_id,revision,actor_id,title,status,questions,sections,rubric,answer_key) VALUES($1,$2,$3,$4,$5,$6,$7,'draft',$8,$9,$10,$11)",
+          "INSERT INTO assessment_definitions(id,organisation_id,environment,family_id,revision,actor_id,title,status,questions,sections,rubric,answer_key,source_definition_id,source_revision) VALUES($1,$2,$3,$4,$5,$6,$7,'draft',$8,$9,$10,$11,$12,$13)",
           [
             id,
             client,
@@ -196,6 +204,8 @@ export class AssessmentDefinitions {
             data.sections ? JSON.stringify(data.sections) : null,
             data.rubric,
             encrypted,
+            old?.id ?? null,
+            old?.revision ?? null,
           ],
         );
       }
@@ -210,7 +220,13 @@ export class AssessmentDefinitions {
         old?.status === 'draft' ? 'assessment.definition_saved' : 'assessment.definition_created',
         id,
       );
-      return { id, version };
+      const metadata = (
+        await sql.query(
+          'SELECT revision,source_definition_id,source_revision FROM assessment_definitions WHERE id=$1',
+          [id],
+        )
+      ).rows[0];
+      return { id, version, ...metadata };
     });
   }
   async publish(token: string, csrf: string, client: string, id: string, expected: number) {

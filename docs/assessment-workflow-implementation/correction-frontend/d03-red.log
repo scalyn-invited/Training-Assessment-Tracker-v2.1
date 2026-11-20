@@ -1,0 +1,42 @@
+
+Running 1 test using 1 worker
+
+  x  1 docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:1 › QA-D03 changed server draft after publication conflict offers recovery comparison (9.1s)
+
+
+  1) docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:1 › QA-D03 changed server draft after publication conflict offers recovery comparison 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Compare with saved definition' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: 'Compare with saved definition' }) with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Compare with saved definition' })
+
+
+      667 |   expect(posts).toBe(1);
+      668 |   await screenshot(page,'QA-D03-changed-draft-recovery');
+    > 669 |   await expect(page.getByRole('button',{name:'Compare with saved definition'})).toBeVisible();
+          |                                                                                 ^
+      670 | });
+      671 |
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:669:81
+
+    Error Context: .runtime\correction-browser-results\workflow-QA-D03-changed-se-e5f00--offers-recovery-comparison\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\correction-browser-results\workflow-QA-D03-changed-se-e5f00--offers-recovery-comparison\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\correction-browser-results\workflow-QA-D03-changed-se-e5f00--offers-recovery-comparison\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    docs\assessment-workflow-implementation\correction-frontend\browser-tests\workflow.spec.ts:654:1 › QA-D03 changed server draft after publication conflict offers recovery comparison 
+
+EXIT 1

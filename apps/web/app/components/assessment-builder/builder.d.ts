@@ -1,6 +1,9 @@
 export type BuilderState = {
   id: string | null;
   version: number;
+  revision?: number;
+  source_definition_id?: string | null;
+  source_revision?: number | null;
   status: string;
   title: string;
   questions: unknown[];

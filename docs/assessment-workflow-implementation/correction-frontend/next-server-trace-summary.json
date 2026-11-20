@@ -1,0 +1,85 @@
+[
+  {
+    "name": "compile-path",
+    "milliseconds": 5246.307,
+    "tags": {
+      "trigger": "proxy"
+    },
+    "startTime": 1794834050548
+  },
+  {
+    "name": "handle-request",
+    "milliseconds": 1378.149,
+    "tags": {
+      "url": "/assessments",
+      "failed": true
+    },
+    "startTime": 1794834055819
+  },
+  {
+    "name": "compile-path",
+    "milliseconds": 21979.182,
+    "tags": {
+      "trigger": "/assessments/page"
+    },
+    "startTime": 1794834058654
+  },
+  {
+    "name": "render-path",
+    "milliseconds": 2628.52,
+    "tags": {
+      "path": "/assessments"
+    },
+    "startTime": 1794834083949
+  },
+  {
+    "name": "handle-request",
+    "milliseconds": 5858.459,
+    "tags": {
+      "url": "/assessments"
+    },
+    "startTime": 1794834080742
+  },
+  {
+    "name": "handle-request",
+    "milliseconds": 534.048,
+    "tags": {
+      "url": "/assessments",
+      "failed": true
+    },
+    "startTime": 1794834088921
+  },
+  {
+    "name": "render-path",
+    "milliseconds": 491.27,
+    "tags": {
+      "path": "/assessments"
+    },
+    "startTime": 1794834089593
+  },
+  {
+    "name": "handle-request",
+    "milliseconds": 537.971,
+    "tags": {
+      "url": "/assessments"
+    },
+    "startTime": 1794834089549
+  },
+  {
+    "name": "handle-request",
+    "milliseconds": 165.068,
+    "tags": {
+      "url": "/assessments/definitions/synthetic-definition?_rsc=hwGi8VF06EQnBrsE",
+      "failed": true
+    },
+    "startTime": 1794834100906
+  },
+  {
+    "name": "compile-path",
+    "milliseconds": 47041.854,
+    "tags": {
+      "trigger": "/assessments/definitions/[id]/page"
+    },
+    "startTime": 1794834101252
+  }
+]

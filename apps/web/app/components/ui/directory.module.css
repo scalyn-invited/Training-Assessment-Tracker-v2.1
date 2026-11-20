@@ -1,0 +1,88 @@
+/* Extracted Clients table. Column widths, row actions and data remain feature-owned. */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0;
+  font-size: var(--ui-text-body);
+}
+.table th {
+  text-transform: none;
+  letter-spacing: normal;
+  background: var(--ui-raised);
+  color: var(--ui-muted);
+  text-align: left;
+  font-size: var(--ui-text-small);
+  font-weight: 500;
+  line-height: 16px;
+  height: 40px;
+}
+.table :is(th, td) {
+  border: 0;
+  border-bottom: 1px solid var(--ui-border);
+  padding: var(--ui-space-3) var(--ui-space-2);
+  vertical-align: middle;
+}
+.table th {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.table :is(th, td):first-child {
+  padding-left: var(--ui-space-5);
+}
+.table :is(th, td):last-child {
+  padding-right: var(--ui-space-5);
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+  padding: var(--ui-space-2) 0;
+}
+/* Preserve all cells and their data-labels in the existing Clients stacked view. */
+@media (max-width: 1270px) {
+  .stacked,
+  .stacked tbody,
+  .stacked tr,
+  .stacked td {
+    display: block;
+    width: 100%;
+  }
+  .stacked thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .stacked thead button {
+    visibility: hidden;
+  }
+  .stacked tbody tr {
+    height: auto;
+    padding: 14px var(--ui-space-4);
+    border-bottom: 1px solid var(--ui-border);
+  }
+  .stacked :is(td, td:first-child, td:last-child) {
+    padding: 0;
+    border: 0;
+  }
+  .stacked td + td {
+    margin-top: var(--ui-space-2);
+  }
+  .stacked td[data-label] {
+    display: flex;
+    align-items: center;
+    gap: var(--ui-space-3);
+    line-height: 20px;
+  }
+  .stacked td[data-label]::before {
+    content: attr(data-label);
+    width: 104px;
+    flex-shrink: 0;
+    font-size: var(--ui-text-small);
+    line-height: 16px;
+    font-weight: 500;
+  }
+}

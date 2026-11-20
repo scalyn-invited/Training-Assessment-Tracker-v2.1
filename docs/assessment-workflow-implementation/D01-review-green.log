@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ok 1 tests\workflow-qa-browser\workflow.spec.ts:229:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (2.8s)
+
+  1 passed (4.8s)

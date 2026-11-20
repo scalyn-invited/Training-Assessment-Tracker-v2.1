@@ -1,6 +1,9 @@
 'use client';
+import { Select, Input, Textarea, Button, Panel, Feedback } from './ui/controls';
+import styles from './ui/form-layout.module.css';
+
 import { useEffect, useState, useRef, type FormEvent } from 'react';
-import { api, Feedback } from './auth-ui';
+import { api } from './auth-ui';
 type Person = { id: string; name: string };
 type Choices = { members: Person[]; coordinators: Person[]; teams: Person[] };
 type Draft = {
@@ -70,7 +73,7 @@ export function EnrolmentForm({ client, csrf }: { client: string; csrf: string }
     }
   }
   return (
-    <section className="panel" aria-labelledby="enrolment-heading">
+    <Panel className={styles.panel} aria-labelledby="enrolment-heading">
       <h2 id="enrolment-heading">Create a training record</h2>
       <p>
         Select the member, their primary coordinator and team. Sensitive assessment access is
@@ -79,9 +82,9 @@ export function EnrolmentForm({ client, csrf }: { client: string; csrf: string }
       <Feedback error={error} success={success} />
       {!choices ? (
         error ? (
-          <button type="button" className="secondary" onClick={() => setRevision((r) => r + 1)}>
+          <Button type="button" variant="secondary" onClick={() => setRevision((r) => r + 1)}>
             Retry enrolment choices
-          </button>
+          </Button>
         ) : (
           <p role="status">Loading eligible people and teams…</p>
         )
@@ -91,7 +94,7 @@ export function EnrolmentForm({ client, csrf }: { client: string; csrf: string }
         <>
           <form ref={form} onSubmit={prepare} hidden={Boolean(draft)}>
             <label htmlFor="enrolment-member">Training member</label>
-            <select id="enrolment-member" name="memberId" required defaultValue="">
+            <Select id="enrolment-member" name="memberId" required defaultValue="">
               <option value="" disabled>
                 Choose a member
               </option>
@@ -100,9 +103,9 @@ export function EnrolmentForm({ client, csrf }: { client: string; csrf: string }
                   {m.name}
                 </option>
               ))}
-            </select>
+            </Select>
             <label htmlFor="enrolment-coordinator">Primary coordinator</label>
-            <select id="enrolment-coordinator" name="coordinatorId" required defaultValue="">
+            <Select id="enrolment-coordinator" name="coordinatorId" required defaultValue="">
               <option value="" disabled>
                 Choose a coordinator
               </option>
@@ -111,9 +114,9 @@ export function EnrolmentForm({ client, csrf }: { client: string; csrf: string }
                   {m.name}
                 </option>
               ))}
-            </select>
+            </Select>
             <label htmlFor="enrolment-team">Team</label>
-            <select id="enrolment-team" name="groupId" required defaultValue="">
+            <Select id="enrolment-team" name="groupId" required defaultValue="">
               <option value="" disabled>
                 Choose a team or no team
               </option>
@@ -123,12 +126,14 @@ export function EnrolmentForm({ client, csrf }: { client: string; csrf: string }
                   {m.name}
                 </option>
               ))}
-            </select>
+            </Select>
             <label htmlFor="enrolment-title">Training title</label>
-            <input id="enrolment-title" name="title" required maxLength={160} />
+            <Input id="enrolment-title" name="title" required maxLength={160} />
             <label htmlFor="enrolment-reason">Reason for creating this record</label>
-            <textarea id="enrolment-reason" name="reason" required minLength={8} maxLength={2000} />
-            <button className="primary">Review training record</button>
+            <Textarea id="enrolment-reason" name="reason" required minLength={8} maxLength={2000} />
+            <Button type="submit" variant="primary">
+              Review training record
+            </Button>
           </form>
           {draft && (
             <div>
@@ -155,12 +160,12 @@ export function EnrolmentForm({ client, csrf }: { client: string; csrf: string }
                 This creates an onboarding record. If the member has a different primary
                 coordinator, replace that allocation explicitly first.
               </p>
-              <button type="button" className="primary" onClick={create} disabled={busy}>
+              <Button type="button" variant="primary" onClick={create} disabled={busy}>
                 {busy ? 'Creating record…' : 'Create training record'}
-              </button>{' '}
-              <button
+              </Button>{' '}
+              <Button
                 type="button"
-                className="secondary"
+                variant="secondary"
                 disabled={busy}
                 onClick={() => {
                   setDraft(null);
@@ -169,11 +174,11 @@ export function EnrolmentForm({ client, csrf }: { client: string; csrf: string }
                 }}
               >
                 Back to edit
-              </button>
+              </Button>
             </div>
           )}
         </>
       )}
-    </section>
+    </Panel>
   );
 }

@@ -1,7 +1,10 @@
 'use client';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
-import { api, Feedback } from './auth-ui';
+import { api } from './auth-ui';
+import { Button, Panel, Badge, Input, Select, Feedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/training-record.module.css';
 type File = { id: string; name: string; bytes: number; status: string; purpose: string };
 export function EnrolmentEvidence({
   id,
@@ -74,7 +77,7 @@ export function EnrolmentEvidence({
     }
   }
   return (
-    <section className="panel">
+    <Panel className={layout.panel} aria-label="Private evidence">
       <h2>Private evidence</h2>
       <p>
         Downloads require current enrolment access. Sensitive assessments require an additional
@@ -83,7 +86,7 @@ export function EnrolmentEvidence({
       <Feedback error={error} success={message} />
       {!files && loading && <p role="status">Loading private evidence...</p>}
       {files && (
-        <ul className="file-list">
+        <ul className={styles.files}>
           {!files.length && <li>No evidence visible in your scope.</li>}
           {files.map((file) => (
             <li key={file.id}>
@@ -96,9 +99,7 @@ export function EnrolmentEvidence({
               {file.status === 'clean' ? (
                 <a href={'/api/files/' + file.id}>Download {file.name}</a>
               ) : (
-                <span className="badge">
-                  {file.status === 'rejected' ? 'Rejected' : 'Quarantined'}
-                </span>
+                <Badge>{file.status === 'rejected' ? 'Rejected' : 'Quarantined'}</Badge>
               )}
               {file.purpose === 'assessment' && canManage && (
                 <Link href={`/enrolments/${id}/documents/${file.id}`}>
@@ -109,9 +110,9 @@ export function EnrolmentEvidence({
           ))}
         </ul>
       )}
-      <button className="secondary" disabled={busy || loading} onClick={() => void refresh()}>
+      <Button disabled={busy || loading} onClick={() => void refresh()}>
         {loading ? 'Refreshing evidence...' : 'Refresh evidence'}
-      </button>
+      </Button>
       {canUpload && (
         <form onSubmit={upload} aria-busy={busy}>
           <h3>Upload for quarantine</h3>
@@ -121,14 +122,15 @@ export function EnrolmentEvidence({
           </p>
           <label>
             File purpose
-            <select name="purpose" aria-label="File purpose" disabled={busy}>
+            <Select name="purpose" aria-label="File purpose" disabled={busy}>
               <option value="assessment">Sensitive assessment for coordinator review</option>
               <option value="evidence">My submitted work or supporting evidence</option>
-            </select>
+            </Select>
           </label>
           <label>
             Evidence file
-            <input
+            <Input
+              className={styles.upload}
               name="evidence"
               type="file"
               accept=".pdf,.png,.jpg,.jpeg,.txt,.docx"
@@ -136,11 +138,11 @@ export function EnrolmentEvidence({
               disabled={busy}
             />
           </label>
-          <button className="secondary" disabled={busy}>
+          <Button type="submit" disabled={busy}>
             {busy ? 'Storing evidence...' : 'Store privately'}
-          </button>
+          </Button>
         </form>
       )}
-    </section>
+    </Panel>
   );
 }

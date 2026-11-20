@@ -1,0 +1,82 @@
+
+Running 2 tests using 1 worker
+
+  x  1 docs\assessment-workflow-implementation\review-d03-02-correction\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version 409 (10.2s)
+  x  2 docs\assessment-workflow-implementation\review-d03-02-correction\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version lost-response (9.8s)
+
+
+  1) docs\assessment-workflow-implementation\review-d03-02-correction\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version 409 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('#save-definition')
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" locator('#save-definition') with timeout 5000ms
+      - waiting for locator('#save-definition')
+        13 × locator resolved to <button type="button" class="primary" id="save-definition">Save draft</button>
+           - unexpected value "enabled"
+
+
+      755 |   await screenshot(page,`REVIEW-D03-newer-published-${outcome}`);
+      756 |   expect(posts).toBe(1);
+    > 757 |   await expect(page.locator('#save-definition')).toBeDisabled();
+          |                                                  ^
+      758 |   await expect(page.getByRole('button',{name:'Compare with saved definition'})).toBeVisible();
+      759 |   await expect(page.locator('#definition-provenance')).toContainText('edit version 1');
+      760 | });
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\review-d03-02-correction\browser-tests\workflow.spec.ts:757:50
+
+    Error Context: .runtime\review-d03-02-correction-browser-results\workflow-REVIEW-D03-newer--5f662-the-local-saved-version-409\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\review-d03-02-correction-browser-results\workflow-REVIEW-D03-newer--5f662-the-local-saved-version-409\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\review-d03-02-correction-browser-results\workflow-REVIEW-D03-newer--5f662-the-local-saved-version-409\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) docs\assessment-workflow-implementation\review-d03-02-correction\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version lost-response 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('#save-definition')
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" locator('#save-definition') with timeout 5000ms
+      - waiting for locator('#save-definition')
+        13 × locator resolved to <button type="button" class="primary" id="save-definition">Save draft</button>
+           - unexpected value "enabled"
+
+
+      755 |   await screenshot(page,`REVIEW-D03-newer-published-${outcome}`);
+      756 |   expect(posts).toBe(1);
+    > 757 |   await expect(page.locator('#save-definition')).toBeDisabled();
+          |                                                  ^
+      758 |   await expect(page.getByRole('button',{name:'Compare with saved definition'})).toBeVisible();
+      759 |   await expect(page.locator('#definition-provenance')).toContainText('edit version 1');
+      760 | });
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\review-d03-02-correction\browser-tests\workflow.spec.ts:757:50
+
+    Error Context: .runtime\review-d03-02-correction-browser-results\workflow-REVIEW-D03-newer--e8459-saved-version-lost-response\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\review-d03-02-correction-browser-results\workflow-REVIEW-D03-newer--e8459-saved-version-lost-response\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\review-d03-02-correction-browser-results\workflow-REVIEW-D03-newer--e8459-saved-version-lost-response\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    docs\assessment-workflow-implementation\review-d03-02-correction\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version 409 
+    docs\assessment-workflow-implementation\review-d03-02-correction\browser-tests\workflow.spec.ts:733:49 › REVIEW-D03 newer published content must not confirm the local saved version lost-response 
+
+EXIT 1

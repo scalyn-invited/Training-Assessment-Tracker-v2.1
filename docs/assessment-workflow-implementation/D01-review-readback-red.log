@@ -1,0 +1,35 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:295:1 › D01 uncertain reviewer decision stops newer writes and retains fields (6.0s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:295:1 › D01 uncertain reviewer decision stops newer writes and retains fields 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByLabel('Private decision rationale')
+    Expected: "Synthetic private rationale"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" getByLabel('Private decision rationale') with timeout 5000ms
+      - waiting for getByLabel('Private decision rationale')
+        14 × locator resolved to <textarea disabled required="" minlength="8" maxlength="2000" aria-label="Private decision rationale"></textarea>
+           - unexpected value ""
+
+
+      308 |  await expect(page.getByLabel('Private decision rationale')).toHaveValue('Synthetic private rationale');
+      309 |  await page.getByRole('button',{name:'Refresh review status'}).click();
+    > 310 |  await expect(page.getByLabel('Private decision rationale')).toHaveValue('Synthetic private rationale');
+          |                                                              ^
+      311 |  await expect(page.getByRole('button',{name:'Reject and allow resubmission'})).toBeDisabled();
+      312 |  expect(posts).toBe(1);
+      313 | });
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:310:62
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D01-uncertain-rev-192bc-r-writes-and-retains-fields\error-context.md
+
+  1 failed
+    tests\workflow-qa-browser\workflow.spec.ts:295:1 › D01 uncertain reviewer decision stops newer writes and retains fields 

@@ -120,12 +120,12 @@ afterAll(async () => {
   await instance?.close();
   if (dir) await rm(dir, { recursive: true, force: true });
 });
-async function submitted(withFile = false) {
+async function submitted(withFile = false, groupId: string | null = team) {
   const enrolment = (
     await enrolments.create(admin.token, admin.csrf, client, {
       memberId,
       coordinatorId,
-      groupId: team,
+      groupId,
       title: 'Review record',
       reason: 'Synthetic review verification',
     })
@@ -211,6 +211,129 @@ function decide(
     result,
   );
 }
+it('QA D02 characterizes no-team appeal freeze and unavailable alternate routing', async () => {
+  const a = await submitted(false, null);
+  const rejected = await decide(a, coordinator, 'rejected');
+  const appeal = await reviews.appeal(
+    member.token,
+    member.csrf,
+    client,
+    a.id,
+    rejected.version,
+    'Synthetic request for independent review',
+  );
+  const routing = await reviews.routing(clientAdmin.token, client);
+  expect(routing.canRoute).toBe(true);
+  expect(routing.appeals.find((p) => p.id === appeal.appeal)?.reviewers).toEqual([]);
+  await expect(
+    reviews.route(
+      clientAdmin.token,
+      clientAdmin.csrf,
+      client,
+      appeal.appeal,
+      alternateUser,
+      'Synthetic independent routing',
+    ),
+  ).rejects.toMatchObject({ status: 422, code: 'invalid_alternate' });
+  await expect(
+    responses.save(member.token, member.csrf, client, a.id, appeal.version, {
+      responses: { written: 'New evidence' },
+      save_token: randomUUID(),
+    }),
+  ).rejects.toMatchObject({ status: 409 });
+  await expect(
+    responses.submit(member.token, member.csrf, client, a.id, appeal.version, randomUUID()),
+  ).rejects.toMatchObject({ status: 409 });
+  await expect(decide(a, coordinator, 'approved', appeal.version)).rejects.toMatchObject({
+    status: 403,
+  });
+  expect((await reviews.read(member.token, client, a.id)).appeal).toMatchObject({ status: 'open' });
+});
+it('D07 separately authored return feedback is safe, encrypted and bound to the immutable attempt', async () => {
+  const a = await submitted();
+  const feedback = 'PUBLIC: Add a concrete worked example before resubmitting.';
+  const rejected = await reviews.decide(
+    coordinator.token,
+    coordinator.csrf,
+    client,
+    a.id,
+    a.attempt,
+    3,
+    'rejected',
+    'PRIVATE: Internal rationale only',
+    score(a.attempt),
+    null,
+    feedback,
+  );
+  const view = await reviews.read(member.token, client, a.id);
+  expect(view).toMatchObject({
+    approved: null,
+    reviews: [],
+    rubric: null,
+    evidence: [],
+    returned: { attemptId: a.attempt, feedback },
+  });
+  expect(JSON.stringify(view)).not.toContain('PRIVATE:');
+  expect(JSON.stringify(view)).not.toContain('Evidence supports the result.');
+  const stored = (
+    await instance.db.pool.query('SELECT return_feedback FROM assessment_reviews WHERE id=$1', [
+      rejected.review,
+    ])
+  ).rows[0];
+  expect(stored.return_feedback).not.toContain('PUBLIC:');
+  await expect(
+    instance.db.pool.query('UPDATE assessment_reviews SET return_feedback=$1 WHERE id=$2', [
+      'tamper',
+      rejected.review,
+    ]),
+  ).rejects.toThrow();
+  await responses.save(member.token, member.csrf, client, a.id, rejected.version, {
+    responses: { written: 'Revised public evidence' },
+    save_token: randomUUID(),
+  });
+  expect((await reviews.read(member.token, client, a.id)).returned?.feedback).toBe(feedback);
+  await responses.submit(
+    member.token,
+    member.csrf,
+    client,
+    a.id,
+    rejected.version + 1,
+    randomUUID(),
+  );
+  expect((await reviews.read(member.token, client, a.id)).returned).toBeNull();
+});
+it('D07 rejects empty explicitly supplied public feedback without a decision', async () => {
+  const a = await submitted();
+  await expect(
+    reviews.decide(
+      coordinator.token,
+      coordinator.csrf,
+      client,
+      a.id,
+      a.attempt,
+      3,
+      'rejected',
+      'Private test rationale',
+      null,
+      null,
+      '   ',
+    ),
+  ).rejects.toThrow();
+  expect((await reviews.read(member.token, client, a.id)).status).toBe('submitted');
+});
+it('QA D07 legacy rejection omits public feedback without leaking private rationale', async () => {
+  const a = await submitted();
+  const rejected = await decide(a, coordinator, 'rejected');
+  const view = await reviews.read(member.token, client, a.id);
+  expect(view).toMatchObject({ approved: null, reviews: [], rubric: null, evidence: [] });
+  expect(JSON.stringify(view)).not.toContain('Verified human decision');
+  expect(JSON.stringify(view)).not.toContain('Evidence supports the result.');
+  await responses.save(member.token, member.csrf, client, a.id, rejected.version, {
+    responses: { written: 'Revised evidence' },
+    save_token: randomUUID(),
+  });
+  expect((await responses.read(member.token, client, a.id)).status).toBe('draft');
+});
 it('requires reviewer authority, pins the latest version and projects approved results only', async () => {
   const a = await submitted();
   await expect(decide(a, member)).rejects.toMatchObject({ status: 403 });

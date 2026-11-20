@@ -1,0 +1,15 @@
+[WebServer] ▲ Next.js 16.4.6
+[WebServer] - Local:         http://127.0.0.1:3275
+[WebServer] - Network:       http://127.0.0.1:3275
+[WebServer] ✓ Ready in 731ms
+[WebServer] ✓ Running next.config.ts took 93ms
+
+Running 3 tests using 1 worker
+
+  ok 1 docs\assessment-workflow-implementation\correction-qa\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (3.1s)
+  ok 2 docs\assessment-workflow-implementation\correction-qa\next-tests\recovery.spec.ts:3:48 › D03 real Next 409 authorized recovery reloads newer draft only after discard (6.4s)
+  ok 3 docs\assessment-workflow-implementation\correction-qa\next-tests\recovery.spec.ts:3:48 › D03 real Next lost-response authorized recovery reloads newer draft only after discard (5.7s)
+
+  3 passed (21.5s)
+
+EXIT 0

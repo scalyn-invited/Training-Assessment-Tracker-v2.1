@@ -1,0 +1,67 @@
+/* Shared by application, guest and recovery layouts. Theme selection and branded palettes remain owned by useBrand. */
+.theme {
+  --ui-font: Inter, 'Segoe UI', sans-serif;
+  --ui-text-small: 12px;
+  --ui-text-label: 13px;
+  --ui-text-body: 14px;
+  --ui-text-control-mobile: 16px;
+  --ui-text-section: 20px;
+  --ui-text-title-mobile: 24px;
+  --ui-text-title: 32px;
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-5: 20px;
+  --ui-space-6: 24px;
+  --ui-space-7: 32px;
+  --ui-space-8: 40px;
+  --ui-radius-control: 8px;
+  --ui-radius-icon: 10px;
+  --ui-radius-panel: 14px;
+  --ui-radius-pill: 999px;
+  --ui-background: var(--bg);
+  --ui-surface: var(--surface);
+  --ui-raised: var(--raised);
+  --ui-text: var(--ink);
+  --ui-muted: var(--muted);
+  --ui-border: var(--line);
+  --ui-focus: var(--focus);
+  --ui-sidebar: var(--surface);
+  --ui-active: var(--hover);
+  --ui-tertiary: var(--muted);
+  --ui-link: var(--primary);
+  --ui-accent: var(--primary);
+  --ui-on-accent: var(--on-primary);
+  --ui-danger: var(--error);
+  --ui-danger-bg: var(--error-bg);
+  --ui-warning: #855000;
+  --ui-warning-bg: #fff1cd;
+  --ui-success: #146c45;
+  --ui-success-bg: #e5f7ed;
+  --ui-glow: transparent;
+  --ui-backdrop: #000a;
+}
+:global([data-theme='dark']) .theme {
+  color-scheme: dark;
+  --bg: #070b16;
+  --surface: #0d1426;
+  --raised: #111a30;
+  --hover: #16213d;
+  --ink: #e9edf7;
+  --muted: #98a2bc;
+  --line: #1a2440;
+  --primary: #7baaff;
+  --focus: #7baaff;
+  --on-primary: #070b16;
+  --soft: #14224a;
+  --ui-sidebar: #0a1020;
+  --ui-tertiary: #8492b0;
+  --ui-accent: #2f6beb;
+  --ui-on-accent: #ffffff;
+  --ui-warning: #fbbf4a;
+  --ui-warning-bg: #2b2010;
+  --ui-success: #4ade9a;
+  --ui-success-bg: #0f2a22;
+  --ui-glow: rgba(23, 46, 117, 0.55);
+}

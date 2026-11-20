@@ -1,0 +1,25 @@
+.panel {
+  overflow-wrap: anywhere;
+}
+.panel li + li {
+  margin-top: var(--ui-space-2);
+}
+.article {
+  padding-top: var(--ui-space-4);
+  border-top: 1px solid var(--ui-border);
+}
+.article > :not(:first-child),
+.article details[open] > div + div {
+  margin-top: var(--ui-space-4);
+}
+.article details > div > :not(:first-child) {
+  margin-top: var(--ui-space-2);
+}
+.panel fieldset > button {
+  align-self: flex-start;
+}
+@media (pointer: coarse) {
+  .panel summary {
+    min-height: 44px;
+  }
+}
