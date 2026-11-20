@@ -18,7 +18,7 @@ People, evidence, accountable review. Preserve the existing Figma implementation
 
 ## Global color tokens
 
-The shared `components/ui/tokens.module.css` theme scope supplies reusable semantics. It inherits the existing theme resolver for light, neon, platform and client palettes; only the plain Dark theme applies the Figma navy override. Personal theme precedence and branding generation are unchanged. Legacy `--ov-*` names temporarily alias these semantics for reference screens.
+The shared `components/ui/tokens.module.css` theme scope supplies reusable semantics. It inherits the existing theme resolver for light, neon, platform and client palettes; only the plain Dark theme applies the Figma navy override. Plain Dark base colors are defined at the root in `globals.css` so the initial canvas matches these scopes. Personal theme precedence and branding generation are unchanged. Legacy `--ov-*` names temporarily alias these semantics for reference screens.
 
 - `--ui-background`, `--ui-surface`, `--ui-raised`, `--ui-text`, `--ui-muted`, `--ui-border`, `--ui-focus` alias the active `--bg`, `--surface`, `--raised`, `--ink`, `--muted`, `--line`, `--focus`. Light defaults remain #f4f8fb / #ffffff / text #203f59; dark values come directly from Overview: #070b16 / #0d1426 / #111a30 / #e9edf7 / #98a2bc / #1a2440 / #7baaff.
 - `--ui-accent`: light #1d4668 via `--primary`, dark #2f6beb; primary actions only. `--ui-on-accent` inherits the theme's `--on-primary`, with #ffffff for plain Dark. `--ui-link` inherits `--primary`, dark #7baaff, to keep text links legible.
@@ -167,6 +167,12 @@ Bernie's response forwarded by the user confirms preserving the current authenti
 `error.tsx` and `not-found.tsx` use the standalone RecoveryFrame with shared semantic tokens, PageHeader and button/link styles. Retain the existing single-column title, explanation and one recovery action; do not add navigation, account information or inferred permissions. The frame has no session or branding fetch dependency. It inherits the document's resolved theme and palette without overwriting preferences; a fresh document before appearance resolves retains the existing root default. Keep 32px/24px headings, 14px text, 24px section gaps, existing 1260px content maximum and 20px mobile inset. Mobile/coarse-pointer actions have 48px targets. Focus the main landmark when the fallback mounts; keep the root skip link functional.
 
 The error action uses the installed Next.js `retry` callback to refresh and reset the boundary; `reset` is still supported but does not itself refresh. Preserve the existing error copy and never render exception details. Not-found keeps its `/` return link, framework 404 and noindex behavior. `/` remains the unchanged redirect to `/dashboard`; session/client/role destinations are not redesigned. Evidence: `docs/implementation/GLOBAL_UI_RECOVERY_QA.md`.
+
+## First-paint appearance initialization
+
+Appearance is resolved per document through the existing API before rendering; server palettes and the configured theme are delivered with the root. A parser-blocking, allowlisted local-storage override applies the existing guest/shared account preference before body paint. Client personal preferences remain server-owned. The request snapshot is not a navigation cache and is invalidated after navigation or appearance changes. Session loading is not treated as an anonymous identity.
+
+Plain Dark's existing navy base tokens now live on the document root, covering canvas, gutters and recovery as well as shells. Shared accent/status tokens and all existing light/neon/generated palettes retain their values. No OS-following System mode is added. If authoritative appearance is unavailable, a bounded request deadline falls back to the existing visible retry path rather than an indefinite blank screen; unavailable generated/default appearance is explicitly not guaranteed to match its eventual successful retry. See `docs/implementation/FIRST_PAINT_FIX.md` for evidence and qualification limits.
 
 ## Historical design record
 

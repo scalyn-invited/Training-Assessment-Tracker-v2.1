@@ -3,62 +3,60 @@ import { useEffect, useState, useRef, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import { themes } from '../../../../packages/domain/src/theme';
 import { Icon } from './workspace-icon';
-export type Brand = {
-  displayName: string;
-  appName: string;
-  mode: string;
-  selectedTheme: string;
-  logo: string | null;
-  palettes: Record<string, Record<string, string>>;
-  platformPalettes: Record<string, Record<string, string>>;
-  themes?: Record<string, string>;
-  preferenceVersion?: number;
-  theme?: string;
-};
-export function useBrand(account = 'guest') {
+import {
+  appearanceKey,
+  paletteProperties,
+  savedTheme,
+  sharedAppearance,
+  type Brand,
+} from './appearance-state';
+import { useInitialAppearance } from './appearance-provider';
+export type { Brand } from './appearance-state';
+export function useBrand(account: string | null = 'guest') {
   const pathname = usePathname(),
-    shared = /^\/(platform|login|setup|clients|account|accounts)(\/|$)/.test(pathname);
-  const [brand, setBrand] = useState<Brand | null>(null),
+    shared = sharedAppearance(pathname);
+  const initial = useInitialAppearance();
+  const initialMatches =
+    initial?.pathname === pathname && (account === null || initial.account === account);
+  const [brand, setBrand] = useState<Brand | null>(initialMatches ? initial.brand : null),
     [error, setError] = useState(''),
     [retry, setRetry] = useState(0);
-  const storageKey = 'training.v21.appearance.platform.' + account;
+  const storageKey = appearanceKey(account ?? initial?.account ?? 'guest');
   useEffect(() => {
-    let current = true;
+    // Session loading is not an anonymous identity. Keep the resolved document theme.
+    if (account === null) return;
+    let current = true,
+      sequence = 0;
+    function apply(data: Brand) {
+      const resolved = savedTheme(data, account!, shared);
+      const root = document.documentElement;
+      for (const [key, value] of Object.entries(paletteProperties(resolved)))
+        root.style.setProperty(key, value);
+      root.dataset.theme = resolved.selectedTheme;
+      setBrand(resolved);
+      setError('');
+    }
     async function refresh() {
+      const request = ++sequence;
       try {
         const response = await fetch('/api/branding/current?shared=' + (shared ? '1' : '0'), {
           cache: 'no-store',
         });
         if (!response.ok) throw new Error('Appearance could not be loaded. Retry appearance.');
         const data = (await response.json()) as Brand;
-        if (!current) return;
-        const root = document.documentElement;
-        for (const [prefix, palettes] of [
-          ['client', data.palettes],
-          ['platform', data.platformPalettes],
-        ] as const)
-          for (const [variant, tokens] of Object.entries(palettes))
-            for (const [key, value] of Object.entries(tokens))
-              root.style.setProperty('--' + prefix + '-' + variant + '-' + key, value);
-        if (shared || account === 'guest')
-          try {
-            const saved = localStorage.getItem(storageKey);
-            if (saved && Object.hasOwn(themes, saved)) data.selectedTheme = saved;
-          } catch {}
-        root.dataset.theme = data.selectedTheme;
-        setBrand(data);
-        setError('');
+        if (current && request === sequence) apply(data);
       } catch (e) {
-        if (current) setError((e as Error).message);
+        if (current && request === sequence) setError((e as Error).message);
       }
     }
-    void refresh();
+    if (initialMatches && initial?.brand && retry === 0) apply(initial.brand);
+    else void refresh();
     window.addEventListener('brandingchanged', refresh);
     return () => {
       current = false;
       window.removeEventListener('brandingchanged', refresh);
     };
-  }, [pathname, shared, account, storageKey, retry]);
+  }, [pathname, shared, account, initial, initialMatches, retry]);
   return { brand, error, shared, storageKey, reload: () => setRetry((n) => n + 1) };
 }
 export function ThemePicker({
@@ -76,6 +74,8 @@ export function ThemePicker({
   reload: () => void;
   icon?: ReactNode;
 }) {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
   const menu = useRef<HTMLDetailsElement>(null);
   const [busy, setBusy] = useState(false),
     [error, setError] = useState(''),
@@ -143,7 +143,7 @@ export function ThemePicker({
           {icon ?? <Icon name="moon" />}
           <span>Theme</span>
           <span className="theme-current">
-            {brand
+            {brand && hydrated
               ? ((brand.themes ?? themes) as Record<string, string>)[brand.selectedTheme]
               : 'Loading...'}
           </span>
@@ -153,15 +153,19 @@ export function ThemePicker({
             <button
               type="button"
               key={value}
-              disabled={!brand || busy}
-              aria-pressed={brand?.selectedTheme === value}
+              disabled={!brand || !hydrated || busy}
+              aria-pressed={hydrated && brand?.selectedTheme === value}
               onClick={() => void choose(value)}
             >
               <span className={'theme-dot theme-dot-' + value} aria-hidden="true" />
               {label}
             </button>
           ))}
-          <button type="button" disabled={!brand || busy} onClick={() => void choose(null)}>
+          <button
+            type="button"
+            disabled={!brand || !hydrated || busy}
+            onClick={() => void choose(null)}
+          >
             Use {client ? 'client' : 'platform'} default
           </button>
         </div>

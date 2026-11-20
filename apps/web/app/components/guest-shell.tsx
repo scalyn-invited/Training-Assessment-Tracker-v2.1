@@ -55,7 +55,7 @@ export function GuestShell({
       </header>
       <div className={styles.content}>
         <div className={styles.toolbar}>
-          <ThemePicker brand={brand} storageKey={storageKey} reload={reload} />
+          <ThemePicker brand={session ? null : brand} storageKey={storageKey} reload={reload} />
         </div>
         {error && (
           <div className={styles.brandError}>

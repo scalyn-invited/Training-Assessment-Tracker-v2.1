@@ -22,7 +22,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     storageKey,
     reload,
   } = useBrand(
-    !guest && context?.user ? context.user.environment + '.' + context.user.id : 'guest',
+    !context && !/^\/(login|setup|account\/link)(\/|$)/.test(pathname)
+      ? null
+      : !guest && context?.user
+        ? context.user.environment + '.' + context.user.id
+        : 'guest',
   );
   const [clients, setClients] = useState<Client[] | null>(null),
     [selected, setSelected] = useState(''),

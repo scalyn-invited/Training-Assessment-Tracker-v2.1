@@ -44,17 +44,6 @@
 }
 :global([data-theme='dark']) .theme {
   color-scheme: dark;
-  --bg: #070b16;
-  --surface: #0d1426;
-  --raised: #111a30;
-  --hover: #16213d;
-  --ink: #e9edf7;
-  --muted: #98a2bc;
-  --line: #1a2440;
-  --primary: #7baaff;
-  --focus: #7baaff;
-  --on-primary: #070b16;
-  --soft: #14224a;
   --ui-sidebar: #0a1020;
   --ui-tertiary: #8492b0;
   --ui-accent: #2f6beb;
