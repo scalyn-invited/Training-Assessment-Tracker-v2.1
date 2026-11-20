@@ -14,6 +14,10 @@ Task `t_9ea2df68`: geometry correction passes exact four reload conditions plus 
 
 FOUC-QA-04 scoped appearance correction: owner-approved authority-gated SPA rendering implemented with explicit pending/retry, pre-paint appearance commit and obsolete-response rejection. Original RED preserved; revised baseline contract and reused-shell A -> B -> A case reproduced RED before their corrections. Expanded real-API navigation/client/identity checks and first-paint policy regressions are recorded in `SCOPED_APPEARANCE_TRANSITION_FIX.md` and `evidence/scope-fix/`. The historical strict 503 assertion remains a recorded failure under the approved bounded exception; no independent/human acceptance is inferred.
 
+## Authority-gated assessment builder — FOUC-QA-05
+
+Task `t_ec45899d`: reproduced the empty-host RED after delayed appearance authority; separated imperative editor data lifetime from shell-host attachment and withheld controls until the lazy module installs handlers/guards. Newer edits and saved state now survive the save URL's temporary authority gate. Final unchanged real-API builder journey, enhanced gate/save/history regression, delayed real-bundle regression, scope/history/races, shell/guest and 10 builder component checks pass; policy14/branding6/build/types pass. Prior first-paint result remains 22 passes / one preserved superseded outage assertion failure. See `BUILDER_APPEARANCE_GATE_FIX.md` and `evidence/builder-appearance-gate-fix.tar.gz`. Original QA evidence unchanged. Implementation phase complete; root independent QA and remaining all-family coverage still pending, no overall acceptance.
+
 ## Foundation — Completed (local implementation and QA)
 Acceptance: independent workspaces, separate web/API/worker, persistent shared PGlite fallback, PostgreSQL adapter, checksummed SQL migrations, transaction-scoped tenant access, durable outbox, startup and browser checks.
 - [x] Implementation
