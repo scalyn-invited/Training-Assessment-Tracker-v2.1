@@ -1,0 +1,41 @@
+
+> training-assessment-tracker-v2-1@0.1.0 build
+> tsc -p tsconfig.server.json && npm run build --workspace=@tracker/web
+
+
+> build
+> next build
+
+▲ Next.js 16.4.6 (Turbopack)
+✓ Running next.config.ts took 723ms
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 1 error:
+./apps/web/app
+Error: Could not find the Next.js package (next/package.json)
+Resolved from: C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\fouc-scope-fix\apps\web\app
+Filesystem root used for resolution: C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\fouc-scope-fix
+
+Possible causes:
+  - node_modules is being reorganized by a concurrent install (e.g. pnpm adding a package with a `next` peer dependency). This is transient and should clear once the install completes.
+  - node_modules/next was removed, renamed, or has a broken symlink.
+  - The workspace root is incorrect — see turbopack.root in the Next.js config docs for how to configure it.
+  - In a monorepo, the Next.js package may only exist in a directory above the closest directory containing a package manager lockfile. The workspace root is detected by locating the nearest package manager lockfile.
+  - Next.js is installed globally rather than as a project dependency. This is not supported; install it locally.
+
+Note: To ensure a hermetic build and a portable cache, files outside of the workspace root are not compiled.
+
+https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory
+
+
+    at <unknown> (Filesystem root used for resolution: C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\fouc-scope-fix)
+    at <unknown> (https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory)
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\fouc-scope-fix\apps\web
+npm error workspace @tracker/web
+npm error location C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\fouc-scope-fix\apps\web
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c next build

@@ -1,0 +1,118 @@
+[
+  {
+    "t": 247.79999995231628,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 160,
+      "y": 134,
+      "width": 480
+    }
+  },
+  {
+    "t": 253.20000004768372,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 160,
+      "y": 134,
+      "width": 480
+    }
+  },
+  {
+    "t": 260.10000002384186,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 160,
+      "y": 134,
+      "width": 480
+    }
+  },
+  {
+    "t": 275.7999999523163,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 160,
+      "y": 134,
+      "width": 480
+    }
+  },
+  {
+    "t": 308.10000002384186,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 160,
+      "y": 134,
+      "width": 480
+    }
+  },
+  {
+    "t": 311.2000000476837,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 160,
+      "y": 134,
+      "width": 480
+    }
+  },
+  {
+    "t": 324.39999997615814,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "rect": {
+      "x": 160,
+      "y": 134,
+      "width": 480
+    }
+  },
+  {
+    "t": 366.39999997615814,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 0,
+      "y": 291.5,
+      "width": 800
+    }
+  },
+  {
+    "t": 373.7000000476837,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 0,
+      "y": 291.5,
+      "width": 800
+    }
+  },
+  {
+    "t": 375.89999997615814,
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "shell": "learning",
+    "rect": {
+      "x": 0,
+      "y": 291.5,
+      "width": 800
+    }
+  }
+]

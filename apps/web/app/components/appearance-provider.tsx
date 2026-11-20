@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useLayoutEffect, useState, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import type { InitialAppearance } from './appearance-state';
 const AppearanceContext = createContext<InitialAppearance | null>(null);
@@ -12,7 +12,7 @@ export function AppearanceProvider({
 }) {
   const pathname = usePathname();
   const [valid, setValid] = useState(true);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (pathname !== initial.pathname) setValid(false);
     const invalidate = () => setValid(false);
     window.addEventListener('brandingchanged', invalidate);

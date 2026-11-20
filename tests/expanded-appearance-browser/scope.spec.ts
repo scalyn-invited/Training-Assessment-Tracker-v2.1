@@ -4,7 +4,7 @@ const dir = process.env.QA_EVIDENCE_DIR || 'evidence/expanded';
 test('real API scoped navigation never renders target content in the previous scope theme', async ({
   page,
 }) => {
-  test.setTimeout(180000);
+  test.setTimeout(300000);
   await mkdir(dir, { recursive: true });
   const post = async (path: string, data: Record<string, unknown>) => {
     const c = await (await page.request.get('/api/auth/context')).json();
@@ -61,6 +61,8 @@ test('real API scoped navigation never renders target content in the previous sc
           theme: document.documentElement.dataset.theme,
           bg: getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(),
           heading: document.querySelector('main h1')?.textContent,
+          pending: Boolean(document.querySelector('[data-appearance-pending]')),
+          text: document.body.innerText,
           shell: document
             .querySelector('[data-application-shell]')
             ?.getAttribute('data-application-shell'),
@@ -91,9 +93,11 @@ test('real API scoped navigation never renders target content in the previous sc
   });
   await page.getByRole('link', { name: 'Learning workspace', exact: true }).click();
   await seen;
-  await expect(
-    page.getByRole('heading', { name: 'Welcome back, Scope QA owner.', exact: true }),
-  ).toBeVisible();
+  await page.waitForTimeout(150);
+  await expect.soft(page.locator('[data-appearance-pending]')).toBeVisible();
+  await expect
+    .soft(page.getByRole('heading', { name: 'Welcome back, Scope QA owner.', exact: true }))
+    .not.toBeVisible();
   const pending = await page.evaluate(() => ({
     theme: document.documentElement.dataset.theme,
     heading: document.querySelector('main h1')?.textContent,
@@ -102,16 +106,219 @@ test('real API scoped navigation never renders target content in the previous sc
   await page.screenshot({ path: dir + '/scope-client-pending.png', fullPage: true });
   release();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'client-dark');
+  await expect(
+    page.getByRole('heading', { name: 'Welcome back, Scope QA owner.', exact: true }),
+  ).toBeVisible();
   await page.screenshot({ path: dir + '/scope-client-settled.png', fullPage: true });
   const frames = await page.evaluate(() => (window as any).__frames);
   await writeFile(dir + '/scope-transition.json', JSON.stringify({ pending, frames }, null, 2));
   expect
     .soft(
-      pending.theme,
-      'Target client content must not be displayed in shared Light while branding resolves',
+      frames.filter(
+        (f: any) =>
+          f.heading === 'Welcome back, Scope QA owner.' &&
+          (f.theme !== 'client-dark' || !f.text.includes('QA Alpha')),
+      ),
     )
-    .toBe('client-dark');
+    .toEqual([]);
+  expect
+    .soft(frames.filter((f: any) => f.path === '/dashboard' && !f.shell && !f.pending))
+    .toEqual([]);
   await page.unroute('**/api/branding/current?shared=0');
+  const transition = async (
+    label: string,
+    shared: boolean,
+    navigate: () => Promise<unknown>,
+    fail = false,
+  ) => {
+    const pattern = '**/api/branding/current?shared=' + (shared ? '1' : '0');
+    let open!: () => void, arrived!: () => void;
+    const gate = new Promise<void>((r) => (open = r));
+    const request = new Promise<void>((r) => (arrived = r));
+    await page.route(pattern, async (route) => {
+      arrived();
+      await gate;
+      if (fail) await route.fulfill({ status: 503, contentType: 'application/json', body: '{}' });
+      else await route.continue();
+    });
+    await page.evaluate(() => ((window as any).__frames = []));
+    await navigate();
+    await request;
+    await expect(page.locator('[data-appearance-pending]')).toBeVisible();
+    await page.waitForTimeout(150);
+    open();
+    if (fail) {
+      await expect(
+        page.getByRole('button', { name: 'Retry appearance', exact: true }),
+      ).toBeVisible();
+      await expect(page.locator('[data-application-shell]')).toHaveCount(0);
+      await page.unroute(pattern);
+      await page.getByRole('button', { name: 'Retry appearance', exact: true }).click();
+    }
+    await expect(
+      page.getByRole('heading', {
+        name: shared ? 'Platform overview' : 'Welcome back, Scope QA owner.',
+        exact: true,
+      }),
+    ).toBeVisible();
+    await expect(page.locator('html')).toHaveAttribute(
+      'data-theme',
+      shared ? 'light' : 'client-dark',
+    );
+    await page.waitForTimeout(100);
+    const samples = await page.evaluate(() => (window as any).__frames);
+    await writeFile(dir + '/' + label + '.json', JSON.stringify(samples, null, 2));
+    const heading = shared ? 'Platform overview' : 'Welcome back, Scope QA owner.';
+    expect(
+      samples.filter(
+        (f: any) =>
+          f.heading === heading &&
+          (f.theme !== (shared ? 'light' : 'client-dark') ||
+            !f.text.includes(shared ? 'Scalyn' : 'QA Alpha')),
+      ),
+    ).toEqual([]);
+    expect(
+      samples.filter(
+        (f: any) => f.path === (shared ? '/platform' : '/dashboard') && !f.shell && !f.pending,
+      ),
+    ).toEqual([]);
+    await page.unroute(pattern);
+  };
+  await transition(
+    'reverse-failure-retry',
+    true,
+    () => page.getByRole('link', { name: 'Platform administration', exact: true }).first().click(),
+    true,
+  );
+  await transition('history-back-client', false, () => page.goBack());
+  await transition('history-forward-platform', true, () => page.goForward());
+  await transition('history-back-client-again', false, () => page.goBack());
+  // Capture an old real response, then deliver it after a newer generation.
+  const pattern = '**/api/branding/current?shared=0';
+  let oldRelease!: () => void, oldSeen!: () => void;
+  const oldGate = new Promise<void>((r) => (oldRelease = r));
+  const oldRequest = new Promise<void>((r) => (oldSeen = r));
+  await page.evaluate(() => ((window as any).__frames = []));
+  let count = 0;
+  await page.route(pattern, async (route) => {
+    if (++count === 1) {
+      const response = await route.fetch();
+      const data = await response.json();
+      oldSeen();
+      await oldGate;
+      await route.fulfill({
+        json: { ...data, displayName: 'OBSOLETE RESPONSE', selectedTheme: 'light' },
+      });
+    } else await route.continue();
+  });
+  await page.evaluate(() => window.dispatchEvent(new Event('brandingchanged')));
+  await oldRequest;
+  const newer = page.waitForResponse((r) => r.url().includes('/branding/current?shared=0'));
+  await page.evaluate(() => window.dispatchEvent(new Event('brandingchanged')));
+  await newer;
+  oldRelease();
+  await page.waitForTimeout(200);
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'client-dark');
+  await expect(page.getByText('OBSOLETE RESPONSE')).toHaveCount(0);
+  const reordered = await page.evaluate(() => (window as any).__frames);
+  await writeFile(dir + '/out-of-order-frames.json', JSON.stringify(reordered, null, 2));
+  expect(
+    reordered.filter(
+      (f: any) =>
+        f.heading === 'Welcome back, Scope QA owner.' &&
+        (f.theme !== 'client-dark' ||
+          !f.text.includes('QA Alpha') ||
+          f.text.includes('OBSOLETE RESPONSE')),
+    ),
+  ).toEqual([]);
+  await page.unroute(pattern);
+  // An obsolete response from a departed scope cannot write the document either.
+  let departedRelease!: () => void, departedSeen!: () => void;
+  const departedGate = new Promise<void>((r) => (departedRelease = r));
+  const departedRequest = new Promise<void>((r) => (departedSeen = r));
+  await page.route(pattern, async (route) => {
+    const response = await route.fetch();
+    departedSeen();
+    await departedGate;
+    await route.fulfill({ response });
+  });
+  await page.evaluate(() => window.dispatchEvent(new Event('brandingchanged')));
+  await departedRequest;
+  await transition('departed-response-platform', true, () => page.goForward());
+  departedRelease();
+  await page.waitForTimeout(200);
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.getByRole('heading', { name: 'Platform overview', exact: true })).toBeVisible();
+  const departed = await page.evaluate(() => (window as any).__frames);
+  expect(
+    departed.filter(
+      (f: any) =>
+        f.heading === 'Platform overview' && (f.theme !== 'light' || !f.text.includes('Scalyn')),
+    ),
+  ).toEqual([]);
+  await writeFile(dir + '/stale-response-frames.json', JSON.stringify(departed, null, 2));
+  await page.unroute(pattern);
+  await transition('return-after-stale-response', false, () => page.goBack());
+  // Exercise a reused shell as well as document navigation: A -> B -> A must
+  // resolve a new authority generation even though A's key appeared previously.
+  let releaseB!: () => void, releaseA!: () => void;
+  let seenB!: () => void, seenA!: () => void;
+  const gateB = new Promise<void>((r) => (releaseB = r));
+  const gateA = new Promise<void>((r) => (releaseA = r));
+  const requestB = new Promise<void>((r) => (seenB = r));
+  const requestA = new Promise<void>((r) => (seenA = r));
+  let switched = 0;
+  await page.route(pattern, async (route) => {
+    const index = ++switched;
+    const response = await route.fetch();
+    if (index === 1) {
+      seenB();
+      await gateB;
+    } else {
+      seenA();
+      await gateA;
+    }
+    await route.fulfill({ response });
+  });
+  const publishClient = async (id: string) => {
+    await post('/clients/select', { clientId: id });
+    const context = await (await page.request.get('/api/auth/context')).json();
+    await page.evaluate(
+      (context) => window.dispatchEvent(new CustomEvent('trackercontext', { detail: context })),
+      context,
+    );
+  };
+  await publishClient(b.id);
+  await requestB;
+  await expect(page.locator('[data-appearance-pending]')).toBeVisible();
+  await page.evaluate(() => ((window as any).__frames = []));
+  await publishClient(a.id);
+  await requestA;
+  await expect.soft(page.locator('[data-appearance-pending]')).toBeVisible({ timeout: 1000 });
+  await page.waitForTimeout(100);
+  const recycledPending = await page.evaluate(() => (window as any).__frames);
+  await writeFile(dir + '/recycled-client-pending.json', JSON.stringify(recycledPending, null, 2));
+  expect
+    .soft(recycledPending.filter((f: any) => !f.pending || f.heading !== 'Opening workspace'))
+    .toEqual([]);
+  releaseA();
+  await expect(
+    page.getByRole('heading', { name: 'Welcome back, Scope QA owner.', exact: true }),
+  ).toBeVisible();
+  releaseB();
+  await page.waitForTimeout(200);
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'client-dark');
+  await expect(page.locator('[data-application-shell]')).toContainText('QA Alpha');
+  const recycled = await page.evaluate(() => (window as any).__frames);
+  await writeFile(dir + '/recycled-client-frames.json', JSON.stringify(recycled, null, 2));
+  expect(
+    recycled.filter(
+      (f: any) =>
+        f.heading === 'Welcome back, Scope QA owner.' &&
+        (f.theme !== 'client-dark' || !f.text.includes('QA Alpha')),
+    ),
+  ).toEqual([]);
+  await page.unroute(pattern);
   // Full document client switches: verify selected authority and pre-hydration frame themes.
   await page.getByRole('combobox', { name: 'Active client', exact: true }).selectOption(b.id);
   await page.getByRole('button', { name: 'Switch client', exact: true }).click();
@@ -124,6 +331,11 @@ test('real API scoped navigation never renders target content in the previous sc
   const bFrames = await page.evaluate(() => (window as any).__frames);
   await writeFile(dir + '/client-b-frames.json', JSON.stringify(bFrames, null, 2));
   expect(bFrames.filter((f: any) => f.theme !== 'client-light')).toEqual([]);
+  expect(
+    bFrames.filter(
+      (f: any) => f.heading === 'Welcome back, Scope QA owner.' && !f.text.includes('QA Beta'),
+    ),
+  ).toEqual([]);
   await page.reload();
   await expect(
     page.getByRole('heading', { name: 'Welcome back, Scope QA owner.', exact: true }),

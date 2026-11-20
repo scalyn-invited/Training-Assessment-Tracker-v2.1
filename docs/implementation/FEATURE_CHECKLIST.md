@@ -10,6 +10,10 @@ Task `t_eeccfb23`: saved-theme-before-hydration RED→GREEN, request-scoped auth
 
 Task `t_9ea2df68`: geometry correction passes exact four reload conditions plus withheld-hydration check. Owner-approved fresh branding-503/scoped platform-dark exception now uses honest built-in navy Dark with unavailable/Retry UI and preserved preference; recovery restores authoritative palette. Full built suite 22 passes / 1 preserved original strict-contract failure (expects generated theme, receives approved built-in fallback); separate policy regression passes RED→GREEN. Web policy isolation 14, branding 6, real API guest 1 pass; build/typechecks pass. Root QA must independently retest; see `FIRST_PAINT_REWORK.md`. No overall acceptance claimed.
 
+## Scoped appearance transitions — FOUC-QA-04
+
+FOUC-QA-04 scoped appearance correction: owner-approved authority-gated SPA rendering implemented with explicit pending/retry, pre-paint appearance commit and obsolete-response rejection. Original RED preserved; revised baseline contract and reused-shell A -> B -> A case reproduced RED before their corrections. Expanded real-API navigation/client/identity checks and first-paint policy regressions are recorded in `SCOPED_APPEARANCE_TRANSITION_FIX.md` and `evidence/scope-fix/`. The historical strict 503 assertion remains a recorded failure under the approved bounded exception; no independent/human acceptance is inferred.
+
 ## Foundation — Completed (local implementation and QA)
 Acceptance: independent workspaces, separate web/API/worker, persistent shared PGlite fallback, PostgreSQL adapter, checksummed SQL migrations, transaction-scoped tenant access, durable outbox, startup and browser checks.
 - [x] Implementation
