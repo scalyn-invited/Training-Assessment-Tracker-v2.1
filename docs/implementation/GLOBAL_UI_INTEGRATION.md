@@ -1,8 +1,8 @@
 # Global design-system integration preparation — 18 November 2026
 
-## Authorization and boundary
+## Original authorization and boundary (superseded for push on 20 November)
 
-The user supplied Bernie's instruction to apply the current Figma presentation globally across existing routes, preserve workflows and safeguards, reconcile current main, and perform bounded feature QA. **No push or deployment is authorized for this integration.** Existing uncommitted files and stashes must be preserved. The earlier five-screen work is the visual reference, not evidence that the remaining routes have been migrated.
+The user supplied Bernie's instruction to apply the current Figma presentation globally across existing routes, preserve workflows and safeguards, reconcile current main, and perform bounded feature QA. At initial preparation, no push or deployment was authorized. On 20 November the user forwarded Bernie's approval to reconcile dev, push and open a PR targeting dev. Deployment and merging remain unauthorized; see `GLOBAL_UI_SUBMISSION_QA.md`. Existing uncommitted files and stashes must be preserved. The earlier five-screen work is the visual reference, not evidence that the remaining routes have been migrated.
 
 ## Branch reconciliation
 
@@ -72,3 +72,8 @@ The reproducible source audit covers 95 source files, 33 CSS Modules, 627 static
 Six final isolated browser suites pass: Clients, Overview, People, Settings, shell and client Appearance. TypeScript, separate-output production build, targeted formatting, whitespace and preservation checks pass. Evidence: GLOBAL_UI_FINAL_QA.md, GLOBAL_UI_FINAL_AUDIT.json and six inspected screenshots in screenshots/global-ui-final/. Earlier bounded feature results remain historical evidence, not tests rerun by this checkpoint.
 
 Bernie's workflow-fix commit e44b295 remains an ancestor. All 67 original preservation entries and stashes are unchanged. No backend, workflow, permission, approval, scan, immutable-record, budget or N+2 change. V2 untouched; no push, deployment, live email or paid AI. Human technical/UX and owner acceptance stay deferred; local UI completion does not establish full V2.1 parity, production readiness or PostgreSQL qualification. Next: local handoff; future authorized submission must reconcile current dev and target dev.
+
+
+## Authorized dev submission - 20 November 2026
+
+Bernie authorized reconciliation with dev, branch push and an unmerged PR targeting dev. Merge 3578819 incorporates fetched dev e4a4588 while retaining the later global Settings/shared-shell implementation over the earlier Settings revert. The resolved tree matches verified UI checkpoint 9531c1e. Complete assessment workflow fixes e44b295, both migrations and historical evidence remain. Settings, Overview and shell browser suites, 18 focused domain tests, TypeScript, production build and source audit pass. All 161 current untracked files, original preservation baseline and stashes are preserved. Details and review boundaries: GLOBAL_UI_SUBMISSION_QA.md. Remote CI status belongs to the PR; no deployment or human acceptance is claimed.
