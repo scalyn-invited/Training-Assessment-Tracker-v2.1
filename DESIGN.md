@@ -174,6 +174,10 @@ Appearance is resolved per document through the existing API before rendering; s
 
 Plain Dark's existing navy base tokens now live on the document root, covering canvas, gutters and recovery as well as shells. Shared accent/status tokens and all existing light/neon/generated palettes retain their values. No OS-following System mode is added. If authoritative appearance is unavailable, a bounded request deadline falls back to the existing visible retry path rather than an indefinite blank screen; unavailable generated/default appearance is explicitly not guaranteed to match its eventual successful retry. See `docs/implementation/FIRST_PAINT_FIX.md` for evidence and qualification limits.
 
+## First-paint geometry rework (t_9ea2df68)
+
+The sign-in main region reserves a 500px minimum desktop footprint, verified against the existing password form, from the first document paint. This is a minimum, not a fixed height: MFA, errors and expanded help grow naturally; at 800px and below the existing fluid mobile layout is unchanged. The guest theme label reserves 14ch for existing labels during hydration, preventing Loading-to-Dark control movement. These are bounded loading-geometry corrections, not new layouts. At short desktop heights the footer remains below the fold, as in the previous settled layout. Generated appearance outage disposition remains unapproved and failing; see `docs/implementation/FIRST_PAINT_REWORK.md`.
+
 ## Historical design record
 
 The sections below retain the earlier scoped design decisions. The global contract above governs new UI work.

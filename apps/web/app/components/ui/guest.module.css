@@ -105,6 +105,11 @@
 .toolbar :global(.theme-picker) {
   font-family: var(--ui-font);
 }
+/* Reserve the longest existing theme label before hydration resolves it. */
+.toolbar :global(.theme-current) {
+  min-inline-size: 14ch;
+  text-align: right;
+}
 .toolbar :global(.theme-options) {
   z-index: 50;
   top: calc(100% + 8px);
@@ -293,6 +298,13 @@
   width: 18px;
   height: 18px;
   flex: 0 0 auto;
+}
+/* Reserve the existing password sign-in footprint, not a fixed-height form.
+   MFA, errors and expanded help may still grow naturally. Mobile stays fluid. */
+@media (min-width: 801px) {
+  .signIn .main {
+    min-height: 500px;
+  }
 }
 @media (max-width: 1100px) {
   .signIn {

@@ -1,0 +1,36 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\first-paint-browser\qa-independent.spec.ts:34:1 › QA generated preference outage exposes incorrect initial theme (3.4s)
+
+
+  1) tests\first-paint-browser\qa-independent.spec.ts:34:1 › QA generated preference outage exposes incorrect initial theme 
+
+    Error: Saved generated Dark must not show Light on failure
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "platform-dark"
+    Received: "light"
+
+      39 |  await context.clearCookies();await page.getByRole('button',{name:'Retry appearance',exact:true}).click();await expect(page.locator('html')).toHaveAttribute('data-theme','platform-dark');await page.screenshot({path:info.outputPath('recovered.png')});
+      40 |  await writeFile(info.outputPath('outage.json'),JSON.stringify({before,after:await page.locator('html').getAttribute('data-theme')}));
+    > 41 |  expect(before,'Saved generated Dark must not show Light on failure').toBe('platform-dark');
+         |                                                                       ^
+      42 | });
+      43 |
+      44 | test('QA built-in readability keyboard reduced motion and retained input',async({page},info)=>{
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\qa-independent.spec.ts:41:71
+
+    Error Context: output\first-paint\qa-independent-QA-generate-e9781-ses-incorrect-initial-theme\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\first-paint\qa-independent-QA-generate-e9781-ses-incorrect-initial-theme\trace.zip
+    Usage:
+
+        npx playwright show-trace output\first-paint\qa-independent-QA-generate-e9781-ses-incorrect-initial-theme\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\first-paint-browser\qa-independent.spec.ts:34:1 › QA generated preference outage exposes incorrect initial theme 

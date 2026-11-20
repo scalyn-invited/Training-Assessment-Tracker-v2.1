@@ -1,0 +1,194 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\first-paint-browser\geometry.spec.ts:4:1 › login existing geometry stays stable across the exact reload matrix (16.5s)
+
+
+  1) tests\first-paint-browser\geometry.spec.ts:4:1 › login existing geometry stays stable across the exact reload matrix 
+
+    Error: normal-warm: intro
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["{\"x\":48,\"y\":271.3125,\"width\":463,\"height\":215.375}", "{\"x\":48,\"y\":297.3125,\"width\":463,\"height\":215.375}"]
+
+      46 |     for (const element of ['intro', 'footer', 'theme']) {
+      47 |       const positions = [...new Set(frames.map((f: any) => JSON.stringify(f[element])))];
+    > 48 |       expect.soft(positions, name + ': ' + element).toHaveLength(1);
+         |                                                     ^
+      49 |     }
+      50 |     expect.soft([...new Set(frames.map((f: any) => f.themeName))]).toEqual(['dark']);
+      51 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:48:53
+
+    Error: normal-warm: footer
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["{\"x\":846.046875,\"y\":542.671875,\"width\":147.890625,\"height\":46}", "{\"x\":846.046875,\"y\":706,\"width\":147.890625,\"height\":46}"]
+
+      46 |     for (const element of ['intro', 'footer', 'theme']) {
+      47 |       const positions = [...new Set(frames.map((f: any) => JSON.stringify(f[element])))];
+    > 48 |       expect.soft(positions, name + ': ' + element).toHaveLength(1);
+         |                                                     ^
+      49 |     }
+      50 |     expect.soft([...new Set(frames.map((f: any) => f.themeName))]).toEqual(['dark']);
+      51 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:48:53
+
+    Error: normal-warm: theme
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["{\"x\":1104.9375,\"y\":28,\"width\":135.0625,\"height\":44}", "{\"x\":1129.53125,\"y\":28,\"width\":110.46875,\"height\":44}"]
+
+      46 |     for (const element of ['intro', 'footer', 'theme']) {
+      47 |       const positions = [...new Set(frames.map((f: any) => JSON.stringify(f[element])))];
+    > 48 |       expect.soft(positions, name + ': ' + element).toHaveLength(1);
+         |                                                     ^
+      49 |     }
+      50 |     expect.soft([...new Set(frames.map((f: any) => f.themeName))]).toEqual(['dark']);
+      51 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:48:53
+
+    Error: hard-warm: intro
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["{\"x\":48,\"y\":271.3125,\"width\":463,\"height\":215.375}", "{\"x\":48,\"y\":297.3125,\"width\":463,\"height\":215.375}"]
+
+      46 |     for (const element of ['intro', 'footer', 'theme']) {
+      47 |       const positions = [...new Set(frames.map((f: any) => JSON.stringify(f[element])))];
+    > 48 |       expect.soft(positions, name + ': ' + element).toHaveLength(1);
+         |                                                     ^
+      49 |     }
+      50 |     expect.soft([...new Set(frames.map((f: any) => f.themeName))]).toEqual(['dark']);
+      51 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:48:53
+
+    Error: hard-warm: footer
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["{\"x\":846.046875,\"y\":542.671875,\"width\":147.890625,\"height\":46}", "{\"x\":846.046875,\"y\":706,\"width\":147.890625,\"height\":46}"]
+
+      46 |     for (const element of ['intro', 'footer', 'theme']) {
+      47 |       const positions = [...new Set(frames.map((f: any) => JSON.stringify(f[element])))];
+    > 48 |       expect.soft(positions, name + ': ' + element).toHaveLength(1);
+         |                                                     ^
+      49 |     }
+      50 |     expect.soft([...new Set(frames.map((f: any) => f.themeName))]).toEqual(['dark']);
+      51 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:48:53
+
+    Error: hard-warm: theme
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["{\"x\":1104.9375,\"y\":28,\"width\":135.0625,\"height\":44}", "{\"x\":1129.53125,\"y\":28,\"width\":110.46875,\"height\":44}"]
+
+      46 |     for (const element of ['intro', 'footer', 'theme']) {
+      47 |       const positions = [...new Set(frames.map((f: any) => JSON.stringify(f[element])))];
+    > 48 |       expect.soft(positions, name + ': ' + element).toHaveLength(1);
+         |                                                     ^
+      49 |     }
+      50 |     expect.soft([...new Set(frames.map((f: any) => f.themeName))]).toEqual(['dark']);
+      51 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:48:53
+
+    Error: normal-cold: intro
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["{\"x\":48,\"y\":271.3125,\"width\":463,\"height\":215.375}", "{\"x\":48,\"y\":297.3125,\"width\":463,\"height\":215.375}"]
+
+      46 |     for (const element of ['intro', 'footer', 'theme']) {
+      47 |       const positions = [...new Set(frames.map((f: any) => JSON.stringify(f[element])))];
+    > 48 |       expect.soft(positions, name + ': ' + element).toHaveLength(1);
+         |                                                     ^
+      49 |     }
+      50 |     expect.soft([...new Set(frames.map((f: any) => f.themeName))]).toEqual(['dark']);
+      51 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:48:53
+
+    Error: normal-cold: footer
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["{\"x\":846.046875,\"y\":542.671875,\"width\":147.890625,\"height\":46}", "{\"x\":846.046875,\"y\":706,\"width\":147.890625,\"height\":46}"]
+
+      46 |     for (const element of ['intro', 'footer', 'theme']) {
+      47 |       const positions = [...new Set(frames.map((f: any) => JSON.stringify(f[element])))];
+    > 48 |       expect.soft(positions, name + ': ' + element).toHaveLength(1);
+         |                                                     ^
+      49 |     }
+      50 |     expect.soft([...new Set(frames.map((f: any) => f.themeName))]).toEqual(['dark']);
+      51 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:48:53
+
+    Error: normal-cold: theme
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["{\"x\":1104.9375,\"y\":28,\"width\":135.0625,\"height\":44}", "{\"x\":1129.53125,\"y\":28,\"width\":110.46875,\"height\":44}"]
+
+      46 |     for (const element of ['intro', 'footer', 'theme']) {
+      47 |       const positions = [...new Set(frames.map((f: any) => JSON.stringify(f[element])))];
+    > 48 |       expect.soft(positions, name + ': ' + element).toHaveLength(1);
+         |                                                     ^
+      49 |     }
+      50 |     expect.soft([...new Set(frames.map((f: any) => f.themeName))]).toEqual(['dark']);
+      51 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:48:53
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByLabel('Email', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByLabel('Email', { exact: true }) with timeout 5000ms
+      - waiting for getByLabel('Email', { exact: true })
+
+
+      37 |     await navigation;
+      38 |     await page.screenshot({ path: info.outputPath(name + '-pending.png') });
+    > 39 |     await expect(page.getByLabel('Email', { exact: true })).toBeVisible();
+         |                                                             ^
+      40 |     await expect(page.locator('.theme-current')).toHaveText('Dark');
+      41 |     await page.screenshot({ path: info.outputPath(name + '-settled.png') });
+      42 |     const frames = await page.evaluate(() => (window as any).geometryFrames);
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\geometry.spec.ts:39:61
+
+    Error Context: evidence\rework\geometry-red\geometry-login-existing-ge-82054-oss-the-exact-reload-matrix\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\rework\geometry-red\geometry-login-existing-ge-82054-oss-the-exact-reload-matrix\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\rework\geometry-red\geometry-login-existing-ge-82054-oss-the-exact-reload-matrix\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\first-paint-browser\geometry.spec.ts:4:1 › login existing geometry stays stable across the exact reload matrix 
