@@ -50,9 +50,10 @@ test.beforeAll(async () => {
     stdin: {
       contents: `import {createRoot} from 'react-dom/client';
         import {AssessmentReview} from './apps/web/app/components/assessment-review';
-        createRoot(document.getElementById('root')).render(<AssessmentReview
+        import tokens from './apps/web/app/components/ui/tokens.module.css';
+        createRoot(document.getElementById('root')).render(<div className={tokens.theme}><AssessmentReview
           id="synthetic-assignment" client="synthetic-client" csrf="inert-test-value"
-          status="approved" complete={()=>{}} onStatus={()=>{}} />);`,
+          status="approved" complete={()=>{}} onStatus={()=>{}} /></div>);`,
       resolveDir: process.cwd(),
       loader: 'tsx',
     },
@@ -111,9 +112,12 @@ for (const scenario of [
     await page.goto(origin);
     await page.addStyleTag({ content: css });
     await page.addScriptTag({ content: bundle });
-    const automatic = page.locator('section.panel').filter({
-      has: page.getByRole('heading', { name: 'Automatic multiple-choice score', exact: true }),
-    });
+    const automatic = page
+      .getByRole('heading', {
+        name: 'Automatic multiple-choice score',
+        exact: true,
+      })
+      .locator('..');
     if (scenario.approved) {
       await expect(automatic).toContainText(
         'This automatic score uses the assigned revision. The result above was approved.',
@@ -130,8 +134,8 @@ for (const scenario of [
     ).toBeEnabled();
     await expect(page.getByRole('button', { name: 'Reject and allow resubmission' })).toBeEnabled();
     const approved = page
-      .locator('section.panel')
-      .filter({ has: page.getByRole('heading', { name: 'Approved result', exact: true }) });
+      .getByRole('heading', { name: 'Approved result', exact: true })
+      .locator('..');
     if (scenario.approvedAttempt) {
       await expect(approved).toContainText('Rubric score: 90');
       await expect(approved).toContainText('Multiple-choice score: 100%');

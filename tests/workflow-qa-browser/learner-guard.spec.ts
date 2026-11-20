@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { build } from 'esbuild';
+import { serveShellAsset } from './shell-assets';
 let script: string;
 test.beforeAll(async () => {
   script = (
@@ -38,6 +39,7 @@ test('D01 learner shares pre-context guard and blocks unknown autosave outcome',
   let contextPosts = 0,
     savePosts = 0;
   await page.route('**/*', async (route) => {
+    if (await serveShellAsset(route, 'https://learner-guard.invalid')) return;
     const u = new URL(route.request().url());
     let json: unknown;
     if (u.pathname === '/')

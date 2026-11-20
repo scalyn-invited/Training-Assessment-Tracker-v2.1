@@ -29,6 +29,14 @@ Browser/domain fixtures use isolated databases and storage. Generated Next confi
 
 All 161 untracked files present at submission start and the stash inventory are preserved by path/hash checks. The original 67-entry preservation baseline also remains intact. No local environment files, UX Engine folder, downloaded archify folder or team drafts are added to the PR. Committed Archify reference files already present in dev remain unchanged. V2 is untouched.
 
+## PR assessment harness compatibility
+
+PR #9 targets `dev` and remains unmerged. The first CI run exposed six assessment component-harness failures after the shared UI migration: three selectors depended on the retired global `section.panel` class, and three synthetic transports rejected the shared shell's local decorative icons. The harness now locates score sections by their exact headings, applies the shared theme scope to the isolated review component, and serves an explicit same-origin GET allowlist of checked-in shell icons. Unexpected requests still fail. Workflow assertions and production code are unchanged.
+
+Local retest: all 22 component-harness tests passed in Chrome (20.0s), including canceled client switching/logout, unknown autosave outcomes, pinned content, human-approved results and member-safe return guidance. The real Next navigation scenario passed (5.5s) in a separate tracked-file export without environment files, databases or external adapters; Windows renderer teardown required stopping only the verified test process tree on port 3275. Local Chrome was selected through ignored configs; CI retains bundled Chromium. Historical screenshots in the main checkout were not overwritten.
+
+GitHub Actions, rather than these local results, determines the updated commit's remote status. No human acceptance or full parity is inferred.
+
 ## Review boundary
 
 The published PR and GitHub Actions are the source for remote CI status; local tests do not establish remote success. Do not merge or deploy. Human technical/UX and owner acceptance remain deferred, and full V2.1 parity/production readiness is not claimed. Review the Settings reintroduction and assessment workflow migrations explicitly.

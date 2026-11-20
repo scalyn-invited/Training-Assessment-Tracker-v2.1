@@ -1,6 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 import { build } from 'esbuild';
 import { readFile, mkdir } from 'node:fs/promises';
+import { serveShellAsset } from './shell-assets';
 const origin = 'https://workflow-qa.invalid';
 const shots = '.runtime/workflow-qa-screenshots';
 const questions = ['A1', 'A2', 'B1', 'B2'].map((id) => ({
@@ -87,6 +88,7 @@ async function boot(page: Page, handler?: (route: any) => Promise<boolean>) {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.route('**/*', async (route) => {
+    if (await serveShellAsset(route, origin)) return;
     if (handler && (await handler(route))) return;
     const u = route.request().url();
     if (u === origin + '/' || u === origin + '/assessments/definitions/synthetic-copy')
@@ -631,6 +633,7 @@ for (const action of ['switch', 'logout'])
     });
     await page.locator('#builder').evaluate((e) => e.remove());
     await page.addScriptTag({ content: shell });
+    await expect(page.locator('#active-client')).toHaveValue('synthetic-client');
     await expect(page.getByRole('button', { name: 'Switch client', exact: true })).toBeEnabled();
     await page.addScriptTag({ content: builder });
     await page.locator('#assessment-title').fill('Dirty synthetic context draft');
