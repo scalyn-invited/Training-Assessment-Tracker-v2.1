@@ -1,0 +1,122 @@
+[
+  {
+    "log": "account-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "assessment-builder-ui-browser.log",
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "log": "audit-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "build.log",
+    "passed": 0,
+    "failed": 0
+  },
+  {
+    "log": "builder-gate.log",
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "log": "builder-repeat.log",
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "log": "client-admin-ui-browser.log",
+    "passed": 1,
+    "failed": 2
+  },
+  {
+    "log": "client-appearance.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "client-choice-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "client-people.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "client-settings-ui-browser.log",
+    "passed": 1,
+    "failed": 1
+  },
+  {
+    "log": "clients-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "curriculum-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "delivery-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "document-review-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "generation-ui-browser.log",
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "log": "learning-overview-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "onboarding-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "overview-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "people-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "scope.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "settings-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "training-directory-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "log": "training-record-ui-browser.log",
+    "passed": 1,
+    "failed": 0
+  }
+]

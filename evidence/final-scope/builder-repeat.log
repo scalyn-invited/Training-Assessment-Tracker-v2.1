@@ -1,0 +1,129 @@
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\assessment-builder-ui-browser\builder.spec.ts:5:1 › shared builder preserves authoring, immutable publication and recovery (27.4s)
+
+
+  1) tests\assessment-builder-ui-browser\builder.spec.ts:5:1 › shared builder preserves authoring, immutable publication and recovery 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Build an assessment', exact: true })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Build an assessment', exact: true }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Build an assessment', exact: true })
+
+
+      116 |   await expect(
+      117 |     page.getByRole('heading', { name: 'Build an assessment', exact: true }),
+    > 118 |   ).toBeVisible();
+          |     ^
+      119 |   const step = async (name: string) => page.locator('[data-section=' + name + ']').click();
+      120 |   await page.getByLabel('Assessment title', { exact: true }).fill('Shared authoring verification');
+      121 |   for (const name of ['Switch client', 'Sign out']) {
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_d56e101f\tests\assessment-builder-ui-browser\builder.spec.ts:118:5
+
+    Error Context: evidence\final-scope\builder-repeat-results\builder-shared-builder-pre-713ec-le-publication-and-recovery\error-context.md
+
+  1 failed
+    tests\assessment-builder-ui-browser\builder.spec.ts:5:1 › shared builder preserves authoring, immutable publication and recovery 
