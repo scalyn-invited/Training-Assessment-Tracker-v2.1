@@ -297,7 +297,7 @@ test('shared receipt preserves immutable history, grading, appeals and role boun
     page.getByText('Content hash: ' + original.submission.contentHash, { exact: true }),
   ).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await page.getByText('Withdraw this attempt', { exact: true }).click();
   const withdrawReason = page.getByLabel('Withdraw attempt reason', { exact: true });
@@ -438,7 +438,7 @@ test('shared receipt preserves immutable history, grading, appeals and role boun
   await page.unroute(receiptApi);
   await page.reload();
   await expect(page.getByText('Provisional total: 100', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await a11y();
   await screenshot('review-desktop');
@@ -637,7 +637,7 @@ test('shared receipt preserves immutable history, grading, appeals and role boun
   await page.unroute(manualApi);
   expect((await read()).submission.contentHash).toBe(pinned.contentHash);
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

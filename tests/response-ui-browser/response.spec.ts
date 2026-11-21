@@ -384,7 +384,7 @@ test('shared response and review preserve submission recovery and independent de
   ).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Approved result', exact: true })).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

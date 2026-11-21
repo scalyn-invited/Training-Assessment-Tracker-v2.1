@@ -246,7 +246,7 @@ test('responsive lesson and receipt painted controls across data and intra-view 
   await login('demo.1.3@example.invalid');
 
   await page.goto('/dashboard');
-  await page.getByRole('button', { name: /^Theme / }).click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   const saved = page.waitForResponse(
     (r) => r.url().includes('/api/branding/preference') && r.request().method() === 'POST',
   );

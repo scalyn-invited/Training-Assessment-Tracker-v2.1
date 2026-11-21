@@ -83,7 +83,7 @@ test('pointer dismissal and trigger toggle retain intentional focus', async ({ p
 
 test('all existing themes, selected state and local default reset persist', async ({ page }) => {
   await mount(page);
-  const trigger = page.getByRole('complementary').getByRole('button', { name: /^Theme / });
+  const trigger = page.getByRole('complementary').getByRole('button', { name: /^Theme(?: |$)/ });
   for (const [value, label] of Object.entries(themes)) {
     await trigger.click();
     await page.getByRole('button', { name: label, exact: true }).click();
@@ -117,7 +117,7 @@ for (const viewport of [
     const owner = mobile
       ? page.getByRole('dialog', { name: 'Personal settings' })
       : page.getByRole('complementary');
-    const trigger = owner.getByRole('button', { name: /^Theme / });
+    const trigger = owner.getByRole('button', { name: /^Theme(?: |$)/ });
     await trigger.scrollIntoViewIfNeeded();
     const before = await owner.evaluate((el) => el.scrollHeight);
     await trigger.click();

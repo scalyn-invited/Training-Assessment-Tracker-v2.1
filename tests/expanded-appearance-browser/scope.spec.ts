@@ -76,7 +76,7 @@ test('real API scoped navigation never renders target content in the previous sc
   });
   await page.goto('/platform');
   await expect(page.getByRole('heading', { name: 'Platform overview', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: /^Theme / }).click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.locator('summary').filter({ hasText: 'Workspace' }).click();
@@ -380,7 +380,7 @@ test('real API scoped navigation never renders target content in the previous sc
   await expect(page).toHaveURL(/\/clients$/);
   const member = (await (await page.request.get('/api/auth/context')).json()).user;
   expect(member.id).not.toBe(owner.id);
-  await page.getByRole('button', { name: /^Theme / }).click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.reload();

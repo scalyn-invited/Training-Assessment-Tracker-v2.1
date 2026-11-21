@@ -74,7 +74,7 @@ test('screenshot observer calibration on settled dashboard', async ({ page }) =>
   });
   await page.goto('/platform');
   await expect(page.getByRole('heading', { name: 'Platform overview', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: /^Theme / }).click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 

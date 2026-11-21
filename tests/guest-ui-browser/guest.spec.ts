@@ -5,9 +5,10 @@ import * as OTPAuth from 'otpauth';
 test('guest sign-in and private account links preserve authentication and one-time authority', async ({
   page,
   request,
+  baseURL,
 }) => {
   test.setTimeout(240000);
-  const origin = 'http://127.0.0.1:3110';
+  const origin = new URL(baseURL!).origin;
   const password = 'Isolated guest administrator passphrase';
   const recipientPassword = 'Isolated guest recipient passphrase';
   const errors: string[] = [];
@@ -53,7 +54,7 @@ test('guest sign-in and private account links preserve authentication and one-ti
     await page.screenshot({ path: `output/playwright/guest-ui/${name}.png`, fullPage: true });
   }
   async function theme(name: string) {
-    await page.getByRole('button', { name: /^Theme / }).click();
+    await page.getByRole('button', { name: /^Theme(?: |$)/ }).click();
     await page.getByRole('button', { name, exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', name.toLowerCase());
   }
@@ -96,6 +97,13 @@ test('guest sign-in and private account links preserve authentication and one-ti
   await shot('sign-in-desktop');
   for (const width of [390, 320, 800]) {
     await page.setViewportSize({ width, height: 844 });
+    // The compact toolbar hides the theme suffix: its accessible name is just Theme.
+    await theme('Light');
+    await theme('Dark');
+    const trigger = page.getByRole('button', { name: /^Theme(?: |$)/ });
+    await trigger.click();
+    await page.keyboard.press('Escape');
+    await expect(trigger).toBeFocused();
     await a11y();
     const inputBox = await page.getByLabel('Email', { exact: true }).boundingBox();
     expect(inputBox!.height).toBeGreaterThanOrEqual(48);
@@ -108,9 +116,9 @@ test('guest sign-in and private account links preserve authentication and one-ti
   }
   await theme('Light');
   await a11y();
-  await page.getByRole('button', { name: /^Theme / }).click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await page.keyboard.press('Escape');
-  await expect(page.getByRole('button', { name: /^Theme / })).toBeFocused();
+  await expect(page.getByRole('button', { name: /^Theme(?: |$)/ })).toBeFocused();
   for (const selectedTheme of ['neon-cyan', 'platform-dark']) {
     await page.evaluate(
       (t) => localStorage.setItem('training.v21.appearance.platform.guest', t),

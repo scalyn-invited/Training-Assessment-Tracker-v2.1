@@ -60,7 +60,7 @@ test('administration presentation preserves teams, role reviews, allocations, en
     .boundingBox();
   expect(submitBounds!.x).toBeGreaterThan(searchBounds!.x + searchBounds!.width);
   await a11y();
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await a11y();
   await page.screenshot({

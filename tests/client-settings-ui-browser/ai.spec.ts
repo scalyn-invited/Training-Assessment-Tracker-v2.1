@@ -66,7 +66,7 @@ test('client AI settings preserve routing versions, billing holds, permissions a
   ).toHaveAttribute('aria-current', 'page');
   await page.setViewportSize({ width: 1440, height: 1000 });
   await a11y();
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await a11y();

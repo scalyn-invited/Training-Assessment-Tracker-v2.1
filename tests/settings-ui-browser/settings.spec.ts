@@ -67,7 +67,7 @@ test('Settings preserves versioned branding, previews, status and permissions on
   await page.keyboard.press('Tab');
   await expect(sections.getByRole('link', { name: 'System status' })).toBeFocused();
   await a11y();
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await a11y();

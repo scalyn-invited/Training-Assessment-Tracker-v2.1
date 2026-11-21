@@ -296,7 +296,7 @@ test('shared review queue preserves scoped work and independent appeal routing',
     page.getByText('Content hash: ' + original.submission.contentHash, { exact: true }),
   ).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await page.getByText('Withdraw this attempt', { exact: true }).click();
   const withdrawReason = page.getByLabel('Withdraw attempt reason', { exact: true });
@@ -437,7 +437,7 @@ test('shared review queue preserves scoped work and independent appeal routing',
   await page.unroute(receiptApi);
   await page.reload();
   await expect(page.getByText('Provisional total: 100', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await a11y();
   await screenshot('review-desktop');
@@ -757,7 +757,7 @@ test('shared review queue preserves scoped work and independent appeal routing',
   await page.unroute(manualApi);
   expect((await read()).submission.contentHash).toBe(pinned.contentHash);
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();
@@ -896,7 +896,7 @@ test('shared review queue preserves scoped work and independent appeal routing',
     await page.setViewportSize({ width, height: 1000 });
     await a11y();
   }
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

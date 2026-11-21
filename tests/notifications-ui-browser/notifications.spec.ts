@@ -461,7 +461,7 @@ test('shared updates preserve scoped notices, preference saves and navigation gu
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'Your updates', exact: true })).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

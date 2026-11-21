@@ -89,7 +89,7 @@ test('Audit Log preserves read-only evidence and filters across desktop, mobile 
     await expect(table).toContainText('First-install administrator setup');
     await a11y();
     await page.screenshot({ path: `${screenshots}/audit-light-desktop.png`, fullPage: true });
-    await page.getByRole('button', { name: /^Theme / }).first().click();
+    await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
     await page.getByRole('button', { name: 'Dark', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await a11y();
@@ -183,7 +183,7 @@ test('Audit Log preserves read-only evidence and filters across desktop, mobile 
     await expect(details).toBeFocused();
     await page.getByRole('button', { name: 'Personal settings' }).click();
     const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
-    await settings.getByRole('button', { name: /^Theme / }).click();
+    await settings.getByRole('button', { name: /^Theme(?: |$)/ }).click();
     await settings.getByRole('button', { name: 'Light', exact: true }).click();
     await settings.getByRole('button', { name: 'Close', exact: true }).click();
     await a11y();

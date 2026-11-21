@@ -108,7 +108,7 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   }
   await accessibility();
   await page.screenshot({ path: `${screenshotDir}/overview-light-desktop.png`, fullPage: true });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await accessibility();

@@ -380,7 +380,7 @@ test('shared builder preserves authoring, immutable publication and recovery', a
   await page.unroute('**/assessments/media/*/status');
   await page.getByText('Insert image or edit alt text', { exact: true }).click();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

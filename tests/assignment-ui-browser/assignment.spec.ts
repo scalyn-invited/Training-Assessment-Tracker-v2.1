@@ -269,7 +269,7 @@ test('shared assignment form preserves pinned recipients, team rules and recover
   await page.setViewportSize({ width: 390, height: 900 });
   await screenshot('team-mobile');
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByLabel('Assign to', { exact: true }).selectOption('member');

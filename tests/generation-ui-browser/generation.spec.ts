@@ -216,7 +216,7 @@ test('shared generation progress preserves polling, provenance, recovery and rol
   await page.goto(progressUrl);
   await expect(page.locator('[data-application-shell="learning"]')).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await a11y();
   await screenshot('complete-desktop');
@@ -340,7 +340,7 @@ test('shared generation progress preserves polling, provenance, recovery and rol
     await a11y();
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme / }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();
