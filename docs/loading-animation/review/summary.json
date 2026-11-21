@@ -1,0 +1,84 @@
+{
+  "frames": [
+    {
+      "width": 1440,
+      "frames": 223,
+      "neutral": 188,
+      "body": 0,
+      "leaks": 0,
+      "pendingFocus": {
+        "tag": "MAIN",
+        "id": "main"
+      },
+      "settledFocus": {
+        "tag": "MAIN",
+        "id": "main"
+      }
+    },
+    {
+      "width": 820,
+      "frames": 216,
+      "neutral": 195,
+      "body": 0,
+      "leaks": 0,
+      "pendingFocus": {
+        "tag": "MAIN",
+        "id": "main"
+      },
+      "settledFocus": {
+        "tag": "MAIN",
+        "id": "main"
+      }
+    },
+    {
+      "width": 390,
+      "frames": 217,
+      "neutral": 196,
+      "body": 0,
+      "leaks": 0,
+      "pendingFocus": {
+        "tag": "MAIN",
+        "id": "main"
+      },
+      "settledFocus": {
+        "tag": "MAIN",
+        "id": "main"
+      }
+    }
+  ],
+  "logs": {
+    "loading": [
+      "  ✓  15 tests\\loading-animation-browser\\shell.spec.ts:331:1 › failed client mutation conceals old scope and immediately offers session verification, not a second POST (1.3s)",
+      "  22 passed (41.0s)"
+    ],
+    "policy": [
+      " Test Files  1 passed (1)",
+      "      Tests  20 passed (20)"
+    ],
+    "types": [],
+    "build": [
+      "✓ Compiled successfully in 5.0s",
+      "  Finished TypeScript in 810ms ..."
+    ],
+    "temporal": [
+      "  1 passed (31.3s)"
+    ],
+    "scope": [
+      "  1 passed (38.0s)"
+    ],
+    "builder-gate": [
+      "  1 passed (21.9s)"
+    ],
+    "navigation": [
+      "  1 passed (31.4s)"
+    ],
+    "guest": [
+      "  1 passed (42.2s)"
+    ],
+    "selectors": [
+      "  ✓   8 tests\\theme-picker-browser\\qa-independent.spec.ts:164:1 › client pending and failed saves stay in the overlay with versioned payload and retry (1.4s)",
+      "  ✓  22 tests\\theme-picker-browser\\theme-picker.spec.ts:149:1 › client pending and failed saves stay in the overlay with versioned payload and retry (1.3s)",
+      "  36 passed (1.4m)"
+    ]
+  }
+}

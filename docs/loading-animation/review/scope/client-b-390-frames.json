@@ -1,0 +1,278 @@
+[
+  {
+    "t": 178.40000009536743,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 192.60000002384186,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 196,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 208.80000007152557,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 236.5,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 247.70000004768372,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 262.2000000476837,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 276.8000000715256,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 293.60000002384186,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 310.40000009536743,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 327.10000002384186,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 344.60000002384186,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 390
+    }
+  },
+  {
+    "t": 378.10000002384186,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nWorkspace\nLearning workspace\nLocal sandbox\nS\nScope QA owner\nCurrent client access\nMenu\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose, and make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nLoading your background receipts...\n\nScope QA",
+    "shell": "learning",
+    "rect": {
+      "x": 0,
+      "y": 343.5,
+      "width": 390
+    }
+  },
+  {
+    "t": 395.40000009536743,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nWorkspace\nLearning workspace\nLocal sandbox\nS\nScope QA owner\nCurrent client access\nMenu\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose, and make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nLoading your background receipts...\n\nScope QA",
+    "shell": "learning",
+    "rect": {
+      "x": 0,
+      "y": 343.5,
+      "width": 390
+    }
+  },
+  {
+    "t": 397.90000009536743,
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "path": "/dashboard",
+    "theme": "client-light",
+    "bg": "#faf8f6",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nWorkspace\nLearning workspace\nLocal sandbox\nS\nScope QA owner\nCurrent client access\nMenu\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose, and make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nLoading your background receipts...\n\nScope QA",
+    "shell": "learning",
+    "rect": {
+      "x": 0,
+      "y": 343.5,
+      "width": 390
+    }
+  }
+]
