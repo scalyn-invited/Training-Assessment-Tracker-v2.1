@@ -11,7 +11,7 @@ test.beforeAll(async () => {
     import {api,loadContext} from './apps/web/app/components/auth-ui';
     window.refreshContext=loadContext; window.mutate=()=>api('/clients/select',{csrf:'synthetic',clientId:'next'});
     const Root=shells['AppShellRoot']||Fragment;
-    function Page(){const path=usePathname();return <shells.AppShell><h1>Verified page {path}</h1><button onClick={()=>window.navigate('/platform/clients')}>Navigate</button></shells.AppShell>}
+    function Page(){const path=usePathname();return <shells.AppShell><h1>Verified page {path}</h1><input aria-label="Unsaved note" defaultValue=""/><button onClick={()=>window.navigate('/platform/clients')}>Navigate</button></shells.AppShell>}
     function Fixture(){const path=usePathname();const [recovery,setRecovery]=useState(false);window.recover=setRecovery;return <Root>{recovery ? <><shells.ShellRecovery/><main id="main"><h1>Recovery</h1></main></> : <Page key={path}/>}</Root>}
     createRoot(document.getElementById('root')).render(<Fixture/>);`,
       resolveDir: process.cwd(),
@@ -191,6 +191,73 @@ test('leaving a client for a guest route keeps unresolved canvas neutral', async
   await expect(page.locator('html')).toHaveAttribute('data-shell-neutral', '');
   await expect(page.getByText('Client A brand', { exact: true })).toHaveCount(0);
   release();
+});
+
+for (const width of [1440, 820, 390])
+  test(`removed-control focus reaches main through context failure and keyboard retry ${width}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const { state, start } = await mountControlled(page);
+    await start();
+    const navigate = page.getByRole('button', { name: 'Navigate', exact: true });
+    await expect(navigate).toBeVisible();
+    let release!: () => void;
+    state.contextGate = new Promise<void>((r) => (release = r));
+    await navigate.focus();
+    await navigate.press('Enter');
+    await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+    await expect(page.locator('main#main')).toBeFocused();
+    state.contextFailure = true;
+    release();
+    await expect(page.getByRole('alert')).toContainText('Session unavailable');
+    await expect(page.locator('main#main')).toBeFocused();
+    await page.keyboard.press('Tab');
+    const retry = page.getByRole('button', { name: 'Try loading again' });
+    await expect(retry).toBeFocused();
+    state.contextFailure = false;
+    state.contextGate = new Promise<void>((r) => (release = r));
+    await retry.press('Enter');
+    await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+    await expect(page.locator('main#main')).toBeFocused();
+    release();
+    await expect(navigate).toBeVisible();
+    await expect(page.locator('main#main')).toBeFocused();
+  });
+
+test('background context and appearance refresh preserve input focus value and DOM identity', async ({
+  page,
+}) => {
+  const { state, start } = await mountControlled(page);
+  await start();
+  const input = page.getByRole('textbox', { name: 'Unsaved note' });
+  await input.fill('Keep my unsaved note');
+  await input.evaluate((el) => ((window as any).focusedInput = el));
+  for (const kind of ['context', 'appearance']) {
+    let release!: () => void;
+    const gate = new Promise<void>((r) => (release = r));
+    if (kind === 'context') state.contextGate = gate;
+    else state.brandGate = gate;
+    const request = page.waitForRequest(
+      kind === 'context' ? '**/api/auth/context' : '**/api/branding/current*',
+    );
+    await page.evaluate((kind) => {
+      if (kind === 'context') void (window as any).refreshContext();
+      else window.dispatchEvent(new Event('brandingchanged'));
+    }, kind);
+    await request;
+    await expect(input).toBeFocused();
+    await expect(input).toHaveValue('Keep my unsaved note');
+    const response = page.waitForResponse(
+      kind === 'context' ? '**/api/auth/context' : '**/api/branding/current*',
+    );
+    release();
+    await response;
+    await page.waitForTimeout(100);
+    await expect(input).toBeFocused();
+    expect(await input.evaluate((el) => el === (window as any).focusedInput)).toBe(true);
+    await expect(input).toHaveValue('Keep my unsaved note');
+  }
 });
 
 async function mountControlled(page: import('@playwright/test').Page) {

@@ -8,6 +8,7 @@ import { PeopleIcon } from './people-icon';
 import { AuditIcon } from './audit-icon';
 import { Dialog } from './ui/dialog';
 import { WorkspacePopover } from './workspace-popover';
+import { ShellFocusFrame } from './shell-focus-frame';
 import type { Context } from './auth-ui';
 import { Icon } from './workspace-icon';
 import { Button } from './ui/controls';
@@ -193,7 +194,7 @@ export function ApplicationShell({
     );
   }
   return (
-    <div
+    <ShellFocusFrame
       className={standalone ? undefined : styles.shell}
       data-shell-frame={frame}
       data-application-shell={standalone ? undefined : platform ? 'platform' : 'learning'}
@@ -369,6 +370,6 @@ export function ApplicationShell({
           {themePicker()}
         </Dialog>
       )}
-    </div>
+    </ShellFocusFrame>
   );
 }
