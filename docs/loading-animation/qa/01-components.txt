@@ -1,0 +1,23 @@
+
+Running 18 tests using 1 worker
+
+  ✓   1 tests\loading-animation-browser\context.spec.ts:4:1 › a pre-switch context response cannot publish after an identity mutation (923ms)
+  ✓   2 tests\loading-animation-browser\context.spec.ts:57:1 › a late mutation failure cannot invalidate a newer session epoch (515ms)
+  ✓   3 tests\loading-animation-browser\loading.spec.ts:44:1 › session wait is textless initially with stable accessible status and context after three seconds (2.0s)
+  ✓   4 tests\loading-animation-browser\loading.spec.ts:59:1 › guest session uses the same initially textless animation (906ms)
+  ✓   5 tests\loading-animation-browser\loading.spec.ts:64:1 › confirmed session errors replace the spinner and retry resets its delay (1.2s)
+  ✓   6 tests\loading-animation-browser\shell.spec.ts:50:1 › same-workspace route keeps chrome mounted while destination content waits for exact authority (1.9s)
+  ✓   7 tests\loading-animation-browser\shell.spec.ts:114:1 › a permission change cannot reuse the previous appearance authority (1.8s)
+  ✓   8 tests\loading-animation-browser\shell.spec.ts:163:1 › one pending transition keeps its accessible status stable across session and appearance (1.4s)
+  ✓   9 tests\loading-animation-browser\shell.spec.ts:181:1 › leaving a client for a guest route keeps unresolved canvas neutral (1.1s)
+  ✓  10 tests\loading-animation-browser\shell.spec.ts:255:1 › signed-out context never reveals protected page content (1.1s)
+  ✓  11 tests\loading-animation-browser\shell.spec.ts:264:1 › failed client mutation conceals old scope and immediately offers session verification, not a second POST (1.4s)
+  ✓  12 tests\loading-animation-browser\shell.spec.ts:289:1 › held route context uses neutral stable chrome, then failure and explicit retry (1.5s)
+  ✓  13 tests\loading-animation-browser\shell.spec.ts:320:1 › same-path recovery suppresses all chrome and resumes without duplicate main (1.3s)
+  ✓  14 tests\loading-animation-browser\shell.spec.ts:341:1 › route verification does not join or publish an older in-flight page refresh (1.2s)
+  ✓  15 tests\loading-animation-browser\shell.spec.ts:370:3 › content loader occupies and centers within the available area 1440 (1.5s)
+  ✓  16 tests\loading-animation-browser\shell.spec.ts:370:3 › content loader occupies and centers within the available area 820 (1.4s)
+  ✓  17 tests\loading-animation-browser\shell.spec.ts:370:3 › content loader occupies and centers within the available area 390 (1.9s)
+  ✓  18 tests\loading-animation-browser\shell.spec.ts:406:1 › context deadline replaces an indefinite wait with actionable recovery (11.8s)
+
+  18 passed (43.5s)
