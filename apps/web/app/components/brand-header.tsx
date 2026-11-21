@@ -13,11 +13,14 @@ import {
 import { useInitialAppearance } from './appearance-provider';
 export type { Brand } from './appearance-state';
 export function useBrand(account: string | null = 'guest', clientId: string | null = null) {
-  const pathname = usePathname(),
-    shared = sharedAppearance(pathname);
+  const pathname = usePathname();
   const initial = useInitialAppearance();
   const initialMatches =
     initial?.pathname === pathname && (account === null || initial.account === account);
+  const shared = sharedAppearance(
+    pathname,
+    account === null && initialMatches ? initial.clientId : clientId,
+  );
   const identity = account ?? (initialMatches ? initial.account : null);
   const key = JSON.stringify([pathname, identity, shared ? null : clientId]);
   const [state, setState] = useState(() => ({

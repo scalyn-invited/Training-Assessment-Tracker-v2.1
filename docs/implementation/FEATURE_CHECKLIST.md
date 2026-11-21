@@ -2,6 +2,10 @@
 
 Source: V2 working tree at commit 3f3e4a86e8c4a4ce829a983b0406abac4b43a5b1, including the captured uncommitted assessment work. See source-baseline.json (366 files). V2 historical evidence does not prove V2.1 parity.
 
+## Account appearance consistency — implementation verified; independent QA pending
+
+Task `t_71fbc8b1`: `/accounts` and `/account/security` now resolve the selected Learning client's appearance through the existing shared resolver, including initial document/pre-body and hydrated scope. No-client account pages and guest/platform routes retain shared scope. Real-API RED→GREEN, nine-palette desktop/tablet/mobile dev and built matrices, unchanged account/security behavior journey, built scoped-navigation regression, 20 appearance-policy and 6 branding tests pass; types/build/format/diff checks pass. See `ACCOUNT_THEME_CONSISTENCY.md` and `evidence/account-theme-consistency.tar.gz`, including the retained build-origin fixture failure and correction. Independent QA `t_b23a00b1` and overall review remain pending; no deployment or human acceptance claimed.
+
 ## First-paint appearance correction — implementation verified; independent QA pending
 
 Task `t_eeccfb23`: saved-theme-before-hydration RED→GREEN, request-scoped authoritative palettes, current navy document canvas, session/guest separation and one-document snapshot invalidation implemented. Final built-renderer matrix: 17 passed; existing isolated API guest/account-link/axe journey: 1 passed; branding domain: 6 passed; build, server/web TypeScript and diff checks pass. See `FIRST_PAINT_FIX.md` for changed files, reproducible commands and evidence. Unavailable authoritative generated/default appearance may still change on retry; no universal zero-CLS or cross-browser claim. Independent QA `t_8db94a12` and overall acceptance remain open.

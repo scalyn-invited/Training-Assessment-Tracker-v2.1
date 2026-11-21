@@ -1,12 +1,62 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { runInNewContext } from 'node:vm';
-import {
-  appearanceScript,
-  type InitialAppearance,
-} from './components/appearance-state';
+import { appearanceScript, type InitialAppearance } from './components/appearance-state';
 import { loadInitialAppearance } from './initial-appearance';
 
 afterEach(() => vi.unstubAllGlobals());
+describe('account appearance follows the selected Learning workspace', () => {
+  for (const pathname of ['/accounts', '/account/security']) {
+    it(`${pathname} requests client authority in its first document`, async () => {
+      const fetcher = vi
+        .fn()
+        .mockResolvedValueOnce(
+          Response.json({ user: { id: 'user', environment: 'test' }, client: { id: 'client' } }),
+        )
+        .mockResolvedValueOnce(Response.json({ selectedTheme: 'dark' }));
+      vi.stubGlobal('fetch', fetcher);
+      await loadInitialAppearance(pathname, 'tracker_session=fixture', 'http://fixture');
+      expect(fetcher.mock.calls[1][0]).toBe('http://fixture/branding/current?shared=0');
+    });
+    it(`${pathname} keeps shared appearance without a selected client`, async () => {
+      const fetcher = vi
+        .fn()
+        .mockResolvedValueOnce(
+          Response.json({ user: { id: 'user', environment: 'test' }, client: null }),
+        )
+        .mockResolvedValueOnce(Response.json({ selectedTheme: 'light' }));
+      vi.stubGlobal('fetch', fetcher);
+      const initial = await loadInitialAppearance(
+        pathname,
+        'tracker_session=fixture',
+        'http://fixture',
+      );
+      expect(fetcher.mock.calls[1][0]).toBe('http://fixture/branding/current?shared=1');
+      const dataset = { theme: 'light' };
+      runInNewContext(appearanceScript(initial), {
+        document: { documentElement: { dataset } },
+        localStorage: { getItem: () => 'dark' },
+      });
+      expect(dataset.theme).toBe('dark');
+    });
+    it(`${pathname} does not apply a platform override to a client document`, () => {
+      const dataset = { theme: 'dark' };
+      runInNewContext(
+        appearanceScript({
+          pathname,
+          account: 'test.user',
+          clientId: 'client',
+          brand: { selectedTheme: 'dark' } as InitialAppearance['brand'],
+        }),
+        {
+          document: { documentElement: { dataset } },
+          localStorage: { getItem: () => 'light' },
+        },
+      );
+      expect(dataset.theme).toBe('dark');
+    });
+  }
+});
+
 describe('bounded 503 policy scope', () => {
   for (const [name, pathname, account, unavailable, stored, expected] of [
     ['guest known intent', '/login', 'guest', true, { guest: 'platform-dark' }, 'dark'],

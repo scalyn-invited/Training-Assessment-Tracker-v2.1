@@ -16,6 +16,7 @@ export async function loadInitialAppearance(
     guestAppearance(pathname) || !/(?:^|;\s*)tracker_session=/.test(cookie) ? 'guest' : null;
   const signal = AbortSignal.timeout(2500);
   let brandingUnavailable = false;
+  let clientId: string | null = null;
   const get = async (route: string) => {
     const response = await fetch(origin + route, {
       headers: { cookie },
@@ -32,14 +33,15 @@ export async function loadInitialAppearance(
     if (account === null) {
       const context = await get('/auth/context');
       account = context.user ? context.user.environment + '.' + context.user.id : 'guest';
+      clientId = context.user ? (context.client?.id ?? null) : null;
     }
     const brand = (await get(
-      '/branding/current?shared=' + (sharedAppearance(pathname) ? '1' : '0'),
+      '/branding/current?shared=' + (sharedAppearance(pathname, clientId) ? '1' : '0'),
     )) as Brand;
-    return { pathname, account, brand };
+    return { pathname, account, clientId, brand };
   } catch {
     // Bounded recovery, not an indefinite blank document. No guessed identity/cache.
     // The existing appearance retry fetch owns recovery after hydration.
-    return { pathname, account, brand: null, brandingUnavailable };
+    return { pathname, account, clientId, brand: null, brandingUnavailable };
   }
 }
