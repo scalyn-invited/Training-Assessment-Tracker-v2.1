@@ -1,0 +1,401 @@
+[
+  {
+    "t": 7229.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7246.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7262.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7279.299999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7296.199999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7312.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7329.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7346,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7363.199999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7379.299999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7396.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7412.899999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7429.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7446.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7463,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7479.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7496.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7512.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7529.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7546,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 7562.699999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  }
+]

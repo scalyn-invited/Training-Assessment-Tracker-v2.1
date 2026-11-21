@@ -1,0 +1,164 @@
+[
+  {
+    "t": 1468.6000000238419,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 314,
+        "y": 1751.5,
+        "width": 440,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 1475.2999999523163,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 314,
+        "y": 1751.5,
+        "width": 440,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 1499,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 314,
+        "y": 1751.5,
+        "width": 440,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 1508.3999999761581,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 314,
+        "y": 1751.5,
+        "width": 440,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 1525.1000000238419,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 314,
+        "y": 1751.5,
+        "width": 440,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 1541.7000000476837,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 314,
+        "y": 1751.5,
+        "width": 440,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 1558.2999999523163,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 314,
+        "y": 1751.5,
+        "width": 440,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 1575.1000000238419,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 314,
+        "y": 1751.5,
+        "width": 440,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 1591.7000000476837,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 314,
+        "y": 1751.5,
+        "width": 440,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  }
+]

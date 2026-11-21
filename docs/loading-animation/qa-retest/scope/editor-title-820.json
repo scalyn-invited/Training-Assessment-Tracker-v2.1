@@ -1,0 +1,182 @@
+[
+  {
+    "t": 958.7999999523163,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 975.3999999761581,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 992.1000000238419,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1008.6000000238419,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1025.2000000476837,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1042.1000000238419,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1058.8999999761581,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1075.7000000476837,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1091.8999999761581,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1108.7999999523163,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 820,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 313,
+        "y": 850,
+        "width": 442,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  }
+]

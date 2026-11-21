@@ -1,0 +1,86 @@
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+
+Running 1 test using 1 worker
+
+  ✓  1 tests\expanded-appearance-browser\scope.spec.ts:4:1 › real API scoped navigation never renders target content in the previous scope theme (17.9s)
+
+  1 passed (32.9s)
