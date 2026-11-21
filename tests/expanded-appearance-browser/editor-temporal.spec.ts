@@ -52,7 +52,7 @@ test('responsive editor controls through authority and section transitions', asy
     });
     await page.goto('/assessments/definitions/new');
     await expect.poll(() => seen).toBe(true);
-    await expect(page.getByText('Opening workspace', { exact: true })).toBeVisible();
+    await expect(page.locator('[data-appearance-pending] [data-loading-spinner]')).toBeVisible();
     await start(
       page,
       { title: '#assessment-title', save: '#save-draft', nav: '[data-section="questions"]' },

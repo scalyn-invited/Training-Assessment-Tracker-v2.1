@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\loading-animation-browser\shell.spec.ts:178:1 › leaving a client for a guest route keeps unresolved canvas neutral (6.2s)
+
+
+  1) tests\loading-animation-browser\shell.spec.ts:178:1 › leaving a client for a guest route keeps unresolved canvas neutral 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('html')
+    Expected: ""
+    Received: serializes to the same string
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('html') with timeout 5000ms
+      - waiting for locator('html')
+        14 × locator resolved to <html lang="en" data-theme="light">…</html>
+           - unexpected value "null"
+
+
+      182 |   await page.evaluate(()=>(window as any).navigate('/login'));
+      183 |   await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+    > 184 |   await expect(page.locator('html')).toHaveAttribute('data-shell-neutral','');
+          |                                      ^
+      185 |   await expect(page.getByText('Client A brand',{exact:true})).toHaveCount(0);
+      186 |   release();
+      187 | });
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:184:38
+
+    Error Context: output\loading-animation\shell-leaving-a-client-for-c5121-s-unresolved-canvas-neutral\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-leaving-a-client-for-c5121-s-unresolved-canvas-neutral\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-leaving-a-client-for-c5121-s-unresolved-canvas-neutral\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\loading-animation-browser\shell.spec.ts:178:1 › leaving a client for a guest route keeps unresolved canvas neutral 

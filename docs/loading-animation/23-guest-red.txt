@@ -1,0 +1,44 @@
+
+Running 3 tests using 1 worker
+
+  ✓  1 tests\loading-animation-browser\loading.spec.ts:27:1 › session wait is textless initially with stable accessible status and context after three seconds (913ms)
+  ✘  2 tests\loading-animation-browser\loading.spec.ts:39:1 › guest session uses the same initially textless animation (5.8s)
+  ✓  3 tests\loading-animation-browser\loading.spec.ts:44:1 › confirmed session errors replace the spinner and retry resets its delay (767ms)
+
+
+  1) tests\loading-animation-browser\loading.spec.ts:39:1 › guest session uses the same initially textless animation 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('[data-loading-spinner]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('[data-loading-spinner]') with timeout 5000ms
+      - waiting for locator('[data-loading-spinner]')
+
+
+      39 | test('guest session uses the same initially textless animation',async({page})=>{
+      40 |   await mount(page,'/guest');
+    > 41 |   await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+         |                                                        ^
+      42 |   await expect(page.locator('[data-loading-context]')).not.toBeVisible();
+      43 | });
+      44 | test('confirmed session errors replace the spinner and retry resets its delay',async({page})=>{
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\loading.spec.ts:41:56
+
+    Error Context: output\loading-animation\loading-guest-session-uses-73081-nitially-textless-animation\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\loading-guest-session-uses-73081-nitially-textless-animation\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\loading-guest-session-uses-73081-nitially-textless-animation\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\loading-animation-browser\loading.spec.ts:39:1 › guest session uses the same initially textless animation 
+  2 passed (11.3s)

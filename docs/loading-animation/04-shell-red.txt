@@ -1,0 +1,61 @@
+
+Running 1 test using 1 worker
+
+✘ [ERROR] Could not resolve "react"
+
+    fixture:navigation:1:35:
+      1 │ ... {useSyncExternalStore} from 'react';let path='/platform';window...
+        ╵                                 ~~~~~~~
+
+  The plugin "navigation-fixture" didn't set a resolve directory for the file "fixture:navigation", so esbuild did not search for "react" on the file system.
+
+  ✘  1 tests\loading-animation-browser\shell.spec.ts:20:1 › same-workspace route keeps chrome mounted while destination content waits for exact authority (0ms)
+
+
+  1) tests\loading-animation-browser\shell.spec.ts:20:1 › same-workspace route keeps chrome mounted while destination content waits for exact authority 
+
+    Error: Build failed with 1 error:
+    fixture:navigation:1:35: ERROR: Could not resolve "react"
+        at failureErrorWithLog (C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\node_modules\esbuild\lib\main.js:1752:15)
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\node_modules\esbuild\lib\main.js:1211:25
+        at runOnEndCallbacks (C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\node_modules\esbuild\lib\main.js:1592:45)
+        at buildResponseToResult (C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\node_modules\esbuild\lib\main.js:1209:7)
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\node_modules\esbuild\lib\main.js:1236:16
+        at responseCallbacks.<computed> (C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\node_modules\esbuild\lib\main.js:886:9)
+        at handleIncomingPacket (C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\node_modules\esbuild\lib\main.js:941:12)
+        at Socket.readFromStdout (C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\node_modules\esbuild\lib\main.js:864:7)
+
+    {
+      detail: undefined,
+      id: '',
+      location: {
+        column: 35,
+        file: 'fixture:navigation',
+        length: 7,
+        line: 1,
+        lineText: "import {useSyncExternalStore} from 'react';let path='/platform';window.navigate=p=>{path=p;window.dispatchEvent(new Event('navigate'))};export function usePathname(){return useSyncExternalStore(cb=>{window.addEventListener('navigate',cb);return()=>window.removeEventListener('navigate',cb)},()=>path)};const router={replace:p=>window.navigate(p)};export const useRouter=()=>router;",
+        namespace: '',
+        suggestion: ''
+      },
+      notes: [
+        {
+          location: null,
+          text: `The plugin "navigation-fixture" didn't set a resolve directory for the file "fixture:navigation", so esbuild did not search for "react" on the file system.`
+        }
+      ],
+      pluginName: '',
+      text: 'Could not resolve "react"'
+    }
+
+    Error Context: output\loading-animation\shell-same-workspace-route-59efa-t-waits-for-exact-authority\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-same-workspace-route-59efa-t-waits-for-exact-authority\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-same-workspace-route-59efa-t-waits-for-exact-authority\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\loading-animation-browser\shell.spec.ts:20:1 › same-workspace route keeps chrome mounted while destination content waits for exact authority 

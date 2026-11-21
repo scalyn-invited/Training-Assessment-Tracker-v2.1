@@ -1,0 +1,9 @@
+
+ RUN  v5.1.0 C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/loading-animation
+
+
+ Test Files  1 passed (1)
+      Tests  20 passed (20)
+   Start at  17:01:49
+   Duration  540ms (tests 50%, import 25%, transform 19%, worker 6%)
+

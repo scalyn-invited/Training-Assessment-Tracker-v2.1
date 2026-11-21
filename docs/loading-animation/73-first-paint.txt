@@ -1,0 +1,27 @@
+
+Running 22 tests using 1 worker
+
+  ✓   1 tests\first-paint-browser\first-paint.spec.ts:3:1 › saved Dark uses current navy before hydration and stays stable through loading (2.0s)
+  ✓   2 tests\first-paint-browser\geometry.spec.ts:4:1 › login pre-hydration geometry matches the settled form (2.1s)
+  ✓   3 tests\first-paint-browser\geometry.spec.ts:28:1 › login existing geometry stays stable across the exact reload matrix (10.6s)
+  ✓   4 tests\first-paint-browser\outage-policy.spec.ts:4:1 › approved 503 fallback preserves scoped generated Dark intent through repeat failure and recovery (4.3s)
+  ✓   5 tests\first-paint-browser\precedence.spec.ts:13:3 › light: pre-hydration palette, native scheme, reload and OS independence (2.0s)
+  ✓   6 tests\first-paint-browser\precedence.spec.ts:13:3 › dark: pre-hydration palette, native scheme, reload and OS independence (2.8s)
+  ✓   7 tests\first-paint-browser\precedence.spec.ts:13:3 › neon-cyan: pre-hydration palette, native scheme, reload and OS independence (3.6s)
+  ✓   8 tests\first-paint-browser\precedence.spec.ts:13:3 › neon-emerald: pre-hydration palette, native scheme, reload and OS independence (2.3s)
+  ✓   9 tests\first-paint-browser\precedence.spec.ts:13:3 › neon-amber: pre-hydration palette, native scheme, reload and OS independence (2.2s)
+  ✓  10 tests\first-paint-browser\precedence.spec.ts:13:3 › platform-light: pre-hydration palette, native scheme, reload and OS independence (2.5s)
+  ✓  11 tests\first-paint-browser\precedence.spec.ts:13:3 › platform-dark: pre-hydration palette, native scheme, reload and OS independence (2.2s)
+  ✓  12 tests\first-paint-browser\precedence.spec.ts:45:3 › missing storage uses configured generated default before hydration (1.1s)
+  ✓  13 tests\first-paint-browser\precedence.spec.ts:45:3 › malformed storage uses configured generated default before hydration (946ms)
+  ✓  14 tests\first-paint-browser\precedence.spec.ts:45:3 › blocked storage uses configured generated default before hydration (795ms)
+  ✓  15 tests\first-paint-browser\precedence.spec.ts:67:3 › shared identity never temporarily uses guest override (1.3s)
+  ✓  16 tests\first-paint-browser\precedence.spec.ts:67:3 › client identity never temporarily uses guest override (6.3s)
+  ✓  17 tests\first-paint-browser\precedence.spec.ts:137:1 › reset returns to configured default and survives reload (1.9s)
+  ✓  18 tests\first-paint-browser\precedence.spec.ts:150:1 › return navigation does not replay an obsolete document default (1.2s)
+  ✓  19 tests\first-paint-browser\precedence.spec.ts:164:1 › appearance failure keeps saved built-in theme and exposes retry without blanking (1.0s)
+  ✓  20 tests\first-paint-browser\qa-independent.spec.ts:5:1 › QA baseline reload matrix and route continuity (9.7s)
+  ✓  21 tests\first-paint-browser\qa-independent.spec.ts:44:1 › QA built-in readability keyboard reduced motion and retained input (8.7s)
+  ✓  22 tests\first-paint-browser\temporal.spec.ts:4:1 › visible frame samples remain navy across responsive reloads, throttling and recovery (7.5s)
+
+  22 passed (1.4m)

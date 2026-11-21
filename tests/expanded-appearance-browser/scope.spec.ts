@@ -63,6 +63,9 @@ test('real API scoped navigation never renders target content in the previous sc
           bg: getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(),
           heading: document.querySelector('main h1')?.textContent,
           pending: Boolean(document.querySelector('[data-appearance-pending]')),
+          spinner: Boolean(
+            document.querySelector('[data-appearance-pending] [data-loading-spinner]'),
+          ),
           text: document.body.innerText,
           shell: document
             .querySelector('[data-application-shell]')
@@ -160,7 +163,12 @@ test('real API scoped navigation never renders target content in the previous sc
       await expect(
         page.getByRole('button', { name: 'Retry appearance', exact: true }),
       ).toBeVisible();
-      await expect(page.locator('[data-application-shell]')).toHaveCount(0);
+      await expect(page.locator('[data-shell-frame="ready"]')).toHaveCount(0);
+      await expect(page.locator('[data-shell-frame="neutral"]')).toHaveCount(1);
+      await expect(page.getByText('QA Alpha', { exact: true })).toHaveCount(0);
+      await expect(
+        page.getByRole('heading', { name: 'Platform overview', exact: true }),
+      ).toHaveCount(0);
       await page.unroute(pattern);
       await page.getByRole('button', { name: 'Retry appearance', exact: true }).click();
     }
@@ -308,7 +316,7 @@ test('real API scoped navigation never renders target content in the previous sc
   const recycledPending = await page.evaluate(() => (window as any).__frames);
   await writeFile(dir + '/recycled-client-pending.json', JSON.stringify(recycledPending, null, 2));
   expect
-    .soft(recycledPending.filter((f: any) => !f.pending || f.heading !== 'Opening workspace'))
+    .soft(recycledPending.filter((f: any) => !f.pending || !f.spinner || f.heading))
     .toEqual([]);
   releaseA();
   await expect(

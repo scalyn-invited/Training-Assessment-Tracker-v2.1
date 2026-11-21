@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { ThemePicker, type Brand } from './brand-header';
 import { Button, Feedback } from './ui/controls';
+import { LoadingState } from './loading-state';
 import tokens from './ui/tokens.module.css';
 import styles from './ui/guest.module.css';
 
@@ -91,6 +92,6 @@ export function GuestPending({
       <Button onClick={retry}>Try loading again</Button>
     </div>
   ) : (
-    <p role="status">{message}</p>
+    <LoadingState message={message + ' This is taking longer than usual.'} />
   );
 }

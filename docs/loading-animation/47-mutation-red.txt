@@ -1,0 +1,33 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\loading-animation-browser\context.spec.ts:57:1 › a late mutation failure cannot invalidate a newer session epoch (785ms)
+
+
+  1) tests\loading-animation-browser\context.spec.ts:57:1 › a late mutation failure cannot invalidate a newer session epoch 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      69 |   await page.evaluate(()=>(window as any).api('mock-login',{}));
+      70 |   release();await page.evaluate(()=>(window as any).oldMutation);
+    > 71 |   expect(await page.evaluate(()=>(window as any).failures)).toBe(0);
+         |                                                             ^
+      72 | });
+      73 |
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\context.spec.ts:71:61
+
+    Error Context: output\loading-animation\context-a-late-mutation-fa-77624-idate-a-newer-session-epoch\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\context-a-late-mutation-fa-77624-idate-a-newer-session-epoch\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\context-a-late-mutation-fa-77624-idate-a-newer-session-epoch\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\loading-animation-browser\context.spec.ts:57:1 › a late mutation failure cannot invalidate a newer session epoch 

@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import { loadInitialAppearance } from './initial-appearance';
 import { appearanceScript, paletteProperties } from './components/appearance-state';
 import { AppearanceProvider } from './components/appearance-provider';
+import { AppShellRoot } from './components/app-shell';
 import './globals.css';
 import './workspace.css';
 import './directory.css';
@@ -33,7 +34,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <a className="skip" href="#main">
           Skip to content
         </a>
-        <AppearanceProvider initial={initial}>{children}</AppearanceProvider>
+        <AppearanceProvider initial={initial}>
+          <AppShellRoot>{children}</AppShellRoot>
+        </AppearanceProvider>
       </body>
     </html>
   );

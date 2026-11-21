@@ -1,0 +1,9 @@
+
+Running 4 tests using 1 worker
+
+  ✓  1 tests\loading-animation-browser\context.spec.ts:4:1 › a pre-switch context response cannot publish after an identity mutation (970ms)
+  ✓  2 tests\loading-animation-browser\loading.spec.ts:26:1 › session wait is textless initially with stable accessible status and context after three seconds (772ms)
+  ✓  3 tests\loading-animation-browser\shell.spec.ts:22:1 › same-workspace route keeps chrome mounted while destination content waits for exact authority (2.1s)
+  ✓  4 tests\loading-animation-browser\shell.spec.ts:47:1 › a permission change cannot reuse the previous appearance authority (1.1s)
+
+  4 passed (7.3s)

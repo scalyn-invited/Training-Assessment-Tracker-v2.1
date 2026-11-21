@@ -1,0 +1,124 @@
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\loading-next-browser\navigation.spec.ts:3:1 › built Next retains chrome nodes across page mounts and suppresses them for standalone recovery (4.0s)
+
+
+  1) tests\loading-next-browser\navigation.spec.ts:3:1 › built Next retains chrome nodes across page mounts and suppresses them for standalone recovery 
+
+    Error: route.continue: Route is already handled!
+
+      20 |     let release!:()=>void,seen=false;
+      21 |     const hold=new Promise<void>(resolve=>release=resolve);
+    > 22 |     await page.route('**/api/branding/current?*',async route=>{seen=true;await hold;await route.continue()});
+         |                                                                                                         ^
+      23 |     const nav=page.getByRole('navigation',{name:width<800?'Mobile platform navigation':'Main navigation',exact:true});
+      24 |     await nav.getByRole('link',{name:'Clients',exact:true}).click();
+      25 |     await expect.poll(()=>seen).toBe(true);
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-next-browser\navigation.spec.ts:22:105
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Clients', exact: true })
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Clients', exact: true }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Clients', exact: true })
+      - Test ended.
+
+
+      32 |     await page.screenshot({path:`docs/loading-animation/built/navigation-${width}.png`});
+      33 |     release();await page.unroute('**/api/branding/current?*');
+    > 34 |     await expect(page.getByRole('heading',{name:'Clients',exact:true})).toBeVisible();
+         |                                                                         ^
+      35 |     await page.goBack();await expect(page.getByRole('heading',{name:'Platform overview',exact:true})).toBeVisible();
+      36 |     await page.goForward();await expect(page.getByRole('heading',{name:'Clients',exact:true})).toBeVisible();
+      37 |   }
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-next-browser\navigation.spec.ts:34:73
+
+    Error Context: output\loading-next\navigation-built-Next-reta-88211-hem-for-standalone-recovery\error-context.md
+
+  1 failed
+    tests\loading-next-browser\navigation.spec.ts:3:1 › built Next retains chrome nodes across page mounts and suppresses them for standalone recovery 

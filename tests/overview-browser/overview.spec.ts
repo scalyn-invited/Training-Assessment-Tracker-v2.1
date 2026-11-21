@@ -44,7 +44,7 @@ test('Overview design uses live scoped data, preserves access, and works on desk
     route.fulfill({ status: 503, json: { message: 'Session temporarily unavailable.' } }),
   );
   await page.goto('/platform');
-  await expect(page.locator('[data-guest-shell="session"]')).toBeVisible();
+  await expect(page.locator('main[data-appearance-pending]')).toBeVisible();
   await expect(page.getByText('Session temporarily unavailable.', { exact: true })).toBeVisible();
   await expect(page.locator('[data-application-shell], .app-sidebar, .guest-header')).toHaveCount(
     0,
@@ -108,7 +108,10 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   }
   await accessibility();
   await page.screenshot({ path: `${screenshotDir}/overview-light-desktop.png`, fullPage: true });
-  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
+  await page
+    .getByRole('button', { name: /^Theme(?: |$)/ })
+    .first()
+    .click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await accessibility();

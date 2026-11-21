@@ -1,0 +1,95 @@
+
+Running 10 tests using 1 worker
+
+▲ [WARNING] The value of "border" in the "panel" class is undefined [undefined-composes-from]
+
+    apps/web/app/components/ui/form-layout.module.css:7:1:
+      7 │ .panel {
+        ╵  ~~~~~
+
+  The first definition of "border" is here:
+
+    apps/web/app/components/ui/controls.module.css:73:2:
+      73 │   border: 1px solid var(--ui-border);
+         ╵   ~~~~~~
+
+  The second definition of "border" is here:
+
+    apps/web/app/components/ui/form-layout.module.css:48:2:
+      48 │   border: 0;
+         ╵   ~~~~~~
+
+  The specification of "composes" does not define an order when class declarations from separate files are composed together. The value of the "border" property for "panel" may change unpredictably as the code is edited. Make sure that all definitions of "border" for "panel" are in a single file.
+
+▲ [WARNING] The value of "min-width" in the "panel" class is undefined [undefined-composes-from]
+
+    apps/web/app/components/ui/form-layout.module.css:7:1:
+      7 │ .panel {
+        ╵  ~~~~~
+
+  The first definition of "min-width" is here:
+
+    apps/web/app/components/ui/controls.module.css:72:2:
+      72 │   min-width: 0;
+         ╵   ~~~~~~~~~
+
+  The second definition of "min-width" is here:
+
+    apps/web/app/components/ui/form-layout.module.css:51:2:
+      51 │   min-width: 0;
+         ╵   ~~~~~~~~~
+
+  The specification of "composes" does not define an order when class declarations from separate files are composed together. The value of the "min-width" property for "panel" may change unpredictably as the code is edited. Make sure that all definitions of "min-width" for "panel" are in a single file.
+
+▲ [WARNING] The value of "min-width" in the "panel" class is undefined [undefined-composes-from]
+
+    apps/web/app/components/ui/form-layout.module.css:7:1:
+      7 │ .panel {
+        ╵  ~~~~~
+
+  The first definition of "min-width" is here:
+
+    apps/web/app/components/ui/controls.module.css:72:2:
+      72 │   min-width: 0;
+         ╵   ~~~~~~~~~
+
+  The second definition of "min-width" is here:
+
+    apps/web/app/components/ui/form-layout.module.css:51:2:
+      51 │   min-width: 0;
+         ╵   ~~~~~~~~~
+
+  The specification of "composes" does not define an order when class declarations from separate files are composed together. The value of the "min-width" property for "panel" may change unpredictably as the code is edited. Make sure that all definitions of "min-width" for "panel" are in a single file.
+
+▲ [WARNING] The value of "border" in the "panel" class is undefined [undefined-composes-from]
+
+    apps/web/app/components/ui/form-layout.module.css:7:1:
+      7 │ .panel {
+        ╵  ~~~~~
+
+  The first definition of "border" is here:
+
+    apps/web/app/components/ui/controls.module.css:73:2:
+      73 │   border: 1px solid var(--ui-border);
+         ╵   ~~~~~~
+
+  The second definition of "border" is here:
+
+    apps/web/app/components/ui/form-layout.module.css:48:2:
+      48 │   border: 0;
+         ╵   ~~~~~~
+
+  The specification of "composes" does not define an order when class declarations from separate files are composed together. The value of the "border" property for "panel" may change unpredictably as the code is edited. Make sure that all definitions of "border" for "panel" are in a single file.
+
+  ✓   1 tests\workflow-qa-browser\workflow.spec.ts:111:1 › D04 preview discloses scope and uses pinned section references across views (787ms)
+  ✓   2 tests\workflow-qa-browser\workflow.spec.ts:137:3 › D03 lost publication reconciles exact definition: published (595ms)
+  ✓   3 tests\workflow-qa-browser\workflow.spec.ts:137:3 › D03 lost publication reconciles exact definition: draft (650ms)
+  ✓   4 tests\workflow-qa-browser\workflow.spec.ts:137:3 › D03 lost publication reconciles exact definition: unavailable (1.4s)
+  ✓   5 tests\workflow-qa-browser\workflow.spec.ts:137:3 › D03 lost publication reconciles exact definition: denied (2.2s)
+  ✓   6 tests\workflow-qa-browser\workflow.spec.ts:179:1 › D03 stale save stops writes and offers authorized structured comparison (1.8s)
+  ✓   7 tests\workflow-qa-browser\workflow.spec.ts:208:1 › D03 unknown save replays exact operation before newer typing (1.2s)
+  ✓   8 tests\workflow-qa-browser\workflow.spec.ts:236:1 › D06 exact published handoff and D08 durable copy provenance (2.2s)
+  ✓   9 tests\workflow-qa-browser\workflow.spec.ts:302:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (1.3s)
+  ✓  10 tests\workflow-qa-browser\workflow.spec.ts:334:1 › D01 same-document Back and Forward cancellation retains author work (1.4s)
+
+  10 passed (17.3s)

@@ -1,0 +1,80 @@
+.loading {
+  min-width: 0;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  color: var(--ink);
+}
+.spinner {
+  display: block;
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--line);
+  border-top-color: var(--ink);
+  border-radius: 50%;
+  animation: loading-turn 0.9s linear infinite;
+}
+.context {
+  margin: 0;
+  max-width: 36rem;
+  text-align: center;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+}
+.routeSlot {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.contentPending {
+  flex: 1;
+  display: grid;
+  place-content: center;
+  min-height: 240px;
+}
+.fullPage {
+  composes: theme from './tokens.module.css';
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+  background: var(--bg);
+  color: var(--ink);
+}
+.recovery {
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+@media (max-width: 800px) {
+  .recovery.recovery button {
+    min-height: 44px;
+    font-size: 16px;
+  }
+}
+:global(html[data-shell-neutral]) {
+  --bg: #070b16 !important;
+  --surface: #0d1426 !important;
+  --raised: #111a30 !important;
+  --ink: #e9edf7 !important;
+  --muted: #98a2bc !important;
+  --line: #1a2440 !important;
+  --primary: #7baaff !important;
+  --sidebar: #0d1426 !important;
+  --focus: #7baaff !important;
+}
+@keyframes loading-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}

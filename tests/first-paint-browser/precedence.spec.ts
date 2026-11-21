@@ -98,10 +98,12 @@ for (const scope of ['shared', 'client'])
       'background-color',
       scope === 'shared' ? colors.dark : colors['platform-dark'],
     );
-    // Inspect a frame with hydration complete but session still pending.
+    // Approved initial-session surface has only a loader, not guest theme controls.
+    await expect(page.locator('[data-loading-spinner]')).toBeVisible();
     await expect(
       page.getByRole('button', { name: 'Dark', exact: true, includeHidden: true }),
-    ).toBeDisabled();
+    ).toHaveCount(0);
+    await expect(page.locator('main h1')).toHaveCount(0);
     release();
     await expect(page.getByRole('button', { name: 'Sign out', exact: true })).toBeVisible();
     if (scope === 'client') {

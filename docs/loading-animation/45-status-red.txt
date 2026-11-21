@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\loading-animation-browser\shell.spec.ts:163:1 › one pending transition keeps its accessible status stable across session and appearance (5.9s)
+
+
+  1) tests\loading-animation-browser\shell.spec.ts:163:1 › one pending transition keeps its accessible status stable across session and appearance 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('[data-loading-state] [role="status"]')
+    Expected: "Loading your session"
+    Received: "Loading workspace"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('[data-loading-state] [role="status"]') with timeout 5000ms
+      - waiting for locator('[data-loading-state] [role="status"]')
+        14 × locator resolved to <div role="status" aria-live="polite" aria-label="Loading workspace">…</div>
+           - unexpected value "Loading workspace"
+
+
+      172 |   await expect.poll(()=>page.locator('[data-loading-state]').count()).toBe(1);
+      173 |   await page.waitForTimeout(100);
+    > 174 |   await expect(status).toHaveAttribute('aria-label',label!);
+          |                        ^
+      175 |   releaseBrand();
+      176 | });
+      177 |
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:174:24
+
+    Error Context: output\loading-animation\shell-one-pending-transiti-fdfea-ross-session-and-appearance\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-one-pending-transiti-fdfea-ross-session-and-appearance\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-one-pending-transiti-fdfea-ross-session-and-appearance\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\loading-animation-browser\shell.spec.ts:163:1 › one pending transition keeps its accessible status stable across session and appearance 

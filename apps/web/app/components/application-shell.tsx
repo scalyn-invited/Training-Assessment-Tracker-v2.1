@@ -13,6 +13,7 @@ import { Icon } from './workspace-icon';
 import { Button } from './ui/controls';
 import styles from '../platform/overview.module.css';
 import shared from './ui/application-shell.module.css';
+import loading from './ui/loading-state.module.css';
 
 type Props = {
   context: Context;
@@ -31,6 +32,9 @@ type Props = {
   reload: () => void;
   logout: () => void;
   signingOut: boolean;
+  /** Persistent layout keeps route children in one fixed div; pages own main. */
+  frame?: 'ready' | 'neutral' | 'standalone';
+  themePending?: boolean;
 };
 
 export function ApplicationShell({
@@ -50,7 +54,11 @@ export function ApplicationShell({
   reload,
   logout,
   signingOut,
+  frame,
+  themePending = false,
 }: Props) {
+  const decorated = !frame || frame === 'ready';
+  const standalone = frame === 'standalone';
   const menu = useRef<HTMLDialogElement>(null);
   const workspaceName = platform ? 'Platform administration' : 'Learning workspace';
   const home = platform ? '/platform' : '/dashboard';
@@ -175,7 +183,7 @@ export function ApplicationShell({
   function themePicker() {
     return (
       <ThemePicker
-        brand={brand}
+        brand={themePending ? null : brand}
         client={themeClientId}
         csrf={context.csrf}
         storageKey={storageKey}
@@ -185,94 +193,118 @@ export function ApplicationShell({
     );
   }
   return (
-    <div className={styles.shell} data-application-shell={platform ? 'platform' : 'learning'}>
+    <div
+      className={standalone ? undefined : styles.shell}
+      data-shell-frame={frame}
+      data-application-shell={standalone ? undefined : platform ? 'platform' : 'learning'}
+    >
       <aside
         className={styles.sidebar}
-        aria-label={platform ? 'Platform workspace' : 'Learning workspace'}
+        style={standalone ? { display: 'none' } : undefined}
+        aria-label={
+          decorated ? (platform ? 'Platform workspace' : 'Learning workspace') : 'Workspace'
+        }
       >
-        <Link href={home} className={styles.brand} aria-label={`${brandName} — Overview`}>
-          <span className={styles.brandMark}>
-            {customLogo ? <img src={brand!.logo!} alt="" /> : brandName.slice(0, 1).toUpperCase()}
-          </span>
-          <span className={styles.brandCopy}>
-            <strong>{brandName}</strong>
-            <small>{brand?.appName ?? 'Assessment Training Tracker'}</small>
-          </span>
-        </Link>
-        {brand?.mode === 'co-branded' && <p className={shared.coBrand}>Part of Cerebru</p>}
-        <WorkspacePopover
-          triggerContent={
-            <>
-              <span className={styles.workspaceIcon}>
-                <OverviewIcon name="workspace" />
+        {decorated && (
+          <>
+            <Link href={home} className={styles.brand} aria-label={`${brandName} — Overview`}>
+              <span className={styles.brandMark}>
+                {customLogo ? (
+                  <img src={brand!.logo!} alt="" />
+                ) : (
+                  brandName.slice(0, 1).toUpperCase()
+                )}
               </span>
-              <span className={styles.workspaceCopy}>
-                <small>Workspace</small>
-                <strong>{workspaceName}</strong>
+              <span className={styles.brandCopy}>
+                <strong>{brandName}</strong>
+                <small>{brand?.appName ?? 'Assessment Training Tracker'}</small>
               </span>
-              <OverviewIcon name="switch" />
-            </>
-          }
-        >
-          {context.user?.global_admin && (
-            <Link href="/platform" aria-current={platform ? 'page' : undefined}>
-              Platform administration
             </Link>
-          )}
-          <Link href="/dashboard">Learning workspace</Link>
-          <Link href="/clients">Choose your client</Link>
-          {canManageAccounts && <Link href="/accounts">Manage account access</Link>}
-          {brand && brand.mode !== 'white-label' && (
-            <a href="https://opsbrain-eosin.vercel.app/home">Back to Cerebru</a>
-          )}
-        </WorkspacePopover>
-        <p className={styles.navLabel}>{workspaceName}</p>
-        {platform ? navigation() : learningNavigation()}
-        <div className={styles.desktopTheme}>{themePicker()}</div>
+            {brand?.mode === 'co-branded' && <p className={shared.coBrand}>Part of Cerebru</p>}
+            <WorkspacePopover
+              triggerContent={
+                <>
+                  <span className={styles.workspaceIcon}>
+                    <OverviewIcon name="workspace" />
+                  </span>
+                  <span className={styles.workspaceCopy}>
+                    <small>Workspace</small>
+                    <strong>{workspaceName}</strong>
+                  </span>
+                  <OverviewIcon name="switch" />
+                </>
+              }
+            >
+              {context.user?.global_admin && (
+                <Link href="/platform" aria-current={platform ? 'page' : undefined}>
+                  Platform administration
+                </Link>
+              )}
+              <Link href="/dashboard">Learning workspace</Link>
+              <Link href="/clients">Choose your client</Link>
+              {canManageAccounts && <Link href="/accounts">Manage account access</Link>}
+              {brand && brand.mode !== 'white-label' && (
+                <a href="https://opsbrain-eosin.vercel.app/home">Back to Cerebru</a>
+              )}
+            </WorkspacePopover>
+            <p className={styles.navLabel}>{workspaceName}</p>
+            {platform ? navigation() : learningNavigation()}
+            <div className={styles.desktopTheme}>{themePicker()}</div>
+          </>
+        )}
       </aside>
-      <div className={styles.main + (!platform ? ' ' + shared.learningMain : '')}>
-        <header className={styles.topbar}>
-          {environment === 'test' ? (
-            <div className={styles.sandbox}>
-              <span className={styles.sandboxBadge}>
-                <OverviewIcon name="dot" />
-                Local sandbox
-              </span>
-              <span className={styles.sandboxDetail}>
-                Synthetic people · {authMode === 'mock' ? 'Mock sign-in' : 'Local password sign-in'}{' '}
-                · No email delivery
-              </span>
-            </div>
-          ) : (
-            <span className={styles.platformLabel}>{workspaceName}</span>
+      <div
+        className={
+          standalone ? undefined : styles.main + (!platform ? ' ' + shared.learningMain : '')
+        }
+      >
+        <header className={styles.topbar} style={standalone ? { display: 'none' } : undefined}>
+          {decorated && (
+            <>
+              {environment === 'test' ? (
+                <div className={styles.sandbox}>
+                  <span className={styles.sandboxBadge}>
+                    <OverviewIcon name="dot" />
+                    Local sandbox
+                  </span>
+                  <span className={styles.sandboxDetail}>
+                    Synthetic people ·{' '}
+                    {authMode === 'mock' ? 'Mock sign-in' : 'Local password sign-in'} · No email
+                    delivery
+                  </span>
+                </div>
+              ) : (
+                <span className={styles.platformLabel}>{workspaceName}</span>
+              )}
+              <div className={styles.profile}>
+                <button
+                  type="button"
+                  className={styles.avatar}
+                  aria-label="Personal settings"
+                  aria-haspopup="dialog"
+                  onClick={() => settings.current?.showModal()}
+                >
+                  {name.slice(0, 1).toUpperCase()}
+                </button>
+                <span className={styles.profileCopy}>
+                  <strong title={name}>{name}</strong>
+                  <small>{platform ? 'Global administration' : 'Current client access'}</small>
+                </span>
+                <button
+                  type="button"
+                  className={styles.logout}
+                  onClick={logout}
+                  disabled={navigationBusy}
+                  aria-busy={signingOut}
+                  aria-label={signingOut ? 'Signing out...' : 'Sign out'}
+                >
+                  <OverviewIcon name="logout" />
+                </button>
+              </div>
+            </>
           )}
-          <div className={styles.profile}>
-            <button
-              type="button"
-              className={styles.avatar}
-              aria-label="Personal settings"
-              aria-haspopup="dialog"
-              onClick={() => settings.current?.showModal()}
-            >
-              {name.slice(0, 1).toUpperCase()}
-            </button>
-            <span className={styles.profileCopy}>
-              <strong title={name}>{name}</strong>
-              <small>{platform ? 'Global administration' : 'Current client access'}</small>
-            </span>
-            <button
-              type="button"
-              className={styles.logout}
-              onClick={logout}
-              disabled={navigationBusy}
-              aria-busy={signingOut}
-              aria-label={signingOut ? 'Signing out...' : 'Sign out'}
-            >
-              <OverviewIcon name="logout" />
-            </button>
-          </div>
         </header>
-        {!platform && (
+        {decorated && !platform && (
           <div className={shared.clientBar}>
             <Button
               className={shared.menuToggle}
@@ -286,16 +318,26 @@ export function ApplicationShell({
             {clientSwitcher}
           </div>
         )}
-        <main id="main" className={styles.content} tabIndex={-1}>
-          {children}
-        </main>
-        <footer className={styles.footer}>
-          <span>{brand?.appName ?? 'Assessment Training Tracker'}</span>
-          <span>Learning with purpose. Progress with evidence.</span>
+        <div data-route-slot className={loading.routeSlot}>
+          {frame ? (
+            children
+          ) : (
+            <main id="main" className={styles.content} tabIndex={-1}>
+              {children}
+            </main>
+          )}
+        </div>
+        <footer className={styles.footer} style={!decorated ? { display: 'none' } : undefined}>
+          {decorated && (
+            <>
+              <span>{brand?.appName ?? 'Assessment Training Tracker'}</span>
+              <span>Learning with purpose. Progress with evidence.</span>
+            </>
+          )}
         </footer>
       </div>
-      {platform && navigation(true)}
-      {!platform && (
+      {decorated && platform && navigation(true)}
+      {decorated && !platform && (
         <Dialog dialogRef={menu} titleId="workspace-menu-title">
           <div className={styles.dialogHeader}>
             <h2 id="workspace-menu-title">Workspace menu</h2>
@@ -304,25 +346,29 @@ export function ApplicationShell({
           {learningNavigation(true)}
         </Dialog>
       )}
-      <Dialog dialogRef={settings} titleId="overview-settings-title">
-        <div className={styles.dialogHeader}>
-          <h2 id="overview-settings-title">Personal settings</h2>
-          <button type="button" className="secondary" onClick={() => settings.current?.close()}>
-            Close
-          </button>
-        </div>
-        <nav className={styles.settingsLinks} aria-label="Account settings">
-          {context.user?.global_admin && (
-            <>
-              <Link href="/platform/settings">Platform appearance</Link>
-              <Link href="/platform/admins">Global admins</Link>
-            </>
-          )}
-          {canManageAccounts && <Link href="/accounts">Manage account access</Link>}
-          {authMode === 'local_password' && <Link href="/account/security">Account security</Link>}
-        </nav>
-        {themePicker()}
-      </Dialog>
+      {decorated && (
+        <Dialog dialogRef={settings} titleId="overview-settings-title">
+          <div className={styles.dialogHeader}>
+            <h2 id="overview-settings-title">Personal settings</h2>
+            <button type="button" className="secondary" onClick={() => settings.current?.close()}>
+              Close
+            </button>
+          </div>
+          <nav className={styles.settingsLinks} aria-label="Account settings">
+            {context.user?.global_admin && (
+              <>
+                <Link href="/platform/settings">Platform appearance</Link>
+                <Link href="/platform/admins">Global admins</Link>
+              </>
+            )}
+            {canManageAccounts && <Link href="/accounts">Manage account access</Link>}
+            {authMode === 'local_password' && (
+              <Link href="/account/security">Account security</Link>
+            )}
+          </nav>
+          {themePicker()}
+        </Dialog>
+      )}
     </div>
   );
 }

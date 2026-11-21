@@ -1,0 +1,83 @@
+
+Running 8 tests using 1 worker
+
+  ✓  1 tests\loading-animation-browser\context.spec.ts:4:1 › a pre-switch context response cannot publish after an identity mutation (1.0s)
+  ✓  2 tests\loading-animation-browser\loading.spec.ts:26:1 › session wait is textless initially with stable accessible status and context after three seconds (699ms)
+  ✓  3 tests\loading-animation-browser\shell.spec.ts:22:1 › same-workspace route keeps chrome mounted while destination content waits for exact authority (1.8s)
+  ✓  4 tests\loading-animation-browser\shell.spec.ts:47:1 › a permission change cannot reuse the previous appearance authority (1.4s)
+  ✘  5 tests\loading-animation-browser\shell.spec.ts:91:1 › signed-out context never reveals protected page content (6.0s)
+  ✘  6 tests\loading-animation-browser\shell.spec.ts:98:1 › failed client mutation conceals old scope and immediately offers session verification, not a second POST (6.2s)
+  ✓  7 tests\loading-animation-browser\shell.spec.ts:113:1 › held route context uses neutral stable chrome, then failure and explicit retry (2.9s)
+  ✓  8 tests\loading-animation-browser\shell.spec.ts:132:1 › same-path recovery suppresses all chrome and resumes without duplicate main (1.9s)
+
+
+  1) tests\loading-animation-browser\shell.spec.ts:91:1 › signed-out context never reveals protected page content 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('[data-loading-spinner]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('[data-loading-spinner]') with timeout 5000ms
+      - waiting for locator('[data-loading-spinner]')
+
+
+      91 | test('signed-out context never reveals protected page content', async ({page})=>{
+      92 |   const {state,start}=await mountControlled(page); state.session.user=null; await start();
+    > 93 |   await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+         |                                                        ^
+      94 |   await page.waitForTimeout(100);
+      95 |   await expect(page.getByRole('heading',{name:/Verified page/})).toHaveCount(0);
+      96 | });
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:93:56
+
+    Error Context: output\loading-animation\shell-signed-out-context-n-07cd8-eals-protected-page-content\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-signed-out-context-n-07cd8-eals-protected-page-content\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-signed-out-context-n-07cd8-eals-protected-page-content\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\loading-animation-browser\shell.spec.ts:98:1 › failed client mutation conceals old scope and immediately offers session verification, not a second POST 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('alert')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('alert') with timeout 5000ms
+      - waiting for getByRole('alert')
+
+
+      105 |   await expect(page.locator(':popover-open')).toHaveCount(0);
+      106 |   await expect(page.getByText('Client A brand',{exact:true})).toHaveCount(0);
+    > 107 |   await expect(page.getByRole('alert')).toBeVisible();
+          |                                         ^
+      108 |   await expect(page.getByRole('button',{name:'Try loading again'})).toBeVisible();
+      109 |   await page.getByRole('button',{name:'Try loading again'}).click();
+      110 |   await expect(page.getByRole('heading',{name:'Verified page /platform',exact:true})).toBeVisible();
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:107:41
+
+    Error Context: output\loading-animation\shell-failed-client-mutati-768f5-ification-not-a-second-POST\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-failed-client-mutati-768f5-ification-not-a-second-POST\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-failed-client-mutati-768f5-ification-not-a-second-POST\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\loading-animation-browser\shell.spec.ts:91:1 › signed-out context never reveals protected page content 
+    tests\loading-animation-browser\shell.spec.ts:98:1 › failed client mutation conceals old scope and immediately offers session verification, not a second POST 
+  6 passed (28.6s)

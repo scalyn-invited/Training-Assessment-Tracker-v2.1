@@ -1,0 +1,76 @@
+
+Running 2 tests using 1 worker
+
+  ✘  1 tests\loading-animation-browser\shell.spec.ts:147:1 › route verification does not join or publish an older in-flight page refresh (6.4s)
+  ✘  2 tests\loading-animation-browser\shell.spec.ts:160:1 › context deadline replaces an indefinite wait with actionable recovery (13.4s)
+
+
+  1) tests\loading-animation-browser\shell.spec.ts:147:1 › route verification does not join or publish an older in-flight page refresh 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('New verified identity', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('New verified identity', { exact: true }) with timeout 5000ms
+      - waiting for getByText('New verified identity', { exact: true })
+
+
+      153 |   state.contextGate=null; state.session.user.name='New verified identity';
+      154 |   await page.getByRole('button',{name:'Navigate',exact:true}).click();
+    > 155 |   await expect(page.getByText('New verified identity',{exact:true})).toBeVisible();
+          |                                                                      ^
+      156 |   release();await page.waitForTimeout(100);
+      157 |   await expect(page.getByText('Synthetic user',{exact:true})).toHaveCount(0);
+      158 | });
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:155:70
+
+    Error Context: output\loading-animation\shell-route-verification-d-7f410-lder-in-flight-page-refresh\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-route-verification-d-7f410-lder-in-flight-page-refresh\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-route-verification-d-7f410-lder-in-flight-page-refresh\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\loading-animation-browser\shell.spec.ts:160:1 › context deadline replaces an indefinite wait with actionable recovery 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('alert')
+    Expected: visible
+    Timeout: 12500ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('alert') with timeout 12500ms
+      - waiting for getByRole('alert')
+
+
+      161 |   const {state,start}=await mountControlled(page); state.contextGate=new Promise<void>(()=>{}); await start();
+      162 |   await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+    > 163 |   await expect(page.getByRole('alert')).toBeVisible({timeout:12500});
+          |                                         ^
+      164 |   await expect(page.locator('[data-loading-spinner]')).toHaveCount(0);
+      165 |   await expect(page.getByRole('button',{name:'Try loading again'})).toBeVisible();
+      166 | });
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:163:41
+
+    Error Context: output\loading-animation\shell-context-deadline-rep-e15dd-it-with-actionable-recovery\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-context-deadline-rep-e15dd-it-with-actionable-recovery\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-context-deadline-rep-e15dd-it-with-actionable-recovery\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\loading-animation-browser\shell.spec.ts:147:1 › route verification does not join or publish an older in-flight page refresh 
+    tests\loading-animation-browser\shell.spec.ts:160:1 › context deadline replaces an indefinite wait with actionable recovery 

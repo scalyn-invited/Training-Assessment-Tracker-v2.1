@@ -13,7 +13,11 @@ import {
 } from './appearance-state';
 import { useInitialAppearance } from './appearance-provider';
 export type { Brand } from './appearance-state';
-export function useBrand(account: string | null = 'guest', clientId: string | null = null) {
+export function useBrand(
+  account: string | null = 'guest',
+  clientId: string | null = null,
+  generation: string | number = 0,
+) {
   const pathname = usePathname();
   const initial = useInitialAppearance();
   const initialMatches =
@@ -23,7 +27,7 @@ export function useBrand(account: string | null = 'guest', clientId: string | nu
     account === null && initialMatches ? initial.clientId : clientId,
   );
   const identity = account ?? (initialMatches ? initial.account : null);
-  const key = JSON.stringify([pathname, identity, shared ? null : clientId]);
+  const key = JSON.stringify([pathname, identity, shared ? null : clientId, generation]);
   const [state, setState] = useState(() => ({
     key,
     brand: initialMatches ? initial.brand : null,

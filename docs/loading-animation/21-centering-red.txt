@@ -1,0 +1,90 @@
+
+Running 3 tests using 1 worker
+
+  ✘  1 tests\loading-animation-browser\shell.spec.ts:161:3 › content loader occupies and centers within the available area 1440 (1.5s)
+  ✘  2 tests\loading-animation-browser\shell.spec.ts:161:3 › content loader occupies and centers within the available area 820 (1.1s)
+  ✘  3 tests\loading-animation-browser\shell.spec.ts:161:3 › content loader occupies and centers within the available area 390 (3.5s)
+
+
+  1) tests\loading-animation-browser\shell.spec.ts:161:3 › content loader occupies and centers within the available area 1440 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 540
+    Received:   304
+
+      167 |     await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+      168 |     const main=await page.locator('main').boundingBox(); const spinner=await page.locator('[data-loading-spinner]').boundingBox();
+    > 169 |     expect(main!.height).toBeGreaterThan(viewport.height*.6);
+          |                          ^
+      170 |     expect(Math.abs(spinner!.x+spinner!.width/2-(main!.x+main!.width/2))).toBeLessThan(12);
+      171 |     expect(Math.abs(spinner!.y+spinner!.height/2-(main!.y+main!.height/2))).toBeLessThan(18);
+      172 |     expect(await page.locator('[data-loading-spinner]').evaluate(el=>getComputedStyle(el).animationName)).toBe('none');
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:169:26
+
+    Error Context: output\loading-animation\shell-content-loader-occup-61fe3-hin-the-available-area-1440\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-content-loader-occup-61fe3-hin-the-available-area-1440\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-content-loader-occup-61fe3-hin-the-available-area-1440\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\loading-animation-browser\shell.spec.ts:161:3 › content loader occupies and centers within the available area 820 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 708
+    Received:   304
+
+      167 |     await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+      168 |     const main=await page.locator('main').boundingBox(); const spinner=await page.locator('[data-loading-spinner]').boundingBox();
+    > 169 |     expect(main!.height).toBeGreaterThan(viewport.height*.6);
+          |                          ^
+      170 |     expect(Math.abs(spinner!.x+spinner!.width/2-(main!.x+main!.width/2))).toBeLessThan(12);
+      171 |     expect(Math.abs(spinner!.y+spinner!.height/2-(main!.y+main!.height/2))).toBeLessThan(18);
+      172 |     expect(await page.locator('[data-loading-spinner]').evaluate(el=>getComputedStyle(el).animationName)).toBe('none');
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:169:26
+
+    Error Context: output\loading-animation\shell-content-loader-occup-f4dbd-thin-the-available-area-820\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-content-loader-occup-f4dbd-thin-the-available-area-820\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-content-loader-occup-f4dbd-thin-the-available-area-820\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests\loading-animation-browser\shell.spec.ts:161:3 › content loader occupies and centers within the available area 390 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 506.4
+    Received:   272
+
+      167 |     await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+      168 |     const main=await page.locator('main').boundingBox(); const spinner=await page.locator('[data-loading-spinner]').boundingBox();
+    > 169 |     expect(main!.height).toBeGreaterThan(viewport.height*.6);
+          |                          ^
+      170 |     expect(Math.abs(spinner!.x+spinner!.width/2-(main!.x+main!.width/2))).toBeLessThan(12);
+      171 |     expect(Math.abs(spinner!.y+spinner!.height/2-(main!.y+main!.height/2))).toBeLessThan(18);
+      172 |     expect(await page.locator('[data-loading-spinner]').evaluate(el=>getComputedStyle(el).animationName)).toBe('none');
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:169:26
+
+    Error Context: output\loading-animation\shell-content-loader-occup-d4955-thin-the-available-area-390\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-content-loader-occup-d4955-thin-the-available-area-390\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-content-loader-occup-d4955-thin-the-available-area-390\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests\loading-animation-browser\shell.spec.ts:161:3 › content loader occupies and centers within the available area 1440 
+    tests\loading-animation-browser\shell.spec.ts:161:3 › content loader occupies and centers within the available area 820 
+    tests\loading-animation-browser\shell.spec.ts:161:3 › content loader occupies and centers within the available area 390 

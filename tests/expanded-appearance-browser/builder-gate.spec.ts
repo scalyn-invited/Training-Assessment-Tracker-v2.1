@@ -39,7 +39,7 @@ test('FOUC-QA-05 builder mounts after delayed appearance authority', async ({ pa
   });
   await page.goto('/assessments/definitions/new');
   await expect.poll(() => requested).toBe(true);
-  await expect(page.getByText('Opening workspace', { exact: true })).toBeVisible();
+  await expect(page.locator('[data-appearance-pending] [data-loading-spinner]')).toBeVisible();
   await expect(page.locator('#assessment-builder')).toHaveCount(0);
   await expect(page.getByLabel('Assessment title', { exact: true })).toHaveCount(0);
   // Ensure independent definition data has resolved while the host is gated.
@@ -110,7 +110,7 @@ test('FOUC-QA-05 builder mounts after delayed appearance authority', async ({ pa
   await title.fill('Newer unsaved edit survives save URL gate');
   releaseSave();
   await expect.poll(() => appearanceRequested).toBe(true);
-  await expect(page.getByText('Opening workspace', { exact: true })).toBeVisible();
+  await expect(page.locator('[data-appearance-pending] [data-loading-spinner]')).toBeVisible();
   await expect(title).toHaveCount(0);
   releaseAppearance();
   await expect(title).toHaveValue('Newer unsaved edit survives save URL gate');

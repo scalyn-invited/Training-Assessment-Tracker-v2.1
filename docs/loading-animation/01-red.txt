@@ -1,0 +1,41 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\loading-animation-browser\loading.spec.ts:25:1 › session wait is textless initially with stable accessible status and context after three seconds (8.0s)
+
+
+  1) tests\loading-animation-browser\loading.spec.ts:25:1 › session wait is textless initially with stable accessible status and context after three seconds 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('[data-loading-spinner]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('[data-loading-spinner]') with timeout 5000ms
+      - waiting for locator('[data-loading-spinner]')
+
+
+      25 | test('session wait is textless initially with stable accessible status and context after three seconds', async ({page})=>{
+      26 |   await mount(page);
+    > 27 |   await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+         |                                                        ^
+      28 |   const status=page.getByRole('status');
+      29 |   await expect(status).toHaveAccessibleName('Loading your session');
+      30 |   await expect(page.locator('[data-loading-context]')).not.toBeVisible();
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\loading.spec.ts:27:56
+
+    Error Context: output\loading-animation\loading-session-wait-is-te-02bb9-context-after-three-seconds\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\loading-session-wait-is-te-02bb9-context-after-three-seconds\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\loading-session-wait-is-te-02bb9-context-after-three-seconds\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\loading-animation-browser\loading.spec.ts:25:1 › session wait is textless initially with stable accessible status and context after three seconds 

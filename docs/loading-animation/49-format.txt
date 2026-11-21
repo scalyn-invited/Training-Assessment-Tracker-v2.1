@@ -1,0 +1,12 @@
+[90mapps/web/app/components/app-shell-root.tsx[39m 108ms (unchanged)
+[90mapps/web/app/components/auth-ui.tsx[39m 20ms (unchanged)
+[90mapps/web/app/components/loading-state.tsx[39m 3ms (unchanged)
+[90mapps/web/app/error.tsx[39m 2ms (unchanged)
+[90mapps/web/app/not-found.tsx[39m 2ms (unchanged)
+[90mtests/loading-animation-browser/check-ports.ts[39m 4ms (unchanged)
+tests/loading-animation-browser/context.spec.ts 9ms
+[90mtests/loading-animation-browser/loading.spec.ts[39m 10ms (unchanged)
+tests/loading-animation-browser/shell.spec.ts 42ms
+tests/loading-next-browser/navigation.spec.ts 12ms
+[90mtests/first-paint-browser/precedence.spec.ts[39m 16ms (unchanged)
+tests/assessment-builder-ui-browser/builder.spec.ts 42ms

@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\loading-animation-browser\loading.spec.ts:25:1 › session wait is textless initially with stable accessible status and context after three seconds (6.1s)
+
+
+  1) tests\loading-animation-browser\loading.spec.ts:25:1 › session wait is textless initially with stable accessible status and context after three seconds 
+
+    Error: expect(locator).not.toBeVisible() failed
+
+    Locator:  locator('[data-loading-context]')
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toBeVisible" locator('[data-loading-context]') with timeout 5000ms
+      - waiting for locator('[data-loading-context]')
+        14 × locator resolved to <p data-loading-context="true" class="loading_state_context">Checking your session. This is taking longer than…</p>
+           - unexpected value "visible"
+
+
+      30 |   await expect(page.locator('[data-loading-context]')).not.toBeVisible();
+      31 |   await page.clock.fastForward(2999);
+    > 32 |   await expect(page.locator('[data-loading-context]')).not.toBeVisible();
+         |                                                            ^
+      33 |   await page.clock.fastForward(1);
+      34 |   await expect(page.locator('[data-loading-context]')).toBeVisible();
+      35 |   await expect(status).toHaveAccessibleName('Loading your session');
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\loading.spec.ts:32:60
+
+    Error Context: output\loading-animation\loading-session-wait-is-te-02bb9-context-after-three-seconds\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\loading-session-wait-is-te-02bb9-context-after-three-seconds\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\loading-session-wait-is-te-02bb9-context-after-three-seconds\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\loading-animation-browser\loading.spec.ts:25:1 › session wait is textless initially with stable accessible status and context after three seconds 

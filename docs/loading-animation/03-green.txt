@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ✓  1 tests\loading-animation-browser\loading.spec.ts:26:1 › session wait is textless initially with stable accessible status and context after three seconds (735ms)
+
+  1 passed (6.5s)
