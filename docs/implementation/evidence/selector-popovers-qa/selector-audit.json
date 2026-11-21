@@ -1,0 +1,216 @@
+{
+  "count": 72,
+  "files": 42,
+  "audit": [
+    {
+      "file": "tests/account-ui-browser/accounts.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/assessment-builder-ui-browser/builder.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/assessment-directory-ui-browser/directory.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/assignment-ui-browser/assignment.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/audit-ui-browser/audit.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/client-admin-ui-browser/administration.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/client-admin-ui-browser/people.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/client-choice-ui-browser/choice.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/client-settings-ui-browser/ai.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/clients-ui-browser/clients.spec.ts",
+      "replacements": 3,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/curriculum-ui-browser/curriculum.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/delivery-ui-browser/delivery.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/document-review-ui-browser/document.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/expanded-appearance-browser/editor-temporal.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/expanded-appearance-browser/layouts.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/expanded-appearance-browser/learning-temporal.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/expanded-appearance-browser/scope-instrumented.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/expanded-appearance-browser/scope.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/expanded-appearance-browser/screenshot-calibration.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/expanded-appearance-browser/scrollbar.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/first-paint-browser/precedence.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/first-paint-browser/qa-independent.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/first-paint-browser/temporal.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/generation-ui-browser/generation.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/guest-ui-browser/guest.spec.ts",
+      "replacements": 3,
+      "selectorOnly": false
+    },
+    {
+      "file": "tests/learning-overview-ui-browser/overview.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/lesson-ui-browser/lesson.spec.ts",
+      "replacements": 4,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/notifications-ui-browser/notifications.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/onboarding-ui-browser/onboarding.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/overview-browser/overview.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/people-ui-browser/people.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/platform-accounts-browser/accounts.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/progress-ui-browser/progress.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/receipt-ui-browser/receipt.spec.ts",
+      "replacements": 3,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/response-ui-browser/response.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/review-queue-ui-browser/review-queue.spec.ts",
+      "replacements": 4,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/settings-ui-browser/settings.spec.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/setup-ui-checks.ts",
+      "replacements": 1,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/shell-browser/shell.spec.ts",
+      "replacements": 3,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/theme-picker-browser/theme-picker.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/training-directory-ui-browser/directory.spec.ts",
+      "replacements": 2,
+      "selectorOnly": true
+    },
+    {
+      "file": "tests/training-record-ui-browser/record.spec.ts",
+      "replacements": 3,
+      "selectorOnly": true
+    }
+  ]
+}
