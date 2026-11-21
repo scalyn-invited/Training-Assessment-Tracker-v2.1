@@ -1,0 +1,60 @@
+[WebServer] ◇ injected env (0) from .runtime\workspace-browser\2026-11-21T02-53-33-610Z\unused.env
+[WebServer] Failed to proxy http://127.0.0.1:3491/health/ready Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3491/health/ready Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3491/health/ready Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+
+Running 1 test using 1 worker
+
+Theme enumeration {"light":"Light","dark":"Dark","neon-cyan":"Neon Cyan","neon-emerald":"Neon Emerald","neon-amber":"Neon Amber","platform-light":"Platform Light","platform-dark":"Platform Dark"}
+geometry { width: 1280, height: 600 } { height: 664, width: 247 } { x: 12, y: 168, width: 224, height: 364 }
+geometry { width: 1280, height: 300 } { height: 664, width: 247 } { x: 12, y: 8, width: 224, height: 224 }
+geometry { width: 375, height: 420 } { height: 332, width: 339 } { x: 42, y: 8, width: 291, height: 291.75 }
+geometry { width: 320, height: 300 } { height: 332, width: 284 } { x: 42, y: 8, width: 236, height: 190.5 }
+  ✓  1 tests\workspace-real-browser\workspace.spec.ts:3:1 › QA real client all themes survive reload, default reset, desktop and mobile overlay (38.5s)
+
+  1 passed (59.4s)

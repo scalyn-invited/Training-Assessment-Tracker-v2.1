@@ -1,0 +1,9 @@
+
+ RUN  v5.1.0 C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/selector-popovers-qa
+
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  10:59:08
+   Duration  440ms (transform 44%, tests 28%, import 21%, worker 6%)
+
