@@ -1,0 +1,19 @@
+PASS reverse-normalized full source tests/overview-browser/overview.spec.ts; assertions/actions/timeouts/guards unchanged
+PASS reverse-normalized full source tests/recovery-ui-browser/recovery.spec.ts; assertions/actions/timeouts/guards unchanged
+PASS preserved REVIEW.md
+PASS preserved logs/review-scope.log
+PASS preserved logs/li-review-01-qa-overview.log
+PASS preserved logs/li-review-01-qa-overview-repeat.log
+PASS no product/test working changes; main preserved; tested 46db637ce3a27c2ec5fb3de2487262211a4f4371; correction 397c6a33672ca01cecceb0087afa41f877719d77
+build: > tsc -p tsconfig.server.json && npm run build --workspace=@tracker/web
+✓ Compiled successfully in 4.1s
+  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+overview:   1 passed (41.3s)
+recovery:   1 passed (45.9s)
+scope:   1 passed (30.8s)
+selectors:   36 passed (1.2m)
+policy:  Test Files  1 passed (1)
+      Tests  20 passed (20)
+types: > tsc --noEmit -p tsconfig.server.json && npm run typecheck --workspace=@tracker/web
+> tsc --noEmit

@@ -1,0 +1,9 @@
+
+ RUN  v5.1.0 C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/latest-ui-t_8d33f464
+
+
+ Test Files  1 passed (1)
+      Tests  20 passed (20)
+   Start at  13:59:25
+   Duration  410ms (tests 50%, import 24%, transform 18%, worker 7%)
+
