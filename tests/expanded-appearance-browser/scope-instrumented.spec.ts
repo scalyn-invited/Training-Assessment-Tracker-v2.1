@@ -151,7 +151,7 @@ test('instrument exact authority transition with capture control', async ({ page
     await page.getByRole('button', { name: /^Theme(?: |$)/ }).click();
     await page.getByRole('button', { name: 'Light', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-    await page.locator('summary').filter({ hasText: 'Workspace' }).click();
+    await page.getByRole('button', { name: /^Workspace / }).click();
     let release!: () => void;
     const held = new Promise<void>((r) => (release = r));
     let requested!: () => void;

@@ -282,7 +282,7 @@ test('Overview design uses live scoped data, preserves access, and works on desk
     await touchContext.close();
   }
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.locator('summary').filter({ hasText: 'Workspace' }).click();
+  await page.getByRole('button', { name: /^Workspace / }).click();
   await page.getByRole('link', { name: 'Choose your client' }).click();
   await page.getByRole('button', { name: 'Demo Client 1', exact: true }).click();
   await expect(page).toHaveURL(/\/dashboard$/);

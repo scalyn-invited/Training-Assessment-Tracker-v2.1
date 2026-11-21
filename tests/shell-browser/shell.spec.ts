@@ -111,7 +111,7 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
     await page.keyboard.press('Escape');
     await page.keyboard.press('Escape');
-    await page.locator('summary').filter({ hasText: 'Workspace' }).click();
+    await page.getByRole('button', { name: /^Workspace / }).click();
     await page.getByRole('link', { name: 'Choose your client', exact: true }).click();
     await page.getByRole('button', { name: 'Demo Client 1', exact: true }).click();
     await expect(page).toHaveURL(/dashboard/);

@@ -78,7 +78,7 @@ test('screenshot observer calibration on settled dashboard', async ({ page }) =>
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 
-  await page.locator('summary').filter({ hasText: 'Workspace' }).click();
+  await page.getByRole('button', { name: /^Workspace / }).click();
   await page.getByRole('link', { name: 'Learning workspace', exact: true }).click();
   await expect(
     page.getByRole('heading', { name: 'Welcome back, Scope QA owner.', exact: true }),
