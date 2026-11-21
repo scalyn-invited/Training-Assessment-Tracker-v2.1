@@ -1,0 +1,28 @@
+01-red.txt   1 failed
+02-build.txt 
+03-green.txt   1 passed (38.0s)
+04-focused.txt   2 passed (12.1s)
+05-focused-baseline-red.txt   3 failed |   1 passed (41.8s)
+06-loading.txt   22 passed (42.0s)
+07-selectors.txt   36 passed (1.3m)
+08-builder-component.txt   10 passed (17.3s)
+09-policy.txt  Test Files  1 passed (1) |       Tests  20 passed (20)
+10-types.txt 
+11-builder-gate.spec.ts.txt   1 passed (24.3s)
+11-builder-loading.spec.ts.txt   1 passed (26.5s)
+11-editor-temporal.spec.ts.txt   1 passed (32.6s)
+11-scope.spec.ts.txt   1 passed (44.4s)
+12-assessment-builder-ui-browser.txt   1 passed (54.3s)
+12-guest-ui-browser.txt   1 passed (50.4s)
+12-overview-browser.txt   1 passed (42.2s)
+12-recovery-ui-browser.txt   1 passed (56.0s)
+12-shell-browser.txt   1 passed (38.9s)
+13-account-theme.txt   1 passed (1.3m)
+14-workspace.txt   1 passed (55.6s)
+15-first-paint-build.txt 
+16-outage-policy.txt   1 passed (9.7s)
+17-navigation.spec.ts.txt   1 passed (33.5s)
+17-qa-temporal.spec.ts.txt   1 passed (30.4s)
+01-red-frames.json [{"width":1440,"pending":{"tag":"BODY","id":""},"settled":{"tag":"BODY","id":""},"neutralFrames":205,"neutralBodyFrames":205},{"width":820,"pending":{"tag":"BODY","id":""},"settled":{"tag":"BODY","id":""},"neutralFrames":187,"neutralBodyFrames":187},{"width":390,"pending":{"tag":"BODY","id":""},"settled":{"tag":"BODY","id":""},"neutralFrames":207,"neutralBodyFrames":207}]
+03-green-frames.json [{"width":1440,"pending":{"tag":"MAIN","id":"main"},"settled":{"tag":"MAIN","id":"main"},"neutralFrames":188,"neutralBodyFrames":0},{"width":820,"pending":{"tag":"MAIN","id":"main"},"settled":{"tag":"MAIN","id":"main"},"neutralFrames":196,"neutralBodyFrames":0},{"width":390,"pending":{"tag":"MAIN","id":"main"},"settled":{"tag":"MAIN","id":"main"},"neutralFrames":192,"neutralBodyFrames":0}]
+17-final-frames.json [{"width":1440,"pending":{"tag":"MAIN","id":"main"},"settled":{"tag":"MAIN","id":"main"},"neutralFrames":190,"neutralBodyFrames":0},{"width":820,"pending":{"tag":"MAIN","id":"main"},"settled":{"tag":"MAIN","id":"main"},"neutralFrames":196,"neutralBodyFrames":0},{"width":390,"pending":{"tag":"MAIN","id":"main"},"settled":{"tag":"MAIN","id":"main"},"neutralFrames":192,"neutralBodyFrames":0}]
