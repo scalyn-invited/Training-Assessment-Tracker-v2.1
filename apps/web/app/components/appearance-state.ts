@@ -14,11 +14,15 @@ export type Brand = {
 export type InitialAppearance = {
   pathname: string;
   account: string | null;
+  clientId?: string | null;
   brand: Brand | null;
   brandingUnavailable?: boolean;
 };
-export const sharedAppearance = (pathname: string) =>
-  /^\/(platform|login|setup|clients|account|accounts)(\/|$)/.test(pathname);
+export const sharedAppearance = (pathname: string, clientId: string | null = null) =>
+  // Account tools live in Learning navigation, but remain usable without a client.
+  /^\/(accounts|account\/security)\/?$/.test(pathname)
+    ? !clientId
+    : /^\/(platform|login|setup|clients|account)(\/|$)/.test(pathname);
 export const guestAppearance = (pathname: string) =>
   /^\/(login|setup|account\/link)(\/|$)/.test(pathname);
 export const appearanceKey = (account: string) => 'training.v21.appearance.platform.' + account;
@@ -48,7 +52,8 @@ export function savedTheme(brand: Brand, account: string, shared: boolean) {
 // Escape '<' even though current account identifiers are server-issued UUIDs.
 export function appearanceScript(initial: InitialAppearance) {
   const key =
-    initial.account && (sharedAppearance(initial.pathname) || initial.account === 'guest')
+    initial.account &&
+    (sharedAppearance(initial.pathname, initial.clientId) || initial.account === 'guest')
       ? appearanceKey(initial.account)
       : null;
   const available = initial.brand
