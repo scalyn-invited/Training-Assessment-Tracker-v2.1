@@ -1,5 +1,6 @@
 'use client';
-import { useEffect, useLayoutEffect, useState, useRef, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useState, useRef, useId, type ReactNode } from 'react';
+import pickerStyles from './ui/theme-picker.module.css';
 import { usePathname } from 'next/navigation';
 import { themes } from '../../../../packages/domain/src/theme';
 import { Icon } from './workspace-icon';
@@ -113,12 +114,67 @@ export function ThemePicker({
 }) {
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);
-  const menu = useRef<HTMLDetailsElement>(null);
+  const menu = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const pointerOpened = useRef(false);
+  const menuId = useId();
+  const [open, setOpen] = useState(false);
+  function positionMenu() {
+    if (!menu.current || !trigger.current) return;
+    const rect = trigger.current.getBoundingClientRect();
+    const viewport = window.visualViewport;
+    const left = viewport?.offsetLeft ?? 0,
+      top = viewport?.offsetTop ?? 0;
+    const width = viewport?.width ?? window.innerWidth;
+    const height = viewport?.height ?? window.innerHeight;
+    const gap = 8;
+    const panelWidth = Math.min(Math.max(rect.width, 224), width - gap * 2);
+    const above = Math.max(0, rect.top - top - gap * 2);
+    const below = Math.max(0, top + height - rect.bottom - gap * 2);
+    const useAbove = above > below;
+    const panel = menu.current;
+    panel.style.width = `${panelWidth}px`;
+    panel.style.maxHeight = `${Math.max(0, useAbove ? above : below)}px`;
+    panel.style.left = `${Math.max(left + gap, Math.min(rect.left, left + width - panelWidth - gap))}px`;
+    const panelHeight = panel.getBoundingClientRect().height;
+    panel.style.top = `${Math.max(top + gap, Math.min(useAbove ? rect.top - gap - panelHeight : rect.bottom + gap, top + height - panelHeight - gap))}px`;
+  }
+  function closeMenu() {
+    menu.current?.hidePopover();
+    trigger.current?.focus({ preventScroll: true });
+  }
+  function openMenu() {
+    menu.current?.showPopover();
+    positionMenu();
+    (
+      menu.current?.querySelector<HTMLElement>('button[aria-pressed="true"]:not(:disabled)') ??
+      menu.current?.querySelector<HTMLElement>('button:not(:disabled)')
+    )?.focus({ preventScroll: true });
+  }
+  useEffect(() => {
+    if (!open) return;
+    const viewport = window.visualViewport;
+    window.addEventListener('resize', positionMenu);
+    window.addEventListener('scroll', positionMenu, true);
+    viewport?.addEventListener('resize', positionMenu);
+    viewport?.addEventListener('scroll', positionMenu);
+    return () => {
+      window.removeEventListener('resize', positionMenu);
+      window.removeEventListener('scroll', positionMenu, true);
+      viewport?.removeEventListener('resize', positionMenu);
+      viewport?.removeEventListener('scroll', positionMenu);
+    };
+  }, [open]);
   const [busy, setBusy] = useState(false),
     [error, setError] = useState(''),
     [message, setMessage] = useState('');
+  useLayoutEffect(() => {
+    if (open) positionMenu();
+  }, [open, busy, error]);
   async function choose(theme: string | null) {
     if (!brand || busy) return;
+    // Retain focus in the overlay while its option buttons are disabled.
+    menu.current?.focus({ preventScroll: true });
     setBusy(true);
     setError('');
     setMessage('');
@@ -152,10 +208,7 @@ export function ThemePicker({
       }
       window.dispatchEvent(new Event('brandingchanged'));
       setMessage('Theme preference saved.');
-      if (menu.current) {
-        menu.current.open = false;
-        menu.current.querySelector('summary')?.focus();
-      }
+      closeMenu();
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -164,19 +217,23 @@ export function ThemePicker({
   }
   return (
     <div>
-      <details
-        className="theme-picker"
-        ref={menu}
-        onKeyDown={(e) => {
-          if (e.key === 'Escape' && e.currentTarget.open) {
-            e.preventDefault();
-            e.stopPropagation();
-            e.currentTarget.open = false;
-            e.currentTarget.querySelector('summary')?.focus();
-          }
-        }}
-      >
-        <summary>
+      <div className="theme-picker">
+        <button
+          type="button"
+          className={pickerStyles.trigger}
+          ref={trigger}
+          aria-expanded={open}
+          aria-controls={menuId}
+          onPointerDown={() => {
+            pointerOpened.current = Boolean(menu.current?.matches(':popover-open'));
+          }}
+          onClick={(event) => {
+            // Pointer focus/light-dismiss can close the panel before click fires.
+            const wasOpen =
+              event.detail > 0 ? pointerOpened.current : menu.current?.matches(':popover-open');
+            wasOpen ? closeMenu() : openMenu();
+          }}
+        >
           {icon ?? <Icon name="moon" />}
           <span>Theme</span>
           <span className="theme-current">
@@ -184,8 +241,56 @@ export function ThemePicker({
               ? ((brand.themes ?? themes) as Record<string, string>)[brand.selectedTheme]
               : 'Loading...'}
           </span>
-        </summary>
-        <div className="theme-options" role="group" aria-label="Colour theme">
+        </button>
+        <div
+          className={'theme-options ' + pickerStyles.options}
+          ref={menu}
+          id={menuId}
+          popover="auto"
+          role="group"
+          aria-label="Colour theme"
+          tabIndex={-1}
+          onToggle={(event) => {
+            const isOpen = event.newState === 'open';
+            setOpen(isOpen);
+            // Light-dismiss on non-focusable content must not strand focus on body.
+            // Keep deliberate focus on another control (including Tab navigation).
+            const focused = document.activeElement as HTMLElement | null;
+            if (
+              !isOpen &&
+              (!focused ||
+                focused === document.body ||
+                (focused.tabIndex < 0 &&
+                  !focused.isContentEditable &&
+                  !focused.matches('input,textarea,select,button,a[href]')))
+            )
+              trigger.current?.focus({ preventScroll: true });
+          }}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) menu.current?.hidePopover();
+          }}
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              event.preventDefault();
+              event.stopPropagation();
+              closeMenu();
+              return;
+            }
+            if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const items = Array.from(
+              event.currentTarget.querySelectorAll<HTMLButtonElement>('button:not(:disabled)'),
+            );
+            const current = items.indexOf(document.activeElement as HTMLButtonElement);
+            const next =
+              event.key === 'Home'
+                ? 0
+                : event.key === 'End'
+                  ? items.length - 1
+                  : (current + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+            items[next]?.focus();
+          }}
+        >
           {Object.entries(brand?.themes ?? themes).map(([value, label]) => (
             <button
               type="button"
@@ -205,23 +310,24 @@ export function ThemePicker({
           >
             Use {client ? 'client' : 'platform'} default
           </button>
+          {busy && <p role="status">Saving theme...</p>}
+          {error && (
+            <div role="alert">
+              <p>{error}</p>
+              <button
+                className="secondary"
+                onClick={() => {
+                  menu.current?.focus({ preventScroll: true });
+                  setError('');
+                  reload();
+                }}
+              >
+                Reload appearance
+              </button>
+            </div>
+          )}
         </div>
-      </details>
-      {busy && <p role="status">Saving theme...</p>}
-      {error && (
-        <div role="alert">
-          <p>{error}</p>
-          <button
-            className="secondary"
-            onClick={() => {
-              setError('');
-              reload();
-            }}
-          >
-            Reload appearance
-          </button>
-        </div>
-      )}
+      </div>
       <p className="sr-only" role="status">
         {message}
       </p>

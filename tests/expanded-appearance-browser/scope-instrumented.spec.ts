@@ -148,7 +148,7 @@ test('instrument exact authority transition with capture control', async ({ page
     await expect(
       page.getByRole('heading', { name: 'Platform overview', exact: true }),
     ).toBeVisible();
-    await page.locator('summary:visible').filter({ hasText: 'Theme' }).click();
+    await page.getByRole('button', { name: /^Theme / }).click();
     await page.getByRole('button', { name: 'Light', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
     await page.locator('summary').filter({ hasText: 'Workspace' }).click();

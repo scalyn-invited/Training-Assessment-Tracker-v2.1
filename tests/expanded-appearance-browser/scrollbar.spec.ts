@@ -50,7 +50,7 @@ test('tablet directory loading preserves existing action positions', async ({ pa
   for (const url of ['/platform', '/dashboard']) {
     await page.goto(url);
     await expect(page.locator('main h1')).toBeVisible();
-    const menu = page.locator('summary:visible').filter({ hasText: 'Theme' }).first();
+    const menu = page.getByRole('button', { name: /^Theme / }).first();
     await menu.click();
     const saved =
       url === '/dashboard'

@@ -2,6 +2,10 @@
 
 Source: V2 working tree at commit 3f3e4a86e8c4a4ce829a983b0406abac4b43a5b1, including the captured uncommitted assessment work. See source-baseline.json (366 files). V2 historical evidence does not prove V2.1 parity.
 
+## Theme selector popover — implementation verified; independent QA pending
+
+Task `t_32d79f81`: theme choices now use a viewport-constrained native top-layer popover without expanding sidebar layout. Existing themes, selection/persistence and client preference contract are preserved; keyboard/pointer dismissal and focus, dialog nesting, internal scrolling and async errors are covered. Final component browser 9, built-Next appearance 4, web policy 14 and branding domain 6 pass; build/typechecks/diff checks pass. See `THEME_POPOVER.md` for RED/GREEN evidence, changed files, harness corrections and limits. QA `t_d0f9320a` and root review remain pending; workspace selection is separate scope.
+
 ## First-paint appearance correction — implementation verified; independent QA pending
 
 Task `t_eeccfb23`: saved-theme-before-hydration RED→GREEN, request-scoped authoritative palettes, current navy document canvas, session/guest separation and one-document snapshot invalidation implemented. Final built-renderer matrix: 17 passed; existing isolated API guest/account-link/axe journey: 1 passed; branding domain: 6 passed; build, server/web TypeScript and diff checks pass. See `FIRST_PAINT_FIX.md` for changed files, reproducible commands and evidence. Unavailable authoritative generated/default appearance may still change on retry; no universal zero-CLS or cross-browser claim. Independent QA `t_8db94a12` and overall acceptance remain open.

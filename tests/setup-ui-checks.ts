@@ -31,7 +31,7 @@ export async function setupA11y(page: Page) {
   }
 }
 export async function setupTheme(page: Page, name: string) {
-  await page.locator('summary').filter({ hasText: 'Theme' }).click();
+  await page.getByRole('button', { name: /^Theme / }).click();
   await page.getByRole('button', { name, exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', name.toLowerCase());
 }

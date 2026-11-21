@@ -12,7 +12,7 @@ test('QA baseline reload matrix and route continuity',async({page,context},info)
  const sample=()=>{if(document.body && document.querySelector('main'))w.framesQA.push({at:performance.now(),visibility:document.visibilityState,theme:document.documentElement.dataset.theme,canvas:getComputedStyle(document.body).backgroundColor,header:document.querySelector('header')?.getBoundingClientRect().toJSON()});requestAnimationFrame(sample);};requestAnimationFrame(sample);
  });
  await page.goto('/login');await page.bringToFront();
- await page.locator('summary').filter({hasText:'Theme'}).click();await page.getByRole('button',{name:'Dark',exact:true}).click();
+ await page.getByRole('button',{name:/^Theme /}).click();await page.getByRole('button',{name:'Dark',exact:true}).click();
  const cdp=await context.newCDPSession(page);await cdp.send('Network.enable');
  const results=[];
  for(const [name,hard,cold,slow] of [['normal-warm',false,false,false],['hard-warm',true,false,false],['normal-cold',false,true,false],['hard-cold-800ms',true,true,true]] as const){
@@ -45,7 +45,7 @@ test('QA built-in readability keyboard reduced motion and retained input',async(
  await page.emulateMedia({reducedMotion:'reduce',colorScheme:'dark'});await page.goto('/login');await page.getByLabel('Email',{exact:true}).fill('synthetic@example.invalid');
  const findings=[];
  for(const theme of ['Dark','Light','Neon Cyan','Neon Emerald','Neon Amber']){
- await page.locator('summary').filter({hasText:'Theme'}).click();await page.getByRole('button',{name:theme,exact:true}).click();
+ await page.getByRole('button',{name:/^Theme /}).click();await page.getByRole('button',{name:theme,exact:true}).click();
  await expect(page.getByLabel('Email',{exact:true})).toHaveValue('synthetic@example.invalid');
  const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();findings.push({theme,violations:axe.violations});
  await page.getByLabel('Email',{exact:true}).focus();await page.keyboard.press('Tab');expect(await page.evaluate(()=>document.activeElement?.tagName)).toBe('INPUT');

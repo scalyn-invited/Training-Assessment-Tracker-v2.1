@@ -32,7 +32,7 @@ test('responsive editor controls through authority and section transitions', asy
   });
 
   await page.goto('/assessments');
-  await page.locator('summary:visible').filter({ hasText: 'Theme' }).click();
+  await page.getByRole('button', { name: /^Theme / }).click();
   const saved = page.waitForResponse(
     (r) => r.url().includes('/api/branding/preference') && r.request().method() === 'POST',
   );

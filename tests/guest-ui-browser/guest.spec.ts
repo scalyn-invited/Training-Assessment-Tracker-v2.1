@@ -53,7 +53,7 @@ test('guest sign-in and private account links preserve authentication and one-ti
     await page.screenshot({ path: `output/playwright/guest-ui/${name}.png`, fullPage: true });
   }
   async function theme(name: string) {
-    await page.locator('summary').filter({ hasText: 'Theme' }).click();
+    await page.getByRole('button', { name: /^Theme / }).click();
     await page.getByRole('button', { name, exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', name.toLowerCase());
   }
@@ -108,9 +108,9 @@ test('guest sign-in and private account links preserve authentication and one-ti
   }
   await theme('Light');
   await a11y();
-  await page.locator('summary').filter({ hasText: 'Theme' }).click();
+  await page.getByRole('button', { name: /^Theme / }).click();
   await page.keyboard.press('Escape');
-  await expect(page.locator('summary').filter({ hasText: 'Theme' })).toBeFocused();
+  await expect(page.getByRole('button', { name: /^Theme / })).toBeFocused();
   for (const selectedTheme of ['neon-cyan', 'platform-dark']) {
     await page.evaluate(
       (t) => localStorage.setItem('training.v21.appearance.platform.guest', t),

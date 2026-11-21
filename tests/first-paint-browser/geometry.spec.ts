@@ -12,7 +12,7 @@ test('login pre-hydration geometry matches the settled form', async ({ page }, i
   await expect(page.getByLabel('Email', { exact: true })).toHaveCount(0);
   const measure = () => page.evaluate(() => {
     const shell = document.querySelector('[data-guest-shell="sign-in"]')!;
-    return ['header > div', 'footer', '.theme-picker > summary'].map(selector => shell.querySelector(selector)!.getBoundingClientRect().toJSON());
+    return ['header > div', 'footer', '.theme-picker > button'].map(selector => shell.querySelector(selector)!.getBoundingClientRect().toJSON());
   });
   const before = await measure();
   await page.screenshot({ path: info.outputPath('before-hydration.png') });
@@ -39,7 +39,7 @@ test('login existing geometry stays stable across the exact reload matrix', asyn
           const r = shell.querySelector(selector)?.getBoundingClientRect();
           return r ? { x: r.x, y: r.y, width: r.width, height: r.height } : null;
         };
-        frames.push({ intro: rect('header > div'), footer: rect('footer'), theme: rect('.theme-picker > summary'), form: !!shell.querySelector('#email'), themeName: document.documentElement.dataset.theme });
+        frames.push({ intro: rect('header > div'), footer: rect('footer'), theme: rect('.theme-picker > button'), form: !!shell.querySelector('#email'), themeName: document.documentElement.dataset.theme });
       }
       requestAnimationFrame(sample);
     };

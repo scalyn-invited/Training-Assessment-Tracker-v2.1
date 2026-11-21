@@ -198,7 +198,7 @@ test('shared curriculum preserves versioned edits, complete review, approval and
   await page.getByRole('button', { name: 'Retry curriculum', exact: true }).click();
   await expect(page.getByLabel('Learning objective', { exact: true })).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme / }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('[data-application-shell="learning"]')).toBeVisible();
   await page
@@ -368,7 +368,7 @@ test('shared curriculum preserves versioned edits, complete review, approval and
   await page.unroute(genApi);
   await page.getByLabel('Revision notes (optional)', { exact: true }).fill('');
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme / }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

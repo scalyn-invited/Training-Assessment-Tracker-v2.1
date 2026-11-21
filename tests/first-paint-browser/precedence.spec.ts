@@ -135,10 +135,10 @@ for (const scope of ['shared', 'client'])
 test('reset returns to configured default and survives reload', async ({ page, context }) => {
   await context.addCookies([{ name: 'default-dark', value: '1', url: 'http://127.0.0.1:3280' }]);
   await page.goto('/login');
-  await page.locator('summary').filter({ hasText: 'Theme' }).click();
+  await page.getByRole('button', { name: /^Theme / }).click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await page.locator('summary').filter({ hasText: 'Theme' }).click();
+  await page.getByRole('button', { name: /^Theme / }).click();
   await page.getByRole('button', { name: 'Use platform default' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'platform-dark');
   await page.reload();

@@ -66,7 +66,7 @@ test('Clients presentation preserves real management, workspace selection and re
   }
   await accessibility();
   await page.screenshot({ path: `${screenshotDir}/clients-light-desktop.png`, fullPage: true });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme / }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await accessibility();
@@ -99,7 +99,7 @@ test('Clients presentation preserves real management, workspace selection and re
   await page.screenshot({ path: `${screenshotDir}/clients-dark-mobile.png`, fullPage: true });
   await page.getByRole('button', { name: 'Personal settings' }).click();
   const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
-  await settings.locator('summary').filter({ hasText: 'Theme' }).click();
+  await settings.getByRole('button', { name: /^Theme / }).click();
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await settings.getByRole('button', { name: 'Close', exact: true }).click();
   await accessibility();
@@ -148,7 +148,7 @@ test('Clients presentation preserves real management, workspace selection and re
     has: page.getByRole('button', { name: 'Manage UI QA renamed client', exact: true }),
   });
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme / }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await renamed.getByRole('button', { name: 'Manage UI QA renamed client', exact: true }).click();
   await accessibility();

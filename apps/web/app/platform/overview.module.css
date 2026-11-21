@@ -194,7 +194,7 @@
   margin-top: auto;
   padding-top: 20px;
 }
-.desktopTheme :global(.theme-picker) > summary {
+.desktopTheme :global(.theme-picker) > button {
   padding: 8px 10px;
   gap: 12px;
   font-size: 14px;
@@ -203,9 +203,6 @@
 .desktopTheme :global(.theme-current) {
   font-size: 13px;
   color: var(--ov-tertiary);
-}
-.desktopTheme :global(.theme-options) {
-  position: static;
 }
 .main {
   margin-left: 248px;

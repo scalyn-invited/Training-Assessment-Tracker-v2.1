@@ -36,7 +36,7 @@ test('visible frame samples remain navy across responsive reloads, throttling an
     requestAnimationFrame(sample);
   });
   await page.goto('/login');
-  await page.locator('summary').filter({ hasText: 'Theme' }).click();
+  await page.getByRole('button', { name: /^Theme / }).click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   const cdp = await context.newCDPSession(page);

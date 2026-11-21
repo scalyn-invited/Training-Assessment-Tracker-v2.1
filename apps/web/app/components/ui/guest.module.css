@@ -110,14 +110,6 @@
   min-inline-size: 14ch;
   text-align: right;
 }
-.toolbar :global(.theme-options) {
-  z-index: 50;
-  top: calc(100% + 8px);
-  bottom: auto;
-  left: auto;
-  right: 0;
-  width: 210px;
-}
 .brandError {
   display: grid;
   gap: var(--ui-space-2);

@@ -194,7 +194,7 @@ test('shared onboarding preserves autosave, guards, roles, confirmations and cur
   await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(page.getByLabel('Current role', { exact: true })).toBeEnabled();
   await expect(page.locator('[data-application-shell="learning"]')).toBeVisible();
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme / }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await fields({
     'Current role': 'Operator',
@@ -375,7 +375,7 @@ test('shared onboarding preserves autosave, guards, roles, confirmations and cur
   await expect(draftReason).toHaveValue('Retained curriculum creation reason');
   await page.unroute(`**/api/enrolments/${id}/plan/create`);
   await draftReason.fill('');
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme / }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();
