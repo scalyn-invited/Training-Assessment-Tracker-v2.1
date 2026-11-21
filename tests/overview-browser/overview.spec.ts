@@ -203,10 +203,10 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   await expect(settings.getByRole('link', { name: 'Global admins', exact: true })).toBeVisible();
   await settings.getByRole('button', { name: 'Close', exact: true }).focus();
   await page.keyboard.press('Shift+Tab');
-  await expect(settings.locator('summary')).toBeFocused();
+  await expect(settings.getByRole('button', { name: /^Theme(?: |$)/ })).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(settings.getByRole('button', { name: 'Close', exact: true })).toBeFocused();
-  await settings.locator('summary').click();
+  await settings.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   // Exercise the shared dialog's field boundary with an isolated DOM fixture. The old

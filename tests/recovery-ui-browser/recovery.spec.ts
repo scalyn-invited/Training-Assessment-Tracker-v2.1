@@ -108,7 +108,7 @@ test('shared recovery, framework 404 and existing root redirects across roles', 
   ).toBeVisible();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();
   const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
-  await settings.locator('summary').click();
+  await settings.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await settings.getByRole('button', { name: 'Dark', exact: true }).click();
   await page.keyboard.press('Escape');
   await page.keyboard.press('Escape');
