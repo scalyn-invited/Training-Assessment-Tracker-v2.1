@@ -1,0 +1,41 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\theme-picker-browser\workspace.spec.ts:51:1 › workspace opening preserves sidebar and navigation geometry (2.3s)
+
+
+  1) tests\theme-picker-browser\workspace.spec.ts:51:1 › workspace opening preserves sidebar and navigation geometry 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 2
+    + Received  + 2
+
+      Object {
+    -   "height": 460,
+    -   "nav": 166,
+    +   "height": 663,
+    +   "nav": 401,
+        "width": 247,
+      }
+
+      58 |   await expect(page.getByRole('navigation',{name:'Choose workspace'})).toBeVisible();
+      59 |   await page.screenshot({path:info.outputPath('workspace.png')});
+    > 60 |   expect(await geometry()).toEqual(before);
+         |                            ^
+      61 | });
+      62 |
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\workspace-selection-popover\tests\theme-picker-browser\workspace.spec.ts:60:28
+
+    Error Context: output\workspace-red\workspace-workspace-openin-d6a7e-bar-and-navigation-geometry\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\workspace-red\workspace-workspace-openin-d6a7e-bar-and-navigation-geometry\trace.zip
+    Usage:
+
+        npx playwright show-trace output\workspace-red\workspace-workspace-openin-d6a7e-bar-and-navigation-geometry\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\theme-picker-browser\workspace.spec.ts:51:1 › workspace opening preserves sidebar and navigation geometry 
