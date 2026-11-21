@@ -1,0 +1,701 @@
+[
+  {
+    "t": 5151.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5162.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5180.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5195.699999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5212.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5228.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5245.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5262.199999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5278.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5295.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5312.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5328.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5345.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5362,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5378.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5395.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5412.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5428.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5445.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5462.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5478.699999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5495.299999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5512.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "light",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5558,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nLoading...\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nLoading your background receipts...\n\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5564,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nLoading...\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nLoading your background receipts...\n\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5580.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nLoading your background receipts...\n\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5596.299999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nLoading your background receipts...\n\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5613.699999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nLoading your background receipts...\n\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5628.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nLoading your background receipts...\n\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5645.599999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5662,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5678.599999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5695.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5711.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5728.699999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 5745.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  }
+]

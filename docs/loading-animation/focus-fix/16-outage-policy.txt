@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ✓  1 tests\first-paint-browser\outage-policy.spec.ts:4:1 › approved 503 fallback preserves scoped generated Dark intent through repeat failure and recovery (2.5s)
+
+  1 passed (9.7s)

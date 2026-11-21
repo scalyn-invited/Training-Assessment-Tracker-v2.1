@@ -1,0 +1,182 @@
+[
+  {
+    "t": 1442.7000000476837,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1460.7000000476837,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1475.1000000238419,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1491.8000000715256,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1508.3000000715256,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1525,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1541.9000000953674,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1558.6000000238419,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1575,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  },
+  {
+    "t": 1591.8000000715256,
+    "phase": "title-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "title": {
+        "x": 349,
+        "y": 770.5,
+        "width": 790,
+        "height": 40,
+        "font": "14px / 20px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(7, 11, 22)"
+      }
+    }
+  }
+]

@@ -1,0 +1,581 @@
+[
+  {
+    "t": 6290.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6295.599999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6312,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6328.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6345.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6361.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6378.299999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6395.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6411.699999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6428.099999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6444.899999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6461.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6478.199999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6495.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6511.599999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6528.199999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6544.899999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6561.299999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6578.599999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6594.899999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6611.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content\nLoading workspace",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6632,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLoading...\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6645,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6662.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6685.599999904633,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6694.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6711.799999952316,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6732.399999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6744.699999928474,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 6761.899999976158,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  }
+]

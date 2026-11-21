@@ -1,0 +1,7 @@
+
+Running 2 tests using 1 worker
+
+  ✓  1 tests\loading-animation-browser\shell.spec.ts:196:1 › removed-control focus reaches main through context failure and keyboard retry (2.3s)
+  ✓  2 tests\loading-animation-browser\shell.spec.ts:226:1 › background context and appearance refresh preserve input focus value and DOM identity (1.9s)
+
+  2 passed (12.1s)

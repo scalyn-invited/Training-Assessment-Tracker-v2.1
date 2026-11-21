@@ -1,0 +1,200 @@
+[
+  {
+    "t": 2226.3000000715256,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2271.8000000715256,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2276.4000000953674,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2291.600000023842,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2308.2000000476837,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2324.600000023842,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2341.600000023842,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2358.3000000715256,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2374.8000000715256,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2391.9000000953674,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  {
+    "t": 2408.4000000953674,
+    "phase": "question-input",
+    "theme": "dark",
+    "width": 1440,
+    "overflow": 0,
+    "anchors": {
+      "prompt": {
+        "x": 650,
+        "y": 1487,
+        "width": 688,
+        "height": 180,
+        "font": "",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    }
+  }
+]

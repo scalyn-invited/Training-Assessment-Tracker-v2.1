@@ -1,0 +1,9 @@
+Verified free isolated port 3110
+Verified free isolated port 3111
+Verified free isolated port 55432
+Verified free isolated port 3280
+Verified free isolated port 3281
+Verified free isolated port 3490
+Verified free isolated port 3491
+Verified free isolated port 55449
+Isolated storage root: C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\.runtime\expanded-real-api
