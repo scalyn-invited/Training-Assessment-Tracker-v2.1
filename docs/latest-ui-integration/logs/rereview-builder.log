@@ -1,0 +1,111 @@
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+
+Running 2 tests using 1 worker
+
+  ✓  1 tests\expanded-appearance-browser\builder-gate.spec.ts:3:1 › FOUC-QA-05 builder mounts after delayed appearance authority (8.2s)
+  ✘  2 tests\expanded-appearance-browser\builder-loading.spec.ts:4:1 › builder never exposes unbound controls while its lazy editor loads (502ms)
+
+
+  1) tests\expanded-appearance-browser\builder-loading.spec.ts:4:1 › builder never exposes unbound controls while its lazy editor loads 
+
+    Error: {"status":409,"code":"already_installed","message":"This application is already installed. Sign in.","requestId":"e0459678-1d8e-44b8-b23f-f1962d4831bf"}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      10 |       data: { ...data, csrf: c.csrf },
+      11 |     });
+    > 12 |     expect(r.ok(), await r.text()).toBe(true);
+         |                                    ^
+      13 |     return r.json();
+      14 |   }
+      15 |   await post('/auth/setup', {
+        at post (C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\latest-ui-t_8d33f464\tests\expanded-appearance-browser\builder-loading.spec.ts:12:36)
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\latest-ui-t_8d33f464\tests\expanded-appearance-browser\builder-loading.spec.ts:15:3
+
+    Error Context: output\latest-ui-rereview\builder-results\builder-loading-builder-ne-7c45d-while-its-lazy-editor-loads\error-context.md
+
+  1 failed
+    tests\expanded-appearance-browser\builder-loading.spec.ts:4:1 › builder never exposes unbound controls while its lazy editor loads 
+  1 passed (22.5s)

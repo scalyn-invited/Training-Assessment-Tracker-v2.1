@@ -1,5 +1,59 @@
 # Independent combined UI review — t_137037d0
 
+## Final re-review: APPROVED WITH NON-BLOCKING FINDINGS
+
+Exact independently tested revision: `ebb32ffd66c7689c5ae57bb85023500503fed90b`, branch `integration/latest-ui-t_8d33f464`. This final verdict supersedes the historical changes-requested decision below. No production edits were made by the reviewer. Main was rechecked at `ff1d19fb427c054efd9e48bc546c9ec1398ef835` and was not restarted or modified.
+
+### Correction and contract verification
+
+- LI-REVIEW-01 is resolved by `8e082f0f026ac31692dd5de36fc17f2fbc08c23c`: eight Workspace locator replacements across six existing tests. Full original scope/history now passes independently, including delayed authority, retry, back/forward and stale-response checks.
+- LI-QA-02 is resolved by `397c6a33672ca01cecceb0087afa41f877719d77`: two overview and one recovery Theme locator replacements. Full original overview (including focus and later Workspace navigation) and recovery journeys pass independently. No assertion, timeout, action or guard was weakened.
+- Read latest QA report and manifest; the manifest still names historical `9a2a413`, so it must NOT be used as the final rollout revision. Use this report's tested revision plus the evidence-only final review commit recorded in Kanban.
+- Inspected the complete production diff again, and verified ancestry of accepted selector `bd7bc723d38a5b18dda05ff3baa2334af9247b9b`, account `32ab3631a878b8adce3e250d174dceca86d689e0`, and main/FOUC `ff1d19f`. Production source is unchanged since the prior combined review. No migration, dependency, API authorization or business/security policy changes were introduced.
+- Account client scope remains shared by initial server resolution, pre-body override policy and hydrated resolver. Existing route/identity/client authority and stale-result rejection remain intact. Popover positioning, native navigation, token inheritance and focus logic preserve the accepted lineages; no new confirmed production defect found.
+
+### Fresh independent execution on the combined revision
+
+Raw logs: `docs/latest-ui-integration/logs/rereview-*.log`. Commands use the same configurations and isolated built setup listed in the historical command table below, with output prefix `output/latest-ui-rereview/`.
+
+| Gate | Result |
+| --- | --- |
+| Server/web typecheck | PASS, exit 0 |
+| Explicit `.next-expanded` production build | PASS, exit 0 |
+| Appearance policy | 20 passed |
+| Selector component/geometry suite | 36 passed (overlapping coverage, not unique contracts) |
+| Original scoped-navigation/history | 1 passed, 29.0s |
+| Builder authority/save/newer-edit/history | 1 passed in initial builder invocation |
+| Lazy-builder loading | 1 passed, 18.1s, separate fresh fixture |
+| Nine-palette account/scoped-theme journey | 1 passed, 1.3m |
+| Guest selector journey | 1 passed, 1.0m |
+| Full original overview | 1 passed, 43.0s |
+| Full original recovery | 1 passed, 41.2s |
+| Existing independent complete-source preservation audit | PASS after restoring generated Next config changes |
+
+Reproduction additions: `QA_BUILT=1 QA_TEST_DIR=tests/overview-browser UI_QA_SCREENSHOTS=output/latest-ui-rereview/overview npx playwright test -c playwright.qa-expanded.config.ts overview.spec.ts`; `QA_BUILT=1 QA_TEST_DIR=tests/recovery-ui-browser npx playwright test -c playwright.qa-expanded.config.ts recovery.spec.ts`; `node docs/latest-ui-integration/li-qa-02-qa-audit.cjs`. Explicit output directories are recorded in the raw failure contexts and evidence archive.
+
+Execution caveats are retained, not waived: initially batching builder-gate and builder-loading in one fixture passed the former but failed the latter at setup with `409 already_installed`. Running lazy-builder alone with its required new fixture passed; no product correction was needed. The initial audit failed because Next rewrote next-env.d.ts/tsconfig.json; after inspecting and restoring only those generated changes to HEAD, the audit passed. Both failed logs remain. The audit prints its original QA revision and prior result summaries; those are historical audit inputs, not this run's tested SHA/results. Startup ECONNREFUSED readiness warnings remain in passing logs.
+
+### Fresh visual evidence inspected
+
+Loaded actual synthetic Chrome captures and visually inspected:
+- `output/latest-ui-rereview/selectors/selector-qa-independent-combined-geometry-390x420/theme.png`: top-layer Theme options fit within the short viewport above their trigger, with readable choices and no visible panel clipping.
+- `output/latest-ui-rereview/account/platform-dark-account-security-390.png`: consistent dark client appearance, stacked panels, wrapped text and in-bounds security controls; no visible horizontal clipping.
+- `output/latest-ui-rereview/builder/saved-reloaded.png`: populated light builder, saved-not-published notice and authoring controls after reload. Viewport-only capture does not qualify below-fold layout.
+
+### Non-blocking findings, limits and handoff
+
+Remaining source-only obsolete Theme consumers are inventoried by predecessor QA and routed to default via existing `t_616602dc`; these other families were not executed here and are not represented as passing. This is test-maintenance debt outside the bounded required gates, not a demonstrated production regression. Native popover compatibility is qualified in automated Chrome only; no cross-browser, native screen-reader, full-route, PostgreSQL, universal zero-FOUC/CLS or human acceptance claim.
+
+All real-API runs used isolated memory PGlite and private fixture storage, with mail/live AI disabled and no existing-server reuse. No main data/account/runtime writes, remote push, deployment, reset/clean/stash, or production implementation edits. Existing untracked files and prior failure evidence remain. D02/D06 and favicon remain separate.
+
+**Next responsible agents:** backend `t_b9689fc0` may proceed with the owner-authorized local running-app integration stage, using this qualified lineage; default owns the existing maintenance follow-up and final coordination. Review approval is NOT rollout completion or deployment approval. Persistent launcher, verified database backup before stopping/migrations, cache refresh/restart, continuity checks and actual running-instance feature verification remain mandatory downstream. Coordinate exclusive candidate ownership: maintenance routing must not mutate the qualified candidate while rollout consumes it.
+
+---
+
+## Historical first review (preserved)
+
 ## Decision: CHANGES REQUESTED — rollout not approved
 
 Reviewed and independently tested `9a2a4130d01f3722a91ae11ca99db0ce0da893cd` on `integration/latest-ui-t_8d33f464`. This differs from predecessor tested `755b39f9cbfbc4b607bcd92968580953338e174f` only by requalification documentation/logs. Main remains `ui/global-design-system` at `ff1d19fb427c054efd9e48bc546c9ec1398ef835`; no operator runtime/data/cache changes were made.
