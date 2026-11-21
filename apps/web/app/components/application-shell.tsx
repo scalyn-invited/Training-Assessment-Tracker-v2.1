@@ -7,6 +7,7 @@ import { ClientsIcon } from './clients-icon';
 import { PeopleIcon } from './people-icon';
 import { AuditIcon } from './audit-icon';
 import { Dialog } from './ui/dialog';
+import { WorkspacePopover } from './workspace-popover';
 import type { Context } from './auth-ui';
 import { Icon } from './workspace-icon';
 import { Button } from './ui/controls';
@@ -106,17 +107,11 @@ export function ApplicationShell({
       </nav>
     );
   }
-  const workspace = useRef<HTMLDetailsElement>(null);
+
   const settings = useRef<HTMLDialogElement>(null);
   const brandName = brand?.mode === 'cerebru' ? 'Cerebru' : (brand?.displayName ?? 'Scalyn');
   const customLogo = brand?.logo && brand.logo !== '/images/scalyn-opc-logo.png';
-  function closeWorkspace(event: React.KeyboardEvent<HTMLDetailsElement>) {
-    if (event.key === 'Escape' && event.currentTarget.open) {
-      event.preventDefault();
-      event.currentTarget.open = false;
-      event.currentTarget.querySelector('summary')?.focus();
-    }
-  }
+
   function navigation(mobile = false) {
     return (
       <nav
@@ -205,37 +200,32 @@ export function ApplicationShell({
           </span>
         </Link>
         {brand?.mode === 'co-branded' && <p className={shared.coBrand}>Part of Cerebru</p>}
-        <details ref={workspace} className={styles.workspace} onKeyDown={closeWorkspace}>
-          <summary>
-            <span className={styles.workspaceIcon}>
-              <OverviewIcon name="workspace" />
-            </span>
-            <span className={styles.workspaceCopy}>
-              <small>Workspace</small>
-              <strong>{workspaceName}</strong>
-            </span>
-            <OverviewIcon name="switch" />
-          </summary>
-          <nav className={styles.workspaceMenu} aria-label="Choose workspace">
-            {context.user?.global_admin && (
-              <Link
-                href="/platform"
-                aria-current={platform ? 'page' : undefined}
-                onClick={() => {
-                  if (workspace.current) workspace.current.open = false;
-                }}
-              >
-                Platform administration
-              </Link>
-            )}
-            <Link href="/dashboard">Learning workspace</Link>
-            <Link href="/clients">Choose your client</Link>
-            {canManageAccounts && <Link href="/accounts">Manage account access</Link>}
-            {brand && brand.mode !== 'white-label' && (
-              <a href="https://opsbrain-eosin.vercel.app/home">Back to Cerebru</a>
-            )}
-          </nav>
-        </details>
+        <WorkspacePopover
+          triggerContent={
+            <>
+              <span className={styles.workspaceIcon}>
+                <OverviewIcon name="workspace" />
+              </span>
+              <span className={styles.workspaceCopy}>
+                <small>Workspace</small>
+                <strong>{workspaceName}</strong>
+              </span>
+              <OverviewIcon name="switch" />
+            </>
+          }
+        >
+          {context.user?.global_admin && (
+            <Link href="/platform" aria-current={platform ? 'page' : undefined}>
+              Platform administration
+            </Link>
+          )}
+          <Link href="/dashboard">Learning workspace</Link>
+          <Link href="/clients">Choose your client</Link>
+          {canManageAccounts && <Link href="/accounts">Manage account access</Link>}
+          {brand && brand.mode !== 'white-label' && (
+            <a href="https://opsbrain-eosin.vercel.app/home">Back to Cerebru</a>
+          )}
+        </WorkspacePopover>
         <p className={styles.navLabel}>{workspaceName}</p>
         {platform ? navigation() : learningNavigation()}
         <div className={styles.desktopTheme}>{themePicker()}</div>
