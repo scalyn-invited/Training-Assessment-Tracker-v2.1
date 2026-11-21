@@ -1,0 +1,106 @@
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\expanded-appearance-browser\scope.spec.ts:4:1 › real API scoped navigation never renders target content in the previous scope theme (19.1s)
+
+
+  1) tests\expanded-appearance-browser\scope.spec.ts:4:1 › real API scoped navigation never renders target content in the previous scope theme 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('summary').filter({ hasText: 'Workspace' })
+
+
+      80 |   await page.getByRole('button', { name: 'Light', exact: true }).click();
+      81 |   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+    > 82 |   await page.locator('summary').filter({ hasText: 'Workspace' }).click();
+         |                                                                  ^
+      83 |   let release!: () => void;
+      84 |   const held = new Promise<void>((r) => (release = r));
+      85 |   let requested!: () => void;
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\latest-ui-t_8d33f464\tests\expanded-appearance-browser\scope.spec.ts:82:66
+
+    Error Context: output\latest-ui-review-scope-results\scope-real-API-scoped-navi-fddc4-in-the-previous-scope-theme\error-context.md
+
+  1 failed
+    tests\expanded-appearance-browser\scope.spec.ts:4:1 › real API scoped navigation never renders target content in the previous scope theme 
