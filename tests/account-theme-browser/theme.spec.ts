@@ -31,7 +31,7 @@ test('Learning account routes retain the selected workspace appearance', async (
   // With no selected client, account tools retain their shared theme picker.
   await page.goto('/account/security');
   await expect(page.getByRole('heading', { name: 'Account security', exact: true })).toBeVisible();
-  await page.locator('summary:visible').filter({ hasText: 'Theme' }).click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.reload();
@@ -127,7 +127,7 @@ test('Learning account routes retain the selected workspace appearance', async (
     }
   }
   // The account picker writes the client preference, not the platform browser preference.
-  await page.locator('summary:visible').filter({ hasText: 'Theme' }).click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.getByRole('link', { name: 'Back to workspace', exact: true }).click();
