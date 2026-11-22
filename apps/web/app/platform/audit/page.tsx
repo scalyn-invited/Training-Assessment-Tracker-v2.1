@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { api, useContext, Guest, Pending, Feedback } from '../../components/auth-ui';
 import { AuditIcon } from '../../components/audit-icon';
-import { OverviewDialog } from '../../components/overview-dialog';
+import { Dialog } from '../../components/ui/dialog';
 import shell from '../overview.module.css';
 import styles from './audit.module.css';
 
@@ -290,7 +290,7 @@ export default function AuditPage() {
                                 type="button"
                                 aria-expanded={!collapsed.has(date)}
                                 aria-controls={`audit-day-${date}`}
-                            aria-label={`${date}, ${events.length} ${events.length === 1 ? 'event' : 'events'} on this page`}
+                                aria-label={`${date}, ${events.length} ${events.length === 1 ? 'event' : 'events'} on this page`}
                                 onClick={() =>
                                   setCollapsed((previous) => {
                                     const next = new Set(previous);
@@ -397,7 +397,7 @@ export default function AuditPage() {
               )
             )}
           </section>
-          <OverviewDialog
+          <Dialog
             dialogRef={dialog}
             titleId="audit-details-title"
             onClose={() => setSelected(null)}
@@ -460,7 +460,7 @@ export default function AuditPage() {
                 )}
               </div>
             )}
-          </OverviewDialog>
+          </Dialog>
         </div>
       )}
     </Guest>

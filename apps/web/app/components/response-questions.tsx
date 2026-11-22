@@ -1,5 +1,10 @@
 'use client';
+import { Input, Textarea } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/assessment-response.module.css';
+
 import type { CSSProperties } from 'react';
+import { questionReference } from './question-reference';
 export type Question = {
   id: string;
   type: string;
@@ -18,12 +23,16 @@ export type Section = { id: string; title: string; instructions: string; questio
 export type Answers = Record<string, unknown>;
 export function ResponseQuestions({
   questions,
+  allQuestions = questions,
+  sections,
   answers,
   onChange,
   errors = {},
   prefix = 'response',
 }: {
   questions: Question[];
+  allQuestions?: Question[];
+  sections?: Section[] | null;
   answers: Answers;
   onChange?: (id: string, value: unknown) => void;
   errors?: Record<string, string>;
@@ -31,12 +40,12 @@ export function ResponseQuestions({
 }) {
   return (
     <>
-      {questions.map((q, index) => {
+      {questions.map((q) => {
         const value = answers[q.id],
           title = prefix + '-' + q.id;
         return (
-          <section key={q.id} className="panel">
-            <h3 id={title}>Question {index + 1}</h3>
+          <section key={q.id} className={`${layout.panel} ${styles.panel}`}>
+            <h3 id={title}>{questionReference(q.id, allQuestions, sections)}</h3>
             {q.prompt_html ? (
               <div
                 className="assessment-prompt"
@@ -97,7 +106,7 @@ export function ResponseQuestions({
                       {q.matrix!.ratings.map((r) => (
                         <label className="matrix-choice" key={r.id}>
                           {onChange ? (
-                            <input
+                            <Input
                               type="radio"
                               name={areaId}
                               aria-label={area.text + ': ' + r.text}
@@ -114,7 +123,7 @@ export function ResponseQuestions({
                         <label className="matrix-note">
                           Notes (optional)
                           {onChange ? (
-                            <textarea
+                            <Textarea
                               aria-label={'Notes for ' + area.text}
                               maxLength={500}
                               value={row.note ?? ''}
@@ -138,9 +147,9 @@ export function ResponseQuestions({
               <fieldset aria-labelledby={title}>
                 <legend>Choose one answer</legend>
                 {q.choices.map((c) => (
-                  <label key={c.id}>
+                  <label className={styles.choice} key={c.id}>
                     {onChange ? (
-                      <input
+                      <Input
                         type="radio"
                         name={title}
                         checked={value === c.id}
@@ -156,7 +165,7 @@ export function ResponseQuestions({
             ) : onChange ? (
               <label>
                 Your answer
-                <textarea
+                <Textarea
                   aria-labelledby={title}
                   maxLength={10000}
                   value={typeof value === 'string' ? value : ''}

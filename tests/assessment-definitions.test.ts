@@ -130,6 +130,7 @@ describe('assessment definitions and publication', () => {
         first.id,
       ]),
     ).rejects.toThrow('immutable');
+    const copyToken = randomUUID();
     const second = await definitions.save(
       coordinator.token,
       coordinator.csrf,
@@ -137,8 +138,19 @@ describe('assessment definitions and publication', () => {
       { ...input(), title: 'Revised' },
       first.id,
       2,
-      randomUUID(),
+      copyToken,
     );
+    expect(
+      await definitions.save(
+        coordinator.token,
+        coordinator.csrf,
+        client,
+        { ...input(), title: 'Revised' },
+        first.id,
+        2,
+        copyToken,
+      ),
+    ).toEqual(second);
     expect(second.id).not.toBe(first.id);
     const a = await definitions.get(coordinator.token, client, first.id),
       b = await definitions.get(coordinator.token, client, second.id);
@@ -146,6 +158,42 @@ describe('assessment definitions and publication', () => {
     expect(b.family_id).toBe(a.family_id);
     expect(b.revision).toBe(a.revision + 1);
     expect(b.status).toBe('draft');
+    expect(b).toMatchObject({ source_definition_id: a.id, source_revision: a.revision });
+    expect(second).toMatchObject({
+      revision: b.revision,
+      source_definition_id: a.id,
+      source_revision: a.revision,
+    });
+    await expect(definitions.get(member.token, client, second.id)).rejects.toMatchObject({
+      status: 403,
+    });
+    await expect(
+      instance.db.pool.query(
+        'UPDATE assessment_definitions SET source_definition_id=NULL,source_revision=NULL WHERE id=$1',
+        [second.id],
+      ),
+    ).rejects.toThrow();
+  });
+  it('QA D03 exact publication retry conflicts but exact readback confirms the same published record', async () => {
+    const saved = await definitions.save(
+      coordinator.token,
+      coordinator.csrf,
+      client,
+      input(),
+      null,
+      0,
+      randomUUID(),
+    );
+    await definitions.publish(coordinator.token, coordinator.csrf, client, saved.id, saved.version);
+    await expect(
+      definitions.publish(coordinator.token, coordinator.csrf, client, saved.id, saved.version),
+    ).rejects.toMatchObject({ status: 409 });
+    expect(await definitions.get(coordinator.token, client, saved.id)).toMatchObject({
+      id: saved.id,
+      status: 'published',
+      revision: 1,
+      version: 2,
+    });
   });
   it('blocks incomplete publication and foreign or quarantined image references', async () => {
     const incomplete = await definitions.save(

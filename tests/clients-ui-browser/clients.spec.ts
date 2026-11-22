@@ -97,11 +97,8 @@ test('Clients presentation preserves real management, workspace selection and re
   await page.setViewportSize({ width: 390, height: 1458 });
   await accessibility();
   await page.screenshot({ path: `${screenshotDir}/clients-dark-mobile.png`, fullPage: true });
-  await page
-    .getByRole('navigation', { name: 'Mobile platform navigation' })
-    .getByRole('button', { name: 'Settings' })
-    .click();
-  const settings = page.getByRole('dialog', { name: 'Settings', exact: true });
+  await page.getByRole('button', { name: 'Personal settings' }).click();
+  const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
   await settings.locator('summary').filter({ hasText: 'Theme' }).click();
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await settings.getByRole('button', { name: 'Close', exact: true }).click();
@@ -109,12 +106,37 @@ test('Clients presentation preserves real management, workspace selection and re
   await page.screenshot({ path: `${screenshotDir}/clients-light-mobile.png`, fullPage: true });
   await main.getByRole('button', { name: 'Create client', exact: true }).click();
   const dialog = page.getByRole('dialog');
+  await expect(dialog).toHaveCSS('border-top-width', '1px');
   await expect(dialog.getByRole('button', { name: 'Close', exact: true })).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  await expect(dialog.getByRole('button', { name: 'Create client', exact: true })).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(dialog.getByRole('button', { name: 'Close', exact: true })).toBeFocused();
+  await dialog.getByRole('button', { name: 'Create client', exact: true }).click();
+  await expect(dialog.getByLabel('Directory name')).toBeFocused();
   await dialog.getByLabel('Directory name').fill('UI QA client');
   await dialog.getByLabel('Creation reason').fill('Verify the existing client creation workflow');
   await accessibility();
-  await dialog.getByRole('button', { name: 'Create client', exact: true }).click();
+  await page.screenshot({ path: `${screenshotDir}/client-create-dialog-light-mobile.png` });
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route('**/api/platform/clients', async (route) => {
+    if (route.request().method() === 'POST') await gate;
+    await route.continue();
+  });
+  try {
+    await dialog.getByRole('button', { name: 'Create client', exact: true }).click();
+    await expect(dialog.getByRole('button', { name: 'Close', exact: true })).toBeDisabled();
+    await expect(dialog.getByRole('button', { name: 'Saving…', exact: true })).toBeDisabled();
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeVisible();
+  } finally {
+    release();
+  }
   await expect(dialog).not.toBeVisible();
+  await page.unroute('**/api/platform/clients');
   await expect(main.getByText('Client created.', { exact: true })).toBeVisible();
   const manage = table.getByRole('button', { name: 'Manage UI QA client', exact: true });
   await manage.click();
@@ -125,12 +147,27 @@ test('Clients presentation preserves real management, workspace selection and re
   const renamed = table.getByRole('row').filter({
     has: page.getByRole('button', { name: 'Manage UI QA renamed client', exact: true }),
   });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await renamed.getByRole('button', { name: 'Manage UI QA renamed client', exact: true }).click();
+  await accessibility();
+  await page.screenshot({ path: `${screenshotDir}/client-manage-dialog-dark-desktop.png` });
+  await page.setViewportSize({ width: 390, height: 900 });
   await dialog
     .getByLabel('Client change reason')
     .fill('Verify guarded suspension of isolated client');
   await dialog.getByRole('button', { name: 'Suspend client', exact: true }).click();
   await expect(dialog.getByRole('group', { name: 'Confirm client access change' })).toBeVisible();
+  await expect(dialog.getByLabel('Directory name')).toHaveAttribute('readonly', '');
+  await expect(dialog.getByLabel('Client change reason')).toHaveAttribute('readonly', '');
+  const cancelBox = await dialog.getByRole('button', { name: 'Cancel', exact: true }).boundingBox();
+  const confirmBox = await dialog
+    .getByRole('button', { name: 'Confirm suspension', exact: true })
+    .boundingBox();
+  expect(confirmBox!.x - (cancelBox!.x + cancelBox!.width)).toBeGreaterThanOrEqual(8);
+  await accessibility();
+  await page.screenshot({ path: `${screenshotDir}/client-suspend-dialog-dark-mobile.png` });
   await dialog.getByRole('button', { name: 'Cancel', exact: true }).click();
   await expect(dialog.getByRole('button', { name: 'Suspend client', exact: true })).toBeVisible();
   await dialog.getByRole('button', { name: 'Suspend client', exact: true }).click();
@@ -223,6 +260,13 @@ test('Clients presentation preserves real management, workspace selection and re
   ]) {
     expect((await control.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   }
+  await mobile.getByRole('button', { name: 'Manage Demo Client 1', exact: true }).click();
+  const touchDialog = mobile.getByRole('dialog');
+  for (const control of await touchDialog.locator('input,button').all()) {
+    expect((await control.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  }
+  expect(await touchDialog.evaluate((el) => el.scrollWidth <= el.clientWidth)).toBe(true);
+  await touchDialog.getByRole('button', { name: 'Close', exact: true }).click();
   await mobile.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
   const footer = await mobile.locator('footer').boundingBox();
   const bottomNav = await mobile

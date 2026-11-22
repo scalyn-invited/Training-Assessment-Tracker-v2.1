@@ -1,0 +1,15 @@
+[WebServer] ▲ Next.js 16.4.6
+[WebServer] - Local:         http://127.0.0.1:3275
+[WebServer] - Network:       http://127.0.0.1:3275
+[WebServer] ✓ Ready in 570ms
+[WebServer] ✓ Running next.config.ts took 63ms
+
+Running 3 tests using 1 worker
+
+  ok 1 docs\assessment-workflow-implementation\correction-frontend\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (4.4s)
+  ok 2 docs\assessment-workflow-implementation\correction-frontend\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (2.8s)
+  ok 3 docs\assessment-workflow-implementation\correction-frontend\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (2.3s)
+
+  3 passed (19.2s)
+
+EXIT 0

@@ -1,0 +1,8 @@
+
+Running 3 tests using 1 worker
+
+  ok 1 tests\workflow-qa-browser\workflow.spec.ts:229:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (3.1s)
+  ok 2 tests\workflow-qa-browser\workflow.spec.ts:260:3 › D01 switch canceled guard sends zero context mutations (1.6s)
+  ok 3 tests\workflow-qa-browser\workflow.spec.ts:260:3 › D01 logout canceled guard sends zero context mutations (1.9s)
+
+  3 passed (10.8s)

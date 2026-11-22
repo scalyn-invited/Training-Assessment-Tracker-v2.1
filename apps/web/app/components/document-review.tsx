@@ -1,7 +1,13 @@
 ﻿'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
+import { useRouter } from 'next/navigation';
+import { registerWorkGuard } from './work-guard';
+import { Button, Input, Select, Textarea, Panel, PageHeader, Feedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/document-review.module.css';
+import recordStyles from './ui/training-record.module.css';
+import { api, useContext, Guest, Pending } from './auth-ui';
 import { onboardingFields } from '../../../../packages/contracts/src/onboarding';
 type Review = {
   file: { id: string; name: string; status: string };
@@ -25,6 +31,10 @@ type Review = {
 export function DocumentReview({ id, fileId }: { id: string; fileId: string }) {
   const { context, error: contextError, load: loadContext } = useContext(),
     client = context?.client?.id;
+  const router = useRouter();
+  useEffect(() => {
+    if (context && !context.user) router.replace('/login');
+  }, [context, router]);
   const [view, setView] = useState<Review | null>(null),
     [draft, setDraft] = useState<Record<string, string>>({}),
     [error, setError] = useState(''),
@@ -60,38 +70,10 @@ export function DocumentReview({ id, fileId }: { id: string; fileId: string }) {
     const timer = setInterval(() => void load(), 3000);
     return () => clearInterval(timer);
   }, [view?.run?.status, client]);
-  useEffect(() => {
-    const unload = (e: BeforeUnloadEvent) => {
-      if (dirty.current || pending.current) e.preventDefault();
-    };
-    const link = (e: MouseEvent) => {
-      const anchor = (e.target as Element).closest?.('a');
-      if (
-        !anchor ||
-        anchor.getAttribute('href')?.startsWith('/api/files/') ||
-        e.defaultPrevented ||
-        e.button !== 0 ||
-        e.ctrlKey ||
-        e.metaKey ||
-        (!dirty.current && !pending.current)
-      )
-        return;
-      if (
-        !window.confirm(
-          'Leave this review with unsaved findings? Copy your changes before leaving.',
-        )
-      ) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    };
-    window.addEventListener('beforeunload', unload);
-    document.addEventListener('click', link, true);
-    return () => {
-      window.removeEventListener('beforeunload', unload);
-      document.removeEventListener('click', link, true);
-    };
-  }, []);
+  useEffect(
+    () => registerWorkGuard(() => ({ dirty: dirty.current, pending: pending.current })),
+    [],
+  );
   async function request() {
     if (!client || !context || busy) return;
     pending.current = true;
@@ -151,212 +133,214 @@ export function DocumentReview({ id, fileId }: { id: string; fileId: string }) {
       view?.editable && run?.status === 'ready' && view.file.status === 'clean' && !run.error;
   return (
     <Guest>
-      {!context?.user ? (
-        <Pending error={contextError} retry={loadContext} />
-      ) : !client ? (
-        <>
-          <h1>Choose a client</h1>
-          <Link href="/clients">Choose your client</Link>
-        </>
-      ) : (
-        <>
-          <Link href={`/enrolments/${id}/onboarding?step=assessment`}>
-            Back to assessment findings
-          </Link>
-          <h1>Review document extraction</h1>
-          <Feedback error={error} success={message} />
-          {!view && !error && <p role="status">Loading document review…</p>}
-          {error && (
-            <button
-              className="secondary"
-              disabled={busy}
-              onClick={() => {
-                if (
-                  !dirty.current ||
-                  window.confirm('Reload this review? Copy your unsaved findings first.')
-                )
-                  void load(true);
-              }}
-            >
-              Reload review
-            </button>
-          )}
-          {view && (
-            <>
-              <p>
-                {view.enrolment.title} · {view.file.name} · Scan: {view.file.status}
-              </p>
-              <p className="notice">
-                Extracted text is untrusted draft material. Compare it with the original, correct
-                errors and select only relevant findings. Extraction alone confirms nothing and
-                sends nothing to AI.
-              </p>
-              {view.file.status === 'clean' && (
+      <div className={layout.page}>
+        {!context?.user ? (
+          <Pending error={contextError} retry={loadContext} />
+        ) : !client ? (
+          <>
+            <PageHeader title="Choose a client" />
+            <Link href="/clients">Choose your client</Link>
+          </>
+        ) : (
+          <>
+            <Link href={`/enrolments/${id}/onboarding?step=assessment`}>
+              Back to assessment findings
+            </Link>
+            <PageHeader title="Review document extraction" />
+            <Feedback error={error} success={message} />
+            {!view && !error && <p role="status">Loading document review…</p>}
+            {error && (
+              <Button
+                disabled={busy}
+                onClick={() => {
+                  if (
+                    !dirty.current ||
+                    window.confirm('Reload this review? Copy your unsaved findings first.')
+                  )
+                    void load(true);
+                }}
+              >
+                Reload review
+              </Button>
+            )}
+            {view && (
+              <>
                 <p>
-                  <a href={'/api/files/' + fileId} target="_blank" rel="noreferrer">
-                    Download original for comparison
-                  </a>
+                  {view.enrolment.title} · {view.file.name} · Scan: {view.file.status}
                 </p>
-              )}
-              {!view.editable && (
-                <p className="notice">
-                  This enrolment has started. Its onboarding findings cannot be replaced through
-                  this workflow.
+                <p className={recordStyles.notice}>
+                  Extracted text is untrusted draft material. Compare it with the original, correct
+                  errors and select only relevant findings. Extraction alone confirms nothing and
+                  sends nothing to AI.
                 </p>
-              )}
-              {view.editable &&
-                (!run || run.status === 'failed') &&
-                ['clean', 'quarantined', 'scanning'].includes(view.file.status) && (
-                  <button
-                    className="primary"
-                    disabled={busy}
-                    aria-busy={busy}
-                    onClick={() => void request()}
-                  >
-                    {busy
-                      ? 'Requesting extraction…'
-                      : run
-                        ? 'Retry extraction'
-                        : 'Request extraction'}
-                  </button>
+                {view.file.status === 'clean' && (
+                  <p>
+                    <a href={'/api/files/' + fileId} target="_blank" rel="noreferrer">
+                      Download original for comparison
+                    </a>
+                  </p>
                 )}
-              {run && (
-                <section className="panel">
-                  <h2>Extraction status: {run.status.replaceAll('_', ' ')}</h2>
-                  <p>
-                    Revision {run.version}
-                    {run.engine ? ' · ' + run.engine : ''}
-                    {run.pages ? ' · ' + run.pages + ' pages' : ''}
+                {!view.editable && (
+                  <p className={recordStyles.notice}>
+                    This enrolment has started. Its onboarding findings cannot be replaced through
+                    this workflow.
                   </p>
-                  {['waiting_scan', 'queued', 'running'].includes(run.status) && (
-                    <p role="status">
-                      {run.status === 'waiting_scan'
-                        ? 'Waiting for malware scanning. A missing scanner keeps this file quarantined.'
-                        : 'The extraction worker is processing this request.'}{' '}
-                      Status refreshes automatically.
-                    </p>
+                )}
+                {view.editable &&
+                  (!run || run.status === 'failed') &&
+                  ['clean', 'quarantined', 'scanning'].includes(view.file.status) && (
+                    <Button
+                      variant="primary"
+                      disabled={busy}
+                      aria-busy={busy}
+                      onClick={() => void request()}
+                    >
+                      {busy
+                        ? 'Requesting extraction…'
+                        : run
+                          ? 'Retry extraction'
+                          : 'Request extraction'}
+                    </Button>
                   )}
-                  <Feedback error={run.error ?? ''} />
-                  {run.error && (
+                {run && (
+                  <Panel className={layout.panel}>
+                    <h2>Extraction status: {run.status.replaceAll('_', ' ')}</h2>
                     <p>
-                      <Link href={`/enrolments/${id}/onboarding?step=assessment`}>
-                        Use manual assessment entry
-                      </Link>
+                      Revision {run.version}
+                      {run.engine ? ' · ' + run.engine : ''}
+                      {run.pages ? ' · ' + run.pages + ' pages' : ''}
                     </p>
-                  )}
-                  {run.warnings.map((warning, i) => (
-                    <p className="notice" key={i}>
-                      {warning}
-                    </p>
-                  ))}
-                  {run.text !== null && (
-                    <details open>
-                      <summary>Original extracted text (read-only)</summary>
-                      <pre style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>
-                        {run.text}
-                      </pre>
-                    </details>
-                  )}
-                  {run.status === 'confirmed' && (
-                    <p>
-                      Confirmed into onboarding. Later manual edits require a new confirmation; this
-                      receipt preserves the earlier decision.
-                    </p>
-                  )}
-                </section>
-              )}
-              {canReview && (
-                <section className="panel">
-                  <h2>Correct and confirm relevant findings</h2>
-                  <p>
-                    Summarise relevant sections in at most 4,000 characters. Preserve the reported
-                    scale and distinguish provider scores, observed evidence and self reports.
-                    Source file, hash and extraction revision are attached automatically.
-                  </p>
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      void save(false);
-                    }}
-                  >
-                    <fieldset disabled={busy}>
-                      <legend className="sr-only">Document findings review</legend>
-                      {Object.entries(onboardingFields.assessment)
-                        .filter(([key]) => key !== 'source')
-                        .map(([key, label]) => (
-                          <div key={key}>
-                            <label htmlFor={'review-' + key}>{label}</label>
-                            {key === 'date' ? (
-                              <input
-                                id={'review-' + key}
-                                type="date"
-                                value={draft[key] ?? ''}
-                                onChange={(e) => {
-                                  dirty.current = true;
-                                  setDraft((d) => ({ ...d, [key]: e.target.value }));
-                                }}
-                              />
-                            ) : key === 'kind' ? (
-                              <select
-                                id={'review-' + key}
-                                value={draft[key] ?? ''}
-                                onChange={(e) => {
-                                  dirty.current = true;
-                                  setDraft((d) => ({ ...d, [key]: e.target.value }));
-                                }}
-                              >
-                                <option value="">Choose evidence type</option>
-                                {['provider score', 'self report', 'observed evidence'].map((v) => (
-                                  <option key={v}>{v}</option>
-                                ))}
-                              </select>
-                            ) : (
-                              <textarea
-                                id={'review-' + key}
-                                rows={key === 'findings' ? 10 : 2}
-                                maxLength={4000}
-                                value={draft[key] ?? ''}
-                                onChange={(e) => {
-                                  dirty.current = true;
-                                  setDraft((d) => ({ ...d, [key]: e.target.value }));
-                                }}
-                              />
-                            )}
-                          </div>
-                        ))}
-                    </fieldset>
-                    <div className="form-actions">
-                      <button className="secondary" disabled={busy}>
-                        {busy ? 'Saving review…' : 'Save review draft'}
-                      </button>
-                      <button
-                        type="button"
-                        className="primary"
-                        disabled={busy}
-                        onClick={() => void save(true)}
-                      >
-                        Confirm reviewed findings
-                      </button>
-                    </div>
-                  </form>
-                </section>
-              )}
-              {view.history.length > 0 && (
-                <details>
-                  <summary>Extraction attempts</summary>
-                  <ul>
-                    {view.history.map((h) => (
-                      <li key={h.id}>
-                        Attempt {h.attempt} · {h.status.replaceAll('_', ' ')} · Revision {h.version}
-                      </li>
+                    {['waiting_scan', 'queued', 'running'].includes(run.status) && (
+                      <p role="status">
+                        {run.status === 'waiting_scan'
+                          ? 'Waiting for malware scanning. A missing scanner keeps this file quarantined.'
+                          : 'The extraction worker is processing this request.'}{' '}
+                        Status refreshes automatically.
+                      </p>
+                    )}
+                    <Feedback error={run.error ?? ''} />
+                    {run.error && (
+                      <p>
+                        <Link href={`/enrolments/${id}/onboarding?step=assessment`}>
+                          Use manual assessment entry
+                        </Link>
+                      </p>
+                    )}
+                    {run.warnings.map((warning, i) => (
+                      <p className={recordStyles.notice} key={i}>
+                        {warning}
+                      </p>
                     ))}
-                  </ul>
-                </details>
-              )}
-            </>
-          )}
-        </>
-      )}
+                    {run.text !== null && (
+                      <details open>
+                        <summary>Original extracted text (read-only)</summary>
+                        <pre className={styles.text}>{run.text}</pre>
+                      </details>
+                    )}
+                    {run.status === 'confirmed' && (
+                      <p>
+                        Confirmed into onboarding. Later manual edits require a new confirmation;
+                        this receipt preserves the earlier decision.
+                      </p>
+                    )}
+                  </Panel>
+                )}
+                {canReview && (
+                  <Panel className={layout.panel}>
+                    <h2>Correct and confirm relevant findings</h2>
+                    <p>
+                      Summarise relevant sections in at most 4,000 characters. Preserve the reported
+                      scale and distinguish provider scores, observed evidence and self reports.
+                      Source file, hash and extraction revision are attached automatically.
+                    </p>
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        void save(false);
+                      }}
+                    >
+                      <fieldset disabled={busy}>
+                        <legend className="sr-only">Document findings review</legend>
+                        {Object.entries(onboardingFields.assessment)
+                          .filter(([key]) => key !== 'source')
+                          .map(([key, label]) => (
+                            <div key={key}>
+                              <label htmlFor={'review-' + key}>{label}</label>
+                              {key === 'date' ? (
+                                <Input
+                                  id={'review-' + key}
+                                  type="date"
+                                  value={draft[key] ?? ''}
+                                  onChange={(e) => {
+                                    dirty.current = true;
+                                    setDraft((d) => ({ ...d, [key]: e.target.value }));
+                                  }}
+                                />
+                              ) : key === 'kind' ? (
+                                <Select
+                                  id={'review-' + key}
+                                  value={draft[key] ?? ''}
+                                  onChange={(e) => {
+                                    dirty.current = true;
+                                    setDraft((d) => ({ ...d, [key]: e.target.value }));
+                                  }}
+                                >
+                                  <option value="">Choose evidence type</option>
+                                  {['provider score', 'self report', 'observed evidence'].map(
+                                    (v) => (
+                                      <option key={v}>{v}</option>
+                                    ),
+                                  )}
+                                </Select>
+                              ) : (
+                                <Textarea
+                                  id={'review-' + key}
+                                  rows={key === 'findings' ? 10 : 2}
+                                  maxLength={4000}
+                                  value={draft[key] ?? ''}
+                                  onChange={(e) => {
+                                    dirty.current = true;
+                                    setDraft((d) => ({ ...d, [key]: e.target.value }));
+                                  }}
+                                />
+                              )}
+                            </div>
+                          ))}
+                      </fieldset>
+                      <div className={layout.actions}>
+                        <Button type="submit" disabled={busy} aria-busy={busy}>
+                          {busy ? 'Saving review…' : 'Save review draft'}
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="primary"
+                          disabled={busy}
+                          onClick={() => void save(true)}
+                        >
+                          Confirm reviewed findings
+                        </Button>
+                      </div>
+                    </form>
+                  </Panel>
+                )}
+                {view.history.length > 0 && (
+                  <details className={styles.history}>
+                    <summary>Extraction attempts</summary>
+                    <ul>
+                      {view.history.map((h) => (
+                        <li key={h.id}>
+                          Attempt {h.attempt} · {h.status.replaceAll('_', ' ')} · Revision{' '}
+                          {h.version}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+              </>
+            )}
+          </>
+        )}
+      </div>
     </Guest>
   );
 }

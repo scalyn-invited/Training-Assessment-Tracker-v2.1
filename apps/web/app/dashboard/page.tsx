@@ -2,7 +2,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from '../components/auth-ui';
+import { api, useContext, Guest, Pending } from '../components/auth-ui';
+import { PageHeader, Panel, Badge, Button, Feedback } from '../components/ui/controls';
+import { Pagination } from '../components/ui/directory';
+import styles from './overview.module.css';
 import { BackgroundReceipts } from '../components/background-receipts';
 import { Icon } from '../components/workspace-icon';
 type Overview = {
@@ -50,21 +53,19 @@ export default function Dashboard() {
       {!context?.user ? (
         <Pending error={error} retry={load} />
       ) : (
-        <>
-          <div className="page-heading workspace-welcome">
+        <div className={styles.page}>
+          <div className={styles.welcome}>
             <div>
               <p className="eyebrow">Your development space</p>
-              <h1>
-                Welcome back, {context.user.name.split('\u00b7')[0].trim()}
-                <span className="welcome-period">.</span>
-              </h1>
-              <p className="lead">A little focus today. A meaningful step forward.</p>
+              <PageHeader
+                title={'Welcome back, ' + context.user.name.split('\u00b7')[0].trim() + '.'}
+              >
+                A little focus today. A meaningful step forward.
+              </PageHeader>
             </div>
-            <span className="signed-in">
-              <span className="dot" /> Signed in
-            </span>
+            <Badge tone="success">Signed in</Badge>
           </div>
-          <section className="workspace-hero" aria-labelledby="chapter-heading">
+          <Panel className={styles.hero} aria-labelledby="chapter-heading">
             <div>
               <p className="eyebrow">The big picture</p>
               <h2 id="chapter-heading">
@@ -77,13 +78,10 @@ export default function Dashboard() {
                 <br className="hero-break" /> and make your progress visible.
               </p>
             </div>
-            <div className="growth-orbit" aria-hidden="true">
-              <span>&#8599;</span>
-            </div>
-          </section>
-          <div className="workspace-summary">
-            <section className="panel account-panel" aria-labelledby="account-heading">
-              <div className="section-heading">
+          </Panel>
+          <div className={styles.summary}>
+            <Panel className={styles.panel} aria-labelledby="account-heading">
+              <div className={styles.sectionHeading}>
                 <h2 id="account-heading">Your account</h2>
                 <span>Client workspace</span>
               </div>
@@ -107,16 +105,16 @@ export default function Dashboard() {
                   <dd>Programmes in your scope</dd>
                 </div>
               </dl>
-              <a className="workspace-text-link" href="#learning-plans">
+              <a className={styles.textLink} href="#learning-plans">
                 View learning plans <Icon name="arrow" />
               </a>
-            </section>
-            <section className="panel journey-panel" aria-labelledby="journey-heading">
-              <div className="section-heading">
+            </Panel>
+            <Panel className={styles.panel} aria-labelledby="journey-heading">
+              <div className={styles.sectionHeading}>
                 <h2 id="journey-heading">A focused journey</h2>
                 <span>01 / 03</span>
               </div>
-              <ol className="journey-steps">
+              <ol className={styles.steps}>
                 {[
                   ['Know your starting point', 'Capture a baseline for your chosen skills.'],
                   ['Put learning into practice', 'Turn weekly objectives into evidence.'],
@@ -131,9 +129,9 @@ export default function Dashboard() {
                   </li>
                 ))}
               </ol>
-            </section>
+            </Panel>
           </div>
-          <div className="section-heading" id="learning-plans">
+          <div className={styles.sectionHeading} id="learning-plans">
             <h2>
               <Icon name="book" />
               Training plans in your scope
@@ -145,24 +143,24 @@ export default function Dashboard() {
             )}
           </div>
           <Feedback error={failure} />
-          {failure && (
-            <button className="secondary" onClick={() => setRetry((n) => n + 1)}>
-              Retry learning plans
-            </button>
-          )}
+          {failure && <Button onClick={() => setRetry((n) => n + 1)}>Retry learning plans</Button>}
           {!data && !failure && <p role="status">Loading your learning plans...</p>}
           {data && (
             <>
-              <div className="cards">
+              <div className={styles.cards}>
                 {data.records.map((record) => (
-                  <Link key={record.id} className="plan-card" href={'/enrolments/' + record.id}>
-                    <div className="card-top">
-                      <span className="badge">{record.groupName ?? 'No team'}</span>
-                      <span className="subtle">{record.status.replaceAll('_', ' ')}</span>
+                  <Link
+                    key={record.id}
+                    className={styles.planCard}
+                    href={'/enrolments/' + record.id}
+                  >
+                    <div className={styles.cardTop}>
+                      <Badge>{record.groupName ?? 'No team'}</Badge>
+                      <span className={styles.subtle}>{record.status.replaceAll('_', ' ')}</span>
                     </div>
                     <h3>{record.title}</h3>
                     <p>{record.memberName}</p>
-                    <div className="card-bottom">
+                    <div className={styles.cardBottom}>
                       <span>
                         {record.durationWeeks} weeks / {record.dailyMinutes} min/day
                       </span>
@@ -173,41 +171,29 @@ export default function Dashboard() {
                   </Link>
                 ))}
                 {!data.records.length && (
-                  <section className="panel empty-state">
+                  <Panel className={styles.empty}>
                     <Icon name="book" />
                     <h3>No enrolments available</h3>
                     <p>
                       No training plans are currently available to you in this client. Contact your
                       client administrator if you expected access.
                     </p>
-                    {page > 1 && (
-                      <button className="secondary" onClick={() => setPage(1)}>
-                        Return to first page
-                      </button>
-                    )}
-                  </section>
+                    {page > 1 && <Button onClick={() => setPage(1)}>Return to first page</Button>}
+                  </Panel>
                 )}
               </div>
               {data.total > 12 && (
-                <nav className="form-actions" aria-label="Learning plan pages">
-                  <button
-                    className="secondary"
-                    disabled={page === 1}
-                    onClick={() => setPage((n) => n - 1)}
-                  >
+                <Pagination aria-label="Learning plan pages">
+                  <Button disabled={page === 1} onClick={() => setPage((n) => n - 1)}>
                     Previous plans
-                  </button>
+                  </Button>
                   <span>
                     Page {page} of {Math.ceil(data.total / 12)}
                   </span>
-                  <button
-                    className="secondary"
-                    disabled={page * 12 >= data.total}
-                    onClick={() => setPage((n) => n + 1)}
-                  >
+                  <Button disabled={page * 12 >= data.total} onClick={() => setPage((n) => n + 1)}>
                     Next plans
-                  </button>
-                </nav>
+                  </Button>
+                </Pagination>
               )}
             </>
           )}
@@ -215,7 +201,7 @@ export default function Dashboard() {
             <Link href="/enrolments">Training records</Link>
           </p>
           {client && <BackgroundReceipts client={client} />}
-        </>
+        </div>
       )}
     </Guest>
   );

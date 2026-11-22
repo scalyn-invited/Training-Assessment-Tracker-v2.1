@@ -1,16 +1,11 @@
 'use client';
 import { useState, useEffect, useCallback, useRef, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  api,
-  useContext,
-  Guest,
-  Pending,
-  Password,
-  Feedback,
-  values,
-  type ApiError,
-} from '../components/auth-ui';
+import { api, useContext, Guest, values, type ApiError } from '../components/auth-ui';
+import { Button, Input, Feedback } from '../components/ui/controls';
+import { PasswordField as Password } from '../components/ui/password';
+import { GuestPending as Pending } from '../components/guest-shell';
+import styles from '../components/ui/guest.module.css';
 type SignInOptions = {
   mode: 'local_password' | 'mock' | 'unavailable';
   identities: { id: string; name: string }[];
@@ -97,54 +92,29 @@ export default function Login() {
   }
   return (
     <Guest>
-      {passwordChanged && (
-        <p role="status">
-          Password changed. All sessions have ended. Sign in with your new password.
-        </p>
-      )}
-      {!context ? (
-        <Pending error={loadError} retry={load} />
-      ) : (
-        <div className="login-grid">
-          <section className="intro">
-            <p className="eyebrow">Learning with purpose</p>
-            <h1>
-              Make progress.
-              <br />
-              Keep the evidence.
-            </h1>
-            <p className="lead">
-              One place for focused training, thoughtful review, and a clear view of what comes
-              next.
-            </p>
-            <div className="steps">
-              <div>
-                <b>01</b>
-                <span>Set a meaningful goal</span>
-              </div>
-              <div>
-                <b>02</b>
-                <span>Learn and practise</span>
-              </div>
-              <div>
-                <b>03</b>
-                <span>Review demonstrated skills</span>
-              </div>
-            </div>
-          </section>
-          <section className="panel login-panel">
-            <h2>Sign in</h2>
+      <div className={styles.stack}>
+        <header className={styles.heading}>
+          <h1>Sign in</h1>
+          <p>Welcome back. Enter your details to continue.</p>
+        </header>
+        {passwordChanged && (
+          <p role="status">
+            Password changed. All sessions have ended. Sign in with your new password.
+          </p>
+        )}
+        {!context ? (
+          <Pending error={loadError} retry={load} />
+        ) : (
+          <>
             {!options ? (
               <Pending error={optionsError} retry={loadOptions} />
             ) : options.mode === 'unavailable' ? (
               <>
                 <p>Sign-in is unavailable. Contact your administrator to configure access.</p>
-                <button type="button" className="secondary" onClick={loadOptions}>
-                  Check again
-                </button>
+                <Button onClick={loadOptions}>Check again</Button>
               </>
             ) : options.mode === 'mock' ? (
-              <div aria-busy={busy}>
+              <div aria-busy={busy} className={styles.stack}>
                 <h3>Choose a test identity</h3>
                 <p>
                   Each synthetic identity has a different view of the application. This simulates
@@ -154,16 +124,11 @@ export default function Login() {
                 {options.identities.length ? (
                   options.identities.map((identity) => (
                     <p key={identity.id}>
-                      <button
-                        type="button"
-                        className="secondary"
-                        disabled={busy}
-                        onClick={() => signInAs(identity.id)}
-                      >
+                      <Button type="button" disabled={busy} onClick={() => signInAs(identity.id)}>
                         {selectedIdentity === identity.id
                           ? `Signing in as ${identity.name}...`
                           : `Sign in as ${identity.name}`}
-                      </button>
+                      </Button>
                     </p>
                   ))
                 ) : (
@@ -172,29 +137,39 @@ export default function Login() {
                       No synthetic identities are available. Ask your administrator to prepare test
                       accounts, then refresh this list.
                     </p>
-                    <button type="button" className="secondary" onClick={loadOptions}>
-                      Refresh identities
-                    </button>
+                    <Button onClick={loadOptions}>Refresh identities</Button>
                   </>
                 )}
               </div>
             ) : (
               <>
-                <form onSubmit={submit} aria-busy={busy}>
-                  <label htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="username"
-                    maxLength={200}
-                    required
+                <form onSubmit={submit} aria-busy={busy} className={styles.form}>
+                  <div>
+                    <label htmlFor="email">Email</label>
+                    <div className={styles.fieldIcon}>
+                      <img src="/auth/mail.svg" alt="" width={18} height={18} />
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="username"
+                        maxLength={200}
+                        required
+                        placeholder="name@company.com"
+                      />
+                    </div>
+                  </div>
+                  <Password
+                    className={styles.password}
+                    name="password"
+                    label="Password"
+                    inputClassName={styles.fieldIcon}
+                    icon={<img src="/auth/lock.svg" alt="" width={18} height={18} />}
                   />
-                  <Password name="password" label="Password" />
                   {mfa && (
                     <>
                       <label htmlFor="code">Authenticator or recovery code</label>
-                      <input
+                      <Input
                         id="code"
                         name="code"
                         autoComplete="one-time-code"
@@ -208,23 +183,31 @@ export default function Login() {
                     </>
                   )}
                   <Feedback error={error} />
-                  <button className="primary" disabled={busy}>
-                    {busy ? 'Signing in…' : 'Sign in'}
-                  </button>
+                  <details className={styles.forgot}>
+                    <summary>Forgot password?</summary>
+                    <p>
+                      For first-time access or a forgotten password, contact your administrator for
+                      a private setup or recovery link.
+                    </p>
+                  </details>
+                  <div className={styles.actions}>
+                    <Button type="submit" variant="primary" disabled={busy}>
+                      {busy ? 'Signing in…' : 'Sign in'}
+                    </Button>
+                    <p className={styles.help}>
+                      No account yet? Ask your administrator to invite you.
+                    </p>
+                    <p className={styles.help}>
+                      If you received a client invitation, sign in first, then reopen the invitation
+                      link.
+                    </p>
+                  </div>
                 </form>
-                <p>
-                  For first-time access or a forgotten password, contact your administrator for a
-                  private setup or recovery link.
-                </p>
-                <p>
-                  If you received a client invitation, sign in first, then reopen the invitation
-                  link.
-                </p>
               </>
             )}
-          </section>
-        </div>
-      )}
+          </>
+        )}
+      </div>
     </Guest>
   );
 }

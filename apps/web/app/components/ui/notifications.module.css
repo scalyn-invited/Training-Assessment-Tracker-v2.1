@@ -1,0 +1,39 @@
+.panel {
+  overflow-wrap: anywhere;
+}
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list li + li {
+  border-top: 1px solid var(--ui-border);
+  padding-top: var(--ui-space-4);
+  margin-top: var(--ui-space-4);
+}
+.list li > p + p {
+  margin-top: var(--ui-space-2);
+}
+.time {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.panel .choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-space-2);
+  color: var(--ui-text);
+}
+.choice input {
+  flex: 0 0 auto;
+}
+@media (pointer: coarse) {
+  .choice,
+  .list a {
+    min-height: 44px;
+  }
+  .list a {
+    display: inline-flex;
+    align-items: center;
+  }
+}

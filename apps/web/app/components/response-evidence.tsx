@@ -1,6 +1,11 @@
 'use client';
-import { useEffect, useState, type FormEvent } from 'react';
-import { api, Feedback } from './auth-ui';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { api } from './auth-ui';
+import { Button, Input, Panel, Feedback } from './ui/controls';
+import { registerWorkGuard } from './work-guard';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/learning-lesson.module.css';
+import recordStyles from './ui/training-record.module.css';
 type FileRow = { id: string; name: string; status: string; bytes: number };
 export function ResponseEvidence({
   enrolment,
@@ -21,6 +26,11 @@ export function ResponseEvidence({
     [error, setError] = useState(''),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState('');
+  const [chosen, setChosen] = useState(false);
+  const pending = useRef(false);
+  useEffect(() => {
+    return registerWorkGuard(() => ({ dirty: chosen, pending: pending.current }));
+  }, [chosen]);
   async function refresh() {
     setError('');
     try {
@@ -37,11 +47,13 @@ export function ResponseEvidence({
   }, [enrolment, client]);
   async function upload(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (pending.current) return;
     const form = event.currentTarget,
       body = new FormData(form);
     body.set('csrf', csrf);
     body.set('clientId', client);
     body.set('purpose', 'evidence');
+    pending.current = true;
     setBusy(true);
     setError('');
     setMessage('');
@@ -54,16 +66,18 @@ export function ResponseEvidence({
         data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Upload failed.');
       form.reset();
+      setChosen(false);
       setMessage('File uploaded. It must pass scanning before you can attach it.');
       await refresh();
     } catch (e) {
       setError((e as Error).message + ' Refresh the list before uploading again.');
     } finally {
+      pending.current = false;
       setBusy(false);
     }
   }
   return (
-    <section className="panel">
+    <Panel className={`${layout.panel} ${styles.panel}`}>
       <h2>Supporting evidence</h2>
       <p>
         Attach up to five clean files. PDF, DOCX, TXT, PNG or JPEG; up to 20 MiB each. Files
@@ -73,9 +87,9 @@ export function ResponseEvidence({
       {!files && !error && <p role="status">Loading evidence...</p>}
       {files?.length === 0 && <p>No supporting files uploaded yet.</p>}
       {files?.map((file) => (
-        <div key={file.id}>
-          <label>
-            <input
+        <div key={file.id} className={styles.file}>
+          <label className={styles.choice}>
+            <Input
               type="checkbox"
               checked={selected.includes(file.id)}
               disabled={
@@ -96,9 +110,9 @@ export function ResponseEvidence({
           {file.status === 'clean' && <a href={'/api/files/' + file.id}>Download {file.name}</a>}
         </div>
       ))}
-      <button type="button" className="secondary" onClick={() => void refresh()}>
+      <Button type="button" onClick={() => void refresh()}>
         Refresh evidence
-      </button>
+      </Button>
       <form onSubmit={upload}>
         <label>
           Upload supporting evidence
@@ -108,12 +122,14 @@ export function ResponseEvidence({
             accept=".pdf,.docx,.txt,.png,.jpg,.jpeg"
             required
             disabled={busy || disabled}
+            className={recordStyles.upload}
+            onChange={(e) => setChosen(!!e.target.files?.length)}
           />
         </label>
-        <button className="secondary" disabled={busy || disabled} aria-busy={busy}>
+        <Button type="submit" disabled={busy || disabled} aria-busy={busy}>
           {busy ? 'Uploading evidence...' : 'Upload evidence'}
-        </button>
+        </Button>
       </form>
-    </section>
+    </Panel>
   );
 }

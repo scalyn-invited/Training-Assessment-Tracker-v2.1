@@ -1,8 +1,14 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Button, Input, Textarea, Panel, PageHeader, Badge, Feedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/curriculum.module.css';
+import recordStyles from './ui/training-record.module.css';
+import { registerWorkGuard } from './work-guard';
 import { GenerationRequest } from './programme-generation';
-import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
+import { api, useContext, Guest, Pending } from './auth-ui';
 import {
   lessonMinuteFields,
   type LearningBlock,
@@ -58,6 +64,10 @@ function differences(old: LearningBlock, current: LearningBlock) {
 export function Curriculum({ id }: { id: string }) {
   const { context, error: contextError, load: loadContext } = useContext(),
     client = context?.client?.id;
+  const router = useRouter();
+  useEffect(() => {
+    if (context && !context.user) router.replace('/login');
+  }, [context, router]);
   const [view, setView] = useState<View | null>(null),
     [block, setBlock] = useState<LearningBlock | null>(null),
     [index, setIndex] = useState(0),
@@ -67,7 +77,8 @@ export function Curriculum({ id }: { id: string }) {
     [message, setMessage] = useState(''),
     [busy, setBusy] = useState(false);
   const rationaleDirty = useRef(false),
-    generationDirty = useRef(false);
+    generationDirty = useRef(false),
+    generationPending = useRef(false);
   const dirty = useRef(false),
     pending = useRef(false),
     heading = useRef<HTMLHeadingElement>(null);
@@ -105,46 +116,18 @@ export function Curriculum({ id }: { id: string }) {
     const params = new URLSearchParams(window.location.search);
     void load(Number(params.get('version')) || undefined, Number(params.get('block')) || 0);
   }, [client, id]);
-  useEffect(() => {
-    let leaving = false;
-    const unload = (e: BeforeUnloadEvent) => {
-      if (
-        (dirty.current || rationaleDirty.current || generationDirty.current || pending.current) &&
-        !leaving
-      )
-        e.preventDefault();
-    };
-    const link = (e: MouseEvent) => {
-      const a = (e.target as Element).closest?.('a');
-      if (
-        !a ||
-        e.defaultPrevented ||
-        e.button !== 0 ||
-        e.ctrlKey ||
-        e.metaKey ||
-        a.getAttribute('href')?.startsWith('#') ||
-        (!dirty.current && !rationaleDirty.current && !generationDirty.current && !pending.current)
-      )
-        return;
-      if (
-        !window.confirm(
-          'Leave this curriculum with unsaved changes? Copy or save your edits first.',
-        )
-      ) {
-        e.preventDefault();
-        e.stopPropagation();
-      } else leaving = true;
-    };
-    window.addEventListener('beforeunload', unload);
-    document.addEventListener('click', link, true);
-    return () => {
-      window.removeEventListener('beforeunload', unload);
-      document.removeEventListener('click', link, true);
-    };
-  }, []);
+  useEffect(
+    () =>
+      registerWorkGuard(() => ({
+        dirty: dirty.current || rationaleDirty.current || generationDirty.current,
+        pending: pending.current || generationPending.current,
+      })),
+    [],
+  );
   function canLeave(includeGeneration = true) {
     return (
       !pending.current &&
+      !generationPending.current &&
       (!(
         dirty.current ||
         rationaleDirty.current ||
@@ -247,385 +230,388 @@ export function Curriculum({ id }: { id: string }) {
     changes = previous && block ? differences(previous, block) : [];
   return (
     <Guest>
-      {!context?.user ? (
-        <Pending error={contextError} retry={loadContext} />
-      ) : !client ? (
-        <>
-          <h1>Choose a client</h1>
-          <Link href="/clients">Choose your client</Link>
-        </>
-      ) : (
-        <>
-          <Link href="/enrolments">← Training records</Link>
-          <Feedback error={error} success={message} />
-          {!view || !block ? (
-            <>
-              <h1>Curriculum editor</h1>
-              {error ? (
-                <button className="secondary" onClick={() => void load()}>
-                  Retry curriculum
-                </button>
-              ) : (
-                <p role="status">Loading curriculum…</p>
-              )}
-            </>
-          ) : (
-            <>
-              <div className="page-heading">
-                <div>
-                  <p className="eyebrow">Curriculum · Version {view.plan.version}</p>
-                  <h1>{view.enrolment.title}</h1>
-                  <p>
-                    {view.enrolment.memberName} · {view.calendar.timezone}
-                  </p>
+      <div className={layout.page}>
+        {!context?.user ? (
+          <Pending error={contextError} retry={loadContext} />
+        ) : !client ? (
+          <>
+            <PageHeader title="Choose a client" />
+            <Link href="/clients">Choose your client</Link>
+          </>
+        ) : (
+          <>
+            <Link href="/enrolments">← Training records</Link>
+            <Feedback error={error} success={message} />
+            {!view || !block ? (
+              <>
+                <PageHeader title="Curriculum editor" />
+                {error ? (
+                  <Button onClick={() => void load()}>Retry curriculum</Button>
+                ) : (
+                  <p role="status">Loading curriculum…</p>
+                )}
+              </>
+            ) : (
+              <>
+                <div className={recordStyles.heading}>
+                  <div>
+                    <p className="eyebrow">Curriculum · Version {view.plan.version}</p>
+                    <PageHeader title={view.enrolment.title}>
+                      {view.enrolment.memberName} · {view.calendar.timezone}
+                    </PageHeader>
+                  </div>
+                  <Badge>{view.plan.state.replaceAll('_', ' ')}</Badge>
                 </div>
-                <span className="badge">{view.plan.state.replaceAll('_', ' ')}</span>
-              </div>
-              <p className="notice">
-                {view.plan.state === 'approved'
-                  ? 'This exact baseline is approved and reserves shared capacity. Training has not been activated by this approval.'
-                  : 'Preview only. Draft content is not approved learning material and does not reserve capacity.'}
-              </p>
-              <div className="form-actions">
-                <Link href={`/enrolments/${id}/onboarding?step=review`}>
-                  Review onboarding or reschedule
-                </Link>
-                <details>
-                  <summary>Version history</summary>
-                  <ul>
-                    {view.versions.map((v) => (
-                      <li key={v.version}>
-                        <button
-                          className="secondary"
-                          disabled={busy}
-                          onClick={() => {
-                            if (canLeave()) void load(v.version, index);
-                          }}
-                        >
-                          Version {v.version} · {v.state.replaceAll('_', ' ')}
-                        </button>{' '}
-                        · {v.reason}
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </div>
-              {view.editable && (
-                <GenerationRequest
-                  id={id}
-                  client={client}
-                  csrf={context.csrf}
-                  version={view.plan.version}
-                  onDirty={(value) => {
-                    generationDirty.current = value;
-                  }}
-                  canQueue={() => !dirty.current && !rationaleDirty.current && !pending.current}
-                />
-              )}
-              <nav className="step-nav" aria-label="Learning blocks">
-                {view.plan.content.blocks.map((b, i) => (
-                  <button
-                    className="secondary"
-                    key={i}
-                    aria-current={i === index ? 'page' : undefined}
-                    disabled={busy}
-                    onClick={() => select(i)}
-                  >
-                    Block {i + 1} · {b.start}
-                  </button>
-                ))}
-              </nav>
-              <section className="panel">
-                <h2 tabIndex={-1} ref={heading}>
-                  Block {index + 1} · {block.start}
-                </h2>
-                <p className="subtle">
-                  Future adaptation cutoff:{' '}
-                  {new Intl.DateTimeFormat('en-GB', {
-                    timeZone: view.calendar.timezone,
-                    dateStyle: 'medium',
-                    timeStyle: 'short',
-                  }).format(new Date(block.freeze_at))}
-                  . Calendar version {view.calendar.version}. Baseline approval does not activate
-                  training.
+                <p className={recordStyles.notice}>
+                  {view.plan.state === 'approved'
+                    ? 'This exact baseline is approved and reserves shared capacity. Training has not been activated by this approval.'
+                    : 'Preview only. Draft content is not approved learning material and does not reserve capacity.'}
                 </p>
-                <details>
-                  <summary>Confirmed competency, KPI and resource references</summary>
-                  <h3>Competencies</h3>
-                  <ol>
-                    {view.references.competencies.map((v, i) => (
-                      <li key={i}>{v}</li>
-                    ))}
-                  </ol>
-                  <h3>Measures</h3>
-                  <ol>
-                    {view.references.measures.map((v, i) => (
-                      <li key={i}>
-                        {v.name} · {v.target} {v.unit} · {v.evidence}
-                      </li>
-                    ))}
-                  </ol>
-                  <h3>Approved resource catalogue</h3>
-                  <p>
-                    {view.references.resources.title} · {view.references.resources.reference}
+                <div className={layout.actions}>
+                  <Link href={`/enrolments/${id}/onboarding?step=review`}>
+                    Review onboarding or reschedule
+                  </Link>
+                  <details>
+                    <summary>Version history</summary>
+                    <ul>
+                      {view.versions.map((v) => (
+                        <li key={v.version}>
+                          <Button
+                            disabled={busy}
+                            onClick={() => {
+                              if (canLeave()) void load(v.version, index);
+                            }}
+                          >
+                            Version {v.version} · {v.state.replaceAll('_', ' ')}
+                          </Button>{' '}
+                          · {v.reason}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </div>
+                {view.editable && (
+                  <GenerationRequest
+                    id={id}
+                    client={client}
+                    csrf={context.csrf}
+                    version={view.plan.version}
+                    onPending={(value) => {
+                      generationPending.current = value;
+                    }}
+                    onDirty={(value) => {
+                      generationDirty.current = value;
+                    }}
+                    canQueue={() => !dirty.current && !rationaleDirty.current && !pending.current}
+                  />
+                )}
+                <nav className={styles.steps} aria-label="Learning blocks">
+                  {view.plan.content.blocks.map((b, i) => (
+                    <Button
+                      key={i}
+                      aria-current={i === index ? 'page' : undefined}
+                      disabled={busy}
+                      onClick={() => select(i)}
+                    >
+                      Block {i + 1} · {b.start}
+                    </Button>
+                  ))}
+                </nav>
+                <Panel className={layout.panel + ' ' + styles.panel}>
+                  <h2 tabIndex={-1} ref={heading}>
+                    Block {index + 1} · {block.start}
+                  </h2>
+                  <p className={styles.subtle}>
+                    Future adaptation cutoff:{' '}
+                    {new Intl.DateTimeFormat('en-GB', {
+                      timeZone: view.calendar.timezone,
+                      dateStyle: 'medium',
+                      timeStyle: 'short',
+                    }).format(new Date(block.freeze_at))}
+                    . Calendar version {view.calendar.version}. Baseline approval does not activate
+                    training.
                   </p>
-                  <p>
-                    Permission: {view.references.resources.licence} · Cost:{' '}
-                    {view.references.resources.cost} · Access: {view.references.resources.access}
-                  </p>
-                  <p>
-                    Each lesson uses this reviewed resource. Changes require new onboarding and a
-                    refreshed draft.
-                  </p>
-                </details>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    void save();
-                  }}
-                >
-                  <fieldset disabled={!view.editable || busy}>
-                    <legend className="sr-only">Block content</legend>
-                    <label>
-                      Learning objective
-                      <textarea
-                        aria-label="Learning objective"
-                        rows={3}
-                        maxLength={4000}
-                        value={block.objective ?? ''}
-                        onChange={(e) => change('objective', e.target.value)}
-                      />
-                    </label>
-                    <label>
-                      Prerequisites and sequence
-                      <textarea
-                        aria-label="Prerequisites and sequence"
-                        rows={2}
-                        maxLength={4000}
-                        value={block.prerequisites ?? ''}
-                        onChange={(e) => change('prerequisites', e.target.value)}
-                      />
-                    </label>
-                    <label>
-                      Target competency number
-                      <input
-                        type="number"
-                        min={1}
-                        max={100}
-                        required
-                        value={block.competency}
-                        onChange={(e) =>
-                          change('competency', e.target.value === '' ? '' : Number(e.target.value))
-                        }
-                      />
-                    </label>
-                    <fieldset className="lesson">
-                      <legend>Assessment rubric</legend>
-                      <p>
-                        Score range 0–100. Weights must total 1. Criteria reference this block’s
-                        competency and lesson completion evidence.
-                      </p>
-                      <div className="form-grid">
-                        {(['one', 'two'] as const).map((key) => (
-                          <div key={key}>
-                            <label>
-                              Criterion {key} and evidence expectations
-                              <textarea
-                                aria-label={`Criterion ${key} and evidence expectations`}
-                                rows={3}
-                                maxLength={2000}
-                                value={block[`criterion_${key}`] ?? ''}
-                                onChange={(e) => change(`criterion_${key}`, e.target.value)}
+                  <details>
+                    <summary>Confirmed competency, KPI and resource references</summary>
+                    <h3>Competencies</h3>
+                    <ol>
+                      {view.references.competencies.map((v, i) => (
+                        <li key={i}>{v}</li>
+                      ))}
+                    </ol>
+                    <h3>Measures</h3>
+                    <ol>
+                      {view.references.measures.map((v, i) => (
+                        <li key={i}>
+                          {v.name} · {v.target} {v.unit} · {v.evidence}
+                        </li>
+                      ))}
+                    </ol>
+                    <h3>Approved resource catalogue</h3>
+                    <p>
+                      {view.references.resources.title} · {view.references.resources.reference}
+                    </p>
+                    <p>
+                      Permission: {view.references.resources.licence} · Cost:{' '}
+                      {view.references.resources.cost} · Access: {view.references.resources.access}
+                    </p>
+                    <p>
+                      Each lesson uses this reviewed resource. Changes require new onboarding and a
+                      refreshed draft.
+                    </p>
+                  </details>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      void save();
+                    }}
+                  >
+                    <fieldset disabled={!view.editable || busy}>
+                      <legend className="sr-only">Block content</legend>
+                      <label>
+                        Learning objective
+                        <Textarea
+                          aria-label="Learning objective"
+                          rows={3}
+                          maxLength={4000}
+                          value={block.objective ?? ''}
+                          onChange={(e) => change('objective', e.target.value)}
+                        />
+                      </label>
+                      <label>
+                        Prerequisites and sequence
+                        <Textarea
+                          aria-label="Prerequisites and sequence"
+                          rows={2}
+                          maxLength={4000}
+                          value={block.prerequisites ?? ''}
+                          onChange={(e) => change('prerequisites', e.target.value)}
+                        />
+                      </label>
+                      <label>
+                        Target competency number
+                        <Input
+                          type="number"
+                          min={1}
+                          max={100}
+                          required
+                          value={block.competency}
+                          onChange={(e) =>
+                            change(
+                              'competency',
+                              e.target.value === '' ? '' : Number(e.target.value),
+                            )
+                          }
+                        />
+                      </label>
+                      <fieldset className={styles.lesson}>
+                        <legend>Assessment rubric</legend>
+                        <p>
+                          Score range 0–100. Weights must total 1. Criteria reference this block’s
+                          competency and lesson completion evidence.
+                        </p>
+                        <div className={styles.grid}>
+                          {(['one', 'two'] as const).map((key) => (
+                            <div key={key}>
+                              <label>
+                                Criterion {key} and evidence expectations
+                                <Textarea
+                                  aria-label={`Criterion ${key} and evidence expectations`}
+                                  rows={3}
+                                  maxLength={2000}
+                                  value={block[`criterion_${key}`] ?? ''}
+                                  onChange={(e) => change(`criterion_${key}`, e.target.value)}
+                                />
+                              </label>
+                              <label>
+                                Weight {key}
+                                <Input
+                                  type="number"
+                                  step="0.01"
+                                  min={0}
+                                  max={1}
+                                  required
+                                  value={block[`weight_${key}`]}
+                                  onChange={(e) =>
+                                    change(
+                                      `weight_${key}`,
+                                      e.target.value === '' ? '' : Number(e.target.value),
+                                    )
+                                  }
+                                />
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </fieldset>
+                      {block.lessons.map((l, i) => (
+                        <details
+                          className={styles.lesson}
+                          key={`${index}-${i}`}
+                          open={i === 0 ? true : undefined}
+                        >
+                          <summary>
+                            Day {i + 1} · {l.date} · {l.title || 'Lesson content needed'}
+                          </summary>
+                          {Object.entries(fields).map(([key, label]) => (
+                            <label key={key}>
+                              {label}
+                              <Textarea
+                                aria-label={label}
+                                rows={['explanation', 'example', 'activity'].includes(key) ? 4 : 2}
+                                maxLength={8000}
+                                value={l[key as keyof typeof fields] ?? ''}
+                                onChange={(e) => lesson(i, key, e.target.value)}
                               />
                             </label>
+                          ))}
+                          <div className={styles.grid}>
+                            {lessonMinuteFields.map((key) => (
+                              <label key={key}>
+                                {key[0].toUpperCase() + key.slice(1)} minutes
+                                <Input
+                                  type="number"
+                                  min={0}
+                                  max={120}
+                                  value={l[key] ?? 0}
+                                  onChange={(e) =>
+                                    lesson(
+                                      i,
+                                      key,
+                                      e.target.value === '' ? null : Number(e.target.value),
+                                    )
+                                  }
+                                />
+                              </label>
+                            ))}
                             <label>
-                              Weight {key}
-                              <input
+                              Linked KPI number
+                              <Input
                                 type="number"
-                                step="0.01"
-                                min={0}
-                                max={1}
                                 required
-                                value={block[`weight_${key}`]}
+                                min={1}
+                                max={view.references.measures.length}
+                                value={l.kpi ?? 1}
                                 onChange={(e) =>
-                                  change(
-                                    `weight_${key}`,
+                                  lesson(
+                                    i,
+                                    'kpi',
                                     e.target.value === '' ? '' : Number(e.target.value),
                                   )
                                 }
                               />
                             </label>
                           </div>
-                        ))}
-                      </div>
-                    </fieldset>
-                    {block.lessons.map((l, i) => (
-                      <details
-                        className="lesson"
-                        key={`${index}-${i}`}
-                        open={i === 0 ? true : undefined}
-                      >
-                        <summary>
-                          Day {i + 1} · {l.date} · {l.title || 'Lesson content needed'}
-                        </summary>
-                        {Object.entries(fields).map(([key, label]) => (
-                          <label key={key}>
-                            {label}
-                            <textarea
-                              aria-label={label}
-                              rows={['explanation', 'example', 'activity'].includes(key) ? 4 : 2}
-                              maxLength={8000}
-                              value={l[key as keyof typeof fields] ?? ''}
-                              onChange={(e) => lesson(i, key, e.target.value)}
-                            />
-                          </label>
-                        ))}
-                        <div className="form-grid">
-                          {lessonMinuteFields.map((key) => (
-                            <label key={key}>
-                              {key[0].toUpperCase() + key.slice(1)} minutes
-                              <input
-                                type="number"
-                                min={0}
-                                max={120}
-                                value={l[key] ?? 0}
-                                onChange={(e) =>
-                                  lesson(
-                                    i,
-                                    key,
-                                    e.target.value === '' ? null : Number(e.target.value),
-                                  )
-                                }
-                              />
-                            </label>
-                          ))}
+                          <p className={styles.subtle}>
+                            Combined time must be 15–{view.references.dailyMinutes} minutes,
+                            including assessment and revision.
+                          </p>
+                        </details>
+                      ))}
+                      {view.editable && (
+                        <>
                           <label>
-                            Linked KPI number
-                            <input
-                              type="number"
+                            Reason for this version
+                            <Input
                               required
-                              min={1}
-                              max={view.references.measures.length}
-                              value={l.kpi ?? 1}
-                              onChange={(e) =>
-                                lesson(
-                                  i,
-                                  'kpi',
-                                  e.target.value === '' ? '' : Number(e.target.value),
-                                )
-                              }
+                              minLength={8}
+                              maxLength={2000}
+                              value={reason}
+                              onChange={(e) => {
+                                dirty.current = true;
+                                setReason(e.target.value);
+                              }}
                             />
                           </label>
+                          <Button type="submit" variant="primary" aria-busy={busy}>
+                            {busy ? 'Saving version…' : 'Save new draft version'}
+                          </Button>
+                        </>
+                      )}
+                    </fieldset>
+                  </form>
+                </Panel>
+                {previous && (
+                  <details className={layout.panel + ' ' + styles.comparison}>
+                    <summary>Compare this block with previous version</summary>
+                    {changes.length === 0 ? (
+                      <p>No content changes in this block.</p>
+                    ) : (
+                      changes.map((c, i) => (
+                        <div key={i}>
+                          <h3>{c.label}</h3>
+                          <div className={styles.grid}>
+                            <p className={styles.preserve}>
+                              <strong>Previous</strong>
+                              <br />
+                              {String(c.before ?? 'Not set')}
+                            </p>
+                            <p className={styles.preserve}>
+                              <strong>Current</strong>
+                              <br />
+                              {String(c.after ?? 'Not set')}
+                            </p>
+                          </div>
                         </div>
-                        <p className="subtle">
-                          Combined time must be 15–{view.references.dailyMinutes} minutes, including
-                          assessment and revision.
-                        </p>
-                      </details>
-                    ))}
-                    {view.editable && (
-                      <>
+                      ))
+                    )}
+                  </details>
+                )}
+                {view.editable && ['draft', 'needs_review'].includes(view.plan.state) && (
+                  <Panel className={layout.panel + ' ' + styles.panel}>
+                    <h2>Review the complete baseline</h2>
+                    <p>
+                      All {view.plan.content.blocks.length} blocks need usable lessons, rubric
+                      weights and valid time budgets. Approval rechecks current permissions, input
+                      versions and shared capacity in one transaction.
+                    </p>
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        void review(view.plan.state === 'needs_review');
+                      }}
+                    >
+                      {view.plan.state === 'needs_review' && (
                         <label>
-                          Reason for this version
-                          <input
+                          Approval rationale
+                          <Input
                             required
                             minLength={8}
                             maxLength={2000}
-                            value={reason}
+                            value={rationale}
+                            disabled={busy}
                             onChange={(e) => {
-                              dirty.current = true;
-                              setReason(e.target.value);
+                              rationaleDirty.current = Boolean(e.target.value);
+                              setRationale(e.target.value);
                             }}
                           />
                         </label>
-                        <button className="primary" aria-busy={busy}>
-                          {busy ? 'Saving version…' : 'Save new draft version'}
-                        </button>
-                      </>
-                    )}
-                  </fieldset>
-                </form>
-              </section>
-              {previous && (
-                <details className="panel comparison">
-                  <summary>Compare this block with previous version</summary>
-                  {changes.length === 0 ? (
-                    <p>No content changes in this block.</p>
-                  ) : (
-                    changes.map((c, i) => (
-                      <div key={i}>
-                        <h3>{c.label}</h3>
-                        <div className="form-grid">
-                          <p className="preserve-lines">
-                            <strong>Previous</strong>
-                            <br />
-                            {String(c.before ?? 'Not set')}
-                          </p>
-                          <p className="preserve-lines">
-                            <strong>Current</strong>
-                            <br />
-                            {String(c.after ?? 'Not set')}
-                          </p>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </details>
-              )}
-              {view.editable && ['draft', 'needs_review'].includes(view.plan.state) && (
-                <section className="panel receipts">
-                  <h2>Review the complete baseline</h2>
-                  <p>
-                    All {view.plan.content.blocks.length} blocks need usable lessons, rubric weights
-                    and valid time budgets. Approval rechecks current permissions, input versions
-                    and shared capacity in one transaction.
-                  </p>
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      void review(view.plan.state === 'needs_review');
-                    }}
-                  >
-                    {view.plan.state === 'needs_review' && (
-                      <label>
-                        Approval rationale
-                        <input
-                          required
-                          minLength={8}
-                          maxLength={2000}
-                          value={rationale}
-                          disabled={busy}
-                          onChange={(e) => {
-                            rationaleDirty.current = Boolean(e.target.value);
-                            setRationale(e.target.value);
-                          }}
-                        />
-                      </label>
-                    )}
-                    <button className="secondary" disabled={busy} aria-busy={busy}>
-                      {busy
-                        ? 'Checking baseline…'
-                        : view.plan.state === 'needs_review'
-                          ? `Approve exact version ${view.plan.version}`
-                          : 'Validate all blocks and request review'}
-                    </button>
-                  </form>
-                </section>
-              )}
-              {view.approval && (
-                <section className="panel">
-                  <h2>Approval receipt</h2>
-                  <p>{view.approval.reason}</p>
-                  <p>
-                    Exact content hash:{' '}
-                    <code style={{ overflowWrap: 'anywhere' }}>{view.approval.content_hash}</code>
-                  </p>
-                </section>
-              )}
-            </>
-          )}
-        </>
-      )}
+                      )}
+                      <Button type="submit" disabled={busy} aria-busy={busy}>
+                        {busy
+                          ? 'Checking baseline…'
+                          : view.plan.state === 'needs_review'
+                            ? `Approve exact version ${view.plan.version}`
+                            : 'Validate all blocks and request review'}
+                      </Button>
+                    </form>
+                  </Panel>
+                )}
+                {view.approval && (
+                  <Panel className={layout.panel + ' ' + styles.panel}>
+                    <h2>Approval receipt</h2>
+                    <p>{view.approval.reason}</p>
+                    <p>
+                      Exact content hash:{' '}
+                      <code style={{ overflowWrap: 'anywhere' }}>{view.approval.content_hash}</code>
+                    </p>
+                  </Panel>
+                )}
+              </>
+            )}
+          </>
+        )}
+      </div>
     </Guest>
   );
 }

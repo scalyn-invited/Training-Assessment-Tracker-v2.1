@@ -1,0 +1,98 @@
+
+Running 23 tests using 1 worker
+
+  ok  1 docs\assessment-workflow-implementation\independent-qa\browser-tests\d05.spec.ts:85:3 › current approved attempt keeps accurate copy and review controls (903ms)
+  ok  2 docs\assessment-workflow-implementation\independent-qa\browser-tests\d05.spec.ts:85:3 › pending attempt keeps accurate copy and review controls (581ms)
+  ok  3 docs\assessment-workflow-implementation\independent-qa\browser-tests\d05.spec.ts:85:3 › newer attempt with earlier approval keeps accurate copy and review controls (6.5s)
+  x   4 docs\assessment-workflow-implementation\independent-qa\browser-tests\learner-guard.spec.ts:34:1 › D01 learner shares pre-context guard and blocks unknown autosave outcome (8.2s)
+  ok  5 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:105:1 › D04 preview discloses scope and uses pinned section references across views (1.3s)
+  ok  6 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: published (5.1s)
+  ok  7 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: draft (4.3s)
+  ok  8 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: unavailable (5.4s)
+  ok  9 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:131:3 › D03 lost publication reconciles exact definition: denied (4.9s)
+  ok 10 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:173:1 › D03 stale save stops writes and offers authorized structured comparison (4.5s)
+  ok 11 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:202:1 › D03 unknown save replays exact operation before newer typing (2.5s)
+  ok 12 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:230:1 › D06 exact published handoff and D08 durable copy provenance (5.0s)
+  ok 13 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:296:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (2.6s)
+  ok 14 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:328:1 › D01 same-document Back and Forward cancellation retains author work (1.5s)
+  ok 15 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:353:1 › D07 rejection requires separate member-safe feedback and transmits it separately (2.2s)
+  ok 16 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:391:1 › D07 learner sees returned guidance without a released grade or private reason (1.5s)
+  ok 17 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:438:1 › D04 reordered current references do not renumber historical pinned content (2.3s)
+  ok 18 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:460:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (6.6s)
+  ok 19 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:494:1 › D01 confirmed file evidence becomes clean without losing an unrelated review draft (4.9s)
+  ok 20 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:526:1 › D01 uncertain reviewer decision stops newer writes and retains fields (2.3s)
+  ok 21 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:562:3 › D01 switch canceled guard sends zero context mutations (3.3s)
+  ok 22 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:562:3 › D01 logout canceled guard sends zero context mutations (3.4s)
+  x  23 docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:654:1 › QA-D03 changed server draft after publication conflict offers recovery comparison (8.3s)
+
+
+  1) docs\assessment-workflow-implementation\independent-qa\browser-tests\learner-guard.spec.ts:34:1 › D01 learner shares pre-context guard and blocks unknown autosave outcome 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Array [
+    -   "confirm",
+    +   "alert",
+      ]
+
+      119 |   await page.getByRole('button', { name: 'Switch client', exact: true }).click();
+      120 |   expect(contextPosts).toBe(0);
+    > 121 |   expect(dialogs).toEqual(['confirm']);
+          |                   ^
+      122 |   await expect(page.getByLabel('Additional context (optional)')).toHaveValue(
+      123 |     'Retain learner draft',
+      124 |   );
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\independent-qa\browser-tests\learner-guard.spec.ts:121:19
+
+    Error Context: .runtime\independent-browser-results\learner-guard-D01-learner--12f66-ks-unknown-autosave-outcome\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\independent-browser-results\learner-guard-D01-learner--12f66-ks-unknown-autosave-outcome\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\independent-browser-results\learner-guard-D01-learner--12f66-ks-unknown-autosave-outcome\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:654:1 › QA-D03 changed server draft after publication conflict offers recovery comparison 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Compare with saved definition' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: 'Compare with saved definition' }) with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Compare with saved definition' })
+
+
+      667 |   expect(posts).toBe(1);
+      668 |   await screenshot(page,'QA-D03-changed-draft-recovery');
+    > 669 |   await expect(page.getByRole('button',{name:'Compare with saved definition'})).toBeVisible();
+          |                                                                                 ^
+      670 | });
+      671 |
+      672 |
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:669:81
+
+    Error Context: .runtime\independent-browser-results\workflow-QA-D03-changed-se-e5f00--offers-recovery-comparison\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\independent-browser-results\workflow-QA-D03-changed-se-e5f00--offers-recovery-comparison\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\independent-browser-results\workflow-QA-D03-changed-se-e5f00--offers-recovery-comparison\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    docs\assessment-workflow-implementation\independent-qa\browser-tests\learner-guard.spec.ts:34:1 › D01 learner shares pre-context guard and blocks unknown autosave outcome 
+    docs\assessment-workflow-implementation\independent-qa\browser-tests\workflow.spec.ts:654:1 › QA-D03 changed server draft after publication conflict offers recovery comparison 
+  21 passed (1.9m)
+
+EXIT 1

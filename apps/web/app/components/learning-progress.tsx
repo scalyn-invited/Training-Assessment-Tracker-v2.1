@@ -1,8 +1,13 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
-import { useLeaveGuard } from './learning-controls';
+import { api, useContext, Guest } from './auth-ui';
+import { useRouter } from 'next/navigation';
+import { Button, Input, Select, Textarea, Panel, PageHeader, Feedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/learning-progress.module.css';
+import recordStyles from './ui/training-record.module.css';
+import { registerWorkGuard } from './work-guard';
 import { LearningSupport } from './learning-support';
 import type { LearningKpis } from '../../../../packages/domain/src/learning-kpis';
 type View = Awaited<ReturnType<LearningKpis['read']>>;
@@ -10,6 +15,10 @@ type Metric = View['metrics'][number];
 export function LearningProgress({ id }: { id: string }) {
   const ctx = useContext(),
     client = ctx.context?.client?.id;
+  const router = useRouter();
+  useEffect(() => {
+    if (ctx.context && !ctx.context.user) router.replace('/login');
+  }, [ctx.context, router]);
   const [view, setView] = useState<View | null>(null),
     [error, setError] = useState('');
   const sequence = useRef(0);
@@ -39,41 +48,54 @@ export function LearningProgress({ id }: { id: string }) {
   }
   return (
     <Guest>
-      <Link href={`/enrolments/${id}/delivery`}>Back to learning plan</Link>
-      {!view ? (
-        <Pending error={error || ctx.error} retry={load} />
-      ) : (
-        <>
-          <div className="page-heading">
+      <div className={layout.page}>
+        <Link href={`/enrolments/${id}/delivery`}>Back to learning plan</Link>
+        {!ctx.context?.user || !view ? (
+          <>
+            <PageHeader title="Progress and evidence" />
+            <Feedback error={error || ctx.error} />
+            {error || ctx.error ? (
+              <Button onClick={() => void (ctx.context?.user ? load() : ctx.load())}>
+                Try loading again
+              </Button>
+            ) : (
+              <p role="status">
+                {ctx.context?.user ? 'Loading progress...' : 'Loading your session...'}
+              </p>
+            )}
+          </>
+        ) : (
+          <>
             <div>
               <p className="eyebrow">{view.memberName}</p>
-              <h1>Progress and evidence</h1>
-              <p>{view.enrolment.title}</p>
+              <PageHeader title="Progress and evidence">{view.enrolment.title}</PageHeader>
             </div>
-          </div>
-          <p>Approved evidence informs progress. Missing samples are never treated as zero.</p>
-          <Feedback error={error} />
-          {!view.metrics.length ? (
-            <p className="notice">KPI definitions become available after programme activation.</p>
-          ) : (
-            view.metrics.map((metric) => (
-              <MetricCard
-                key={metric.id}
-                metric={metric}
-                coordinator={view.coordinator}
-                mutate={mutate}
-              />
-            ))
-          )}
-          <LearningSupport
-            key={`${id}:${client}`}
-            id={id}
-            client={client!}
-            csrf={ctx.context!.csrf}
-            active={view.enrolment.status === 'active'}
-          />
-        </>
-      )}
+            <p>Approved evidence informs progress. Missing samples are never treated as zero.</p>
+            <Feedback error={error} />
+            {!view.metrics.length ? (
+              <p className={recordStyles.notice}>
+                KPI definitions become available after programme activation.
+              </p>
+            ) : (
+              view.metrics.map((metric) => (
+                <MetricCard
+                  key={metric.id}
+                  metric={metric}
+                  coordinator={view.coordinator}
+                  mutate={mutate}
+                />
+              ))
+            )}
+            <LearningSupport
+              key={`${id}:${client}`}
+              id={id}
+              client={client!}
+              csrf={ctx.context!.csrf}
+              active={view.enrolment.status === 'active'}
+            />
+          </>
+        )}
+      </div>
     </Guest>
   );
 }
@@ -90,10 +112,11 @@ function MetricCard({
     [error, setError] = useState(''),
     [message, setMessage] = useState('');
   const pending = useRef(false);
+  useEffect(() => registerWorkGuard(() => ({ dirty: false, pending: pending.current })), []);
   const d = m.definition,
     s = m.snapshot;
   return (
-    <section className="panel">
+    <Panel className={`${layout.panel} ${styles.panel}`}>
       <h2>{d.name}</h2>
       <p>{d.rationale}</p>
       <p>
@@ -114,15 +137,13 @@ function MetricCard({
       {s && (
         <details>
           <summary>Evidence lineage</summary>
-          <p style={{ overflowWrap: 'anywhere' }}>
+          <p>
             Snapshot {s.id} / {new Date(s.createdAt).toISOString()}. Later changes do not rewrite
             this snapshot.
           </p>
           <ul>
             {s.sourceIds.map((source) => (
-              <li key={source} style={{ overflowWrap: 'anywhere' }}>
-                {source}
-              </li>
+              <li key={source}>{source}</li>
             ))}
           </ul>
         </details>
@@ -130,8 +151,8 @@ function MetricCard({
       {coordinator && (
         <>
           <Feedback error={error} success={message} />
-          <button
-            className="secondary"
+          <Button
+            variant="secondary"
             disabled={busy}
             aria-busy={busy}
             onClick={async () => {
@@ -151,7 +172,7 @@ function MetricCard({
             }}
           >
             {busy ? 'Recording snapshot...' : 'Refresh evidence snapshot'}
-          </button>
+          </Button>
           {d.formula === 'manual_mean' && <Observation metric={m} mutate={mutate} />}
           {m.latest && (
             <>
@@ -165,7 +186,7 @@ function MetricCard({
           )}
         </>
       )}
-    </section>
+    </Panel>
   );
 }
 function Observation({
@@ -182,7 +203,14 @@ function Observation({
     [error, setError] = useState(''),
     [message, setMessage] = useState('');
   const pending = useRef(false);
-  useLeaveGuard(!!value || !!evidence || !!reason || busy);
+  useEffect(
+    () =>
+      registerWorkGuard(() => ({
+        dirty: !!value || !!evidence || !!reason,
+        pending: pending.current,
+      })),
+    [value, evidence, reason],
+  );
   return (
     <details>
       <summary>Record workplace evidence</summary>
@@ -222,7 +250,7 @@ function Observation({
       >
         <label>
           Observed value
-          <input
+          <Input
             type="number"
             step="any"
             required
@@ -233,7 +261,8 @@ function Observation({
         </label>
         <label>
           Evidence reference
-          <textarea
+          <Textarea
+            aria-label="Evidence reference"
             required
             minLength={10}
             maxLength={4000}
@@ -244,7 +273,7 @@ function Observation({
         </label>
         <label>
           Observation reason
-          <input
+          <Input
             required
             minLength={8}
             maxLength={2000}
@@ -254,9 +283,9 @@ function Observation({
           />
         </label>
         <Feedback error={error} success={message} />
-        <button className="primary" disabled={busy} aria-busy={busy}>
+        <Button type="submit" variant="primary" disabled={busy} aria-busy={busy}>
           {busy ? 'Recording evidence...' : 'Record evidence'}
-        </button>
+        </Button>
       </form>
     </details>
   );
@@ -282,7 +311,7 @@ function Definition({
     [busy, setBusy] = useState(false),
     [error, setError] = useState('');
   const pending = useRef(false);
-  useLeaveGuard(dirty || busy);
+  useEffect(() => registerWorkGuard(() => ({ dirty, pending: pending.current })), [dirty]);
   function field(key: string, value: string) {
     setD((p) => ({ ...p, [key]: value }));
     setDirty(true);
@@ -334,7 +363,7 @@ function Definition({
           {(['name', 'rationale', 'unit', 'baseline'] as const).map((k) => (
             <label key={k}>
               {k[0].toUpperCase() + k.slice(1)}
-              <input
+              <Input
                 required
                 maxLength={k === 'rationale' ? 1000 : k === 'unit' ? 100 : 200}
                 value={d[k]}
@@ -347,7 +376,7 @@ function Definition({
           <legend>Target and direction</legend>
           <label>
             Target
-            <input
+            <Input
               type="number"
               step="any"
               required
@@ -357,7 +386,7 @@ function Definition({
           </label>
           <label>
             Direction
-            <select
+            <Select
               aria-label="Direction"
               value={d.direction}
               onChange={(e) => field('direction', e.target.value)}
@@ -365,12 +394,12 @@ function Definition({
               <option value="higher">At least the target</option>
               <option value="lower">At most the target</option>
               <option value="band">Within a target band</option>
-            </select>
+            </Select>
           </label>
           {d.direction === 'band' && (
             <label>
               Upper target
-              <input
+              <Input
                 type="number"
                 step="any"
                 required
@@ -384,29 +413,29 @@ function Definition({
           <legend>Comparable evidence</legend>
           <label>
             Formula
-            <select
+            <Select
               aria-label="Formula"
               value={d.formula}
               onChange={(e) => field('formula', e.target.value)}
             >
               <option value="approved_grade_mean">Approved grade mean (percent)</option>
               <option value="manual_mean">Observed evidence mean</option>
-            </select>
+            </Select>
           </label>
           <label>
             Evidence type
-            <select
+            <Select
               aria-label="Evidence type"
               value={d.evidence_type}
               onChange={(e) => field('evidence_type', e.target.value)}
             >
               <option value="demonstrated_competence">Demonstrated competence</option>
               <option value="workplace_outcome">Workplace outcome</option>
-            </select>
+            </Select>
           </label>
           <label>
             Minimum samples
-            <input
+            <Input
               type="number"
               min={1}
               max={100}
@@ -422,7 +451,7 @@ function Definition({
         </fieldset>
         <label>
           Effective from (UTC)
-          <input
+          <Input
             type="datetime-local"
             required
             disabled={busy}
@@ -435,7 +464,7 @@ function Definition({
         </label>
         <label>
           Revision reason
-          <input
+          <Input
             required
             minLength={8}
             maxLength={2000}
@@ -448,9 +477,9 @@ function Definition({
           />
         </label>
         <Feedback error={error} />
-        <button className="primary" disabled={busy} aria-busy={busy}>
+        <Button type="submit" variant="primary" disabled={busy} aria-busy={busy}>
           {busy ? 'Saving definition...' : 'Save future definition'}
-        </button>
+        </Button>
       </form>
     </details>
   );

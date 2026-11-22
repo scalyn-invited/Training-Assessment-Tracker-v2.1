@@ -1,0 +1,8 @@
+
+Running 1 test using 1 worker
+
+  ok 1 docs\assessment-workflow-implementation\correction-frontend\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (1.0m)
+
+  1 passed (2.4m)
+
+EXIT 0

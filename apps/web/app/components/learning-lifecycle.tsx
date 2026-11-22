@@ -1,7 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { api, Feedback, Pending } from './auth-ui';
-import { ReasonAction, useLeaveGuard } from './learning-controls';
+import { api } from './auth-ui';
+import { Button, Input, Panel, Feedback } from './ui/controls';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/learning-delivery.module.css';
+import { registerWorkGuard } from './work-guard';
+import { ReasonAction } from './learning-controls';
 import type { LearningLifecycle as LifecycleService } from '../../../../packages/domain/src/learning-lifecycle';
 type View = Awaited<ReturnType<LifecycleService['read']>>;
 export function LearningLifecycle({
@@ -25,7 +29,13 @@ export function LearningLifecycle({
     [busy, setBusy] = useState(false);
   const sequence = useRef(0),
     pending = useRef(false);
-  useLeaveGuard(!!reason || busy);
+  const savedWeeks = useRef('0'),
+    dirty = useRef(false);
+  dirty.current = view?.status === 'paused' && (!!reason || weeks !== savedWeeks.current);
+  useEffect(
+    () => registerWorkGuard(() => ({ dirty: dirty.current, pending: pending.current })),
+    [],
+  );
   async function load() {
     const request = ++sequence.current;
     try {
@@ -64,6 +74,7 @@ export function LearningLifecycle({
     setMessage('');
     try {
       await mutate({ action: 'preview', weeks: Number(weeks), reason });
+      savedWeeks.current = weeks;
       setReason('');
       setMessage('Preview created. Dates remain unchanged until you confirm resumption.');
     } catch (e) {
@@ -75,14 +86,19 @@ export function LearningLifecycle({
   }
   if (!view)
     return (
-      <section className="panel">
+      <Panel className={layout.panel + ' ' + styles.panel}>
         <h2>Programme status</h2>
-        <Pending error={error} retry={load} />
-      </section>
+        <Feedback error={error} />
+        {error ? (
+          <Button onClick={() => void load()}>Try loading again</Button>
+        ) : (
+          <p role="status">Loading programme status...</p>
+        )}
+      </Panel>
     );
   if (!view.canManage) return null;
   return (
-    <section className="panel">
+    <Panel className={layout.panel + ' ' + styles.panel}>
       <h2>Programme status</h2>
       <Feedback error={error} success={message} />
       {view.status === 'active' && (
@@ -124,7 +140,7 @@ export function LearningLifecycle({
           <form onSubmit={preview}>
             <label>
               Move unstarted blocks by weeks
-              <input
+              <Input
                 type="number"
                 min={0}
                 max={52}
@@ -141,7 +157,7 @@ export function LearningLifecycle({
             </p>
             <label>
               Resumption reason
-              <input
+              <Input
                 required
                 minLength={8}
                 maxLength={2000}
@@ -150,9 +166,9 @@ export function LearningLifecycle({
                 onChange={(e) => setReason(e.target.value)}
               />
             </label>
-            <button className="primary" disabled={busy} aria-busy={busy}>
+            <Button type="submit" variant="primary" disabled={busy} aria-busy={busy}>
               {busy ? 'Checking calendar...' : 'Preview resumption'}
-            </button>
+            </Button>
           </form>
           <h3>Resumption previews</h3>
           {!!reason && (
@@ -162,7 +178,7 @@ export function LearningLifecycle({
             <p>No previews yet. Enter the planned delay and reason above.</p>
           ) : (
             view.previews.map((p) => (
-              <article key={p.id} className="panel">
+              <article key={p.id} className={styles.preview}>
                 <h4>
                   {p.preview.weeks === 0
                     ? 'Keep unstarted block dates'
@@ -206,7 +222,7 @@ export function LearningLifecycle({
       {view.status === 'completed' && (
         <p>Programme completed. Submitted evidence and decisions remain in history.</p>
       )}
-    </section>
+    </Panel>
   );
 }
 function ResumePreview({
@@ -221,12 +237,12 @@ function ResumePreview({
   const [busy, setBusy] = useState(false),
     [error, setError] = useState('');
   const pending = useRef(false);
+  useEffect(() => registerWorkGuard(() => ({ dirty: false, pending: pending.current })), []);
   return (
     <>
       <Feedback error={error} />
       {stale && <p>This preview is out of date. Create a new preview.</p>}
-      <button
-        className="secondary"
+      <Button
         disabled={disabled || busy}
         aria-busy={busy}
         onClick={async () => {
@@ -251,7 +267,7 @@ function ResumePreview({
         }}
       >
         {busy ? 'Resuming programme...' : 'Confirm preview and resume'}
-      </button>
+      </Button>
     </>
   );
 }

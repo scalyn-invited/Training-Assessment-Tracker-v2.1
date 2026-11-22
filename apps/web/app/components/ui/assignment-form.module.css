@@ -1,0 +1,29 @@
+.confirmation.confirmation {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-space-3);
+  color: var(--ui-text);
+  line-height: 22px;
+  cursor: pointer;
+}
+.confirmation input {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+.rule {
+  border-top: 1px solid var(--ui-border);
+  padding-top: var(--ui-space-4);
+}
+.rule > * + * {
+  margin-top: var(--ui-space-3);
+}
+@media (pointer: coarse) {
+  .confirmation {
+    min-height: 44px;
+  }
+}
+.form fieldset > button {
+  align-self: flex-start;
+}

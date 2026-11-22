@@ -76,11 +76,9 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     await expect(page.getByText('Password sign-in', { exact: true })).toBeVisible();
     await page.keyboard.press('Escape');
     await page.setViewportSize({ width: 375, height: 812 });
-    const settingsButton = page
-      .getByRole('navigation', { name: 'Mobile platform navigation' })
-      .getByRole('button', { name: 'Settings' });
+    const settingsButton = page.getByRole('button', { name: 'Personal settings' });
     await settingsButton.click();
-    const drawer = page.getByRole('dialog', { name: 'Settings', exact: true });
+    const drawer = page.getByRole('dialog', { name: 'Personal settings', exact: true });
     await expect(drawer).toBeVisible();
     const first = drawer.getByRole('button', { name: 'Close', exact: true });
     await expect(first).toBeFocused();
@@ -152,8 +150,9 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
       page.getByText('Learning plans temporarily unavailable.', { exact: true }),
     ).toBeVisible();
     await page.getByRole('button', { name: 'Retry learning plans' }).click();
-    await expect(page.locator('.plan-card')).toHaveCount(12);
-    await expect(page.locator('.plan-card h3').first()).toHaveText('Plan 00');
+    const plans = page.getByRole('link').filter({ has: page.getByRole('heading', { level: 3 }) });
+    await expect(plans).toHaveCount(12);
+    await expect(plans.getByRole('heading').first()).toHaveText('Plan 00');
     await expect(
       page
         .getByRole('navigation', { name: 'Main navigation' })
@@ -163,9 +162,9 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     expect((await page.request.get('/api/platform/overview')).status()).toBe(403);
     expect((await page.request.get('/api/clients/people?clientId=' + client)).status()).toBe(403);
     await page.getByRole('button', { name: 'Next plans' }).click();
-    await expect(page.locator('.plan-card h3')).toHaveText('Plan 12');
+    await expect(plans.getByRole('heading')).toHaveText('Plan 12');
     await page.getByRole('button', { name: 'Previous plans' }).click();
-    await expect(page.locator('.plan-card')).toHaveCount(12);
+    await expect(plans).toHaveCount(12);
     await page.getByRole('combobox', { name: 'Active client', exact: true }).focus();
     await page.evaluate(() => scrollTo(0, 0));
     await page.screenshot({

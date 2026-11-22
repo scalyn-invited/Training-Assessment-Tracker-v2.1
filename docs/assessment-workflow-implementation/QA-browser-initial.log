@@ -1,0 +1,91 @@
+
+Running 7 tests using 1 worker
+
+  ok 1 tests\workflow-qa-browser\workflow.spec.ts:23:1 › D04 observes reset and inconsistent second-section references (6.7s)
+  ok 2 tests\workflow-qa-browser\workflow.spec.ts:32:1 › D03 observes false definitive publication failure then blind version retry (5.4s)
+  x  3 tests\workflow-qa-browser\workflow.spec.ts:37:1 › D03 stale save preserves fields but does not stop another write (6.3s)
+  x  4 tests\workflow-qa-browser\workflow.spec.ts:40:1 › D06 existing published handoff targets exact ID; D08 saved copy lacks provenance (8.1s)
+  ok 5 tests\workflow-qa-browser\workflow.spec.ts:44:1 › D01 reviewer reload loses score feedback rationale and verified file text without warning (4.4s)
+  x  6 tests\workflow-qa-browser\workflow.spec.ts:47:41 › D01 switch POST occurs before canceled builder unload (3.1s)
+  ok 7 tests\workflow-qa-browser\workflow.spec.ts:47:41 › D01 logout POST occurs before canceled builder unload (3.6s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:37:1 › D03 stale save preserves fields but does not stop another write 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#builder-errors')
+    Expected substring: "copy them before reloading"
+    Received string:    ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#builder-errors') with timeout 5000ms
+      - waiting for locator('#builder-errors')
+        13 × locator resolved to <div hidden="" role="alert" id="builder-errors"></div>
+           - unexpected value ""
+
+
+      36 | });
+      37 | test('D03 stale save preserves fields but does not stop another write',async({page})=>{
+    > 38 |  const posts:any[]=[];const errors=await boot(page,async route=>{if(!route.request().url().endsWith('/api/assessments/builder'))return false;posts.push(route.request().postDataJSON());await route.fulfill({status:409,json:{message:'Stale version'}});return true;});await page.addScriptTag({content:builder});await page.locator('#assessment-title').fill('Local conflict title');await page.locator('#save-definition').click();await expect(page.locator('#builder-errors')).toContainText('copy them before reloading');await expect(page.locator('#assessment-title')).toHaveValue('Local conflict title');await page.locator('#save-definition').click();await expect.poll(()=>posts.length).toBe(2);expect(posts[1].expected_version).toBe(posts[0].expected_version);expect(posts[1].save_token).not.toBe(posts[0].save_token);await screenshot(page,'D03-conflict-retry');expect(errors).toEqual([]);
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+      39 | });
+      40 | test('D06 existing published handoff targets exact ID; D08 saved copy lacks provenance',async({page})=>{
+      41 |  const errors=await boot(page,async route=>{if(!route.request().url().endsWith('/api/assessments/builder'))return false;await route.fulfill({json:{id:'synthetic-copy',version:1,status:'draft',readiness:{}}});return true;});await page.evaluate(()=>{(window as any).fixture.status='published';(window as any).fixture.version=2;});await page.addScriptTag({content:builder});await expect(page.locator('#assign-definition')).toBeVisible();await expect(page.locator('#assign-definition')).toHaveAttribute('href','/assessments/definitions/synthetic-definition/assign');await screenshot(page,'D06-existing-assignment-handoff');await page.locator('#assessment-title').fill('Synthetic revised copy');await expect(page.locator('#assign-definition')).toBeHidden();await page.locator('#save-definition').click();await expect(page.locator('#save-status')).toHaveText('Draft saved. Not published.');await expect(page).toHaveURL(origin+'/assessments/definitions/synthetic-copy');await expect(page.locator('#builder')).not.toContainText('synthetic-definition');await screenshot(page,'D08-copy-provenance');expect(errors).toEqual([]);
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:38:470
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D03-stale-save-pr-14d72-does-not-stop-another-write\error-context.md
+
+  2) tests\workflow-qa-browser\workflow.spec.ts:40:1 › D06 existing published handoff targets exact ID; D08 saved copy lacks provenance 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#save-status')
+    Expected: "Draft saved. Not published."
+    Received: "Unsaved changes"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#save-status') with timeout 5000ms
+      - waiting for locator('#save-status')
+        13 × locator resolved to <p role="status" id="save-status" aria-live="polite">Unsaved changes</p>
+           - unexpected value "Unsaved changes"
+
+
+      39 | });
+      40 | test('D06 existing published handoff targets exact ID; D08 saved copy lacks provenance',async({page})=>{
+    > 41 |  const errors=await boot(page,async route=>{if(!route.request().url().endsWith('/api/assessments/builder'))return false;await route.fulfill({json:{id:'synthetic-copy',version:1,status:'draft',readiness:{}}});return true;});await page.evaluate(()=>{(window as any).fixture.status='published';(window as any).fixture.version=2;});await page.addScriptTag({content:builder});await expect(page.locator('#assign-definition')).toBeVisible();await expect(page.locator('#assign-definition')).toHaveAttribute('href','/assessments/definitions/synthetic-definition/assign');await screenshot(page,'D06-existing-assignment-handoff');await page.locator('#assessment-title').fill('Synthetic revised copy');await expect(page.locator('#assign-definition')).toBeHidden();await page.locator('#save-definition').click();await expect(page.locator('#save-status')).toHaveText('Draft saved. Not published.');await expect(page).toHaveURL(origin+'/assessments/definitions/synthetic-copy');await expect(page.locator('#builder')).not.toContainText('synthetic-definition');await screenshot(page,'D08-copy-provenance');expect(errors).toEqual([]);
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^
+      42 | });
+      43 | const reviewData={status:'submitted',canAnalyze:false,files:[{id:'synthetic-file',name:'synthetic.txt',status:'clean',extraction:null}],version:3,member:false,canReview:true,attemptId:'attempt-current',definitionId:'synthetic-definition',revision:1,rubricApplicable:true,objective:null,appeal:null,approved:null,reviews:[],rubric:{threshold:70,criteria:[{id:'c',category:'Practice',label:'Evidence',guidance:'Use evidence',weight:1}]},evidence:[{id:'attempt-current:q',text:'Synthetic evidence'}]};
+      44 | test('D01 reviewer reload loses score feedback rationale and verified file text without warning',async({page})=>{
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:41:843
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D06-existing-publ-5a188-saved-copy-lacks-provenance\error-context.md
+
+  3) tests\workflow-qa-browser\workflow.spec.ts:47:41 › D01 switch POST occurs before canceled builder unload 
+
+    Error: locator.selectOption: Error: strict mode violation: getByLabel('Active client', { exact: true }) resolved to 2 elements:
+        1) <form class="client-switcher" aria-label="Active client">…</form> aka getByRole('form', { name: 'Active client' })
+        2) <select required="" id="active-client">…</select> aka getByRole('form', { name: 'Active client' }).getByLabel('Active client')
+
+    Call log:
+      - waiting for getByLabel('Active client', { exact: true })
+
+
+      47 | for(const action of ['switch','logout'])test('D01 '+action+' POST occurs before canceled builder unload',async({page})=>{
+      48 |  const events:string[]=[];const errors=await boot(page,async route=>{const u=new URL(route.request().url());if(u.pathname==='/api/auth/context'){await route.fulfill({json:{csrf:'inert',installed:true,user:{id:'synthetic-user',name:'Synthetic coordinator',environment:'test',global_admin:false},client:{id:'synthetic-client',name:'Synthetic A'},canCoordinate:true}});return true;}if(u.pathname==='/api/clients'){await route.fulfill({json:[{id:'synthetic-client',name:'Synthetic A'},{id:'synthetic-b',name:'Synthetic B'}]});return true;}if(u.pathname.startsWith('/api/branding/')){await route.fulfill({json:{displayName:'Synthetic',appName:'Synthetic',mode:'white-label',selectedTheme:'light',logo:null,palettes:{},platformPalettes:{}}});return true;}if(['/api/clients/select','/api/auth/logout'].includes(u.pathname)){events.push('POST '+u.pathname);await route.fulfill({json:{ok:true}});return true;}return false;});
+    > 49 |  await page.locator('#builder').evaluate(e=>e.remove());await page.addScriptTag({content:shell});await expect(page.getByRole('button',{name:'Switch client',exact:true})).toBeEnabled();await page.addScriptTag({content:builder});await page.locator('#assessment-title').fill('Dirty synthetic context draft');page.on('dialog',async d=>{events.push(d.type());await d.dismiss();});if(action==='switch'){await page.getByLabel('Active client',{exact:true}).selectOption('synthetic-b');await page.getByRole('button',{name:'Switch client',exact:true}).click();}else await page.getByRole('button',{name:/sign out/i}).click();await expect.poll(()=>events.length).toBe(2);expect(events).toEqual(['POST '+(action==='switch'?'/api/clients/select':'/api/auth/logout'),'beforeunload']);await expect(page.locator('#assessment-title')).toHaveValue('Dirty synthetic context draft');await screenshot(page,'D01-'+action+'-canceled-after-post');expect(errors).toEqual([]);
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+      50 | });
+      51 |
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:49:450
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D01-switch-POST-o-b44eb-ore-canceled-builder-unload\error-context.md
+
+  3 failed
+    tests\workflow-qa-browser\workflow.spec.ts:37:1 › D03 stale save preserves fields but does not stop another write 
+    tests\workflow-qa-browser\workflow.spec.ts:40:1 › D06 existing published handoff targets exact ID; D08 saved copy lacks provenance 
+    tests\workflow-qa-browser\workflow.spec.ts:47:41 › D01 switch POST occurs before canceled builder unload 
+  4 passed (1.9m)

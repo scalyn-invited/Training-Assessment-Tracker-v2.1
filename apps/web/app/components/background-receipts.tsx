@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { api, Feedback } from './auth-ui';
+import { api } from './auth-ui';
+import { Button, Panel, Badge, Feedback } from './ui/controls';
+import styles from './ui/receipts.module.css';
 type Receipt = {
   id: string;
   state: string;
@@ -50,26 +52,26 @@ export function BackgroundReceipts({
     };
   }, [client, revision, retry]);
   return (
-    <section className="panel receipts" aria-label="Background check receipts">
-      <div className="section-heading">
+    <Panel className={styles.panel} aria-label="Background check receipts">
+      <div className={styles.heading}>
         <h2>Background receipts</h2>
         <span>Refreshes every 5 seconds</span>
       </div>
-      <p className="subtle">Local notification sink. No outbound email.</p>
+      <p className={styles.subtle}>Local notification sink. No outbound email.</p>
       <Feedback error={error} />
       {error && (
-        <button
-          className="secondary"
+        <Button
+          type="button"
           disabled={loading}
           aria-busy={loading}
           onClick={() => setRetry((n) => n + 1)}
         >
           {loading ? 'Loading receipts...' : 'Retry background receipts'}
-        </button>
+        </Button>
       )}
       {!receipts && !error && <p role="status">Loading your background receipts...</p>}
       {receipts && (
-        <ul className="file-list" aria-live="polite">
+        <ul className={styles.list} aria-live="polite">
           {receipts.length === 0 && (
             <li>No checks requested yet. Open a training record to check background processing.</li>
           )}
@@ -91,13 +93,11 @@ export function BackgroundReceipts({
                   </p>
                 )}
               </div>
-              <span className="badge">
-                {row.state.charAt(0).toUpperCase() + row.state.slice(1)}
-              </span>
+              <Badge>{row.state.charAt(0).toUpperCase() + row.state.slice(1)}</Badge>
             </li>
           ))}
         </ul>
       )}
-    </section>
+    </Panel>
   );
 }

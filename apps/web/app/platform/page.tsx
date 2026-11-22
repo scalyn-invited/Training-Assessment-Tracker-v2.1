@@ -2,9 +2,10 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from '../components/auth-ui';
+import { api, useContext, Guest, Pending } from '../components/auth-ui';
 import { OverviewIcon, type OverviewIconName } from '../components/overview-icon';
-import { OverviewDialog } from '../components/overview-dialog';
+import { Dialog } from '../components/ui/dialog';
+import { Button, PageHeader, Panel, Feedback } from '../components/ui/controls';
 import styles from './overview.module.css';
 
 type Overview = {
@@ -146,16 +147,11 @@ export default function PlatformOverview() {
         </>
       ) : (
         <div className={styles.page}>
-          <header className={styles.pageHeader}>
-            <h1 aria-label="Platform overview">Overview</h1>
-            <p>What needs attention across the platform.</p>
-          </header>
+          <PageHeader title="Overview" titleLabel="Platform overview">
+            What needs attention across the platform.
+          </PageHeader>
           <Feedback error={overview.error} />
-          {overview.error && (
-            <button className="secondary" onClick={overview.retry}>
-              Retry platform overview
-            </button>
-          )}
+          {overview.error && <Button onClick={overview.retry}>Retry platform overview</Button>}
           {!data && !overview.error && <p role="status">Loading platform overview...</p>}
           {data && (
             <>
@@ -190,9 +186,7 @@ export default function PlatformOverview() {
                   {accounts.error && (
                     <div className={styles.sectionFeedback}>
                       <Feedback error={accounts.error} />
-                      <button className="secondary" onClick={accounts.retry}>
-                        Retry account count
-                      </button>
+                      <Button onClick={accounts.retry}>Retry account count</Button>
                     </div>
                   )}
                 </div>
@@ -206,7 +200,7 @@ export default function PlatformOverview() {
                   </Link>
                 </section>
               )}
-              <section className={styles.panel} aria-labelledby="attention-title">
+              <Panel aria-labelledby="attention-title">
                 <div className={styles.panelHeader}>
                   <h2 id="attention-title">Needs attention</h2>
                   <span className={styles.attentionCount}>{attentionCount}</span>
@@ -261,14 +255,10 @@ export default function PlatformOverview() {
                     </button>
                   </div>
                 )}
-              </section>
+              </Panel>
             </>
           )}
-          <section
-            className={styles.panel}
-            aria-labelledby="activity-title"
-            aria-busy={!history.data && !history.error}
-          >
+          <Panel aria-labelledby="activity-title" aria-busy={!history.data && !history.error}>
             <div className={`${styles.panelHeader} ${styles.activityHeader}`}>
               <h2 id="activity-title">Recent administrative activity</h2>
               <Link className={styles.textAction} href="/platform/audit">
@@ -278,9 +268,7 @@ export default function PlatformOverview() {
             {history.error && (
               <div className={styles.sectionFeedback}>
                 <Feedback error={history.error} />
-                <button className="secondary" onClick={history.retry}>
-                  Retry recent activity
-                </button>
+                <Button onClick={history.retry}>Retry recent activity</Button>
               </div>
             )}
             {!history.data && !history.error && (
@@ -323,8 +311,8 @@ export default function PlatformOverview() {
               ) : (
                 <p className={styles.sectionFeedback}>No administrative activity recorded yet.</p>
               ))}
-          </section>
-          <OverviewDialog dialogRef={system} titleId="system-status-title">
+          </Panel>
+          <Dialog dialogRef={system} titleId="system-status-title">
             <div className={styles.dialogHeader}>
               <h2 id="system-status-title">System overview</h2>
               <button type="button" className="secondary" onClick={() => system.current?.close()}>
@@ -367,7 +355,7 @@ export default function PlatformOverview() {
                 <p>Owner: Technical administrator. Credentials are managed outside this screen.</p>
               </>
             )}
-          </OverviewDialog>
+          </Dialog>
         </div>
       )}
     </Guest>

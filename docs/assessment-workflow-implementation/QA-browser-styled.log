@@ -1,0 +1,15 @@
+
+Running 10 tests using 1 worker
+
+  ok  1 tests\workflow-qa-browser\d05.spec.ts:85:3 › current approved attempt keeps accurate copy and review controls (576ms)
+  ok  2 tests\workflow-qa-browser\d05.spec.ts:85:3 › pending attempt keeps accurate copy and review controls (404ms)
+  ok  3 tests\workflow-qa-browser\d05.spec.ts:85:3 › newer attempt with earlier approval keeps accurate copy and review controls (481ms)
+  ok  4 tests\workflow-qa-browser\workflow.spec.ts:105:1 › D04 observes reset and inconsistent second-section references (1.9s)
+  ok  5 tests\workflow-qa-browser\workflow.spec.ts:123:1 › D03 observes false definitive publication failure then blind version retry (1.2s)
+  ok  6 tests\workflow-qa-browser\workflow.spec.ts:156:1 › D03 stale save preserves fields but does not stop another write (1.2s)
+  ok  7 tests\workflow-qa-browser\workflow.spec.ts:176:1 › D06 existing published handoff targets exact ID; D08 saved copy lacks provenance (1.6s)
+  ok  8 tests\workflow-qa-browser\workflow.spec.ts:229:1 › D01 reviewer reload loses score feedback rationale and verified file text without warning (1.7s)
+  ok  9 tests\workflow-qa-browser\workflow.spec.ts:261:3 › D01 switch POST occurs before canceled builder unload (1.7s)
+  ok 10 tests\workflow-qa-browser\workflow.spec.ts:261:3 › D01 logout POST occurs before canceled builder unload (1.4s)
+
+  10 passed (14.8s)

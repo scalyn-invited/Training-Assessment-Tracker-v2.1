@@ -1,0 +1,1676 @@
+{
+  "checkedSources": 239,
+  "unusedClasses": [
+    "action-arrow",
+    "action-card",
+    "action-icon",
+    "appearance-section",
+    "audit-changes",
+    "brand-colour-control",
+    "brand-copy",
+    "brand-logo",
+    "brand-symbol",
+    "branding-preview",
+    "client-choice",
+    "client-colour-editor",
+    "client-controls",
+    "client-directory-table",
+    "client-identity",
+    "client-initials",
+    "client-preview-button",
+    "client-preview-card",
+    "client-switcher",
+    "command-center",
+    "date-label",
+    "dialog-actions",
+    "directory-action",
+    "directory-audit-filters",
+    "directory-badge",
+    "directory-empty",
+    "directory-mobile-sort",
+    "directory-row-actions",
+    "directory-search-filters",
+    "directory-sort",
+    "directory-table",
+    "directory-table-wrap",
+    "directory-tabs",
+    "empty-state",
+    "error-summary",
+    "filter-bar",
+    "form-grid",
+    "icon-button",
+    "logo-dark",
+    "logo-light",
+    "nav-section",
+    "overview-count",
+    "overview-grid",
+    "overview-next",
+    "page-header",
+    "page-heading",
+    "pagination-links",
+    "parent-link",
+    "platform-metrics",
+    "platform-preview-logo",
+    "platform-sections",
+    "preview-button",
+    "preview-caption",
+    "preview-full",
+    "preview-logo",
+    "profile-copy",
+    "quick-actions",
+    "required-field",
+    "status-label",
+    "table-scroll",
+    "table-wrap",
+    "theme-check"
+  ],
+  "removed": [
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-symbol"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-copy"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-copy strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-copy>span"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-logo"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".logo-light"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ":root[data-theme=light] .logo-light"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ":root[data-theme=light] .logo-dark"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".nav-section"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".parent-link"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".parent-link:hover"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".parent-link .icon"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".profile-copy"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".profile-copy strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".profile-copy small"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".icon-button"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".icon-button:hover"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".theme-check"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": "[aria-pressed=true] .theme-check"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".page-heading"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".date-label"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".status-label"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".command-center"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".command-center>.section-heading"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-grid"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-count"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-next"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-count"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-count>span"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-count strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-count small"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-next h3"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-next p"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-next a"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".quick-actions"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".action-card"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".action-card:hover"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".action-icon"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".action-card strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".action-card>span:not(.action-icon)"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".action-arrow"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".empty-state"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".empty-state>.icon"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".empty-state p"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".table-wrap"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".form-grid"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".form-grid>*"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".appearance-section"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".branding-preview"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".branding-preview p"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".branding-preview strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".preview-logo"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".preview-caption"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".quick-actions"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".date-label"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".page-heading"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".page-heading>.badge"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-grid"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".form-grid"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-grid"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-count"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-count strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".overview-count small"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".command-center"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".section-heading>.status-label"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".action-card"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".action-arrow"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".action-card"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ":root:not([data-brand-mode=cerebru]) .brand-symbol"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".pagination-links"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".pagination-links>a"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".pagination-links>span"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".pagination-links [aria-current]"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".pagination-links [aria-disabled]"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-copy strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-copy>span"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-symbol"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".nav-section"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-copy strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-symbol:has(.brand-logo)"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-symbol .brand-logo"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".preview-logo"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-switcher"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-switcher label"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-controls"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-controls select"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-controls button"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".table-wrap:focus-visible"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-switcher"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-controls button"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-logo"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".preview-logo"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-colour-editor"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-colour-editor legend"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-colour-editor .form-grid"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-preview-card"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".client-preview-button"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".branding-preview[data-client-preview]"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".branding-preview[data-client-preview] .preview-caption"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".branding-preview[data-client-preview] p"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-colour-control"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-colour-control input[type=color]"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand-colour-control #brand-colour-hex"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".page-header"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".page-header p"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".pagination-links>a"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar label"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar input"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar select"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".error-summary:focus"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".dialog-actions"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".platform-metrics"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".platform-metrics strong"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".audit-changes"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".platform-preview-logo"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".platform-sections"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".platform-sections a"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".preview-full"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".preview-full .preview-card"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".preview-full .preview-button"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".table-scroll"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".platform-metrics"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".page-header"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar>*"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar button"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".platform-sections a"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".required-field::before"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar label"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar label input"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar label select"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".filter-bar button"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".brand-copy span"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".client-controls"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".client-controls select"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-tabs"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-tabs a"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-tabs a[aria-current]"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table th"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table td"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table tr:last-child td"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".client-directory-table td:first-child"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table small"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".client-identity"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".client-initials"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-badge"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-badge.warning"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-action"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-sort"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-sort"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-row-actions"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-empty"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table-wrap"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table pre"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-tabs a"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table tbody"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table tr"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table td"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table thead"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table tr"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table td"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table td[data-label]::before"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table td:first-child"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table .directory-empty"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".client-identity strong"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table th"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-badge.warning"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ":root[data-theme=light] .directory-badge.warning"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ":root[data-theme$=\"-light\"] .directory-badge.warning"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table .client-identity small"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-mobile-sort"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-mobile-sort"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".client-identity"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".client-identity>div"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table .client-identity small"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-search-filters"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-audit-filters"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table td"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-search-filters"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-audit-filters"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table-wrap .table-scroll"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table th"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".client-directory-table th"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".client-choice"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".client-choice button"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table-wrap"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-table-wrap"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".brand"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".co-brand"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".profile"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".avatar"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".profile form"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".sandbox"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".sandbox strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".dot"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".container"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".lead"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".section-heading"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".section-heading h2"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".section-heading>span"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".cards"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".badge"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".subtle"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".metrics"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".metric"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".metric>span"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".metric small"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".metric strong"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".error"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".back"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".quiet"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".save-status"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".identity"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".identity:hover"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".container"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".sandbox"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".sandbox>span:last-child"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".cards"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".metrics"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".section-heading"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".sandbox"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".container"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".pagination"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".pagination p"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".container"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".lead"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".container"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".container"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".container>.panel"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".container>section"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".container>form"
+    },
+    {
+      "file": "apps/web/app/globals.css",
+      "selector": ".badge"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".container"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".field-error"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".container"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".sandbox span"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".section-heading>span"
+    },
+    {
+      "file": "apps/web/app/workspace.css",
+      "selector": ".sandbox"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-filters"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-filters label"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-filters input"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-filters select"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-filters button"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-filters"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-filters input"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-filters select"
+    },
+    {
+      "file": "apps/web/app/directory.css",
+      "selector": ".directory-filters>a.button"
+    },
+    {
+      "file": "apps/web/app/platform/clients/clients.module.css",
+      "selector": ".accountAccess :global(.directory-filters)"
+    }
+  ],
+  "assets": [
+    {
+      "file": "apps/web/public/setup/step-check.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/setup/shield.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/setup/schedule.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/setup/complete.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/setup/check-circle.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/setup/arrow.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/images/settings/upload.svg",
+      "reason": "Shared icon variant in apps/web/app/components/platform-settings.tsx"
+    },
+    {
+      "file": "apps/web/public/images/settings/settings-active.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/images/settings/mail.svg",
+      "reason": "Shared icon variant in apps/web/app/components/platform-settings.tsx"
+    },
+    {
+      "file": "apps/web/public/images/settings/key.svg",
+      "reason": "Shared icon variant in apps/web/app/components/platform-settings.tsx"
+    },
+    {
+      "file": "apps/web/public/images/settings/info.svg",
+      "reason": "Shared icon variant in apps/web/app/components/platform-settings.tsx"
+    },
+    {
+      "file": "apps/web/public/images/settings/ai.svg",
+      "reason": "Shared icon variant in apps/web/app/components/platform-settings.tsx"
+    },
+    {
+      "file": "apps/web/public/images/scalyn-opc-logo.png",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/images/people/search.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/images/people/people-active.svg",
+      "reason": "Shared icon variant in apps/web/app/components/people-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/people/lock.svg",
+      "reason": "Shared icon variant in apps/web/app/components/people-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/people/arrow.svg",
+      "reason": "Shared icon variant in apps/web/app/components/people-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/people/add-account.svg",
+      "reason": "Shared icon variant in apps/web/app/components/people-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/workspace.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/warning.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/switch.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/settings.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/people.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/overview.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/moon.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/mail.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/logout.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/dot.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/clients.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/clients-stat.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/audit.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/arrow.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/ai.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/admins-stat.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/overview/accounts-stat.svg",
+      "reason": "Shared icon variant in apps/web/app/components/overview-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/clients/workspace-arrow.svg",
+      "reason": "Shared icon variant in apps/web/app/components/clients-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/clients/sort.svg",
+      "reason": "Shared icon variant in apps/web/app/components/clients-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/clients/search.svg",
+      "reason": "Shared icon variant in apps/web/app/components/clients-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/clients/overview-inactive.svg",
+      "reason": "Shared icon variant in apps/web/app/components/clients-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/clients/filter.svg",
+      "reason": "Shared icon variant in apps/web/app/components/clients-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/clients/clients-active.svg",
+      "reason": "Shared icon variant in apps/web/app/components/clients-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/clients/chevron.svg",
+      "reason": "Shared icon variant in apps/web/app/components/clients-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/clients/add.svg",
+      "reason": "Shared icon variant in apps/web/app/components/clients-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/clients/active-dot.svg",
+      "reason": "Shared icon variant in apps/web/app/components/clients-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/audit/more.svg",
+      "reason": "Shared icon variant in apps/web/app/components/audit-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/audit/filter.svg",
+      "reason": "Shared icon variant in apps/web/app/components/audit-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/audit/expand.svg",
+      "reason": "Shared icon variant in apps/web/app/components/audit-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/audit/details.svg",
+      "reason": "Shared icon variant in apps/web/app/components/audit-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/audit/calendar.svg",
+      "reason": "Shared icon variant in apps/web/app/components/audit-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/images/audit/audit-active.svg",
+      "reason": "Shared icon variant in apps/web/app/components/audit-icon.tsx"
+    },
+    {
+      "file": "apps/web/public/auth/mail.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/auth/lock.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/auth/key.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/auth/info.svg",
+      "reason": "Direct source URL"
+    },
+    {
+      "file": "apps/web/public/auth/accepted.svg",
+      "reason": "Direct source URL"
+    }
+  ],
+  "unreferencedComponentOrModuleCandidates": [],
+  "manuallyReviewedUnusedClasses": [
+    "avatar",
+    "back",
+    "badge",
+    "brand",
+    "cards",
+    "co-brand",
+    "container",
+    "dot",
+    "error",
+    "identity",
+    "lead",
+    "metric",
+    "metrics",
+    "pagination",
+    "profile",
+    "quiet",
+    "sandbox",
+    "save-status",
+    "section-heading",
+    "subtle",
+    "field-error",
+    "directory-filters"
+  ],
+  "reviewNotes": {
+    "back": "Installer action value; not a global class",
+    "dot": "Shared icon name; not a global class",
+    "error": "Control variant whose CSS Module class is scoped",
+    "identity": "Field/record value; not a global class",
+    "metrics": "Section id; not a global class",
+    "profile": "Installer step and onboarding field; not a global class",
+    "save-status": "Builder id; not a global class",
+    "directory-filters": "Only remaining reference was an unused CSS Module adapter, removed with the global rules"
+  },
+  "retainedGlobalClasses": {
+    "globals": [
+      {
+        "name": "choices",
+        "consumers": [
+          "apps/web/app/platform/people/page.tsx",
+          "apps/web/app/components/platform-accounts.tsx"
+        ]
+      },
+      {
+        "name": "eyebrow",
+        "consumers": [
+          "apps/web/app/dashboard/page.tsx",
+          "apps/web/app/notifications/page.tsx",
+          "apps/web/app/enrolments/page.tsx",
+          "apps/web/app/people/page.tsx",
+          "apps/web/app/administration/page.tsx",
+          "apps/web/app/assessments/page.tsx",
+          "apps/web/app/components/appearance.tsx",
+          "apps/web/app/components/delivery.tsx",
+          "apps/web/app/components/curriculum.tsx",
+          "apps/web/app/components/assessment-response.tsx",
+          "apps/web/app/components/enrolment-record.tsx",
+          "apps/web/app/components/learning-progress.tsx",
+          "apps/web/app/components/onboarding.tsx",
+          "apps/web/app/components/assessment-builder/markup.ts",
+          "apps/web/app/components/programme-generation.tsx"
+        ]
+      },
+      {
+        "name": "form-actions",
+        "consumers": [
+          "apps/web/app/components/platform-accounts.tsx"
+        ]
+      },
+      {
+        "name": "hero-break",
+        "consumers": [
+          "apps/web/app/dashboard/page.tsx"
+        ]
+      },
+      {
+        "name": "icon",
+        "consumers": [
+          "apps/web/app/components/workspace-icon.tsx"
+        ]
+      },
+      {
+        "name": "notice",
+        "consumers": [
+          "apps/web/app/components/assessment-builder/presentation.ts",
+          "apps/web/app/components/assessment-builder/markup.ts",
+          "apps/web/app/components/assessment-builder/builder.js"
+        ]
+      },
+      {
+        "name": "panel",
+        "consumers": [
+          "apps/web/app/components/assessment-builder/presentation.ts",
+          "apps/web/app/components/assessment-builder/markup.ts",
+          "apps/web/app/components/platform-accounts.tsx"
+        ]
+      },
+      {
+        "name": "primary",
+        "consumers": [
+          "apps/web/app/platform/page.tsx",
+          "apps/web/app/platform/clients/page.tsx",
+          "apps/web/app/platform/people/page.tsx",
+          "apps/web/app/components/assessment-builder/presentation.ts",
+          "apps/web/app/components/assessment-builder/markup.ts"
+        ]
+      },
+      {
+        "name": "review-section",
+        "consumers": [
+          "apps/web/app/components/platform-accounts.tsx"
+        ]
+      },
+      {
+        "name": "sample-client",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "sample-client-dark",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "sample-client-light",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "sample-dark",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "sample-light",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "sample-neon-amber",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "sample-neon-cyan",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "sample-neon-emerald",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "sample-platform-dark",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "sample-platform-light",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "secondary",
+        "consumers": [
+          "apps/web/app/platform/page.tsx",
+          "apps/web/app/platform/audit/page.tsx",
+          "apps/web/app/platform/clients/page.tsx",
+          "apps/web/app/platform/people/page.tsx",
+          "apps/web/app/components/brand-header.tsx",
+          "apps/web/app/components/application-shell.tsx",
+          "apps/web/app/components/assessment-builder/markup.ts",
+          "apps/web/app/components/assessment-builder/builder.js",
+          "apps/web/app/components/platform-accounts.tsx"
+        ]
+      },
+      {
+        "name": "skip",
+        "consumers": [
+          "apps/web/app/layout.tsx"
+        ]
+      },
+      {
+        "name": "sr-only",
+        "consumers": [
+          "apps/web/app/platform/page.tsx",
+          "apps/web/app/platform/audit/page.tsx",
+          "apps/web/app/platform/clients/page.tsx",
+          "apps/web/app/platform/people/page.tsx",
+          "apps/web/app/people/page.tsx",
+          "apps/web/app/administration/page.tsx",
+          "apps/web/app/assessments/page.tsx",
+          "apps/web/app/platform/admins/page.tsx",
+          "apps/web/app/accounts/page.tsx",
+          "apps/web/app/components/allocations.tsx",
+          "apps/web/app/components/curriculum.tsx",
+          "apps/web/app/components/brand-header.tsx",
+          "apps/web/app/components/assessment-response.tsx",
+          "apps/web/app/components/document-review.tsx",
+          "apps/web/app/components/onboarding.tsx",
+          "apps/web/app/components/promotions.tsx"
+        ]
+      },
+      {
+        "name": "theme-current",
+        "consumers": [
+          "apps/web/app/platform/overview.module.css",
+          "apps/web/app/components/brand-header.tsx",
+          "apps/web/app/components/ui/guest.module.css"
+        ]
+      },
+      {
+        "name": "theme-dot",
+        "consumers": [
+          "apps/web/app/components/brand-header.tsx"
+        ]
+      },
+      {
+        "name": "theme-dot-client",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-dot-client-dark",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-dot-client-light",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-dot-dark",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-dot-light",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-dot-neon-amber",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-dot-neon-cyan",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-dot-neon-emerald",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-dot-platform-dark",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-dot-platform-light",
+        "consumers": [],
+        "dynamic": "Appearance/ThemePicker key plus retained palette compatibility"
+      },
+      {
+        "name": "theme-options",
+        "consumers": [
+          "apps/web/app/platform/overview.module.css",
+          "apps/web/app/components/brand-header.tsx",
+          "apps/web/app/components/ui/guest.module.css",
+          "apps/web/app/components/ui/controls.module.css"
+        ]
+      },
+      {
+        "name": "theme-picker",
+        "consumers": [
+          "apps/web/app/platform/overview.module.css",
+          "apps/web/app/components/brand-header.tsx",
+          "apps/web/app/components/ui/guest.module.css"
+        ]
+      }
+    ],
+    "workspace": [
+      {
+        "name": "button",
+        "consumers": [
+          "apps/web/app/platform/page.tsx",
+          "apps/web/app/components/assessment-builder/markup.ts"
+        ]
+      },
+      {
+        "name": "danger",
+        "consumers": [
+          "apps/web/app/platform/clients/page.tsx",
+          "apps/web/app/platform/people/page.tsx"
+        ]
+      },
+      {
+        "name": "eyebrow",
+        "consumers": [
+          "apps/web/app/dashboard/page.tsx",
+          "apps/web/app/notifications/page.tsx",
+          "apps/web/app/enrolments/page.tsx",
+          "apps/web/app/people/page.tsx",
+          "apps/web/app/administration/page.tsx",
+          "apps/web/app/assessments/page.tsx",
+          "apps/web/app/components/appearance.tsx",
+          "apps/web/app/components/delivery.tsx",
+          "apps/web/app/components/curriculum.tsx",
+          "apps/web/app/components/assessment-response.tsx",
+          "apps/web/app/components/enrolment-record.tsx",
+          "apps/web/app/components/learning-progress.tsx",
+          "apps/web/app/components/onboarding.tsx",
+          "apps/web/app/components/assessment-builder/markup.ts",
+          "apps/web/app/components/programme-generation.tsx"
+        ]
+      },
+      {
+        "name": "field-help",
+        "consumers": [
+          "apps/web/app/accounts/page.tsx"
+        ]
+      },
+      {
+        "name": "panel",
+        "consumers": [
+          "apps/web/app/components/assessment-builder/presentation.ts",
+          "apps/web/app/components/assessment-builder/markup.ts",
+          "apps/web/app/components/platform-accounts.tsx"
+        ]
+      },
+      {
+        "name": "review-section",
+        "consumers": [
+          "apps/web/app/components/platform-accounts.tsx"
+        ]
+      },
+      {
+        "name": "workspace-dialog",
+        "consumers": [
+          "apps/web/app/platform/clients/page.tsx"
+        ]
+      }
+    ],
+    "directory": [
+      {
+        "name": "directory-count",
+        "consumers": [
+          "apps/web/app/accounts/page.tsx",
+          "apps/web/app/components/promotions.tsx"
+        ]
+      },
+      {
+        "name": "directory-danger",
+        "consumers": [
+          "apps/web/app/platform/clients/page.tsx",
+          "apps/web/app/platform/clients/clients.module.css"
+        ]
+      },
+      {
+        "name": "directory-dialog-header",
+        "consumers": [
+          "apps/web/app/platform/clients/page.tsx",
+          "apps/web/app/platform/clients/clients.module.css"
+        ]
+      },
+      {
+        "name": "directory-panel",
+        "consumers": [
+          "apps/web/app/components/platform-accounts.tsx"
+        ]
+      }
+    ]
+  },
+  "removedSelectorCount": 251,
+  "removedClassCount": 84
+}

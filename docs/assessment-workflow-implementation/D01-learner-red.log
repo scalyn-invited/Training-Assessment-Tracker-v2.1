@@ -1,0 +1,26 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-qa-browser\learner-guard.spec.ts:5:1 › D01 learner shares pre-context guard and blocks unknown autosave outcome (560ms)
+
+
+  1) tests\workflow-qa-browser\learner-guard.spec.ts:5:1 › D01 learner shares pre-context guard and blocks unknown autosave outcome 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      24 |  await page.locator('#active-client').selectOption('client-b');
+      25 |  await page.getByRole('button',{name:'Switch client',exact:true}).click();
+    > 26 |  expect(contextPosts).toBe(0);expect(dialogs).toEqual(['confirm']);
+         |                       ^
+      27 |  await expect(page.getByLabel('Additional context (optional)')).toHaveValue('Retain learner draft');
+      28 |  await expect.poll(()=>savePosts).toBe(1);
+      29 |  dialogs.length=0;
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\learner-guard.spec.ts:26:23
+
+    Error Context: .runtime\workflow-qa-playwright\learner-guard-D01-learner--12f66-ks-unknown-autosave-outcome\error-context.md
+
+  1 failed
+    tests\workflow-qa-browser\learner-guard.spec.ts:5:1 › D01 learner shares pre-context guard and blocks unknown autosave outcome 

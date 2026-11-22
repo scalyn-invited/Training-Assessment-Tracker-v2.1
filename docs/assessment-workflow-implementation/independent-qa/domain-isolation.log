@@ -1,0 +1,2 @@
+Node temporary directory: C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\.runtime\independent-qa-temp
+PASS: disposable in-memory PGlite test port 55439 free. Tests use helpers.ts, not environment database URLs.

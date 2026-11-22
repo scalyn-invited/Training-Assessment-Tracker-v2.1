@@ -1,7 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from '../components/auth-ui';
+import { useRouter } from 'next/navigation';
+import { api, useContext, Guest, Pending } from '../components/auth-ui';
+import { Button, Input, Panel, PageHeader, Feedback } from '../components/ui/controls';
+import { Pagination } from '../components/ui/directory';
+import layout from '../components/ui/form-layout.module.css';
+import styles from './directory.module.css';
 type Records = {
   records: { id: string; title: string; status: string; memberName: string; canDetails: boolean }[];
   total: number;
@@ -9,6 +14,7 @@ type Records = {
 };
 export default function Enrolments() {
   const { context, error, load } = useContext();
+  const router = useRouter();
   const [data, setData] = useState<Records | null>(null),
     [failure, setFailure] = useState(''),
     [search, setSearch] = useState(''),
@@ -16,6 +22,9 @@ export default function Enrolments() {
     [page, setPage] = useState(1),
     [retry, setRetry] = useState(0);
   const client = context?.client?.id;
+  useEffect(() => {
+    if (context && !context.user) router.replace('/login');
+  }, [context, router]);
   useEffect(() => {
     if (!client) return;
     let current = true;
@@ -40,44 +49,46 @@ export default function Enrolments() {
         <Pending error={error} retry={load} />
       ) : !client ? (
         <>
-          <h1>Choose a client</h1>
+          <PageHeader title="Choose a client" />
           <Link href="/clients">Choose your client</Link>
         </>
       ) : (
-        <>
+        <div className={layout.page}>
           <p className="eyebrow">{context.client?.name}</p>
-          <h1>Training records</h1>
+          <PageHeader title="Training records" />
           <p>
             <Link href="/dashboard">Workspace</Link>
           </p>
           <form
+            className={styles.search}
             onSubmit={(e) => {
               e.preventDefault();
               setFilter(search);
               setPage(1);
               setData(null);
+              setRetry((n) => n + 1);
             }}
           >
             <label>
               Search training records
-              <input
+              <Input
                 maxLength={120}
                 type="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </label>
-            <button className="primary">Search records</button>
+            <Button type="submit" variant="primary">
+              Search records
+            </Button>
           </form>
           <Feedback error={failure} />
           {failure && (
-            <button className="secondary" onClick={() => setRetry((n) => n + 1)}>
-              Retry training records
-            </button>
+            <Button onClick={() => setRetry((n) => n + 1)}>Retry training records</Button>
           )}
           {!data && !failure && <p role="status">Loading training records…</p>}
           {data && (
-            <section className="panel">
+            <Panel className={layout.panel}>
               <h2>Your accessible training records</h2>
               {data.records.length === 0 ? (
                 <p>
@@ -87,7 +98,7 @@ export default function Enrolments() {
                 </p>
               ) : (
                 data.records.map((r) => (
-                  <article key={r.id}>
+                  <article key={r.id} className={styles.record}>
                     <h3>
                       {r.memberName} · {r.title}
                     </h3>
@@ -108,28 +119,20 @@ export default function Enrolments() {
                   </article>
                 ))
               )}
-              <div className="form-actions">
-                <button
-                  className="secondary"
-                  disabled={page === 1}
-                  onClick={() => setPage((n) => n - 1)}
-                >
+              <Pagination aria-label="Training record pages">
+                <Button disabled={page === 1} onClick={() => setPage((n) => n - 1)}>
                   Previous page
-                </button>
+                </Button>
                 <span>
                   Page {page} · {data.total} records
                 </span>
-                <button
-                  className="secondary"
-                  disabled={page * 20 >= data.total}
-                  onClick={() => setPage((n) => n + 1)}
-                >
+                <Button disabled={page * 20 >= data.total} onClick={() => setPage((n) => n + 1)}>
                   Next page
-                </button>
-              </div>
-            </section>
+                </Button>
+              </Pagination>
+            </Panel>
           )}
-        </>
+        </div>
       )}
     </Guest>
   );

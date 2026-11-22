@@ -1,32 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { Feedback } from './auth-ui';
-export function useLeaveGuard(changed: boolean) {
-  const dirty = useRef(changed);
-  dirty.current = changed;
-  useEffect(() => {
-    let leaving = false;
-    const unload = (e: BeforeUnloadEvent) => {
-      if (dirty.current && !leaving) e.preventDefault();
-    };
-    const click = (e: MouseEvent) => {
-      const a = (e.target as Element).closest?.('a');
-      if (!a || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || !dirty.current)
-        return;
-      if (!window.confirm('Leave with unsaved changes? Save or copy your work first.')) {
-        e.preventDefault();
-        e.stopPropagation();
-      } else leaving = true;
-    };
-    window.addEventListener('beforeunload', unload);
-    document.addEventListener('click', click, true);
-    return () => {
-      window.removeEventListener('beforeunload', unload);
-      document.removeEventListener('click', click, true);
-    };
-  }, []);
-  return dirty;
-}
+import { Button, Input, Feedback } from './ui/controls';
+import { registerWorkGuard } from './work-guard';
 export function ReasonAction({
   label,
   help,
@@ -46,7 +21,12 @@ export function ReasonAction({
     [busy, setBusy] = useState(false),
     [error, setError] = useState('');
   const pending = useRef(false);
-  useLeaveGuard(!!reason || busy);
+  const dirty = useRef(false);
+  dirty.current = !!reason;
+  useEffect(
+    () => registerWorkGuard(() => ({ dirty: dirty.current, pending: pending.current })),
+    [],
+  );
   return (
     <form
       onSubmit={async (e) => {
@@ -69,7 +49,7 @@ export function ReasonAction({
       <p>{help}</p>
       <label>
         {label} reason
-        <input
+        <Input
           required
           minLength={8}
           maxLength={2000}
@@ -79,13 +59,14 @@ export function ReasonAction({
         />
       </label>
       <Feedback error={error} />
-      <button
-        className={primary ? 'primary' : 'secondary'}
+      <Button
+        type="submit"
+        variant={primary ? 'primary' : 'secondary'}
         disabled={busy || disabled}
         aria-busy={busy}
       >
         {busy ? 'Saving decision...' : label}
-      </button>
+      </Button>
     </form>
   );
 }

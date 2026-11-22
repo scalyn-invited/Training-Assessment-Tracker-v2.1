@@ -1,0 +1,92 @@
+.root {
+  min-width: 0;
+  --text: var(--ui-text);
+  --border: var(--ui-border);
+}
+.panel {
+  overflow-wrap: anywhere;
+}
+.panel form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-4);
+}
+.panel label > :is(input:not([type='checkbox']):not([type='radio']), textarea) {
+  margin-top: var(--ui-space-2);
+}
+.panel fieldset {
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-control);
+  padding: var(--ui-space-4);
+}
+.panel fieldset > * + * {
+  margin-top: var(--ui-space-3);
+}
+.panel legend {
+  padding: 0 var(--ui-space-2);
+}
+.panel summary {
+  cursor: pointer;
+  color: var(--ui-text);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.panel details {
+  padding: var(--ui-space-3) 0;
+  border-bottom: 1px solid var(--ui-border);
+}
+.panel details[open] > * + * {
+  margin-top: var(--ui-space-4);
+}
+.panel textarea {
+  min-height: 100px;
+}
+.panel .choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-space-2);
+  color: var(--ui-text);
+}
+.choice input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  margin-top: 2px;
+}
+.root :global(.matrix-choice) {
+  display: flex;
+}
+.root :global(.matrix-row[aria-invalid='true']) {
+  outline-color: var(--ui-danger);
+}
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-4);
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.answers > label > textarea {
+  margin-top: var(--ui-space-2);
+}
+.notice {
+  border: 1px solid var(--ui-border);
+  background: var(--ui-raised);
+  padding: var(--ui-space-4);
+  border-radius: var(--ui-radius-control);
+}
+.notice > * + * {
+  margin-top: var(--ui-space-3);
+}
+.panel :global(.assessment-prompt) img {
+  max-width: 100%;
+  height: auto;
+}
+@media (pointer: coarse) {
+  .choice,
+  .panel summary {
+    min-height: 44px;
+  }
+}

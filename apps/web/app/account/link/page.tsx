@@ -1,15 +1,12 @@
 'use client';
 import { useEffect, useState, type FormEvent } from 'react';
 import Link from 'next/link';
-import {
-  api,
-  useContext,
-  Guest,
-  Pending,
-  Password,
-  Feedback,
-  values,
-} from '../../components/auth-ui';
+import { api, useContext, Guest, values } from '../../components/auth-ui';
+import { Button, Panel, Feedback } from '../../components/ui/controls';
+import { PasswordField as Password } from '../../components/ui/password';
+import { GuestPending as Pending } from '../../components/guest-shell';
+import styles from '../../components/ui/guest.module.css';
+import { useWorkGuard } from '../../components/use-work-guard';
 type Credential = { raw: string; purpose: 'setup' | 'reset' | 'invite' };
 type Details = {
   purpose: string;
@@ -24,9 +21,12 @@ export default function AccountLink() {
     [error, setError] = useState(''),
     [busy, setBusy] = useState(false),
     [complete, setComplete] = useState(false);
+  const [dirty, setDirty] = useState(false);
+  useWorkGuard({ dirty: !complete && dirty, pending: busy });
   useEffect(() => {
     const readLink = () => {
       setComplete(false);
+      setDirty(false);
       setDetails(null);
       setError('');
       const q = new URLSearchParams(window.location.hash.slice(1)),
@@ -53,7 +53,8 @@ export default function AccountLink() {
   useEffect(() => {
     if (!context || !credential || complete) return;
     let cancelled = false;
-    setDetails(null);
+    // A retry for the same private link must not discard entered passwords/acceptance.
+    // readLink clears the old recipient and form when the fragment actually changes.
     setError('');
     api<Details>('/accounts/inspect', { csrf: context.csrf, ...credential })
       .then((result) => {
@@ -80,6 +81,7 @@ export default function AccountLink() {
         accept: data.accept === 'on',
       });
       setComplete(true);
+      setDirty(false);
       setDetails(null);
       setCredential(null);
       window.history.replaceState(null, '', '/account/link');
@@ -91,16 +93,38 @@ export default function AccountLink() {
   }
   return (
     <Guest>
-      <section className="panel">
-        <h1>
-          {complete
-            ? 'Account action completed'
-            : credential?.purpose === 'invite'
-              ? 'Client invitation'
-              : credential?.purpose === 'reset'
-                ? 'Reset your password'
-                : 'Set your password'}
-        </h1>
+      <Panel className={`${styles.card} ${styles.stack}`}>
+        <header className={styles.heading}>
+          <span className={styles.headerIcon} aria-hidden="true">
+            <img
+              src={
+                credential?.purpose === 'invite' || complete
+                  ? '/auth/accepted.svg'
+                  : '/auth/key.svg'
+              }
+              alt=""
+              width={26}
+              height={26}
+            />
+          </span>
+          <h1>
+            {complete
+              ? 'Account action completed'
+              : credential?.purpose === 'invite'
+                ? 'Client invitation'
+                : credential?.purpose === 'reset'
+                  ? 'Reset your password'
+                  : 'Set your password'}
+          </h1>
+        </header>
+        {context && contextError && (
+          <>
+            <Feedback error={contextError} />
+            <Button onClick={load} disabled={busy}>
+              Retry session
+            </Button>
+          </>
+        )}
         {!context ? (
           <Pending error={contextError} retry={load} />
         ) : complete ? (
@@ -128,50 +152,90 @@ export default function AccountLink() {
                     new private link.
                   </p>
                 )}
-                <button className="secondary" onClick={load}>
+                <Button onClick={load} disabled={busy}>
                   Check this link again
-                </button>
+                </Button>
               </>
             )}
             {!details && !error && <p role="status">Checking your private link…</p>}
             {details && (
               <>
-                <p>
-                  <strong>{details.recipient.name}</strong> · {details.recipient.email}
-                </p>
-                {details.client && <p>Client: {details.client}</p>}
-                <p>Expires: {new Date(details.expiresAt).toUTCString()}</p>
-                <form onSubmit={submit} aria-busy={busy}>
+                <dl className={styles.details}>
+                  <div>
+                    <dt>Account</dt>
+                    <dd>
+                      {details.recipient.name}
+                      <br />
+                      {details.recipient.email}
+                    </dd>
+                  </div>
+                  {details.client && (
+                    <div>
+                      <dt>Client</dt>
+                      <dd>{details.client}</dd>
+                    </div>
+                  )}
+                  <div>
+                    <dt>Expires</dt>
+                    <dd>{new Date(details.expiresAt).toUTCString()}</dd>
+                  </div>
+                </dl>
+                <form
+                  onSubmit={submit}
+                  aria-busy={busy}
+                  className={styles.form}
+                  onInput={(event) => {
+                    const data = new FormData(event.currentTarget);
+                    setDirty(
+                      !!(data.get('password') || data.get('confirmation') || data.get('accept')),
+                    );
+                  }}
+                >
                   {credential?.purpose === 'invite' ? (
                     <>
-                      <p>
-                        Accepting adds Member access to this client. Your existing accounts and
-                        permissions remain separate.
-                      </p>
-                      <label>
+                      <div className={styles.callout}>
+                        <img src="/auth/info.svg" alt="" width={18} height={18} />
+                        <p>
+                          Accepting adds Member access to this client. Your existing accounts and
+                          permissions remain separate.
+                        </p>
+                      </div>
+                      <label className={styles.checkbox}>
                         <input type="checkbox" name="accept" required /> I accept this client
                         invitation.
                       </label>
                     </>
                   ) : (
                     <>
-                      <Password name="password" label="New password" creation />
-                      <Password name="confirmation" label="Confirm new password" creation />
+                      <Password
+                        name="password"
+                        label="New password"
+                        creation
+                        className={styles.password}
+                      />
+                      <Password
+                        name="confirmation"
+                        label="Confirm new password"
+                        creation
+                        className={styles.password}
+                      />
                     </>
                   )}
-                  <button className="primary" disabled={busy}>
-                    {busy
-                      ? 'Saving…'
-                      : credential?.purpose === 'invite'
-                        ? 'Accept invitation'
-                        : 'Save password'}
-                  </button>
+                  <div className={styles.actions}>
+                    <Button type="submit" variant="primary" disabled={busy}>
+                      {busy
+                        ? 'Saving…'
+                        : credential?.purpose === 'invite'
+                          ? 'Accept invitation'
+                          : 'Save password'}
+                    </Button>
+                  </div>
                 </form>
               </>
             )}
           </>
         )}
-      </section>
+      </Panel>
     </Guest>
   );
 }

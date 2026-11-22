@@ -1,0 +1,1193 @@
+{
+  "sourceFiles": 95,
+  "moduleFiles": 33,
+  "staticReferences": 627,
+  "compositions": 8,
+  "missing": [],
+  "dynamic": [
+    {
+      "file": "apps/web/app/components/ui/controls.tsx",
+      "line": 18,
+      "module": "apps/web/app/components/ui/controls.module.css",
+      "key": null,
+      "expression": "styles[variant]"
+    },
+    {
+      "file": "apps/web/app/components/ui/controls.tsx",
+      "line": 48,
+      "module": "apps/web/app/components/ui/controls.module.css",
+      "key": null,
+      "expression": "styles[tone]"
+    }
+  ],
+  "orphanModules": [],
+  "unusedClassCandidates": [],
+  "rawDialogs": [
+    {
+      "file": "apps/web/app/components/ui/dialog.tsx",
+      "line": 46
+    }
+  ],
+  "pageRoutes": [
+    "/",
+    "/account/link",
+    "/account/security",
+    "/accounts",
+    "/administration",
+    "/assessments",
+    "/assessments/assignments/[id]",
+    "/assessments/definitions/[id]",
+    "/assessments/definitions/[id]/assign",
+    "/clients",
+    "/dashboard",
+    "/enrolments",
+    "/enrolments/[id]",
+    "/enrolments/[id]/delivery",
+    "/enrolments/[id]/delivery/[blockId]/[index]",
+    "/enrolments/[id]/documents/[fileId]",
+    "/enrolments/[id]/generation/[runId]",
+    "/enrolments/[id]/onboarding",
+    "/enrolments/[id]/plan",
+    "/enrolments/[id]/progress",
+    "/enrolments/[id]/submissions/[submissionId]",
+    "/learning-reviews",
+    "/login",
+    "/notifications",
+    "/people",
+    "/platform",
+    "/platform/admins",
+    "/platform/appearance",
+    "/platform/audit",
+    "/platform/clients",
+    "/platform/people",
+    "/platform/settings",
+    "/platform/settings/status",
+    "/settings/ai",
+    "/settings/appearance",
+    "/setup",
+    "/setup/hosted",
+    "/setup/local"
+  ],
+  "missingRouteRows": [],
+  "presentationDependencies": [
+    {
+      "file": "apps/web/app/setup/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/setup/local/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/setup/hosted/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/settings/appearance/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/settings/ai/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/platform/settings/status/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/platform/settings/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/platform/people/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/platform/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/platform/clients/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/platform/audit/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/platform/appearance/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/error.tsx",
+      "appShell": false,
+      "recoveryFrame": true
+    },
+    {
+      "file": "apps/web/app/page.tsx",
+      "appShell": false,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/platform/admins/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/login/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/notifications/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/not-found.tsx",
+      "appShell": false,
+      "recoveryFrame": true
+    },
+    {
+      "file": "apps/web/app/learning-reviews/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/administration/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/assessments/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/dashboard/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/clients/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/people/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/account/security/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/accounts/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/account/link/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/assessments/assignments/[id]/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/assessments/definitions/[id]/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/assessments/definitions/[id]/assign/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/[id]/onboarding/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/[id]/submissions/[submissionId]/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/[id]/generation/[runId]/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/[id]/progress/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/[id]/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/[id]/plan/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/[id]/documents/[fileId]/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/[id]/delivery/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    },
+    {
+      "file": "apps/web/app/enrolments/[id]/delivery/[blockId]/[index]/page.tsx",
+      "appShell": true,
+      "recoveryFrame": false
+    }
+  ],
+  "unreferencedSourceCandidates": [],
+  "imports": [
+    {
+      "file": "apps/web/app/setup/page.tsx",
+      "module": "apps/web/app/components/ui/setup.module.css"
+    },
+    {
+      "file": "apps/web/app/settings/ai/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/platform/people/page.tsx",
+      "module": "apps/web/app/components/account-access.module.css"
+    },
+    {
+      "file": "apps/web/app/platform/people/page.tsx",
+      "module": "apps/web/app/platform/overview.module.css"
+    },
+    {
+      "file": "apps/web/app/platform/people/page.tsx",
+      "module": "apps/web/app/platform/people/people.module.css"
+    },
+    {
+      "file": "apps/web/app/platform/page.tsx",
+      "module": "apps/web/app/platform/overview.module.css"
+    },
+    {
+      "file": "apps/web/app/platform/clients/page.tsx",
+      "module": "apps/web/app/platform/clients/clients.module.css"
+    },
+    {
+      "file": "apps/web/app/platform/audit/page.tsx",
+      "module": "apps/web/app/platform/overview.module.css"
+    },
+    {
+      "file": "apps/web/app/platform/audit/page.tsx",
+      "module": "apps/web/app/platform/audit/audit.module.css"
+    },
+    {
+      "file": "apps/web/app/platform/admins/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/login/page.tsx",
+      "module": "apps/web/app/components/ui/guest.module.css"
+    },
+    {
+      "file": "apps/web/app/notifications/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/notifications/page.tsx",
+      "module": "apps/web/app/components/ui/notifications.module.css"
+    },
+    {
+      "file": "apps/web/app/not-found.tsx",
+      "module": "apps/web/app/components/ui/controls.module.css"
+    },
+    {
+      "file": "apps/web/app/administration/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/assessments/page.tsx",
+      "module": "apps/web/app/components/ui/controls.module.css"
+    },
+    {
+      "file": "apps/web/app/assessments/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/assessments/page.tsx",
+      "module": "apps/web/app/components/ui/assessment-directory.module.css"
+    },
+    {
+      "file": "apps/web/app/dashboard/page.tsx",
+      "module": "apps/web/app/dashboard/overview.module.css"
+    },
+    {
+      "file": "apps/web/app/clients/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/people/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/account/security/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/enrolments/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/enrolments/page.tsx",
+      "module": "apps/web/app/enrolments/directory.module.css"
+    },
+    {
+      "file": "apps/web/app/accounts/page.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/account/link/page.tsx",
+      "module": "apps/web/app/components/ui/guest.module.css"
+    },
+    {
+      "file": "apps/web/app/components/assignment-form.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/assignment-form.tsx",
+      "module": "apps/web/app/components/ui/assignment-form.module.css"
+    },
+    {
+      "file": "apps/web/app/components/assessment-review.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/assessment-review.tsx",
+      "module": "apps/web/app/components/ui/assessment-response.module.css"
+    },
+    {
+      "file": "apps/web/app/components/assessment-response.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/assessment-response.tsx",
+      "module": "apps/web/app/components/ui/assessment-response.module.css"
+    },
+    {
+      "file": "apps/web/app/components/assessment-builder.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/app-shell.tsx",
+      "module": "apps/web/app/components/ui/application-shell.module.css"
+    },
+    {
+      "file": "apps/web/app/components/allocations.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/appearance.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/appearance.tsx",
+      "module": "apps/web/app/components/ui/appearance.module.css"
+    },
+    {
+      "file": "apps/web/app/components/appeal-routing.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/appeal-routing.tsx",
+      "module": "apps/web/app/components/ui/assessment-directory.module.css"
+    },
+    {
+      "file": "apps/web/app/components/application-shell.tsx",
+      "module": "apps/web/app/platform/overview.module.css"
+    },
+    {
+      "file": "apps/web/app/components/application-shell.tsx",
+      "module": "apps/web/app/components/ui/application-shell.module.css"
+    },
+    {
+      "file": "apps/web/app/components/enrolment-record.tsx",
+      "module": "apps/web/app/components/ui/controls.module.css"
+    },
+    {
+      "file": "apps/web/app/components/enrolment-record.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/enrolment-record.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/enrolment-form.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/enrolment-evidence.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/enrolment-evidence.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/document-review.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/document-review.tsx",
+      "module": "apps/web/app/components/ui/document-review.module.css"
+    },
+    {
+      "file": "apps/web/app/components/document-review.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/delivery.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/delivery.tsx",
+      "module": "apps/web/app/components/ui/learning-delivery.module.css"
+    },
+    {
+      "file": "apps/web/app/components/delivery.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/delivery.tsx",
+      "module": "apps/web/app/components/ui/learning-lesson.module.css"
+    },
+    {
+      "file": "apps/web/app/components/delivery.tsx",
+      "module": "apps/web/app/components/ui/submission-receipt.module.css"
+    },
+    {
+      "file": "apps/web/app/components/curriculum.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/curriculum.tsx",
+      "module": "apps/web/app/components/ui/curriculum.module.css"
+    },
+    {
+      "file": "apps/web/app/components/curriculum.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/background-receipts.tsx",
+      "module": "apps/web/app/components/ui/receipts.module.css"
+    },
+    {
+      "file": "apps/web/app/components/auth-ui.tsx",
+      "module": "apps/web/app/components/ui/guest.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-queue.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-queue.tsx",
+      "module": "apps/web/app/components/ui/learning-queue.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-progress.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-progress.tsx",
+      "module": "apps/web/app/components/ui/learning-progress.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-progress.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-lifecycle.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-lifecycle.tsx",
+      "module": "apps/web/app/components/ui/learning-delivery.module.css"
+    },
+    {
+      "file": "apps/web/app/components/installation-wizard.tsx",
+      "module": "apps/web/app/components/ui/setup.module.css"
+    },
+    {
+      "file": "apps/web/app/components/guest-shell.tsx",
+      "module": "apps/web/app/components/ui/tokens.module.css"
+    },
+    {
+      "file": "apps/web/app/components/guest-shell.tsx",
+      "module": "apps/web/app/components/ui/guest.module.css"
+    },
+    {
+      "file": "apps/web/app/components/onboarding-files.tsx",
+      "module": "apps/web/app/components/ui/onboarding.module.css"
+    },
+    {
+      "file": "apps/web/app/components/onboarding-files.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-support.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-support.tsx",
+      "module": "apps/web/app/components/ui/learning-progress.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-support.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-review.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-review.tsx",
+      "module": "apps/web/app/components/ui/submission-receipt.module.css"
+    },
+    {
+      "file": "apps/web/app/components/learning-review.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/onboarding.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/onboarding.tsx",
+      "module": "apps/web/app/components/ui/onboarding.module.css"
+    },
+    {
+      "file": "apps/web/app/components/onboarding.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/plan-create.tsx",
+      "module": "apps/web/app/components/ui/onboarding.module.css"
+    },
+    {
+      "file": "apps/web/app/components/plan-create.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/platform-accounts.tsx",
+      "module": "apps/web/app/components/account-access.module.css"
+    },
+    {
+      "file": "apps/web/app/components/programme-generation.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/programme-generation.tsx",
+      "module": "apps/web/app/components/ui/curriculum.module.css"
+    },
+    {
+      "file": "apps/web/app/components/programme-generation.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/programme-generation.tsx",
+      "module": "apps/web/app/components/ui/generation-progress.module.css"
+    },
+    {
+      "file": "apps/web/app/components/platform-settings.tsx",
+      "module": "apps/web/app/platform/overview.module.css"
+    },
+    {
+      "file": "apps/web/app/components/platform-settings.tsx",
+      "module": "apps/web/app/platform/settings/settings.module.css"
+    },
+    {
+      "file": "apps/web/app/components/promotions.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/response-questions.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/response-questions.tsx",
+      "module": "apps/web/app/components/ui/assessment-response.module.css"
+    },
+    {
+      "file": "apps/web/app/components/response-evidence.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/response-evidence.tsx",
+      "module": "apps/web/app/components/ui/learning-lesson.module.css"
+    },
+    {
+      "file": "apps/web/app/components/response-evidence.tsx",
+      "module": "apps/web/app/components/ui/training-record.module.css"
+    },
+    {
+      "file": "apps/web/app/components/recovery-frame.tsx",
+      "module": "apps/web/app/components/ui/tokens.module.css"
+    },
+    {
+      "file": "apps/web/app/components/recovery-frame.tsx",
+      "module": "apps/web/app/components/ui/recovery.module.css"
+    },
+    {
+      "file": "apps/web/app/components/setup-frame.tsx",
+      "module": "apps/web/app/components/ui/controls.module.css"
+    },
+    {
+      "file": "apps/web/app/components/setup-frame.tsx",
+      "module": "apps/web/app/components/ui/setup.module.css"
+    },
+    {
+      "file": "apps/web/app/components/assessment-builder/presentation.ts",
+      "module": "apps/web/app/components/ui/controls.module.css"
+    },
+    {
+      "file": "apps/web/app/components/assessment-builder/presentation.ts",
+      "module": "apps/web/app/components/ui/assessment-builder.module.css"
+    },
+    {
+      "file": "apps/web/app/components/ui/password.tsx",
+      "module": "apps/web/app/components/ui/form-layout.module.css"
+    },
+    {
+      "file": "apps/web/app/components/ui/directory.tsx",
+      "module": "apps/web/app/components/ui/directory.module.css"
+    },
+    {
+      "file": "apps/web/app/components/ui/dialog.tsx",
+      "module": "apps/web/app/components/ui/controls.module.css"
+    },
+    {
+      "file": "apps/web/app/components/ui/controls.tsx",
+      "module": "apps/web/app/components/ui/controls.module.css"
+    }
+  ],
+  "baseline": "8ce90a6",
+  "removedSelectors": {
+    "apps/web/app/workspace.css": [
+      "dialog.workspace-dialog",
+      ".workspace-dialog",
+      ".danger"
+    ],
+    "apps/web/app/directory.css": [
+      ".directory-danger",
+      ".directory-dialog-header",
+      ".directory-dialog-header button",
+      ".directory-danger button+button"
+    ],
+    "apps/web/app/platform/overview.module.css": [
+      ".pageHeader",
+      ".panel",
+      ".panel"
+    ]
+  },
+  "dynamicReview": {
+    "buttonVariants": [
+      "primary",
+      "secondary",
+      "ghost",
+      "danger"
+    ],
+    "badgeTones": [
+      "warning",
+      "success",
+      "error"
+    ],
+    "result": "All declared keys exist in controls.module.css; undefined tone is filtered by classes()."
+  },
+  "retainedGlobalClasses": {
+    "globals": [
+      {
+        "name": "eyebrow",
+        "consumers": [
+          "apps/web/app\\people\\page.tsx",
+          "apps/web/app\\administration\\page.tsx",
+          "apps/web/app\\assessments\\page.tsx",
+          "apps/web/app\\enrolments\\page.tsx",
+          "apps/web/app\\dashboard\\page.tsx",
+          "apps/web/app\\notifications\\page.tsx",
+          "apps/web/app\\components\\delivery.tsx",
+          "apps/web/app\\components\\curriculum.tsx",
+          "apps/web/app\\components\\assessment-response.tsx",
+          "apps/web/app\\components\\onboarding.tsx",
+          "apps/web/app\\components\\learning-progress.tsx",
+          "apps/web/app\\components\\enrolment-record.tsx",
+          "apps/web/app\\components\\programme-generation.tsx",
+          "apps/web/app\\components\\assessment-builder\\markup.ts",
+          "apps/web/app\\components\\appearance.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\people\\page.tsx",
+          "apps/web/app\\administration\\page.tsx",
+          "apps/web/app\\assessments\\page.tsx",
+          "apps/web/app\\enrolments\\page.tsx",
+          "apps/web/app\\dashboard\\page.tsx",
+          "apps/web/app\\notifications\\page.tsx",
+          "apps/web/app\\components\\delivery.tsx",
+          "apps/web/app\\components\\curriculum.tsx",
+          "apps/web/app\\components\\assessment-response.tsx",
+          "apps/web/app\\components\\onboarding.tsx",
+          "apps/web/app\\components\\learning-progress.tsx",
+          "apps/web/app\\components\\enrolment-record.tsx",
+          "apps/web/app\\components\\programme-generation.tsx",
+          "apps/web/app\\components\\appearance.tsx"
+        ]
+      },
+      {
+        "name": "hero-break",
+        "consumers": [
+          "apps/web/app\\dashboard\\page.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\dashboard\\page.tsx"
+        ]
+      },
+      {
+        "name": "icon",
+        "consumers": [
+          "apps/web/app\\components\\workspace-icon.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\components\\workspace-icon.tsx"
+        ]
+      },
+      {
+        "name": "notice",
+        "consumers": [
+          "apps/web/app\\components\\assessment-builder\\presentation.ts",
+          "apps/web/app\\components\\assessment-builder\\markup.ts",
+          "apps/web/app\\components\\assessment-builder\\builder.js"
+        ],
+        "literalFiles": [
+          "apps/web/app\\components\\assessment-builder\\presentation.ts",
+          "apps/web/app\\components\\assessment-builder\\builder.js"
+        ]
+      },
+      {
+        "name": "panel",
+        "consumers": [
+          "apps/web/app\\components\\assessment-builder\\presentation.ts",
+          "apps/web/app\\components\\assessment-builder\\markup.ts"
+        ],
+        "literalFiles": [
+          "apps/web/app\\components\\assessment-builder\\presentation.ts"
+        ]
+      },
+      {
+        "name": "primary",
+        "consumers": [
+          "apps/web/app\\platform\\page.tsx",
+          "apps/web/app\\components\\assessment-builder\\presentation.ts",
+          "apps/web/app\\components\\assessment-builder\\markup.ts"
+        ],
+        "literalFiles": [
+          "apps/web/app\\error.tsx",
+          "apps/web/app\\login\\page.tsx",
+          "apps/web/app\\accounts\\page.tsx",
+          "apps/web/app\\administration\\page.tsx",
+          "apps/web/app\\enrolments\\page.tsx",
+          "apps/web/app\\account\\security\\page.tsx",
+          "apps/web/app\\components\\enrolment-form.tsx",
+          "apps/web/app\\components\\document-review.tsx",
+          "apps/web/app\\components\\delivery.tsx",
+          "apps/web/app\\components\\curriculum.tsx",
+          "apps/web/app\\account\\link\\page.tsx",
+          "apps/web/app\\components\\assignment-form.tsx",
+          "apps/web/app\\components\\assessment-review.tsx",
+          "apps/web/app\\components\\assessment-response.tsx",
+          "apps/web/app\\components\\onboarding.tsx",
+          "apps/web/app\\components\\learning-review.tsx",
+          "apps/web/app\\components\\learning-progress.tsx",
+          "apps/web/app\\components\\learning-lifecycle.tsx",
+          "apps/web/app\\components\\learning-controls.tsx",
+          "apps/web/app\\components\\installation-wizard.tsx",
+          "apps/web/app\\components\\programme-generation.tsx",
+          "apps/web/app\\components\\platform-settings.tsx",
+          "apps/web/app\\components\\plan-create.tsx",
+          "apps/web/app\\platform\\page.tsx",
+          "apps/web/app\\components\\assessment-builder\\presentation.ts",
+          "apps/web/app\\components\\appearance.tsx",
+          "apps/web/app\\components\\appeal-routing.tsx",
+          "apps/web/app\\components\\allocations.tsx",
+          "apps/web/app\\platform\\clients\\page.tsx",
+          "apps/web/app\\platform\\people\\page.tsx",
+          "apps/web/app\\platform\\admins\\page.tsx",
+          "apps/web/app\\setup\\page.tsx",
+          "apps/web/app\\components\\ui\\controls.tsx"
+        ]
+      },
+      {
+        "name": "sample-client",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "sample-client-dark",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "sample-client-light",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "sample-dark",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "sample-light",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "sample-neon-amber",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "sample-neon-cyan",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "sample-neon-emerald",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "sample-platform-dark",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "sample-platform-light",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "secondary",
+        "consumers": [
+          "apps/web/app\\components\\brand-header.tsx",
+          "apps/web/app\\platform\\page.tsx",
+          "apps/web/app\\components\\assessment-builder\\markup.ts",
+          "apps/web/app\\components\\assessment-builder\\builder.js",
+          "apps/web/app\\components\\application-shell.tsx",
+          "apps/web/app\\platform\\audit\\page.tsx",
+          "apps/web/app\\platform\\clients\\page.tsx",
+          "apps/web/app\\platform\\people\\page.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\accounts\\page.tsx",
+          "apps/web/app\\administration\\page.tsx",
+          "apps/web/app\\account\\security\\page.tsx",
+          "apps/web/app\\settings\\ai\\page.tsx",
+          "apps/web/app\\components\\enrolment-form.tsx",
+          "apps/web/app\\components\\delivery.tsx",
+          "apps/web/app\\components\\brand-header.tsx",
+          "apps/web/app\\components\\assignment-form.tsx",
+          "apps/web/app\\components\\assessment-review.tsx",
+          "apps/web/app\\components\\assessment-response.tsx",
+          "apps/web/app\\components\\learning-support.tsx",
+          "apps/web/app\\components\\learning-review.tsx",
+          "apps/web/app\\components\\learning-progress.tsx",
+          "apps/web/app\\components\\learning-controls.tsx",
+          "apps/web/app\\components\\installation-wizard.tsx",
+          "apps/web/app\\components\\promotions.tsx",
+          "apps/web/app\\platform\\page.tsx",
+          "apps/web/app\\components\\appearance.tsx",
+          "apps/web/app\\components\\assessment-builder\\builder.js",
+          "apps/web/app\\components\\allocations.tsx",
+          "apps/web/app\\components\\application-shell.tsx",
+          "apps/web/app\\platform\\audit\\page.tsx",
+          "apps/web/app\\platform\\clients\\page.tsx",
+          "apps/web/app\\platform\\people\\page.tsx",
+          "apps/web/app\\platform\\admins\\page.tsx",
+          "apps/web/app\\components\\ui\\controls.tsx"
+        ]
+      },
+      {
+        "name": "skip",
+        "consumers": [
+          "apps/web/app\\layout.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\layout.tsx"
+        ]
+      },
+      {
+        "name": "sr-only",
+        "consumers": [
+          "apps/web/app\\accounts\\page.tsx",
+          "apps/web/app\\people\\page.tsx",
+          "apps/web/app\\administration\\page.tsx",
+          "apps/web/app\\assessments\\page.tsx",
+          "apps/web/app\\components\\document-review.tsx",
+          "apps/web/app\\components\\curriculum.tsx",
+          "apps/web/app\\components\\brand-header.tsx",
+          "apps/web/app\\components\\assessment-response.tsx",
+          "apps/web/app\\components\\onboarding.tsx",
+          "apps/web/app\\components\\promotions.tsx",
+          "apps/web/app\\platform\\page.tsx",
+          "apps/web/app\\components\\allocations.tsx",
+          "apps/web/app\\platform\\audit\\page.tsx",
+          "apps/web/app\\platform\\clients\\page.tsx",
+          "apps/web/app\\platform\\people\\page.tsx",
+          "apps/web/app\\platform\\admins\\page.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\accounts\\page.tsx",
+          "apps/web/app\\people\\page.tsx",
+          "apps/web/app\\administration\\page.tsx",
+          "apps/web/app\\assessments\\page.tsx",
+          "apps/web/app\\components\\document-review.tsx",
+          "apps/web/app\\components\\curriculum.tsx",
+          "apps/web/app\\components\\brand-header.tsx",
+          "apps/web/app\\components\\assessment-response.tsx",
+          "apps/web/app\\components\\onboarding.tsx",
+          "apps/web/app\\components\\promotions.tsx",
+          "apps/web/app\\platform\\page.tsx",
+          "apps/web/app\\components\\allocations.tsx",
+          "apps/web/app\\platform\\audit\\page.tsx",
+          "apps/web/app\\platform\\clients\\page.tsx",
+          "apps/web/app\\platform\\people\\page.tsx",
+          "apps/web/app\\platform\\admins\\page.tsx"
+        ]
+      },
+      {
+        "name": "theme-current",
+        "consumers": [
+          "apps/web/app\\components\\brand-header.tsx",
+          "apps/web/app\\platform\\overview.module.css",
+          "apps/web/app\\components\\ui\\guest.module.css"
+        ],
+        "literalFiles": [
+          "apps/web/app\\components\\brand-header.tsx"
+        ]
+      },
+      {
+        "name": "theme-dot",
+        "consumers": [
+          "apps/web/app\\components\\brand-header.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\components\\brand-header.tsx"
+        ]
+      },
+      {
+        "name": "theme-dot-client",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-dot-client-dark",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-dot-client-light",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-dot-dark",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-dot-light",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-dot-neon-amber",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-dot-neon-cyan",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-dot-neon-emerald",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-dot-platform-dark",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-dot-platform-light",
+        "consumers": [],
+        "literalFiles": []
+      },
+      {
+        "name": "theme-options",
+        "consumers": [
+          "apps/web/app\\components\\brand-header.tsx",
+          "apps/web/app\\platform\\overview.module.css",
+          "apps/web/app\\components\\ui\\guest.module.css",
+          "apps/web/app\\components\\ui\\controls.module.css"
+        ],
+        "literalFiles": [
+          "apps/web/app\\components\\brand-header.tsx"
+        ]
+      },
+      {
+        "name": "theme-picker",
+        "consumers": [
+          "apps/web/app\\components\\brand-header.tsx",
+          "apps/web/app\\platform\\overview.module.css",
+          "apps/web/app\\components\\ui\\guest.module.css"
+        ],
+        "literalFiles": [
+          "apps/web/app\\components\\brand-header.tsx"
+        ]
+      }
+    ],
+    "workspace": [
+      {
+        "name": "button",
+        "consumers": [
+          "apps/web/app\\platform\\page.tsx",
+          "apps/web/app\\components\\assessment-builder\\markup.ts"
+        ],
+        "literalFiles": [
+          "apps/web/app\\login\\page.tsx",
+          "apps/web/app\\accounts\\page.tsx",
+          "apps/web/app\\administration\\page.tsx",
+          "apps/web/app\\account\\security\\page.tsx",
+          "apps/web/app\\components\\enrolment-form.tsx",
+          "apps/web/app\\components\\document-review.tsx",
+          "apps/web/app\\components\\brand-header.tsx",
+          "apps/web/app\\components\\background-receipts.tsx",
+          "apps/web/app\\components\\assessment-review.tsx",
+          "apps/web/app\\components\\onboarding.tsx",
+          "apps/web/app\\components\\onboarding-files.tsx",
+          "apps/web/app\\components\\installation-wizard.tsx",
+          "apps/web/app\\components\\programme-generation.tsx",
+          "apps/web/app\\components\\promotions.tsx",
+          "apps/web/app\\components\\response-evidence.tsx",
+          "apps/web/app\\platform\\page.tsx",
+          "apps/web/app\\components\\appearance.tsx",
+          "apps/web/app\\components\\assessment-builder\\builder.js",
+          "apps/web/app\\components\\application-shell.tsx",
+          "apps/web/app\\platform\\audit\\page.tsx",
+          "apps/web/app\\platform\\clients\\page.tsx",
+          "apps/web/app\\platform\\people\\page.tsx",
+          "apps/web/app\\platform\\admins\\page.tsx",
+          "apps/web/app\\components\\ui\\controls.tsx"
+        ]
+      },
+      {
+        "name": "eyebrow",
+        "consumers": [
+          "apps/web/app\\people\\page.tsx",
+          "apps/web/app\\administration\\page.tsx",
+          "apps/web/app\\assessments\\page.tsx",
+          "apps/web/app\\enrolments\\page.tsx",
+          "apps/web/app\\dashboard\\page.tsx",
+          "apps/web/app\\notifications\\page.tsx",
+          "apps/web/app\\components\\delivery.tsx",
+          "apps/web/app\\components\\curriculum.tsx",
+          "apps/web/app\\components\\assessment-response.tsx",
+          "apps/web/app\\components\\onboarding.tsx",
+          "apps/web/app\\components\\learning-progress.tsx",
+          "apps/web/app\\components\\enrolment-record.tsx",
+          "apps/web/app\\components\\programme-generation.tsx",
+          "apps/web/app\\components\\assessment-builder\\markup.ts",
+          "apps/web/app\\components\\appearance.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\people\\page.tsx",
+          "apps/web/app\\administration\\page.tsx",
+          "apps/web/app\\assessments\\page.tsx",
+          "apps/web/app\\enrolments\\page.tsx",
+          "apps/web/app\\dashboard\\page.tsx",
+          "apps/web/app\\notifications\\page.tsx",
+          "apps/web/app\\components\\delivery.tsx",
+          "apps/web/app\\components\\curriculum.tsx",
+          "apps/web/app\\components\\assessment-response.tsx",
+          "apps/web/app\\components\\onboarding.tsx",
+          "apps/web/app\\components\\learning-progress.tsx",
+          "apps/web/app\\components\\enrolment-record.tsx",
+          "apps/web/app\\components\\programme-generation.tsx",
+          "apps/web/app\\components\\appearance.tsx"
+        ]
+      },
+      {
+        "name": "field-help",
+        "consumers": [
+          "apps/web/app\\accounts\\page.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\accounts\\page.tsx"
+        ]
+      },
+      {
+        "name": "panel",
+        "consumers": [
+          "apps/web/app\\components\\assessment-builder\\presentation.ts",
+          "apps/web/app\\components\\assessment-builder\\markup.ts"
+        ],
+        "literalFiles": [
+          "apps/web/app\\components\\assessment-builder\\presentation.ts"
+        ]
+      }
+    ],
+    "directory": [
+      {
+        "name": "directory-count",
+        "consumers": [
+          "apps/web/app\\accounts\\page.tsx",
+          "apps/web/app\\components\\promotions.tsx"
+        ],
+        "literalFiles": [
+          "apps/web/app\\accounts\\page.tsx",
+          "apps/web/app\\components\\promotions.tsx"
+        ]
+      }
+    ]
+  },
+  "retainedDeclarations": "PostCSS comparison: retained declarations, selector order and enclosing conditions match baseline."
+}

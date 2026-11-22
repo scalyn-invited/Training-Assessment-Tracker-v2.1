@@ -1,0 +1,1290 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\node_modules\\playwright\\cli.js",
+      "test",
+      "-c",
+      "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\browser.config.ts",
+      "--trace",
+      "on"
+    ],
+    "configFile": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\browser.config.ts",
+    "rootDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/review-d03-02-qa/browser-tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/review-d03-02-qa/runtime-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/review-d03-02-qa/browser-tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\browser-tests",
+        "snapshotDir": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\browser-tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 90000,
+        "use": {
+          "headless": true,
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\browser.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "d05.spec.ts",
+      "file": "d05.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "current approved attempt keeps accurate copy and review controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5834,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:25:37.689Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\d05-current-approved-attem-20a9a-te-copy-and-review-controls\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "111eed22252feb6ac480-8bcae22bd33797c29dd9",
+          "file": "d05.spec.ts",
+          "line": 85,
+          "column": 3
+        },
+        {
+          "title": "pending attempt keeps accurate copy and review controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3463,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:25:45.137Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\d05-pending-attempt-keeps-accurate-copy-and-review-controls\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "111eed22252feb6ac480-f51689217ad6a8268de4",
+          "file": "d05.spec.ts",
+          "line": 85,
+          "column": 3
+        },
+        {
+          "title": "newer attempt with earlier approval keeps accurate copy and review controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1992,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:25:49.340Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\d05-newer-attempt-with-ear-78ea8-te-copy-and-review-controls\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "111eed22252feb6ac480-fb9d334f59d33acdb9b7",
+          "file": "d05.spec.ts",
+          "line": 85,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "learner-guard.spec.ts",
+      "file": "learner-guard.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "D01 learner shares pre-context guard and blocks unknown autosave outcome",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3496,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:25:51.747Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\learner-guard-D01-learner--12f66-ks-unknown-autosave-outcome\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0e15b856cc42d6546d2b-5ff84b83086c24d76bc9",
+          "file": "learner-guard.spec.ts",
+          "line": 34,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "workflow.spec.ts",
+      "file": "workflow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "D04 preview discloses scope and uses pinned section references across views",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3522,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:25:56.843Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D04-preview-discl-1702b-ion-references-across-views\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-11a4ce7ff36bd8ce2e32",
+          "file": "workflow.spec.ts",
+          "line": 105,
+          "column": 1
+        },
+        {
+          "title": "D03 lost publication reconciles exact definition: published",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2343,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:03.935Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-lost-publicat-02f54--exact-definition-published\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-3ab89ade3020789a9ba1",
+          "file": "workflow.spec.ts",
+          "line": 131,
+          "column": 3
+        },
+        {
+          "title": "D03 lost publication reconciles exact definition: draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2862,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:06.843Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-lost-publicat-fe7b3-iles-exact-definition-draft\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-ade24e730e6b011cce1e",
+          "file": "workflow.spec.ts",
+          "line": 131,
+          "column": 3
+        },
+        {
+          "title": "D03 lost publication reconciles exact definition: unavailable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2318,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:10.753Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-lost-publicat-91d01-xact-definition-unavailable\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-d495d9587296ad9dc35a",
+          "file": "workflow.spec.ts",
+          "line": 131,
+          "column": 3
+        },
+        {
+          "title": "D03 lost publication reconciles exact definition: denied",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2922,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:13.398Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-lost-publicat-25e2d-les-exact-definition-denied\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-f3a8b1f32643f86bad17",
+          "file": "workflow.spec.ts",
+          "line": 131,
+          "column": 3
+        },
+        {
+          "title": "D03 stale save stops writes and offers authorized structured comparison",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3228,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:16.621Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-stale-save-st-e42bb-rized-structured-comparison\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-e0b5d82f1aa377d638f1",
+          "file": "workflow.spec.ts",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "D03 unknown save replays exact operation before newer typing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2237,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:20.228Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-unknown-save--9ad57-eration-before-newer-typing\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-eebd0ed912cf3a271957",
+          "file": "workflow.spec.ts",
+          "line": 202,
+          "column": 1
+        },
+        {
+          "title": "D06 exact published handoff and D08 durable copy provenance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4074,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:22.857Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D06-exact-publish-c05a9-D08-durable-copy-provenance\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-8bd8a144ea8c4a2da4fd",
+          "file": "workflow.spec.ts",
+          "line": 230,
+          "column": 1
+        },
+        {
+          "title": "D01 literal link cancellation preserves author edits; clean navigation proceeds",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2422,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:27.464Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D01-literal-link--28487-s-clean-navigation-proceeds\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-9a183f5b337c56e72837",
+          "file": "workflow.spec.ts",
+          "line": 296,
+          "column": 1
+        },
+        {
+          "title": "D01 same-document Back and Forward cancellation retains author work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2468,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:31.239Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D01-same-document-c036e-llation-retains-author-work\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-4e834745e09ce48d47bc",
+          "file": "workflow.spec.ts",
+          "line": 328,
+          "column": 1
+        },
+        {
+          "title": "D07 rejection requires separate member-safe feedback and transmits it separately",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2106,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:34.330Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D07-rejection-req-b369b-and-transmits-it-separately\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-d79ba038e168ca0e1328",
+          "file": "workflow.spec.ts",
+          "line": 353,
+          "column": 1
+        },
+        {
+          "title": "D07 learner sees returned guidance without a released grade or private reason",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1552,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:36.969Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D07-learner-sees--446d2-sed-grade-or-private-reason\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-f30d33c37d8e84de93bc",
+          "file": "workflow.spec.ts",
+          "line": 391,
+          "column": 1
+        },
+        {
+          "title": "D04 reordered current references do not renumber historical pinned content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3108,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:38.977Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D04-reordered-cur-6e0fe-r-historical-pinned-content\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-4436d2f331561d4496cb",
+          "file": "workflow.spec.ts",
+          "line": 438,
+          "column": 1
+        },
+        {
+          "title": "D01 reviewer canceled reload preserves score feedback rationale and verified file text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4614,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:43.046Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D01-reviewer-canc-fba7f-nale-and-verified-file-text\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-0815a8aa02fa4c2e3fe3",
+          "file": "workflow.spec.ts",
+          "line": 460,
+          "column": 1
+        },
+        {
+          "title": "D01 confirmed file evidence becomes clean without losing an unrelated review draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4785,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:48.355Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D01-confirmed-fil-533a0-g-an-unrelated-review-draft\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-735bd47feca7d3e80bc4",
+          "file": "workflow.spec.ts",
+          "line": 494,
+          "column": 1
+        },
+        {
+          "title": "D01 uncertain reviewer decision stops newer writes and retains fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1742,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:53.515Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D01-uncertain-rev-192bc-r-writes-and-retains-fields\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-b837e2e91b2294a27bbb",
+          "file": "workflow.spec.ts",
+          "line": 526,
+          "column": 1
+        },
+        {
+          "title": "D01 switch canceled guard sends zero context mutations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2994,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:55.655Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D01-switch-cancel-7abdb-ends-zero-context-mutations\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-f6edea81ccde55f36fa2",
+          "file": "workflow.spec.ts",
+          "line": 562,
+          "column": 3
+        },
+        {
+          "title": "D01 logout canceled guard sends zero context mutations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2523,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:26:59.268Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D01-logout-cancel-0f143-ends-zero-context-mutations\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-3910922e6221623007cb",
+          "file": "workflow.spec.ts",
+          "line": 562,
+          "column": 3
+        },
+        {
+          "title": "D03 recovery draft 409 retains complete local draft through denied/unavailable comparison and cancel",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5241,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:27:02.288Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-recovery-draf-ec663-lable-comparison-and-cancel\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-ad3e98f4e009c0a57481",
+          "file": "workflow.spec.ts",
+          "line": 654,
+          "column": 3
+        },
+        {
+          "title": "D03 recovery draft lost-response retains complete local draft through denied/unavailable comparison and cancel",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5709,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:27:08.037Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-recovery-draf-5bd46-lable-comparison-and-cancel\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-096c4e316e5edc217bbe",
+          "file": "workflow.spec.ts",
+          "line": 654,
+          "column": 3
+        },
+        {
+          "title": "D03 recovery published 409 retains complete local draft through denied/unavailable comparison and cancel",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6212,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:27:14.499Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-recovery-publ-b217f-lable-comparison-and-cancel\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-ec41d91dceef2d4bb8ee",
+          "file": "workflow.spec.ts",
+          "line": 654,
+          "column": 3
+        },
+        {
+          "title": "D03 recovery published lost-response retains complete local draft through denied/unavailable comparison and cancel",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6265,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:27:21.687Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-D03-recovery-publ-a0708-lable-comparison-and-cancel\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-a9af2b8bb8d232985d27",
+          "file": "workflow.spec.ts",
+          "line": 654,
+          "column": 3
+        },
+        {
+          "title": "QA-D03 changed server draft after publication conflict offers recovery comparison",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2958,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:27:28.504Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-QA-D03-changed-se-e5f00--offers-recovery-comparison\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-3ae107f41719ce862b60",
+          "file": "workflow.spec.ts",
+          "line": 726,
+          "column": 1
+        },
+        {
+          "title": "REVIEW-D03 newer published content must not confirm the local saved version 409",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2209,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:27:32.173Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-REVIEW-D03-newer--5f662-the-local-saved-version-409\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-e919473cdbf69169c024",
+          "file": "workflow.spec.ts",
+          "line": 744,
+          "column": 49
+        },
+        {
+          "title": "REVIEW-D03 newer published content must not confirm the local saved version lost-response",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2561,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-16T15:27:34.887Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\cabas\\AppData\\Local\\hermes\\worktrees\\tat-assessment-workflow\\docs\\assessment-workflow-implementation\\review-d03-02-qa\\runtime-browser-results\\workflow-REVIEW-D03-newer--e8459-saved-version-lost-response\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c601ceb5ecfc8efa4a14-2351b148cb0e5ace0b30",
+          "file": "workflow.spec.ts",
+          "line": 744,
+          "column": 49
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-16T15:25:36.501Z",
+    "duration": 122748.871,
+    "expected": 29,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

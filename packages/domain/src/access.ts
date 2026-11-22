@@ -51,14 +51,20 @@ export class Access {
     client: string,
     environment: string,
   ): Promise<Membership | undefined> {
-    if (
-      !(await this.active(sql, userId, environment)) ||
-      !(await this.available(sql, client, environment))
-    )
-      return undefined;
+    // Recheck all gates in one statement, not three network round trips per call.
+    // No decision is cached: later calls still observe revocation and client changes.
     return (
       await sql.query<Membership>(
-        "SELECT * FROM client_memberships WHERE user_id=$1 AND organisation_id=$2 AND environment=$3 AND status='active' AND joined_at<=now() AND ended_at IS NULL",
+        `SELECT cm.* FROM client_memberships cm
+         JOIN users u ON u.id=cm.user_id AND u.environment=cm.environment
+         JOIN organisations o ON o.id=cm.organisation_id
+         JOIN platform_client_states s ON s.organisation_id=o.id AND s.environment=cm.environment
+         WHERE cm.user_id=$1 AND cm.organisation_id=$2 AND cm.environment=$3
+           AND cm.status='active' AND cm.joined_at<=now() AND cm.ended_at IS NULL
+           AND u.active AND NOT (u.environment='production' AND u.is_synthetic)
+           AND (u.origin<>'primary_import' OR u.permissions_synced_at>=now()-interval '5 minutes')
+           AND EXISTS(SELECT 1 FROM identities i WHERE i.user_id=u.id AND i.active)
+           AND o.active AND NOT s.suspended`,
         [userId, client, environment],
       )
     ).rows[0];

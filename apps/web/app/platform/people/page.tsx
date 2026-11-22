@@ -2,7 +2,10 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { api, useContext, Guest, Pending, Feedback } from '../../components/auth-ui';
+import { api, useContext, Guest, Pending } from '../../components/auth-ui';
+import { Button, Input, Feedback } from '../../components/ui/controls';
+import { Dialog } from '../../components/ui/dialog';
+import accessStyles from '../../components/account-access.module.css';
 import { AccountAccess } from '../../components/platform-accounts';
 import { PeopleIcon } from '../../components/people-icon';
 import shell from '../overview.module.css';
@@ -365,19 +368,17 @@ export default function PeoplePage() {
               </>
             )}
           </section>
-          <dialog
-            ref={dialog}
-            className={`${shell.dialog} ${styles.accessDialog}`}
-            aria-labelledby="people-access-title"
+          <Dialog
+            dialogRef={dialog}
+            className={styles.accessDialog}
+            titleId="people-access-title"
             onClose={() => setSelected(null)}
           >
             {selected && data && (
               <>
                 <div className={shell.dialogHeader}>
                   <h2 id="people-access-title">Manage access</h2>
-                  <button className="secondary" type="button" onClick={close}>
-                    Close
-                  </button>
+                  <Button onClick={close}>Close</Button>
                 </div>
                 <p>
                   {selected.name} · {selected.email}
@@ -415,7 +416,7 @@ export default function PeoplePage() {
                 />
               </>
             )}
-          </dialog>
+          </Dialog>
         </div>
       )}
     </Guest>
@@ -479,6 +480,7 @@ function GlobalAccess({
         <p>This account is not eligible for appointment.</p>
       ) : (
         <form
+          className={accessStyles.form}
           aria-label={`Manage Global Admin access for ${account.email}`}
           onSubmit={save}
           aria-busy={busy}
@@ -487,23 +489,19 @@ function GlobalAccess({
             <legend>{revoke ? 'Revoke Global Admin' : 'Appoint Global Admin'}</legend>
             <label>
               Reason
-              <input name="reason" required minLength={8} maxLength={2000} />
+              <Input name="reason" required minLength={8} maxLength={2000} />
             </label>
-            <label className="choices">
-              <input type="checkbox" required />I confirm {revoke ? 'revoking' : 'appointing'}{' '}
+            <label className={accessStyles.confirmation}>
+              <Input type="checkbox" required />I confirm {revoke ? 'revoking' : 'appointing'}{' '}
               Global Admin access for {account.name}.
             </label>
             <p>Their existing sessions will end.</p>
-            <button className={revoke ? 'danger' : 'primary'}>
+            <Button type="submit" variant={revoke ? 'danger' : 'primary'}>
               {busy ? 'Saving access…' : revoke ? 'Confirm revocation' : 'Confirm appointment'}
-            </button>
+            </Button>
           </fieldset>
           <Feedback error={error} />
-          {stale && (
-            <button type="button" className="secondary" onClick={reload}>
-              Reload accounts
-            </button>
-          )}
+          {stale && <Button onClick={reload}>Reload accounts</Button>}
         </form>
       )}
     </section>

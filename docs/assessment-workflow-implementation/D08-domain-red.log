@@ -1,0 +1,73 @@
+
+ RUN  v5.1.0 C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow
+
+ ❯ tests/assessment-definitions.test.ts (5 tests | 1 failed) 20724ms
+   ❯ assessment definitions and publication (5)
+     × publishes immutable revisions and edits by creating a new family revision 496ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/assessment-definitions.test.ts > assessment definitions and publication > publishes immutable revisions and edits by creating a new family revision
+AssertionError: expected { …(15) } to match object { …(2) }
+(18 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "source_definition_id": "0dc03844-8724-4b74-84c7-8bf8b59ed005",
+-   "source_revision": 1,
++   "actor_id": "9cad91e7-222a-48e8-867c-92029d1a741b",
++   "answer_key": {
++     "q": "safe",
++   },
++   "created_at": 2026-11-16T11:06:14.211Z,
++   "environment": "test",
++   "family_id": "e20b9091-0f47-4ac1-b23c-88f4d64ad8d8",
++   "id": "1e7b0a3b-2fbc-469a-8a5b-dd827a5287f9",
++   "organisation_id": "ca53d81e-c0ef-407b-a4f0-a5b70c6cb9eb",
++   "published_at": null,
++   "questions": [
++     {
++       "choices": [
++         {
++           "id": "safe",
++           "text": "Check",
++         },
++         {
++           "id": "unsafe",
++           "text": "Ignore",
++         },
++       ],
++       "id": "q",
++       "prompt": "Choose",
++       "type": "multiple_choice",
++     },
++   ],
++   "revision": 2,
++   "rubric": {
++     "criteria": [],
++     "threshold": 75,
++   },
++   "sections": null,
++   "status": "draft",
++   "title": "Revised",
++   "version": 1,
+  }
+
+ ❯ tests/assessment-definitions.test.ts:149:15
+    147|     expect(b.revision).toBe(a.revision + 1);
+    148|     expect(b.status).toBe('draft');
+    149|     expect(b).toMatchObject({source_definition_id:a.id,source_revision…
+       |               ^
+    150|     expect(second).toMatchObject({revision:b.revision,source_definitio…
+    151|     await expect(definitions.get(member.token,client,second.id)).rejec…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  19:05:52
+   Duration  22.49s (tests 94%, import 5%, transform 1%)
+

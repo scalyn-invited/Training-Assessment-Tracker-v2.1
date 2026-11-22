@@ -1,0 +1,20 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mselects N+2, keeps mock output provisional and requires exact current human approval[33m 7976[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22matomically invalidates pending proposals and flags approved support after a source regrade[33m 7484[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mresumption invalidates a pending proposal and preserves approved history[33m 6208[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mkeeps KPI support provisional, pinned to immutable snapshots and private to coordinators[33m 2990[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mretains ambiguous reservations without a usable suggestion[33m 4521[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mchecks the exact freeze boundary and refuses a target started during provider work[33m 6062[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mreturns final support without a provider call when no future block is eligible[33m 2358[2mms[22m[39m
+ [32m✓[39m tests/learning-support.test.ts[2m > [22mrechecks revoked authority after provider work and keeps the known charge without applying output[33m 1439[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m8 passed[39m[22m[90m (8)[39m
+[2m   Start at [22m 21:29:27
+[2m   Duration [22m 76.39s[2m (tests 98%, import 1%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/correction-backend/support-red.json
+
+EXIT 0

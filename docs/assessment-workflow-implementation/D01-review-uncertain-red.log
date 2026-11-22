@@ -1,0 +1,35 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:295:1 › D01 uncertain reviewer decision stops newer writes and retains fields (5.4s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:295:1 › D01 uncertain reviewer decision stops newer writes and retains fields 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  getByRole('button', { name: 'Reject and allow resubmission' })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" getByRole('button', { name: 'Reject and allow resubmission' }) with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Reject and allow resubmission' })
+        14 × locator resolved to <button value="reject" class="secondary">Reject and allow resubmission</button>
+           - unexpected value "enabled"
+
+
+      305 |  page.on('dialog',d=>d.accept());
+      306 |  await page.getByRole('button',{name:'Reject and allow resubmission'}).click();
+    > 307 |  await expect(page.getByRole('button',{name:'Reject and allow resubmission'})).toBeDisabled();
+          |                                                                                ^
+      308 |  await expect(page.getByLabel('Private decision rationale')).toHaveValue('Synthetic private rationale');
+      309 |  await page.getByRole('button',{name:'Refresh review status'}).click();
+      310 |  await expect(page.getByRole('button',{name:'Reject and allow resubmission'})).toBeDisabled();
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:307:80
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D01-uncertain-rev-192bc-r-writes-and-retains-fields\error-context.md
+
+  1 failed
+    tests\workflow-qa-browser\workflow.spec.ts:295:1 › D01 uncertain reviewer decision stops newer writes and retains fields 

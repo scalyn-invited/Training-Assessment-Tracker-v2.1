@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState, type FormEvent } from 'react';
-import Link from 'next/link';
+import { Button, Feedback } from './ui/controls';
+import guestStyles from './ui/guest.module.css';
+export { Feedback } from './ui/controls';
 import { AppShell } from './app-shell';
 type User = {
   id: string;
@@ -73,68 +75,15 @@ export function useContext() {
   }, []);
   return { context, setContext, error, load };
 }
-export function Password({
-  name,
-  label,
-  creation = false,
-}: {
-  name: string;
-  label: string;
-  creation?: boolean;
-}) {
-  const [visible, setVisible] = useState(false);
-  return (
-    <div className="password-field">
-      <label htmlFor={name}>{label}</label>
-      <input
-        id={name}
-        name={name}
-        type={visible ? 'text' : 'password'}
-        required
-        minLength={creation ? 15 : undefined}
-        maxLength={72}
-        autoComplete={creation ? 'new-password' : 'current-password'}
-        aria-describedby={creation ? name + '-help' : undefined}
-      />
-      <button
-        type="button"
-        className="secondary"
-        aria-pressed={visible}
-        onClick={() => setVisible(!visible)}
-      >
-        {visible ? 'Hide' : 'Show'} {label.toLowerCase()}
-      </button>
-      {creation && (
-        <p id={name + '-help'} className="help">
-          Use at least 15 characters and no more than 72 UTF-8 bytes.
-        </p>
-      )}
-    </div>
-  );
-}
-export function Feedback({ error, success }: { error?: string; success?: string }) {
-  return (
-    <>
-      {error && (
-        <p className="notice" role="alert">
-          {error}
-        </p>
-      )}
-      {success && <p role="status">{success}</p>}
-    </>
-  );
-}
 export function Guest({ children }: { children: React.ReactNode }) {
   return <AppShell>{children}</AppShell>;
 }
 export function Pending({ error, retry }: { error: string; retry: () => void }) {
   return error ? (
-    <>
+    <div className={guestStyles.stack}>
       <Feedback error={error} />
-      <button className="secondary" onClick={retry}>
-        Try loading again
-      </button>
-    </>
+      <Button onClick={retry}>Try loading again</Button>
+    </div>
   ) : (
     <p role="status">Loading your session…</p>
   );

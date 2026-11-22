@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+  x  1 docs\assessment-workflow-implementation\independent-qa\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds (1.4m)
+
+
+  1) docs\assessment-workflow-implementation\independent-qa\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: locator('#assessment-title')
+    Expected: "Synthetic saved draft"
+    Timeout: 60000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" locator('#assessment-title') with timeout 60000ms
+      - waiting for locator('#assessment-title')
+
+
+      68 |   await page.goto('/assessments');
+      69 |   await page.getByRole('link', { name: 'Edit draft', exact: true }).click();
+    > 70 |   await expect(page.locator('#assessment-title')).toHaveValue(row.title, { timeout: 60000 });
+         |                                                   ^
+      71 |   await page.evaluate(() => {
+      72 |     (window as any).__sameDocument = 'retained';
+      73 |   });
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\docs\assessment-workflow-implementation\independent-qa\next-tests\navigation.spec.ts:70:51
+
+    Error Context: .runtime\independent-next-results\navigation-D01-real-Next-s-98965-ean-SPA-navigation-proceeds\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    .runtime\independent-next-results\navigation-D01-real-Next-s-98965-ean-SPA-navigation-proceeds\trace.zip
+    Usage:
+
+        npx playwright show-trace .runtime\independent-next-results\navigation-D01-real-Next-s-98965-ean-SPA-navigation-proceeds\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    docs\assessment-workflow-implementation\independent-qa\next-tests\navigation.spec.ts:4:1 › D01 real Next sidebar and history preserve dirty builder; clean SPA navigation proceeds 
+
+EXIT 1

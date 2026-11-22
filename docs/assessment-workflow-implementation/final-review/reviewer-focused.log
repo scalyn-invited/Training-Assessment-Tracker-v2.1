@@ -1,0 +1,36 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mQA D02 characterizes no-team appeal freeze and unavailable alternate routing[33m 4504[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mD07 separately authored return feedback is safe, encrypted and bound to the immutable attempt[33m 2507[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mD07 rejects empty explicitly supplied public feedback without a decision[33m 1131[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mQA D07 legacy rejection omits public feedback without leaking private rationale[33m 2328[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mrequires reviewer authority, pins the latest version and projects approved results only[33m 2342[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mrequires explicit current file confirmation and rechecks bytes at decision time[33m 4994[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mallows rejection and resubmission but never reviews a superseded attempt[33m 2273[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mroutes case-only appeals and closes alternate record/file access immediately on resolution[33m 5329[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mbinds appeal access to the exact role grant without revival[33m 3024[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mkeeps routing metadata separate from sensitive assessment details[33m 1850[2mms[22m[39m
+ [32m✓[39m tests/assessment-reviews.test.ts[2m > [22mblocks decisions during queued analysis and rejects a provisional source from another attempt[33m 1881[2mms[22m[39m
+ [32m✓[39m tests/assessment-assignments.test.ts[2m > [22mrejects unpublished revisions and missing independent sensitive authority[33m 712[2mms[22m[39m
+ [32m✓[39m tests/assessment-assignments.test.ts[2m > [22massigns one pinned revision idempotently and exposes only scoped assignment metadata[33m 1267[2mms[22m[39m
+ [32m✓[39m tests/assessment-assignments.test.ts[2m > [22mpins team rules, includes future eligible records and does not replace individual assignments[33m 2403[2mms[22m[39m
+ [32m✓[39m tests/assessment-assignments.test.ts[2m > [22mQA D08 published-copy creation preserves old individual and team pins[32m 186[2mms[22m[39m
+ [32m✓[39m tests/assessment-assignments.test.ts[2m > [22mstops future assignments without deleting work and resumes only explicitly[33m 1405[2mms[22m[39m
+ [32m✓[39m tests/assessment-assignments.test.ts[2m > [22mblocks future processing when the rule creator loses current authority[33m 627[2mms[22m[39m
+ [32m✓[39m tests/assessment-definitions.test.ts[2m > [22massessment definitions and publication[2m > [22mrequires coordinator membership rather than platform authority[32m 110[2mms[22m[39m
+ [32m✓[39m tests/assessment-definitions.test.ts[2m > [22massessment definitions and publication[2m > [22mencrypts keys, replays identical saves and rejects changed tokens or stale versions[33m 369[2mms[22m[39m
+ [32m✓[39m tests/assessment-definitions.test.ts[2m > [22massessment definitions and publication[2m > [22mpublishes immutable revisions and edits by creating a new family revision[33m 493[2mms[22m[39m
+ [32m✓[39m tests/assessment-definitions.test.ts[2m > [22massessment definitions and publication[2m > [22mQA D03 exact publication retry conflicts but exact readback confirms the same published record[32m 153[2mms[22m[39m
+ [32m✓[39m tests/assessment-definitions.test.ts[2m > [22massessment definitions and publication[2m > [22mblocks incomplete publication and foreign or quarantined image references[33m 347[2mms[22m[39m
+ [32m✓[39m tests/access-membership.test.ts[2m > [22mbounds each fresh membership decision to one database round trip[32m 43[2mms[22m[39m
+ [32m✓[39m tests/access-membership.test.ts[2m > [22mpreserves every current identity, client, environment and membership gate without caching[32m 240[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m4 passed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[32m24 passed[39m[22m[90m (24)[39m
+[2m   Start at [22m 22:33:47
+[2m   Duration [22m 81.49s[2m (tests 95%, import 4%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/final-review/reviewer-focused.json
+
+EXIT 0

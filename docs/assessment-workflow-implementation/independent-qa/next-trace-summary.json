@@ -1,0 +1,304 @@
+[
+  {
+    "url": "http://127.0.0.1:3275/assessments",
+    "status": 200,
+    "time": 1371.787,
+    "timings": {
+      "dns": 200.555,
+      "connect": 3.484,
+      "ssl": 233.255,
+      "send": 0,
+      "wait": 898.936,
+      "receive": 35.557
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/_next/static/css/app/layout.css?v=1794830956346",
+    "status": 200,
+    "time": 277.103,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 153.292,
+      "receive": 123.811
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/_next/static/chunks/app/error.js",
+    "status": 200,
+    "time": 285.988,
+    "timings": {
+      "dns": 0.035,
+      "connect": 1.991,
+      "ssl": 6.797,
+      "send": 0,
+      "wait": 119.963,
+      "receive": 157.202
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/_next/static/chunks/webpack.js?v=1794830956346",
+    "status": 200,
+    "time": 305.155,
+    "timings": {
+      "dns": 0.338,
+      "connect": 0.618,
+      "ssl": 2.624,
+      "send": 0,
+      "wait": 145.417,
+      "receive": 156.158
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/_next/static/chunks/app/not-found.js",
+    "status": 200,
+    "time": 340.956,
+    "timings": {
+      "dns": 0.012,
+      "connect": 0.785,
+      "ssl": 6.71,
+      "send": 0,
+      "wait": 135.733,
+      "receive": 197.716
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/_next/static/chunks/app-pages-internals.js",
+    "status": 200,
+    "time": 354.466,
+    "timings": {
+      "dns": 0.011,
+      "connect": 0.725,
+      "ssl": 4.205,
+      "send": 0,
+      "wait": 124.482,
+      "receive": 225.043
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/_next/static/chunks/app/assessments/page.js",
+    "status": 200,
+    "time": 475.558,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 70.317,
+      "receive": 405.241
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/_next/static/chunks/main-app.js?v=1794830956346",
+    "status": 200,
+    "time": 3260.235,
+    "timings": {
+      "dns": 0.009,
+      "connect": 0.69,
+      "ssl": 3.074,
+      "send": 0,
+      "wait": 113.457,
+      "receive": 3143.005
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/branding/current?shared=0",
+    "status": 200,
+    "time": 1062.573,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 1058.737,
+      "receive": 3.836
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/auth/context",
+    "status": 200,
+    "time": 1059.237,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 1056.623,
+      "receive": 2.614
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/branding/current?shared=0",
+    "status": 200,
+    "time": 1057.327,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 1055.245,
+      "receive": 2.082
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/branding/current?shared=0",
+    "status": 200,
+    "time": 1027.726,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 1025.423,
+      "receive": 2.303
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/branding/current?shared=0",
+    "status": 200,
+    "time": 1026.251,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 1023.914,
+      "receive": 2.337
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/branding/current?shared=0",
+    "status": 200,
+    "time": 179.18599999999998,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 176.009,
+      "receive": 3.177
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/clients",
+    "status": 200,
+    "time": 176.27200000000002,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 173.883,
+      "receive": 2.389
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/assessments/assignments?clientId=synthetic-client&page=1",
+    "status": 200,
+    "time": 171.10399999999998,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 168.541,
+      "receive": 2.563
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/assessments/definitions?clientId=synthetic-client&page=1",
+    "status": 200,
+    "time": 83.128,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 81.741,
+      "receive": 1.387
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/assessments/appeals?clientId=synthetic-client",
+    "status": 200,
+    "time": 68.403,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 65.149,
+      "receive": 3.254
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/api/assessments/appeals?clientId=synthetic-client",
+    "status": 200,
+    "time": 64.112,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 61.134,
+      "receive": 2.978
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/__nextjs_font/geist-latin.woff2",
+    "status": 200,
+    "time": 1776.026,
+    "timings": {
+      "dns": 0.647,
+      "connect": 15.057,
+      "ssl": 18.326,
+      "send": 0,
+      "wait": 993.806,
+      "receive": 748.19
+    },
+    "failure": null
+  },
+  {
+    "url": "ws://127.0.0.1:3275/_next/hmr?id=iimNuHWVIweU495r9x_YP",
+    "status": 101,
+    "time": 65751.6630859375,
+    "timings": {
+      "send": -1,
+      "wait": -1,
+      "receive": -1
+    },
+    "failure": null
+  },
+  {
+    "url": "http://127.0.0.1:3275/assessments/definitions/synthetic-definition?_rsc=hwGi8VF06EQnBrsE",
+    "status": -1,
+    "time": -1,
+    "timings": {
+      "send": -1,
+      "wait": -1,
+      "receive": -1
+    },
+    "failure": null
+  }
+]

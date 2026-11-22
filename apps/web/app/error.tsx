@@ -1,10 +1,15 @@
 'use client';
-export default function ErrorPage({ reset }: { reset: () => void }) {
+import { RecoveryFrame } from './components/recovery-frame';
+import { Button } from './components/ui/controls';
+export default function ErrorPage({ retry }: { retry: () => void }) {
   return (
-    <main id="main" className="container">
-      <h1>This page could not load</h1>
-      <p>Try loading the page again. Your saved records have not been changed.</p>
-      <button onClick={reset}>Try again</button>
-    </main>
+    <RecoveryFrame
+      title="This page could not load"
+      message="Try loading the page again. Your saved records have not been changed."
+    >
+      <Button variant="primary" onClick={retry}>
+        Try again
+      </Button>
+    </RecoveryFrame>
   );
 }

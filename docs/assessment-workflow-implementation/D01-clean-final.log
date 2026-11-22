@@ -1,0 +1,13 @@
+
+Running 8 tests using 1 worker
+
+  ok 1 tests\workflow-qa-browser\workflow.spec.ts:293:1 › D01 literal link cancellation preserves author edits; clean navigation proceeds (518ms)
+  ok 2 tests\workflow-qa-browser\workflow.spec.ts:325:1 › D01 same-document Back and Forward cancellation retains author work (523ms)
+  ok 3 tests\workflow-qa-browser\workflow.spec.ts:350:1 › D07 rejection requires separate member-safe feedback and transmits it separately (541ms)
+  ok 4 tests\workflow-qa-browser\workflow.spec.ts:431:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (3.1s)
+  ok 5 tests\workflow-qa-browser\workflow.spec.ts:465:1 › D01 confirmed file evidence becomes clean without losing an unrelated review draft (3.9s)
+  ok 6 tests\workflow-qa-browser\workflow.spec.ts:488:1 › D01 uncertain reviewer decision stops newer writes and retains fields (904ms)
+  ok 7 tests\workflow-qa-browser\workflow.spec.ts:524:3 › D01 switch canceled guard sends zero context mutations (1.5s)
+  ok 8 tests\workflow-qa-browser\workflow.spec.ts:524:3 › D01 logout canceled guard sends zero context mutations (1.3s)
+
+  8 passed (14.5s)

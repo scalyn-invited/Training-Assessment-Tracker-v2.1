@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { setupA11y, setupTheme, setupShot } from '../setup-ui-checks.js';
 import { Database } from '../../packages/database/src/database.js';
 test('fresh local wizard, full fixtures, interrupted resume and automatic runtime handoff', async ({
   page,
@@ -9,7 +10,19 @@ test('fresh local wizard, full fixtures, interrupted resume and automatic runtim
   await expect(
     page.getByRole('heading', { name: 'Check installation requirements' }),
   ).toBeVisible();
-  await page.getByRole('button', { name: 'Continue to database' }).click();
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await setupTheme(page, 'Dark');
+  await setupA11y(page);
+  await setupShot(page, 'requirements-desktop');
+  for (const width of [320, 390, 800]) {
+    await page.setViewportSize({ width, height: 844 });
+    await setupA11y(page);
+  }
+  await setupTheme(page, 'Light');
+  await setupA11y(page);
+  await setupTheme(page, 'Dark');
+  await page.getByRole('button', { name: 'Continue to database' }).focus();
+  await page.keyboard.press('Enter');
   await expect(page.getByRole('radio', { name: 'Local PGlite workspace' })).toBeChecked();
   await page.getByRole('radio', { name: 'PostgreSQL database' }).check();
   await page.getByLabel('Database name', { exact: true }).fill('keep-my-input');
@@ -18,8 +31,19 @@ test('fresh local wizard, full fixtures, interrupted resume and automatic runtim
   await expect(page.getByLabel('Database name', { exact: true })).toHaveValue('keep-my-input');
   await page.getByRole('radio', { name: 'Local PGlite workspace' }).check();
   await page.getByRole('button', { name: 'Check database and continue' }).click();
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await setupA11y(page);
+  await setupShot(page, 'administrator-desktop');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await setupA11y(page);
+  await setupShot(page, 'administrator-mobile');
+  await page.getByRole('button', { name: 'Review installation', exact: true }).click();
+  await expect(page.getByLabel('Your name', { exact: true })).toBeFocused();
   await page.getByLabel('Your name', { exact: true }).fill('Local Workspace Owner');
   await page.getByLabel('Email address', { exact: true }).fill('owner@local.example.test');
+  page.once('dialog', (dialog) => dialog.dismiss());
+  await page.getByRole('button', { name: 'Back', exact: true }).click();
+  await expect(page.getByLabel('Your name', { exact: true })).toHaveValue('Local Workspace Owner');
   const password = 'Personal local administrator passphrase';
   const demo = 'Separate fictional account passphrase';
   await page.getByLabel('Administrator password', { exact: true }).fill(password);
@@ -42,6 +66,8 @@ test('fresh local wizard, full fixtures, interrupted resume and automatic runtim
     path: 'output/playwright/local-setup-review-mobile.png',
     fullPage: true,
   });
+  await setupA11y(page);
+  await setupShot(page, 'review-mobile');
   let calls = 0;
   await page.route('**/api/installation/action', async (route) => {
     if (route.request().postDataJSON().action === 'install' && ++calls === 6)
@@ -58,6 +84,7 @@ test('fresh local wizard, full fixtures, interrupted resume and automatic runtim
   await expect(page.getByText('Interrupted fixture stage. Resume the saved step.')).toBeVisible({
     timeout: 90000,
   });
+  await setupA11y(page);
   await page.reload();
   await expect(page.getByText('Demo preparation: 4 of 25 steps saved.')).toBeVisible();
   await page.getByRole('button', { name: 'Continue installation', exact: true }).click();
@@ -72,6 +99,8 @@ test('fresh local wizard, full fixtures, interrupted resume and automatic runtim
   await expect(page.getByRole('link', { name: 'Continue to sign in' })).toBeVisible({
     timeout: 45000,
   });
+  await setupA11y(page);
+  await setupShot(page, 'complete-mobile');
   const db = new Database('postgresql://postgres:postgres@127.0.0.1:55442/postgres');
   try {
     expect((await db.pool.query('SELECT count(*)::int AS n FROM users')).rows[0].n).toBe(31);

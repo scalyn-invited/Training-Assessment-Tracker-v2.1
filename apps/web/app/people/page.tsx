@@ -1,7 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { api, useContext, Guest, Pending, Feedback } from '../components/auth-ui';
+import { api, useContext, Guest, Pending } from '../components/auth-ui';
+import { Button, Panel, PageHeader, Feedback } from '../components/ui/controls';
+import { DirectoryTable, Pagination } from '../components/ui/directory';
+import styles from '../components/ui/form-layout.module.css';
 type People = {
   people: { id: string; name: string; sync_policy: string; active: boolean }[];
   total: number;
@@ -38,29 +41,24 @@ export default function People() {
       {!context?.user ? (
         <Pending error={error} retry={load} />
       ) : (
-        <>
+        <div className={styles.page}>
           <p className="eyebrow">Administration</p>
-          <h1>People in this client</h1>
-          <p className="lead">
+          <PageHeader title="People in this client">
             Synthetic profiles are isolated from production. Admin access does not grant private
             assessment access.
-          </p>
+          </PageHeader>
           <Feedback error={failure} />
-          {failure && (
-            <button className="secondary" onClick={() => setRetry((n) => n + 1)}>
-              Retry people
-            </button>
-          )}
+          {failure && <Button onClick={() => setRetry((n) => n + 1)}>Retry people</Button>}
           {!data && !failure && <p role="status">Loading client members...</p>}
           {data && (
             <>
-              <div
-                className="panel directory-panel"
+              <Panel
+                className={styles.panel}
                 role="region"
                 aria-label="People in the active client"
                 tabIndex={0}
               >
-                <table className="directory-table">
+                <DirectoryTable stacked className={styles.table}>
                   <caption className="sr-only">
                     People with an active membership in the selected client
                   </caption>
@@ -87,30 +85,22 @@ export default function People() {
                       </tr>
                     )}
                   </tbody>
-                </table>
-              </div>
-              <nav className="form-actions" aria-label="People pages">
-                <button
-                  className="secondary"
-                  disabled={page === 1}
-                  onClick={() => setPage((n) => n - 1)}
-                >
+                </DirectoryTable>
+              </Panel>
+              <Pagination aria-label="People pages">
+                <Button disabled={page === 1} onClick={() => setPage((n) => n - 1)}>
                   Previous people
-                </button>
+                </Button>
                 <span>
                   Page {page} of {Math.max(1, Math.ceil(data.total / 20))}
                 </span>
-                <button
-                  className="secondary"
-                  disabled={page * 20 >= data.total}
-                  onClick={() => setPage((n) => n + 1)}
-                >
+                <Button disabled={page * 20 >= data.total} onClick={() => setPage((n) => n + 1)}>
                   Next people
-                </button>
-              </nav>
+                </Button>
+              </Pagination>
             </>
           )}
-        </>
+        </div>
       )}
     </Guest>
   );

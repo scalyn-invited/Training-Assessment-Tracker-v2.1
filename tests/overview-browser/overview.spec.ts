@@ -39,6 +39,34 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   const expected = await (await request.get('/api/platform/overview')).json();
   const accounts = await (await request.get('/api/platform/client-accounts')).json();
   const audit = await (await request.get('/api/platform/audit')).json();
+  // Protected-page context failures use the shared guest system before a session resolves.
+  await page.route('**/api/auth/context', (route) =>
+    route.fulfill({ status: 503, json: { message: 'Session temporarily unavailable.' } }),
+  );
+  await page.goto('/platform');
+  await expect(page.locator('[data-guest-shell="session"]')).toBeVisible();
+  await expect(page.getByText('Session temporarily unavailable.', { exact: true })).toBeVisible();
+  await expect(page.locator('[data-application-shell], .app-sidebar, .guest-header')).toHaveCount(
+    0,
+  );
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    expect(
+      (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+        .violations,
+    ).toEqual([]);
+    const retry = page.getByRole('button', { name: 'Try loading again', exact: true });
+    await retry.focus();
+    await expect(retry).toBeFocused();
+    if (width <= 800) expect((await retry.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    await page.screenshot({ path: `${screenshotDir}/session-error-${width}.png`, fullPage: true });
+  }
+  await page.unroute('**/api/auth/context');
+  await page.getByRole('button', { name: 'Try loading again', exact: true }).press('Enter');
+  await expect(page).toHaveURL(/\/login$/);
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/login');
   await page.getByLabel('Email', { exact: true }).fill('overview@example.invalid');
@@ -46,6 +74,9 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
   await expect(page).toHaveURL(/\/platform$/);
   await expect(page.getByRole('heading', { name: 'Platform overview' })).toBeVisible();
+  await expect(
+    page.getByText('What needs attention across the platform.', { exact: true }),
+  ).toHaveCSS('margin-top', '8px');
   const main = page.getByRole('main');
   await expect(
     main.getByRole('link', { name: 'Manage clients', exact: true }).locator('strong'),
@@ -166,8 +197,8 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   await page.setViewportSize({ width: 390, height: 1458 });
   await page.screenshot({ path: `${screenshotDir}/overview-dark-mobile.png`, fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
-  await mobile.getByRole('button', { name: 'Settings' }).click();
-  const settings = page.getByRole('dialog', { name: 'Settings', exact: true });
+  await page.getByRole('button', { name: 'Personal settings' }).click();
+  const settings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
   await expect(settings.getByRole('link', { name: 'Account security', exact: true })).toBeVisible();
   await expect(settings.getByRole('link', { name: 'Global admins', exact: true })).toBeVisible();
   await settings.getByRole('button', { name: 'Close', exact: true }).focus();
@@ -178,8 +209,30 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   await settings.locator('summary').click();
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  // Exercise the shared dialog's field boundary with an isolated DOM fixture. The old
+  // button-only focus list skipped fields at either edge of a form dialog.
+  await settings.evaluate((dialog) => {
+    const field = document.createElement('input');
+    field.setAttribute('aria-label', 'Dialog keyboard fixture');
+    field.dataset.keyboardFixture = 'true';
+    dialog.append(field);
+    const disabled = document.createElement('fieldset');
+    disabled.disabled = true;
+    disabled.dataset.keyboardFixture = 'true';
+    disabled.append(document.createElement('input'));
+    dialog.append(disabled);
+  });
+  const fixture = settings.getByRole('textbox', { name: 'Dialog keyboard fixture' });
+  await settings.getByRole('button', { name: 'Close', exact: true }).focus();
+  await page.keyboard.press('Shift+Tab');
+  await expect(fixture).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(settings.getByRole('button', { name: 'Close', exact: true })).toBeFocused();
+  await settings
+    .locator('[data-keyboard-fixture]')
+    .evaluateAll((nodes) => nodes.forEach((node) => node.remove()));
   await page.keyboard.press('Escape');
-  await expect(mobile.getByRole('button', { name: 'Settings' })).toBeFocused();
+  await expect(page.getByRole('button', { name: 'Personal settings' })).toBeFocused();
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await accessibility();
@@ -210,13 +263,12 @@ test('Overview design uses live scoped data, preserves access, and works on desk
       (await new AxeBuilder({ page: touch }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
         .violations,
     ).toEqual([]);
+    await touch.getByRole('button', { name: 'Personal settings' }).tap();
+    await expect(
+      touch.getByRole('dialog', { name: 'Personal settings', exact: true }),
+    ).toBeVisible();
     await touch
-      .getByRole('navigation', { name: 'Mobile platform navigation' })
-      .getByRole('button', { name: 'Settings' })
-      .tap();
-    await expect(touch.getByRole('dialog', { name: 'Settings', exact: true })).toBeVisible();
-    await touch
-      .getByRole('dialog', { name: 'Settings', exact: true })
+      .getByRole('dialog', { name: 'Personal settings', exact: true })
       .getByRole('button', { name: 'Close', exact: true })
       .tap();
     await touch.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));

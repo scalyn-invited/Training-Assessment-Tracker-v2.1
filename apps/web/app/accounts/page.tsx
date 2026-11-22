@@ -2,7 +2,19 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Password, Feedback, values } from '../components/auth-ui';
+import {
+  Button,
+  Input,
+  Select,
+  Panel,
+  PageHeader,
+  Feedback,
+  Badge,
+} from '../components/ui/controls';
+import { DirectoryTable, Pagination } from '../components/ui/directory';
+import { PasswordField } from '../components/ui/password';
+import styles from '../components/ui/form-layout.module.css';
+import { api, useContext, Guest, Pending, values } from '../components/auth-ui';
 type Client = { id: string; name: string };
 type Issued = {
   id: string;
@@ -140,341 +152,349 @@ export default function AccountsPage() {
     );
   return (
     <Guest>
-      <p>
-        <Link href="/dashboard">Back to workspace</Link>
-      </p>
-      <h1>Accounts</h1>
-      <Feedback error={error} success={message} />
-      {error && (
+      <div className={styles.page}>
         <p>
-          <button
-            className="secondary"
-            onClick={() => {
-              setError('');
-              void refresh();
-            }}
-          >
-            Try loading accounts again
-          </button>{' '}
-          <Link href="/clients">Choose your client</Link>
+          <Link href="/dashboard">Back to workspace</Link>
         </p>
-      )}
-      {!data && !error && <p role="status">Loading account administration…</p>}
-      {data &&
-        (!result ? (
-          <>
-            <section className="panel">
-              <h2>Create an account or invite an existing member</h2>
-              <p>
-                Access starts after password setup or invitation acceptance. Initial access is
-                Member only.
-              </p>
-              {!data.clients.length ? (
-                <>
-                  <p>Create your first client to start adding accounts.</p>
-                  <Link href="/platform/clients">Manage clients</Link>
-                </>
-              ) : (
-                <form onSubmit={create} aria-busy={busy}>
-                  <fieldset hidden={Boolean(review)} disabled={busy}>
-                    <legend>Account details</legend>
+        <PageHeader title="Accounts" />
+        <Feedback error={error} success={message} />
+        {error && (
+          <p>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setError('');
+                void refresh();
+              }}
+            >
+              Try loading accounts again
+            </Button>{' '}
+            <Link href="/clients">Choose your client</Link>
+          </p>
+        )}
+        {!data && !error && <p role="status">Loading account administration…</p>}
+        {data &&
+          (!result ? (
+            <>
+              <Panel className={styles.panel}>
+                <h2>Create an account or invite an existing member</h2>
+                <p>
+                  Access starts after password setup or invitation acceptance. Initial access is
+                  Member only.
+                </p>
+                {!data.clients.length ? (
+                  <>
+                    <p>Create your first client to start adding accounts.</p>
+                    <Link href="/platform/clients">Manage clients</Link>
+                  </>
+                ) : (
+                  <form onSubmit={create} aria-busy={busy}>
+                    <fieldset hidden={Boolean(review)} disabled={busy}>
+                      <legend>Account details</legend>
+                      <label>
+                        Client
+                        <Select name="clientId" required defaultValue={data.clientId ?? ''}>
+                          <option value="">Choose client…</option>
+                          {data.clients.map((c) => (
+                            <option value={c.id} key={c.id}>
+                              {c.name}
+                            </option>
+                          ))}
+                        </Select>
+                      </label>
+                      <label>
+                        Account operation
+                        <Select value={mode} onChange={(e) => setMode(e.target.value)}>
+                          <option value="new">New account</option>
+                          <option value="existing">Existing account invitation</option>
+                        </Select>
+                      </label>
+                      {mode === 'new' && (
+                        <label>
+                          Name
+                          <Input name="name" required maxLength={120} autoComplete="off" />
+                        </label>
+                      )}
+                      <label>
+                        Email
+                        <Input
+                          type="email"
+                          name="email"
+                          required
+                          maxLength={200}
+                          autoComplete="off"
+                        />
+                      </label>
+                      {mode === 'new' && (
+                        <>
+                          <label>
+                            <Input type="checkbox" name="synthetic" defaultChecked /> Test account
+                          </label>
+                          <p className="field-help">
+                            Uncheck for a non-test local account. Existing accounts keep their
+                            classification.
+                          </p>
+                        </>
+                      )}
+                      {!data.accountMailAvailable && (
+                        <p>
+                          Email is not configured. A private link will be shown for manual sharing.
+                        </p>
+                      )}
+                      <PasswordField name="createPassword" label="Your current password" />
+                      <label>
+                        Reason
+                        <Input name="reason" required minLength={8} maxLength={2000} />
+                      </label>
+                    </fieldset>
+                    {review && (
+                      <div role="group" aria-label="Review account action">
+                        <h3>Review {mode === 'new' ? 'account setup' : 'invitation'}</h3>
+                        <p>
+                          {review.name} · {review.email}
+                        </p>
+                        <p>Client: {data.clients.find((c) => c.id === review.clientId)?.name}</p>
+                        <p>Reason: {review.reason}</p>
+                        <p>The recipient must accept access. This action creates a private link.</p>
+                        <Button
+                          type="button"
+                          variant="secondary"
+                          onClick={() => setReview(null)}
+                          disabled={busy}
+                        >
+                          Back to details
+                        </Button>
+                      </div>
+                    )}
+                    {data.accountMailAvailable && (
+                      <details>
+                        <summary>Optional email delivery</summary>
+                        <label>
+                          <Input type="checkbox" name="sendEmail" disabled={busy} /> Email this link
+                          to the approved recipient (optional)
+                        </label>
+                      </details>
+                    )}
+                    <Button type="submit" variant="primary" disabled={busy}>
+                      {busy
+                        ? 'Creating private link…'
+                        : review
+                          ? 'Create private link'
+                          : 'Review and continue'}
+                    </Button>
+                  </form>
+                )}
+              </Panel>
+              <details className={styles.panel}>
+                <summary>Manage setup and recovery links</summary>
+                <p>
+                  Recovery changes the shared login across every client and ends all recipient
+                  sessions when completed. Client Admins cannot recover themselves or Global Admins.
+                </p>
+                <label>
+                  Find an account
+                  <Input
+                    type="search"
+                    maxLength={120}
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    enterKeyHint="search"
+                  />
+                </label>
+                {loading && <p role="status">Updating accounts…</p>}
+                <form onSubmit={recover} aria-busy={busy}>
+                  <label>
+                    Action
+                    <Select name="purpose" required>
+                      <option value="">Choose action…</option>
+                      <option value="reset">Issue recovery link</option>
+                      <option value="setup">Reissue initial setup</option>
+                    </Select>
+                  </label>
+                  <label>
+                    Account
+                    <Select name="userId" required>
+                      <option value="">Choose account…</option>
+                      {data.targets.map((t) => (
+                        <option value={t.id} key={t.id}>
+                          {t.name} — {t.email}
+                        </option>
+                      ))}
+                    </Select>
+                  </label>
+                  <p className="field-help">
+                    Up to 100 matching accounts are shown. Refine the search if needed.
+                  </p>
+                  {data.global && (
                     <label>
-                      Client
-                      <select name="clientId" required defaultValue={data.clientId ?? ''}>
-                        <option value="">Choose client…</option>
+                      Client (required for initial setup)
+                      <Select name="clientId">
+                        <option value="">Account-wide recovery</option>
                         {data.clients.map((c) => (
                           <option value={c.id} key={c.id}>
                             {c.name}
                           </option>
                         ))}
-                      </select>
+                      </Select>
                     </label>
-                    <label>
-                      Account operation
-                      <select value={mode} onChange={(e) => setMode(e.target.value)}>
-                        <option value="new">New account</option>
-                        <option value="existing">Existing account invitation</option>
-                      </select>
-                    </label>
-                    {mode === 'new' && (
-                      <label>
-                        Name
-                        <input name="name" required maxLength={120} autoComplete="off" />
-                      </label>
-                    )}
-                    <label>
-                      Email
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        maxLength={200}
-                        autoComplete="off"
-                      />
-                    </label>
-                    {mode === 'new' && (
-                      <>
-                        <label>
-                          <input type="checkbox" name="synthetic" defaultChecked /> Test account
-                        </label>
-                        <p className="field-help">
-                          Uncheck for a non-test local account. Existing accounts keep their
-                          classification.
-                        </p>
-                      </>
-                    )}
-                    {!data.accountMailAvailable && (
-                      <p>
-                        Email is not configured. A private link will be shown for manual sharing.
-                      </p>
-                    )}
-                    <Password name="createPassword" label="Your current password" />
-                    <label>
-                      Reason
-                      <input name="reason" required minLength={8} maxLength={2000} />
-                    </label>
-                  </fieldset>
-                  {review && (
-                    <div role="group" aria-label="Review account action">
-                      <h3>Review {mode === 'new' ? 'account setup' : 'invitation'}</h3>
-                      <p>
-                        {review.name} · {review.email}
-                      </p>
-                      <p>Client: {data.clients.find((c) => c.id === review.clientId)?.name}</p>
-                      <p>Reason: {review.reason}</p>
-                      <p>The recipient must accept access. This action creates a private link.</p>
-                      <button
-                        type="button"
-                        className="secondary"
-                        onClick={() => setReview(null)}
-                        disabled={busy}
-                      >
-                        Back to details
-                      </button>
-                    </div>
                   )}
+                  <PasswordField
+                    name="recoveryPassword"
+                    label="Your current password for recovery"
+                  />
+                  <label>
+                    Recovery reason
+                    <Input name="reason" required minLength={8} maxLength={2000} />
+                  </label>
+                  <label>
+                    <Input type="checkbox" required /> I have checked the recipient and recovery
+                    action.
+                  </label>
                   {data.accountMailAvailable && (
                     <details>
                       <summary>Optional email delivery</summary>
                       <label>
-                        <input type="checkbox" name="sendEmail" disabled={busy} /> Email this link
+                        <Input type="checkbox" name="sendEmail" disabled={busy} /> Email this link
                         to the approved recipient (optional)
                       </label>
                     </details>
                   )}
-                  <button className="primary" disabled={busy}>
-                    {busy
-                      ? 'Creating private link…'
-                      : review
-                        ? 'Create private link'
-                        : 'Review and continue'}
-                  </button>
+                  <Button type="submit" variant="secondary" disabled={busy}>
+                    {busy ? 'Issuing…' : 'Issue private link'}
+                  </Button>
                 </form>
-              )}
-            </section>
-            <details className="panel">
-              <summary>Manage setup and recovery links</summary>
+              </details>
+              <Panel className={styles.panel} aria-busy={loading}>
+                <h2>Issued links</h2>
+                <p className="directory-count">{data.total} issued links</p>
+                <div className={styles.tableWrap}>
+                  <DirectoryTable stacked className={styles.table}>
+                    <caption className="sr-only">Issued account links</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Account</th>
+                        <th scope="col">Purpose</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Expires (UTC)</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.links.map((link) => (
+                        <tr key={link.id}>
+                          <td>
+                            <strong>{link.name}</strong>
+                            <small>{link.email}</small>
+                          </td>
+                          <td data-label="Purpose">{link.purpose}</td>
+                          <td data-label="Status">
+                            <Badge>
+                              {link.consumed_at
+                                ? 'Used'
+                                : link.revoked_at
+                                  ? 'Cancelled'
+                                  : Date.parse(link.expires_at) <= Date.now()
+                                    ? 'Expired'
+                                    : 'Pending'}
+                            </Badge>
+                          </td>
+                          <td data-label="Expires (UTC)">
+                            {new Date(link.expires_at).toUTCString()}
+                          </td>
+                          <td>
+                            {!link.consumed_at && !link.revoked_at ? (
+                              <details>
+                                <summary>Manage link</summary>
+                                <form onSubmit={(e) => void cancel(e, link)}>
+                                  <PasswordField
+                                    name={'password-' + link.id}
+                                    label={'Your current password to cancel ' + link.name}
+                                  />
+                                  <label>
+                                    Cancellation reason
+                                    <Input name="reason" required minLength={8} maxLength={2000} />
+                                  </label>
+                                  <label>
+                                    <Input type="checkbox" required /> Cancel this private link.
+                                  </label>
+                                  <Button type="submit" variant="danger" disabled={busy}>
+                                    Cancel link
+                                  </Button>
+                                </form>
+                              </details>
+                            ) : (
+                              <span>No action available</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                      {!data.links.length && (
+                        <tr>
+                          <td colSpan={5}>
+                            No links have been issued. Create an account or invitation above to
+                            begin.
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </DirectoryTable>
+                </div>
+                {data.total > 20 && (
+                  <Pagination aria-label="Issued link pages">
+                    <Button
+                      variant="secondary"
+                      disabled={page === 1 || loading}
+                      onClick={() => setPage(page - 1)}
+                    >
+                      Previous
+                    </Button>
+                    <span> Page {page} </span>
+                    <Button
+                      type="submit"
+                      variant="secondary"
+                      disabled={page * 20 >= data.total || loading}
+                      onClick={() => setPage(page + 1)}
+                    >
+                      Next
+                    </Button>
+                  </Pagination>
+                )}
+              </Panel>
+            </>
+          ) : (
+            <Panel className={styles.panel}>
+              <h2>Private account link</h2>
+              {result.delivery && <p role="status">{result.delivery}</p>}
               <p>
-                Recovery changes the shared login across every client and ends all recipient
-                sessions when completed. Client Admins cannot recover themselves or Global Admins.
+                This {result.purpose} link is shown once. Share it privately with the intended
+                person.
               </p>
+              <p>Expires: {new Date(result.expiresAt).toUTCString()}</p>
               <label>
-                Find an account
-                <input
-                  type="search"
-                  maxLength={120}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  enterKeyHint="search"
+                Private link
+                <Input
+                  readOnly
+                  value={typeof window === 'undefined' ? '' : window.location.origin + result.path}
+                  aria-describedby="link-warning"
+                  onFocus={(e) => e.target.select()}
                 />
               </label>
-              {loading && <p role="status">Updating accounts…</p>}
-              <form onSubmit={recover} aria-busy={busy}>
-                <label>
-                  Action
-                  <select name="purpose" required>
-                    <option value="">Choose action…</option>
-                    <option value="reset">Issue recovery link</option>
-                    <option value="setup">Reissue initial setup</option>
-                  </select>
-                </label>
-                <label>
-                  Account
-                  <select name="userId" required>
-                    <option value="">Choose account…</option>
-                    {data.targets.map((t) => (
-                      <option value={t.id} key={t.id}>
-                        {t.name} — {t.email}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <p className="field-help">
-                  Up to 100 matching accounts are shown. Refine the search if needed.
-                </p>
-                {data.global && (
-                  <label>
-                    Client (required for initial setup)
-                    <select name="clientId">
-                      <option value="">Account-wide recovery</option>
-                      {data.clients.map((c) => (
-                        <option value={c.id} key={c.id}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                )}
-                <Password name="recoveryPassword" label="Your current password for recovery" />
-                <label>
-                  Recovery reason
-                  <input name="reason" required minLength={8} maxLength={2000} />
-                </label>
-                <label>
-                  <input type="checkbox" required /> I have checked the recipient and recovery
-                  action.
-                </label>
-                {data.accountMailAvailable && (
-                  <details>
-                    <summary>Optional email delivery</summary>
-                    <label>
-                      <input type="checkbox" name="sendEmail" disabled={busy} /> Email this link to
-                      the approved recipient (optional)
-                    </label>
-                  </details>
-                )}
-                <button className="secondary" disabled={busy}>
-                  {busy ? 'Issuing…' : 'Issue private link'}
-                </button>
-              </form>
-            </details>
-            <section className="panel directory-panel" aria-busy={loading}>
-              <h2>Issued links</h2>
-              <p className="directory-count">{data.total} issued links</p>
-              <div className="directory-table-wrap">
-                <table className="directory-table">
-                  <caption className="sr-only">Issued account links</caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">Account</th>
-                      <th scope="col">Purpose</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Expires (UTC)</th>
-                      <th scope="col">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.links.map((link) => (
-                      <tr key={link.id}>
-                        <td>
-                          <strong>{link.name}</strong>
-                          <small>{link.email}</small>
-                        </td>
-                        <td data-label="Purpose">{link.purpose}</td>
-                        <td data-label="Status">
-                          <span className="directory-badge">
-                            {link.consumed_at
-                              ? 'Used'
-                              : link.revoked_at
-                                ? 'Cancelled'
-                                : Date.parse(link.expires_at) <= Date.now()
-                                  ? 'Expired'
-                                  : 'Pending'}
-                          </span>
-                        </td>
-                        <td data-label="Expires (UTC)">
-                          {new Date(link.expires_at).toUTCString()}
-                        </td>
-                        <td>
-                          {!link.consumed_at && !link.revoked_at ? (
-                            <details>
-                              <summary>Manage link</summary>
-                              <form onSubmit={(e) => void cancel(e, link)}>
-                                <Password
-                                  name={'password-' + link.id}
-                                  label={'Your current password to cancel ' + link.name}
-                                />
-                                <label>
-                                  Cancellation reason
-                                  <input name="reason" required minLength={8} maxLength={2000} />
-                                </label>
-                                <label>
-                                  <input type="checkbox" required /> Cancel this private link.
-                                </label>
-                                <button type="submit" className="danger" disabled={busy}>
-                                  Cancel link
-                                </button>
-                              </form>
-                            </details>
-                          ) : (
-                            <span>No action available</span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                    {!data.links.length && (
-                      <tr>
-                        <td colSpan={5}>
-                          No links have been issued. Create an account or invitation above to begin.
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-              {data.total > 20 && (
-                <nav aria-label="Issued link pages">
-                  <button
-                    className="secondary"
-                    disabled={page === 1 || loading}
-                    onClick={() => setPage(page - 1)}
-                  >
-                    Previous
-                  </button>
-                  <span> Page {page} </span>
-                  <button
-                    className="secondary"
-                    disabled={page * 20 >= data.total || loading}
-                    onClick={() => setPage(page + 1)}
-                  >
-                    Next
-                  </button>
-                </nav>
-              )}
-            </section>
-          </>
-        ) : (
-          <section className="panel">
-            <h2>Private account link</h2>
-            {result.delivery && <p role="status">{result.delivery}</p>}
-            <p>
-              This {result.purpose} link is shown once. Share it privately with the intended person.
-            </p>
-            <p>Expires: {new Date(result.expiresAt).toUTCString()}</p>
-            <label>
-              Private link
-              <input
-                readOnly
-                value={typeof window === 'undefined' ? '' : window.location.origin + result.path}
-                aria-describedby="link-warning"
-                onFocus={(e) => e.target.select()}
-              />
-            </label>
-            <p id="link-warning">
-              Do not put this link in a ticket, public message, or screenshot. Reissuing cancels the
-              previous link.
-            </p>
-            <button
-              className="secondary"
-              onClick={() => {
-                setResult(null);
-                setMessage('Private link hidden.');
-              }}
-            >
-              Done with private link
-            </button>
-          </section>
-        ))}
+              <p id="link-warning">
+                Do not put this link in a ticket, public message, or screenshot. Reissuing cancels
+                the previous link.
+              </p>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setResult(null);
+                  setMessage('Private link hidden.');
+                }}
+              >
+                Done with private link
+              </Button>
+            </Panel>
+          ))}
+      </div>
     </Guest>
   );
 }

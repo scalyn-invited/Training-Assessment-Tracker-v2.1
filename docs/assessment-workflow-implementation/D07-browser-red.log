@@ -1,0 +1,60 @@
+
+Running 2 tests using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:317:1 › D07 rejection requires separate member-safe feedback and transmits it separately (6.0s)
+  x  2 tests\workflow-qa-browser\workflow.spec.ts:335:1 › D07 learner sees returned guidance without a released grade or private reason (5.5s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:317:1 › D07 rejection requires separate member-safe feedback and transmits it separately 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Enter member-safe return feedback between 8 and 4,000 characters.', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('Enter member-safe return feedback between 8 and 4,000 characters.', { exact: true }) with timeout 5000ms
+      - waiting for getByText('Enter member-safe return feedback between 8 and 4,000 characters.', { exact: true })
+
+
+      326 |  page.on('dialog',d=>d.accept());
+      327 |  await page.getByRole('button',{name:'Reject and allow resubmission'}).click();
+    > 328 |  await expect(page.getByText('Enter member-safe return feedback between 8 and 4,000 characters.',{exact:true})).toBeVisible();
+          |                                                                                                                 ^
+      329 |  expect(posts).toHaveLength(0);
+      330 |  await page.getByLabel('Member-safe return feedback', {exact:true}).fill('PUBLIC: Add a worked example.');
+      331 |  await page.getByRole('button',{name:'Reject and allow resubmission'}).click();
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:328:113
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D07-rejection-req-b369b-and-transmits-it-separately\error-context.md
+
+  2) tests\workflow-qa-browser\workflow.spec.ts:335:1 › D07 learner sees returned guidance without a released grade or private reason 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Changes requested' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Changes requested' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Changes requested' })
+
+
+      339 |  });
+      340 |  await page.addScriptTag({content:review});
+    > 341 |  await expect(page.getByRole('heading',{name:'Changes requested'})).toBeVisible();
+          |                                                                     ^
+      342 |  await expect(page.getByText('PUBLIC: Add a worked example.')).toBeVisible();
+      343 |  await expect(page.getByRole('heading',{name:'Approved result'})).toHaveCount(0);
+      344 |  await screenshot(page,'D07-member-return-guidance');
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:341:69
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D07-learner-sees--446d2-sed-grade-or-private-reason\error-context.md
+
+  2 failed
+    tests\workflow-qa-browser\workflow.spec.ts:317:1 › D07 rejection requires separate member-safe feedback and transmits it separately 
+    tests\workflow-qa-browser\workflow.spec.ts:335:1 › D07 learner sees returned guidance without a released grade or private reason 

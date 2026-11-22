@@ -1,0 +1,64 @@
+{
+  "testedHead": "03949a624b0354efbd32008e8c9dd0f7cc1238ef",
+  "productionCommit": "a1e4c16d2096076b4111cd3669396dfd4661d939",
+  "exactReviewerCasesUnchanged": true,
+  "stats": {
+    "original": {
+      "startTime": "2026-11-16T14:35:56.826Z",
+      "duration": 83500.337,
+      "expected": 25,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "correctionRed": {
+      "startTime": "2026-11-16T14:54:37.577Z",
+      "duration": 42628.143000000004,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "correctionGreen": {
+      "startTime": "2026-11-16T15:12:40.838Z",
+      "duration": 82915.22,
+      "expected": 29,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qaComponent": {
+      "startTime": "2026-11-16T15:25:36.501Z",
+      "duration": 122748.871,
+      "expected": 29,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qaNext": {
+      "startTime": "2026-11-16T15:30:41.664Z",
+      "duration": 42933.304,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qa-focused.json": {
+      "passed": 24,
+      "failed": 0,
+      "pending": 0,
+      "total": 24
+    },
+    "domain.json": {
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "total": 1
+    }
+  },
+  "productionDiff": "",
+  "originalEvidenceDiff": "",
+  "trackedDiff": "",
+  "portsBefore": "3275 free after QA\n55439 free after QA\n",
+  "portsAfter": "3275 free after QA\n55439 free after QA\n"
+}

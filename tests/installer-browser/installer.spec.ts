@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { setupA11y, setupTheme, setupShot } from '../setup-ui-checks.js';
 import AxeBuilder from '@axe-core/playwright';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -16,7 +17,9 @@ test('hosted token, owned database, reviewed installation, retry and production 
     application: string;
     url: string;
   };
-  const setupResponse = await request.get('/api/installation/context', { headers: { 'X-Request-ID': 'untrusted-id' } });
+  const setupResponse = await request.get('/api/installation/context', {
+    headers: { 'X-Request-ID': 'untrusted-id' },
+  });
   expect(setupResponse.ok()).toBeTruthy();
   const setupHeaders = setupResponse.headers();
   expect(setupHeaders['cache-control']).toContain('no-store');
@@ -27,6 +30,9 @@ test('hosted token, owned database, reviewed installation, retry and production 
   expect(setupHeaders['x-request-id']).toMatch(/^[0-9a-f-]{36}$/);
   await page.goto('/setup/hosted');
   await expect(page.getByRole('heading', { name: 'Unlock hosted setup' })).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await setupTheme(page, 'Dark');
+  await setupA11y(page);
   await page.getByLabel('Setup token', { exact: true }).fill('a'.repeat(64));
   await page.getByRole('button', { name: 'Unlock setup', exact: true }).click();
   await expect(
@@ -40,6 +46,11 @@ test('hosted token, owned database, reviewed installation, retry and production 
     page.getByRole('heading', { name: 'Check installation requirements' }),
   ).toBeVisible();
   await page.getByRole('button', { name: 'Continue to database' }).click();
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await setupA11y(page);
+  await setupShot(page, 'database-desktop');
+  await page.setViewportSize({ width: 320, height: 844 });
+  await setupA11y(page);
   await page.getByLabel('Database host', { exact: true }).fill('127.0.0.1');
   await page.getByLabel('Database port', { exact: true }).fill(String(fixture.postgresPort));
   await page.getByLabel('Database name', { exact: true }).fill('training_installer_test');

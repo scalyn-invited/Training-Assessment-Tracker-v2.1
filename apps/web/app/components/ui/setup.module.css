@@ -1,0 +1,288 @@
+/* Christian's six-stage setup frames; actual workflow and progress remain API-owned. */
+.page {
+  display: grid;
+  gap: 28px;
+  width: 100%;
+}
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 12px;
+}
+.stepper li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ui-muted);
+  font-size: 13px;
+  line-height: 20px;
+}
+.stepper li + li::before {
+  content: '';
+  width: 22px;
+  height: 2px;
+  background: var(--ui-border);
+  margin-right: 4px;
+}
+.stepNumber {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  border: 1px solid var(--ui-border);
+  border-radius: 50%;
+  background: var(--ui-raised);
+  font-size: 12px;
+}
+.stepper li[aria-current] {
+  color: var(--ui-text);
+  font-weight: 500;
+}
+.stepper li[aria-current] .stepNumber {
+  background: var(--ui-accent);
+  color: var(--ui-on-accent);
+  border-color: var(--ui-accent);
+}
+.stepper li[data-completed='true'] .stepNumber {
+  background: var(--ui-success-bg);
+  border-color: var(--ui-success);
+}
+.card.card {
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.heading {
+  display: grid;
+  gap: 8px;
+}
+.heading h1 {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+}
+.eyebrow {
+  font-size: 12px;
+  line-height: 18px;
+}
+.card form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.card fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.card fieldset:not([hidden]) {
+  display: grid;
+  gap: 20px;
+}
+.card legend {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.card label {
+  color: var(--ui-muted);
+  font-size: 13px;
+  line-height: 20px;
+}
+.field {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+}
+.host {
+  grid-template-columns: minmax(0, 1fr) minmax(100px, 0.28fr);
+}
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.choices label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 64px;
+  padding: 16px;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-control);
+  cursor: pointer;
+  color: var(--ui-text);
+}
+.choices label:has(:checked) {
+  border-color: var(--ui-accent);
+  background: var(--soft);
+}
+.choices input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+.card > button,
+.card form > button {
+  align-self: flex-end;
+}
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--soft);
+}
+.callout img {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+.callout p {
+  font-size: 13px;
+  line-height: 20px;
+}
+.requirements,
+.stages {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+  background: var(--ui-background);
+}
+.requirements li,
+.stages li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-size: 13px;
+}
+.requirements li + li,
+.stages li + li {
+  border-top: 1px solid var(--ui-border);
+}
+.requirements img,
+.stages img {
+  flex: 0 0 auto;
+}
+.requirements li > span:last-child {
+  margin-left: auto;
+}
+.summary {
+  margin: 0;
+  padding: 0 20px;
+  background: var(--ui-background);
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+}
+.summary > div {
+  display: grid;
+  grid-template-columns: 135px minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px 0;
+}
+.summary > div:last-child {
+  border: 0;
+}
+.summary dd {
+  text-align: left;
+  font-weight: 400;
+}
+.complete.complete {
+  max-width: 560px;
+  padding: 36px;
+  text-align: center;
+}
+.complete .heading {
+  justify-items: center;
+}
+.completeIcon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--ui-success-bg);
+  margin-bottom: 8px;
+}
+.signIn.signIn {
+  color: var(--ui-on-accent);
+  align-self: stretch;
+}
+.signIn img {
+  flex: 0 0 auto;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+@media (max-width: 800px) {
+  .page {
+    gap: 24px;
+  }
+  .stepper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 8px;
+    align-items: start;
+  }
+  .stepper li {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .stepper li + li::before {
+    display: none;
+  }
+  .card.card,
+  .complete.complete {
+    padding: 20px;
+    gap: 20px;
+  }
+  .card .heading h1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .pair,
+  .choices {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .card > button,
+  .card form > button {
+    width: 100%;
+  }
+  .requirements li {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .summary {
+    padding-inline: 16px;
+  }
+  .summary > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .actions > button,
+  .signIn.signIn {
+    min-height: 48px;
+    flex: 1;
+  }
+}

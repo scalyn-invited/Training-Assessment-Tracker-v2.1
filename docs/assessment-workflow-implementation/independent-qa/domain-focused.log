@@ -1,0 +1,44 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.1.0 [39m[90mC:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow[39m
+
+ [32m✓[39m tests/assessment-reviews.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 61410[2mms[22m[39m
+   [33m[2m✓[22m[39m QA D02 characterizes no-team appeal freeze and unavailable alternate routing[33m 3224[2mms[22m[39m
+   [33m[2m✓[22m[39m D07 separately authored return feedback is safe, encrypted and bound to the immutable attempt[33m 2816[2mms[22m[39m
+   [33m[2m✓[22m[39m D07 rejects empty explicitly supplied public feedback without a decision[33m 1392[2mms[22m[39m
+   [33m[2m✓[22m[39m QA D07 legacy rejection omits public feedback without leaking private rationale[33m 2284[2mms[22m[39m
+   [33m[2m✓[22m[39m requires reviewer authority, pins the latest version and projects approved results only[33m 3168[2mms[22m[39m
+   [33m[2m✓[22m[39m requires explicit current file confirmation and rechecks bytes at decision time[33m 5830[2mms[22m[39m
+   [33m[2m✓[22m[39m allows rejection and resubmission but never reviews a superseded attempt[33m 3579[2mms[22m[39m
+   [33m[2m✓[22m[39m routes case-only appeals and closes alternate record/file access immediately on resolution[33m 7789[2mms[22m[39m
+   [33m[2m✓[22m[39m binds appeal access to the exact role grant without revival[33m 3708[2mms[22m[39m
+   [33m[2m✓[22m[39m keeps routing metadata separate from sensitive assessment details[33m 2309[2mms[22m[39m
+   [33m[2m✓[22m[39m blocks decisions during queued analysis and rejects a provisional source from another attempt[33m 2830[2mms[22m[39m
+ [32m✓[39m tests/assessment-responses.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 31187[2mms[22m[39m
+   [33m[2m✓[22m[39m limits editing to the member and never projects keys or rubric to the member[33m 2562[2mms[22m[39m
+   [33m[2m✓[22m[39m enforces section order and required matrix gates while retaining encrypted draft progress[33m 4152[2mms[22m[39m
+   [33m[2m✓[22m[39m accepts only accessible clean evidence from the same enrolment[33m 2736[2mms[22m[39m
+   [33m[2m✓[22m[39m does not permit other members to replay a submission reference[33m 1142[2mms[22m[39m
+   [33m[2m✓[22m[39m preserves unsectioned multiple-choice responses and allows an unanswered choice[33m 1731[2mms[22m[39m
+ [32m✓[39m tests/assessment-assignments.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 37556[2mms[22m[39m
+   [33m[2m✓[22m[39m rejects unpublished revisions and missing independent sensitive authority[33m 1574[2mms[22m[39m
+   [33m[2m✓[22m[39m assigns one pinned revision idempotently and exposes only scoped assignment metadata[33m 2978[2mms[22m[39m
+   [33m[2m✓[22m[39m pins team rules, includes future eligible records and does not replace individual assignments[33m 4255[2mms[22m[39m
+   [33m[2m✓[22m[39m QA D08 published-copy creation preserves old individual and team pins[33m 328[2mms[22m[39m
+   [33m[2m✓[22m[39m stops future assignments without deleting work and resumes only explicitly[33m 2347[2mms[22m[39m
+   [33m[2m✓[22m[39m blocks future processing when the rule creator loses current authority[33m 1222[2mms[22m[39m
+ [32m✓[39m tests/assessment-definitions.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 21803[2mms[22m[39m
+   [32m✓[39m assessment definitions and publication [2m(5)[22m
+     [33m[2m✓[22m[39m encrypts keys, replays identical saves and rejects changed tokens or stale versions[33m 595[2mms[22m[39m
+     [33m[2m✓[22m[39m publishes immutable revisions and edits by creating a new family revision[33m 770[2mms[22m[39m
+     [33m[2m✓[22m[39m blocks incomplete publication and foreign or quarantined image references[33m 772[2mms[22m[39m
+ [32m✓[39m tests/assessment-scoring.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 50[2mms[22m[39m
+ [32m✓[39m tests/assessment-content.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 62[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m6 passed[39m[22m[90m (6)[39m
+[2m      Tests [22m [1m[32m40 passed[39m[22m[90m (40)[39m
+[2m   Start at [22m 20:24:45
+[2m   Duration [22m 163.68s[2m (tests 95%, import 5%, transform 1%)[22m
+
+JSON report written to C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow/docs/assessment-workflow-implementation/independent-qa/domain.json
+
+EXIT 0

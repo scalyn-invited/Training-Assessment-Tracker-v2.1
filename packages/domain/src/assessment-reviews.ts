@@ -27,6 +27,7 @@ type Review = {
   status: string;
   result: string | null;
   source_review_id: string | null;
+  return_feedback: string | null;
   reason: string;
   created_at: Date;
 };
@@ -205,9 +206,19 @@ export class AssessmentReviews {
     reason: string,
     result: unknown,
     source: string | null = null,
+    returnFeedback: string | null = null,
   ) {
     reasonSchema.parse(reason);
     z.enum(['approved', 'rejected']).parse(outcome);
+    if (returnFeedback !== null) {
+      returnFeedback = z.string().trim().min(8).max(4000).parse(returnFeedback);
+      requireCondition(
+        outcome === 'rejected',
+        422,
+        'return_feedback_outcome',
+        'Return feedback is only for a rejected attempt.',
+      );
+    }
     return this.responses.locked(token, csrf, client, id, async (sql, actor, a, e) => {
       await this.reviewer(sql, actor, a, e);
       const t = await this.current(sql, a, attempt, expected);
@@ -258,7 +269,7 @@ export class AssessmentReviews {
           ).rows[0].next,
         );
       await sql.query(
-        "INSERT INTO assessment_reviews(id,organisation_id,environment,assignment_id,attempt_id,actor_id,sequence,kind,status,result,source_review_id,reason) VALUES($1,$2,$3,$4,$5,$6,$7,'decision',$8,$9,$10,$11)",
+        "INSERT INTO assessment_reviews(id,organisation_id,environment,assignment_id,attempt_id,actor_id,sequence,kind,status,result,source_review_id,reason,return_feedback) VALUES($1,$2,$3,$4,$5,$6,$7,'decision',$8,$9,$10,$11,$12)",
         [
           review,
           client,
@@ -271,6 +282,7 @@ export class AssessmentReviews {
           scored ? encrypt(JSON.stringify(scored), this.key) : null,
           source,
           reason,
+          returnFeedback === null ? null : encrypt(returnFeedback, this.key),
         ],
       );
       await sql.query(
@@ -542,6 +554,24 @@ export class AssessmentReviews {
           ).rows[0]
         : null;
       const definition = await this.responses.definition(sql, a);
+      const latestDecision =
+        t && (member || canReview)
+          ? (
+              await sql.query<Review>(
+                "SELECT * FROM assessment_reviews WHERE attempt_id=$1 AND kind='decision' ORDER BY sequence DESC LIMIT 1",
+                [t.id],
+              )
+            ).rows[0]
+          : null;
+      const returned =
+        latestDecision?.status === 'rejected' && latestDecision.return_feedback
+          ? {
+              attemptId: latestDecision.attempt_id,
+              decisionId: latestDecision.id,
+              returnedAt: latestDecision.created_at,
+              feedback: decrypt(latestDecision.return_feedback, this.key),
+            }
+          : null;
       const approved = approvedRow
         ? {
             contract: 'C03-v1',
@@ -666,6 +696,7 @@ export class AssessmentReviews {
           ? { id: p.id, status: p.status, reason: p.reason, assigned: Boolean(p.reviewer_id) }
           : null,
         approved,
+        returned,
         reviews,
         rubric: canReview && t ? this.snapshot(t).rubric : null,
         definitionId: a.definition_id,

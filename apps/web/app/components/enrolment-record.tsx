@@ -2,7 +2,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from './auth-ui';
+import { api, useContext, Guest, Pending } from './auth-ui';
+import { Button, Panel, PageHeader, Badge, Feedback } from './ui/controls';
+import controls from './ui/controls.module.css';
+import layout from './ui/form-layout.module.css';
+import styles from './ui/training-record.module.css';
 import { BackgroundReceipts } from './background-receipts';
 import { EnrolmentEvidence } from './enrolment-evidence';
 type RecordView =
@@ -82,41 +86,43 @@ export function EnrolmentRecord({ id }: { id: string }) {
         <Pending error={error} retry={load} />
       ) : !client ? (
         <>
-          <h1>Choose a client</h1>
+          <PageHeader title="Choose a client" />
           <Link href="/clients">Choose your client</Link>
         </>
       ) : !record ? (
         <>
           <Feedback error={failure} />
           {failure ? (
-            <button className="secondary" onClick={() => setRetry((n) => n + 1)}>
-              Retry training record
-            </button>
+            <Button onClick={() => setRetry((n) => n + 1)}>Retry training record</Button>
           ) : (
             <p role="status">Loading training record...</p>
           )}
         </>
       ) : !record.canDetails ? (
-        <section className="panel">
-          <h1>{record.title}</h1>
+        <Panel className={layout.panel}>
+          <PageHeader title={record.title} />
           <p>Status: {record.status}</p>
           <p>
             Your team access permits this training summary. Detailed records and review actions
             require separate authority.
           </p>
           <Link href="/dashboard">Back to workspace</Link>
-        </section>
+        </Panel>
       ) : (
-        <>
-          <Link className="back" href="/dashboard">
-            Back to workspace
-          </Link>
-          <nav className="form-actions" aria-label="Training record actions">
-            <Link className="button primary" href={`/enrolments/${id}/delivery`}>
+        <div className={layout.page}>
+          <Link href="/dashboard">Back to workspace</Link>
+          <nav className={layout.actions} aria-label="Training record actions">
+            <Link
+              className={controls.button + ' ' + controls.primary}
+              href={`/enrolments/${id}/delivery`}
+            >
               Today and learning plan
             </Link>
             {record.canUpload && (
-              <Link className="button secondary" href={`/enrolments/${id}/onboarding`}>
+              <Link
+                className={controls.button + ' ' + controls.secondary}
+                href={`/enrolments/${id}/onboarding`}
+              >
                 Onboarding and plan setup
               </Link>
             )}
@@ -124,20 +130,19 @@ export function EnrolmentRecord({ id }: { id: string }) {
               <Link href={`/enrolments/${id}/plan`}>View curriculum and versions</Link>
             )}
           </nav>
-          <div className="page-heading">
+          <div className={styles.heading}>
             <div>
               <p className="eyebrow">{record.groupName ?? 'No team'}</p>
-              <h1>{record.title}</h1>
-              <p className="lead">
+              <PageHeader title={record.title}>
                 {record.memberName} / Coordinator: {record.coordinatorName ?? 'Not assigned'}
-              </p>
+              </PageHeader>
             </div>
-            <span className="badge">{record.status}</span>
+            <Badge>{record.status}</Badge>
           </div>
-          <div className="detail-grid">
-            <section className="panel">
+          <div className={styles.grid}>
+            <Panel className={layout.panel} aria-label="Plan foundation">
               <h2>Plan foundation</h2>
-              <dl>
+              <dl className={styles.facts}>
                 <div>
                   <dt>Duration</dt>
                   <dd>{record.durationWeeks} weeks</dd>
@@ -159,7 +164,7 @@ export function EnrolmentRecord({ id }: { id: string }) {
                   <dd>{record.syncPolicy.replaceAll('_', ' ')}</dd>
                 </div>
               </dl>
-              <div className="notice">
+              <div className={styles.notice}>
                 Open Today and learning plan for lessons, saved work and reviewed results.
                 Provisional AI output requires a coordinator decision.
               </div>
@@ -169,26 +174,17 @@ export function EnrolmentRecord({ id }: { id: string }) {
                 recorded. No email is sent.
               </p>
               <Feedback error={actionError} success={message} />
-              <div className="form-actions">
-                <button
-                  className="secondary"
-                  disabled={busy}
-                  aria-busy={busy}
-                  onClick={() => void check()}
-                >
+              <div className={layout.actions}>
+                <Button disabled={busy} aria-busy={busy} onClick={() => void check()}>
                   {busy ? 'Queuing check...' : 'Queue foundation check'}
-                </button>
+                </Button>
                 {actionError && (
-                  <button
-                    className="secondary"
-                    disabled={busy}
-                    onClick={() => setRetry((n) => n + 1)}
-                  >
+                  <Button disabled={busy} onClick={() => setRetry((n) => n + 1)}>
                     Reload training record
-                  </button>
+                  </Button>
                 )}
               </div>
-            </section>
+            </Panel>
             <EnrolmentEvidence
               key={client + id}
               id={id}
@@ -199,7 +195,7 @@ export function EnrolmentRecord({ id }: { id: string }) {
             />
           </div>
           <BackgroundReceipts key={client} client={client} revision={revision} />
-        </>
+        </div>
       )}
     </Guest>
   );

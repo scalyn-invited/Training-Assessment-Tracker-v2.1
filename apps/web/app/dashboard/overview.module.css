@@ -1,0 +1,201 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-6);
+  min-width: 0;
+}
+.page > button {
+  align-self: flex-start;
+}
+.welcome {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ui-space-4);
+}
+.welcome > div {
+  min-width: 0;
+  flex: 1;
+}
+.panel,
+.hero,
+.empty {
+  padding: var(--ui-space-6);
+}
+.hero {
+  background: var(--ui-raised);
+}
+.hero h2 {
+  margin: var(--ui-space-4) 0;
+  font-size: var(--ui-text-title);
+  line-height: 40px;
+  font-weight: 600;
+}
+.hero p {
+  margin: 0;
+  color: var(--ui-muted);
+}
+.summary,
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-space-6);
+}
+.sectionHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+}
+.sectionHeading h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  font-size: var(--ui-text-section);
+  line-height: 28px;
+  margin: 0;
+}
+.sectionHeading > span,
+.subtle {
+  color: var(--ui-muted);
+  font-size: var(--ui-text-small);
+}
+.panel dl {
+  margin: var(--ui-space-4) 0;
+}
+.panel dl > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--ui-space-2);
+  padding: var(--ui-space-3) 0;
+  border-color: var(--ui-border);
+}
+.panel dd {
+  max-width: 65%;
+  color: var(--ui-text);
+}
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+}
+.steps {
+  list-style: none;
+  margin: var(--ui-space-6) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-6);
+}
+.steps li {
+  display: flex;
+  gap: var(--ui-space-3);
+  align-items: flex-start;
+}
+.steps li > span {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-pill);
+  color: var(--ui-muted);
+  font-size: var(--ui-text-small);
+}
+.steps h3 {
+  font-size: var(--ui-text-body);
+  line-height: 22px;
+  margin: 0 0 var(--ui-space-1);
+}
+.steps p {
+  margin: 0;
+  color: var(--ui-muted);
+}
+.planCard {
+  display: block;
+  min-width: 0;
+  padding: var(--ui-space-6);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-panel);
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  text-decoration: none;
+}
+.planCard:hover {
+  background: var(--ui-raised);
+  border-color: var(--ui-muted);
+}
+.planCard:focus-visible,
+.textLink:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 3px;
+}
+.planCard h3 {
+  font-size: var(--ui-text-section);
+  line-height: 28px;
+  margin: var(--ui-space-5) 0 var(--ui-space-2);
+  overflow-wrap: anywhere;
+}
+.planCard p {
+  margin: 0;
+  color: var(--ui-muted);
+}
+.cardTop,
+.cardBottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--ui-space-3);
+  align-items: center;
+}
+.cardBottom {
+  border-top: 1px solid var(--ui-border);
+  margin-top: var(--ui-space-5);
+  padding-top: var(--ui-space-3);
+  font-size: var(--ui-text-small);
+}
+.cardBottom > span {
+  white-space: nowrap;
+}
+.cardBottom > span:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  color: var(--ui-link);
+}
+.page :is(p, dd, dt, h3) {
+  overflow-wrap: anywhere;
+}
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+}
+.empty > :not(:first-child) {
+  margin-top: var(--ui-space-3);
+}
+.empty h3 {
+  font-size: var(--ui-text-section);
+}
+@media (max-width: 800px) {
+  .summary,
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .panel,
+  .hero,
+  .empty,
+  .planCard {
+    padding: var(--ui-space-4);
+  }
+  .hero h2 {
+    font-size: var(--ui-text-title-mobile);
+    line-height: 32px;
+  }
+  .welcome > span {
+    display: none;
+  }
+}

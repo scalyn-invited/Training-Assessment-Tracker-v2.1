@@ -1,0 +1,8 @@
+const fs=require('node:fs'),path=require('node:path'),{execFileSync}=require('node:child_process');
+const out=__dirname, src=path.resolve('docs/assessment-workflow-implementation/correction-frontend');
+const git=(...a)=>execFileSync('git',a,{encoding:'utf8'});
+fs.writeFileSync(path.join(out,'freeze.json'),JSON.stringify({candidate:git('rev-parse','HEAD').trim(),branch:git('branch','--show-current').trim(),status:git('status','--porcelain'),productionTree:git('ls-tree','-r','HEAD','apps','packages','tests','scripts'),originalEvidenceTree:git('ls-tree','-r','HEAD','docs/assessment-workflow-implementation/independent-qa')},null,2));
+for(const dir of ['browser-tests','next-tests']){fs.mkdirSync(path.join(out,dir),{recursive:true});for(const f of fs.readdirSync(path.join(src,dir)))fs.writeFileSync(path.join(out,dir,f),fs.readFileSync(path.join(src,dir,f),'utf8').replaceAll('correction-frontend','correction-qa'));}
+for(const f of ['run.cjs','browser.config.ts','next.config.ts','next-server.cjs'])fs.writeFileSync(path.join(out,f),fs.readFileSync(path.join(src,f),'utf8').replaceAll('correction-frontend','correction-qa').replaceAll('.runtime/correction-browser-results','.runtime/correction-qa-browser-results').replaceAll('.runtime/correction-next-results','.runtime/correction-qa-next-results'));
+fs.writeFileSync(path.join(out,'domain-run.cjs'),fs.readFileSync('docs/assessment-workflow-implementation/correction-backend/run.cjs','utf8').replaceAll('correction-backend-','correction-qa-'));
+console.log('Frozen',git('rev-parse','HEAD').trim(),'independent harness prepared; original evidence untouched');

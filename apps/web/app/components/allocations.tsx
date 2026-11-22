@@ -1,6 +1,10 @@
 'use client';
+import { Select, Input, Button, Panel, Feedback } from './ui/controls';
+import styles from './ui/form-layout.module.css';
+import { DirectoryTable } from './ui/directory';
+
 import { useState, type FormEvent } from 'react';
-import { api, Feedback } from './auth-ui';
+import { api } from './auth-ui';
 export type AllocationData = {
   candidates: { id: string; name: string; email: string; coordinator: boolean; member: boolean }[];
   allocations: {
@@ -61,7 +65,7 @@ export function Allocations({
     }
   }
   return (
-    <section className="panel directory-panel">
+    <Panel className={styles.panel}>
       <h2>Coordinator allocations and sensitive access</h2>
       <p>
         A coordinator allocation establishes responsibility. Sensitive access requires a separate
@@ -73,7 +77,7 @@ export function Allocations({
         <form onSubmit={(e) => submit(e, 'allocations')}>
           <label>
             Member
-            <select name="member" required defaultValue="">
+            <Select name="member" required defaultValue="">
               <option value="" disabled>
                 Choose a member
               </option>
@@ -84,11 +88,11 @@ export function Allocations({
                     {p.name} — {p.email}
                   </option>
                 ))}
-            </select>
+            </Select>
           </label>
           <label>
             Coordinator
-            <select name="coordinator" required defaultValue="">
+            <Select name="coordinator" required defaultValue="">
               <option value="" disabled>
                 Choose a coordinator
               </option>
@@ -99,22 +103,22 @@ export function Allocations({
                     {p.name} — {p.email}
                   </option>
                 ))}
-            </select>
+            </Select>
           </label>
           <label>
             Responsibility
-            <select name="kind">
+            <Select name="kind">
               <option value="primary">Primary</option>
               <option value="backup">Backup</option>
-            </select>
+            </Select>
           </label>
           <label>
             Allocation reason
-            <input name="reason" required minLength={8} maxLength={2000} />
+            <Input name="reason" required minLength={8} maxLength={2000} />
           </label>
-          <button className="secondary" disabled={busy} aria-busy={busy}>
+          <Button type="submit" variant="secondary" disabled={busy} aria-busy={busy}>
             {busy ? 'Saving allocation…' : 'Create allocation'}
-          </button>
+          </Button>
         </form>
       </details>
       {!data.canGrantSensitive && (
@@ -125,8 +129,8 @@ export function Allocations({
           No current coordinator allocations. Allocate a coordinator to establish responsibility.
         </p>
       ) : (
-        <div className="directory-table-wrap">
-          <table className="directory-table">
+        <div className={styles.tableWrap}>
+          <DirectoryTable stacked className={styles.table}>
             <caption className="sr-only">Current coordinator allocations</caption>
             <thead>
               <tr>
@@ -160,38 +164,42 @@ export function Allocations({
                         >
                           <label>
                             Sensitive access reason
-                            <input name="reason" required minLength={8} maxLength={2000} />
+                            <Input name="reason" required minLength={8} maxLength={2000} />
                           </label>
                           <label>
-                            <input type="checkbox" required /> I have checked the coordinator and
+                            <Input type="checkbox" required /> I have checked the coordinator and
                             member.
                           </label>
-                          <button className={a.sensitive ? 'danger' : 'secondary'} disabled={busy}>
+                          <Button
+                            type="submit"
+                            variant={a.sensitive ? 'danger' : 'secondary'}
+                            disabled={busy}
+                          >
                             {a.sensitive ? 'Revoke sensitive access' : 'Grant sensitive access'}
-                          </button>
+                          </Button>
                         </form>
                       )}
                       <form onSubmit={(e) => submit(e, 'allocations/end', { id: a.id })}>
                         <p>Ending this allocation also ends its sensitive-access grant.</p>
                         <label>
                           End allocation reason
-                          <input name="reason" required minLength={8} maxLength={2000} />
+                          <Input name="reason" required minLength={8} maxLength={2000} />
                         </label>
                         <label>
-                          <input type="checkbox" required /> End responsibility for this member.
+                          <Input type="checkbox" required /> End responsibility for this member.
                         </label>
-                        <button className="danger" disabled={busy}>
+                        <Button type="submit" variant="danger" disabled={busy}>
                           Confirm allocation end
-                        </button>
+                        </Button>
                       </form>
                     </details>
                   </td>
                 </tr>
               ))}
             </tbody>
-          </table>
+          </DirectoryTable>
         </div>
       )}
-    </section>
+    </Panel>
   );
 }

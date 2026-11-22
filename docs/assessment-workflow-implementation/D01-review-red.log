@@ -1,0 +1,31 @@
+
+Running 1 test using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:229:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text (1.6s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:229:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 1
+
+    - Array [
+    -   "beforeunload",
+    - ]
+    + Array []
+
+      249 |   });
+      250 |   await page.reload({timeout: 2000}).catch(() => {});
+    > 251 |   expect(dialogs).toEqual(['beforeunload']);
+          |                   ^
+      252 |   await expect(page.getByLabel('Private decision rationale')).toHaveValue('Synthetic private rationale');
+      253 |   await expect(page.getByLabel('Score for Evidence', { exact: true })).toHaveValue('83');
+      254 |   await expect(page.getByLabel('Feedback for Evidence', { exact: true })).toHaveValue('Synthetic member feedback');
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:251:19
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D01-reviewer-canc-fba7f-nale-and-verified-file-text\error-context.md
+
+  1 failed
+    tests\workflow-qa-browser\workflow.spec.ts:229:1 › D01 reviewer canceled reload preserves score feedback rationale and verified file text 

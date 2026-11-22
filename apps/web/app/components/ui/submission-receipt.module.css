@@ -1,0 +1,33 @@
+.panel {
+  overflow-wrap: anywhere;
+}
+.panel li + li {
+  margin-top: var(--ui-space-2);
+}
+.prose {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.panel .choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-space-2);
+  color: var(--ui-text);
+}
+.choice input {
+  flex: 0 0 auto;
+}
+.panel fieldset > button {
+  align-self: flex-start;
+}
+@media (pointer: coarse) {
+  .choice,
+  .panel summary,
+  .panel a {
+    min-height: 44px;
+  }
+  .panel a {
+    display: inline-flex;
+    align-items: center;
+  }
+}

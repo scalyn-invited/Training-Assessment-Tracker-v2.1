@@ -2,7 +2,9 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { api, useContext, Guest, Pending, Feedback } from '../components/auth-ui';
+import { api, useContext, Guest, Pending } from '../components/auth-ui';
+import { Button, Panel, PageHeader, Feedback } from '../components/ui/controls';
+import styles from '../components/ui/form-layout.module.css';
 type Client = { id: string; name: string };
 export default function Clients() {
   const { context, error, load } = useContext(),
@@ -37,15 +39,16 @@ export default function Clients() {
       {!context?.user ? (
         <Pending error={error} retry={load} />
       ) : (
-        <>
-          <section className="panel" aria-busy={Boolean(busy)}>
-            <h1>Choose your client</h1>
-            <p>Select the organisation you want to work in.</p>
+        <div className={styles.page}>
+          <Panel className={styles.panel} aria-busy={Boolean(busy)}>
+            <PageHeader title="Choose your client">
+              Select the organisation you want to work in.
+            </PageHeader>
             <Feedback error={failure} />
             {failure && (
-              <button className="secondary" onClick={loadClients} disabled={Boolean(busy)}>
+              <Button onClick={loadClients} disabled={Boolean(busy)}>
                 Try loading clients again
-              </button>
+              </Button>
             )}
             {!clients && !failure && <p role="status">Loading your clients…</p>}
             {clients?.length === 0 && (
@@ -53,21 +56,20 @@ export default function Clients() {
             )}
             {clients?.map((client) => (
               <form
-                className="client-choice"
                 key={client.id}
                 onSubmit={(e) => {
                   e.preventDefault();
                   void choose(client);
                 }}
               >
-                <button className="secondary" type="submit" disabled={Boolean(busy)}>
+                <Button type="submit" disabled={Boolean(busy)}>
                   {busy === client.id ? 'Opening ' + client.name + '…' : client.name}
-                </button>
+                </Button>
               </form>
             ))}
-          </section>
+          </Panel>
           <Link href="/dashboard">Back to workspace</Link>
-        </>
+        </div>
       )}
     </Guest>
   );

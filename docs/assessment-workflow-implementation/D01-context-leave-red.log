@@ -1,0 +1,58 @@
+
+Running 2 tests using 1 worker
+
+  x  1 tests\workflow-qa-browser\workflow.spec.ts:260:3 › D01 switch canceled guard sends zero context mutations (732ms)
+  x  2 tests\workflow-qa-browser\workflow.spec.ts:260:3 › D01 logout canceled guard sends zero context mutations (1.5s)
+
+
+  1) tests\workflow-qa-browser\workflow.spec.ts:260:3 › D01 switch canceled guard sends zero context mutations 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 1
+
+      Array [
+        "confirm",
+        "POST /api/clients/select",
+    +   "beforeunload",
+      ]
+
+      338 |     else await page.getByRole('button', {name:/sign out/i}).click();
+      339 |     await expect(page.getByRole('heading', {name:'Synthetic destination'})).toBeVisible();
+    > 340 |     expect(events).toEqual(['confirm', 'POST ' + (action === 'switch' ? '/api/clients/select' : '/api/auth/logout')]);
+          |                    ^
+      341 |     expect(errors).toEqual([]);
+      342 |   });
+      343 |
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:340:20
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D01-switch-cancel-7abdb-ends-zero-context-mutations\error-context.md
+
+  2) tests\workflow-qa-browser\workflow.spec.ts:260:3 › D01 logout canceled guard sends zero context mutations 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 1
+
+      Array [
+        "confirm",
+        "POST /api/auth/logout",
+    +   "beforeunload",
+      ]
+
+      338 |     else await page.getByRole('button', {name:/sign out/i}).click();
+      339 |     await expect(page.getByRole('heading', {name:'Synthetic destination'})).toBeVisible();
+    > 340 |     expect(events).toEqual(['confirm', 'POST ' + (action === 'switch' ? '/api/clients/select' : '/api/auth/logout')]);
+          |                    ^
+      341 |     expect(errors).toEqual([]);
+      342 |   });
+      343 |
+        at C:\Users\cabas\AppData\Local\hermes\worktrees\tat-assessment-workflow\tests\workflow-qa-browser\workflow.spec.ts:340:20
+
+    Error Context: .runtime\workflow-qa-playwright\workflow-D01-logout-cancel-0f143-ends-zero-context-mutations\error-context.md
+
+  2 failed
+    tests\workflow-qa-browser\workflow.spec.ts:260:3 › D01 switch canceled guard sends zero context mutations 
+    tests\workflow-qa-browser\workflow.spec.ts:260:3 › D01 logout canceled guard sends zero context mutations 
