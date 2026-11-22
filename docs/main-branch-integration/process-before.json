@@ -1,0 +1,311 @@
+[
+  {
+    "pid": 2888,
+    "ppid": 38020,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\.worktrees\\t_b23a00b1\\evidence\\independent-account-qa\\baseline",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs/node_modules/npm/bin/npm-cli.js",
+      "run",
+      "dev",
+      "--workspace=@tracker/web",
+      "--",
+      "--hostname",
+      "127.0.0.1",
+      "--port",
+      "3112"
+    ],
+    "created": 1795225742.7914026,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": null,
+      "AI_ANTHROPIC_ENABLED": null,
+      "AI_GEMINI_ENABLED": null,
+      "SMTP_ENABLED": null,
+      "ACCOUNT_MAIL_ENABLED": null,
+      "RETENTION_APPROVED": null,
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": []
+  },
+  {
+    "pid": 26376,
+    "ppid": 32196,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+    "command": [
+      "node",
+      "C:\\Users\\cabas\\AppData\\Roaming\\npm\\\\node_modules\\@openai\\codex\\bin\\codex.js"
+    ],
+    "created": 1795220438.1023185,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": null,
+      "AI_ANTHROPIC_ENABLED": null,
+      "AI_GEMINI_ENABLED": null,
+      "SMTP_ENABLED": null,
+      "ACCOUNT_MAIL_ENABLED": null,
+      "RETENTION_APPROVED": null,
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": []
+  },
+  {
+    "pid": 28684,
+    "ppid": 7296,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "--import",
+      "tsx",
+      "scripts/dev.ts"
+    ],
+    "created": 1795220376.262123,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": "false",
+      "AI_ANTHROPIC_ENABLED": "false",
+      "AI_GEMINI_ENABLED": "false",
+      "SMTP_ENABLED": "false",
+      "ACCOUNT_MAIL_ENABLED": "false",
+      "RETENTION_APPROVED": "false",
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": [
+      55431
+    ]
+  },
+  {
+    "pid": 29944,
+    "ppid": 28684,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\bin\\next",
+      "dev",
+      "--hostname",
+      "127.0.0.1",
+      "--port",
+      "3100"
+    ],
+    "created": 1795220377.9719632,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": "false",
+      "AI_ANTHROPIC_ENABLED": "false",
+      "AI_GEMINI_ENABLED": "false",
+      "SMTP_ENABLED": "false",
+      "ACCOUNT_MAIL_ENABLED": "false",
+      "RETENTION_APPROVED": "false",
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": []
+  },
+  {
+    "pid": 32268,
+    "ppid": 29944,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\server\\lib\\start-server.js"
+    ],
+    "created": 1795220383.1010888,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": "false",
+      "AI_ANTHROPIC_ENABLED": "false",
+      "AI_GEMINI_ENABLED": "false",
+      "SMTP_ENABLED": "false",
+      "ACCOUNT_MAIL_ENABLED": "false",
+      "RETENTION_APPROVED": "false",
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": [
+      3100
+    ]
+  },
+  {
+    "pid": 33128,
+    "ppid": 28684,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "--import",
+      "tsx",
+      "apps/api/src/main.ts"
+    ],
+    "created": 1795220377.9427035,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": "false",
+      "AI_ANTHROPIC_ENABLED": "false",
+      "AI_GEMINI_ENABLED": "false",
+      "SMTP_ENABLED": "false",
+      "ACCOUNT_MAIL_ENABLED": "false",
+      "RETENTION_APPROVED": "false",
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": [
+      3101
+    ]
+  },
+  {
+    "pid": 34680,
+    "ppid": 28684,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "--import",
+      "tsx",
+      "apps/worker/src/main.ts"
+    ],
+    "created": 1795220377.956627,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": "false",
+      "AI_ANTHROPIC_ENABLED": "false",
+      "AI_GEMINI_ENABLED": "false",
+      "SMTP_ENABLED": "false",
+      "ACCOUNT_MAIL_ENABLED": "false",
+      "RETENTION_APPROVED": "false",
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": []
+  },
+  {
+    "pid": 35056,
+    "ppid": 18900,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\.worktrees\\t_b23a00b1\\evidence\\independent-account-qa\\baseline\\apps\\web",
+    "command": [
+      "node",
+      "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\.worktrees\\t_b23a00b1\\evidence\\independent-account-qa\\baseline\\node_modules\\.bin\\\\..\\next\\dist\\bin\\next",
+      "dev",
+      "--hostname",
+      "127.0.0.1",
+      "--port",
+      "3112"
+    ],
+    "created": 1795225743.6510038,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": null,
+      "AI_ANTHROPIC_ENABLED": null,
+      "AI_GEMINI_ENABLED": null,
+      "SMTP_ENABLED": null,
+      "ACCOUNT_MAIL_ENABLED": null,
+      "RETENTION_APPROVED": null,
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": []
+  },
+  {
+    "pid": 43732,
+    "ppid": 37588,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+    "command": [
+      "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.1111.2228.0_x64__2p2nqsd0c76g0\\app\\resources\\cua_node\\bin\\node.exe",
+      "--import",
+      "file:///C:/Users/cabas/.codex/plugins/cache/openai-bundled/unified-computer-use/26.1111.21308/require-browser-access.mjs",
+      "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.1111.2228.0_x64__2p2nqsd0c76g0\\app\\resources\\cua_node\\bin\\node_modules\\@oai\\cua-repl\\bin\\cua-repl.mjs"
+    ],
+    "created": 1795220473.2735116,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": null,
+      "AI_ANTHROPIC_ENABLED": null,
+      "AI_GEMINI_ENABLED": null,
+      "SMTP_ENABLED": null,
+      "ACCOUNT_MAIL_ENABLED": null,
+      "RETENTION_APPROVED": null,
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": []
+  },
+  {
+    "pid": 48936,
+    "ppid": 37588,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Maintenance agent\\dist\\mcp\\wordpress-maintenance\\src\\server.js"
+    ],
+    "created": 1795220473.3529391,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": null,
+      "AI_ANTHROPIC_ENABLED": null,
+      "AI_GEMINI_ENABLED": null,
+      "SMTP_ENABLED": null,
+      "ACCOUNT_MAIL_ENABLED": null,
+      "RETENTION_APPROVED": null,
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": []
+  },
+  {
+    "pid": 51396,
+    "ppid": 35056,
+    "name": "node.exe",
+    "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\.worktrees\\t_b23a00b1\\evidence\\independent-account-qa\\baseline\\apps\\web",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\.worktrees\\t_b23a00b1\\evidence\\independent-account-qa\\baseline\\node_modules\\next\\dist\\server\\lib\\start-server.js"
+    ],
+    "created": 1795225744.4178252,
+    "environment": {
+      "NEXT_DIST_DIR": null,
+      "PRIVATE_STORAGE_PATH": null,
+      "AI_LIVE_ENABLED": null,
+      "AI_ANTHROPIC_ENABLED": null,
+      "AI_GEMINI_ENABLED": null,
+      "SMTP_ENABLED": null,
+      "ACCOUNT_MAIL_ENABLED": null,
+      "RETENTION_APPROVED": null,
+      "WEB_PORT": null,
+      "API_PORT": null,
+      "PGLITE_PORT": null
+    },
+    "listeners": [
+      3112
+    ]
+  }
+]

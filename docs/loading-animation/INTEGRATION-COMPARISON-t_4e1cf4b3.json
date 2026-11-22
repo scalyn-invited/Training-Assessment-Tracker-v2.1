@@ -1,0 +1,21 @@
+{
+  "stableFieldsMatch": {
+    "head": true,
+    "branch": true,
+    "trackedContentSha256": true,
+    "worktrees": true,
+    "refs": true,
+    "processes": true,
+    "protectedConfigAggregateSha256": true
+  },
+  "removedDocs": [],
+  "changedDocs": [],
+  "addedDocs": [
+    "docs/loading-animation/INTEGRATION-ELIGIBILITY.md",
+    "docs/loading-animation/PREFLIGHT-SCHEMA-t_0ca98965.json",
+    "docs/loading-animation/PREFLIGHT-STATE-t_0ca98965.json",
+    "docs/loading-animation/PREFLIGHT-t_0ca98965.md"
+  ],
+  "unexpectedAdditions": [],
+  "explanation": "Only preflight/lineage evidence and this task concurrent policy/type logs may be added. Live DB/cache and other worktree contents excluded."
+}

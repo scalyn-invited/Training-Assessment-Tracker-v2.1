@@ -1,0 +1,105 @@
+{
+  "checkedAt": "2026-11-21T03:26:49.198063+00:00",
+  "branch": "ui/global-design-system",
+  "head": "ff1d19fb427c054efd9e48bc546c9ec1398ef835",
+  "allRefsUnchanged": true,
+  "worktreeHeadsUnchanged": true,
+  "isolatedMergeUnchanged": true,
+  "unchangedPrivateConfigurationFiles": 8,
+  "verifiedColdBackupFiles": 1394,
+  "cachePath": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web\\.next",
+  "cacheBackup": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\.runtime\\main-app-cache-backup-t_b77c6213\\next-cache",
+  "cacheRenamedAt": "2026-11-21T03:25:27.556742+00:00",
+  "freshCacheFiles": 204,
+  "freshCacheCreatedAt": "2026-11-21T03:25:48.699419+00:00",
+  "noLiveEffects": {
+    "AI_LIVE_ENABLED": true,
+    "AI_ANTHROPIC_ENABLED": true,
+    "AI_GEMINI_ENABLED": true,
+    "SMTP_ENABLED": true,
+    "ACCOUNT_MAIL_ENABLED": true,
+    "RETENTION_APPROVED": true
+  },
+  "databaseCountsAndReceiptsUnchanged": true,
+  "otherWorktreeServer3112Unchanged": true,
+  "persistentSession": "proc_ca1916e010e4",
+  "processes": [
+    {
+      "pid": 6256,
+      "ppid": 16732,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/dev.ts"
+      ],
+      "ports": [
+        55431
+      ],
+      "created": 1795231533.9928465
+    },
+    {
+      "pid": 30712,
+      "ppid": 6256,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--import",
+        "tsx",
+        "apps/api/src/main.ts"
+      ],
+      "ports": [
+        3101
+      ],
+      "created": 1795231535.1178925
+    },
+    {
+      "pid": 31868,
+      "ppid": 6256,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--import",
+        "tsx",
+        "apps/worker/src/main.ts"
+      ],
+      "ports": [],
+      "created": 1795231535.1268013
+    },
+    {
+      "pid": 38848,
+      "ppid": 6256,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\bin\\next",
+        "dev",
+        "--hostname",
+        "127.0.0.1",
+        "--port",
+        "3100"
+      ],
+      "ports": [],
+      "created": 1795231535.1358192
+    },
+    {
+      "pid": 46468,
+      "ppid": 38848,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\server\\lib\\start-server.js"
+      ],
+      "ports": [
+        3100
+      ],
+      "created": 1795231536.1177287
+    }
+  ]
+}

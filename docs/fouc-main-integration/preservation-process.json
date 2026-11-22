@@ -1,0 +1,135 @@
+{
+  "checkedAt": "2026-11-21T00:21:31.438788+00:00",
+  "branch": "ui/global-design-system",
+  "head": "ff1d19fb427c054efd9e48bc546c9ec1398ef835",
+  "backupReference": ".runtime/fouc-main-integration-backup",
+  "verifiedBackupFiles": 1397,
+  "unchangedNonDatabasePrivateFiles": 7,
+  "liveEffectsDisabled": {
+    "AI_LIVE_ENABLED": true,
+    "AI_ANTHROPIC_ENABLED": true,
+    "AI_GEMINI_ENABLED": true,
+    "SMTP_ENABLED": true,
+    "ACCOUNT_MAIL_ENABLED": true,
+    "RETENTION_APPROVED": true
+  },
+  "persistentToolSession": "proc_c2f346abffd8",
+  "processes": [
+    {
+      "pid": 28684,
+      "ppid": 7296,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/dev.ts"
+      ],
+      "listeningPorts": [
+        55431
+      ],
+      "createdAt": "2026-11-21T00:19:36.262123+00:00"
+    },
+    {
+      "pid": 3884,
+      "ppid": 28684,
+      "name": "esbuild.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\@esbuild\\win32-x64\\esbuild.exe",
+        "--service=0.28.2",
+        "--ping"
+      ],
+      "listeningPorts": [],
+      "createdAt": "2026-11-21T00:19:36.887211+00:00"
+    },
+    {
+      "pid": 33128,
+      "ppid": 28684,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--import",
+        "tsx",
+        "apps/api/src/main.ts"
+      ],
+      "listeningPorts": [
+        3101
+      ],
+      "createdAt": "2026-11-21T00:19:37.942703+00:00"
+    },
+    {
+      "pid": 34680,
+      "ppid": 28684,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--import",
+        "tsx",
+        "apps/worker/src/main.ts"
+      ],
+      "listeningPorts": [],
+      "createdAt": "2026-11-21T00:19:37.956627+00:00"
+    },
+    {
+      "pid": 29944,
+      "ppid": 28684,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\bin\\next",
+        "dev",
+        "--hostname",
+        "127.0.0.1",
+        "--port",
+        "3100"
+      ],
+      "listeningPorts": [],
+      "createdAt": "2026-11-21T00:19:37.971963+00:00"
+    },
+    {
+      "pid": 32268,
+      "ppid": 29944,
+      "name": "node.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\server\\lib\\start-server.js"
+      ],
+      "listeningPorts": [
+        3100
+      ],
+      "createdAt": "2026-11-21T00:19:43.101089+00:00"
+    },
+    {
+      "pid": 19752,
+      "ppid": 34680,
+      "name": "esbuild.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\@esbuild\\win32-x64\\esbuild.exe",
+        "--service=0.28.2",
+        "--ping"
+      ],
+      "listeningPorts": [],
+      "createdAt": "2026-11-21T00:19:42.515739+00:00"
+    },
+    {
+      "pid": 20788,
+      "ppid": 33128,
+      "name": "esbuild.exe",
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\@esbuild\\win32-x64\\esbuild.exe",
+        "--service=0.28.2",
+        "--ping"
+      ],
+      "listeningPorts": [],
+      "createdAt": "2026-11-21T00:19:38.383074+00:00"
+    }
+  ]
+}

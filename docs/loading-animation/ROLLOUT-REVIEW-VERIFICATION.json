@@ -1,0 +1,112 @@
+{
+  "checkedAt": "2026-11-22T04:33:12.552696+00:00",
+  "sha": "ff493ddbd8ad54b0535f1ca436e3233e9afa40fc",
+  "processes": [
+    {
+      "pid": 14456,
+      "birthMatches": true,
+      "cwdMatches": true,
+      "commandMatches": true,
+      "ports": [
+        55431
+      ],
+      "safetyFlagsDisabled": true
+    },
+    {
+      "pid": 31152,
+      "birthMatches": true,
+      "cwdMatches": true,
+      "commandMatches": true,
+      "ports": [
+        3101
+      ],
+      "safetyFlagsDisabled": true
+    },
+    {
+      "pid": 45080,
+      "birthMatches": true,
+      "cwdMatches": true,
+      "commandMatches": true,
+      "ports": [],
+      "safetyFlagsDisabled": true
+    },
+    {
+      "pid": 9368,
+      "birthMatches": true,
+      "cwdMatches": true,
+      "commandMatches": true,
+      "ports": [],
+      "safetyFlagsDisabled": true
+    },
+    {
+      "pid": 22308,
+      "birthMatches": true,
+      "cwdMatches": true,
+      "commandMatches": true,
+      "ports": [
+        3100
+      ],
+      "safetyFlagsDisabled": true
+    }
+  ],
+  "integrationWorkerExited": true,
+  "postWorkerExitVerified": true,
+  "backupHashesVerified": 1394,
+  "configAssetHashesVerified": 8,
+  "http": [
+    {
+      "url": "http://127.0.0.1:3101/health/live",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "api"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:3101/health/ready",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/api/health/ready",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/login",
+      "status": 200,
+      "stylesheetsPassed": 2
+    },
+    {
+      "url": "http://localhost:3100/accounts",
+      "status": 200,
+      "stylesheetsPassed": 2
+    },
+    {
+      "url": "http://localhost:3100/account/security",
+      "status": 200,
+      "stylesheetsPassed": 2
+    },
+    {
+      "url": "http://localhost:3100/platform",
+      "status": 200,
+      "stylesheetsPassed": 1
+    },
+    {
+      "url": "http://localhost:3100/dashboard",
+      "status": 200,
+      "stylesheetsPassed": 2
+    }
+  ],
+  "renderedMainVerified": false,
+  "browserError": "no_browser: No browser is connected for this session",
+  "finalGatePassed": false
+}
