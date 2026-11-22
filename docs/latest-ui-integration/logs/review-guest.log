@@ -1,0 +1,39 @@
+[WebServer] ◇ injected env (0) from .runtime\workspace-browser\2026-11-21T04-59-26-558Z\unused.env
+[WebServer] Failed to proxy http://127.0.0.1:3491/health/ready Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3491/health/ready Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3491
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3491
+[WebServer] }
+
+Running 1 test using 1 worker
+
+  ✓  1 tests\guest-ui-browser\guest.spec.ts:5:1 › guest sign-in and private account links preserve authentication and one-time authority (59.2s)
+
+  1 passed (1.4m)

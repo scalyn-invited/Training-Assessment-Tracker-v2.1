@@ -65,7 +65,7 @@ test('shared shell and account pages preserve guarded access, private links and 
   await expect(page.getByText('Protected: last active Global Admin.')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Manage access', exact: true })).toBeDisabled();
   await a11y();
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await a11y();
   await page.screenshot({ path: `${screenshots}/admins-desktop.png`, fullPage: true });

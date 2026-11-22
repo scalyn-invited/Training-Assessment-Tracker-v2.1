@@ -2,6 +2,7 @@ node_modules/
 dist/
 .next/
 .next-overview/
+.next-first-paint/
 .next-clients-build/
 .next-setup-ui/
 .env

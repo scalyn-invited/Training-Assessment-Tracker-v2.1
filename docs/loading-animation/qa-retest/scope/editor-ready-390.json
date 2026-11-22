@@ -1,0 +1,370 @@
+[
+  {
+    "t": 476.89999997615814,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 493.39999997615814,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 510.39999997615814,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 528,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 544.3000000715256,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 560.3000000715256,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 576.8999999761581,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 593.7000000476837,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 610.1000000238419,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 627.5,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {}
+  },
+  {
+    "t": 669.3000000715256,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 678.7000000476837,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 692.3000000715256,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 709.2000000476837,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 726.6000000238419,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 742.5,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 758.5,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 785,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 791.6000000238419,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 808.3000000715256,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 825.1000000238419,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 841.8000000715256,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 858.3999999761581,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 875.2000000476837,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 891.7000000476837,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  },
+  {
+    "t": 908.3999999761581,
+    "phase": "authority-pending-ready",
+    "theme": "dark",
+    "width": 390,
+    "overflow": 0,
+    "anchors": {
+      "nav": {
+        "x": 199,
+        "y": 851.5,
+        "width": 175,
+        "height": 36,
+        "font": "500 13px / 18px Inter, \"Segoe UI\", sans-serif",
+        "color": "rgb(233, 237, 247)",
+        "background": "rgb(17, 26, 48)"
+      }
+    }
+  }
+]

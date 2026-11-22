@@ -1,0 +1,988 @@
+[
+  {
+    "t": 2723.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2733.9000000953674,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2750.600000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2767.3000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2789.100000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2800.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2817.3000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/dashboard",
+    "theme": "client-dark",
+    "bg": "#0c1218",
+    "heading": "Welcome back, Scope QA owner.",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nQ\nQA Alpha\nScope QA\nWorkspace\nLearning workspace\n\nLEARNING WORKSPACE\n\nPlatform administration\nOverview\nLearning plans\nAssessments\nUpdates\nPeople\nAdministration\nAccount access\nAI settings\nAppearance\nAccount security\nTheme\nClient Dark\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nCurrent client access\nActive client\nChoose client\nDemo Client 1\nDemo Client 2\nDemo Client 3\nSwitch client\n\nYour development space\n\nWelcome back, Scope QA owner.\n\nA little focus today. A meaningful step forward.\n\nSigned in\n\nThe big picture\n\nYour next chapter\nstarts with a baseline.\n\nUnderstand your starting point, practise with purpose,\nand make your progress visible.\n\nYour account\nClient workspace\nName\nScope QA owner\nAccess\nScoped to the selected client\nLearning plans\n0 plans\nWorkspace scope\nProgrammes in your scope\nView learning plans\nA focused journey\n01 / 03\n01\nKnow your starting point\n\nCapture a baseline for your chosen skills.\n\n02\nPut learning into practice\n\nTurn weekly objectives into evidence.\n\n03\nReflect on your growth\n\nReview your progress with approved evidence.\n\nTraining plans in your scope\n0 plans\nNo enrolments available\n\nNo training plans are currently available to you in this client. Contact your client administrator if you expected access.\n\nTraining records\n\nBackground receipts\nRefreshes every 5 seconds\n\nLocal notification sink. No outbound email.\n\nNo checks requested yet. Open a training record to check background processing.\nScope QA\nLearning with purpose. Progress with evidence.",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 165.5,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2852.2000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2856.3000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2867.7000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2883.9000000953674,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2900.600000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2917.4000000953674,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "learning",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2934.2000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2950.600000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2967.3000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 2984.100000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3000.8000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3017.600000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3034.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3050.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3067.7000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3084.3000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3100.7000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3117.8000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3134.100000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3151,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": true,
+    "text": "Skip to content",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3167.2000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3184.100000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3200.9000000953674,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3218.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3233.600000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3251.2000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3267.100000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3283.7000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3300.4000000953674,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3321.7000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3333.8000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3350.9000000953674,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3368.8000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3383.9000000953674,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "client-dark",
+    "bg": "#070b16",
+    "pending": true,
+    "spinner": false,
+    "text": "Skip to content\n\nAppearance could not be loaded. Retry appearance.\n\nRetry appearance",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 60,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3417.100000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLoading...\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3424.3000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLoading...\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3434.100000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3450.8000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3467,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3490.8000000715256,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3500.2000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3517.5,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3534.100000023842,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  },
+  {
+    "t": 3563.7000000476837,
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "path": "/platform",
+    "theme": "light",
+    "bg": "#f4f8fb",
+    "heading": "Overview",
+    "pending": false,
+    "spinner": false,
+    "text": "Skip to content\nS\nScalyn\nAssessment Training Tracker\nWorkspace\nPlatform administration\n\nPLATFORM ADMINISTRATION\n\nOverview\nClients\nPeople & access\nAudit log\nSettings\nTheme\nLight\n\nLocal sandbox\nSynthetic people · Local password sign-in · No email delivery\nS\nScope QA owner\nGlobal administration\nOverview\n\nWhat needs attention across the platform.\n\nClients\n3\nGlobal admins\n1\nAccounts\n31\nNeeds attention\n3\nOnly one active Global Admin\n\nAdd another trusted administrator to maintain access continuity.\n\nReview access\nEmail delivery is not configured\n\nConfigure the approved mail service and verify a test inbox before enabling delivery.\n\nView system status\nAI generation is not configured\n\nConfirm the approved AI provider and verify a sample request before enabling generation.\n\nView system status\nRecent administrative activity\nView audit log\n\nNo administrative activity recorded yet.\n\nAssessment Training Tracker\nLearning with purpose. Progress with evidence.",
+    "shell": "platform",
+    "rect": {
+      "x": 248,
+      "y": 65,
+      "width": 1032
+    }
+  }
+]

@@ -1,0 +1,72 @@
+{
+  "control-1": {
+    "transitions": 12,
+    "frames": 883,
+    "bad": []
+  },
+  "control-0": {
+    "transitions": 12,
+    "frames": 642,
+    "bad": []
+  },
+  "capture-stress": {
+    "transitions": 60,
+    "frames": 4115,
+    "bad": [
+      {
+        "iteration": "25",
+        "index": 34,
+        "t": 1171.7000000476837,
+        "capture": "settled",
+        "viewport": {
+          "width": 1,
+          "height": 1,
+          "client": 1,
+          "scroll": 0
+        },
+        "mainStyle": {
+          "display": "block",
+          "width": "32px",
+          "padding": "8px 16px 24px",
+          "position": "static"
+        },
+        "styles": [
+          {
+            "href": "http://127.0.0.1:3110/_next/static/chunks/2n47il59nclm4.css",
+            "disabled": false,
+            "media": "",
+            "rules": 164
+          },
+          {
+            "href": "http://127.0.0.1:3110/_next/static/chunks/0gvz6m3g5j5_c.css",
+            "disabled": false,
+            "media": "",
+            "rules": 804
+          }
+        ],
+        "prior": {
+          "width": 1280,
+          "height": 720,
+          "client": 1280,
+          "scroll": 0
+        },
+        "next": {
+          "width": 1280,
+          "height": 720,
+          "client": 1280,
+          "scroll": 0
+        }
+      }
+    ]
+  },
+  "stress-0": {
+    "transitions": 60,
+    "frames": 3000,
+    "bad": []
+  },
+  "stress-viewport": {
+    "transitions": 60,
+    "frames": 3761,
+    "bad": []
+  }
+}

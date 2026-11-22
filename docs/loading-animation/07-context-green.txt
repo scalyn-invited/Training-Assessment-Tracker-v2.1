@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ✓  1 tests\loading-animation-browser\context.spec.ts:4:1 › a pre-switch context response cannot publish after an identity mutation (950ms)
+
+  1 passed (3.6s)

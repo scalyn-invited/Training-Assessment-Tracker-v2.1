@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-11-21T03:24:15.463Z",
+  "http": [
+    {
+      "url": "http://127.0.0.1:3101/health/live",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "api"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:3101/health/ready",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/api/health/ready",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/login",
+      "status": 200,
+      "htmlBytes": 21276,
+      "stylesheets": [
+        {
+          "path": "/_next/static/chunks/apps_web_app_0t8xi56vr12e9._.css",
+          "status": 200,
+          "bytes": 21995
+        },
+        {
+          "path": "/_next/static/chunks/apps_web_app_0l6a5ab-37sgc._.css",
+          "status": 200,
+          "bytes": 41107
+        }
+      ]
+    }
+  ],
+  "database": {
+    "readOnly": true,
+    "matchingReceipts": 33,
+    "sourceMigrations": 33,
+    "counts": [
+      {
+        "users": 31,
+        "organisations": 3
+      }
+    ]
+  }
+}

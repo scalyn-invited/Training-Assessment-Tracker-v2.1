@@ -93,7 +93,7 @@
   flex-shrink: 0;
   width: 100%;
 }
-.workspace > summary {
+.workspace > button {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -104,9 +104,9 @@
   background: var(--surface);
   list-style: none;
   margin: 0;
-}
-.workspace > summary::-webkit-details-marker {
-  display: none;
+  width: 100%;
+  text-align: left;
+  color: var(--ink);
 }
 .workspaceIcon {
   display: grid;
@@ -135,13 +135,28 @@
   color: var(--ink);
 }
 .workspaceMenu {
-  display: flex;
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: auto;
+  overscroll-behavior: contain;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  box-shadow: 0 12px 32px #0003;
   flex-direction: column;
   padding: 8px;
-  margin-top: 6px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 10px;
+}
+.workspaceMenu:popover-open {
+  display: flex;
+}
+@media (pointer: coarse) {
+  .workspaceMenu a {
+    min-height: 44px;
+  }
 }
 .workspaceMenu a,
 .settingsLinks a {
@@ -194,7 +209,7 @@
   margin-top: auto;
   padding-top: 20px;
 }
-.desktopTheme :global(.theme-picker) > summary {
+.desktopTheme :global(.theme-picker) > button {
   padding: 8px 10px;
   gap: 12px;
   font-size: 14px;
@@ -203,9 +218,6 @@
 .desktopTheme :global(.theme-current) {
   font-size: 13px;
   color: var(--ov-tertiary);
-}
-.desktopTheme :global(.theme-options) {
-  position: static;
 }
 .main {
   margin-left: 248px;
@@ -566,17 +578,10 @@
     min-width: 0;
     width: auto;
   }
-  .workspace > summary {
+  .workspace > button {
     height: 56px;
   }
-  .workspaceMenu {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    z-index: 40;
-    box-shadow: 0 12px 30px #0004;
-  }
+
   .main {
     margin-left: 0;
     min-height: calc(100dvh - 81px);

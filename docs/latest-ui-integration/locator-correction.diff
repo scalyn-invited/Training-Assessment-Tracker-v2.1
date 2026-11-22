@@ -1,0 +1,30 @@
+commit a1600eee15f98ba89d4eb68a77636a68d564629f
+Author:     scalyn-invited <invited@trusteddigitalagency.com>
+AuthorDate: Sat Nov 21 12:36:51 2026 +0800
+Commit:     scalyn-invited <invited@trusteddigitalagency.com>
+CommitDate: Sat Nov 21 12:36:51 2026 +0800
+
+    test: align account theme triggers with accepted popover
+
+diff --git a/tests/account-theme-browser/theme.spec.ts b/tests/account-theme-browser/theme.spec.ts
+index c35ff08..f8db4fe 100644
+--- a/tests/account-theme-browser/theme.spec.ts
++++ b/tests/account-theme-browser/theme.spec.ts
+@@ -31,7 +31,7 @@ test('Learning account routes retain the selected workspace appearance', async (
+   // With no selected client, account tools retain their shared theme picker.
+   await page.goto('/account/security');
+   await expect(page.getByRole('heading', { name: 'Account security', exact: true })).toBeVisible();
+-  await page.locator('summary:visible').filter({ hasText: 'Theme' }).click();
++  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
+   await page.getByRole('button', { name: 'Dark', exact: true }).click();
+   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+   await page.reload();
+@@ -127,7 +127,7 @@ test('Learning account routes retain the selected workspace appearance', async (
+     }
+   }
+   // The account picker writes the client preference, not the platform browser preference.
+-  await page.locator('summary:visible').filter({ hasText: 'Theme' }).click();
++  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
+   await page.getByRole('button', { name: 'Light', exact: true }).click();
+   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+   await page.getByRole('link', { name: 'Back to workspace', exact: true }).click();

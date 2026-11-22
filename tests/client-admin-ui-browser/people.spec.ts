@@ -66,7 +66,7 @@ test('client People preserves directory scope, paging, recovery and client theme
       .getByRole('link', { name: 'People', exact: true }),
   ).toHaveAttribute('aria-current', 'page');
   await a11y();
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');

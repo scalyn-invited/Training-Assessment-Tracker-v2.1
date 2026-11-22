@@ -239,7 +239,7 @@ test('shared learning delivery preserves activation, locked history, lifecycle a
   await page.keyboard.press('Enter');
   await expect(page.getByLabel('Activate programme reason', { exact: true })).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await page
     .getByLabel('Activate programme reason', { exact: true })
@@ -417,7 +417,7 @@ test('shared learning delivery preserves activation, locked history, lifecycle a
   );
   await page.getByLabel('Complete programme reason', { exact: true }).fill('');
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

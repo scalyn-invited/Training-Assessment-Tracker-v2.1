@@ -1,0 +1,83 @@
+[
+  {
+    "t": 147,
+    "path": "/clients",
+    "theme": "dark",
+    "bg": "#070b16",
+    "rect": {
+      "x": 500,
+      "y": 286.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 153.70000004768372,
+    "path": "/clients",
+    "theme": "dark",
+    "bg": "#070b16",
+    "rect": {
+      "x": 500,
+      "y": 286.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 167.5,
+    "path": "/clients",
+    "theme": "dark",
+    "bg": "#070b16",
+    "rect": {
+      "x": 500,
+      "y": 286.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 183.79999995231628,
+    "path": "/clients",
+    "theme": "dark",
+    "bg": "#070b16",
+    "rect": {
+      "x": 500,
+      "y": 286.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 209.5,
+    "path": "/clients",
+    "theme": "dark",
+    "bg": "#070b16",
+    "rect": {
+      "x": 500,
+      "y": 286.25,
+      "width": 440
+    }
+  },
+  {
+    "t": 248.70000004768372,
+    "path": "/clients",
+    "theme": "dark",
+    "bg": "#070b16",
+    "heading": "Choose your client",
+    "shell": "learning",
+    "rect": {
+      "x": 284,
+      "y": 165.5,
+      "width": 1120
+    }
+  },
+  {
+    "t": 266.2000000476837,
+    "path": "/clients",
+    "theme": "dark",
+    "bg": "#070b16",
+    "heading": "Choose your client",
+    "shell": "learning",
+    "rect": {
+      "x": 284,
+      "y": 165.5,
+      "width": 1120
+    }
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "url": "/assessments/definitions/new",
+  "theme": "light",
+  "host": "<div id=\"assessment-builder\"></div>",
+  "main": ""
+}

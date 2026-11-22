@@ -1,0 +1,126 @@
+[
+  {
+    "condition": "normal-warm",
+    "samples": 33,
+    "pending": 3,
+    "rectangles": {
+      "intro": [
+        {
+          "x": 48,
+          "y": 300.3125,
+          "width": 463,
+          "height": 215.375
+        }
+      ],
+      "footer": [
+        {
+          "x": 846.046875,
+          "y": 712,
+          "width": 147.890625,
+          "height": 46
+        }
+      ],
+      "theme": [
+        {
+          "x": 1067.53125,
+          "y": 28,
+          "width": 172.46875,
+          "height": 44
+        }
+      ]
+    }
+  },
+  {
+    "condition": "hard-warm",
+    "samples": 35,
+    "pending": 9,
+    "rectangles": {
+      "intro": [
+        {
+          "x": 48,
+          "y": 300.3125,
+          "width": 463,
+          "height": 215.375
+        }
+      ],
+      "footer": [
+        {
+          "x": 846.046875,
+          "y": 712,
+          "width": 147.890625,
+          "height": 46
+        }
+      ],
+      "theme": [
+        {
+          "x": 1067.53125,
+          "y": 28,
+          "width": 172.46875,
+          "height": 44
+        }
+      ]
+    }
+  },
+  {
+    "condition": "normal-cold",
+    "samples": 33,
+    "pending": 11,
+    "rectangles": {
+      "intro": [
+        {
+          "x": 48,
+          "y": 300.3125,
+          "width": 463,
+          "height": 215.375
+        }
+      ],
+      "footer": [
+        {
+          "x": 846.046875,
+          "y": 712,
+          "width": 147.890625,
+          "height": 46
+        }
+      ],
+      "theme": [
+        {
+          "x": 1067.53125,
+          "y": 28,
+          "width": 172.46875,
+          "height": 44
+        }
+      ]
+    }
+  },
+  {
+    "condition": "hard-cold-800ms",
+    "samples": 231,
+    "pending": 207,
+    "rectangles": {
+      "intro": [
+        {
+          "x": 48,
+          "y": 300.3125,
+          "width": 463,
+          "height": 215.375
+        }
+      ],
+      "footer": [
+        {
+          "x": 846.046875,
+          "y": 712,
+          "width": 147.890625,
+          "height": 46
+        }
+      ],
+      "theme": [
+        {
+          "x": 1067.53125,
+          "y": 28,
+          "width": 172.46875,
+          "height": 44
+        }
+      ]
+    }
+  }
+]

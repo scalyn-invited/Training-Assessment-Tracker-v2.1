@@ -136,7 +136,7 @@ test('training record preserves permissions, quarantine, recovery, receipts and 
   expect(actual.canUpload).toBe(true);
   expect(actual.canManage).toBe(false);
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await a11y();
@@ -221,11 +221,11 @@ test('training record preserves permissions, quarantine, recovery, receipts and 
   await page.unroute(filesApi);
   await evidence.getByRole('button', { name: 'Refresh evidence', exact: true }).click();
   await expect(evidence.getByText('private-notes.txt', { exact: true })).toBeVisible();
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await a11y();
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   for (const width of [800, 390, 320]) {
     await page.setViewportSize({ width, height: 900 });

@@ -1,0 +1,8 @@
+PASS tests/browser/foundation.spec.ts: 3 locator-only replacements; all other bytes preserved
+PASS tests/expanded-appearance-browser/scope-instrumented.spec.ts: 1 locator-only replacements; all other bytes preserved
+PASS tests/expanded-appearance-browser/scope.spec.ts: 1 locator-only replacements; all other bytes preserved
+PASS tests/expanded-appearance-browser/screenshot-calibration.spec.ts: 1 locator-only replacements; all other bytes preserved
+PASS tests/overview-browser/overview.spec.ts: 1 locator-only replacements; all other bytes preserved
+PASS tests/shell-browser/shell.spec.ts: 1 locator-only replacements; all other bytes preserved
+PASS 8 replacements across 6 files; original assertions, guards, role predicates and timeouts unchanged; diff check clean
+PASS original tracked failure log unchanged; original untracked failure context still present (not rewritten by this run)

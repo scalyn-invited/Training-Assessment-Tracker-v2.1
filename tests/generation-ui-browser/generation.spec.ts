@@ -216,7 +216,7 @@ test('shared generation progress preserves polling, provenance, recovery and rol
   await page.goto(progressUrl);
   await expect(page.locator('[data-application-shell="learning"]')).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await a11y();
   await screenshot('complete-desktop');
@@ -340,7 +340,7 @@ test('shared generation progress preserves polling, provenance, recovery and rol
     await a11y();
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();
@@ -369,7 +369,14 @@ test('shared generation progress preserves polling, provenance, recovery and rol
   await page.goto(progressUrl);
   await expect(page.locator('p[role=alert]')).toBeVisible();
   expect((await page.request.get(detailPath)).status()).toBe(404);
+  const logout = page.waitForResponse(
+    (r) => r.url().endsWith('/api/auth/logout') && r.request().method() === 'POST',
+  );
   await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+  expect((await logout).ok()).toBe(true);
+  await expect(page).toHaveURL(/\/login$/);
+  await expect(page.getByRole('heading', { name: 'Sign in', exact: true })).toBeVisible();
+  expect((await (await page.request.get('/api/auth/context')).json()).user).toBeNull();
   await page.goto(progressUrl);
   await expect(page).toHaveURL(/\/login$/);
   expect(errors).toEqual([]);

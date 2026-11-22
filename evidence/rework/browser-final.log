@@ -1,0 +1,58 @@
+
+Running 22 tests using 1 worker
+
+  ✓   1 tests\first-paint-browser\first-paint.spec.ts:3:1 › saved Dark uses current navy before hydration and stays stable through loading (1.4s)
+  ✓   2 tests\first-paint-browser\geometry.spec.ts:4:1 › login pre-hydration geometry matches the settled form (1.1s)
+  ✓   3 tests\first-paint-browser\geometry.spec.ts:28:1 › login existing geometry stays stable across the exact reload matrix (9.4s)
+  ✓   4 tests\first-paint-browser\precedence.spec.ts:13:3 › light: pre-hydration palette, native scheme, reload and OS independence (1.6s)
+  ✓   5 tests\first-paint-browser\precedence.spec.ts:13:3 › dark: pre-hydration palette, native scheme, reload and OS independence (1.5s)
+  ✓   6 tests\first-paint-browser\precedence.spec.ts:13:3 › neon-cyan: pre-hydration palette, native scheme, reload and OS independence (1.5s)
+  ✓   7 tests\first-paint-browser\precedence.spec.ts:13:3 › neon-emerald: pre-hydration palette, native scheme, reload and OS independence (1.5s)
+  ✓   8 tests\first-paint-browser\precedence.spec.ts:13:3 › neon-amber: pre-hydration palette, native scheme, reload and OS independence (1.5s)
+  ✓   9 tests\first-paint-browser\precedence.spec.ts:13:3 › platform-light: pre-hydration palette, native scheme, reload and OS independence (1.7s)
+  ✓  10 tests\first-paint-browser\precedence.spec.ts:13:3 › platform-dark: pre-hydration palette, native scheme, reload and OS independence (1.6s)
+  ✓  11 tests\first-paint-browser\precedence.spec.ts:45:3 › missing storage uses configured generated default before hydration (686ms)
+  ✓  12 tests\first-paint-browser\precedence.spec.ts:45:3 › malformed storage uses configured generated default before hydration (717ms)
+  ✓  13 tests\first-paint-browser\precedence.spec.ts:45:3 › blocked storage uses configured generated default before hydration (729ms)
+  ✓  14 tests\first-paint-browser\precedence.spec.ts:67:3 › shared identity never temporarily uses guest override (1.2s)
+  ✓  15 tests\first-paint-browser\precedence.spec.ts:67:3 › client identity never temporarily uses guest override (1.2s)
+  ✓  16 tests\first-paint-browser\precedence.spec.ts:108:1 › reset returns to configured default and survives reload (1.5s)
+  ✓  17 tests\first-paint-browser\precedence.spec.ts:121:1 › return navigation does not replay an obsolete document default (1.3s)
+  ✓  18 tests\first-paint-browser\precedence.spec.ts:135:1 › appearance failure keeps saved built-in theme and exposes retry without blanking (1.1s)
+  ✓  19 tests\first-paint-browser\qa-independent.spec.ts:5:1 › QA baseline reload matrix and route continuity (10.9s)
+  ✘  20 tests\first-paint-browser\qa-independent.spec.ts:34:1 › QA generated preference outage exposes incorrect initial theme (1.4s)
+  ✓  21 tests\first-paint-browser\qa-independent.spec.ts:44:1 › QA built-in readability keyboard reduced motion and retained input (8.1s)
+  ✓  22 tests\first-paint-browser\temporal.spec.ts:4:1 › visible frame samples remain navy across responsive reloads, throttling and recovery (6.7s)
+
+
+  1) tests\first-paint-browser\qa-independent.spec.ts:34:1 › QA generated preference outage exposes incorrect initial theme 
+
+    Error: Saved generated Dark must not show Light on failure
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "platform-dark"
+    Received: "light"
+
+      39 |  await context.clearCookies();await page.getByRole('button',{name:'Retry appearance',exact:true}).click();await expect(page.locator('html')).toHaveAttribute('data-theme','platform-dark');await page.screenshot({path:info.outputPath('recovered.png')});
+      40 |  await writeFile(info.outputPath('outage.json'),JSON.stringify({before,after:await page.locator('html').getAttribute('data-theme')}));
+    > 41 |  expect(before,'Saved generated Dark must not show Light on failure').toBe('platform-dark');
+         |                                                                       ^
+      42 | });
+      43 |
+      44 | test('QA built-in readability keyboard reduced motion and retained input',async({page},info)=>{
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\t_9ea2df68\tests\first-paint-browser\qa-independent.spec.ts:41:71
+
+    Error Context: evidence\rework\browser-final\qa-independent-QA-generate-e9781-ses-incorrect-initial-theme\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    evidence\rework\browser-final\qa-independent-QA-generate-e9781-ses-incorrect-initial-theme\trace.zip
+    Usage:
+
+        npx playwright show-trace evidence\rework\browser-final\qa-independent-QA-generate-e9781-ses-incorrect-initial-theme\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\first-paint-browser\qa-independent.spec.ts:34:1 › QA generated preference outage exposes incorrect initial theme 
+  21 passed (1.2m)

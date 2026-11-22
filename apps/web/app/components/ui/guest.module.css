@@ -105,13 +105,10 @@
 .toolbar :global(.theme-picker) {
   font-family: var(--ui-font);
 }
-.toolbar :global(.theme-options) {
-  z-index: 50;
-  top: calc(100% + 8px);
-  bottom: auto;
-  left: auto;
-  right: 0;
-  width: 210px;
+/* Reserve the longest existing theme label before hydration resolves it. */
+.toolbar :global(.theme-current) {
+  min-inline-size: 14ch;
+  text-align: right;
 }
 .brandError {
   display: grid;
@@ -293,6 +290,13 @@
   width: 18px;
   height: 18px;
   flex: 0 0 auto;
+}
+/* Reserve the existing password sign-in footprint, not a fixed-height form.
+   MFA, errors and expanded help may still grow naturally. Mobile stays fluid. */
+@media (min-width: 801px) {
+  .signIn .main {
+    min-height: 500px;
+  }
 }
 @media (max-width: 1100px) {
   .signIn {

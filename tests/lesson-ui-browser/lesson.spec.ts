@@ -233,8 +233,16 @@ test('shared lesson preserves quiz publication, drafts, scans, immutable submiss
   await expect(page.getByLabel('Your response', { exact: true })).toHaveCount(0);
   await page.getByText('Publish an objective quiz for this lesson', { exact: true }).click();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
+  const themeSaved = page.waitForResponse(
+    (r) => r.url().includes('/api/branding/preference') && r.request().method() === 'POST',
+  );
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
+  expect((await themeSaved).ok()).toBe(true);
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect(
+    page.getByRole('button', { name: /^Theme(?: |$)/ }).first(),
+  ).toHaveAttribute('aria-expanded', 'false');
   const submitQuiz = page.getByRole('button', { name: 'Publish reviewed quiz', exact: true });
   await submitQuiz.click();
   await expect(page.getByLabel('Question 1', { exact: true })).toBeFocused();
@@ -529,7 +537,7 @@ test('shared lesson preserves quiz publication, drafts, scans, immutable submiss
     await touchContext.close();
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await a11y();
   await screenshot('lesson-desktop');
@@ -540,7 +548,7 @@ test('shared lesson preserves quiz publication, drafts, scans, immutable submiss
   await page.setViewportSize({ width: 390, height: 900 });
   await screenshot('lesson-mobile');
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

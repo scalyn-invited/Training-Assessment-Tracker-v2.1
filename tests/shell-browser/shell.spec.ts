@@ -84,7 +84,7 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     await expect(first).toBeFocused();
     await first.focus();
     await page.keyboard.press('Shift+Tab');
-    await expect(drawer.locator('summary')).toBeFocused();
+    await expect(drawer.getByRole('button', { name: /^Theme(?: |$)/ })).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(first).toBeFocused();
     await page.keyboard.press('Escape');
@@ -98,7 +98,7 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
       true,
     );
     await settingsButton.click();
-    await drawer.locator('summary').click();
+    await drawer.getByRole('button', { name: /^Theme(?: |$)/ }).click();
     await drawer.getByRole('button', { name: 'Dark', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await page.keyboard.press('Escape'); // Close theme menu first.
@@ -106,12 +106,12 @@ test('source shell, role redirects, scoped overviews, client switching and mobil
     await page.reload();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await settingsButton.click();
-    await drawer.locator('summary').click();
+    await drawer.getByRole('button', { name: /^Theme(?: |$)/ }).click();
     await drawer.getByRole('button', { name: 'Use platform default', exact: true }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
     await page.keyboard.press('Escape');
     await page.keyboard.press('Escape');
-    await page.locator('summary').filter({ hasText: 'Workspace' }).click();
+    await page.getByRole('button', { name: /^Workspace / }).click();
     await page.getByRole('link', { name: 'Choose your client', exact: true }).click();
     await page.getByRole('button', { name: 'Demo Client 1', exact: true }).click();
     await expect(page).toHaveURL(/dashboard/);

@@ -1,0 +1,47 @@
+{
+  "temp": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\.worktrees\\loading-animation\\.runtime\\qa-temp",
+  "rows": [
+    {
+      "width": 1440,
+      "pending": {
+        "tag": "MAIN",
+        "id": "main"
+      },
+      "settled": {
+        "tag": "MAIN",
+        "id": "main"
+      },
+      "neutralFrames": 194,
+      "bodyFrames": 0,
+      "privateFrames": 0
+    },
+    {
+      "width": 820,
+      "pending": {
+        "tag": "MAIN",
+        "id": "main"
+      },
+      "settled": {
+        "tag": "MAIN",
+        "id": "main"
+      },
+      "neutralFrames": 198,
+      "bodyFrames": 0,
+      "privateFrames": 0
+    },
+    {
+      "width": 390,
+      "pending": {
+        "tag": "MAIN",
+        "id": "main"
+      },
+      "settled": {
+        "tag": "MAIN",
+        "id": "main"
+      },
+      "neutralFrames": 191,
+      "bodyFrames": 0,
+      "privateFrames": 0
+    }
+  ]
+}

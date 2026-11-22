@@ -463,7 +463,7 @@ test('shared assessment directory preserves author permissions and independent a
     await page.setViewportSize({ width, height: 1000 });
     await a11y();
   }
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

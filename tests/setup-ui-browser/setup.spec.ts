@@ -205,6 +205,13 @@ test('setup loading, requirements failure, upgrade gate and guest branding prece
   });
   await page.goto('/setup/local');
   await expect(page.getByText('Checking the private setup session...')).toBeVisible();
+  // Healthy SSR authority bypasses the initial browser fetch. Exercise an explicit
+  // refresh outage here; fresh-document outages have their own first-paint suite.
+  const failedBrand = page.waitForResponse(
+    (r) => r.url().includes('/api/branding/current?') && r.status() === 503,
+  );
+  await page.evaluate(() => window.dispatchEvent(new Event('brandingchanged')));
+  await failedBrand;
   await expect(page.getByRole('button', { name: 'Retry appearance', exact: true })).toBeVisible();
   brandUnavailable = false;
   await page.getByRole('button', { name: 'Retry appearance', exact: true }).click();

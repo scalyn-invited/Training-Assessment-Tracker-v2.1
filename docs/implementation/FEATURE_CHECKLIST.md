@@ -2,6 +2,30 @@
 
 Source: V2 working tree at commit 3f3e4a86e8c4a4ce829a983b0406abac4b43a5b1, including the captured uncommitted assessment work. See source-baseline.json (366 files). V2 historical evidence does not prove V2.1 parity.
 
+## Theme selector popover — implementation verified; independent QA pending
+
+Task `t_32d79f81`: theme choices now use a viewport-constrained native top-layer popover without expanding sidebar layout. Existing themes, selection/persistence and client preference contract are preserved; keyboard/pointer dismissal and focus, dialog nesting, internal scrolling and async errors are covered. Final component browser 9, built-Next appearance 4, web policy 14 and branding domain 6 pass; build/typechecks/diff checks pass. See `THEME_POPOVER.md` for RED/GREEN evidence, changed files, harness corrections and limits. QA `t_d0f9320a` and root review remain pending; workspace selection is separate scope.
+
+## Account appearance consistency — implementation verified; independent QA pending
+
+Task `t_71fbc8b1`: `/accounts` and `/account/security` now resolve the selected Learning client's appearance through the existing shared resolver, including initial document/pre-body and hydrated scope. No-client account pages and guest/platform routes retain shared scope. Real-API RED→GREEN, nine-palette desktop/tablet/mobile dev and built matrices, unchanged account/security behavior journey, built scoped-navigation regression, 20 appearance-policy and 6 branding tests pass; types/build/format/diff checks pass. See `ACCOUNT_THEME_CONSISTENCY.md` and `evidence/account-theme-consistency.tar.gz`, including the retained build-origin fixture failure and correction. Independent QA `t_b23a00b1` and overall review remain pending; no deployment or human acceptance claimed.
+
+## First-paint appearance correction — implementation verified; independent QA pending
+
+Task `t_eeccfb23`: saved-theme-before-hydration RED→GREEN, request-scoped authoritative palettes, current navy document canvas, session/guest separation and one-document snapshot invalidation implemented. Final built-renderer matrix: 17 passed; existing isolated API guest/account-link/axe journey: 1 passed; branding domain: 6 passed; build, server/web TypeScript and diff checks pass. See `FIRST_PAINT_FIX.md` for changed files, reproducible commands and evidence. Unavailable authoritative generated/default appearance may still change on retry; no universal zero-CLS or cross-browser claim. Independent QA `t_8db94a12` and overall acceptance remain open.
+
+## First-paint same-feature rework — approved bounded policy implemented; independent retest pending
+
+Task `t_9ea2df68`: geometry correction passes exact four reload conditions plus withheld-hydration check. Owner-approved fresh branding-503/scoped platform-dark exception now uses honest built-in navy Dark with unavailable/Retry UI and preserved preference; recovery restores authoritative palette. Full built suite 22 passes / 1 preserved original strict-contract failure (expects generated theme, receives approved built-in fallback); separate policy regression passes RED→GREEN. Web policy isolation 14, branding 6, real API guest 1 pass; build/typechecks pass. Root QA must independently retest; see `FIRST_PAINT_REWORK.md`. No overall acceptance claimed.
+
+## Scoped appearance transitions — FOUC-QA-04
+
+FOUC-QA-04 scoped appearance correction: owner-approved authority-gated SPA rendering implemented with explicit pending/retry, pre-paint appearance commit and obsolete-response rejection. Original RED preserved; revised baseline contract and reused-shell A -> B -> A case reproduced RED before their corrections. Expanded real-API navigation/client/identity checks and first-paint policy regressions are recorded in `SCOPED_APPEARANCE_TRANSITION_FIX.md` and `evidence/scope-fix/`. The historical strict 503 assertion remains a recorded failure under the approved bounded exception; no independent/human acceptance is inferred.
+
+## Authority-gated assessment builder — FOUC-QA-05
+
+Task `t_ec45899d`: reproduced the empty-host RED after delayed appearance authority; separated imperative editor data lifetime from shell-host attachment and withheld controls until the lazy module installs handlers/guards. Newer edits and saved state now survive the save URL's temporary authority gate. Final unchanged real-API builder journey, enhanced gate/save/history regression, delayed real-bundle regression, scope/history/races, shell/guest and 10 builder component checks pass; policy14/branding6/build/types pass. Prior first-paint result remains 22 passes / one preserved superseded outage assertion failure. See `BUILDER_APPEARANCE_GATE_FIX.md` and `evidence/builder-appearance-gate-fix.tar.gz`. Original QA evidence unchanged. Implementation phase complete; root independent QA and remaining all-family coverage still pending, no overall acceptance.
+
 ## Foundation — Completed (local implementation and QA)
 Acceptance: independent workspaces, separate web/API/worker, persistent shared PGlite fallback, PostgreSQL adapter, checksummed SQL migrations, transaction-scoped tenant access, durable outbox, startup and browser checks.
 - [x] Implementation

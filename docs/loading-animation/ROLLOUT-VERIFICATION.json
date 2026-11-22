@@ -1,0 +1,261 @@
+{
+  "checkedAt": "2026-11-21T10:54:10.491418+00:00",
+  "sha": "ff493ddbd8ad54b0535f1ca436e3233e9afa40fc",
+  "branch": "ui/global-design-system",
+  "backupFilesVerified": 1394,
+  "privateConfigAssetsUnchanged": 8,
+  "otherRefsUnchanged": true,
+  "runtimeHandle": "recorded in ROLLOUT.md",
+  "processes": [
+    {
+      "pid": 14456,
+      "ppid": 43640,
+      "created": 1795258379.060525,
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/dev.ts"
+      ],
+      "ports": [
+        55431
+      ],
+      "disabledFlags": {
+        "AI_LIVE_ENABLED": "false",
+        "AI_ANTHROPIC_ENABLED": "false",
+        "AI_GEMINI_ENABLED": "false",
+        "SMTP_ENABLED": "false",
+        "ACCOUNT_MAIL_ENABLED": "false",
+        "RETENTION_APPROVED": "false"
+      }
+    },
+    {
+      "pid": 31152,
+      "ppid": 14456,
+      "created": 1795258380.08072,
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--import",
+        "tsx",
+        "apps/api/src/main.ts"
+      ],
+      "ports": [
+        3101
+      ],
+      "disabledFlags": {
+        "AI_LIVE_ENABLED": "false",
+        "AI_ANTHROPIC_ENABLED": "false",
+        "AI_GEMINI_ENABLED": "false",
+        "SMTP_ENABLED": "false",
+        "ACCOUNT_MAIL_ENABLED": "false",
+        "RETENTION_APPROVED": "false"
+      }
+    },
+    {
+      "pid": 45080,
+      "ppid": 14456,
+      "created": 1795258380.089594,
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--import",
+        "tsx",
+        "apps/worker/src/main.ts"
+      ],
+      "ports": [],
+      "disabledFlags": {
+        "AI_LIVE_ENABLED": "false",
+        "AI_ANTHROPIC_ENABLED": "false",
+        "AI_GEMINI_ENABLED": "false",
+        "SMTP_ENABLED": "false",
+        "ACCOUNT_MAIL_ENABLED": "false",
+        "RETENTION_APPROVED": "false"
+      }
+    },
+    {
+      "pid": 9368,
+      "ppid": 14456,
+      "created": 1795258380.098734,
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\bin\\next",
+        "dev",
+        "--hostname",
+        "127.0.0.1",
+        "--port",
+        "3100"
+      ],
+      "ports": [],
+      "disabledFlags": {
+        "AI_LIVE_ENABLED": "false",
+        "AI_ANTHROPIC_ENABLED": "false",
+        "AI_GEMINI_ENABLED": "false",
+        "SMTP_ENABLED": "false",
+        "ACCOUNT_MAIL_ENABLED": "false",
+        "RETENTION_APPROVED": "false"
+      }
+    },
+    {
+      "pid": 22308,
+      "ppid": 9368,
+      "created": 1795258380.7534845,
+      "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\server\\lib\\start-server.js"
+      ],
+      "ports": [
+        3100
+      ],
+      "disabledFlags": {
+        "AI_LIVE_ENABLED": "false",
+        "AI_ANTHROPIC_ENABLED": "false",
+        "AI_GEMINI_ENABLED": "false",
+        "SMTP_ENABLED": "false",
+        "ACCOUNT_MAIL_ENABLED": "false",
+        "RETENTION_APPROVED": "false"
+      }
+    }
+  ],
+  "http": [
+    {
+      "url": "http://127.0.0.1:3101/health/live",
+      "status": 200,
+      "bytes": 31,
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "9743a9a4bf0fdd3be25d15a2434c6f8f3a2feab7bbebcb46368060a98184ae0b",
+      "body": {
+        "status": "ok",
+        "service": "api"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:3101/health/ready",
+      "status": 200,
+      "bytes": 51,
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "d256d8686628d5b578402e15ef00ee9c92a583d615d1757fd2198dd97f4b34c1",
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/api/health/ready",
+      "status": 200,
+      "bytes": 51,
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "d256d8686628d5b578402e15ef00ee9c92a583d615d1757fd2198dd97f4b34c1",
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/login",
+      "status": 200,
+      "bytes": 22971,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "f9e4e71db38366c8c9bdae570d4dd6ce0cc34bd950ec6756f7e0a320b6c6cfc7",
+      "css": [
+        {
+          "path": "/_next/static/chunks/apps_web_app_18mrvn52cl_rn._.css",
+          "status": 200,
+          "bytes": 60311,
+          "sha256": "612fb809f4f7c8cfe32fe0787bf32f014fbdb2f3c609beeadfa754a23a1a13bb"
+        },
+        {
+          "path": "/_next/static/chunks/apps_web_app_components_ui_form-layout_module_1_-tbyk8ocz3v.css",
+          "status": 200,
+          "bytes": 4105,
+          "sha256": "c1323248e0647a05199130bf89b42c4b67f6941ec4ca5fe1430385d7bb0ebce3"
+        }
+      ]
+    },
+    {
+      "url": "http://localhost:3100/accounts",
+      "status": 200,
+      "bytes": 20217,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "a0a91e50d345a19fedfeea5ea7960cb60cbdf82de2de47a11ee0eb071cbe4c34",
+      "css": [
+        {
+          "path": "/_next/static/chunks/apps_web_app_18mrvn52cl_rn._.css",
+          "status": 200,
+          "bytes": 60311,
+          "sha256": "612fb809f4f7c8cfe32fe0787bf32f014fbdb2f3c609beeadfa754a23a1a13bb"
+        },
+        {
+          "path": "/_next/static/chunks/apps_web_app_components_ui_1zbdvt9e3q8i5._.css",
+          "status": 200,
+          "bytes": 6396,
+          "sha256": "946a94ded8062300424d2d471fdd4630add57f5a62cb85769f8551ffa21a7dc9"
+        }
+      ]
+    },
+    {
+      "url": "http://localhost:3100/account/security",
+      "status": 200,
+      "bytes": 20849,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "40ba56efda301a0e904b2e5c075223b819b7e029eca69515561b8bccfbc3c6f7",
+      "css": [
+        {
+          "path": "/_next/static/chunks/apps_web_app_18mrvn52cl_rn._.css",
+          "status": 200,
+          "bytes": 60311,
+          "sha256": "612fb809f4f7c8cfe32fe0787bf32f014fbdb2f3c609beeadfa754a23a1a13bb"
+        },
+        {
+          "path": "/_next/static/chunks/apps_web_app_components_ui_form-layout_module_1_-tbyk8ocz3v.css",
+          "status": 200,
+          "bytes": 4105,
+          "sha256": "c1323248e0647a05199130bf89b42c4b67f6941ec4ca5fe1430385d7bb0ebce3"
+        }
+      ]
+    },
+    {
+      "url": "http://localhost:3100/platform",
+      "status": 200,
+      "bytes": 19714,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "b1623a0be68034b5e94bef1dda3ff80fd93c2c2ad96429678ff5773a9aeff631",
+      "css": [
+        {
+          "path": "/_next/static/chunks/apps_web_app_18mrvn52cl_rn._.css",
+          "status": 200,
+          "bytes": 60311,
+          "sha256": "612fb809f4f7c8cfe32fe0787bf32f014fbdb2f3c609beeadfa754a23a1a13bb"
+        }
+      ]
+    },
+    {
+      "url": "http://localhost:3100/dashboard",
+      "status": 200,
+      "bytes": 20152,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "3b35a114d8a3a036c03c422815c494f43f51d6ba6680208f50341bae4dc51b47",
+      "css": [
+        {
+          "path": "/_next/static/chunks/apps_web_app_18mrvn52cl_rn._.css",
+          "status": 200,
+          "bytes": 60311,
+          "sha256": "612fb809f4f7c8cfe32fe0787bf32f014fbdb2f3c609beeadfa754a23a1a13bb"
+        },
+        {
+          "path": "/_next/static/chunks/apps_web_app_10si75krq2-d8._.css",
+          "status": 200,
+          "bytes": 8979,
+          "sha256": "9f08424827b529334a1048e27b2c60039c520d9647079e665bbcb4f4e7143695"
+        }
+      ]
+    }
+  ],
+  "browserVerified": false,
+  "postWorkerExitVerified": false
+}

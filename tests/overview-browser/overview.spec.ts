@@ -44,7 +44,7 @@ test('Overview design uses live scoped data, preserves access, and works on desk
     route.fulfill({ status: 503, json: { message: 'Session temporarily unavailable.' } }),
   );
   await page.goto('/platform');
-  await expect(page.locator('[data-guest-shell="session"]')).toBeVisible();
+  await expect(page.locator('main[data-appearance-pending]')).toBeVisible();
   await expect(page.getByText('Session temporarily unavailable.', { exact: true })).toBeVisible();
   await expect(page.locator('[data-application-shell], .app-sidebar, .guest-header')).toHaveCount(
     0,
@@ -108,7 +108,10 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   }
   await accessibility();
   await page.screenshot({ path: `${screenshotDir}/overview-light-desktop.png`, fullPage: true });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page
+    .getByRole('button', { name: /^Theme(?: |$)/ })
+    .first()
+    .click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await accessibility();
@@ -203,10 +206,10 @@ test('Overview design uses live scoped data, preserves access, and works on desk
   await expect(settings.getByRole('link', { name: 'Global admins', exact: true })).toBeVisible();
   await settings.getByRole('button', { name: 'Close', exact: true }).focus();
   await page.keyboard.press('Shift+Tab');
-  await expect(settings.locator('summary')).toBeFocused();
+  await expect(settings.getByRole('button', { name: /^Theme(?: |$)/ })).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(settings.getByRole('button', { name: 'Close', exact: true })).toBeFocused();
-  await settings.locator('summary').click();
+  await settings.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await settings.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   // Exercise the shared dialog's field boundary with an isolated DOM fixture. The old
@@ -282,7 +285,7 @@ test('Overview design uses live scoped data, preserves access, and works on desk
     await touchContext.close();
   }
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.locator('summary').filter({ hasText: 'Workspace' }).click();
+  await page.getByRole('button', { name: /^Workspace / }).click();
   await page.getByRole('link', { name: 'Choose your client' }).click();
   await page.getByRole('button', { name: 'Demo Client 1', exact: true }).click();
   await expect(page).toHaveURL(/\/dashboard$/);

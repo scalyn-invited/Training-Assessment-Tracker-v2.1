@@ -1,0 +1,72 @@
+
+> build
+> next build
+
+▲ Next.js 16.4.6 (Turbopack)
+✓ Running next.config.ts took 52ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 14.9s
+  Running TypeScript ...
+
+  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+  	- include was updated to add '.next-first-paint/types/**/*.ts'
+  	- include was updated to add '.next-first-paint/dev/types/**/*.ts'
+
+  Finished TypeScript in 2.5s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/28) ...
+  Generating static pages using 11 workers (7/28) 
+  Generating static pages using 11 workers (14/28) 
+  Generating static pages using 11 workers (21/28) 
+✓ Generating static pages using 11 workers (28/28) in 1211ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /account/link
+├ ƒ /account/security
+├ ƒ /accounts
+├ ƒ /administration
+├ ƒ /assessments
+├ ƒ /assessments/assignments/[id]
+├ ƒ /assessments/definitions/[id]
+├ ƒ /assessments/definitions/[id]/assign
+├ ƒ /clients
+├ ƒ /dashboard
+├ ƒ /enrolments
+├ ƒ /enrolments/[id]
+├ ƒ /enrolments/[id]/delivery
+├ ƒ /enrolments/[id]/delivery/[blockId]/[index]
+├ ƒ /enrolments/[id]/documents/[fileId]
+├ ƒ /enrolments/[id]/generation/[runId]
+├ ƒ /enrolments/[id]/onboarding
+├ ƒ /enrolments/[id]/plan
+├ ƒ /enrolments/[id]/progress
+├ ƒ /enrolments/[id]/submissions/[submissionId]
+├ ƒ /learning-reviews
+├ ƒ /login
+├ ƒ /notifications
+├ ƒ /people
+├ ƒ /platform
+├ ƒ /platform/admins
+├ ƒ /platform/appearance
+├ ƒ /platform/audit
+├ ƒ /platform/clients
+├ ƒ /platform/people
+├ ƒ /platform/settings
+├ ƒ /platform/settings/status
+├ ƒ /settings/ai
+├ ƒ /settings/appearance
+├ ƒ /setup
+├ ƒ /setup/hosted
+└ ƒ /setup/local
+
+
+ƒ Proxy (Middleware)
+
+ƒ  (Dynamic)  server-rendered on demand
+

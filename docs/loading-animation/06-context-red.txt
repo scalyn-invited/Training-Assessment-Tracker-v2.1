@@ -1,0 +1,42 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\loading-animation-browser\context.spec.ts:4:1 › a pre-switch context response cannot publish after an identity mutation (7.9s)
+
+
+  1) tests\loading-animation-browser\context.spec.ts:4:1 › a pre-switch context response cannot publish after an identity mutation 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByText('Obsolete identity')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" getByText('Obsolete identity') with timeout 5000ms
+      - waiting for getByText('Obsolete identity')
+        13 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      30 |   release();
+      31 |   await page.waitForTimeout(100);
+    > 32 |   await expect(page.getByText('Obsolete identity')).toHaveCount(0);
+         |                                                     ^
+      33 | });
+      34 |
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\context.spec.ts:32:53
+
+    Error Context: output\loading-animation\context-a-pre-switch-conte-922f6--after-an-identity-mutation\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\context-a-pre-switch-conte-922f6--after-an-identity-mutation\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\context-a-pre-switch-conte-922f6--after-an-identity-mutation\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\loading-animation-browser\context.spec.ts:4:1 › a pre-switch context response cannot publish after an identity mutation 

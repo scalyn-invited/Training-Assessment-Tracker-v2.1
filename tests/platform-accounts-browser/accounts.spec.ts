@@ -69,7 +69,7 @@ test('platform account forms preserve selections and require fresh access confir
   const form = section.getByRole('form', {
     name: 'Manage client access for demo.1.3@example.invalid',
   });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   expect(
@@ -77,7 +77,7 @@ test('platform account forms preserve selections and require fresh access confir
       .violations,
   ).toEqual([]);
   await section.screenshot({ path: `${screenshots}/client-access-light-desktop.png` });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await section.screenshot({ path: `${screenshots}/client-access-dark-desktop.png` });

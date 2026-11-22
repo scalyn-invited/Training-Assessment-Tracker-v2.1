@@ -1,0 +1,119 @@
+
+Running 4 tests using 1 worker
+
+  ✘  1 tests\loading-animation-browser\shell.spec.ts:196:39 › removed-control focus reaches main through context failure and keyboard retry 1440 (9.4s)
+  ✘  2 tests\loading-animation-browser\shell.spec.ts:196:39 › removed-control focus reaches main through context failure and keyboard retry 820 (8.9s)
+  ✘  3 tests\loading-animation-browser\shell.spec.ts:196:39 › removed-control focus reaches main through context failure and keyboard retry 390 (6.5s)
+  ✓  4 tests\loading-animation-browser\shell.spec.ts:227:1 › background context and appearance refresh preserve input focus value and DOM identity (1.3s)
+
+
+  1) tests\loading-animation-browser\shell.spec.ts:196:39 › removed-control focus reaches main through context failure and keyboard retry 1440 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('main#main')
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" locator('main#main') with timeout 5000ms
+      - waiting for locator('main#main')
+        14 × locator resolved to <main id="main" tabindex="-1" data-appearance-pending="" class="overview_content loading_state_contentPending">…</main>
+           - unexpected value "inactive"
+
+
+      207 |   await navigate.press('Enter');
+      208 |   await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+    > 209 |   await expect(page.locator('main#main')).toBeFocused();
+          |                                           ^
+      210 |   state.contextFailure = true;
+      211 |   release();
+      212 |   await expect(page.getByRole('alert')).toContainText('Session unavailable');
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:209:43
+
+    Error Context: output\loading-animation\shell-removed-control-focu-aa0a3-ure-and-keyboard-retry-1440\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-removed-control-focu-aa0a3-ure-and-keyboard-retry-1440\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-removed-control-focu-aa0a3-ure-and-keyboard-retry-1440\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\loading-animation-browser\shell.spec.ts:196:39 › removed-control focus reaches main through context failure and keyboard retry 820 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('main#main')
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" locator('main#main') with timeout 5000ms
+      - waiting for locator('main#main')
+        14 × locator resolved to <main id="main" tabindex="-1" data-appearance-pending="" class="overview_content loading_state_contentPending">…</main>
+           - unexpected value "inactive"
+
+
+      207 |   await navigate.press('Enter');
+      208 |   await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+    > 209 |   await expect(page.locator('main#main')).toBeFocused();
+          |                                           ^
+      210 |   state.contextFailure = true;
+      211 |   release();
+      212 |   await expect(page.getByRole('alert')).toContainText('Session unavailable');
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:209:43
+
+    Error Context: output\loading-animation\shell-removed-control-focu-f765b-lure-and-keyboard-retry-820\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-removed-control-focu-f765b-lure-and-keyboard-retry-820\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-removed-control-focu-f765b-lure-and-keyboard-retry-820\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests\loading-animation-browser\shell.spec.ts:196:39 › removed-control focus reaches main through context failure and keyboard retry 390 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  locator('main#main')
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" locator('main#main') with timeout 5000ms
+      - waiting for locator('main#main')
+        14 × locator resolved to <main id="main" tabindex="-1" data-appearance-pending="" class="overview_content loading_state_contentPending">…</main>
+           - unexpected value "inactive"
+
+
+      207 |   await navigate.press('Enter');
+      208 |   await expect(page.locator('[data-loading-spinner]')).toBeVisible();
+    > 209 |   await expect(page.locator('main#main')).toBeFocused();
+          |                                           ^
+      210 |   state.contextFailure = true;
+      211 |   release();
+      212 |   await expect(page.getByRole('alert')).toContainText('Session unavailable');
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\shell.spec.ts:209:43
+
+    Error Context: output\loading-animation\shell-removed-control-focu-fe71a-lure-and-keyboard-retry-390\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\shell-removed-control-focu-fe71a-lure-and-keyboard-retry-390\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\shell-removed-control-focu-fe71a-lure-and-keyboard-retry-390\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests\loading-animation-browser\shell.spec.ts:196:39 › removed-control focus reaches main through context failure and keyboard retry 1440 
+    tests\loading-animation-browser\shell.spec.ts:196:39 › removed-control focus reaches main through context failure and keyboard retry 820 
+    tests\loading-animation-browser\shell.spec.ts:196:39 › removed-control focus reaches main through context failure and keyboard retry 390 
+  1 passed (41.8s)

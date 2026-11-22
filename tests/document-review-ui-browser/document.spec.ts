@@ -188,7 +188,7 @@ test('shared document review preserves quarantine, findings, confirmation, recov
   await expect(download).toHaveAttribute('target', '_blank');
   expect((await page.request.get('/api/files/' + fileId)).ok()).toBe(true);
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   const confirm = page.getByRole('button', { name: 'Confirm reviewed findings', exact: true });
   const save = page.getByRole('button', { name: 'Save review draft', exact: true });
@@ -354,7 +354,7 @@ test('shared document review preserves quarantine, findings, confirmation, recov
   await expect(save).toHaveCount(0);
   await a11y();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();

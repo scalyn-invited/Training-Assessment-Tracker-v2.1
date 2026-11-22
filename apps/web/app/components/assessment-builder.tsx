@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api, useContext, Guest } from './auth-ui';
@@ -13,7 +13,8 @@ type Definition = Omit<BuilderState, 'criteria' | 'threshold'> & {
 export function AssessmentBuilder({ definitionId }: { definitionId: string }) {
   const { context, error, load } = useContext(),
     router = useRouter(),
-    host = useRef<HTMLDivElement>(null),
+    [host, setHost] = useState<HTMLDivElement | null>(null),
+    [editorRoot, setEditorRoot] = useState<HTMLDivElement | null>(null),
     [state, setState] = useState<BuilderState | null>(null),
     [failure, setFailure] = useState(''),
     [retry, setRetry] = useState(0);
@@ -55,20 +56,29 @@ export function AssessmentBuilder({ definitionId }: { definitionId: string }) {
     };
   }, [context?.user?.id, client, definitionId, retry]);
   useEffect(() => {
-    if (!state || !host.current || !context || !client) return;
+    if (!state || !context || !client) {
+      setEditorRoot(null);
+      return;
+    }
     let cancelled = false,
       cleanup: (() => void) | undefined;
-    const root = host.current;
-    root.innerHTML = builderMarkup;
-    root.dataset.client = client;
-    root.dataset.endpoint = '/api/assessments/builder';
-    root.dataset.upload = '/api/assessments/media';
-    (root.querySelector('#builder-csrf') as HTMLInputElement).value = context.csrf;
-    root.querySelector('#builder-heading')!.textContent =
-      state.status === 'published' ? 'Revise assessment' : 'Build an assessment';
+    // Own the imperative editor for the data lifetime, not the shell host lifetime.
+    // Saving replaces the URL; its appearance gate may temporarily detach the host.
+    const root = document.createElement('div');
+    setEditorRoot(root);
+    root.textContent = 'Loading assessment builder...';
     import('./assessment-builder/builder')
       .then((module) => {
-        if (!cancelled) cleanup = module.mountAssessmentBuilder(root, state);
+        if (cancelled) return;
+        // Expose controls only when their handlers and work guard can mount synchronously.
+        root.innerHTML = builderMarkup;
+        root.dataset.client = client;
+        root.dataset.endpoint = '/api/assessments/builder';
+        root.dataset.upload = '/api/assessments/media';
+        (root.querySelector('#builder-csrf') as HTMLInputElement).value = context.csrf;
+        root.querySelector('#builder-heading')!.textContent =
+          state.status === 'published' ? 'Revise assessment' : 'Build an assessment';
+        cleanup = module.mountAssessmentBuilder(root, state);
       })
       .catch((e) => {
         if (!cancelled) setFailure('The editor could not be loaded. Reload to try again.');
@@ -78,6 +88,15 @@ export function AssessmentBuilder({ definitionId }: { definitionId: string }) {
       cleanup?.();
     };
   }, [state, client, context?.csrf]);
+  useEffect(() => {
+    // Never attach destination content until the authority-gated shell supplies a host.
+    // Reattach the same live editor, preserving edits, save state and its work guard.
+    if (!host || !editorRoot) return;
+    host.replaceChildren(editorRoot);
+    return () => {
+      editorRoot.remove();
+    };
+  }, [host, editorRoot]);
   return (
     <Guest>
       <div className={layout.page}>
@@ -107,7 +126,7 @@ export function AssessmentBuilder({ definitionId }: { definitionId: string }) {
             )}
             {!state && <PageHeader title="Assessment builder" />}
             {!state && !failure && <p role="status">Loading assessment builder...</p>}
-            <div id="assessment-builder" hidden={!state} ref={host} />
+            <div id="assessment-builder" hidden={!state} ref={setHost} />
           </>
         )}
       </div>

@@ -1,0 +1,45 @@
+
+Running 5 tests using 1 worker
+
+{"size":{"width":1280,"height":600},"workspace":{"h":600,"w":247,"nav":[{"label":"Main navigation","x":12,"y":166,"w":223,"h":188},{"label":"Mobile platform navigation","x":0,"y":0,"w":0,"h":0},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"workspacePanel":{"h":221,"sh":221,"w":222,"sw":222},"theme":{"h":600,"w":247,"nav":[{"label":"Main navigation","x":12,"y":166,"w":223,"h":188},{"label":"Mobile platform navigation","x":0,"y":0,"w":0,"h":0},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"owner":{"h":600,"w":247}}
+  ✓  1 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 1280x600 (5.4s)
+{"size":{"width":1280,"height":300},"workspace":{"h":428,"w":247,"nav":[{"label":"Main navigation","x":12,"y":166,"w":223,"h":188},{"label":"Mobile platform navigation","x":0,"y":0,"w":0,"h":0},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"workspacePanel":{"h":156,"sh":221,"w":222,"sw":222},"theme":{"h":428,"w":247,"nav":[{"label":"Main navigation","x":12,"y":38,"w":223,"h":188},{"label":"Mobile platform navigation","x":0,"y":0,"w":0,"h":0},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"owner":{"h":428,"w":247}}
+  ✓  2 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 1280x300 (3.2s)
+{"size":{"width":320,"height":300},"workspace":{"h":80,"w":320,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":229,"w":320,"h":71},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"workspacePanel":{"h":214,"sh":221,"w":222,"sw":222},"theme":{"h":80,"w":320,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":229,"w":320,"h":71},{"label":"Account settings","x":42,"y":101.5,"w":236,"h":123}]},"owner":{"h":281,"w":284}}
+  ✓  3 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 320x300 (3.1s)
+{"size":{"width":390,"height":420},"workspace":{"h":80,"w":390,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":349,"w":390,"h":71},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"workspacePanel":{"h":221,"sh":221,"w":292,"sw":292},"theme":{"h":80,"w":390,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":349,"w":390,"h":71},{"label":"Account settings","x":42,"y":153.25,"w":306,"h":123}]},"owner":{"h":281,"w":354}}
+  ✓  4 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 390x420 (3.0s)
+  ✘  5 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 800x300 (30.2s)
+
+
+  1) tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 800x300 ───
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.scrollIntoViewIfNeeded: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('complementary').getByRole('button', { name: /^Theme(?: |$)/ })
+
+
+      61 |  const mobile=size.width<800;if(mobile)await page.getByRole('button',{name:'Personal settings'}).click();
+      62 |  const owner=mobile?page.getByRole('dialog',{name:'Personal settings'}):sidebar;
+    > 63 |  const theme=owner.getByRole('button',{name:/^Theme(?: |$)/});await theme.scrollIntoViewIfNeeded();const closed=await geom();const ownerBefore=await owner.evaluate(el=>({h:el.scrollHeight,w:el.scrollWidth}));
+         |                                                                           ^
+      64 |  await theme.click();const panel=page.getByRole('group',{name:'Colour theme'});await expect(panel).toBeVisible();expect(await geom()).toEqual(closed);expect(await owner.evaluate(el=>({h:el.scrollHeight,w:el.scrollWidth}))).toEqual(ownerBefore);
+      65 |  const box=await panel.boundingBox();expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.y).toBeGreaterThanOrEqual(0);expect(box!.x+box!.width).toBeLessThanOrEqual(size.width);expect(box!.y+box!.height).toBeLessThanOrEqual(size.height);
+      66 |  expect((await new AxeBuilder({page}).include('.theme-options').withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze()).violations).toEqual([]);
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\selector-popovers-qa\tests\theme-picker-browser\selector-qa.spec.ts:63:75
+
+    Error Context: output\selector-qa\independent\selector-qa-independent-combined-geometry-800x300\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\selector-qa\independent\selector-qa-independent-combined-geometry-800x300\trace.zip
+    Usage:
+
+        npx playwright show-trace output\selector-qa\independent\selector-qa-independent-combined-geometry-800x300\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 800x300 ────
+  4 passed (46.6s)

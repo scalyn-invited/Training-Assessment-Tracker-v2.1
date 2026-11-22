@@ -59,7 +59,7 @@ test('client choice retains scoped access, selection recovery and responsive sha
   await expect(page.locator('[data-application-shell="learning"]')).toBeVisible();
   expect((await context()).client).toBeNull(); // Visiting the chooser does not select automatically.
   await a11y();
-  await page.locator('summary').filter({ hasText: 'Theme' }).first().click();
+  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');

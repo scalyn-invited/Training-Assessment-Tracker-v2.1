@@ -1,0 +1,66 @@
+{
+  "checkedAt": "2026-11-21T00:20:21.504Z",
+  "http": [
+    {
+      "url": "http://127.0.0.1:3101/health/live",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "status": "ok",
+        "service": "api"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:3101/health/ready",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/api/health/ready",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/login",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "htmlBytes": 21276,
+      "hasForm": false,
+      "hasStylesheet": true,
+      "hasPasswordInput": false,
+      "htmlSha256": "0338c12035059200c61385b306b8135a970c72cf70a6c7d1f207599f126ead6f",
+      "stylesheets": [
+        {
+          "path": "/_next/static/chunks/apps_web_app_0t8xi56vr12e9._.css",
+          "status": 200,
+          "bytes": 21995
+        },
+        {
+          "path": "/_next/static/chunks/apps_web_app_0l6a5ab-37sgc._.css",
+          "status": 200,
+          "bytes": 41107
+        }
+      ]
+    }
+  ],
+  "database": {
+    "readOnly": true,
+    "matchingReceipts": 33,
+    "counts": [
+      {
+        "users": 31,
+        "organisations": 3
+      }
+    ]
+  }
+}

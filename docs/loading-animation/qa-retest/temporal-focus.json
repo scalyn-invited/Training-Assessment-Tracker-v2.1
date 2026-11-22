@@ -1,0 +1,6107 @@
+[
+  {
+    "width": 1440,
+    "pendingFocus": {
+      "tag": "MAIN",
+      "id": "main"
+    },
+    "frames": [
+      {
+        "time": 1467.8999999761581,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1477,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1491.5,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1507.1000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1523.7000000476837,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1540.6000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1557.3000000715256,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1573.7000000476837,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1597.1000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1607,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1623.6000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1640.2000000476837,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1657,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1673.7000000476837,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1691.5,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1706.8000000715256,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1730.2000000476837,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1740.3000000715256,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1766.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1778.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1790.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1807.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1823.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1840.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1856.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1873.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1890.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1906.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1923.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1940.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1957.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1973.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1990.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2006.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2023.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2040.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2057,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2075.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2090.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2106.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2123.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2139.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2156.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2173.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2190.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2206.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2223.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2239.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2256.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2273.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2290,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2306.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2323.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2340,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2356.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2373.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2390.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2407.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2423.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2439.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2457.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2473.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2489.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2507,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2523.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2540.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2557.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2573.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2590.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2606.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2624.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2640.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2657.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2674.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2690.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2707.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2724.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2739.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2756.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2773.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2790.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2808.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2824,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2841.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2857.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2874.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2891.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2907.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2923.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2940.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2957.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2973.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2990.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3007.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3024.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3040.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3057.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3073.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3090.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3107.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3123.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3140.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3157.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3173.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3189.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3206.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3223.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3240,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3256.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3273.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3289.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3306.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3323.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3339.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3356.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3373,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3390.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3406.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3423,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3439.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3456.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3473,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3489.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3506.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3522.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3539.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3556.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3573.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3589.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3606.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3622.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3639.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3656.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3672.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3689.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3706.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3722.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3739.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3756,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3773.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3789.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3806.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3822.8000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3839.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3856,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3872.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3889.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3906.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3922.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3939.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3956.2000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3972.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3989.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4006.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4022.7000000476837,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4039.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4055.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4072.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4089.3000000715256,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4105.800000071526,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4122.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4139.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4155.700000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4172.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4189.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4205.800000071526,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4222.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4239.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4255.700000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4272.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4289.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4305.800000071526,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4322.300000071526,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4339,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4356.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4372.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4388.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4405.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4422.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4439.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4455.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4472.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4489.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4505.700000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4522.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4538.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4555.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4572.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4589,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4605.700000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4622.300000071526,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4638.800000071526,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4655.700000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4672.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4688.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4705.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4722.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4738.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4755.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4772.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4789,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4805.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4822,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4838.700000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4856.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4872,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4888.700000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4905.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4923.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4939,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4955.700000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4972.200000047684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4988.600000023842,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 5005.5,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 5029.800000071526,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 5039.899999976158,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 5056.899999976158,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 5072.100000023842,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 5106,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 5144.100000023842,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 5152.800000071526,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 5155.300000071526,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      }
+    ],
+    "settledFocus": {
+      "tag": "MAIN",
+      "id": "main"
+    }
+  },
+  {
+    "width": 820,
+    "pendingFocus": {
+      "tag": "MAIN",
+      "id": "main"
+    },
+    "frames": [
+      {
+        "time": 689.2999999523163,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 704.3999999761581,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 722.5,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 737.6999999284744,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 757.6999999284744,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 770.6999999284744,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 788.5,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 804.1000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 820.6999999284744,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 839.1000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 854.1000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 870.6999999284744,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 887.2999999523163,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 904.1000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 921.3999999761581,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 938.5,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 955,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 971,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 987.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1004,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1020.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1037.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1053.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1070.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1087.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1103.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1120.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1137.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1154.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1170.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1187.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1203.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1220.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1237.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1255.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1270.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1287,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1303.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1320.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1337.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1353.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1370.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1387.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1403.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1420.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1436.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1453.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1470.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1487,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1503.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1520.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1537,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1553.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1570.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1586.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1603.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1620.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1636.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1653.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1670.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1686.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1703.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1720.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1736.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1753.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1770.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1786.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1803.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1820.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1836.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1853.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1870.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1886.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1903.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1920.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1937,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1953.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1970.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1986.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2003.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2019.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2037.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2053.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2070.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2086.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2104.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2121,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2137.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2154.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2170.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2187.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2204,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2220.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2237.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2253.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2270.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2286.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2303.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2320.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2337,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2353.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2370.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2386.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2403.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2420.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2436.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2453.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2470.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2486.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2503.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2520.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2536.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2553.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2569.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2586.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2603.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2619.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2636.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2653,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2669.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2686.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2703.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2720,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2737.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2753.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2770.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2787.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2802.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2820.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2837.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2853.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2869.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2887.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2904,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2920.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2937.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2953.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2970.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2987.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3003.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3020.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3037.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3053.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3070.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3087.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3103.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3120,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3136.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3153.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3170.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3186.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3203.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3219.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3236.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3253.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3269.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3286.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3303,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3319.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3336.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3352.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3369.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3386.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3403.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3419.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3436.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3453.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3469.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3486.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3503.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3519.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3536.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3552.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3569.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3586.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3603,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3619.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3636.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3652.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3670,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3686.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3702.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3719.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3736.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3753,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3769.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3786.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3802.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3819,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3836.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3852.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3869.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3886,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3902.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3919.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3936.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3953.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3969.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3985.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4003.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4019.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4036.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4052.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4069.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4086.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4102.799999952316,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4119.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4136.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4152.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4169.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4185.799999952316,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4205.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4219.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4236.199999928474,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4259.5,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4277.100000023842,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4286.399999976158,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4303.699999928474,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4319.5,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4336.100000023842,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4352.600000023842,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4369.299999952316,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4387.299999952316,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4414.399999976158,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4421.399999976158,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4438.299999952316,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4467.600000023842,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4482.100000023842,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4485.699999928474,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4502.199999928474,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4521.399999976158,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4537.899999976158,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4552.100000023842,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4569.699999928474,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4586.199999928474,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      }
+    ],
+    "settledFocus": {
+      "tag": "MAIN",
+      "id": "main"
+    }
+  },
+  {
+    "width": 390,
+    "pendingFocus": {
+      "tag": "MAIN",
+      "id": "main"
+    },
+    "frames": [
+      {
+        "time": 884.5,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 901.1000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 917.7999999523163,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 934.6999999284744,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 951.3999999761581,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 967.6999999284744,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 985.5,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1004.1999999284744,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1017.7999999523163,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1034.3999999761581,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1050.8999999761581,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1067.6000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1084.2999999523163,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1101.1000000238419,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1117.6999999284744,
+        "pending": false,
+        "neutral": false,
+        "heading": "Overview",
+        "focus": "A",
+        "focusText": "",
+        "userVisible": true
+      },
+      {
+        "time": 1145.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1154.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1167.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1184.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1201,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1217.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1234.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1251,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1267.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1284.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1300.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1318.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1335.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1350.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1367.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1384.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1400.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1417.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1434.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1450.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1467.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1484.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1500.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1517.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1534.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1550.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1567.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1583.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1600.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1617.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1634.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1650.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1667.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1684,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1700.6000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1717.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1733.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1750.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1767.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1783.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1800.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1817.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1833.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1850.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1867.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1884,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1900.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1917.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1933.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1950.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1967.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 1983.8999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2000.3999999761581,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2017.1000000238419,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2033.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2050.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2067.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2083.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2100.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2117.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2133.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2150.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2167.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2183.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2200.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2217,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2233.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2250.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2267,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2283.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2300.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2317.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2333.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2350.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2366.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2383.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2400.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2417,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2433.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2450.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2467,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2483.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2500.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2516.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2533.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2550.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2566.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2583.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2600.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2616.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2633.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2650.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2666.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2683.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2700.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2716.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2733.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2750,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2766.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2783.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2800.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2816.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2833.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2850.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2866.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2883.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2900.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2916.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2933.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2950.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2966.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 2983.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3000,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3016.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3033.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3050.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3066.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3083.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3100.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3116.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3133.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3150,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3166.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3183.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3200,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3216.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3233.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3250,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3266.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3283.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3300,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3316.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3333.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3350,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3366.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3383.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3399.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3416.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3433.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3449.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3466.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3483.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3499.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3516.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3533.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3549.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3566.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3583.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3599.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3616.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3633.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3649.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3666.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3683,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3699.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3716.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3732.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3749.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3766.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3783,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3799.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3816.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3832.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3849.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3866.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3882.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3899.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3916.2999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3932.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3949.6999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3966.1999999284744,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3983,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 3999.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4016.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4032.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4049.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4066.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4082.7999999523163,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4099.5,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4116,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4132.899999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4149.799999952316,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4166.199999928474,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4182.699999928474,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4199.399999976158,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4216.100000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4232.699999928474,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4249.299999952316,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4267.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4282.699999928474,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4300.600000023842,
+        "pending": true,
+        "neutral": true,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": false
+      },
+      {
+        "time": 4318.699999928474,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4333,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4349.600000023842,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4366.899999976158,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4382.699999928474,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4402,
+        "pending": true,
+        "neutral": false,
+        "heading": "",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4424.399999976158,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4432.899999976158,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4452,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4465.899999976158,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      },
+      {
+        "time": 4482.600000023842,
+        "pending": false,
+        "neutral": false,
+        "heading": "Clients",
+        "focus": "MAIN",
+        "focusText": "main",
+        "userVisible": true
+      }
+    ],
+    "settledFocus": {
+      "tag": "MAIN",
+      "id": "main"
+    }
+  }
+]

@@ -1,0 +1,182 @@
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Failed to proxy http://127.0.0.1:3111/health/ready Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+[WebServer] Error: connect ECONNREFUSED 127.0.0.1:3111
+[WebServer]     at ignore-listed frames {
+[WebServer]   errno: -4078,
+[WebServer]   code: 'ECONNREFUSED',
+[WebServer]   syscall: 'connect',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 3111
+[WebServer] }
+
+Running 1 test using 1 worker
+
+  ✘  1 tests\loading-next-browser\qa-temporal.spec.ts:4:1 › independent temporal authority and keyboard focus across held route verification (15.8s)
+
+
+  1) tests\loading-next-browser\qa-temporal.spec.ts:4:1 › independent temporal authority and keyboard focus across held route verification 
+
+    Error: Keyboard focus must not fall to body during held navigation at 1440
+
+    expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "BODY"
+
+      47 |     expect(result.frames.filter((f: any) => f.neutral).length).toBeGreaterThan(0);
+      48 |     expect(result.frames.filter((f: any) => f.neutral && (f.heading || f.userVisible))).toEqual([]);
+    > 49 |     expect.soft(pendingFocus.tag, `Keyboard focus must not fall to body during held navigation at ${width}`).not.toBe('BODY');
+         |                                                                                                                  ^
+      50 |     expect.soft(result.settledFocus.tag, `Keyboard focus must remain usable after navigation at ${width}`).not.toBe('BODY');
+      51 |   }
+      52 | });
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-next-browser\qa-temporal.spec.ts:49:114
+
+    Error: Keyboard focus must remain usable after navigation at 1440
+
+    expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "BODY"
+
+      48 |     expect(result.frames.filter((f: any) => f.neutral && (f.heading || f.userVisible))).toEqual([]);
+      49 |     expect.soft(pendingFocus.tag, `Keyboard focus must not fall to body during held navigation at ${width}`).not.toBe('BODY');
+    > 50 |     expect.soft(result.settledFocus.tag, `Keyboard focus must remain usable after navigation at ${width}`).not.toBe('BODY');
+         |                                                                                                                ^
+      51 |   }
+      52 | });
+      53 |
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-next-browser\qa-temporal.spec.ts:50:112
+
+    Error: Keyboard focus must not fall to body during held navigation at 820
+
+    expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "BODY"
+
+      47 |     expect(result.frames.filter((f: any) => f.neutral).length).toBeGreaterThan(0);
+      48 |     expect(result.frames.filter((f: any) => f.neutral && (f.heading || f.userVisible))).toEqual([]);
+    > 49 |     expect.soft(pendingFocus.tag, `Keyboard focus must not fall to body during held navigation at ${width}`).not.toBe('BODY');
+         |                                                                                                                  ^
+      50 |     expect.soft(result.settledFocus.tag, `Keyboard focus must remain usable after navigation at ${width}`).not.toBe('BODY');
+      51 |   }
+      52 | });
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-next-browser\qa-temporal.spec.ts:49:114
+
+    Error: Keyboard focus must remain usable after navigation at 820
+
+    expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "BODY"
+
+      48 |     expect(result.frames.filter((f: any) => f.neutral && (f.heading || f.userVisible))).toEqual([]);
+      49 |     expect.soft(pendingFocus.tag, `Keyboard focus must not fall to body during held navigation at ${width}`).not.toBe('BODY');
+    > 50 |     expect.soft(result.settledFocus.tag, `Keyboard focus must remain usable after navigation at ${width}`).not.toBe('BODY');
+         |                                                                                                                ^
+      51 |   }
+      52 | });
+      53 |
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-next-browser\qa-temporal.spec.ts:50:112
+
+    Error: Keyboard focus must not fall to body during held navigation at 390
+
+    expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "BODY"
+
+      47 |     expect(result.frames.filter((f: any) => f.neutral).length).toBeGreaterThan(0);
+      48 |     expect(result.frames.filter((f: any) => f.neutral && (f.heading || f.userVisible))).toEqual([]);
+    > 49 |     expect.soft(pendingFocus.tag, `Keyboard focus must not fall to body during held navigation at ${width}`).not.toBe('BODY');
+         |                                                                                                                  ^
+      50 |     expect.soft(result.settledFocus.tag, `Keyboard focus must remain usable after navigation at ${width}`).not.toBe('BODY');
+      51 |   }
+      52 | });
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-next-browser\qa-temporal.spec.ts:49:114
+
+    Error: Keyboard focus must remain usable after navigation at 390
+
+    expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "BODY"
+
+      48 |     expect(result.frames.filter((f: any) => f.neutral && (f.heading || f.userVisible))).toEqual([]);
+      49 |     expect.soft(pendingFocus.tag, `Keyboard focus must not fall to body during held navigation at ${width}`).not.toBe('BODY');
+    > 50 |     expect.soft(result.settledFocus.tag, `Keyboard focus must remain usable after navigation at ${width}`).not.toBe('BODY');
+         |                                                                                                                ^
+      51 |   }
+      52 | });
+      53 |
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-next-browser\qa-temporal.spec.ts:50:112
+
+    Error Context: evidence\expanded\results\qa-temporal-independent-te-1246c-oss-held-route-verification\error-context.md
+
+  1 failed
+    tests\loading-next-browser\qa-temporal.spec.ts:4:1 › independent temporal authority and keyboard focus across held route verification 

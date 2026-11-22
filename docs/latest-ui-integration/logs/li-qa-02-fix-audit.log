@@ -1,0 +1,281 @@
+PASS tests/overview-browser/overview.spec.ts: 2 exact replacements; complete remaining source preserved
+PASS tests/recovery-ui-browser/recovery.spec.ts: 1 exact replacements; complete remaining source preserved
+PASS no product edits; main ref and prior review/failure logs unchanged
+SOURCE-ONLY remaining Personal settings Theme risks: 25 sites across 19 files; not runtime-qualified or modified
+[
+  {
+    "file": "tests/assessment-builder-ui-browser/builder.spec.ts",
+    "line": 388,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Dark', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/assessment-builder-ui-browser/builder.spec.ts",
+    "line": 395,
+    "context": [
+      "  await screenshot('questions-dark-desktop');",
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/assessment-directory-ui-browser/directory.spec.ts",
+    "line": 471,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Dark', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/assessment-directory-ui-browser/directory.spec.ts",
+    "line": 477,
+    "context": [
+      "  await a11y();",
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/assignment-ui-browser/assignment.spec.ts",
+    "line": 279,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Dark', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/assignment-ui-browser/assignment.spec.ts",
+    "line": 287,
+    "context": [
+      "  await screenshot('member-dark-mobile');",
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/client-admin-ui-browser/people.spec.ts",
+    "line": 102,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings' }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings' });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/curriculum-ui-browser/curriculum.spec.ts",
+    "line": 376,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/delivery-ui-browser/delivery.spec.ts",
+    "line": 425,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/document-review-ui-browser/document.spec.ts",
+    "line": 362,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/generation-ui-browser/generation.spec.ts",
+    "line": 348,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/learning-overview-ui-browser/overview.spec.ts",
+    "line": 253,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/lesson-ui-browser/lesson.spec.ts",
+    "line": 556,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/notifications-ui-browser/notifications.spec.ts",
+    "line": 469,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  let personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Dark', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/notifications-ui-browser/notifications.spec.ts",
+    "line": 477,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/onboarding-ui-browser/onboarding.spec.ts",
+    "line": 383,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/progress-ui-browser/progress.spec.ts",
+    "line": 677,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/receipt-ui-browser/receipt.spec.ts",
+    "line": 645,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/response-ui-browser/response.spec.ts",
+    "line": 392,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Dark', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/response-ui-browser/response.spec.ts",
+    "line": 398,
+    "context": [
+      "  await a11y();",
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/review-queue-ui-browser/review-queue.spec.ts",
+    "line": 765,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/review-queue-ui-browser/review-queue.spec.ts",
+    "line": 904,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const queueSettings = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await queueSettings.locator('summary').click();",
+      "  await queueSettings.getByRole('button', { name: 'Dark', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/settings-ui-browser/settings.spec.ts",
+    "line": 221,
+    "context": [
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await expect(personal.getByRole('link', { name: 'Account security' })).toBeVisible();",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Light', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/training-directory-ui-browser/directory.spec.ts",
+    "line": 212,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  },
+  {
+    "file": "tests/training-record-ui-browser/record.spec.ts",
+    "line": 238,
+    "context": [
+      "  await page.getByRole('button', { name: 'Personal settings', exact: true }).click();",
+      "  const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });",
+      "  await personal.locator('summary').click();",
+      "  await personal.getByRole('button', { name: 'Use client default', exact: true }).click();",
+      "  await page.keyboard.press('Escape');"
+    ]
+  }
+]

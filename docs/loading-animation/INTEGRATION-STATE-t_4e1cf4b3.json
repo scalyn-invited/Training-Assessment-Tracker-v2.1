@@ -1,0 +1,351 @@
+{
+  "checkedAt": "2026-11-22T04:50:03.573087+00:00",
+  "root": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "exitCode": 0,
+      "stdout": "ui/global-design-system\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "ff493ddbd8ad54b0535f1ca436e3233e9afa40fc\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short",
+        "--untracked-files=all"
+      ],
+      "exitCode": 0,
+      "stdout": "?? .worktrees/fouc-builder-gate-fix/\n?? .worktrees/fouc-scope-fix/\n?? .worktrees/latest-ui-t_8d33f464/\n?? .worktrees/loading-animation/\n?? .worktrees/main-accepted-t_b77c6213/\n?? .worktrees/selector-popovers-qa/\n?? .worktrees/t_0be96f83/\n?? .worktrees/t_21dcd42a/\n?? .worktrees/t_32d79f81/\n?? .worktrees/t_62461e98/\n?? .worktrees/t_71fbc8b1/\n?? .worktrees/t_8db94a12/\n?? .worktrees/t_9ea2df68/\n?? .worktrees/t_b23a00b1/\n?? .worktrees/t_d0f9320a/\n?? .worktrees/t_d56e101f/\n?? .worktrees/t_eeccfb23/\n?? .worktrees/t_f9f57b75/\n?? .worktrees/theme-selector-regression/\n?? .worktrees/workspace-selection-popover/\n?? docs/fouc-main-integration/REPORT.md\n?? docs/fouc-main-integration/REVIEW.md\n?? docs/fouc-main-integration/accepted-QA-REVIEW.md\n?? docs/fouc-main-integration/preservation-process.json\n?? docs/fouc-main-integration/runtime-verification.json\n?? docs/latest-ui-integration/ROLLOUT-REVIEW.md\n?? docs/latest-ui-integration/ROLLOUT-VERIFICATION.json\n?? docs/latest-ui-integration/ROLLOUT.md\n?? docs/loading-animation/INTEGRATION-ELIGIBILITY.md\n?? docs/loading-animation/PREFLIGHT-SCHEMA-t_0ca98965.json\n?? docs/loading-animation/PREFLIGHT-STATE-t_0ca98965.json\n?? docs/loading-animation/PREFLIGHT-t_0ca98965.md\n?? docs/loading-animation/ROLLOUT-REVIEW-VERIFICATION.json\n?? docs/loading-animation/ROLLOUT-VERIFICATION.json\n?? docs/loading-animation/ROLLOUT.md\n?? docs/loading-animation/preflight-schema-t_0ca98965.mjs\n?? docs/loading-animation/preflight-t_0ca98965.py\n?? docs/main-branch-integration/REPORT.md\n?? docs/main-branch-integration/http-database-after.json\n?? docs/main-branch-integration/http-database-before.json\n?? docs/main-branch-integration/preservation-after.json\n?? docs/main-branch-integration/process-before.json\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "worktree",
+        "list",
+        "--porcelain"
+      ],
+      "exitCode": 0,
+      "stdout": "worktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1\nHEAD ff493ddbd8ad54b0535f1ca436e3233e9afa40fc\nbranch refs/heads/ui/global-design-system\n\nworktree C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-ui-rich-editor\nHEAD 284a3cf4e70d1b820805b215c1861c31b078a600\nbranch refs/heads/feature/assessment-ui-rich-editor\n\nworktree C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow\nHEAD 40df79d3e3d71c6d357feb176053b7d225770000\nbranch refs/heads/feature/assessment-workflow-improvements\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/fouc-builder-gate-fix\nHEAD 37fe632303d44678a685e836fc1987d9da1f252d\nbranch refs/heads/wt/t_ec45899d\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/fouc-scope-fix\nHEAD 7e4ec7c6480a43ebc1f2eca2a2b74ea005d6b6de\nbranch refs/heads/wt/t_3d811d15\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/latest-ui-t_8d33f464\nHEAD ba5856f4b0566a93803b994c0b9cd3ef0a1b0a2e\nbranch refs/heads/integration/latest-ui-t_8d33f464\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/loading-animation\nHEAD ff493ddbd8ad54b0535f1ca436e3233e9afa40fc\nbranch refs/heads/ui/loading-animation\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/main-accepted-t_b77c6213\nHEAD 3f558bbd780390feb288dbed07c277aec05022ed\nbranch refs/heads/integration/main-accepted-t_b77c6213\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/selector-popovers-qa\nHEAD 9507c45c964cb60e9f9555825e7c1172ae170d4e\nbranch refs/heads/wt/t_24b58504\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_0be96f83\nHEAD 7c12826129d3dcd11632e2b0c51b3ab0004e685f\nbranch refs/heads/wt/t_0be96f83\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_21dcd42a\nHEAD decdd1a0145dfebe9b373dd09999c24e9b4a6b10\nbranch refs/heads/wt/t_21dcd42a\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_32d79f81\nHEAD 9b8fe827cb711c9efba01ee03e53a10deaf4af4e\nbranch refs/heads/wt/t_32d79f81\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_62461e98\nHEAD b729e23435b6f0e68feba6962aaac20724df7d14\nbranch refs/heads/wt/t_62461e98\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_71fbc8b1\nHEAD 32ab3631a878b8adce3e250d174dceca86d689e0\nbranch refs/heads/wt/t_71fbc8b1\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_8db94a12\nHEAD a5d9768980a42081a0ae93f3abbededd51f8b2bf\nbranch refs/heads/wt/t_8db94a12\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_9ea2df68\nHEAD b1ec076f72c4650785f5e73997e95a0a31d6d3bd\nbranch refs/heads/wt/t_9ea2df68\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_b23a00b1\nHEAD 32ab3631a878b8adce3e250d174dceca86d689e0\nbranch refs/heads/wt/t_b23a00b1\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_d0f9320a\nHEAD 4973daae85fc59313f06031230816139dbe31f0e\nbranch refs/heads/wt/t_d0f9320a\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_d56e101f\nHEAD ff1d19fb427c054efd9e48bc546c9ec1398ef835\nbranch refs/heads/wt/t_d56e101f\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_eeccfb23\nHEAD 68a39bf267193a41f872e4b5a1dabd13cda482f2\nbranch refs/heads/wt/t_eeccfb23\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_f9f57b75\nHEAD 32ab3631a878b8adce3e250d174dceca86d689e0\nbranch refs/heads/wt/t_f9f57b75\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/theme-selector-regression\nHEAD ed826d2a87dd868b474e854c6c06433aeb4cc799\nbranch refs/heads/wt/t_bcd6bed8\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/workspace-selection-popover\nHEAD bd7bc723d38a5b18dda05ff3baa2334af9247b9b\nbranch refs/heads/wt/t_6bd6979d\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1-docs-baseline\nHEAD 440fcc831d41fc1ccfa39c508fe3c5023e8fd015\ndetached\n\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show-ref"
+      ],
+      "exitCode": 0,
+      "stdout": "a2f54f5ba93f473c70ef94c6767324129095fabd refs/heads/backup/main-before-rebase-20261118\n5a9f1cdd5deb75387f7f860625084d9bb3faa226 refs/heads/backup/main-before-rebase-5a9f1cd\ne44b29503964981de669e8991d5506ae1d532bf0 refs/heads/codex/assessment-workflow-fixes\n5d54250f2339bf955f903dc736654b4c13e81792 refs/heads/docs/archify-user-workflows\n284a3cf4e70d1b820805b215c1861c31b078a600 refs/heads/feature/assessment-ui-rich-editor\n40df79d3e3d71c6d357feb176053b7d225770000 refs/heads/feature/assessment-workflow-improvements\nba5856f4b0566a93803b994c0b9cd3ef0a1b0a2e refs/heads/integration/latest-ui-t_8d33f464\n3f558bbd780390feb288dbed07c277aec05022ed refs/heads/integration/main-accepted-t_b77c6213\n3f558bbd780390feb288dbed07c277aec05022ed refs/heads/main\ne09e8f695cc4a571e016161f389579b6c2f5e3c7 refs/heads/ui/audit-log-figma\n86dd1ae5980991f211a14273d8d938feb5b37108 refs/heads/ui/clients-figma\nff493ddbd8ad54b0535f1ca436e3233e9afa40fc refs/heads/ui/global-design-system\nff493ddbd8ad54b0535f1ca436e3233e9afa40fc refs/heads/ui/loading-animation\nc4a76e75d427fa458b3d93a0b8bf8aacdaa07e35 refs/heads/ui/overview-figma\n5977ac4065b3fe9113dfa5bbb3aec35a58bebe51 refs/heads/ui/people-access-figma\n440fcc831d41fc1ccfa39c508fe3c5023e8fd015 refs/heads/ui/settings-figma\n7c12826129d3dcd11632e2b0c51b3ab0004e685f refs/heads/wt/t_0be96f83\ndecdd1a0145dfebe9b373dd09999c24e9b4a6b10 refs/heads/wt/t_21dcd42a\n9507c45c964cb60e9f9555825e7c1172ae170d4e refs/heads/wt/t_24b58504\n9b8fe827cb711c9efba01ee03e53a10deaf4af4e refs/heads/wt/t_32d79f81\n7e4ec7c6480a43ebc1f2eca2a2b74ea005d6b6de refs/heads/wt/t_3d811d15\nb729e23435b6f0e68feba6962aaac20724df7d14 refs/heads/wt/t_62461e98\nbd7bc723d38a5b18dda05ff3baa2334af9247b9b refs/heads/wt/t_6bd6979d\n32ab3631a878b8adce3e250d174dceca86d689e0 refs/heads/wt/t_71fbc8b1\na5d9768980a42081a0ae93f3abbededd51f8b2bf refs/heads/wt/t_8db94a12\nb1ec076f72c4650785f5e73997e95a0a31d6d3bd refs/heads/wt/t_9ea2df68\n32ab3631a878b8adce3e250d174dceca86d689e0 refs/heads/wt/t_b23a00b1\ned826d2a87dd868b474e854c6c06433aeb4cc799 refs/heads/wt/t_bcd6bed8\n4973daae85fc59313f06031230816139dbe31f0e refs/heads/wt/t_d0f9320a\nff1d19fb427c054efd9e48bc546c9ec1398ef835 refs/heads/wt/t_d56e101f\n37fe632303d44678a685e836fc1987d9da1f252d refs/heads/wt/t_ec45899d\n68a39bf267193a41f872e4b5a1dabd13cda482f2 refs/heads/wt/t_eeccfb23\n32ab3631a878b8adce3e250d174dceca86d689e0 refs/heads/wt/t_f9f57b75\ne4a458853abe73b8bc7f546c3fea42dd5d197d27 refs/remotes/origin/HEAD\ne44b29503964981de669e8991d5506ae1d532bf0 refs/remotes/origin/codex/assessment-workflow-fixes\n5d54250f2339bf955f903dc736654b4c13e81792 refs/remotes/origin/docs/archify-user-workflows\ne4a458853abe73b8bc7f546c3fea42dd5d197d27 refs/remotes/origin/main\n0e54e42d555872720cabaea2324b3ed49b9dc570 refs/remotes/origin/revert-6-ui/settings-figma\ncd52efe0a3ec0a10da675f6469ca054279b9f0d3 refs/remotes/origin/ui/audit-log-figma\n4357ed96c56021a665fcf85e1c6067764e9b91a6 refs/remotes/origin/ui/clients-figma\nb729e23435b6f0e68feba6962aaac20724df7d14 refs/remotes/origin/ui/global-design-system\nfaf2d009b79b5d0182191ffe5e0ce465a03ffb4b refs/remotes/origin/ui/overview-figma\nea5140076bcaffd5c9279000cebbf3965fadf4c6 refs/remotes/origin/ui/people-access-figma\n440fcc831d41fc1ccfa39c508fe3c5023e8fd015 refs/remotes/origin/ui/settings-figma\neff80ebaaa4284860bf26559eb7b30152b573af6 refs/stash\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "ba5856f4b0566a93803b994c0b9cd3ef0a1b0a2e",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "--format=%H %s",
+        "ba5856f4b0566a93803b994c0b9cd3ef0a1b0a2e..HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "ff493ddbd8ad54b0535f1ca436e3233e9afa40fc docs(review): retain independent execution logs\ndb5779c69606feacb55631aa237cb61b8f56da87 docs(review): approve bounded loading animation candidate\n06d8f79eef454bae5407d47f703260a936b5eeb4 test: independently requalify loading focus correction\n383a33dca8b4106d720410ec1b7ef1d43d5c8e3f docs(qa): retain computed focus frame summary\n3aa617101881ee9d2e251da23b045d5c145e81b8 docs(qa): record loading focus correction evidence\nbf3befe015e33d5584dcaec53d372ce5916463b9 fix(ui): preserve safe main focus across loading gates\nbee243936407e0322b107c82572b54ce761bcc93 test: record independent loading QA and keyboard focus defect\n4088c7729e78272eec00e8a3469a8b689af45a2a feat: add authority-safe lightweight loading transitions\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code",
+        "bf3befe015e33d5584dcaec53d372ce5916463b9",
+        "HEAD",
+        "--",
+        "apps",
+        "packages"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code",
+        "ba5856f4b0566a93803b994c0b9cd3ef0a1b0a2e",
+        "HEAD",
+        "--",
+        "packages",
+        "apps/api",
+        "apps/worker",
+        "scripts/dev.ts",
+        "package.json",
+        "package-lock.json"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "fingerprint": {
+    "head": "ff493ddbd8ad54b0535f1ca436e3233e9afa40fc",
+    "branch": "ui/global-design-system",
+    "trackedContentSha256": "d860f0325c13fc6544b66e510d26206568d4638cf404407e2dd8af529e787cd6",
+    "untrackedDocs": {
+      "docs/fouc-main-integration/REPORT.md": "48dc4cce04ef91d937a258cbcbe4b1ea5583224b410be7ee023be4f7e6ae1890",
+      "docs/fouc-main-integration/REVIEW.md": "80e0e9e63bba5049f964cdb138e7ab16c0df768081dd4f5897d3ebc7e6e946e9",
+      "docs/fouc-main-integration/accepted-QA-REVIEW.md": "7996109b87c3573a76e5704d06718e74d752fa98b157894772d4c399404c2212",
+      "docs/fouc-main-integration/preservation-process.json": "9ac4b78650b95889fa3c0a095feef092a7c803d02a3de2ea0932de4c12d1970b",
+      "docs/fouc-main-integration/runtime-verification.json": "480563ba93eaad3b29e6e892cecf6dc0e80d8a68208f268e3017df941c223aa3",
+      "docs/latest-ui-integration/ROLLOUT-REVIEW.md": "b916db6dcb53e49e668d4bd2a6cefdc5a1b8a43ff14ad4babfd5c7c390f2120b",
+      "docs/latest-ui-integration/ROLLOUT-VERIFICATION.json": "7d08009ce7420647ba8add496781a3bcb08851ea893d7fecd2a09e2ddbe95283",
+      "docs/latest-ui-integration/ROLLOUT.md": "d5db45cd03c427f2bab7c10dcfe9d6090aae5b6c6a86f785cdb28260ff68e670",
+      "docs/loading-animation/INTEGRATION-ELIGIBILITY.md": "f8d83c4705cab89c7b62d024b3e961ed7e96c2594cc3754948569ff0f28df9ac",
+      "docs/loading-animation/PREFLIGHT-SCHEMA-t_0ca98965.json": "23990df7084b08d6b1715208ad8aacf126afcefeff7ab8be87408683cce23b0b",
+      "docs/loading-animation/PREFLIGHT-STATE-t_0ca98965.json": "469ae734b4d4cc07bd52b1c0bf0b6f25625702e289620636fb66524039cb62f1",
+      "docs/loading-animation/PREFLIGHT-t_0ca98965.md": "3046a58947702cb43d62276ce76b9ef87064b762919b0a452cea68b5178afa90",
+      "docs/loading-animation/ROLLOUT-REVIEW-VERIFICATION.json": "99b8df09c8b38d5ba69582dc4d9fa7e54ad61c9abf409332b9d2eee2bd19b4fe",
+      "docs/loading-animation/ROLLOUT-VERIFICATION.json": "758730043ee78e8c6f54ad1d7905aa7e62fae0e321df11d079adf84fca3ad204",
+      "docs/loading-animation/ROLLOUT.md": "e6b9233bfcfb456aef93120a76624ceb67f8388ae74b46ddc0877ff22a2aa639",
+      "docs/loading-animation/preflight-schema-t_0ca98965.mjs": "def7bb9f315974dddf7af2786d212c9e8d626b99e82de9be0ccc4a66dc571600",
+      "docs/loading-animation/preflight-t_0ca98965.py": "856fd0893cfe0f7104341e6046100cdd6e9e0ac337cb6a4f81171758629019eb",
+      "docs/main-branch-integration/REPORT.md": "ef43be1cbe1297159e3da4a42eccac25be2baa4563dfc6f5988c23d6c4c122b1",
+      "docs/main-branch-integration/http-database-after.json": "9653cec8aabe003cd24a3e88de92af2e7ccaf94b2aa8e993d5378ecc2dfb91aa",
+      "docs/main-branch-integration/http-database-before.json": "78d4535add17f7452da4fc8b4893d9c9ac2702753d9930c7d8f1bd60116d5c96",
+      "docs/main-branch-integration/preservation-after.json": "2b7c05dc2ae2834c9af3277761a9efe089d3f92e33a2d4a274000fd5cfd3d9b7",
+      "docs/main-branch-integration/process-before.json": "8d7f1ee4f84b2ab71b0fb764f90d1626d95d9d236bfc9dfbc3a627e971e4bde1"
+    },
+    "worktrees": "worktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1\nHEAD ff493ddbd8ad54b0535f1ca436e3233e9afa40fc\nbranch refs/heads/ui/global-design-system\n\nworktree C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-ui-rich-editor\nHEAD 284a3cf4e70d1b820805b215c1861c31b078a600\nbranch refs/heads/feature/assessment-ui-rich-editor\n\nworktree C:/Users/cabas/AppData/Local/hermes/worktrees/tat-assessment-workflow\nHEAD 40df79d3e3d71c6d357feb176053b7d225770000\nbranch refs/heads/feature/assessment-workflow-improvements\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/fouc-builder-gate-fix\nHEAD 37fe632303d44678a685e836fc1987d9da1f252d\nbranch refs/heads/wt/t_ec45899d\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/fouc-scope-fix\nHEAD 7e4ec7c6480a43ebc1f2eca2a2b74ea005d6b6de\nbranch refs/heads/wt/t_3d811d15\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/latest-ui-t_8d33f464\nHEAD ba5856f4b0566a93803b994c0b9cd3ef0a1b0a2e\nbranch refs/heads/integration/latest-ui-t_8d33f464\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/loading-animation\nHEAD ff493ddbd8ad54b0535f1ca436e3233e9afa40fc\nbranch refs/heads/ui/loading-animation\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/main-accepted-t_b77c6213\nHEAD 3f558bbd780390feb288dbed07c277aec05022ed\nbranch refs/heads/integration/main-accepted-t_b77c6213\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/selector-popovers-qa\nHEAD 9507c45c964cb60e9f9555825e7c1172ae170d4e\nbranch refs/heads/wt/t_24b58504\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_0be96f83\nHEAD 7c12826129d3dcd11632e2b0c51b3ab0004e685f\nbranch refs/heads/wt/t_0be96f83\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_21dcd42a\nHEAD decdd1a0145dfebe9b373dd09999c24e9b4a6b10\nbranch refs/heads/wt/t_21dcd42a\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_32d79f81\nHEAD 9b8fe827cb711c9efba01ee03e53a10deaf4af4e\nbranch refs/heads/wt/t_32d79f81\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_62461e98\nHEAD b729e23435b6f0e68feba6962aaac20724df7d14\nbranch refs/heads/wt/t_62461e98\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_71fbc8b1\nHEAD 32ab3631a878b8adce3e250d174dceca86d689e0\nbranch refs/heads/wt/t_71fbc8b1\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_8db94a12\nHEAD a5d9768980a42081a0ae93f3abbededd51f8b2bf\nbranch refs/heads/wt/t_8db94a12\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_9ea2df68\nHEAD b1ec076f72c4650785f5e73997e95a0a31d6d3bd\nbranch refs/heads/wt/t_9ea2df68\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_b23a00b1\nHEAD 32ab3631a878b8adce3e250d174dceca86d689e0\nbranch refs/heads/wt/t_b23a00b1\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_d0f9320a\nHEAD 4973daae85fc59313f06031230816139dbe31f0e\nbranch refs/heads/wt/t_d0f9320a\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_d56e101f\nHEAD ff1d19fb427c054efd9e48bc546c9ec1398ef835\nbranch refs/heads/wt/t_d56e101f\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_eeccfb23\nHEAD 68a39bf267193a41f872e4b5a1dabd13cda482f2\nbranch refs/heads/wt/t_eeccfb23\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/t_f9f57b75\nHEAD 32ab3631a878b8adce3e250d174dceca86d689e0\nbranch refs/heads/wt/t_f9f57b75\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/theme-selector-regression\nHEAD ed826d2a87dd868b474e854c6c06433aeb4cc799\nbranch refs/heads/wt/t_bcd6bed8\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1/.worktrees/workspace-selection-popover\nHEAD bd7bc723d38a5b18dda05ff3baa2334af9247b9b\nbranch refs/heads/wt/t_6bd6979d\n\nworktree C:/Users/cabas/Documents/Codex/Projects/Training Assessment Tracker V2.1-docs-baseline\nHEAD 440fcc831d41fc1ccfa39c508fe3c5023e8fd015\ndetached\n\n",
+    "refs": "a2f54f5ba93f473c70ef94c6767324129095fabd refs/heads/backup/main-before-rebase-20261118\n5a9f1cdd5deb75387f7f860625084d9bb3faa226 refs/heads/backup/main-before-rebase-5a9f1cd\ne44b29503964981de669e8991d5506ae1d532bf0 refs/heads/codex/assessment-workflow-fixes\n5d54250f2339bf955f903dc736654b4c13e81792 refs/heads/docs/archify-user-workflows\n284a3cf4e70d1b820805b215c1861c31b078a600 refs/heads/feature/assessment-ui-rich-editor\n40df79d3e3d71c6d357feb176053b7d225770000 refs/heads/feature/assessment-workflow-improvements\nba5856f4b0566a93803b994c0b9cd3ef0a1b0a2e refs/heads/integration/latest-ui-t_8d33f464\n3f558bbd780390feb288dbed07c277aec05022ed refs/heads/integration/main-accepted-t_b77c6213\n3f558bbd780390feb288dbed07c277aec05022ed refs/heads/main\ne09e8f695cc4a571e016161f389579b6c2f5e3c7 refs/heads/ui/audit-log-figma\n86dd1ae5980991f211a14273d8d938feb5b37108 refs/heads/ui/clients-figma\nff493ddbd8ad54b0535f1ca436e3233e9afa40fc refs/heads/ui/global-design-system\nff493ddbd8ad54b0535f1ca436e3233e9afa40fc refs/heads/ui/loading-animation\nc4a76e75d427fa458b3d93a0b8bf8aacdaa07e35 refs/heads/ui/overview-figma\n5977ac4065b3fe9113dfa5bbb3aec35a58bebe51 refs/heads/ui/people-access-figma\n440fcc831d41fc1ccfa39c508fe3c5023e8fd015 refs/heads/ui/settings-figma\n7c12826129d3dcd11632e2b0c51b3ab0004e685f refs/heads/wt/t_0be96f83\ndecdd1a0145dfebe9b373dd09999c24e9b4a6b10 refs/heads/wt/t_21dcd42a\n9507c45c964cb60e9f9555825e7c1172ae170d4e refs/heads/wt/t_24b58504\n9b8fe827cb711c9efba01ee03e53a10deaf4af4e refs/heads/wt/t_32d79f81\n7e4ec7c6480a43ebc1f2eca2a2b74ea005d6b6de refs/heads/wt/t_3d811d15\nb729e23435b6f0e68feba6962aaac20724df7d14 refs/heads/wt/t_62461e98\nbd7bc723d38a5b18dda05ff3baa2334af9247b9b refs/heads/wt/t_6bd6979d\n32ab3631a878b8adce3e250d174dceca86d689e0 refs/heads/wt/t_71fbc8b1\na5d9768980a42081a0ae93f3abbededd51f8b2bf refs/heads/wt/t_8db94a12\nb1ec076f72c4650785f5e73997e95a0a31d6d3bd refs/heads/wt/t_9ea2df68\n32ab3631a878b8adce3e250d174dceca86d689e0 refs/heads/wt/t_b23a00b1\ned826d2a87dd868b474e854c6c06433aeb4cc799 refs/heads/wt/t_bcd6bed8\n4973daae85fc59313f06031230816139dbe31f0e refs/heads/wt/t_d0f9320a\nff1d19fb427c054efd9e48bc546c9ec1398ef835 refs/heads/wt/t_d56e101f\n37fe632303d44678a685e836fc1987d9da1f252d refs/heads/wt/t_ec45899d\n68a39bf267193a41f872e4b5a1dabd13cda482f2 refs/heads/wt/t_eeccfb23\n32ab3631a878b8adce3e250d174dceca86d689e0 refs/heads/wt/t_f9f57b75\ne4a458853abe73b8bc7f546c3fea42dd5d197d27 refs/remotes/origin/HEAD\ne44b29503964981de669e8991d5506ae1d532bf0 refs/remotes/origin/codex/assessment-workflow-fixes\n5d54250f2339bf955f903dc736654b4c13e81792 refs/remotes/origin/docs/archify-user-workflows\ne4a458853abe73b8bc7f546c3fea42dd5d197d27 refs/remotes/origin/main\n0e54e42d555872720cabaea2324b3ed49b9dc570 refs/remotes/origin/revert-6-ui/settings-figma\ncd52efe0a3ec0a10da675f6469ca054279b9f0d3 refs/remotes/origin/ui/audit-log-figma\n4357ed96c56021a665fcf85e1c6067764e9b91a6 refs/remotes/origin/ui/clients-figma\nb729e23435b6f0e68feba6962aaac20724df7d14 refs/remotes/origin/ui/global-design-system\nfaf2d009b79b5d0182191ffe5e0ce465a03ffb4b refs/remotes/origin/ui/overview-figma\nea5140076bcaffd5c9279000cebbf3965fadf4c6 refs/remotes/origin/ui/people-access-figma\n440fcc831d41fc1ccfa39c508fe3c5023e8fd015 refs/remotes/origin/ui/settings-figma\neff80ebaaa4284860bf26559eb7b30152b573af6 refs/stash\n",
+    "processes": [
+      {
+        "pid": 14456,
+        "created": 1795258379.060525,
+        "ppid": 43640,
+        "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "--import",
+          "tsx",
+          "scripts/dev.ts"
+        ],
+        "ports": [
+          55431
+        ],
+        "disabledFlags": {
+          "AI_LIVE_ENABLED": "false",
+          "AI_ANTHROPIC_ENABLED": "false",
+          "AI_GEMINI_ENABLED": "false",
+          "SMTP_ENABLED": "false",
+          "ACCOUNT_MAIL_ENABLED": "false",
+          "RETENTION_APPROVED": "false"
+        },
+        "privateStoragePath": ".runtime/private",
+        "databaseUrlConfigured": false
+      },
+      {
+        "pid": 31152,
+        "created": 1795258380.08072,
+        "ppid": 14456,
+        "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "--import",
+          "tsx",
+          "apps/api/src/main.ts"
+        ],
+        "ports": [
+          3101
+        ],
+        "disabledFlags": {
+          "AI_LIVE_ENABLED": "false",
+          "AI_ANTHROPIC_ENABLED": "false",
+          "AI_GEMINI_ENABLED": "false",
+          "SMTP_ENABLED": "false",
+          "ACCOUNT_MAIL_ENABLED": "false",
+          "RETENTION_APPROVED": "false"
+        },
+        "privateStoragePath": ".runtime/private",
+        "databaseUrlConfigured": false
+      },
+      {
+        "pid": 45080,
+        "created": 1795258380.089594,
+        "ppid": 14456,
+        "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1",
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "--import",
+          "tsx",
+          "apps/worker/src/main.ts"
+        ],
+        "ports": [],
+        "disabledFlags": {
+          "AI_LIVE_ENABLED": "false",
+          "AI_ANTHROPIC_ENABLED": "false",
+          "AI_GEMINI_ENABLED": "false",
+          "SMTP_ENABLED": "false",
+          "ACCOUNT_MAIL_ENABLED": "false",
+          "RETENTION_APPROVED": "false"
+        },
+        "privateStoragePath": ".runtime/private",
+        "databaseUrlConfigured": false
+      },
+      {
+        "pid": 9368,
+        "created": 1795258380.098734,
+        "ppid": 14456,
+        "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\bin\\next",
+          "dev",
+          "--hostname",
+          "127.0.0.1",
+          "--port",
+          "3100"
+        ],
+        "ports": [],
+        "disabledFlags": {
+          "AI_LIVE_ENABLED": "false",
+          "AI_ANTHROPIC_ENABLED": "false",
+          "AI_GEMINI_ENABLED": "false",
+          "SMTP_ENABLED": "false",
+          "ACCOUNT_MAIL_ENABLED": "false",
+          "RETENTION_APPROVED": "false"
+        },
+        "privateStoragePath": ".runtime/private",
+        "databaseUrlConfigured": false
+      },
+      {
+        "pid": 22308,
+        "created": 1795258380.7534845,
+        "ppid": 9368,
+        "cwd": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\apps\\web",
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\node_modules\\next\\dist\\server\\lib\\start-server.js"
+        ],
+        "ports": [
+          3100
+        ],
+        "disabledFlags": {
+          "AI_LIVE_ENABLED": "false",
+          "AI_ANTHROPIC_ENABLED": "false",
+          "AI_GEMINI_ENABLED": "false",
+          "SMTP_ENABLED": "false",
+          "ACCOUNT_MAIL_ENABLED": "false",
+          "RETENTION_APPROVED": "false"
+        },
+        "privateStoragePath": ".runtime/private",
+        "databaseUrlConfigured": false
+      }
+    ],
+    "protectedConfigAggregateSha256": "b7ed01b8ced7d60e922cf1fe672e0a7200f7f9d22aa0c343762e3a6d955f4ffe"
+  },
+  "fingerprintSha256": "683b893dc97a42b91d8a10cd27c8b55889b1f6460c4816dd0139ab5a3f96ecc8",
+  "listeners": [
+    {
+      "pid": 22308,
+      "address": "127.0.0.1",
+      "port": 3100
+    },
+    {
+      "pid": 14456,
+      "address": "127.0.0.1",
+      "port": 55431
+    },
+    {
+      "pid": 31152,
+      "address": "127.0.0.1",
+      "port": 3101
+    }
+  ],
+  "backupHashesVerified": 1394,
+  "protectedConfigAssetHashesVerified": 8,
+  "http": [
+    {
+      "url": "http://127.0.0.1:3101/health/live",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "api"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:3101/health/ready",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/api/health/ready",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "api",
+        "database": "pglite"
+      }
+    },
+    {
+      "url": "http://localhost:3100/login",
+      "status": 200,
+      "htmlBytes": 22971
+    }
+  ],
+  "liveDatabaseBytesHashed": false,
+  "renderedVerified": false,
+  "limitations": [
+    "Fingerprint excludes ignored live DB/cache and other worktree file contents.",
+    "New evidence/report files change untracked docs on later captures; compare maps and explain differences.",
+    "Process identity and on-disk source do not prove in-memory compiled-module equality."
+  ]
+}

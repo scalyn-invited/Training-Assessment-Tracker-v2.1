@@ -1,0 +1,46 @@
+
+Running 3 tests using 1 worker
+
+  ✘  1 tests\loading-animation-browser\loading.spec.ts:44:1 › session wait is textless initially with stable accessible status and context after three seconds (6.2s)
+  ✓  2 tests\loading-animation-browser\loading.spec.ts:59:1 › guest session uses the same initially textless animation (725ms)
+  ✓  3 tests\loading-animation-browser\loading.spec.ts:64:1 › confirmed session errors replace the spinner and retry resets its delay (785ms)
+
+
+  1) tests\loading-animation-browser\loading.spec.ts:44:1 › session wait is textless initially with stable accessible status and context after three seconds 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('status')
+    Expected: "Loading your session"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" getByRole('status') with timeout 5000ms
+      - waiting for getByRole('status')
+        14 × locator resolved to <div role="status" aria-live="polite" aria-label="Loading your session">…</div>
+           - unexpected value ""
+
+
+      49 |   const status = page.getByRole('status');
+      50 |   await expect(status).toHaveAccessibleName('Loading your session');
+    > 51 |   await expect(status).toHaveText('Loading your session');
+         |                        ^
+      52 |   await expect(page.locator('[data-loading-context]')).not.toBeVisible();
+      53 |   await page.clock.fastForward(2999);
+      54 |   await expect(page.locator('[data-loading-context]')).not.toBeVisible();
+        at C:\Users\cabas\Documents\Codex\Projects\Training Assessment Tracker V2.1\.worktrees\loading-animation\tests\loading-animation-browser\loading.spec.ts:51:24
+
+    Error Context: output\loading-animation\loading-session-wait-is-te-02bb9-context-after-three-seconds\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\loading-animation\loading-session-wait-is-te-02bb9-context-after-three-seconds\trace.zip
+    Usage:
+
+        npx playwright show-trace output\loading-animation\loading-session-wait-is-te-02bb9-context-after-three-seconds\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\loading-animation-browser\loading.spec.ts:44:1 › session wait is textless initially with stable accessible status and context after three seconds 
+  2 passed (11.7s)

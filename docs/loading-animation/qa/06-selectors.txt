@@ -1,0 +1,46 @@
+
+Running 36 tests using 1 worker
+
+  ✓   1 tests\theme-picker-browser\qa-independent.spec.ts:51:1 › QA open panel axe and selected-last visibility (1.7s)
+  ✓   2 tests\theme-picker-browser\qa-independent.spec.ts:66:1 › opening theme options does not change sidebar scroll height (1.3s)
+  ✓   3 tests\theme-picker-browser\qa-independent.spec.ts:82:1 › pointer dismissal and trigger toggle retain intentional focus (1.8s)
+  ✓   4 tests\theme-picker-browser\qa-independent.spec.ts:99:1 › all existing themes, selected state and local default reset persist (3.1s)
+  ✓   5 tests\theme-picker-browser\qa-independent.spec.ts:125:3 › viewport bounds and independent scrolling 375x420 (1.4s)
+  ✓   6 tests\theme-picker-browser\qa-independent.spec.ts:125:3 › viewport bounds and independent scrolling 320x568 (1.4s)
+  ✓   7 tests\theme-picker-browser\qa-independent.spec.ts:125:3 › viewport bounds and independent scrolling 1280x300 (1.3s)
+  ✓   8 tests\theme-picker-browser\qa-independent.spec.ts:164:1 › client pending and failed saves stay in the overlay with versioned payload and retry (1.3s)
+  ✓   9 tests\theme-picker-browser\qa-independent.spec.ts:199:1 › open picker has no axe WCAG A/AA violations (2.0s)
+  ✓  10 tests\theme-picker-browser\qa-independent.spec.ts:212:1 › keyboard arrows, Home/End, Escape and Tab dismiss without trapping focus (1.4s)
+{"size":{"width":1280,"height":600},"workspace":{"h":600,"w":247,"nav":[{"label":"Main navigation","x":12,"y":166,"w":223,"h":188},{"label":"Mobile platform navigation","x":0,"y":0,"w":0,"h":0},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"workspacePanel":{"h":221,"sh":221,"w":222,"sw":222},"theme":{"h":600,"w":247,"nav":[{"label":"Main navigation","x":12,"y":166,"w":223,"h":188},{"label":"Mobile platform navigation","x":0,"y":0,"w":0,"h":0},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"owner":{"h":600,"w":247}}
+  ✓  11 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 1280x600 (2.6s)
+{"size":{"width":1280,"height":300},"workspace":{"h":428,"w":247,"nav":[{"label":"Main navigation","x":12,"y":166,"w":223,"h":188},{"label":"Mobile platform navigation","x":0,"y":0,"w":0,"h":0},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"workspacePanel":{"h":156,"sh":221,"w":222,"sw":222},"theme":{"h":428,"w":247,"nav":[{"label":"Main navigation","x":12,"y":38,"w":223,"h":188},{"label":"Mobile platform navigation","x":0,"y":0,"w":0,"h":0},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"owner":{"h":428,"w":247}}
+  ✓  12 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 1280x300 (2.7s)
+{"size":{"width":320,"height":300},"workspace":{"h":80,"w":320,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":229,"w":320,"h":71},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"workspacePanel":{"h":214,"sh":221,"w":222,"sw":222},"theme":{"h":80,"w":320,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":229,"w":320,"h":71},{"label":"Account settings","x":42,"y":101.5,"w":236,"h":123}]},"owner":{"h":281,"w":284}}
+  ✓  13 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 320x300 (2.8s)
+{"size":{"width":390,"height":420},"workspace":{"h":80,"w":390,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":349,"w":390,"h":71},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"workspacePanel":{"h":221,"sh":221,"w":292,"sw":292},"theme":{"h":80,"w":390,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":349,"w":390,"h":71},{"label":"Account settings","x":42,"y":153.25,"w":306,"h":123}]},"owner":{"h":281,"w":354}}
+  ✓  14 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 390x420 (2.6s)
+{"size":{"width":800,"height":300},"workspace":{"h":80,"w":800,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":229,"w":800,"h":71},{"label":"Account settings","x":0,"y":0,"w":0,"h":0}]},"workspacePanel":{"h":214,"sh":221,"w":702,"sw":702},"theme":{"h":80,"w":800,"nav":[{"label":"Main navigation","x":0,"y":0,"w":0,"h":0},{"label":"Mobile platform navigation","x":0,"y":229,"w":800,"h":71},{"label":"Account settings","x":145,"y":101.5,"w":510,"h":123}]},"owner":{"h":281,"w":558}}
+  ✓  15 tests\theme-picker-browser\selector-qa.spec.ts:52:2 › independent combined geometry 800x300 (3.7s)
+  ✓  16 tests\theme-picker-browser\theme-picker.spec.ts:51:1 › opening theme options does not change sidebar scroll height (1.4s)
+  ✓  17 tests\theme-picker-browser\theme-picker.spec.ts:67:1 › pointer dismissal and trigger toggle retain intentional focus (1.3s)
+  ✓  18 tests\theme-picker-browser\theme-picker.spec.ts:84:1 › all existing themes, selected state and local default reset persist (3.2s)
+  ✓  19 tests\theme-picker-browser\theme-picker.spec.ts:110:3 › viewport bounds and independent scrolling 375x420 (1.4s)
+  ✓  20 tests\theme-picker-browser\theme-picker.spec.ts:110:3 › viewport bounds and independent scrolling 320x568 (1.4s)
+  ✓  21 tests\theme-picker-browser\theme-picker.spec.ts:110:3 › viewport bounds and independent scrolling 1280x300 (1.6s)
+  ✓  22 tests\theme-picker-browser\theme-picker.spec.ts:149:1 › client pending and failed saves stay in the overlay with versioned payload and retry (2.1s)
+  ✓  23 tests\theme-picker-browser\theme-picker.spec.ts:184:1 › open picker has no axe WCAG A/AA violations (2.4s)
+  ✓  24 tests\theme-picker-browser\theme-picker.spec.ts:197:1 › keyboard arrows, Home/End, Escape and Tab dismiss without trapping focus (1.5s)
+  ✓  25 tests\theme-picker-browser\workspace.spec.ts:51:1 › workspace opening preserves sidebar and navigation geometry (1.1s)
+  ✓  26 tests\theme-picker-browser\workspace.spec.ts:75:3 › workspace keyboard, bounds and focus 1280x600 (3.2s)
+  ✓  27 tests\theme-picker-browser\workspace.spec.ts:75:3 › workspace keyboard, bounds and focus 1280x300 (3.0s)
+  ✓  28 tests\theme-picker-browser\workspace.spec.ts:75:3 › workspace keyboard, bounds and focus 320x300 (3.8s)
+  ✓  29 tests\theme-picker-browser\workspace.spec.ts:75:3 › workspace keyboard, bounds and focus 390x420 (3.3s)
+  ✓  30 tests\theme-picker-browser\workspace.spec.ts:75:3 › workspace keyboard, bounds and focus 800x300 (3.0s)
+  ✓  31 tests\theme-picker-browser\workspace.spec.ts:125:3 › workspace permission and destination contract  (1.1s)
+  ✓  32 tests\theme-picker-browser\workspace.spec.ts:125:3 › workspace permission and destination contract ?member (985ms)
+  ✓  33 tests\theme-picker-browser\workspace.spec.ts:125:3 › workspace permission and destination contract ?member&admin (1.1s)
+  ✓  34 tests\theme-picker-browser\workspace.spec.ts:125:3 › workspace permission and destination contract ?white (996ms)
+  ✓  35 tests\theme-picker-browser\workspace.spec.ts:125:3 › workspace permission and destination contract ?member&white (1.1s)
+  ✓  36 tests\theme-picker-browser\workspace.spec.ts:143:1 › workspace and theme popovers dismiss each other without stealing focus (1.6s)
+
+  36 passed (1.3m)

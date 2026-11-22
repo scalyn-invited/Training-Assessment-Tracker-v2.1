@@ -1,0 +1,81 @@
+{
+  "started": "2026-11-22T04:59:40.292573+00:00",
+  "portsVerifiedFree": [
+    3110,
+    3111,
+    55432,
+    3280,
+    3281,
+    3490,
+    3491,
+    55449
+  ],
+  "temp": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\.runtime\\qa-t_7b33ab54-temp",
+  "mainBrowserUsed": false,
+  "databaseFixturesUsed": false,
+  "tests": [
+    {
+      "command": [
+        "npx.cmd",
+        "--no-install",
+        "playwright",
+        "test",
+        "-c",
+        "playwright.loading-animation.config.ts",
+        "--output=C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\loading-animation\\qa-runtime-t_7b33ab54\\loading"
+      ],
+      "exitCode": 0,
+      "log": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\loading-animation\\qa-runtime-t_7b33ab54\\01-loading.log"
+    },
+    {
+      "command": [
+        "npx.cmd",
+        "--no-install",
+        "playwright",
+        "test",
+        "-c",
+        "playwright.theme-picker.config.ts",
+        "--output=C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\loading-animation\\qa-runtime-t_7b33ab54\\selectors"
+      ],
+      "exitCode": 0,
+      "log": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\loading-animation\\qa-runtime-t_7b33ab54\\02-selectors.log"
+    },
+    {
+      "command": [
+        "npx.cmd",
+        "--no-install",
+        "playwright",
+        "test",
+        "-c",
+        "playwright.builder-workflow.config.ts",
+        "--output=C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\loading-animation\\qa-runtime-t_7b33ab54\\builder"
+      ],
+      "exitCode": 0,
+      "log": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\loading-animation\\qa-runtime-t_7b33ab54\\03-builder.log"
+    },
+    {
+      "command": [
+        "npx.cmd",
+        "--no-install",
+        "vitest",
+        "run",
+        "-c",
+        "vitest.appearance.config.ts"
+      ],
+      "exitCode": 0,
+      "log": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\loading-animation\\qa-runtime-t_7b33ab54\\04-policy.log"
+    },
+    {
+      "command": [
+        "npm.cmd",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "log": "C:\\Users\\cabas\\Documents\\Codex\\Projects\\Training Assessment Tracker V2.1\\docs\\loading-animation\\qa-runtime-t_7b33ab54\\05-types.log"
+    }
+  ],
+  "integrationWorkerPid": 39512,
+  "integrationWorkerAlive": false,
+  "finished": "2026-11-22T05:05:17.087796+00:00"
+}

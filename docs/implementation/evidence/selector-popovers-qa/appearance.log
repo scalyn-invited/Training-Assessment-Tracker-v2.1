@@ -1,0 +1,9 @@
+
+Running 4 tests using 1 worker
+
+  ✓  1 tests\first-paint-browser\first-paint.spec.ts:3:1 › saved Dark uses current navy before hydration and stays stable through loading (3.8s)
+  ✓  2 tests\first-paint-browser\geometry.spec.ts:4:1 › login pre-hydration geometry matches the settled form (1.6s)
+  ✓  3 tests\first-paint-browser\geometry.spec.ts:28:1 › login existing geometry stays stable across the exact reload matrix (8.5s)
+  ✓  4 tests\first-paint-browser\outage-policy.spec.ts:4:1 › approved 503 fallback preserves scoped generated Dark intent through repeat failure and recovery (1.2s)
+
+  4 passed (19.7s)
