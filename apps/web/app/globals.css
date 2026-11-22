@@ -61,3 +61,16 @@ h1{font-size:31px;letter-spacing:-1px;font-weight:600}.eyebrow{font-size:9px;let
 :root[data-theme=platform-dark]{--platform-decorative:var(--platform-dark-decorative)}
 :root:is([data-theme=platform-light],[data-theme=platform-dark]){--line:var(--platform-decorative)}
 :root:is([data-theme=platform-light],[data-theme=platform-dark]) :is(input,select,textarea,button,.secondary){border-color:var(--platform-line)}
+
+/* Document-level neutral canvas while workspace authority is being verified. */
+html[data-shell-neutral] {
+  --bg: #070b16 !important;
+  --surface: #0d1426 !important;
+  --raised: #111a30 !important;
+  --ink: #e9edf7 !important;
+  --muted: #98a2bc !important;
+  --line: #1a2440 !important;
+  --primary: #7baaff !important;
+  --sidebar: #0d1426 !important;
+  --focus: #7baaff !important;
+}

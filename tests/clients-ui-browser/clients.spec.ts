@@ -284,11 +284,15 @@ test('Clients presentation preserves real management, workspace selection and re
     }),
   );
   await page.getByRole('button', { name: 'Open workspace for Demo Client 1', exact: true }).click();
-  await expect(main.getByRole('alert')).toContainText('Client access changed');
+  await expect(main.getByRole('alert')).toContainText('The workspace change could not be confirmed');
+  await expect(
+    page.getByRole('button', { name: 'Open workspace for Demo Client 1', exact: true }),
+  ).toBeHidden();
+  await page.unroute('**/api/clients/select');
+  await page.getByRole('button', { name: 'Try loading again', exact: true }).click();
   await expect(
     page.getByRole('button', { name: 'Open workspace for Demo Client 1', exact: true }),
   ).toBeEnabled();
-  await page.unroute('**/api/clients/select');
   await page.getByRole('button', { name: 'Open workspace for Demo Client 1', exact: true }).click();
   await expect(page).toHaveURL(/\/dashboard$/);
   const chosen = await page.evaluate(async () => (await fetch('/api/auth/context')).json());

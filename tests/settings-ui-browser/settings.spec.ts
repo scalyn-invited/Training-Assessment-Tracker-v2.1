@@ -218,8 +218,9 @@ test('Settings preserves versioned branding, previews, status and permissions on
   await page.getByRole('button', { name: 'Personal settings' }).click();
   const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });
   await expect(personal.getByRole('link', { name: 'Account security' })).toBeVisible();
-  await personal.locator('summary').click();
+  await personal.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await personal.getByRole('button', { name: 'Light', exact: true }).click();
+  await page.keyboard.press('Escape');
   await page.keyboard.press('Escape');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await a11y();
