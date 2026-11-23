@@ -2,6 +2,7 @@
 import { Input, Textarea } from './ui/controls';
 import layout from './ui/form-layout.module.css';
 import styles from './ui/assessment-response.module.css';
+import richText from './rich-text-editor/editor.module.css';
 
 import type { CSSProperties } from 'react';
 import { questionReference } from './question-reference';
@@ -48,7 +49,7 @@ export function ResponseQuestions({
             <h3 id={title}>{questionReference(q.id, allQuestions, sections)}</h3>
             {q.prompt_html ? (
               <div
-                className="assessment-prompt"
+                className={'assessment-prompt ' + richText.content}
                 dangerouslySetInnerHTML={{ __html: q.prompt_html }}
               />
             ) : (

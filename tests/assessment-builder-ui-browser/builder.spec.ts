@@ -356,19 +356,44 @@ test('shared builder preserves authoring, immutable publication and recovery', a
     .getByRole('button', { name: /Choose the supported/ })
     .click();
   const promptBefore = await page.getByTestId('prompt-editor').innerText();
-  await page.getByText('Insert image or edit alt text', { exact: true }).click();
-  await page.getByLabel('Image alt text', { exact: true }).fill('Synthetic evidence diagram');
   const png = await sharp({ create: { width: 4, height: 4, channels: 3, background: '#123456' } })
     .png()
     .toBuffer();
-  await page
-    .getByLabel('Image file (PNG, JPEG or WebP, up to 2 MiB)', { exact: true })
-    .setInputFiles({ name: 'diagram.png', mimeType: 'image/png', buffer: png });
   // Isolated response fixture: no scanner or usable media asset is claimed.
-  await page.route('**/assessments/media/*/status', (r) =>
-    r.fulfill({ json: { status: 'unavailable' } }),
-  );
-  await page.getByRole('button', { name: 'Upload and insert image', exact: true }).click();
+  let releaseScan!: () => void;
+  const scanGate = new Promise<void>((resolve) => {
+    releaseScan = resolve;
+  });
+  await page.route('**/assessments/media/*/status', async (r) => {
+    await scanGate;
+    await r.fulfill({ json: { status: 'unavailable' } });
+  });
+  let releaseUpload!: () => void;
+  const uploadGate = new Promise<void>((resolve) => {
+    releaseUpload = resolve;
+  });
+  const uploadUrl = await page.locator('[data-upload]').getAttribute('data-upload');
+  await page.route('**' + uploadUrl, async (r) => {
+    await uploadGate;
+    await r.continue();
+  });
+  const picker = page.waitForEvent('filechooser');
+  await page.getByRole('button', { name: 'Insert image', exact: true }).click();
+  await (await picker).setFiles({ name: 'diagram.png', mimeType: 'image/png', buffer: png });
+  await expect(page.getByTestId('prompt-image-busy')).toContainText('Uploading image');
+  await expect(page.getByTestId('prompt-editor')).toHaveAttribute('contenteditable', 'false');
+  await expect(
+    page.getByRole('toolbar', { name: 'Prompt formatting' }).locator('button:enabled'),
+  ).toHaveCount(0);
+  releaseUpload();
+  await expect(page.getByTestId('prompt-image-busy')).toContainText('Checking image');
+  // Re-render while processing must retain the lock for the same question.
+  await page.getByLabel('Question type', { exact: true }).selectOption('open_response');
+  await expect(page.getByTestId('prompt-editor')).toHaveAttribute('contenteditable', 'false');
+  await page.getByLabel('Question type', { exact: true }).selectOption('multiple_choice');
+  await expect(page.getByTestId('prompt-image-busy')).toBeVisible();
+  await screenshot('image-processing-disabled');
+  releaseScan();
   await expect(
     page.getByText(
       'Image processing is unavailable or still pending. Retry after the scanner and worker are available. Your prompt is intact.',
@@ -377,8 +402,21 @@ test('shared builder preserves authoring, immutable publication and recovery', a
   ).toBeVisible();
   await expect(page.getByTestId('prompt-editor')).toHaveText(promptBefore);
   await expect(page.getByRole('button', { name: 'Retry image upload', exact: true })).toBeEnabled();
+  await expect(page.getByTestId('prompt-editor')).toHaveAttribute('contenteditable', 'true');
+  await expect(page.getByTestId('prompt-image-busy')).toBeHidden();
+  // Re-rendering the question must not discard the failed media ID or retry UI.
+  await page.getByLabel('Question type', { exact: true }).selectOption('open_response');
+  await page.getByLabel('Question type', { exact: true }).selectOption('multiple_choice');
+  await expect(page.getByRole('button', { name: 'Retry image upload', exact: true })).toBeVisible();
+  const retryRequest = page.waitForRequest((r) =>
+    /\/assessments\/media\/[^/]+\/retry$/.test(r.url()),
+  );
+  await page.getByRole('button', { name: 'Retry image upload', exact: true }).click();
+  await retryRequest;
+  await expect(page.getByRole('button', { name: 'Retry image upload', exact: true })).toBeEnabled();
+  await expect(page.getByTestId('prompt-editor')).toHaveText(promptBefore);
+  await expect(page.getByTestId('prompt-editor').locator('img[src]')).toHaveCount(0);
   await page.unroute('**/assessments/media/*/status');
-  await page.getByText('Insert image or edit alt text', { exact: true }).click();
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page
     .getByRole('button', { name: /^Theme(?: |$)/ })
