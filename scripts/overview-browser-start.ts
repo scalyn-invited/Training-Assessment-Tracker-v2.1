@@ -30,4 +30,11 @@ for (const key of [
   'CLAMSCAN_DATABASE',
 ])
   delete process.env[key];
+// Native image qualification is opt-in and still uses isolated test storage/DB.
+if (process.env.PROMPT_NATIVE_SCAN === '1') {
+  if (!process.env.QA_CLAMSCAN_PATH || !process.env.QA_CLAMSCAN_DATABASE)
+    throw new Error('Native scan QA requires explicit scanner and signature paths.');
+  process.env.CLAMSCAN_PATH = process.env.QA_CLAMSCAN_PATH;
+  process.env.CLAMSCAN_DATABASE = process.env.QA_CLAMSCAN_DATABASE;
+}
 await import('./dev.js');

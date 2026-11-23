@@ -26,15 +26,13 @@ export async function assessmentBuilderFlow(browser: Browser) {
   await page.getByLabel('Question type', { exact: true }).selectOption('self_assessment');
   await page.getByTestId('prompt-editor').fill('Reflect on your current practice.');
   await page.getByLabel('Assessment area 1', { exact: true }).fill('I check the evidence.');
-  await page.getByText('Insert image or edit alt text', { exact: true }).click();
-  await page.getByLabel('Image alt text', { exact: true }).fill('Test diagram');
+
   const image = await sharp({ create: { width: 4, height: 4, channels: 3, background: '#123456' } })
     .png()
     .toBuffer();
-  await page
-    .getByLabel('Image file (PNG, JPEG or WebP, up to 2 MiB)', { exact: true })
-    .setInputFiles({ name: 'diagram.png', mimeType: 'image/png', buffer: image });
-  await page.getByRole('button', { name: 'Upload and insert image', exact: true }).click();
+  const picker = page.waitForEvent('filechooser');
+  await page.getByRole('button', { name: 'Insert image', exact: true }).click();
+  await (await picker).setFiles({ name: 'diagram.png', mimeType: 'image/png', buffer: image });
   await expect(
     page.getByText(
       'Image processing is unavailable or still pending. Retry after the scanner and worker are available. Your prompt is intact.',
@@ -44,7 +42,6 @@ export async function assessmentBuilderFlow(browser: Browser) {
   await expect(page.getByTestId('prompt-editor')).toHaveText('Reflect on your current practice.');
   await page.getByRole('button', { name: 'Retry image upload', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Retry image upload', exact: true })).toBeEnabled();
-  await page.getByText('Insert image or edit alt text', { exact: true }).click();
 
   await page.getByLabel('Require a rating for every area').check();
   await page.getByLabel('Include optional Notes column').check();

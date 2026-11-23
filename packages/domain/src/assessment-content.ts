@@ -33,7 +33,9 @@ const question = z
       .enum(['open_response', 'multiple_choice', 'self_assessment'])
       .optional()
       .default('open_response'),
-    prompt: text(4000),
+    // Rich editors serialize block/cell separators differently. Bound the raw
+    // companion field, then apply the prompt limit to canonical HTML text below.
+    prompt: text(50000),
     prompt_html: text(50000).optional(),
     choices: z
       .array(choice)
@@ -43,7 +45,11 @@ const question = z
       .default([]),
     matrix: matrixSchema.optional(),
   })
-  .strict();
+  .strict()
+  .refine((value) => value.prompt_html !== undefined || value.prompt.length <= 4000, {
+    path: ['prompt'],
+    message: 'Keep the prompt within 4,000 characters.',
+  });
 const section = z
   .object({
     id: z.string().uuid(),
@@ -85,10 +91,90 @@ const schema = z.object({
 });
 export type AssessmentDraft = z.infer<typeof schema>;
 export type Question = AssessmentDraft['questions'][number];
+// Exact palettes only: accept hex and the equivalent browser CSSOM rgb() form.
+const palette = (colors: string[]) =>
+  colors.flatMap((hex) => {
+    const rgb = [1, 3, 5].map((offset) => parseInt(hex.slice(offset, offset + 2), 16));
+    return [
+      new RegExp(`^${hex}$`, 'i'),
+      new RegExp(`^rgb\\(\\s*${rgb.join('\\s*,\\s*')}\\s*\\)$`, 'i'),
+    ];
+  });
+const promptColors = palette([
+  '#111827',
+  '#dc2626',
+  '#ea580c',
+  '#ca8a04',
+  '#16a34a',
+  '#2563eb',
+  '#9333ea',
+]);
+const promptHighlights = palette(['#fef08a', '#bbf7d0', '#bfdbfe', '#fbcfe8', '#fed7aa']);
+const alignment = { 'text-align': [/^(left|center|right|justify)$/] };
 export function sanitize(html: string) {
   return sanitizeHtml(html, {
-    allowedTags: ['p', 'br', 'strong', 'b', 'em', 'i', 'ul', 'ol', 'li', 'a', 'img'],
-    allowedAttributes: { a: ['href', 'title'], img: ['src', 'alt'] },
+    allowedTags: [
+      'p',
+      'br',
+      'strong',
+      'b',
+      'em',
+      'i',
+      'ul',
+      'ol',
+      'li',
+      'a',
+      'img',
+      'h1',
+      'h2',
+      'h3',
+      'u',
+      's',
+      'code',
+      'pre',
+      'blockquote',
+      'hr',
+      'table',
+      'thead',
+      'tbody',
+      'tr',
+      'th',
+      'td',
+      'span',
+      'mark',
+    ],
+    allowedAttributes: {
+      a: ['href', 'title'],
+      img: ['src', 'alt'],
+      th: ['colspan', 'rowspan'],
+      td: ['colspan', 'rowspan'],
+      p: ['style'],
+      h1: ['style'],
+      h2: ['style'],
+      h3: ['style'],
+      span: ['style'],
+      mark: ['style'],
+    },
+    allowedStyles: {
+      p: alignment,
+      h1: alignment,
+      h2: alignment,
+      h3: alignment,
+      span: { color: promptColors },
+      mark: { 'background-color': promptHighlights },
+    },
+    transformTags: {
+      '*': (tagName, attribs) => {
+        // Reject CSS escapes/comments and priority overrides before CSS parsing.
+        if (/[!\\\\]|\/\*/.test(attribs.style ?? '')) delete attribs.style;
+        if (tagName === 'th' || tagName === 'td') {
+          for (const key of ['colspan', 'rowspan']) {
+            if (!/^(?:[1-9]\d?|100)$/.test(attribs[key] ?? '')) delete attribs[key];
+          }
+        }
+        return { tagName, attribs };
+      },
+    },
     allowedSchemes: ['http', 'https', 'mailto'],
     exclusiveFilter: (frame) =>
       frame.tag === 'img' && !/^\/assessments\/media\/[a-f0-9-]{36}$/.test(frame.attribs.src ?? ''),
@@ -102,10 +188,13 @@ function plain(html: string) {
         value += t;
       },
       onopentag: (name) => {
-        if (name === 'br') value += '\n';
+        if (name === 'br' || name === 'hr') value += '\n';
+        if (name === 'table' && value && !value.endsWith('\n')) value += '\n';
       },
       onclosetag: (name) => {
-        if (['p', 'li'].includes(name)) value += '\n';
+        if (['p', 'li', 'h1', 'h2', 'h3', 'pre', 'blockquote'].includes(name)) value += '\n';
+        if (name === 'td' || name === 'th') value = value.replace(/\n+$/, '') + '\t';
+        if (name === 'tr') value = value.replace(/\t+$/, '') + '\n';
       },
     },
     { decodeEntities: true },

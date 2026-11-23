@@ -1,14 +1,9 @@
 import { styleBuilderElement, styleBuilderRoot } from './presentation';
 import { Editor } from '@tiptap/core';
+import { mountPromptEditor, renderPromptPreview, promptExtensions } from '../rich-text-editor/editor.js';
 import { registerWorkGuard } from '../work-guard';
 import { questionReference } from '../question-reference';
-import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
 import { defaultMatrix, matrixReadiness, matrixPreview } from './assessment-matrix.js';
-
-const PrivateImage = Image.extend({
-    parseHTML() { return [{ tag: 'img[src]', getAttrs: node => /^\/assessments\/media\/[a-f0-9-]{36}$/.test(node.getAttribute('src') || '') ? null : false }]; },
-});
 
 export function mountAssessmentBuilder(root, initial) {
 const lifetime = new AbortController();
@@ -32,6 +27,8 @@ syncOrder();
 state.questions.forEach(q => { q.type ||= 'open_response'; q.choices ||= []; });
 let selected = state.questions[0]?.id, editor, dirty = !state.id, saving = false, generation = 0, retryPayload = null;
 let serverErrors = {}, removed = [], uploadPending = false;
+// Keep upload/retry state with its question, not a disposable editor render.
+const imageUploads = new Map();
 let matrixRemoved = [];
 let publication = null, conflict = false;
 const csrf = $('builder-csrf').value;
@@ -215,41 +212,39 @@ function renderQuestion() {
         changed(); renderList(); renderQuestion(); $('question-type').focus();
     }); card.append(type);
     card.append(el('label', q.type === 'self_assessment' ? 'Matrix heading' : 'Question prompt', { id: 'prompt-label' }));
-    const toolbar = el('div', null, { class: 'builder-toolbar', role: 'group', 'aria-label': 'Prompt formatting' });
-    const editorHost = el('div', null, { class: 'prompt-editor' });
-    card.append(toolbar, editorHost);
+    const editorHost = el('div', null);
+    card.append(editorHost);
     const content = q.prompt_html ?? `<p>${escapeText(q.prompt).replaceAll('\n', '<br>')}</p>`;
-    editor = new Editor({ element: editorHost, extensions: [StarterKit.configure({ heading: false, blockquote: false, codeBlock: false, code: false, horizontalRule: false, link: { openOnClick: false } }), PrivateImage.configure({ inline: true, allowBase64: false })], content,
-        editorProps: { attributes: { role: 'textbox', 'aria-multiline': 'true', 'aria-labelledby': 'prompt-label', 'data-testid': 'prompt-editor' } },
-        onUpdate: ({ editor: instance }) => { q.prompt_html = instance.getHTML(); q.prompt = instance.getText(); changed(); renderList(); },
-        onSelectionUpdate: () => updateToolbar(),
+    if (imageUploads.get(q.id)?.question !== q) imageUploads.set(q.id, { question: q });
+    const imageUpload = imageUploads.get(q.id);
+    editor = mountPromptEditor(editorHost, { content, labelledBy: 'prompt-label',
+        onUpdate: instance => { q.prompt_html = instance.getHTML(); q.prompt = instance.getText(); changed(); renderList(); },
+        onImage: () => { if (!uploadPending) { imageUpload.pickerPosition = editor.state.selection.to; imageUpload.file.click(); } },
+        canImage: () => !uploadPending,
+        getBusy: () => imageUpload.busy || '',
     });
-    const formats = [['Bold', 'bold', 'toggleBold'], ['Italic', 'italic', 'toggleItalic'], ['Bullet list', 'bulletList', 'toggleBulletList'], ['Numbered list', 'orderedList', 'toggleOrderedList']];
-    function updateToolbar() { toolbar.querySelectorAll('[data-format]').forEach(b => b.setAttribute('aria-pressed', String(editor?.isActive(b.dataset.format)))); }
-    formats.forEach(([label, format, command]) => toolbar.append(button(label, () => { editor.chain().focus()[command]().run(); updateToolbar(); }, { 'data-format': format, 'aria-pressed': 'false' })));
-    const linkFields = el('details', null); linkFields.append(el('summary', 'Insert or edit link'));
-    const link = field(linkFields, 'Link URL', '', () => {}, 'prompt-link', 'url');
-    linkFields.append(button('Apply link', () => {
-        try { const url = new URL(link.value); if (!['https:', 'http:', 'mailto:'].includes(url.protocol)) throw Error(); editor.chain().focus().extendMarkRange('link').setLink({ href: url.href }).run(); linkFields.open = false; }
-        catch { link.setCustomValidity('Use an https, http or mailto link.'); link.reportValidity(); }
-    }), button('Remove link', () => editor.chain().focus().unsetLink().run()));
-    link.addEventListener('input', () => link.setCustomValidity(''));
-    card.append(linkFields);
-    const imageFields = el('details', null); imageFields.append(el('summary', 'Insert image or edit alt text'));
-    const alt = field(imageFields, 'Image alt text', '', () => {}, 'image-alt'); alt.maxLength = 500;
-    const file = field(imageFields, 'Image file (PNG, JPEG or WebP, up to 2 MiB)', '', () => {}, 'prompt-image', 'file'); file.accept = '.png,.jpg,.jpeg,.webp';
+    editor.on('transaction', ({ transaction }) => {
+        if (imageUpload.position != null) imageUpload.position = transaction.mapping.map(imageUpload.position);
+    });
+    if (!imageUpload.nodes) {
+    const file = el('input', null, { type: 'file', accept: '.png,.jpg,.jpeg,.webp', hidden: '', 'aria-label': 'Image file (PNG, JPEG or WebP, up to 2 MiB)' });
+    imageUpload.file = file;
     const uploadStatus = el('p', '', { role: 'status' });
     const progress = el('progress', null, { max: '100', value: '0', 'aria-label': 'Image upload progress', hidden: '' });
     let mediaId, selectedFile;
-    file.addEventListener('change', () => { mediaId = null; selectedFile = file.files[0]; });
-    const uploadButton = button('Upload and insert image', async () => {
+    file.addEventListener('change', () => {
+        if (!file.files[0] || uploadPending) return;
+        imageUpload.position = imageUpload.pickerPosition;
+        mediaId = null; selectedFile = file.files[0]; file.value = '';
+        uploadButton.click();
+    });
+    const uploadButton = button('Retry image upload', async () => {
         if (uploadPending) return;
-        selectedFile = file.files[0] || selectedFile;
         if (!selectedFile && !mediaId) { uploadStatus.textContent = 'Choose an image to upload.'; return; }
-        if (!alt.value.trim()) { uploadStatus.textContent = 'Add alt text describing the image before inserting it.'; alt.focus(); return; }
         if (selectedFile?.size > 2 * 1024 * 1024) { uploadStatus.textContent = 'Choose an image smaller than 2 MiB.'; return; }
-        uploadPending = true; uploadButton.disabled = true; uploadStatus.textContent = 'Uploading image…'; updatePublish();
-        const altText = alt.value;
+        uploadPending = true; imageUpload.busy = 'Uploading image…'; uploadButton.disabled = true; uploadStatus.textContent = 'Uploading image…'; updatePublish(); editor?.emit('imageAvailability');
+        uploadButton.hidden = true;
+        const altText = (selectedFile.name.replace(/\.[^.]+$/, '') || selectedFile.name).slice(0, 500);
         try {
             if (mediaId) {
                 const previous = await request(`/assessments/media/${mediaId}/status`);
@@ -260,6 +255,7 @@ function renderQuestion() {
                 const result = await upload(data, percent => progress.value = percent); mediaId = result.id;
             }
             progress.hidden = true; uploadStatus.textContent = 'Checking the image. Your prompt is preserved.';
+            imageUpload.busy = 'Checking image…'; editor?.emit('imageAvailability');
             let result;
             for (let i = 0; i < 75; i++) {
                 result = await request(`/assessments/media/${mediaId}/status`);
@@ -270,16 +266,25 @@ function renderQuestion() {
                 if (result.status === 'rejected') { mediaId = null; throw Error('This image was rejected. Choose another image.'); }
                 throw Error('Image processing is unavailable or still pending. Retry after the scanner and worker are available.');
             }
-            if (selected === q.id && editor) editor.chain().focus().setTextSelection(editor.state.selection.to).setImage({ src: result.url, alt: altText }).run();
-            else { q.prompt_html = (q.prompt_html ?? `<p>${escapeText(q.prompt)}</p>`) + `<p><img src="${result.url}" alt="${escapeText(altText)}"></p>`; changed(); }
+            if (lifetime.signal.aborted || !state.questions.includes(q)) return;
+            if (selected === q.id && editor) editor.chain().focus().setTextSelection(imageUpload.position ?? editor.state.selection.to).setImage({ src: result.url, alt: altText }).run();
+            else {
+                // The author may edit another question while scanning. Insert at
+                // the mapped original cursor without stealing their current focus.
+                const target = new Editor({ extensions: promptExtensions(), content: q.prompt_html ?? `<p>${escapeText(q.prompt)}</p>`, parseOptions: { preserveWhitespace: 'full' } });
+                try {
+                    target.chain().setTextSelection(imageUpload.position ?? target.state.doc.content.size).setImage({ src: result.url, alt: altText }).run();
+                    q.prompt_html = target.getHTML(); q.prompt = target.getText(); changed(); renderList();
+                } finally { target.destroy(); }
+            }
             mediaId = null; selectedFile = null; file.value = ''; uploadStatus.textContent = 'Image inserted. Save the draft to keep it.';
-        } catch (error) { uploadStatus.textContent = error.message + ' Your prompt is intact.'; uploadButton.textContent = 'Retry image upload'; }
-        finally { uploadPending = false; uploadButton.disabled = false; progress.hidden = true; updatePublish(); }
+        } catch (error) { uploadStatus.textContent = error.message + ' Your prompt is intact.'; uploadButton.hidden = false; }
+        finally { uploadPending = false; imageUpload.busy = ''; uploadButton.disabled = false; progress.hidden = true; if (!lifetime.signal.aborted) { updatePublish(); editor?.emit('imageAvailability'); } }
     });
-    imageFields.append(uploadButton, button('Update selected image alt text', () => {
-        if (!editor.isActive('image')) { uploadStatus.textContent = 'Select an image in the prompt first.'; return; }
-        editor.chain().focus().updateAttributes('image', { alt: alt.value }).run();
-    }), progress, uploadStatus); card.append(imageFields);
+    uploadButton.hidden = true;
+    imageUpload.nodes = [file, progress, uploadStatus, uploadButton];
+    }
+    card.append(...imageUpload.nodes);
     if (q.type === 'multiple_choice') renderChoices(card, q);
     if (q.type === 'self_assessment') renderMatrix(card, q);
     const errors = readiness();
@@ -438,8 +443,7 @@ function renderReview() {
         const article = el('article', null, { class: 'builder-preview-question' }); article.append(el('h4', questionReference(q.id, state.questions, state.sections)));
         const prompt = el('div', null, { class: 'assessment-prompt' });
         // Editor schema restricts this HTML; the server independently sanitises persisted markup.
-        const previewEditor = new Editor({ element: prompt, editable: false, extensions: [StarterKit, PrivateImage.configure({ inline: true })], content: q.prompt_html ?? `<p>${escapeText(q.prompt)}</p>` });
-        const rendered = previewEditor.getHTML(); previewEditor.destroy(); prompt.innerHTML = rendered; article.append(prompt);
+        renderPromptPreview(prompt, q.prompt_html ?? `<p>${escapeText(q.prompt)}</p>`); article.append(prompt);
         if (q.type === 'self_assessment') {
             article.append(matrixPreview(q, el));
         } else if (q.type === 'multiple_choice') {
