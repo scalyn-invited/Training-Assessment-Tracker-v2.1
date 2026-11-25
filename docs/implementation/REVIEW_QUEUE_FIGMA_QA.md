@@ -1,5 +1,7 @@
 # Review Queue Figma UI — 25 November 2026
 
+CI follow-up: PR #12's Verify V2.1 browser journey failed because `tests/browser/learning-review-flow.ts` still queried the former full-text queue link. The visible action now has the accessible name `Open Demo Member 1.3 / Browser training record`. Updated that selector only; the complete isolated browser journey passed locally (one test, 4.7 minutes). The other twenty PR checks were successful before this change. This records the diagnosis and local rerun, not a claim about the new remote CI revision.
+
 ## Scope and source
 
 Local branch `ui/review-queue-figma`, based on freshly fetched `origin/dev` at `e1035b44ce8448b4ecae1e721718d7c00dc2dea8`. Implementation is isolated in `D:/TAT/.runtime/review-queue-figma`. The original checkout, saved workspace and running localhost:3100 remain on `ui/global-design-system`; this feature has not replaced that running app.
