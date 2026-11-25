@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { api, useContext, Guest } from './auth-ui';
 import { useRouter } from 'next/navigation';
-import { Button, Select, Panel, PageHeader, Feedback } from './ui/controls';
-import { Pagination } from './ui/directory';
+import { Button, Select, Panel, PageHeader, Feedback, Badge } from './ui/controls';
+import { DirectoryTable, Pagination } from './ui/directory';
 import { registerWorkGuard } from './work-guard';
 import layout from './ui/form-layout.module.css';
 import styles from './ui/learning-queue.module.css';
@@ -46,8 +46,32 @@ export function LearningQueue() {
   return (
     <Guest>
       <div className={layout.page}>
-        <Link href="/dashboard">Back to workspace</Link>
-        <PageHeader title="Learning reviews" />
+        <div className={styles.introduction}>
+          <PageHeader title="Review Queue">
+            {context?.client
+              ? `${context.client.name} · Learning submissions`
+              : 'Learning submissions'}
+          </PageHeader>
+          {context?.user && client && (
+            <>
+              <div className={styles.notice}>
+                <span className={styles.infoIcon} aria-hidden="true" />
+                <div>
+                  <strong>Review the oldest submitted work first.</strong>
+                  <p>Provisional grades need a human decision.</p>
+                </div>
+              </div>
+              <Button
+                className={styles.refresh}
+                aria-label="Refresh review queue"
+                disabled={loading}
+                onClick={() => setRetry((n) => n + 1)}
+              >
+                {loading ? 'Refreshing…' : 'Refresh'}
+              </Button>
+            </>
+          )}
+        </div>
         {!context?.user ? (
           <>
             <Feedback error={sessionError} />
@@ -63,61 +87,104 @@ export function LearningQueue() {
           </p>
         ) : (
           <>
-            <p>Review the oldest submitted work first. Provisional grades need a human decision.</p>
             <Feedback error={error} />
-            <Button
-              className={styles.refresh}
-              disabled={loading}
-              onClick={() => setRetry((n) => n + 1)}
-            >
-              Refresh review queue
-            </Button>
             {loading && <p role="status">Loading learning reviews...</p>}
             {data && (
-              <Panel className={`${layout.panel} ${styles.panel}`}>
-                <h2>Work awaiting your review</h2>
+              <Panel
+                className={styles.queue}
+                aria-labelledby="review-queue-heading"
+                aria-busy={loading}
+              >
+                <h2 id="review-queue-heading" className={styles.queueHeading}>
+                  Work awaiting review
+                </h2>
                 {!data.records.length ? (
-                  <p>
+                  <p className={styles.empty}>
                     No work is awaiting your review under your current permissions. Assigned appeals
                     also appear here.
                   </p>
                 ) : (
-                  <ul className={styles.list}>
-                    {data.records.map((r) => (
-                      <li key={r.id}>
-                        <div>
-                          <Link href={`/enrolments/${r.enrolmentId}/submissions/${r.id}`}>
-                            {r.memberName} / {r.title}
-                          </Link>
-                          <small>
-                            Attempt {r.attempt} / {r.status.replaceAll('_', ' ')}
-                          </small>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                  <DirectoryTable
+                    className={styles.table}
+                    role="table"
+                    aria-label="Work awaiting review"
+                  >
+                    <thead role="rowgroup">
+                      <tr role="row">
+                        <th scope="col" role="columnheader">
+                          Member
+                        </th>
+                        <th scope="col" role="columnheader">
+                          Learning plan
+                        </th>
+                        <th scope="col" role="columnheader">
+                          Attempt
+                        </th>
+                        <th scope="col" role="columnheader">
+                          Status
+                        </th>
+                        <th scope="col" role="columnheader">
+                          <span className={styles.srOnly}>Open submission</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                      {data.records.map((r) => (
+                        <tr key={r.id} role="row">
+                          <td className={styles.member} role="cell">
+                            {r.memberName}
+                          </td>
+                          <td className={styles.plan} role="cell">
+                            {r.title}
+                          </td>
+                          <td className={styles.attempt} role="cell">
+                            Attempt {r.attempt}
+                          </td>
+                          <td className={styles.status} role="cell">
+                            <QueueStatus status={r.status} />
+                          </td>
+                          <td className={styles.action} role="cell">
+                            <Link
+                              className={styles.open}
+                              href={`/enrolments/${r.enrolmentId}/submissions/${r.id}`}
+                              aria-label={`Open ${r.memberName} / ${r.title}`}
+                            >
+                              Open <span className={styles.arrow} aria-hidden="true" />
+                            </Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </DirectoryTable>
                 )}
-                <Pagination aria-label="Review queue pages">
+                <Pagination className={styles.pagination} aria-label="Review queue pages">
                   <Button
+                    variant="ghost"
+                    aria-label="Previous reviews"
                     disabled={loading || data.page === 1}
                     onClick={() => {
                       setPage(data.page - 1);
                       setRetry((n) => n + 1);
                     }}
                   >
-                    Previous reviews
+                    Previous
                   </Button>
-                  <span>
-                    Page {data.page} / {data.total} review items
-                  </span>
+                  <div className={styles.pageInfo}>
+                    <span>Oldest first · 20 per page</span>
+                    <span>
+                      Page {data.page} / {data.total} review items
+                    </span>
+                  </div>
                   <Button
+                    variant="ghost"
+                    aria-label="Next reviews"
                     disabled={loading || data.page * 20 >= data.total}
                     onClick={() => {
                       setPage(data.page + 1);
                       setRetry((n) => n + 1);
                     }}
                   >
-                    Next reviews
+                    Next
                   </Button>
                 </Pagination>
               </Panel>
@@ -125,8 +192,26 @@ export function LearningQueue() {
             <LearningAppealRouting key={client} client={client} csrf={context.csrf} />
           </>
         )}
+        <Link className={styles.back} href="/dashboard">
+          Back to workspace
+        </Link>
       </div>
     </Guest>
+  );
+}
+function QueueStatus({ status }: { status: string }) {
+  const tone =
+    status === 'review_pending' ? 'warning' : status === 'technical_failure' ? 'error' : undefined;
+  const dot = tone ?? (status === 'submitted' ? 'info' : 'neutral');
+  const label = status.replaceAll('_', ' ');
+  return (
+    <Badge
+      tone={tone}
+      className={`${styles.badge} ${status === 'submitted' ? styles.submitted : ''}`}
+    >
+      <span className={styles.dot} data-tone={dot} aria-hidden="true" />
+      {label.charAt(0).toUpperCase() + label.slice(1)}
+    </Badge>
   );
 }
 function LearningAppealRouting({ client, csrf }: { client: string; csrf: string }) {
