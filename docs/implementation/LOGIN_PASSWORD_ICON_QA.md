@@ -18,3 +18,7 @@ Authentication, recovery, MFA, validation, autocomplete and password limits are 
 Screenshots contain empty fields and synthetic branding: [desktop](screenshots/login-password-icon/desktop.png), [mobile](screenshots/login-password-icon/mobile.png).
 
 These are local automated checks and visual inspection, not human acceptance or a claim of full application parity. Nothing pushed, merged or deployed.
+
+## Mobile action spacing correction
+
+Bernie identified that the mobile Sign in button was too far below the fields. The mobile sign-in form no longer grows to fill the viewport or pushes its action to the bottom; the button now follows Forgot password with the normal form gap. Other guest forms retain their prior layout. The isolated guest journey passes at 390, 320 and 800px, including a new assertion that the gap from recovery link to Sign in stays within 48px. The 390px screenshot was refreshed and visually inspected. TypeScript and production build pass. This remains local pending team review.

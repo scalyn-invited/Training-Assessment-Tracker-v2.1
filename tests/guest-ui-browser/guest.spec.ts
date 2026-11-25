@@ -114,6 +114,9 @@ test('guest sign-in and private account links preserve authentication and one-ti
       .boundingBox();
     expect(toggleBox!.width).toBeGreaterThanOrEqual(44);
     expect(toggleBox!.height).toBeGreaterThanOrEqual(44);
+    const forgotBox = await page.getByText('Forgot password?', { exact: true }).boundingBox();
+    const submitBox = await page.getByRole('button', { name: 'Sign in', exact: true }).boundingBox();
+    expect(submitBox!.y - (forgotBox!.y + forgotBox!.height)).toBeLessThanOrEqual(48);
     expect(
       await page
         .getByLabel('Email', { exact: true })
