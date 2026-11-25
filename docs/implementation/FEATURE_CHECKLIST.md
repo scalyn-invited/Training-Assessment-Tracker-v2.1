@@ -1,5 +1,9 @@
 # V2.1 migration checklist
 
+## Sign-in password icon — locally verified
+
+Updated `/login` to Christian's eye/eye-off control while retaining existing authentication. Guest/account-link browser journey (including keyboard, mobile, themes and axe), TypeScript and production build pass. Other password controls remain unchanged. Evidence and screenshots: `LOGIN_PASSWORD_ICON_QA.md`. No push, deployment or human acceptance claimed.
+
 ## Question prompt rich-text editor — locally verified; review/owner handoff
 
 Image-busy follow-up locally verified: owner-requested in-editor spinner with upload/checking labels; prompt and toolbar temporarily disabled; per-question state survives re-render; completion/error unlock without losing content. Component RED/GREEN (3 final checks), integration RED/GREEN (1 builder journey), real-scanner success/save/reload journey (1), server/web typecheck and isolated production build pass. Reduced-motion and 1440/390/320px checks pass. See `QUESTION_PROMPT_RICH_TEXT_QA.md`; human review remains pending, no overall completion or runtime restart claimed.

@@ -29,11 +29,13 @@ test('guest sign-in and private account links preserve authentication and one-ti
   async function a11y() {
     for (const img of await page.locator('img[src^="/auth/"]').all()) {
       if (!(await img.isVisible())) continue;
-      expect(
-        await img.evaluate(
-          (el) => (el as HTMLImageElement).complete && (el as HTMLImageElement).naturalWidth > 0,
-        ),
-      ).toBe(true);
+      await expect
+        .poll(() =>
+          img.evaluate(
+            (el) => (el as HTMLImageElement).complete && (el as HTMLImageElement).naturalWidth > 0,
+          ),
+        )
+        .toBe(true);
       const src = await img.getAttribute('src');
       const expected = src?.includes('key') || src?.includes('accepted') ? 26 : 18;
       const box = await img.boundingBox();
@@ -107,6 +109,11 @@ test('guest sign-in and private account links preserve authentication and one-ti
     await a11y();
     const inputBox = await page.getByLabel('Email', { exact: true }).boundingBox();
     expect(inputBox!.height).toBeGreaterThanOrEqual(48);
+    const toggleBox = await page
+      .getByRole('button', { name: 'Show password', exact: true })
+      .boundingBox();
+    expect(toggleBox!.width).toBeGreaterThanOrEqual(44);
+    expect(toggleBox!.height).toBeGreaterThanOrEqual(44);
     expect(
       await page
         .getByLabel('Email', { exact: true })
@@ -133,9 +140,23 @@ test('guest sign-in and private account links preserve authentication and one-ti
   await expect(page.getByText(/contact your administrator for a private setup/)).toBeVisible();
   await page.getByLabel('Email', { exact: true }).fill('guest-recipient@example.invalid');
   await page.getByLabel('Password', { exact: true }).fill(recipientPassword);
-  await page.getByRole('button', { name: 'Show password', exact: true }).click();
+  let loginRequests = 0;
+  page.on('request', (r) => {
+    if (r.url().endsWith('/api/auth/login')) loginRequests++;
+  });
+  await page.getByRole('button', { name: 'Show password', exact: true }).focus();
+  await page.keyboard.press('Enter');
   await expect(page.getByLabel('Password', { exact: true })).toHaveAttribute('type', 'text');
-  await page.getByRole('button', { name: 'Hide password', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Hide password', exact: true })).toBeFocused();
+  await page.keyboard.press('Space');
+  await expect(page.getByLabel('Password', { exact: true })).toHaveAttribute('type', 'password');
+  await expect(page.getByLabel('Password', { exact: true })).toHaveValue(recipientPassword);
+  expect(loginRequests).toBe(0);
+  expect(
+    await page
+      .getByLabel('Password', { exact: true })
+      .evaluate((el) => parseFloat(getComputedStyle(el).paddingRight)),
+  ).toBeGreaterThanOrEqual(48);
   await page.route('**/api/auth/login', (r) =>
     r.fulfill({ status: 401, json: { message: 'Check your email and password.' } }),
   );
