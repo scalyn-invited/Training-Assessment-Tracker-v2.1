@@ -625,7 +625,14 @@ it('fences environment dispatch and cancels suspension without reactivation resu
 it('limits provider administration to the selected client and returns only safe metadata', async () => {
   member = await login('demo.1.3@example.invalid');
   const settings = await registry.settings(admin.token, client);
-  expect(settings.policies).toHaveLength(5);
+  expect(settings.policies.map((policy) => policy.task).sort()).toEqual([
+    'assess_initial',
+    'generate_assessment_topic',
+    'generate_programme',
+    'grade_submission',
+    'propose_adaptation',
+    'suggest_kpi_actions',
+  ]);
   expect(settings.providers[0]).not.toHaveProperty('secret_reference');
   expect(settings.providers[0]).not.toHaveProperty('endpoint');
   expect(settings.providers[0]).not.toHaveProperty('secret');

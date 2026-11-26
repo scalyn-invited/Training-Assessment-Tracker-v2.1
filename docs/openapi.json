@@ -6985,6 +6985,312 @@
         }
       }
     },
+    "/assessments/proposals/topic": {
+      "post": {
+        "summary": "Queue a topic-based question proposal",
+        "description": "Requires assessment authoring authority and an available authoring allowance.",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operation succeeded; response contains only data authorized for the current actor."
+          },
+          "400": {
+            "description": "Malformed request."
+          },
+          "401": {
+            "description": "Authentication is missing, expired or revoked."
+          },
+          "403": {
+            "description": "Origin, CSRF or current authority check failed."
+          },
+          "409": {
+            "description": "The current version or workflow state conflicts with this operation."
+          },
+          "422": {
+            "description": "Input or domain validation failed."
+          },
+          "429": {
+            "description": "Request limit reached. Wait before retrying."
+          }
+        },
+        "x-implementation": "apps/api/src/main.ts",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "idempotency": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "options": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "topic"
+                    ],
+                    "properties": {
+                      "topic": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 500
+                      },
+                      "count": {
+                        "type": "integer",
+                        "minimum": 2,
+                        "maximum": 30,
+                        "default": 5
+                      },
+                      "difficulty": {
+                        "type": "string",
+                        "enum": [
+                          "easy",
+                          "medium",
+                          "hard"
+                        ],
+                        "default": "medium"
+                      },
+                      "language": {
+                        "type": "string",
+                        "enum": [
+                          "English"
+                        ]
+                      },
+                      "types": {
+                        "type": "string",
+                        "enum": [
+                          "mixed"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "csrf",
+                  "clientId",
+                  "idempotency",
+                  "options"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/assessments/proposals/topic/status": {
+      "post": {
+        "summary": "Read question proposal status",
+        "description": "Returns the authorized request status and available proposal.",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operation succeeded; response contains only data authorized for the current actor."
+          },
+          "400": {
+            "description": "Malformed request."
+          },
+          "401": {
+            "description": "Authentication is missing, expired or revoked."
+          },
+          "403": {
+            "description": "Origin, CSRF or current authority check failed."
+          },
+          "409": {
+            "description": "The current version or workflow state conflicts with this operation."
+          },
+          "422": {
+            "description": "Input or domain validation failed."
+          },
+          "429": {
+            "description": "Request limit reached. Wait before retrying."
+          }
+        },
+        "x-implementation": "apps/api/src/main.ts",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "csrf",
+                  "clientId",
+                  "id"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/assessments/proposals/topic/cancel": {
+      "post": {
+        "summary": "Cancel a question proposal request",
+        "description": "Checks the request state and author authority for the selected client.",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operation succeeded; response contains only data authorized for the current actor."
+          },
+          "400": {
+            "description": "Malformed request."
+          },
+          "401": {
+            "description": "Authentication is missing, expired or revoked."
+          },
+          "403": {
+            "description": "Origin, CSRF or current authority check failed."
+          },
+          "409": {
+            "description": "The current version or workflow state conflicts with this operation."
+          },
+          "422": {
+            "description": "Input or domain validation failed."
+          },
+          "429": {
+            "description": "Request limit reached. Wait before retrying."
+          }
+        },
+        "x-implementation": "apps/api/src/main.ts",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "csrf",
+                  "clientId",
+                  "id"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/assessments/proposals/validate": {
+      "post": {
+        "summary": "Validate imported assessment questions",
+        "description": "Validates the supplied JSON text and returns a preview without saving the assessment.",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operation succeeded; response contains only data authorized for the current actor."
+          },
+          "400": {
+            "description": "Malformed request."
+          },
+          "401": {
+            "description": "Authentication is missing, expired or revoked."
+          },
+          "403": {
+            "description": "Origin, CSRF or current authority check failed."
+          },
+          "409": {
+            "description": "The current version or workflow state conflicts with this operation."
+          },
+          "422": {
+            "description": "Input or domain validation failed."
+          },
+          "429": {
+            "description": "Request limit reached. Wait before retrying."
+          }
+        },
+        "x-implementation": "apps/api/src/main.ts",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csrf": {
+                    "type": "string",
+                    "minLength": 64,
+                    "maxLength": 64
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "source": {
+                    "type": "string",
+                    "maxLength": 262144
+                  }
+                },
+                "required": [
+                  "csrf",
+                  "clientId",
+                  "source"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
     "/assessments/builder": {
       "post": {
         "summary": "Save or publish an assessment builder draft",
