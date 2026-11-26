@@ -2,7 +2,8 @@ import { randomUUID } from 'node:crypto';
 import { Auth, type AuthUser } from './auth.js';
 import { Access } from './access.js';
 import { encrypt, decrypt, digest } from './crypto.js';
-import { requireCondition } from './errors.js';
+import { parseAssessmentProposals, PROPOSAL_MAX_BYTES } from './assessment-proposals.js';
+import { DomainError, requireCondition } from './errors.js';
 import { draft, readiness, mediaIds, type AssessmentDraft } from './assessment-content.js';
 import type { Sql } from '../../database/src/database.js';
 type DefinitionRow = Omit<AssessmentDraft, 'answer_key'> & {
@@ -43,6 +44,28 @@ export class AssessmentDefinitions {
       'Assessment authoring requires coordinator authority.',
     );
     return user!;
+  }
+  async validateProposals(token: string, csrf: string, client: string, source: string) {
+    return this.auth.db.transaction(async (sql) => {
+      await this.author(sql, token, client, csrf);
+      requireCondition(
+        typeof source === 'string' && Buffer.byteLength(source, 'utf8') <= PROPOSAL_MAX_BYTES,
+        422,
+        'proposal_too_large',
+        'Choose a JSON file no larger than 256 KiB.',
+      );
+      let input: unknown;
+      try {
+        input = JSON.parse(source);
+      } catch {
+        throw new DomainError(
+          422,
+          'invalid_proposal_json',
+          'The file is not valid JSON. Correct it and try again.',
+        );
+      }
+      return parseAssessmentProposals(input);
+    });
   }
   async audit(sql: Sql, user: AuthUser, client: string, action: string, id: string) {
     await sql.query(

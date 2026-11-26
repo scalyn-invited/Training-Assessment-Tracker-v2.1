@@ -18,7 +18,8 @@ export type AiRun = {
   id: string;
   organisation_id: string;
   environment: 'test' | 'production';
-  enrolment_id: string;
+  enrolment_id: string | null;
+  scope?: 'enrolment' | 'assessment_authoring';
   actor_id: string;
   task: AiTask;
   subject_id: string;
@@ -61,6 +62,7 @@ export type TaskHandler = {
   promptVersion?: string;
   schemaVersion?: string;
   inputs?: (input: Record<string, unknown>) => Record<string, unknown>[];
+  authorizeAuthoring?: (sql: Sql, run: AiRun, actor: AuthUser) => Promise<void>;
   authorize: (sql: Sql, run: AiRun, actor: AuthUser, e: Enrolment) => Promise<void>;
   validate: (
     sql: Sql,
@@ -86,6 +88,14 @@ export class AiGateway {
   }
   register(task: AiTask, handler: TaskHandler) {
     this.handlers.set(task, handler);
+  }
+  async usable(sql: Sql, run: AiRun, profile: Profile, e?: Enrolment) {
+    if (run.scope === 'assessment_authoring') {
+      this.registry.authoringUsable(profile, run.environment);
+      return;
+    }
+    requireCondition(e, 404, 'enrolment_unavailable', 'Training record is unavailable.');
+    await this.registry.usable(sql, profile, e);
   }
   async records(sql: Sql, id: string) {
     const block = (await sql.query<AiBlock>('SELECT * FROM ai_blocks WHERE id=$1 FOR UPDATE', [id]))
@@ -117,6 +127,16 @@ export class AiGateway {
       'client_unavailable',
       'Client is unavailable.',
     );
+    if (run.scope === 'assessment_authoring') {
+      requireCondition(
+        handler.authorizeAuthoring,
+        403,
+        'authoring_handler',
+        'Authoring handler is unavailable.',
+      );
+      await handler.authorizeAuthoring(sql, run, actor);
+      return { handler, actor, e: undefined };
+    }
     const e = (
       await sql.query<Enrolment>(
         'SELECT * FROM enrolments WHERE id=$1 AND organisation_id=$2 AND environment=$3',
@@ -137,6 +157,43 @@ export class AiGateway {
     programme: string | null = null,
     idempotency = subject,
   ) {
+    return this.requestScoped(sql, actor, e, task, subject, input, programme, idempotency);
+  }
+  async requestAuthoring(
+    sql: Sql,
+    actor: AuthUser,
+    client: string,
+    idempotency: string,
+    input: Record<string, unknown>,
+  ) {
+    return this.requestScoped(
+      sql,
+      actor,
+      { id: null, organisation_id: client, environment: actor.environment },
+      'generate_assessment_topic',
+      randomUUID(),
+      input,
+      null,
+      idempotency,
+    );
+  }
+  async requestScoped(
+    sql: Sql,
+    actor: AuthUser,
+    e: Enrolment | { id: null; organisation_id: string; environment: 'test' | 'production' },
+    task: AiTask,
+    subject: string,
+    input: Record<string, unknown>,
+    programme: string | null,
+    idempotency: string,
+  ) {
+    const authoring = e.id === null;
+    requireCondition(
+      authoring === (task === 'generate_assessment_topic'),
+      422,
+      'ai_scope',
+      'Task scope is invalid.',
+    );
     await sql.query('SELECT id FROM organisations WHERE id=$1 FOR UPDATE', [e.organisation_id]);
     const handler = this.handlers.get(task);
     requireCondition(handler, 422, 'task_unavailable', 'This analysis task is not configured.');
@@ -149,7 +206,10 @@ export class AiGateway {
     );
     const json = JSON.stringify(input),
       hash = digest(json),
-      snapshot = await this.registry.snapshot(sql, e, task);
+      snapshot =
+        e.id === null
+          ? this.registry.authoringSnapshot(e.environment)
+          : await this.registry.snapshot(sql, e, task);
     const config = {
       ...snapshot,
       prompt: handler.prompt,
@@ -188,6 +248,7 @@ export class AiGateway {
       organisation_id: e.organisation_id,
       environment: e.environment,
       enrolment_id: e.id,
+      scope: authoring ? 'assessment_authoring' : 'enrolment',
       actor_id: actor.id,
       task,
       subject_id: subject,
@@ -214,21 +275,61 @@ export class AiGateway {
       );
       return existing;
     }
+    if (authoring) {
+      const active = await sql.query(
+        "SELECT id FROM ai_runs WHERE organisation_id=$1 AND environment=$2 AND scope='assessment_authoring' AND status IN ('queued','running','ambiguous')",
+        [e.organisation_id, e.environment],
+      );
+      requireCondition(
+        !active.rowCount,
+        409,
+        'authoring_active',
+        'An authoring request is active or awaiting reconciliation.',
+      );
+      const calls = (
+        await sql.query(
+          "SELECT count(*)::int count FROM ai_runs WHERE organisation_id=$1 AND environment=$2 AND scope='assessment_authoring'",
+          [e.organisation_id, e.environment],
+        )
+      ).rows[0].count;
+      const limit = z
+        .number()
+        .int()
+        .nonnegative()
+        .safe()
+        .parse(limits.authoringCallLimit ?? 0);
+      requireCondition(
+        calls < limit,
+        422,
+        'authoring_call_limit',
+        'Shared authoring call allowance reached.',
+      );
+    }
     const spent = (
       await sql.query<{ total: string; programme: string }>(
-        'SELECT coalesce(sum(reserved+spent),0) total,coalesce(sum(CASE WHEN enrolment_id=$3 THEN reserved+spent ELSE 0 END),0) programme FROM ai_runs WHERE organisation_id=$1 AND environment=$2',
+        "SELECT coalesce(sum(reserved+spent),0) total,coalesce(sum(CASE WHEN (enrolment_id=$3 OR ($3::uuid IS NULL AND scope='assessment_authoring')) THEN reserved+spent ELSE 0 END),0) programme FROM ai_runs WHERE organisation_id=$1 AND environment=$2",
         [e.organisation_id, e.environment, e.id],
       )
     ).rows[0];
     requireCondition(
       BigInt(spent.total) + BigInt(reserve) <= BigInt(limits.organisationLimit) &&
-        BigInt(spent.programme) + BigInt(reserve) <= BigInt(limits.programmeLimit),
+        BigInt(spent.programme) + BigInt(reserve) <=
+          BigInt(
+            authoring
+              ? z
+                  .number()
+                  .int()
+                  .nonnegative()
+                  .safe()
+                  .parse(limits.authoringLimit ?? 0)
+              : limits.programmeLimit,
+          ),
       422,
       'spend_limit',
       'AI spending limit reached. Manual review remains available.',
     );
     await sql.query(
-      "INSERT INTO ai_runs(id,organisation_id,environment,enrolment_id,actor_id,programme_version_id,idempotency_key,payload_hash,task,subject_id,status,configuration,task_input,reserved,message) VALUES($1,$2,$3,$4,$5,$6,$13,$8,$9,$7::uuid,'queued',$10,$11,$12,'Queued for provisional analysis.')",
+      "INSERT INTO ai_runs(id,organisation_id,environment,enrolment_id,actor_id,programme_version_id,idempotency_key,payload_hash,task,subject_id,status,configuration,task_input,reserved,message,scope) VALUES($1,$2,$3,$4,$5,$6,$13,$8,$9,$7::uuid,'queued',$10,$11,$12,'Queued for provisional analysis.',$14)",
       [
         run.id,
         e.organisation_id,
@@ -243,6 +344,7 @@ export class AiGateway {
         run.task_input,
         reserve,
         idempotency,
+        run.scope,
       ],
     );
     for (let index = 0; index < inputs.length; index++) {
@@ -403,8 +505,8 @@ export class AiGateway {
       try {
         const { e } = await this.authorized(sql, run);
         profile = run.configuration.providers[block.provider_index];
-        await this.registry.usable(sql, this.registry.profile(profile.id, run.task), e);
-        await this.registry.usable(sql, profile, e);
+        await this.usable(sql, run, this.registry.profile(profile.id, run.task), e);
+        await this.usable(sql, run, profile, e);
       } catch {
         await this.stop(sql, run, block, 'stale');
         return null;
@@ -555,12 +657,8 @@ export class AiGateway {
       try {
         const current = await this.authorized(sql, run);
         handler = current.handler;
-        await this.registry.usable(
-          sql,
-          this.registry.profile(claim.profile.id, run.task),
-          current.e,
-        );
-        await this.registry.usable(sql, claim.profile, current.e);
+        await this.usable(sql, run, this.registry.profile(claim.profile.id, run.task), current.e);
+        await this.usable(sql, run, claim.profile, current.e);
       } catch {
         await this.stop(sql, run, block, error === 'ambiguous' ? 'ambiguous' : 'stale');
         return;

@@ -94,6 +94,7 @@ export function AssessmentBuilder({ definitionId }: { definitionId: string }) {
     if (!host || !editorRoot) return;
     host.replaceChildren(editorRoot);
     return () => {
+      editorRoot.dispatchEvent(new Event('assessment-builder:detach'));
       editorRoot.remove();
     };
   }, [host, editorRoot]);

@@ -21,6 +21,7 @@ import { AssessmentAssignments } from '../../../packages/domain/src/assessment-a
 import { EvidenceFiles } from '../../../packages/domain/src/evidence-files.js';
 import { AiRegistry } from '../../../packages/domain/src/ai-registry.js';
 import { AiGateway } from '../../../packages/domain/src/ai-gateway.js';
+import { AssessmentTopicGeneration } from '../../../packages/domain/src/assessment-topic-generation.js';
 import { AssessmentAnalysis } from '../../../packages/domain/src/assessment-analysis.js';
 import { AssessmentResponses } from '../../../packages/domain/src/assessment-responses.js';
 import { AssessmentReviews } from '../../../packages/domain/src/assessment-reviews.js';
@@ -35,6 +36,7 @@ const evidence = new EvidenceFiles(assignments.enrolments);
 const operations = new Operations(evidence);
 const notices = new LearningNotices(assignments.enrolments);
 const aiGateway = new AiGateway(new AiRegistry(assignments.enrolments), key);
+new AssessmentTopicGeneration(media.definitions, aiGateway);
 const reviews = new AssessmentReviews(new AssessmentResponses(assignments));
 new AssessmentAnalysis(reviews, aiGateway);
 const learningPlans = new LearningPlans(new Onboarding(assignments.enrolments, key));

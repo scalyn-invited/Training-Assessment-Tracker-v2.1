@@ -7,6 +7,29 @@
   --text: var(--ui-text);
   --border: var(--ui-border);
 }
+.root :global(.proposal-entry) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2);
+}
+.root :global(.proposal-preview) > * + *,
+.root :global(.proposal-preview) section > * + * {
+  margin-top: var(--ui-space-4);
+}
+.root :global(.proposal-import) p,
+.root :global(.proposal-import) li {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.root :global(.proposal-preview) label {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  min-height: 44px;
+}
+.root :global(.proposal-import) input[type='file'] {
+  max-width: 100%;
+}
 .root[hidden],
 .root [hidden] {
   display: none !important;

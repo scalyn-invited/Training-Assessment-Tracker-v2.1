@@ -50,6 +50,7 @@ import { Branding } from '../../../packages/domain/src/branding.js';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AI_TASKS, AiRegistry } from '../../../packages/domain/src/ai-registry.js';
 import { AiGateway } from '../../../packages/domain/src/ai-gateway.js';
+import { AssessmentTopicGeneration } from '../../../packages/domain/src/assessment-topic-generation.js';
 import { AssessmentAnalysis } from '../../../packages/domain/src/assessment-analysis.js';
 import { AssessmentReviews } from '../../../packages/domain/src/assessment-reviews.js';
 import { AssessmentResponses } from '../../../packages/domain/src/assessment-responses.js';
@@ -694,6 +695,7 @@ const responses = new AssessmentResponses(assignments);
 const reviews = new AssessmentReviews(responses);
 const aiRegistry = new AiRegistry(assignments.enrolments);
 const aiGateway = new AiGateway(aiRegistry, definitions.key);
+const topicGeneration = new AssessmentTopicGeneration(definitions, aiGateway);
 const assessmentAnalysis = new AssessmentAnalysis(reviews, aiGateway);
 const extractions = new DocumentExtractions(reviews);
 const onboardingDocuments = new OnboardingDocuments(extractions);
@@ -892,6 +894,32 @@ class AssessmentController {
       req,
     );
     return assignments.change(token(req), d.csrf, d.clientId, d.id, d.version, d.action);
+  }
+
+  @Post('proposals/topic') async topicProposal(@Req() req: Request) {
+    const d = parse(
+      z.object({ csrf, clientId: uuid, idempotency: uuid, options: z.unknown() }).strict(),
+      req,
+    );
+    return topicGeneration.request(token(req), d.csrf, d.clientId, d.idempotency, d.options);
+  }
+  @Post('proposals/topic/status') async topicStatus(@Req() req: Request) {
+    const d = parse(z.object({ csrf, clientId: uuid, id: uuid }).strict(), req);
+    await definitions.auth.db.transaction((sql) =>
+      definitions.author(sql, token(req), d.clientId, d.csrf),
+    );
+    return topicGeneration.get(token(req), d.clientId, d.id);
+  }
+  @Post('proposals/topic/cancel') async topicCancel(@Req() req: Request) {
+    const d = parse(z.object({ csrf, clientId: uuid, id: uuid }).strict(), req);
+    return topicGeneration.cancel(token(req), d.csrf, d.clientId, d.id);
+  }
+  @Post('proposals/validate') async validateProposals(@Req() req: Request) {
+    const data = parse(
+      z.object({ csrf, clientId: uuid, source: z.string().max(262144) }).strict(),
+      req,
+    );
+    return definitions.validateProposals(token(req), data.csrf, data.clientId, data.source);
   }
 
   @Post('builder') async builder(@Req() req: Request) {

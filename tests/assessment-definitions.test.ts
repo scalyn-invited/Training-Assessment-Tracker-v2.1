@@ -59,6 +59,41 @@ describe('assessment definitions and publication', () => {
   afterAll(async () => {
     await instance?.close();
   });
+  it('validates proposals only for the selected-client author without writing definitions', async () => {
+    const source = JSON.stringify({
+      format: 'assessment-proposals-v1',
+      questions: [
+        {
+          reference: 'q',
+          type: 'open_response',
+          prompt: 'Explain.',
+          choices: [],
+          suggested_answer: 'Private preview only.',
+        },
+      ],
+      rubric: null,
+    });
+    const before = await definitions.list(coordinator.token, client);
+    expect(
+      (await definitions.validateProposals(coordinator.token, coordinator.csrf, client, source))
+        .questions,
+    ).toHaveLength(1);
+    expect(await definitions.list(coordinator.token, client)).toEqual(before);
+    for (const session of [admin, member])
+      await expect(
+        definitions.validateProposals(session.token, session.csrf, client, source),
+      ).rejects.toMatchObject({ status: 403 });
+    await expect(
+      definitions.validateProposals(coordinator.token, coordinator.csrf, other, source),
+    ).rejects.toMatchObject({ status: 403 });
+    await expect(
+      definitions.validateProposals(coordinator.token, 'invalid', client, source),
+    ).rejects.toBeDefined();
+    for (const invalid of ['{', 'x'.repeat(262145), source.replace('Explain.', '<b>Explain.</b>')])
+      await expect(
+        definitions.validateProposals(coordinator.token, coordinator.csrf, client, invalid),
+      ).rejects.toMatchObject({ status: 422 });
+  });
   it('requires coordinator membership rather than platform authority', async () => {
     await expect(definitions.list(admin.token, client)).rejects.toMatchObject({ status: 403 });
     await expect(definitions.list(member.token, client)).rejects.toMatchObject({ status: 403 });

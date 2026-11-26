@@ -1,4 +1,5 @@
 import type { Profile } from './ai-registry.js';
+import { parseTopicRequest, syntheticTopicProposal } from './assessment-topic.js';
 export type ProviderResult = {
   text: string;
   inputTokens: number;
@@ -20,6 +21,13 @@ export type Provider = (
 ) => Promise<ProviderResult>;
 /** Deterministic demonstration output only; never a calibrated grade or an approval. */
 export const mockProvider: Provider = async (_profile, input) => {
+  if (input.task === 'generate_assessment_topic')
+    return {
+      text: JSON.stringify(syntheticTopicProposal(parseTopicRequest(input.options))),
+      inputTokens: 100,
+      outputTokens: 100,
+      externalId: 'synthetic-topic-v1',
+    };
   if (input.task === 'assess_initial' || input.task === 'grade_submission') {
     const evidence = input.evidence as { id: string; text: string }[],
       rubric = input.rubric as { id: string; version: number; criteria: { id: string }[] },
