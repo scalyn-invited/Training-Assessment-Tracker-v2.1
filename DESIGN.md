@@ -16,6 +16,10 @@ The Questions step adds an optional topic-generation panel using the existing se
 
 The approved first AI/import slice adds an optional JSON import panel within the builder's Questions step. It inherits the builder presentation adapter, semantic panels/fields/buttons, 16px group spacing, wrapping plain-text preview and 44px selection labels. Keep source selection, validation feedback, question selection and assessment-wide rubric review in that order. Loading is action-specific; validation failures retain the chosen file for explicit retry, and cancellation ignores late responses. Do not replace or auto-delete the initial blank question. Appending selected questions and confirmed rubric replacement are independent unsaved edits. Open-response suggested answers are explicitly preview-only, never learner content or stored model answers. No AI generation or document-source controls are exposed in this slice. See `docs/implementation/ASSESSMENT_JSON_IMPORT.md`; automated evidence is not human acceptance.
 
+## Sign-in password visibility — 25 November 2026
+
+Christian's updated sign-in frame `6984:3988` uses an eye/eye-off control inside the password field. `/login` opts into this shared PasswordField variant; other password forms retain their existing controls. Use the supplied local SVGs with semantic theme colors, accessible Show/Hide names, keyboard focus, reserved text clearance and 44px mobile targets. Authentication and recovery flow remain unchanged. Evidence: `docs/implementation/LOGIN_PASSWORD_ICON_QA.md`.
+
 ## Question prompt rich-text toolbar — 23 November 2026
 
 Approved image-busy follow-up: while the prompt's image is uploading or processing, show the shared reduced-motion-aware spinner and phase label over its preserved content. Temporarily disable Tiptap editing, toolbar controls and open popovers. Keep this state per question across re-renders; other questions remain editable. Always unlock on completion/error and retain existing progress, scan authority and explicit retry. Do not replace this action state with an app-wide loading gate.
