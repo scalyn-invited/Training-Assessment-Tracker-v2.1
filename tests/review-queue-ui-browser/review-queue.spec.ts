@@ -296,7 +296,10 @@ test('shared review queue preserves scoped work and independent appeal routing',
     page.getByText('Content hash: ' + original.submission.contentHash, { exact: true }),
   ).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
+  await page
+    .getByRole('button', { name: /^Theme(?: |$)/ })
+    .first()
+    .click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await page.getByText('Withdraw this attempt', { exact: true }).click();
   const withdrawReason = page.getByLabel('Withdraw attempt reason', { exact: true });
@@ -437,7 +440,10 @@ test('shared review queue preserves scoped work and independent appeal routing',
   await page.unroute(receiptApi);
   await page.reload();
   await expect(page.getByText('Provisional total: 100', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
+  await page
+    .getByRole('button', { name: /^Theme(?: |$)/ })
+    .first()
+    .click();
   await page.getByRole('button', { name: 'Dark', exact: true }).click();
   await a11y();
   await screenshot('review-desktop');
@@ -597,7 +603,7 @@ test('shared review queue preserves scoped work and independent appeal routing',
   await login('demo.1.1@example.invalid');
   await page.goto('/learning-reviews');
   const caseLink = page.getByRole('link', {
-    name: 'Demo Member 1.3 / Submission receipt verification',
+    name: 'Open Demo Member 1.3 / Submission receipt verification',
     exact: true,
   });
   await expect(caseLink).toHaveAttribute('href', receiptUrl());
@@ -757,12 +763,15 @@ test('shared review queue preserves scoped work and independent appeal routing',
   await page.unroute(manualApi);
   expect((await read()).submission.contentHash).toBe(pinned.contentHash);
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
+  await page
+    .getByRole('button', { name: /^Theme(?: |$)/ })
+    .first()
+    .click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();
   const personal = page.getByRole('dialog', { name: 'Personal settings', exact: true });
-  await personal.locator('summary').click();
+  await personal.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await personal.getByRole('button', { name: 'Use client default', exact: true }).click();
   await page.keyboard.press('Escape');
   await page.keyboard.press('Escape');
@@ -896,12 +905,15 @@ test('shared review queue preserves scoped work and independent appeal routing',
     await page.setViewportSize({ width, height: 1000 });
     await a11y();
   }
-  await page.getByRole('button', { name: /^Theme(?: |$)/ }).first().click();
+  await page
+    .getByRole('button', { name: /^Theme(?: |$)/ })
+    .first()
+    .click();
   await page.getByRole('button', { name: 'Light', exact: true }).click();
   await a11y();
   await page.getByRole('button', { name: 'Personal settings', exact: true }).click();
   const queueSettings = page.getByRole('dialog', { name: 'Personal settings', exact: true });
-  await queueSettings.locator('summary').click();
+  await queueSettings.getByRole('button', { name: /^Theme(?: |$)/ }).click();
   await queueSettings.getByRole('button', { name: 'Dark', exact: true }).click();
   await page.keyboard.press('Escape');
   await page.keyboard.press('Escape');
@@ -933,7 +945,7 @@ test('shared review queue preserves scoped work and independent appeal routing',
   await page.goto('/learning-reviews');
   await expect(page.getByText('Routing recovery check.', { exact: true })).toBeVisible();
   await expect(
-    page.getByRole('heading', { name: 'Work awaiting your review', exact: true }),
+    page.getByRole('heading', { name: 'Work awaiting review', exact: true }),
   ).toBeVisible();
   await page.unroute(routingApi);
   await page.route(routingApi, (r) =>
@@ -964,5 +976,57 @@ test('shared review queue preserves scoped work and independent appeal routing',
   await expect(
     page.getByText('No open learning appeals need routing.', { exact: true }),
   ).toBeVisible();
+  // Presentation fixtures only: all current status labels, responsive geometry and assets.
+  await login('demo.1.2@example.invalid');
+  const statuses = ['review_pending', 'submitted', 'queued', 'technical_failure'];
+  const names = ['Zoe Navarro', 'Ava Garcia', 'Iris Lim', 'Lena Flores'];
+  await page.route(queueApi, (r) =>
+    r.fulfill({
+      json: {
+        page: 1,
+        total: 4,
+        records: statuses.map((status, i) => ({
+          ...row,
+          id: `11111111-1111-4111-8111-11111111111${i}`,
+          memberName: names[i],
+          title: i === 2 ? 'Quality and compliance basics' : 'Customer care foundations',
+          attempt: i === 1 ? 2 : 1,
+          status,
+        })),
+      },
+    }),
+  );
+  await page.goto('/learning-reviews');
+  await expect(page.getByRole('heading', { name: 'Review Queue', exact: true })).toBeVisible();
+  const table = page.getByRole('table', { name: 'Work awaiting review' });
+  await expect(table.getByRole('link', { name: /^Open / })).toHaveCount(4);
+  await expect(page.getByText('Example data', { exact: true })).toHaveCount(0);
+  for (const label of ['Review pending', 'Submitted', 'Queued', 'Technical failure'])
+    await expect(table.getByText(label, { exact: true })).toBeVisible();
+  for (const width of [1440, 1100, 801, 800, 390, 320]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await a11y();
+    const open = table.getByRole('link').first();
+    await open.focus();
+    expect(await open.evaluate((e) => getComputedStyle(e).outlineStyle)).toBe('solid');
+    const arrow = open.locator('span');
+    expect((await arrow.boundingBox())!.width).toBe(width > 1100 ? 16 : 18);
+    if (width <= 1100) expect((await open.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    if (width === 1440 || width === 390) await screenshot(`figma-queue-${width}`);
+  }
+  for (const asset of [
+    'info',
+    'arrow-desktop',
+    'arrow-mobile',
+    'dot-warning',
+    'dot-info',
+    'dot-neutral',
+    'dot-error',
+  ]) {
+    const response = await page.request.get(`/images/review-queue/${asset}.svg`);
+    expect(response.ok()).toBe(true);
+    expect((await response.body()).length).toBeGreaterThan(100);
+  }
+  await page.unroute(queueApi);
   expect(errors).toEqual([]);
 });

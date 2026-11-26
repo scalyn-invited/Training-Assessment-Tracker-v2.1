@@ -1,5 +1,7 @@
 # Global UI route inventory — 18 November 2026
 
+Follow-up, 25 November 2026: `/learning-reviews` received its supplied Figma desktop table/mobile cards on `ui/review-queue-figma` from dev `e1035b4`. Roles, shared shell, queue contract, paging and independent appeal routing remain unchanged. Updated states, responsive/keyboard/theme/access checks and screenshots: `REVIEW_QUEUE_FIGMA_QA.md`. The original migration evidence below is retained as history.
+
 Current status ? 19 November 2026: all route and foundation rows are locally verified. Final reconciliation and limits: `GLOBAL_UI_FINAL_QA.md`. Historical checkpoints below describe their state at the time; they are not outstanding tasks unless repeated in the final checkpoint.
 
 This is the migration checklist, not a completion claim. Source: the local integration of `ui/settings-figma` at `440fcc8` and fetched `origin/main` at `7bcef2c`, merge `a5a9334`. There are **38 page routes and two shared recovery screens**. Every row below remains subject to global-system integration and fresh feature verification, including the already styled reference pages.
