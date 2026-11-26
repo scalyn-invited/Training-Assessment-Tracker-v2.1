@@ -104,7 +104,7 @@ export async function learningReviewFlow(coordinator: Page, member: Page) {
     await login(alternate, 'demo.1.1@example.invalid');
     await alternate.goto('http://127.0.0.1:3110/learning-reviews');
     await alternate
-      .getByRole('link', { name: 'Demo Member 1.3 / Browser training record', exact: true })
+      .getByRole('link', { name: 'Open Demo Member 1.3 / Browser training record', exact: true })
       .click();
     await expect(alternate.getByText('Score: 100 / 100', { exact: true })).toBeVisible();
     await expect(alternate.getByText('Provisional total: 100', { exact: true })).toHaveCount(0);
