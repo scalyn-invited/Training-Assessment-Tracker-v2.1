@@ -4,6 +4,12 @@
 
 Updated `/login` to Christian's eye/eye-off control while retaining existing authentication. Guest/account-link browser journey (including keyboard, mobile, themes and axe), TypeScript and production build pass. Other password controls remain unchanged. Evidence and screenshots: `LOGIN_PASSWORD_ICON_QA.md`. No push, deployment or human acceptance claimed.
 
+## Review Queue Figma follow-up — 25 November 2026
+
+`/learning-reviews` now follows supplied desktop `7054:11807` and mobile `7054:14089` frames on local branch `ui/review-queue-figma`, based on latest fetched dev `e1035b4`. Shared table/mobile cards, status badges, explicit Open links, client-aware header and guidance callout retain existing queue data, twenty-item pagination, receipt destinations and independent appeal routing. No backend, migration, role or protected workflow rule changed.
+
+TypeScript and production build passed; 13 learning-grading domain tests and the full isolated Review Queue browser scenario passed. Browser coverage includes role/appeal authority, dirty/pending guards, loading/error/empty/paging recovery, Light/Dark/client themes, keyboard/axe checks and 320–1440px responsive layouts. Source SVG assets and desktop/mobile screenshots were inspected. A stale theme-picker test selector was corrected for current dev before the successful rerun. Evidence: `REVIEW_QUEUE_FIGMA_QA.md`. Historical entries below remain unchanged. Completed regrades, dashboard metrics and resolved-assessment-appeal explanations remain pending clarifications. No push/deployment or human-acceptance claim.
+
 ## Question prompt rich-text editor — locally verified; review/owner handoff
 
 Image-busy follow-up locally verified: owner-requested in-editor spinner with upload/checking labels; prompt and toolbar temporarily disabled; per-question state survives re-render; completion/error unlock without losing content. Component RED/GREEN (3 final checks), integration RED/GREEN (1 builder journey), real-scanner success/save/reload journey (1), server/web typecheck and isolated production build pass. Reduced-motion and 1440/390/320px checks pass. See `QUESTION_PROMPT_RICH_TEXT_QA.md`; human review remains pending, no overall completion or runtime restart claimed.
