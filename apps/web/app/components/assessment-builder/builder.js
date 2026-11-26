@@ -1,4 +1,7 @@
 import { styleBuilderElement, styleBuilderRoot } from './presentation';
+import { mountJsonProposalImport } from './proposal-preview.js';
+import { mountTopicGeneration } from './topic-generation.js';
+import { mountProposalDialogs } from './proposal-dialogs';
 import { Editor } from '@tiptap/core';
 import { mountPromptEditor, renderPromptPreview, promptExtensions } from '../rich-text-editor/editor.js';
 import { registerWorkGuard } from '../work-guard';
@@ -582,10 +585,56 @@ $('publish-definition').addEventListener('click', async () => {
     finally { saving = false; updatePublish(); }
 });
 function escapeText(value) { const div = el('div', value); return div.innerHTML.replaceAll('"', '&quot;'); }
-const releaseGuard = registerWorkGuard(() => ({ dirty: dirty || conflict, pending: saving || uploadPending, uncertain: !!retryPayload || !!publication }));
+const importHost = el('section', null, { class: 'proposal-import', 'aria-label': 'JSON question import' });
+const proposalEntry = el('div', null, { class: 'proposal-entry', 'aria-label': 'Question sources' });
+const importTrigger = button('Import questions', () => {});
+const topicTrigger = button('Generate questions', () => {});
+proposalEntry.append(importTrigger, topicTrigger);
+$('assessment-section-manager').before(proposalEntry);
+function requireProposalEdit() {
+    if (saving || publication || conflict || retryPayload || uploadPending) throw Error('Finish or resolve the current save, publication or upload before applying proposals.');
+}
+const proposalActions = { el, button, request,
+    append(questions) {
+        requireProposalEdit();
+        if (!questions.length) throw Error('Select at least one unapplied question.');
+        if (state.questions.length + questions.length > 30) throw Error('This assessment allows 30 questions. Select fewer proposals or remove questions first.');
+        if (state.sections !== null && !activeSection()) throw Error('Select or create a section before appending questions.');
+        const keys = {};
+        const additions = questions.map(q => {
+            const id = uuid();
+            const choices = q.choices.map(c => {
+                const choiceId = uuid();
+                if (q.correct_choice_reference === c.reference) keys[id] = choiceId;
+                return { id: choiceId, text: c.text };
+            });
+            // Explicit allowlist: suggested_answer never enters persisted/learner content.
+            return { id, type: q.type, prompt: q.prompt, choices };
+        });
+        state.questions.push(...additions); Object.assign(state.answer_key, keys);
+        activeSection()?.question_ids.push(...additions.map(q => q.id)); syncOrder();
+        selected = additions[0].id; changed(); renderSections(); renderList(); renderQuestion();
+    },
+    replaceRubric(rubric) {
+        requireProposalEdit();
+        state.criteria = rubric.criteria.map(c => ({ id: uuid(), category: c.category, label: c.label, guidance: c.guidance, weight: c.weight }));
+        state.threshold = rubric.threshold; $('assessment-threshold').value = state.threshold ?? '';
+        changed(); renderRubric();
+    },
+};
+const proposalImport = mountJsonProposalImport(importHost, proposalActions);
+const topicHost = el('section', null, { class: 'proposal-import', 'aria-label': 'Topic proposal generation' });
+const topicGeneration = mountTopicGeneration(topicHost, proposalActions);
+const proposalDialogs = mountProposalDialogs(root, [
+    { id: 'import-questions', title: 'Import questions', host: importHost, trigger: importTrigger,
+      help: 'Closing keeps your file and review while this builder remains open. Reopen Import questions to continue.' },
+    { id: 'generate-questions', title: 'Generate questions', host: topicHost, trigger: topicTrigger,
+      help: 'Closing does not cancel generation. Your request and review stay available while this builder remains open. Reopen Generate questions to continue or refresh status.' },
+]);
+const releaseGuard = registerWorkGuard(() => ({ dirty: dirty || conflict || proposalImport.work().dirty || topicGeneration.work().dirty, pending: saving || uploadPending || proposalImport.work().pending || topicGeneration.work().pending, uncertain: !!retryPayload || !!publication }));
 const provenance = el('div',null,{id:'definition-provenance',class:'notice'}); provenance.style.overflowWrap = 'anywhere'; $('save-status').before(provenance);
 renderSections(); renderList(); renderQuestion(); renderRubric(); updatePublish();
 status(dirty ? 'Unsaved changes' : state.status === 'published' ? 'Published revision. Saving creates a new draft.' : 'Draft saved. Not published.');
 
-return () => { lifetime.abort(); observer?.disconnect(); editor?.destroy(); releaseGuard(); };
+return () => { proposalImport.dispose(); topicGeneration.dispose(); proposalDialogs.dispose(); lifetime.abort(); observer?.disconnect(); editor?.destroy(); releaseGuard(); };
 }

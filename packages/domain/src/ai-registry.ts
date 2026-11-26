@@ -10,6 +10,7 @@ export const AI_TASKS = [
   'grade_submission',
   'propose_adaptation',
   'suggest_kpi_actions',
+  'generate_assessment_topic',
 ] as const;
 export type AiTask = (typeof AI_TASKS)[number];
 const profileSchema = z.object({
@@ -35,6 +36,8 @@ export type AiConfig = {
   liveEnabled: boolean;
   organisationLimit: number;
   programmeLimit: number;
+  authoringLimit?: number;
+  authoringCallLimit?: number;
 };
 export function aiConfig(): AiConfig {
   const live = (name: string, adapter: 'anthropic' | 'gemini', endpoint: string) => ({
@@ -64,6 +67,8 @@ export function aiConfig(): AiConfig {
     endpoint,
   });
   return {
+    authoringLimit: Number(process.env.AI_AUTHORING_LIMIT_MICRO_USD ?? 0),
+    authoringCallLimit: Number(process.env.AI_AUTHORING_CALL_LIMIT ?? 0),
     liveEnabled: process.env.AI_LIVE_ENABLED === 'true',
     organisationLimit: Number(process.env.AI_ORGANISATION_LIMIT_MICRO_USD ?? 10000000),
     programmeLimit: Number(process.env.AI_PROGRAMME_LIMIT_MICRO_USD ?? 5000000),
@@ -109,6 +114,31 @@ export class AiRegistry {
       'AI generation is not configured.',
     );
     return { ...parsed.data, id };
+  }
+  authoringUsable(profile: Profile, environment: string) {
+    requireCondition(
+      environment === 'test' &&
+        process.env.NODE_ENV !== 'production' &&
+        profile.adapter === 'mock' &&
+        profile.id === 'mock' &&
+        profile.data_classes.includes('synthetic'),
+      422,
+      'authoring_provider_disabled',
+      'Only the fixed local synthetic authoring fixture is enabled. Paid API and Codex adapters are disabled.',
+    );
+  }
+  authoringSnapshot(environment: string) {
+    const profile = this.profile('mock', 'generate_assessment_topic');
+    this.authoringUsable(profile, environment);
+    return {
+      task: 'generate_assessment_topic' as const,
+      policy_id: null,
+      policy_version: 0,
+      providers: [profile],
+      max_calls_per_block: 1,
+      max_repairs: 0,
+      currency: 'USD',
+    };
   }
   async usable(sql: Sql, profile: Profile, e: Enrolment) {
     const member = (

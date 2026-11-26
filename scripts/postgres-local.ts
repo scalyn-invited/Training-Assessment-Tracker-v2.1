@@ -24,7 +24,7 @@ const postgres = new EmbeddedPostgres({
 });
 const suites = ['tests/postgres.test.ts','tests/demo-postgres.test.ts','tests/foundation-checks-postgres.test.ts','tests/operator-bootstrap-postgres.test.ts','tests/client-services-postgres.test.ts'];
 const requested = process.argv.slice(2);
-if(requested.some(file=>!suites.includes(file)))throw new Error('Choose a configured PostgreSQL qualification suite.');
+if(requested.some(file=>![...suites, 'tests/assessment-topic.test.ts'].includes(file)))throw new Error('Choose a configured PostgreSQL qualification suite.');
 let started = false;
 try {
   await postgres.initialise();

@@ -1,0 +1,80 @@
+{
+  "format": "assessment-proposals-v1",
+  "questions": [
+    {
+      "reference": "q1",
+      "type": "multiple_choice",
+      "prompt": "At the start of a shift, you find a trolley blocking a marked emergency exit. A delivery driver says they will move it in ten minutes. What should you do first?",
+      "choices": [
+        {
+          "reference": "a",
+          "text": "Ask the driver to clear the exit now and confirm the route is open."
+        },
+        {
+          "reference": "b",
+          "text": "Record the obstruction for the end-of-shift inspection."
+        },
+        {
+          "reference": "c",
+          "text": "Tell your team to use another door until the delivery is complete."
+        }
+      ],
+      "correct_choice_reference": "a"
+    },
+    {
+      "reference": "q2",
+      "type": "multiple_choice",
+      "prompt": "A drill has an ‘out of service’ tag. A colleague says it worked yesterday and asks to borrow it for one hole. What should you do?",
+      "choices": [
+        {
+          "reference": "a",
+          "text": "Let the colleague use it under supervision."
+        },
+        {
+          "reference": "b",
+          "text": "Keep the drill out of use and help the colleague locate an approved replacement."
+        },
+        {
+          "reference": "c",
+          "text": "Remove the tag after a visual check shows no damage."
+        }
+      ],
+      "correct_choice_reference": "b"
+    },
+    {
+      "reference": "q3",
+      "type": "multiple_choice",
+      "prompt": "A box falls from a shelf into an empty aisle. Which entry gives the supervisor the best starting point for a near-miss review?",
+      "choices": [
+        {
+          "reference": "a",
+          "text": "‘Storage team stacked the boxes carelessly again.’"
+        },
+        {
+          "reference": "b",
+          "text": "‘No injury. Reminded the team to be careful.’"
+        },
+        {
+          "reference": "c",
+          "text": "‘At 09:20 a box fell from the top shelf into aisle 2. No one was struck. The aisle was closed and the supervisor notified.’"
+        }
+      ],
+      "correct_choice_reference": "c"
+    },
+    {
+      "reference": "q4",
+      "type": "open_response",
+      "prompt": "A spill near the workshop entrance has been cordoned off. Your shift ends before cleanup is complete. Write a two-sentence handover for the incoming shift lead.",
+      "choices": [],
+      "suggested_answer": "The spill at the workshop entrance is still cordoned off, and staff are using the side entrance. The incoming shift lead should follow up with the cleanup team and verify the area is safe before reopening it."
+    },
+    {
+      "reference": "q5",
+      "type": "open_response",
+      "prompt": "Yesterday a delivery trolley blocked the emergency exit. The exit is clear today. Propose one change that would prevent a repeat and explain how you would check whether it works.",
+      "choices": [],
+      "suggested_answer": "Mark a delivery holding area away from the exit and show drivers where to unload. During the next three deliveries, check whether trolleys stay inside that area and the exit remains clear."
+    }
+  ],
+  "rubric": null
+}

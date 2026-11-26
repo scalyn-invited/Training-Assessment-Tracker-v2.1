@@ -149,6 +149,7 @@ export class ProgrammeGeneration {
   }
   async receive(sql: Sql, run: AiRun, output: unknown) {
     const { actor, e } = await this.gateway.authorized(sql, run);
+    requireCondition(e, 422, 'ai_scope', 'Programme generation requires an enrolment.');
     const input = this.input(run),
       base = await this.plans.current(sql, e, input.baseVersion);
     requireCondition(
