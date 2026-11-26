@@ -368,9 +368,16 @@
   .form {
     flex: 1;
   }
+  .signIn .form {
+    flex: 0 0 auto;
+  }
   .actions {
     margin-top: auto;
     padding-top: var(--ui-space-5);
+  }
+  .signIn .actions {
+    margin-top: 0;
+    padding-top: 0;
   }
   .shell.shell.shell
     input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='color']):not(

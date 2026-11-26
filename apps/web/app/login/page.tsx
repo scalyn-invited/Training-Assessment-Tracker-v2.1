@@ -162,6 +162,7 @@ export default function Login() {
                   <Password
                     className={styles.password}
                     name="password"
+                    iconToggle
                     label="Password"
                     inputClassName={styles.fieldIcon}
                     icon={<img src="/auth/lock.svg" alt="" width={18} height={18} />}

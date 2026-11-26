@@ -1,5 +1,9 @@
 # V2.1 migration checklist
 
+## Sign-in password icon — locally verified
+
+Updated `/login` to Christian's eye/eye-off control while retaining existing authentication. Guest/account-link browser journey (including keyboard, mobile, themes and axe), TypeScript and production build pass. Other password controls remain unchanged. Evidence and screenshots: `LOGIN_PASSWORD_ICON_QA.md`. No push, deployment or human acceptance claimed.
+
 ## Review Queue Figma follow-up — 25 November 2026
 
 `/learning-reviews` now follows supplied desktop `7054:11807` and mobile `7054:14089` frames on local branch `ui/review-queue-figma`, based on latest fetched dev `e1035b4`. Shared table/mobile cards, status badges, explicit Open links, client-aware header and guidance callout retain existing queue data, twenty-item pagination, receipt destinations and independent appeal routing. No backend, migration, role or protected workflow rule changed.
